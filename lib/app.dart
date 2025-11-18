@@ -35,7 +35,6 @@ class MyApp extends ConsumerWidget {
         ),
         title: 'Drappers',
         debugShowCheckedModeBanner: false,
-        // home: HomeScreen(),
         routerConfig: goRouter,
         builder: (_, child) {
           return AppStartupWidget(
