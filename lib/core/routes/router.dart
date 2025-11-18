@@ -7,13 +7,16 @@ final routerConfigProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: kDebugMode,
     navigatorKey: navigatorKey,
-
-    initialLocation: AppRoutes.home.path,
-
+    initialLocation: AppRoutes.splashScreen.path,
     redirect: (context, state) {
       return null;
     },
-
-    routes: [],
+    routes: [
+      GoRoute(
+        path: AppRoutes.splashScreen.path,
+        name: AppRoutes.splashScreen.name,
+        builder: (context, state) => SplashScreen(),
+      ),
+    ],
   );
 });

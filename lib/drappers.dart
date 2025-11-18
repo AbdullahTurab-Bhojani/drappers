@@ -61,6 +61,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 // Generated files (local)
 import 'core/local/providers/shared_pref.dart';
+import 'features/splash/presentation/views/splash.dart';
 import 'gen/assets.gen.dart';
 
 // Chewie internal imports (for custom controls)
