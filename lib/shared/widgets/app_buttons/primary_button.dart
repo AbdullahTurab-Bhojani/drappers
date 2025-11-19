@@ -39,10 +39,7 @@ class AppButton extends StatelessWidget {
           return DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xFF00C6FF), // Lighter Cyan
-                  Color(0xFF0072FF), // Darker Blue
-                ],
+                colors: customColors.buttonColors,
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
