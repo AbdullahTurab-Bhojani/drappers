@@ -6,6 +6,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final goRouter = ref.watch(routerConfigProvider);
+    final themeState = ref.watch(customThemeProvider);
 
     final buttonStyle = ButtonStyle(
       iconColor: WidgetStateProperty.all<Color>(Colors.black),
@@ -21,18 +22,9 @@ class MyApp extends ConsumerWidget {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: MaterialApp.router(
-        theme: ThemeData(
-          // canvasColor: AppColors.pageColor,
-          brightness: Brightness.light,
-          visualDensity: VisualDensity.standard,
-          useMaterial3: true,
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
-          textButtonTheme: TextButtonThemeData(style: buttonStyle),
-          outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
-        ),
+        themeMode: themeState.themeMode,
+        theme: themeState.themeData,
+        darkTheme: themeState.themeData,
         title: 'Drappers',
         debugShowCheckedModeBanner: false,
         routerConfig: goRouter,
