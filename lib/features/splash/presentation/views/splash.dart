@@ -13,7 +13,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Go to Home after 2 seconds
     Timer(const Duration(seconds: 2), () {});
   }
 
@@ -22,13 +21,28 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Text(
-          "Splash Screen",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Splash Screen",
+              style: TextStyle(
+                fontFamily: "Mundial",
+                fontSize: 24,
+                fontWeight: FontWeight.w400,
+                color: Colors.black87,
+              ),
+            ),
+            Text(
+              "Splash Screen",
+              style: TextStyle(
+                fontFamily: "Poppins",
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
+            ),
+          ],
         ),
       ),
     );
