@@ -60,12 +60,14 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 // Generated files (local)
+import 'core/extensions/theme_extension.dart';
 import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_theme.dart';
 import 'features/login/presentation/forgetpassword_screen.dart';
 import 'features/login/presentation/login_screen.dart';
 import 'features/login/presentation/verfiicationcode_screen.dart';
 import 'features/onboarding/presentation/onboarding_screen.dart';
+import 'features/signup/presentation/views/signup.dart';
 import 'features/splash/presentation/views/splash.dart';
 import 'gen/assets.gen.dart';
 
@@ -158,6 +160,8 @@ part 'shared/widgets/images/svg_images.dart';
 // Text Widgets
 part 'shared/widgets/text_widget/plus_jakarta.dart';
 part 'shared/widgets/text_widget/readmore_text.dart';
+part 'shared/widgets/text_widget/poppins.dart';
+
 // Other Widgets
 part 'shared/widgets/coming_soon.dart';
 part 'shared/widgets/custom_drop_down.dart';
@@ -168,7 +172,6 @@ part 'shared/widgets/error_widget.dart';
 part 'shared/widgets/loading_widget.dart';
 part 'shared/widgets/searchable_custom_dropdown.dart';
 part 'shared/widgets/text_field_label.dart';
-part 'shared/widgets/text_form_field_widget.dart';
 
 // Core - Local
 part 'core/local/domain/repositories/shared_preference_repository.dart';

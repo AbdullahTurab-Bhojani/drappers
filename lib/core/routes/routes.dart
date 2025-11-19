@@ -5,10 +5,11 @@ enum AppRoutes {
    onboardingScreen('onboarding', '/onboarding'),
    loginScreen('login', '/login'),
    forgetpasswordScreen('forgetpassword', '/forgetpassword'),
-   verfiicationcodeScreen('verificationcode', '/verificationcode');
+   verfiicationcodeScreen('verificationcode', '/verificationcode'),
 
 
 
+  signupScreen('signup', '/signup');
 
   final String name;
   final String path;
@@ -19,7 +20,10 @@ enum AppRoutes {
 
   static List<AppRoutes> bottomNavPages = [];
 
-  static List<AppRoutes> get publicRoutes => [AppRoutes.splashScreen];
+  static List<AppRoutes> get publicRoutes => [
+    AppRoutes.splashScreen,
+    AppRoutes.signupScreen,
+  ];
 
   static bool isPublicRoute(GoRouterState state) {
     final fullPath = state.fullPath;

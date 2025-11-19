@@ -20,11 +20,13 @@ class AppButton extends StatelessWidget {
   final bool border;
   final Color? color;
 
-  Color get textColor => border ? AppColors.primary : AppColors.white;
-  Color get backgroundColor =>
-      color ?? (border ? Colors.white : AppColors.primary);
+  // Color get textColor => border ? AppColors.primary : AppColors.white;
+  // Color get backgroundColor =>
+  //     color ?? (border ? Colors.white : AppColors.primary);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     return TextButton(
       style: TextButton.styleFrom(
         minimumSize: buttonSize ?? Size(MediaQuery.of(context).size.width, 52),
@@ -36,28 +38,38 @@ class AppButton extends StatelessWidget {
         backgroundBuilder: (context, states, child) {
           return DecoratedBox(
             decoration: BoxDecoration(
-              border: border ? Border.all(color: AppColors.primary) : null,
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                colors: customColors.buttonColors,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.blue.withOpacity(0.4),
+              //     blurRadius: 5,
+              //     offset: const Offset(0, 5),
+              //   ),
+              // ],
+              borderRadius: BorderRadius.circular(50),
             ),
             child: IntrinsicHeight(child: child),
           );
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        backgroundColor: backgroundColor,
+        // backgroundColor: backgroundColor,
       ),
       onPressed: isLoading ? () {} : onPressed,
       child: isLoading
-          ? LoadingWidget(height: 20, width: 20, color: textColor)
+          ? LoadingWidget(height: 20, width: 20, color: color)
           : Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PlusJakartaText(
-                  size: 14,
+                PoppinsText(
+                  fontSize: PoppinsFontSizeVariant.size13,
                   title,
-                  fontWeight: FontWeight.w600,
-                  color: textColor,
+                  fontWeight: PoppinsFontWeightVariant.medium,
+                  color: customColors.textColor,
                 ),
                 if (icon != null) ...[const SizedBox(width: 6), icon!],
               ],
