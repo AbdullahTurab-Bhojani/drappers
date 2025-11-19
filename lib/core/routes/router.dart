@@ -17,6 +17,11 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.splashScreen.name,
         builder: (context, state) => SplashScreen(),
       ),
+       GoRoute(
+        path: AppRoutes.onboardingScreen.path,
+        name: AppRoutes.onboardingScreen.name,
+        builder: (context, state) => OnboardingScreen(),
+      ),
     ],
   );
 });

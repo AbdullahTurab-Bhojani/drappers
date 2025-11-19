@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:go_router/go_router.dart';
+
+import '../../../../drappers.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -13,7 +17,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Go to Home after 2 seconds
     Timer(const Duration(seconds: 2), () {});
   }
 
@@ -22,13 +25,31 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Text(
-          "Splash Screen",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Splash Screen",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                context.pushNamed(AppRoutes.onboardingScreen.name);
+              },
+              child: Text(
+                        "onboarding Screen",
+                        style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+                        ),
+                      ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,7 +1,8 @@
 part of '../../drappers.dart';
 
 enum AppRoutes {
-  splashScreen('splash', '/');
+  splashScreen('splash', '/'),
+   onboardingScreen('onboarding', '/onboarding');
 
   final String name;
   final String path;

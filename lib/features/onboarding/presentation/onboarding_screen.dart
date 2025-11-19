@@ -32,7 +32,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     'Build your own traders network or follow others that match your interests.',
   ];
 
-  // Common Text Styles
   final TextStyle titleText = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
@@ -58,11 +57,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: customColors.dark,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(Assets.images.onboardingBg.path),
+            image: AssetImage(Assets.images.girl.path),
             fit: BoxFit.cover,
           ),
         ),
@@ -81,7 +80,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
 
-              // PageView
               Expanded(
                 flex: 6,
                 child: PageView.builder(
@@ -99,28 +97,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Container(
                 height: MediaQuery.sizeOf(context).height * 0.44,
                 width: double.infinity,
-                color: AppColors.color3B82F6,
+                // color: AppColors.color3B82F6,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      titles[currentPage],
-                      textAlign: TextAlign.center,
-                      style: titleText,
-                    ),
 
-                    SizedBox(height: 10),
-
-                    Text(
-                      subtitles[currentPage],
-                      textAlign: TextAlign.center,
-                      style: subtitleText,
-                    ),
-
-                    SizedBox(height: 25),
-
-                    Row(
+                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
                         images.length,
@@ -140,6 +126,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
 
                     SizedBox(height: 25),
+
+                    Text(
+                      titles[currentPage],
+                      textAlign: TextAlign.center,
+                      style: titleText,
+                    ),
+
+                    SizedBox(height: 10),
+
+                    Text(
+                      subtitles[currentPage],
+                      textAlign: TextAlign.center,
+                      style: subtitleText,
+                    ),
+
+                    SizedBox(height: 25),
+
+                   
 
                     Container(
                       width: double.infinity,
