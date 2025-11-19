@@ -66,6 +66,7 @@ extension Ex on double {
   double toPrecision(int n) => double.parse(toStringAsFixed(n));
 }
 
+
 enum DeviceType { mobile, tab, web }
 
 extension ContextExtension on BuildContext {
