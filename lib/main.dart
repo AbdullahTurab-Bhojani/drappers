@@ -1,10 +1,11 @@
-part of 'drappers.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'drappers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    setUrlStrategy(PathUrlStrategy());
-  }
 
   runApp(const ProviderScope(child: MyApp()));
 }

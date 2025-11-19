@@ -22,7 +22,7 @@ Future<void> appStartup(Ref ref) async {
 
     // Invalidate dependencies on app exit
     ref.onDispose(() {
-      // ref.invalidate(sharedPreferencesProvider);
+      ref.invalidate(sharedPreferencesProvider);
     });
 
     // Ensure SharedPreferences is ready
