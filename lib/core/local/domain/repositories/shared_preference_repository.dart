@@ -17,26 +17,26 @@ class SharedPreferencesService implements SharedPrefService {
   final countryCodeKey = 'country-code';
   @override
   Future<String?> get accessToken async {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser == null) return null;
+    // final currentUser = FirebaseAuth.instance.currentUser;
+    // if (currentUser == null) return null;
 
-    final result = await currentUser.getIdTokenResult();
-    final expiry = result.expirationTime?.subtract(Duration(minutes: 10));
-    final now = DateTime.now();
+    // final result = await currentUser.getIdTokenResult();
+    // final expiry = result.expirationTime?.subtract(Duration(minutes: 10));
+    // final now = DateTime.now();
 
-    String? token = sharedPreferences.getString(_tokenKey);
+    // String? token = sharedPreferences.getString(_tokenKey);
 
-    // 10 minutes before expiry
+    // // 10 minutes before expiry
 
-    final shouldRefresh =
-        token == null || expiry == null || now.isAfter(expiry);
+    // final shouldRefresh =
+    //     token == null || expiry == null || now.isAfter(expiry);
 
-    if (shouldRefresh) {
-      token = await currentUser.getIdToken(true); // Force refresh
-      await sharedPreferences.setString(_tokenKey, token ?? "");
-    }
+    // if (shouldRefresh) {
+    //   token = await currentUser.getIdToken(true); // Force refresh
+    //   await sharedPreferences.setString(_tokenKey, token ?? "");
+    // }
 
-    return token;
+    return null;
   }
 
   @override

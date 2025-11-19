@@ -3,11 +3,11 @@
 
 // Dart core libraries
 import 'dart:async';
-import 'dart:convert';
+// import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-import 'dart:developer' as dev;
+// import 'dart:developer' as dev;
 
 // Flutter core
 import 'package:flutter/cupertino.dart';
@@ -18,28 +18,28 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
 // Third-party packages
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:firebase_auth/firebase_auth.dart'
-    show
-        AppleAuthProvider,
-        AuthCredential,
-        FirebaseAuth,
-        User,
-        FirebaseAuthException,
-        GoogleAuthProvider,
-        OAuthProvider,
-        UserInfo;
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
+// import 'package:firebase_auth/firebase_auth.dart'
+//     show
+//         AppleAuthProvider,
+//         AuthCredential,
+//         FirebaseAuth,
+//         User,
+//         FirebaseAuthException,
+//         GoogleAuthProvider,
+//         OAuthProvider,
+//         UserInfo;
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:flutter_timezone/flutter_timezone.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart' show Bidi, DateFormat, NumberFormat;
-import 'package:purchases_flutter/purchases_flutter.dart' hide PurchaseResult;
+// import 'package:purchases_flutter/purchases_flutter.dart' hide PurchaseResult;
 import 'package:chewie/chewie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -87,7 +87,7 @@ part 'drappers.freezed.dart';
 
 //App
 part 'app.dart';
-part 'main.dart';
+
 
 // Core - Routes
 part 'core/routes/router.dart';
