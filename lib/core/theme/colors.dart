@@ -2,6 +2,15 @@ part of '../../drappers.dart';
 
 @immutable
 abstract final class AppColors {
+
+
+ static const List<Color> buttongradientcolor = [
+    Color(0xFF9340C3),
+    Color(0xFF2561AF),
+  ];
+
+
+
   // Default Theme //
   static const dDarkest = Color(0xFF0C0A14);
   static const dDark = Color(0xFF0E0C19);
@@ -11,7 +20,9 @@ abstract final class AppColors {
   static const dTextColor = Color(0xFFFFFFFF);
   static const dGrey = Color(0xFF6E7480);
   static const dSubTextColor = Color(0xFF777573); // optional custom subtext
-  static const dLabel = Color(0xFF736D9D); // optional label tone
+  static const dLabel = Color(0xff999999); // optional label tone
+  static const tfield = Color(0xff101317);
+
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);
@@ -34,6 +45,7 @@ abstract final class AppColors {
   static const wGrey = Color(0xFF919498);
   static const wSubTextColor = Color(0xFF736D9D); // optional
   static const wLabel = Color(0xFF919498); // same as grey
+  
 
   static const white = Color(0xffffffff);
   static const black = Color(0xff000000);
