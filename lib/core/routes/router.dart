@@ -22,6 +22,21 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.onboardingScreen.name,
         builder: (context, state) => OnboardingScreen(),
       ),
+       GoRoute(
+        path: AppRoutes.loginScreen.path,
+        name: AppRoutes.loginScreen.name,
+        builder: (context, state) => LoginScreen(),
+      ),
+       GoRoute(
+        path: AppRoutes.forgetpasswordScreen.path,
+        name: AppRoutes.forgetpasswordScreen.name,
+        builder: (context, state) => ForgetpasswordScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.verfiicationcodeScreen.path,
+        name: AppRoutes.verfiicationcodeScreen.name,
+        builder: (context, state) => VerfiicationcodeScreen(),
+      ),
     ],
   );
 });

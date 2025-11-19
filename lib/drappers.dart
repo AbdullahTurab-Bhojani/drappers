@@ -62,6 +62,9 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 // Generated files (local)
 import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_theme.dart';
+import 'features/login/presentation/forgetpassword_screen.dart';
+import 'features/login/presentation/login_screen.dart';
+import 'features/login/presentation/verfiicationcode_screen.dart';
 import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/splash/presentation/views/splash.dart';
 import 'gen/assets.gen.dart';
