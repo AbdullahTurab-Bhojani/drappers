@@ -41,6 +41,14 @@ abstract final class AppColors {
   static const wSubTextColor = Color(0xFF736D9D); // optional
   static const wLabel = Color(0xFF919498); // same as grey
 
+
+  static const List<Color> buttoncolor = [
+    Color(0xFF1FCFFF),
+    Color(0xFF0063FF),
+  ];
+
+
+
   static const white = Color(0xffffffff);
   static const black = Color(0xff000000);
   static const primary = Color(0xff606C38);
@@ -68,4 +76,12 @@ abstract final class AppColors {
   static const color10B981 = Color(0xff10B981);
   static const colorEA580C = Color(0xffEA580C);
   static const color6B7280 = Color(0xff6B7280);
+  static const color1FCFFF = Color(0xff1FCFFF);
+  static const color101317 = Color(0xff101317);
+  static const color101010 = Color(0xff101010);
+
+
+
+
+  static get color3D3C45 => null;
 }

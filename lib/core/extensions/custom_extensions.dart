@@ -1,6 +1,8 @@
 part of '../../drappers.dart';
 
 extension Uint8ListImageExtensions on Uint8List {
+
+  
   /// Checks if the image has the exact resolution (width x height).
   bool hasResolution(int targetWidth, int targetHeight) {
     final decoded = img.decodeImage(this);
@@ -65,6 +67,7 @@ extension NumberFormatter on num {
 extension Ex on double {
   double toPrecision(int n) => double.parse(toStringAsFixed(n));
 }
+
 
 enum DeviceType { mobile, tab, web }
 

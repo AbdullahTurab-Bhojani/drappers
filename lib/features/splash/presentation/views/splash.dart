@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:async';
 
+import 'package:go_router/go_router.dart';
+
 import '../../../../drappers.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -35,18 +37,18 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.black87,
               ),
             ),
-            InkWell(
+            GestureDetector(
               onTap: () {
-                context.pushNamed(AppRoutes.signupScreen.name);
+                context.pushNamed(AppRoutes.onboardingScreen.name);
               },
               child: Text(
-                "signup Screen",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
+                        "onboarding Screen",
+                        style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+                        ),
+                      ),
             ),
           ],
         ),
