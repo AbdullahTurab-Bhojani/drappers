@@ -2,6 +2,39 @@ part of '../../drappers.dart';
 
 @immutable
 abstract final class AppColors {
+  // Default Theme //
+  static const dDarkest = Color(0xFF0C0A14);
+  static const dDark = Color(0xFF0E0C19);
+  static const dRegular = Color(0xFF110E1D);
+  static const dLight = Color(0xFF1A152C);
+  static const dLightest = Color(0xFF1D1930);
+  static const dTextColor = Color(0xFFFFFFFF);
+  static const dGrey = Color(0xFF6E7480);
+  static const dSubTextColor = Color(0xFF777573); // optional custom subtext
+  static const dLabel = Color(0xFF736D9D); // optional label tone
+
+  // Dark Theme //
+  static const bDarkest = Color(0xFF000000);
+  static const bDark = Color(0xFF0D0D0D);
+  static const bRegular = Color(0xFF100F10);
+  static const bLight = Color(0xFF191619);
+  static const bLightest = Color(0xFF1C191C);
+  static const bTextColor = Color(0xFFFFFFFF);
+  static const bGrey = Color(0xFF6E7480);
+  static const bSubTextColor = Color(0xFF777573); // optional
+  static const bLabel = Color(0xFF736D9D); // optional
+
+  // Light Theme //
+  static const wDarkest = Color(0xFFEBE7F1);
+  static const wDark = Color(0xFFF6F2FB);
+  static const wRegular = Color(0xFFFCFAFF);
+  static const wLight = Color(0xFFFFFFFF);
+  static const wLightest = Color(0xFFF0F0F5);
+  static const wTextColor = Color(0xFF1D2733);
+  static const wGrey = Color(0xFF919498);
+  static const wSubTextColor = Color(0xFF736D9D); // optional
+  static const wLabel = Color(0xFF919498); // same as grey
+
   static const white = Color(0xffffffff);
   static const black = Color(0xff000000);
   static const primary = Color(0xff606C38);

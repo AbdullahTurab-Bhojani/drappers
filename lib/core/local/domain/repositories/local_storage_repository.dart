@@ -30,6 +30,8 @@ abstract interface class SharedPrefService {
   String get countryCode;
   Future<void> setLanguageCode(String languageCode);
   Future<void> setCountryCode(String countryCode);
+  Future<void> saveTheme(String themeName);
+  String getTheme();
 }
 
 final localDataProvider = Provider<SharedPrefService>(

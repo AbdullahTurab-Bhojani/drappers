@@ -15,6 +15,8 @@ class SharedPreferencesService implements SharedPrefService {
   final profileComplete = 'profile-complete';
   final languageCodeKey = 'language-code';
   final countryCodeKey = 'country-code';
+  final themeKey = 'selected_theme';
+
   @override
   Future<String?> get accessToken async {
     // final currentUser = FirebaseAuth.instance.currentUser;
@@ -117,5 +119,15 @@ class SharedPreferencesService implements SharedPrefService {
   @override
   Future<void> setCountryCode(String countryCode) async {
     await sharedPreferences.setString(countryCodeKey, countryCode);
+  }
+
+  @override
+  Future<void> saveTheme(String themeName) async {
+    await sharedPreferences.setString(themeKey, themeName);
+  }
+
+  @override
+  String getTheme() {
+    return sharedPreferences.getString(themeKey) ?? 'default';
   }
 }
