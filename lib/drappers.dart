@@ -62,6 +62,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 // Generated files (local)
 import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_theme.dart';
+import 'features/signup/presentation/views/signup.dart';
 import 'features/splash/presentation/views/splash.dart';
 import 'gen/assets.gen.dart';
 
@@ -154,6 +155,9 @@ part 'shared/widgets/images/svg_images.dart';
 // Text Widgets
 part 'shared/widgets/text_widget/plus_jakarta.dart';
 part 'shared/widgets/text_widget/readmore_text.dart';
+part 'shared/widgets/text_widget/poppins.dart';
+
+
 // Other Widgets
 part 'shared/widgets/coming_soon.dart';
 part 'shared/widgets/custom_drop_down.dart';
