@@ -11,8 +11,8 @@ class TextFieldLabel extends ConsumerWidget {
       padding: const EdgeInsets.only(bottom: 6),
       child: PlusJakartaText(
         name,
-        fontWeight: FontWeight.w600,
-        color: AppColors.darkText,
+        fontWeight: FontWeight.w400,
+        color: AppColors.dLabel,
       ),
     );
   }

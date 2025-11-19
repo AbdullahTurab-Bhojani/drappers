@@ -16,12 +16,15 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
+
     Color? colorData;
     if (!kIsWeb) {
       if (Platform.isAndroid) {
-        colorData = Colors.white;
+        colorData = customColors.dark;
       } else {
-        colorData = color ?? AppColors.primary;
+        colorData = color ?? customColors.dark;
       }
     } else {
       colorData = color;

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:async';
+
+import '../../../../drappers.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.red,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -27,19 +30,22 @@ class _SplashScreenState extends State<SplashScreen> {
             Text(
               "Splash Screen",
               style: TextStyle(
-                fontFamily: "Mundial",
                 fontSize: 24,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            Text(
-              "Splash Screen",
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87,
+            InkWell(
+              onTap: () {
+                context.pushNamed(AppRoutes.signupScreen.name);
+              },
+              child: Text(
+                "signup Screen",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
             ),
           ],

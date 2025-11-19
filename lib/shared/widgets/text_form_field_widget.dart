@@ -1,4 +1,10 @@
-part of '../../drappers.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../drappers.dart';
+import '../../gen/assets.gen.dart';
 
 class NoOnlyWhitespaceFormatter extends TextInputFormatter {
   @override
@@ -75,8 +81,8 @@ class TextFormFieldWidget extends ConsumerStatefulWidget {
 
 class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   OutlineInputBorder get border => OutlineInputBorder(
-    borderSide: BorderSide(color: widget.borderColor ?? AppColors.borderColor),
-    borderRadius: BorderRadius.circular(8),
+    // borderSide: BorderSide(color: widget.borderColor ?? AppColors.borderColor),
+    borderRadius: BorderRadius.circular(10),
   );
   TextStyle get textStryle => GoogleFonts.plusJakartaSans(
     fontWeight: FontWeight.w500,
@@ -116,7 +122,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (widget.labelText != null) TextFieldLabel(name: widget.labelText!),
+        // if (widget.labelText != null) TextFieldLabel(name: widget.labelText!),
         TextFormField(
           focusNode: focusNode,
           autofocus: widget.autoFocus,
@@ -152,6 +158,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
           obscureText: obSecure,
 
           decoration: InputDecoration(
+            alignLabelWithHint: true,
             counter: widget.maxLength != null && !widget.maxLengthOutSide
                 ? Offstage()
                 : null,
@@ -159,16 +166,25 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
                 widget.errorStyle ??
                 textStryle.copyWith(color: AppColors.colorEF4444),
             errorMaxLines: 10,
+            label: Column(
+              children: [
+                SizedBox(height: 40),
+                Text(widget.labelText!),
+                SizedBox(height: 5),
+              ],
+            ),
 
             hintText: widget.hintText,
             hintTextDirection: TextDirection.ltr,
 
             hintStyle:
                 widget.hintStyle ??
-                textStryle.copyWith(color: AppColors.color9CA3AF),
+                textStryle.copyWith(color: AppColors.color9CA3AF, height: 2),
             filled: true,
             fillColor: widget.filledColor ?? AppColors.fieldColor,
             errorBorder: border,
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            floatingLabelAlignment: FloatingLabelAlignment.start,
             prefixIconConstraints: widget.prefixIconConstraints,
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.sufixIcon != null
@@ -228,11 +244,9 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
             border: border,
             focusedBorder: border,
             enabledBorder: border,
-            contentPadding: EdgeInsets.fromLTRB(
-              widget.prefixIcon != null ? 0 : 14,
-              10,
-              14,
-              10,
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 16, // adjust for both label and hint
+              horizontal: 14,
             ),
           ),
         ),
