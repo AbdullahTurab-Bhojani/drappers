@@ -61,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(Assets.images.girl.path),
+            image: AssetImage(Assets.images.onboardingBg.path),
             fit: BoxFit.cover,
           ),
         ),

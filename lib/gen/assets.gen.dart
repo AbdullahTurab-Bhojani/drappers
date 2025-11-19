@@ -173,11 +173,27 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Applelogo.png
+  AssetGenImage get applelogo =>
+      const AssetGenImage('assets/images/Applelogo.png');
+
+  /// File path: assets/images/Hideicon.png
+  AssetGenImage get hideicon =>
+      const AssetGenImage('assets/images/Hideicon.png');
+
   /// File path: assets/images/Image.png
   AssetGenImage get image => const AssetGenImage('assets/images/Image.png');
 
   /// File path: assets/images/Logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/Logo.png');
+
+  /// File path: assets/images/Searchicon.png
+  AssetGenImage get searchicon =>
+      const AssetGenImage('assets/images/Searchicon.png');
+
+  /// File path: assets/images/Shareicon.png
+  AssetGenImage get shareicon =>
+      const AssetGenImage('assets/images/Shareicon.png');
 
   /// File path: assets/images/banner guest.png
   AssetGenImage get bannerGuest =>
@@ -190,6 +206,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/banner.svg
   SvgGenImage get bannerSvg => const SvgGenImage('assets/images/banner.svg');
 
+  /// File path: assets/images/bellringicon.png
+  AssetGenImage get bellringicon =>
+      const AssetGenImage('assets/images/bellringicon.png');
+
+  /// File path: assets/images/cancelicon.png
+  AssetGenImage get cancelicon =>
+      const AssetGenImage('assets/images/cancelicon.png');
+
   /// File path: assets/images/course_complete.png
   AssetGenImage get courseComplete =>
       const AssetGenImage('assets/images/course_complete.png');
@@ -198,8 +222,20 @@ class $AssetsImagesGen {
   AssetGenImage get createpage =>
       const AssetGenImage('assets/images/createpage.png');
 
+  /// File path: assets/images/envelopeicon.png
+  AssetGenImage get envelopeicon =>
+      const AssetGenImage('assets/images/envelopeicon.png');
+
+  /// File path: assets/images/gifticon.png
+  AssetGenImage get gifticon =>
+      const AssetGenImage('assets/images/gifticon.png');
+
   /// File path: assets/images/girl.png
   AssetGenImage get girl => const AssetGenImage('assets/images/girl.png');
+
+  /// File path: assets/images/googlelogo.png
+  AssetGenImage get googlelogo =>
+      const AssetGenImage('assets/images/googlelogo.png');
 
   /// File path: assets/images/guest course card image.png
   AssetGenImage get guestCourseCardImage =>
@@ -221,12 +257,43 @@ class $AssetsImagesGen {
   AssetGenImage get lessonComplete =>
       const AssetGenImage('assets/images/lesson_complete.png');
 
+  /// File path: assets/images/likeicon.png
+  AssetGenImage get likeicon =>
+      const AssetGenImage('assets/images/likeicon.png');
+
+  /// File path: assets/images/logo2.png
+  AssetGenImage get logo2 => const AssetGenImage('assets/images/logo2.png');
+
+  /// File path: assets/images/notificationicon.png
+  AssetGenImage get notificationicon =>
+      const AssetGenImage('assets/images/notificationicon.png');
+
+  /// File path: assets/images/notificationsicon.png
+  AssetGenImage get notificationsicon =>
+      const AssetGenImage('assets/images/notificationsicon.png');
+
   /// File path: assets/images/onboard.png
   AssetGenImage get onboard => const AssetGenImage('assets/images/onboard.png');
+
+  /// File path: assets/images/onboarding1.png
+  AssetGenImage get onboarding1 =>
+      const AssetGenImage('assets/images/onboarding1.png');
+
+  /// File path: assets/images/onboarding2.png
+  AssetGenImage get onboarding2 =>
+      const AssetGenImage('assets/images/onboarding2.png');
+
+  /// File path: assets/images/onboarding3.png
+  AssetGenImage get onboarding3 =>
+      const AssetGenImage('assets/images/onboarding3.png');
 
   /// File path: assets/images/onboarding_bg.png
   AssetGenImage get onboardingBg =>
       const AssetGenImage('assets/images/onboarding_bg.png');
+
+  /// File path: assets/images/playicon.png
+  AssetGenImage get playicon =>
+      const AssetGenImage('assets/images/playicon.png');
 
   /// File path: assets/images/prayer.png
   AssetGenImage get prayer => const AssetGenImage('assets/images/prayer.png');
@@ -239,9 +306,17 @@ class $AssetsImagesGen {
   AssetGenImage get progressBg =>
       const AssetGenImage('assets/images/progress_bg.png');
 
+  /// File path: assets/images/screensbg.png
+  AssetGenImage get screensbg =>
+      const AssetGenImage('assets/images/screensbg.png');
+
   /// File path: assets/images/sentence.png
   AssetGenImage get sentence =>
       const AssetGenImage('assets/images/sentence.png');
+
+  /// File path: assets/images/settingsicon.png
+  AssetGenImage get settingsicon =>
+      const AssetGenImage('assets/images/settingsicon.png');
 
   /// File path: assets/images/signInoption.png
   AssetGenImage get signInoption =>
@@ -251,29 +326,53 @@ class $AssetsImagesGen {
   AssetGenImage get subscriptionBg =>
       const AssetGenImage('assets/images/subscription_bg.png');
 
+  /// File path: assets/images/watchtimeicon.png
+  AssetGenImage get watchtimeicon =>
+      const AssetGenImage('assets/images/watchtimeicon.png');
+
   /// List of all assets
   List<dynamic> get values => [
+    applelogo,
+    hideicon,
     image,
     logo,
+    searchicon,
+    shareicon,
     bannerGuest,
     bannerPng,
     bannerSvg,
+    bellringicon,
+    cancelicon,
     courseComplete,
     createpage,
+    envelopeicon,
+    gifticon,
     girl,
+    googlelogo,
     guestCourseCardImage,
     guestLearning,
     guestProfile,
     guestSheet,
     lessonComplete,
+    likeicon,
+    logo2,
+    notificationicon,
+    notificationsicon,
     onboard,
+    onboarding1,
+    onboarding2,
+    onboarding3,
     onboardingBg,
+    playicon,
     prayer,
     profileCard,
     progressBg,
+    screensbg,
     sentence,
+    settingsicon,
     signInoption,
     subscriptionBg,
+    watchtimeicon,
   ];
 }
 
