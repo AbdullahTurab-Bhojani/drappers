@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -13,43 +14,50 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int currentPage = 0;
+  late final Timer _timer;
 
   final List<dynamic> images = [
-    Assets.icons.visible,
-    Assets.icons.visible,
-    Assets.icons.visible,
+    Assets.images.onboarding1.path,
+    Assets.images.onboarding2.path,
+    Assets.images.onboarding3.path,
   ];
 
   final List<String> titles = [
-    'Create Your Trading Identity',
-    'Showcase Your Portfolios',
-    'Build Your Trading Network',
+    'A Front-Row Seat to Innovation',
+    'World-Class Mentors, One Click Away',
+    'The Stories Behind the Success',
   ];
 
   final List<String> subtitles = [
-    'Reserve your handle, build your trading profile, and showcase your experience.',
-    'Analyze and share your portfolio performance with others to gain recognition and insights.',
-    'Build your own traders network or follow others that match your interests.',
+    'Catch live pitches and hear the unfiltered stories of entrepreneurs bringing their visions to life.',
+    'Catch live pitches and hear the unfiltered stories of entrepreneurs bringing their visions to life.',
+    "Dive deep into the success stories, the failures, and the hustle that shaped the world's most iconic companies.",
   ];
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      int nextPage = currentPage + 1;
+      if (nextPage >= images.length) nextPage = 0;
 
-  final TextStyle titleText = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
-  );
+      _pageController.animateToPage(
+        nextPage,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
 
-  final TextStyle subtitleText = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    color: Colors.white70,
-    height: 1.5,
-  );
+      setState(() {
+        currentPage = nextPage; // ✅ safe update
+      });
+    });
+  }
 
-  final TextStyle normalText = TextStyle(
-    fontSize: 15,
-    fontWeight: FontWeight.w600,
-    color: Colors.white,
-  );
+  @override
+  void dispose() {
+    _timer.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,189 +66,133 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     return Scaffold(
       backgroundColor: customColors.dark,
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.onboardingBg.path),
-            fit: BoxFit.cover,
-          ),
-        ),
-
-        child: SafeArea(
-          top: true,
-          bottom: false,
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 16, bottom: 8),
-                child: Image.asset(
-                  Assets.images.onboardingBg.path,
-                  height: 44,
-                  width: 200,
-                ),
-              ),
-
-              Expanded(
-                flex: 6,
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: images.length,
-                  onPageChanged: (index) {
-                    setState(() => currentPage = index);
-                  },
-                  itemBuilder: (context, index) {
-                    return Image.asset(images[index], fit: BoxFit.contain);
-                  },
-                ),
-              ),
-
-              Container(
-                height: MediaQuery.sizeOf(context).height * 0.44,
-                width: double.infinity,
-                // color: AppColors.color3B82F6,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                decoration: BoxDecoration(
-                  
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-
-                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        images.length,
-                        (index) => AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          margin: EdgeInsets.symmetric(horizontal: 4),
-                          width: 26,
-                          height: 4,
-                          decoration: BoxDecoration(
-                            color: currentPage == index
-                                ? customColors.textColor
-                                : customColors.light,
-                            borderRadius: BorderRadius.circular(3),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(height: 25),
-
-                    Text(
-                      titles[currentPage],
-                      textAlign: TextAlign.center,
-                      style: titleText,
-                    ),
-
-                    SizedBox(height: 10),
-
-                    Text(
-                      subtitles[currentPage],
-                      textAlign: TextAlign.center,
-                      style: subtitleText,
-                    ),
-
-                    SizedBox(height: 25),
-
-                   
-
-                    Container(
-                      width: double.infinity,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color(0xFFFF9800),
-                            Color(0xFFE91E63),
-                            Color(0xFF673AB7),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.topRight,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 7,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Center(child: Text('Sign in', style: normalText)),
-                    ),
-
-                    SizedBox(height: 15),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        _socialButton(
-                          icon: Assets.images.logo.image(width: 20, height: 20),
-                          text: "Sign in",
-                          textColor: customColors.textColor,
-                        ),
-                        SizedBox(width: 15),
-                        _socialButton(
-                          icon: Assets.images.logo.image(width: 20, height: 20),
-                          text: "Sign in",
-                          textColor: customColors.textColor,
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 24),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "don't have an account?",
-                          style: normalText.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: customColors.greyColor,
-                          ),
-                        ),
-                        SizedBox(width: 6),
-                        Text(
-                          "sign up",
-                          style: normalText.copyWith(
-                            fontSize: 14,
-                            decoration: TextDecoration.underline,
-                            color: Color(0xFFFF6EA3),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _socialButton({
-    required Widget icon,
-    required String text,
-    required Color textColor,
-  }) {
-    return Container(
-      width: 172,
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.white10,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: [
-          icon,
-          SizedBox(width: 6),
-          Text(text, style: normalText.copyWith(color: textColor)),
+          PageView.builder(
+            controller: _pageController,
+            itemCount: images.length,
+            onPageChanged: (index) {
+              setState(() => currentPage = index);
+            },
+            itemBuilder: (context, index) {
+              return Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(images[index]),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+          ),
+          SafeArea(
+            top: true,
+            bottom: false,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.fromLTRB(40, 16, 40, 20),
+                    color: Colors.black38,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            images.length,
+                            (index) => AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              margin: EdgeInsets.symmetric(horizontal: 4),
+                              width: currentPage == index ? 26 : 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                gradient: currentPage == index
+                                    ? LinearGradient(
+                                        colors: [
+                                          Color(0xFF1FCFFF),
+                                          Color(0xFF0063FF),
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      )
+                                    : null,
+                                color: currentPage != index
+                                    ? customColors.greyColor
+                                    : null,
+                                borderRadius: BorderRadius.circular(
+                                  currentPage == index ? 4 : 4,
+                                ), 
+                                shape: BoxShape.rectangle, 
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 32),
+                        Text(
+                          titles[currentPage],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          subtitles[currentPage],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white70,
+                            height: 1.5,
+                          ),
+                        ),
+                        SizedBox(height: 60),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 52,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.topRight,
+                      ),
+                      borderRadius: BorderRadius.circular(40),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 7,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Next',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 80),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
