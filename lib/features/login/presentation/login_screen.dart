@@ -111,7 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: rememberMe
                                     ? Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4),
+                                          borderRadius: BorderRadius.circular(
+                                            4,
+                                          ),
                                           gradient: const LinearGradient(
                                             colors: [
                                               Color(0xFF1FCFFF),
@@ -131,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-            
+
                           SizedBox(width: 6),
                           PoppinsText(
                             "Remember Me",
@@ -221,7 +223,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: AppColors.color101010,
                                 borderRadius: BorderRadius.circular(30),
                                 image: DecorationImage(
-                                  image: AssetImage(Assets.images.applelogo.path),
+                                  image: AssetImage(
+                                    Assets.images.applelogo.path,
+                                  ),
                                 ),
                               ),
                             ),
@@ -279,7 +283,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                 child: GestureDetector(
                                   onTap: () {
-                                    context.goNamed(AppRoutes.signupScreen.name);
+                                    context.goNamed(
+                                      AppRoutes.signupScreen.name,
+                                    );
                                   },
                                   child: Text(
                                     "Sign Up",
@@ -318,7 +324,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    
     );
   }
 

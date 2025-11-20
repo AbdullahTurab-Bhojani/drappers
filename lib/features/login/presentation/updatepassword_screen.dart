@@ -15,7 +15,7 @@ class UpdatepasswordScreen extends StatefulWidget {
 
 class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
-   final TextEditingController _confirmPasswordController =
+  final TextEditingController _confirmPasswordController =
       TextEditingController();
 
   @override
@@ -62,11 +62,10 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 color: customColors.textColor,
               ),
               SizedBox(height: 40),
-              NewTextField(
+              AppPasswordField(
                 controller: _passwordController,
                 labelText: "New Password",
                 hintText: "Enter your full name",
-                filledColor: AppColors.tfield,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return "Full name required";
@@ -74,13 +73,12 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 15,),
-               NewTextField(
+              SizedBox(height: 15),
+              AppPasswordField(
                 controller: _confirmPasswordController,
                 labelText: "Confirm Password",
-                hintText: "Enter your full name",
-                filledColor: AppColors.tfield,
-                // sufixIcon: Image.asset(Assets.images.hideicon.path),
+                hintText:
+                    "Enter your full name", // sufixIcon: Image.asset(Assets.images.hideicon.path),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return "Full name required";
@@ -88,20 +86,20 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 15,),
+              SizedBox(height: 15),
               PoppinsText(
                 "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
                 fontSize: PoppinsFontSizeVariant.size12,
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.greyColor,
-                ),
-                 SizedBox(height: 40),
-                    AppButton(
-                      onPressed: () {
-                        context.goNamed(AppRoutes.loginScreen.name);
-                      },
-                      title: "Continue",
-                    ),
+              ),
+              SizedBox(height: 40),
+              AppButton(
+                onPressed: () {
+                  context.goNamed(AppRoutes.loginScreen.name);
+                },
+                title: "Continue",
+              ),
             ],
           ),
         ),

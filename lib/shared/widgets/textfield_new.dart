@@ -252,3 +252,121 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
     );
   }
 }
+
+class AppPasswordField extends StatefulWidget {
+  const AppPasswordField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    this.validator,
+    this.textInputAction,
+    this.keyboardType,
+    this.sufixIcon,
+    this.prefixIcon,
+    this.hintStyle,
+    this.labelText,
+  });
+
+  final TextEditingController controller;
+  final String hintText;
+  final String? Function(String?)? validator;
+  final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
+  final Widget? prefixIcon;
+  final Widget? sufixIcon;
+  final TextStyle? hintStyle;
+  final String? labelText;
+
+  @override
+  State createState() => _AppPasswordFieldState();
+}
+
+class _AppPasswordFieldState extends State<AppPasswordField> {
+  bool isShow = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 14, right: 14, top: 12, bottom: 0),
+      decoration: BoxDecoration(
+        color: AppColors.tfield,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.labelText != null) TextFieldLabel(name: widget.labelText!),
+
+          SizedBox(
+            height: 38, // ⭐ Small clean height – perfect balanced
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              cursorColor: AppColors.white,
+              validator: widget.validator,
+              obscureText: isShow,
+              controller: widget.controller,
+              inputFormatters: [NoOnlyWhitespaceFormatter()],
+              keyboardType: widget.keyboardType,
+              textInputAction: widget.textInputAction,
+
+              style: GoogleFonts.poppins(
+                color: AppColors.white,
+                fontSize: 14,
+                height: 1.1, // ⭐ centers text perfectly
+              ),
+
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.zero, // ⭐ no extra height
+
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+
+                hintText: widget.hintText,
+                hintStyle:
+                    widget.hintStyle ??
+                    GoogleFonts.poppins(
+                      color: AppColors.white.withOpacity(0.7),
+                      fontSize: 14,
+                      height: 1.1,
+                    ),
+
+                // ⭐ Prefix Icon Center Aligned
+                prefixIcon: widget.prefixIcon != null
+                    ? Center(child: widget.prefixIcon!)
+                    : null,
+                prefixIconConstraints: const BoxConstraints(
+                  minWidth: 32,
+                  minHeight: 32,
+                ),
+
+                // ⭐ Suffix (Password Toggle) – Perfect Centered
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() => isShow = !isShow);
+                    },
+                    child: Icon(
+                      isShow
+                          ? Icons.visibility_off_rounded
+                          : Icons.visibility_rounded,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ),
+                ),
+
+                suffixIconConstraints: const BoxConstraints(
+                  minWidth: 32,
+                  minHeight: 32,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
