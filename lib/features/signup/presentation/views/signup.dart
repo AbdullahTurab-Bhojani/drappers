@@ -135,38 +135,28 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     SizedBox(height: 15),
 
-
-                    
-                    NewTextField(
-                      controller: _emailController,
-                      // controller: _phoneController,
+                    AppPasswordField(
+                      controller: _passwordController,
                       labelText: "Create Password",
-                      hintText: "*********",
-                      filledColor: AppColors.tfield,
-                      keyboardType: TextInputType.phone,
-                      // validator: (value) {
-                      //   if (value == null || value.trim().isEmpty) {
-                      //     return "Password required";
-                      //   }
-                      //   if (value.length < 11) return "Enter valid phone";
-                      //   return null;
-                      // },
+                      hintText: "Enter your Password ",
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return "Full name required";
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: 15),
-                    NewTextField(
-                      controller: _emailController,
-                      // controller: _phoneController,
+                    AppPasswordField(
+                      controller: _passwordController,
                       labelText: "Confirm Password",
-                      hintText: "*********",
-                      filledColor: AppColors.tfield,
-                      keyboardType: TextInputType.phone,
-                      // validator: (value) {
-                      //   if (value == null || value.trim().isEmpty) {
-                      //     return "Phone number required";
-                      //   }
-                      //   if (value.length < 11) return "Enter valid phone";
-                      //   return null;
-                      // },
+                      hintText: "Enter Confirm your Password",
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return "Full name required";
+                        }
+                        return null;
+                      },
                     ),
 
                     SizedBox(height: 8), // Reduced spacing
@@ -222,7 +212,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     // --- Terms and Conditions Checkbox ---
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Transform.scale(
                           scale: 0.6,
@@ -246,36 +236,55 @@ class _SignupScreenState extends State<SignupScreen> {
                             padding: EdgeInsets.only(top: 0),
                             child: RichText(
                               text: TextSpan(
-                                text: 'I agree to the ',
-                                style: TextStyle(
-                                  color: customColors.textColor,
-                                  fontSize: 12,
-                                  fontFamily: 'Poppins',
-                                ), // Reduced size
                                 children: [
-                                  TextSpan(
-                                    text: 'Terms & Conditions',
-                                    style: TextStyle(
-                                      color: customColors.buttonColors.last,
-                                      decoration: TextDecoration.underline,
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12,
+                                  WidgetSpan(
+                                    child: PoppinsText(
+                                      "I agree to the ",
+                                      fontSize: PoppinsFontSizeVariant.size12,
+                                      color: customColors.textColor,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.regular,
                                     ),
-                                    // onTap functionality would be here
                                   ),
-                                  TextSpan(
-                                    text: ' and ',
-                                    style: TextStyle(fontFamily: 'Poppins'),
-                                  ),
-                                  TextSpan(
-                                    text: 'Privacy Policy.',
-                                    style: TextStyle(
-                                      color: customColors.buttonColors.last,
-                                      decoration: TextDecoration.underline,
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12,
+                                  WidgetSpan(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // TODO: open terms screen
+                                      },
+                                      child: PoppinsText(
+                                        "Terms & Conditions",
+                                        fontSize: PoppinsFontSizeVariant.size12,
+                                        color: customColors.buttonColors.first,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
+
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
-                                    // onTap functionality would be here
+                                  ),
+                                  WidgetSpan(
+                                    child: PoppinsText(
+                                      " and ",
+                                      fontSize: PoppinsFontSizeVariant.size12,
+                                      color: customColors.textColor,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.regular,
+                                    ),
+                                  ),
+                                  WidgetSpan(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // TODO: open privacy screen
+                                      },
+                                      child: PoppinsText(
+                                        "Privacy Policy.",
+                                        fontSize: PoppinsFontSizeVariant.size12,
+                                        color: customColors.buttonColors.last,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -318,8 +327,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    const SizedBox(height: 25), // Reduced spacing
-                    // --- Social Sign-In Buttons ---
+                    const SizedBox(height: 35),
                     Row(
                       children: [
                         Expanded(
