@@ -490,13 +490,10 @@ class _SignupScreenState extends State<SignupScreen> {
                           ],
                         ),
                         InkWell(
-                          onTap: () {
-                            
-                          },
+                          onTap: () {},
                           child: Container(
-                            
-                            
-                            child: PoppinsText("privacy policy")),
+                            child: PoppinsText("privacy policy"),
+                          ),
                         ),
 
                         PoppinsText("faqs"),
