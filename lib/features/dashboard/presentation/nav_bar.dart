@@ -24,22 +24,22 @@ class _BottomNavigationBarShellState
 
   static final List<Map<String, dynamic>> _navItems = [
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.home.name,
       'label': 'Home',
       'icon': Assets.images.a2023DraperTVOfficialLogo14.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.discover.name,
       'label': 'Discover',
       'icon': Assets.images.slider.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.watchlist.name,
       'label': 'Watchlist',
       'icon': Assets.images.galleryFavorite.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.home.name,
       'label': 'Profile',
       'icon': Assets.images.shareicon.path,
     },

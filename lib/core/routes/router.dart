@@ -54,9 +54,19 @@ final routerConfigProvider = Provider((ref) {
         },
         routes: [
           GoRoute(
-            path: AppRoutes.dashboard.path,
-            name: AppRoutes.dashboard.name,
-            builder: (context, state) => Container(color: Colors.red),
+            path: AppRoutes.home.path,
+            name: AppRoutes.home.name,
+            builder: (context, state) => HomeScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.discover.path,
+            name: AppRoutes.discover.name,
+            builder: (context, state) => DiscoverScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.watchlist.path,
+            name: AppRoutes.watchlist.name,
+            builder: (context, state) => WatchlistScreen(),
           ),
         ],
       ),
