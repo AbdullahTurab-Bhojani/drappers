@@ -9,9 +9,10 @@ class TextFieldLabel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
-      child: PlusJakartaText(
+      child: PoppinsText(
         name,
-        fontWeight: FontWeight.w400,
+        fontWeight: PoppinsFontWeightVariant.regular,
+        fontSize: PoppinsFontSizeVariant.size12,
         color: AppColors.dLabel,
       ),
     );

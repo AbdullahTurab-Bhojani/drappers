@@ -6,8 +6,13 @@ enum AppRoutes {
   loginScreen('login', '/login'),
   forgetpasswordScreen('forgetpassword', '/forgetpassword'),
   verfiicationcodeScreen('verificationcode', '/verificationcode'),
-  dashboard('dashboard', '/dashboard'),
-  signupScreen('signup', '/signup');
+  home('home', '/home'),
+  discover('discover', '/discover'),
+  watchlist('watchlist', '/watchlist'),
+  signupScreen('signup', '/signup'),
+  updatepasswordScreen('updatepassword', '/updatepassword'),
+  profile ('profile', '/profile');
+
 
   final String name;
   final String path;
@@ -20,7 +25,12 @@ enum AppRoutes {
     AppRoutes.splashScreen,
     AppRoutes.signupScreen,
   ];
-  static List<AppRoutes> bottomNavPages = [AppRoutes.dashboard];
+  static List<AppRoutes> bottomNavPages = [
+    AppRoutes.home,
+    AppRoutes.discover,
+    AppRoutes.watchlist,
+    AppRoutes.profile
+  ];
 
   static bool isPublicRoute(GoRouterState state) {
     final fullPath = state.fullPath;

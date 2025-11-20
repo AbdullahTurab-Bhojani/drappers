@@ -24,22 +24,22 @@ class _BottomNavigationBarShellState
 
   static final List<Map<String, dynamic>> _navItems = [
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.home.name,
       'label': 'Home',
-      'icon': Assets.images.a2023DraperTVOfficialLogo14.path,
+      'icon': Assets.images.footericon1.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.discover.name,
       'label': 'Discover',
-      'icon': Assets.images.slider.path,
+      'icon': Assets.images.footericon2.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.watchlist.name,
       'label': 'Watchlist',
-      'icon': Assets.images.galleryFavorite.path,
+      'icon': Assets.images.footericon3.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.profile.name,
       'label': 'Profile',
       'icon': Assets.images.shareicon.path,
     },
@@ -96,7 +96,7 @@ class _BottomNavigationBarShellState
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(_navItems.length, (index) {
               final bool isProfileTab =
-                  index == _navItems.length - 1; // ✅ last = Profile
+                  index == _navItems.length - 1; 
 
               final isSelected = selectedIndex == index;
               return InkWell(
