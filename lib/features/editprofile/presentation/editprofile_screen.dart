@@ -92,7 +92,7 @@ class editProfileScreen extends StatelessWidget {
                       children: [
                         NewTextField(
                           controller: _fullNameController,
-                          labelText: "Full Name",
+                          labelText: "Full Name*",
                           hintText: "Enter your full name",
                           filledColor: AppColors.tfield,
                           // validator: (value) {
@@ -107,7 +107,7 @@ class editProfileScreen extends StatelessWidget {
                         // Email Address
                         NewTextField(
                           controller: _emailController,
-                          labelText: "Email Address",
+                          labelText: "Email Address*",
                           hintText: "Enter your email",
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.emailAddress,
@@ -125,7 +125,7 @@ class editProfileScreen extends StatelessWidget {
                         NewTextField(
                           controller: _emailController,
                           // controller: _phoneController,
-                          labelText: "Phone Number",
+                          labelText: "Phone Number*",
                           hintText: "03XXXXXXXXX",
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.phone,
