@@ -76,23 +76,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       SizedBox(height: 16),
-                      NewTextField(
-                        controller: _passwordController,
-                        labelText: "Password",
-                        hintText: "Enter your Password",
-                        filledColor: AppColors.tfield,
-                        keyboardType: TextInputType.emailAddress,
-                        // sufixIcon: Image.asset(
-                        //   Assets.images.hideicon.path
-                        // ),
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return "Email required";
-                          }
-                          if (!value.contains("@")) return "Enter valid email";
-                          return null;
-                        },
-                      ),
+                     AppPasswordField(
+                controller: _passwordController,
+                labelText: "New Password",
+                hintText: "Enter your full name",
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Full name required";
+                  }
+                  return null;
+                },
+              ),
                       SizedBox(height: 14),
                       Row(
                         children: [
@@ -254,13 +248,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          PoppinsText(
                             "Need to create an account?",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                              fontSize: PoppinsFontSizeVariant.size14,
+                              fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
-                            ),
                           ),
                           SizedBox(width: 4),
                           Stack(
@@ -287,12 +279,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       AppRoutes.signupScreen.name,
                                     );
                                   },
-                                  child: Text(
+                                  child: PoppinsText(
                                     "Sign Up",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                                      fontSize: PoppinsFontSizeVariant.size14,
+                                      fontWeight: PoppinsFontWeightVariant.medium,
                                   ),
                                 ),
                               ),

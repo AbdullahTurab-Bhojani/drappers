@@ -26,17 +26,17 @@ class _BottomNavigationBarShellState
     {
       'path': AppRoutes.dashboard.name,
       'label': 'Home',
-      'icon': Assets.images.a2023DraperTVOfficialLogo14.path,
+      'icon': Assets.images.footericon1.path,
     },
     {
       'path': AppRoutes.dashboard.name,
       'label': 'Discover',
-      'icon': Assets.images.slider.path,
+      'icon': Assets.images.footericon2.path,
     },
     {
       'path': AppRoutes.dashboard.name,
       'label': 'Watchlist',
-      'icon': Assets.images.galleryFavorite.path,
+      'icon': Assets.images.footericon3.path,
     },
     {
       'path': AppRoutes.dashboard.name,
@@ -96,7 +96,7 @@ class _BottomNavigationBarShellState
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(_navItems.length, (index) {
               final bool isProfileTab =
-                  index == _navItems.length - 1; // ✅ last = Profile
+                  index == _navItems.length - 1; 
 
               final isSelected = selectedIndex == index;
               return InkWell(

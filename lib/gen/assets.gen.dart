@@ -199,6 +199,14 @@ class $AssetsImagesGen {
   AssetGenImage get shareicon =>
       const AssetGenImage('assets/images/Shareicon.png');
 
+  /// File path: assets/images/Showicon.png
+  AssetGenImage get showicon =>
+      const AssetGenImage('assets/images/Showicon.png');
+
+  /// File path: assets/images/backicon.png
+  AssetGenImage get backicon =>
+      const AssetGenImage('assets/images/backicon.png');
+
   /// File path: assets/images/banner guest.png
   AssetGenImage get bannerGuest =>
       const AssetGenImage('assets/images/banner guest.png');
@@ -229,6 +237,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/envelopeicon.png
   AssetGenImage get envelopeicon =>
       const AssetGenImage('assets/images/envelopeicon.png');
+
+  /// File path: assets/images/footericon1.png
+  AssetGenImage get footericon1 =>
+      const AssetGenImage('assets/images/footericon1.png');
+
+  /// File path: assets/images/footericon2.png
+  AssetGenImage get footericon2 =>
+      const AssetGenImage('assets/images/footericon2.png');
+
+  /// File path: assets/images/footericon3.png
+  AssetGenImage get footericon3 =>
+      const AssetGenImage('assets/images/footericon3.png');
 
   /// File path: assets/images/gallery-favorite.png
   AssetGenImage get galleryFavorite =>
@@ -350,6 +370,8 @@ class $AssetsImagesGen {
     logo,
     searchicon,
     shareicon,
+    showicon,
+    backicon,
     bannerGuest,
     bannerPng,
     bannerSvg,
@@ -358,6 +380,9 @@ class $AssetsImagesGen {
     courseComplete,
     createpage,
     envelopeicon,
+    footericon1,
+    footericon2,
+    footericon3,
     galleryFavorite,
     gifticon,
     girl,

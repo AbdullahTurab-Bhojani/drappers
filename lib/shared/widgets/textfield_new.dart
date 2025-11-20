@@ -173,7 +173,7 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
               // errorMaxLines: 10,
               hintText: widget.hintText,
               hintTextDirection: TextDirection.ltr,
-              contentPadding: const EdgeInsets.symmetric(
+              contentPadding: EdgeInsets.symmetric(
                 horizontal: 0,
                 vertical: 0,
               ),
@@ -220,7 +220,7 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
                             child: SizedBox(
                               child: obSecure
                                   ? Padding(
-                                      padding: const EdgeInsets.all(14.0),
+                                      padding: EdgeInsets.all(14.0),
                                       child: Assets.icons.visible.image(
                                         scale: 4,
                                         height: 20,
@@ -230,7 +230,7 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
                                       ),
                                     )
                                   : Padding(
-                                      padding: const EdgeInsets.all(14.0),
+                                      padding: EdgeInsets.all(14.0),
                                       child: Assets.icons.hide.image(
                                         scale: 4,
                                         height: 20,
@@ -298,7 +298,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
           if (widget.labelText != null) TextFieldLabel(name: widget.labelText!),
 
           SizedBox(
-            height: 38, // ⭐ Small clean height – perfect balanced
+            // height: 38, 
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               cursorColor: AppColors.white,
@@ -312,12 +312,12 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
               style: GoogleFonts.poppins(
                 color: AppColors.white,
                 fontSize: 14,
-                height: 1.1, // ⭐ centers text perfectly
+                height: 1.1, 
               ),
 
               decoration: InputDecoration(
                 isDense: true,
-                contentPadding: EdgeInsets.zero, // ⭐ no extra height
+                contentPadding: EdgeInsets.zero, 
 
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
@@ -327,12 +327,11 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                 hintStyle:
                     widget.hintStyle ??
                     GoogleFonts.poppins(
-                      color: AppColors.white.withOpacity(0.7),
+                      color: AppColors.white,
                       fontSize: 14,
                       height: 1.1,
                     ),
 
-                // ⭐ Prefix Icon Center Aligned
                 prefixIcon: widget.prefixIcon != null
                     ? Center(child: widget.prefixIcon!)
                     : null,
@@ -341,19 +340,20 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                   minHeight: 32,
                 ),
 
-                // ⭐ Suffix (Password Toggle) – Perfect Centered
                 suffixIcon: Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: GestureDetector(
                     onTap: () {
                       setState(() => isShow = !isShow);
                     },
-                    child: Icon(
+                    child: Image.asset(
                       isShow
-                          ? Icons.visibility_off_rounded
-                          : Icons.visibility_rounded,
+                      ? Assets.images.hideicon.path
+                          : Assets.images.showicon.path,
+                          
                       color: Colors.white,
-                      size: 18,
+                      width: 18,
+                      height: 18
                     ),
                   ),
                 ),
@@ -365,6 +365,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
               ),
             ),
           ),
+        
         ],
       ),
     );

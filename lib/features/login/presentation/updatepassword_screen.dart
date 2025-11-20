@@ -41,18 +41,9 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 onTap: () {
                   context.goNamed(AppRoutes.verfiicationcodeScreen.name);
                 },
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.color101317,
-                  ),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                ),
+                child: Image.asset(
+                  Assets.images.backicon.path
+                )
               ),
               SizedBox(height: 40),
               PoppinsText(
@@ -78,7 +69,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 controller: _confirmPasswordController,
                 labelText: "Confirm Password",
                 hintText:
-                    "Enter your full name", // sufixIcon: Image.asset(Assets.images.hideicon.path),
+                    "Enter your full name", 
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return "Full name required";

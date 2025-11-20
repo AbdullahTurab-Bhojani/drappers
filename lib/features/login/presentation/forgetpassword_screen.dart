@@ -42,18 +42,9 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                   onTap: () {
                     context.go('/login');
                   },
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.color101317,
-                    ),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                      size: 22,
-                    ),
-                  ),
+                  child: Image.asset(
+                  Assets.images.backicon.path
+                )
                 ),
                 SizedBox(height: 40),
                 PoppinsText(
