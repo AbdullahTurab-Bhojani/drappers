@@ -1,15 +1,12 @@
 // Main library file for Everbloom app
 // All imports are consolidated here, and all other files use `part of` pattern
 
-// Dart core libraries
+// ignore_for_file: unnecessary_import, implementation_imports
+
 import 'dart:async';
-// import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-// import 'dart:developer' as dev;
-
-// Flutter core
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -34,16 +31,11 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_timezone/flutter_timezone.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image/image.dart' as img;
-import 'package:intl/intl.dart' show Bidi, DateFormat, NumberFormat;
-// import 'package:purchases_flutter/purchases_flutter.dart' hide PurchaseResult;
 import 'package:chewie/chewie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -58,11 +50,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-
-// Generated files (local)
 import 'core/extensions/theme_extension.dart';
 import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_theme.dart';
+import 'features/dashboard/presentation/nav_bar.dart';
 import 'features/login/presentation/forgetpassword_screen.dart';
 import 'features/login/presentation/login_screen.dart';
 import 'features/login/presentation/verfiicationcode_screen.dart';
@@ -70,8 +61,6 @@ import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/signup/presentation/views/signup.dart';
 import 'features/splash/presentation/views/splash.dart';
 import 'gen/assets.gen.dart';
-
-// Chewie internal imports (for custom controls)
 import 'package:chewie/src/center_seek_button.dart';
 import 'package:chewie/src/chewie_player.dart';
 import 'package:chewie/src/chewie_progress_colors.dart';
@@ -82,87 +71,43 @@ import 'package:chewie/src/material/widgets/playback_speed_dialog.dart';
 import 'package:chewie/src/models/option_item.dart';
 import 'package:chewie/src/models/subtitle_model.dart';
 import 'package:chewie/src/notifiers/index.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
-
 import 'shared/custom_app_start/providers/app_start.dart';
 import 'shared/video_player/providers/video_player_provider.dart';
-
-// Generated files
-
-// part 'everbloom.g.dart';
 part 'drappers.freezed.dart';
-
-//App
 part 'app.dart';
-
-// Core - Routes
 part 'core/routes/router.dart';
 part 'core/routes/routes.dart';
-
-// Core - Theme
 part 'core/theme/colors.dart';
-
-// Core - States
 part 'core/states/app_loading_state.dart';
-
-// Core - Mixins
 part 'core/mixin/form_state_mixin.dart';
-
-// Core - Extensions
 part 'core/extensions/custom_extensions.dart';
-
-// Core - Services
 part 'core/services/fcm_service.dart';
 
 part 'core/services/image_picker_handler.dart';
 part 'core/services/fixed_grid_heigh_delegates.dart';
 part 'core/services/files_picker_service.dart';
 part 'core/services/check_internet.dart';
-
-// Shared - App Start
 part 'shared/custom_app_start/presentation/my_app_start.dart';
-
-// Shared - Disposable Providers
 part 'shared/disposable_providers/disposable_providers.dart';
-
-// Shared - Modals
 part 'shared/modals/confirmation_modal.dart';
-
-// Shared - Utils
 part 'shared/utils/custom_date_picker.dart';
 part 'shared/utils/custom_scroll_behaviour.dart';
 part 'shared/utils/ui_breaks_points.dart';
-
-// Shared - Video Player
 part 'shared/video_player/presentation/custom_chewie_controls.dart';
 part 'shared/video_player/presentation/short_view_player.dart';
 part 'shared/video_player/presentation/thumbnail_video_preview.dart';
-// part 'shared/video_player/providers/video_player_provider.dart';
 part 'shared/video_player/presentation/video_player_state_builder.dart';
-
-// Shared - Widgets
-// App Bar
 part 'shared/widgets/app_bar/main_app_bar.dart';
-
-// App Buttons
 part 'shared/widgets/app_buttons/custom_icon_btn.dart';
 part 'shared/widgets/app_buttons/primary_button.dart';
-
-// Base Layouts
-
-// Images
 part 'shared/widgets/images/app_image.dart';
 part 'shared/widgets/images/cached_image.dart';
 part 'shared/widgets/images/circle_image.dart';
 part 'shared/widgets/images/edit_profile_widget.dart';
 part 'shared/widgets/images/svg_images.dart';
-
-// Text Widgets
 part 'shared/widgets/text_widget/plus_jakarta.dart';
 part 'shared/widgets/text_widget/readmore_text.dart';
 part 'shared/widgets/text_widget/poppins.dart';
-
-// Other Widgets
 part 'shared/widgets/coming_soon.dart';
 part 'shared/widgets/custom_drop_down.dart';
 part 'shared/widgets/custom_form_validator.dart';
@@ -172,7 +117,5 @@ part 'shared/widgets/error_widget.dart';
 part 'shared/widgets/loading_widget.dart';
 part 'shared/widgets/searchable_custom_dropdown.dart';
 part 'shared/widgets/text_field_label.dart';
-
-// Core - Local
 part 'core/local/domain/repositories/shared_preference_repository.dart';
 part 'core/local/domain/repositories/local_storage_repository.dart';

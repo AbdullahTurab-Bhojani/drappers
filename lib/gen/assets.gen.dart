@@ -173,6 +173,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/2023_Draper_TV_Official_Logo-14.png
+  AssetGenImage get a2023DraperTVOfficialLogo14 =>
+      const AssetGenImage('assets/images/2023_Draper_TV_Official_Logo-14.png');
+
   /// File path: assets/images/Applelogo.png
   AssetGenImage get applelogo =>
       const AssetGenImage('assets/images/Applelogo.png');
@@ -225,6 +229,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/envelopeicon.png
   AssetGenImage get envelopeicon =>
       const AssetGenImage('assets/images/envelopeicon.png');
+
+  /// File path: assets/images/gallery-favorite.png
+  AssetGenImage get galleryFavorite =>
+      const AssetGenImage('assets/images/gallery-favorite.png');
 
   /// File path: assets/images/gifticon.png
   AssetGenImage get gifticon =>
@@ -322,6 +330,9 @@ class $AssetsImagesGen {
   AssetGenImage get signInoption =>
       const AssetGenImage('assets/images/signInoption.png');
 
+  /// File path: assets/images/slider.png
+  AssetGenImage get slider => const AssetGenImage('assets/images/slider.png');
+
   /// File path: assets/images/subscription_bg.png
   AssetGenImage get subscriptionBg =>
       const AssetGenImage('assets/images/subscription_bg.png');
@@ -332,6 +343,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+    a2023DraperTVOfficialLogo14,
     applelogo,
     hideicon,
     image,
@@ -346,6 +358,7 @@ class $AssetsImagesGen {
     courseComplete,
     createpage,
     envelopeicon,
+    galleryFavorite,
     gifticon,
     girl,
     googlelogo,
@@ -371,6 +384,7 @@ class $AssetsImagesGen {
     sentence,
     settingsicon,
     signInoption,
+    slider,
     subscriptionBg,
     watchtimeicon,
   ];
@@ -393,7 +407,11 @@ class Assets {
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const String splash = 'packages/drappers/assets/splash.mp4';
   static const $AssetsSvgGen svg = $AssetsSvgGen();
+
+  /// List of all assets
+  static List<String> get values => [splash];
 }
 
 class AssetGenImage {

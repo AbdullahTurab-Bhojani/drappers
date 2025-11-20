@@ -49,9 +49,9 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 28),
               PoppinsText(
                 "Get Started with Draper",
-                  fontSize: PoppinsFontSizeVariant.size24,
-                  fontWeight: PoppinsFontWeightVariant.semiBold,
-                  color: customColors.textColor,
+                fontSize: PoppinsFontSizeVariant.size24,
+                fontWeight: PoppinsFontWeightVariant.semiBold,
+                color: customColors.textColor,
               ),
               SizedBox(height: 28),
               Container(
@@ -132,14 +132,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(width: 6),
                         PoppinsText(
                           "Remember Me",
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.textColor,
+                          fontSize: PoppinsFontSizeVariant.size12,
+                          fontWeight: PoppinsFontWeightVariant.regular,
+                          color: customColors.textColor,
                         ),
                       ],
                     ),
                     SizedBox(height: 40),
-                    AppButton(onPressed: () {}, title: "Continue"),
+                    AppButton(
+                      onPressed: () {
+                        context.pushReplacement(AppRoutes.dashboard.path);
+                      },
+                      title: "Continue",
+                    ),
                     SizedBox(height: 12),
                     Container(
                       width: double.infinity,
@@ -153,10 +158,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: PoppinsText(
                             'Forgot Password?',
-                              decoration: TextDecoration.underline,
-                              fontSize: PoppinsFontSizeVariant.size14,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: Colors.white,
+                            decoration: TextDecoration.underline,
+                            fontSize: PoppinsFontSizeVariant.size14,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -175,9 +180,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           child: PoppinsText(
                             "or",
-                              color: AppColors.color6B7280,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              fontSize: PoppinsFontSizeVariant.size12,
+                            color: AppColors.color6B7280,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            fontSize: PoppinsFontSizeVariant.size12,
                           ),
                         ),
                         Expanded(
