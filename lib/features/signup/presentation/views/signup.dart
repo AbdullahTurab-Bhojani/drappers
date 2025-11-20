@@ -498,12 +498,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ],
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          context.goNamed(AppRoutes.PrivacypolicyScreen.name);
-                        },
-                        child: PoppinsText("privacy policy"),
-                      ),
                     ],
                   ),
                 ),
