@@ -79,6 +79,16 @@ final routerConfigProvider = Provider((ref) {
             name: AppRoutes.PrivacypolicyScreen.name,
             builder: (context, state) => PrivacypolicyScreen(),
           ),
+          GoRoute(
+            path: AppRoutes.FaqsScreen.path,
+            name: AppRoutes.FaqsScreen.name,
+            builder: (context, state) => FaqsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.editprofile.path,
+            name: AppRoutes.editprofile.name,
+            builder: (context, state) => editProfileScreen(),
+          ),
         ],
       ),
     ],

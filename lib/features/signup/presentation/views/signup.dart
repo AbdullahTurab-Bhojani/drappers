@@ -302,7 +302,12 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       const SizedBox(height: 20), // Reduced spacing
                       // --- Primary Action Button (Gradient) ---
-                      AppButton(onPressed: () {}, title: "Create Account"),
+                      AppButton(
+                        onPressed: () {
+                          context.pushReplacement(AppRoutes.home.path);
+                        },
+                        title: "Create Account",
+                      ),
 
                       const SizedBox(height: 25), // Reduced spacing
                       // --- OR Divider ---

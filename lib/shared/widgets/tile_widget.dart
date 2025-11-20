@@ -6,7 +6,13 @@ import '../../gen/assets.gen.dart';
 class TileWidget extends StatefulWidget {
   final String title;
   final String iconImage;
-  const TileWidget({super.key, required this.title, required this.iconImage});
+  final VoidCallback? onTap; // ADDED TAP CALLBACK
+  TileWidget({
+    super.key,
+    required this.title,
+    required this.iconImage,
+    this.onTap,
+  });
 
   @override
   State<TileWidget> createState() => _TileWidgetState();
@@ -32,9 +38,7 @@ class _TileWidgetState extends State<TileWidget> {
               ),
             ],
           ),
-         Icon(Icons.arrow_forward_ios,
-         size: 16,
-         )
+          Icon(Icons.arrow_forward_ios, size: 16),
         ],
       ),
     );

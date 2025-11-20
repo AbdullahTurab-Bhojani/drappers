@@ -1,0 +1,158 @@
+import 'package:flutter/material.dart';
+import '../../../../drappers.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../core/extensions/theme_extension.dart';
+import '../../../shared/widgets/cardwidget/card_widget.dart';
+import '../../../shared/widgets/textfield_new.dart';
+import '../../../shared/widgets/tile_widget.dart';
+import '../../privacypolicy/presentation/views/privacypolicy.dart';
+
+class editProfileScreen extends StatelessWidget {
+  editProfileScreen({super.key});
+
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+  }
+
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
+          ),
+          Column(
+            children: [
+              AppMainBar(
+                leadingIcon: Icons.arrow_back_ios,
+                title: "Edit Profile",
+                centerTitle: false,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+              SizedBox(height: 50),
+              Column(
+                children: [
+                  Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(
+                          'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                        ),
+                      ),
+                      Positioned(
+                        bottom: -10,
+                        right: 42,
+                        child: Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: customColors.buttonColors.first,
+                            shape: BoxShape.circle,
+                            // border: Border.all(
+                            //   color: customColors.textColor,
+                            //   width: 1,
+                            // ),
+                          ),
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: customColors.textColor,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  PoppinsText(
+                    'Jerry Mackson',
+                    fontSize: PoppinsFontSizeVariant.size22,
+                    fontWeight: PoppinsFontWeightVariant.medium,
+                    color: customColors.textColor,
+                  ),
+                  SizedBox(height: 20),
+                ],
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: Column(
+                      children: [
+                        NewTextField(
+                          controller: _fullNameController,
+                          labelText: "Full Name",
+                          hintText: "Enter your full name",
+                          filledColor: AppColors.tfield,
+                          // validator: (value) {
+                          //   if (value == null || value.trim().isEmpty) {
+                          //     return "Full name required";
+                          //   }
+                          //   return null;
+                          // },
+                        ),
+                        SizedBox(height: 15),
+
+                        // Email Address
+                        NewTextField(
+                          controller: _emailController,
+                          labelText: "Email Address",
+                          hintText: "Enter your email",
+                          filledColor: AppColors.tfield,
+                          keyboardType: TextInputType.emailAddress,
+                          // validator: (value) {
+                          //   if (value == null || value.trim().isEmpty) {
+                          //     return "Email required";
+                          //   }
+                          //   if (!value.contains("@")) return "Enter valid email";
+                          //   return null;
+                          // },
+                        ),
+                        SizedBox(height: 15),
+
+                        // Phone Number
+                        NewTextField(
+                          controller: _emailController,
+                          // controller: _phoneController,
+                          labelText: "Phone Number",
+                          hintText: "03XXXXXXXXX",
+                          filledColor: AppColors.tfield,
+                          keyboardType: TextInputType.phone,
+                          // validator: (value) {
+                          //   if (value == null || value.trim().isEmpty) {
+                          //     return "Phone number required";
+                          //   }
+                          //   if (value.length < 11) return "Enter valid phone";
+                          //   return null;
+                          // },
+                        ),
+                        SizedBox(height: 15),
+                        AppButton(onPressed: () {}, title: "Save  Changes"),
+                        SizedBox(height: 10),
+                        AppButtonwithoudbg(
+                          onPressed: () {},
+                          title: "Discard  Changes",
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

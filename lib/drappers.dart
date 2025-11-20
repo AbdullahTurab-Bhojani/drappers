@@ -55,6 +55,8 @@ import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_theme.dart';
 import 'features/dashboard/presentation/nav_bar.dart';
 import 'features/discover/presentation/discover_screen.dart';
+import 'features/editprofile/presentation/editprofile_screen.dart';
+import 'features/faqs/privacypolicy/presentation/views/faqs.dart';
 import 'features/home/presentation/views/home.dart';
 import 'features/login/presentation/forgetpassword_screen.dart';
 import 'features/login/presentation/login_screen.dart';
