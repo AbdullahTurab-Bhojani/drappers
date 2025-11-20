@@ -6,7 +6,7 @@ import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class ForgetpasswordScreen extends StatefulWidget {
-  const ForgetpasswordScreen({super.key});
+  ForgetpasswordScreen({super.key});
 
   @override
   State<ForgetpasswordScreen> createState() => _ForgetpasswordScreenState();
@@ -15,11 +15,11 @@ class ForgetpasswordScreen extends StatefulWidget {
 class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
   final _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-
+  bool isPhone = true;
 
   @override
   Widget build(BuildContext context) {
-     final theme = Theme.of(context);
+    final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Scaffold(
@@ -53,7 +53,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                       color: AppColors.color101317,
                     ),
                     child: Icon(
-                      Icons.arrow_back,
+                      Icons.arrow_back_ios,
                       color: Colors.white,
                       size: 22,
                     ),
@@ -62,108 +62,60 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 SizedBox(height: 40),
                 PoppinsText(
                   "Forget Password?",
-                  // style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
                   fontSize: PoppinsFontSizeVariant.size24,
                   fontWeight: PoppinsFontWeightVariant.semiBold,
                   color: customColors.textColor,
-
                 ),
                 SizedBox(height: 4),
                 PoppinsText(
                   'Don’t worry, this happens.',
-                  // style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                   fontSize: PoppinsFontSizeVariant.size16,
+                  fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.regular,
                   color: customColors.textColor,
-
                 ),
                 SizedBox(height: 36),
                 PoppinsText(
                   'Receive Code Via phone or email',
-                  // style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                   fontSize: PoppinsFontSizeVariant.size16,
+                  fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.regular,
                   color: customColors.textColor,
-
                 ),
                 SizedBox(height: 24),
                 Container(
                   width: MediaQuery.of(context).size.width - 40,
-                  child: NewTextField(
-                      controller: _emailController,
-                      labelText: "Enter your Email Address or Phone*",
-                      hintText: "Enter your email",
-                      filledColor: AppColors.tfield,
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Email required";
-                        }
-                        if (!value.contains("@")) return "Enter valid email";
-                        return null;
-                      },
-                    ),
-                ),
-                SizedBox(height: 24),
-                Container(
-                  width: MediaQuery.of(context).size.width - 40,
-                  child: NewTextField(
-                    
-                      controller: _phoneController,
-                      labelText: "Phone Number",
-                      hintText: "03XXXXXXXXX",
-                      filledColor: AppColors.tfield,
-                      keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Phone number required";
-                        }  
-                        if (value.length < 11) return "Enter valid phone";
-                        return null;
-                      },
-                    ),
-                ),
-
-                SizedBox(height: 24),
-                Container(
-                  width: MediaQuery.of(context).size.width - 40,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF1FCFFF), 
-                        Color(0xFF0063FF), 
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(40),
-                      onTap: () {
-                        print("Send Code pressed");
-                      },
-                      child: GestureDetector(
+                  child: Column(
+                    children: [
+                      RadioTileWidget(
+                        selected: isPhone,
+                        title: "Enter Your Email ",
+                        subtitle: "jo********@gmail.co|",
                         onTap: () {
-                          context.goNamed(AppRoutes.verfiicationcodeScreen.name);
+                          setState(() {
+                            isPhone = true;
+                          });
                         },
-                        child: Center(
-                          child: Text(
-                            "Send Code",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
                       ),
-                    ),
+
+                      RadioTileWidget(
+                        selected: !isPhone,
+                        title: "Enter Phone ",
+                        subtitle: "03xxxxxxx59",
+                        onTap: () {
+                          setState(() {
+                            isPhone = false;
+                          });
+                        },
+                      ),
+                    ],
                   ),
                 ),
+                 SizedBox(height: 24),
+              AppButton(onPressed: () {
+                context.goNamed(AppRoutes.verfiicationcodeScreen.name);
+              }, title: "Send Code"),
+                
+
+               
               ],
             ),
           ),
@@ -171,5 +123,69 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
       ),
     );
   }
-  
+}
+
+class RadioTileWidget extends StatelessWidget {
+  final bool selected;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  RadioTileWidget({
+    super.key,
+    required this.selected,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        margin: EdgeInsets.only(bottom: 14),
+        decoration: BoxDecoration(
+          color: Color(0xFF101317),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Transform.scale(
+              scale: 1.3,
+              child: Radio(
+                value: true,
+                groupValue: selected,
+                onChanged: (_) => onTap(),
+                activeColor: Colors.blue,
+              ),
+            ),
+            // SizedBox(width: 8),
+            Container(width: 0.5, height: 24, color: Colors.white),
+            SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PoppinsText(
+                  title,
+                  fontSize: PoppinsFontSizeVariant.size12,
+                  color: AppColors.bGrey,
+                  fontWeight: PoppinsFontWeightVariant.regular,
+                ),
+                PoppinsText(
+                  subtitle,
+                  fontSize: PoppinsFontSizeVariant.size16,
+                  fontWeight: PoppinsFontWeightVariant.regular,
+                  color: customColors.textColor,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

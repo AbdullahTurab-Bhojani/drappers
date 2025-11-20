@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -11,8 +12,39 @@ class VerfiicationcodeScreen extends StatefulWidget {
 }
 
 class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
+  final List<TextEditingController> _otpControllers = List.generate(
+    6,
+    (_) => TextEditingController(),
+  );
+  final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
+
+  void _onOtpChanged(int index, String value) {
+  if (value.length == 1 && index < 5) {
+    _focusNodes[index + 1].requestFocus();
+  }
+  if (value.isEmpty && index > 0) {
+    _focusNodes[index - 1].requestFocus();
+  }
+
+  final otp = _otpControllers.map((c) => c.text).join();
+  if (otp.length == 6) {
+    print("Entered OTP: $otp");
+    context.goNamed(AppRoutes.loginScreen.name); 
+  }
+}
+
+
+  @override
+  void dispose() {
+    _otpControllers.forEach((c) => c.dispose());
+    _focusNodes.forEach((f) => f.dispose());
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
       body: Stack(
         children: [
@@ -27,8 +59,9 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
             ),
           ),
           Positioned(
-             top: 80,
+            top: 80,
             left: 20,
+            right: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,14 +76,116 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                       color: AppColors.color101317,
                     ),
                     child: Icon(
-                      Icons.arrow_back,
+                      Icons.arrow_back_ios,
                       color: Colors.white,
                       size: 22,
                     ),
                   ),
                 ),
-              ]
-            ))
+                SizedBox(height: 40),
+                PoppinsText(
+                  "Enter OTP",
+                  fontSize: PoppinsFontSizeVariant.size24,
+                  fontWeight: PoppinsFontWeightVariant.semiBold,
+                  color: customColors.textColor,
+                ),
+                SizedBox(height: 4),
+                PoppinsText(
+                  'Sent a 6-digit code to jo*******@gmail.com.\nPlease confirm it’s yours so you can update\nyour password.',
+                  fontSize: PoppinsFontSizeVariant.size16,
+                  fontWeight: PoppinsFontWeightVariant.regular,
+                  color: customColors.textColor,
+                ),
+                SizedBox(height: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(6, (index) {
+                    return SizedBox(
+                      width: 56,
+                      child: Container(
+                        height: 54,
+                        alignment: Alignment.center,
+                        child: ValueListenableBuilder<TextEditingValue>(
+                          valueListenable: _otpControllers[index],
+                          builder: (context, value, _) {
+                            return TextField(
+                              controller: _otpControllers[index],
+                              focusNode: _focusNodes[index],
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
+                              textAlignVertical: TextAlignVertical.center,
+                              maxLength: 1,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                              decoration: InputDecoration(
+                                counterText: '',
+                                filled: true,
+                                fillColor: value.text.isEmpty
+                                    ? AppColors.color101317
+                                    : AppColors.color101317,
+                                contentPadding: EdgeInsets.symmetric(vertical: 20,),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  // borderSide: BorderSide(
+                                  //   color: Colors.blueAccent,
+                                  // ),
+                                ),
+                              ),
+                              onChanged: (val) => _onOtpChanged(index, val),
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PoppinsText(
+                      "Resend",
+                      fontSize: PoppinsFontSizeVariant.size16,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.greyColor,
+                    
+                    ),
+                     PoppinsText(
+                      "00:06",
+                      fontSize: PoppinsFontSizeVariant.size16,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
+                    
+                    )
+                  ],
+                )
+                // SizedBox(
+                //   width: double.infinity,
+                //   child: ElevatedButton(
+                //     onPressed: _submitOtp,
+                //     style: ElevatedButton.styleFrom(
+                //       padding: EdgeInsets.symmetric(vertical: 14),
+                //       backgroundColor: Colors.blueAccent,
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(12),
+                //       ),
+                //     ),
+                //     child: PoppinsText(
+                //       "Continue",
+                //       fontSize: PoppinsFontSizeVariant.size16,
+                //       fontWeight: PoppinsFontWeightVariant.semiBold,
+                //       color: Colors.white,
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+          ),
         ],
       ),
     );
