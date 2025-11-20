@@ -8,11 +8,11 @@ class CustomErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: PlusJakartaText(
+      child: PoppinsText(
         message,
         color: AppColors.colorEF4444,
-        fontWeight: FontWeight.w500,
-        size: 16,
+        fontWeight: PoppinsFontWeightVariant.medium,
+        fontSize: PoppinsFontSizeVariant.size16,
       ),
     );
   }

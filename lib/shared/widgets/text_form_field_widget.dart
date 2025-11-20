@@ -169,7 +169,7 @@ class _TextFormFieldWidgetState extends ConsumerState<TextFormFieldWidget> {
             label: Column(
               children: [
                 SizedBox(height: 40),
-                Text(widget.labelText!),
+                PoppinsText(widget.labelText!),
                 SizedBox(height: 5),
               ],
             ),

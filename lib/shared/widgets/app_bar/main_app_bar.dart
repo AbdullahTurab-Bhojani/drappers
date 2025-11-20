@@ -15,10 +15,10 @@ class BackAppBar extends ConsumerWidget implements PreferredSizeWidget {
       toolbarHeight: kToolbarHeight + 15,
       automaticallyImplyLeading: false,
       titleSpacing: 20,
-      title: PlusJakartaText(
+      title: PoppinsText(
         title,
-        size: 22,
-        fontWeight: FontWeight.w700,
+        fontSize: PoppinsFontSizeVariant.size22,
+        fontWeight: PoppinsFontWeightVariant.semiBold,
         color: AppColors.darkText,
       ),
     );
