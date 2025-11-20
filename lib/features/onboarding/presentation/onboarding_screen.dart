@@ -95,13 +95,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               onTap: () {
                 context.pushNamed(AppRoutes.loginScreen.name);
               },
-              child: Text(
+              child: PoppinsText(
                 "Skip",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+                  fontSize: PoppinsFontSizeVariant.size14,
+                  fontWeight: PoppinsFontWeightVariant.medium,
+                  color: customColors.textColor,
               ),
             ),
           ),
@@ -149,27 +147,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                         SizedBox(height: 32),
 
-                        Text(
+                        PoppinsText(
                           titles[currentPage],
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
+                            fontSize: PoppinsFontSizeVariant.size26,
+                            fontWeight: PoppinsFontWeightVariant.extraBold,
                             color: Colors.white,
-                          ),
                         ),
 
                         SizedBox(height: 32),
 
-                        Text(
+                        PoppinsText(
                           subtitles[currentPage],
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w300,
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.light,
                             color: customColors.subtextColor,
                             height: 1.5,
-                          ),
                         ),
 
                         SizedBox(height: 60),
@@ -202,13 +196,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ],
                       ),
                       child: Center(
-                        child: Text(
+                        child: PoppinsText(
                           'Next',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
                             color: Colors.white,
-                          ),
                         ),
                       ),
                     ),
