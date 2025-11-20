@@ -17,17 +17,17 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.splashScreen.name,
         builder: (context, state) => SplashScreen(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.onboardingScreen.path,
         name: AppRoutes.onboardingScreen.name,
         builder: (context, state) => OnboardingScreen(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.loginScreen.path,
         name: AppRoutes.loginScreen.name,
         builder: (context, state) => LoginScreen(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.forgetpasswordScreen.path,
         name: AppRoutes.forgetpasswordScreen.name,
         builder: (context, state) => ForgetpasswordScreen(),
@@ -41,6 +41,19 @@ final routerConfigProvider = Provider((ref) {
         path: AppRoutes.signupScreen.path,
         name: AppRoutes.signupScreen.name,
         builder: (context, state) => SignupScreen(),
+      ),
+      ShellRoute(
+        navigatorKey: shellKey,
+        builder: (context, state, child) {
+          return BottomNavigationBarShell(child: child);
+        },
+        routes: [
+          GoRoute(
+            path: AppRoutes.dashboard.path,
+            name: AppRoutes.dashboard.name,
+            builder: (context, state) => Container(color: Colors.red),
+          ),
+        ],
       ),
     ],
   );

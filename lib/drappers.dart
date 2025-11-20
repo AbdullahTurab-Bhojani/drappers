@@ -63,6 +63,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'core/extensions/theme_extension.dart';
 import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_theme.dart';
+import 'features/dashboard/presentation/nav_bar.dart';
 import 'features/login/presentation/forgetpassword_screen.dart';
 import 'features/login/presentation/login_screen.dart';
 import 'features/login/presentation/verfiicationcode_screen.dart';
