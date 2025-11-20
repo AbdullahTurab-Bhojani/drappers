@@ -68,6 +68,11 @@ final routerConfigProvider = Provider((ref) {
             name: AppRoutes.watchlist.name,
             builder: (context, state) => WatchlistScreen(),
           ),
+          GoRoute(
+            path: AppRoutes.profile.path,
+            name: AppRoutes.profile.name,
+            builder: (context, state) => ProfileScreen(),
+          ),
         ],
       ),
     ],

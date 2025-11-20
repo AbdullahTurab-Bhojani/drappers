@@ -39,7 +39,7 @@ class _BottomNavigationBarShellState
       'icon': Assets.images.footericon3.path,
     },
     {
-      'path': AppRoutes.home.name,
+      'path': AppRoutes.profile.name,
       'label': 'Profile',
       'icon': Assets.images.shareicon.path,
     },
