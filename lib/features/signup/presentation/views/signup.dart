@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/text_form_field_widget.dart';
 import '../../../../shared/widgets/textfield_new.dart';
 
@@ -89,35 +91,27 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                           ),
                           SizedBox(height: 15), // Reduced spacing
-                          Text(
+                          PoppinsText(
                             "Get Started with Draper",
-                            style: TextStyle(
-                              color: customColors.textColor,
-                              fontSize: 20, // Reduced size
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins', // Added Poppins
-                            ),
+                            fontSize: PoppinsFontSizeVariant.size24,
+                            fontWeight: PoppinsFontWeightVariant.semiBold,
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: 25), // Reduced spacing
-                    // --- Form Fields ---
-                    // --- FORM FIELDS ---
-                    SizedBox(height: 25),
-
                     // Full Name
                     NewTextField(
                       controller: _fullNameController,
                       labelText: "Full Name",
                       hintText: "Enter your full name",
                       filledColor: AppColors.tfield,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Full name required";
-                        }
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value == null || value.trim().isEmpty) {
+                      //     return "Full name required";
+                      //   }
+                      //   return null;
+                      // },
                     ),
                     SizedBox(height: 15),
 
@@ -128,13 +122,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       hintText: "Enter your email",
                       filledColor: AppColors.tfield,
                       keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Email required";
-                        }
-                        if (!value.contains("@")) return "Enter valid email";
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value == null || value.trim().isEmpty) {
+                      //     return "Email required";
+                      //   }
+                      //   if (!value.contains("@")) return "Enter valid email";
+                      //   return null;
+                      // },
                     ),
                     SizedBox(height: 15),
 
@@ -145,80 +139,122 @@ class _SignupScreenState extends State<SignupScreen> {
                       hintText: "03XXXXXXXXX",
                       filledColor: AppColors.tfield,
                       keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Phone number required";
-                        }
-                        if (value.length < 11) return "Enter valid phone";
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value == null || value.trim().isEmpty) {
+                      //     return "Phone number required";
+                      //   }
+                      //   if (value.length < 11) return "Enter valid phone";
+                      //   return null;
+                      // },
                     ),
                     SizedBox(height: 15),
+                    NewTextField(
+                      controller: _emailController,
+                      // controller: _phoneController,
+                      labelText: "Create Password",
+                      hintText: "*********",
+                      filledColor: AppColors.tfield,
+                      keyboardType: TextInputType.phone,
+                      // validator: (value) {
+                      //   if (value == null || value.trim().isEmpty) {
+                      //     return "Password required";
+                      //   }
+                      //   if (value.length < 11) return "Enter valid phone";
+                      //   return null;
+                      // },
+                    ),
+                    SizedBox(height: 15),
+                    NewTextField(
+                      controller: _emailController,
+                      // controller: _phoneController,
+                      labelText: "Confirm Password",
+                      hintText: "*********",
+                      filledColor: AppColors.tfield,
+                      keyboardType: TextInputType.phone,
+                      // validator: (value) {
+                      //   if (value == null || value.trim().isEmpty) {
+                      //     return "Phone number required";
+                      //   }
+                      //   if (value.length < 11) return "Enter valid phone";
+                      //   return null;
+                      // },
+                    ),
 
                     SizedBox(height: 8), // Reduced spacing
                     // --- Radio Buttons (Receive Code Via) ---
-                    Padding(
-                      padding: EdgeInsets.only(left: 4.0),
-                      child: Text(
-                        "Receive Code Via",
-                        style: TextStyle(
-                          color: customColors.textColor,
-                          fontSize: 13,
-                          fontFamily: 'Poppins',
-                        ), // Reduced size
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AppColors.tfield,
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _buildRadioTile(
-                            title: 'Email Address',
-                            value: 'Email',
-                            groupValue: _receiveMethod,
-                            onChanged: (value) {
-                              setState(() {
-                                _receiveMethod = value;
-                              });
-                            },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          PoppinsText(
+                            "Receive Code Via",
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
                           ),
-                        ),
-                        Expanded(
-                          child: _buildRadioTile(
-                            title: 'Phone Number',
-                            value: 'Phone',
-                            groupValue: _receiveMethod,
-                            onChanged: (value) {
-                              setState(() {
-                                _receiveMethod = value;
-                              });
-                            },
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildRadioTile(
+                                  title: 'Email Address',
+                                  value: 'Email',
+                                  groupValue: _receiveMethod,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _receiveMethod = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                child: _buildRadioTile(
+                                  title: 'Phone Number',
+                                  value: 'Phone',
+                                  groupValue: _receiveMethod,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _receiveMethod = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
 
                     const SizedBox(height: 10), // Reduced spacing
                     // --- Terms and Conditions Checkbox ---
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Checkbox(
-                          value: _agreedToTerms,
-                          onChanged: (bool? newValue) {
-                            setState(() {
-                              _agreedToTerms = newValue ?? false;
-                            });
-                          },
-                          activeColor: customColors.light,
-                          checkColor: Colors.white,
-                          side: BorderSide(
-                            color: customColors.light,
-                            width: 1.5,
+                        Transform.scale(
+                          scale: 0.6,
+                          child: Checkbox(
+                            value: _agreedToTerms,
+                            onChanged: (bool? newValue) {
+                              setState(() {
+                                _agreedToTerms = newValue ?? false;
+                              });
+                            },
+                            activeColor: customColors.light,
+                            checkColor: Colors.white,
+                            side: BorderSide(
+                              color: customColors.textColor,
+                              width: 0.9,
+                            ),
                           ),
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
+                            padding: EdgeInsets.only(top: 0),
                             child: RichText(
                               text: TextSpan(
                                 text: 'I agree to the ',
@@ -231,22 +267,24 @@ class _SignupScreenState extends State<SignupScreen> {
                                   TextSpan(
                                     text: 'Terms & Conditions',
                                     style: TextStyle(
-                                      color: customColors.lightest,
+                                      color: customColors.buttonColors.last,
                                       decoration: TextDecoration.underline,
                                       fontFamily: 'Poppins',
+                                      fontSize: 12,
                                     ),
                                     // onTap functionality would be here
                                   ),
-                                  const TextSpan(
+                                  TextSpan(
                                     text: ' and ',
                                     style: TextStyle(fontFamily: 'Poppins'),
                                   ),
                                   TextSpan(
                                     text: 'Privacy Policy.',
                                     style: TextStyle(
-                                      color: customColors.dark,
+                                      color: customColors.buttonColors.last,
                                       decoration: TextDecoration.underline,
                                       fontFamily: 'Poppins',
+                                      fontSize: 12,
                                     ),
                                     // onTap functionality would be here
                                   ),
@@ -266,17 +304,26 @@ class _SignupScreenState extends State<SignupScreen> {
                     // --- OR Divider ---
                     Row(
                       children: [
-                        Expanded(child: Divider(color: customColors.textColor)),
+                        Expanded(
+                          child: Divider(
+                            color: customColors.labelColor,
+                            thickness: 1,
+                          ),
+                        ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: PoppinsText(
                             "or",
-                            style: TextStyle(
-                              color: customColors.textColor,
-                              fontSize: 15,
-                              fontFamily: 'Poppins',
-                            ),
-                          ), // Reduced size
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: customColors.labelColor,
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            color: customColors.labelColor,
+                            thickness: 1,
+                          ),
                         ),
                         Expanded(child: Divider(color: customColors.textColor)),
                       ],
@@ -287,19 +334,160 @@ class _SignupScreenState extends State<SignupScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: _buildSocialButton(
-                            label: "Google",
-                            icon: 'G', // Placeholder for Google Icon
-                            onPressed: () {},
+                          child: Container(
+                            height: 52,
+                            decoration: BoxDecoration(
+                              color: customColors.bgcontainerlight,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 52,
+                                  width: 52,
+
+                                  decoration: BoxDecoration(
+                                    // color: customColors.bgcontainerlight,
+                                    // borderRadius: BorderRadius.circular(30),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        Assets.images.googlelogo.path,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                PoppinsText(
+                                  "Google",
+                                  fontSize: PoppinsFontSizeVariant.size16,
+                                  fontWeight: PoppinsFontWeightVariant.medium,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 10), // Reduced spacing
+
+                        SizedBox(width: 10),
                         Expanded(
-                          child: _buildSocialButton(
-                            label: "Apple",
-                            icon: '', // Placeholder for Apple Icon
-                            onPressed: () {},
+                          child: Container(
+                            height: 52,
+                            decoration: BoxDecoration(
+                              color: customColors.bgcontainerlight,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                              children: [
+                                Container(
+                                  height: 52,
+                                  width: 52,
+
+                                  decoration: BoxDecoration(
+                                    // color: customColors.bgcontainerlight,
+                                    // borderRadius: BorderRadius.circular(30),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        Assets.images.applelogo.path,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                PoppinsText(
+                                  "Apple",
+                                  fontSize: PoppinsFontSizeVariant.size16,
+                                  fontWeight: PoppinsFontWeightVariant.medium,
+                                ),
+                              ],
+                            ),
                           ),
+                        ),
+
+                        // Expanded(
+                        //   child: Container(
+                        //     height: 52,
+                        //     decoration: BoxDecoration(
+                        //       color: customColors.bgcontainerlight,
+                        //       borderRadius: BorderRadius.circular(30),
+                        //       image: DecorationImage(
+                        //         image: AssetImage(Assets.images.applelogo.path),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: customColors.bgcontainerlight,
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: Center(
+                        child: PoppinsText(
+                          'Continue as Guest',
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 28),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        PoppinsText(
+                          "Already have an account?",
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                        ),
+                        SizedBox(width: 4),
+                        Stack(
+                          alignment: Alignment.bottomLeft,
+                          children: [
+                            ShaderMask(
+                              shaderCallback: (bounds) =>
+                                  LinearGradient(
+                                    colors: customColors.buttonColors,
+                                  ).createShader(
+                                    Rect.fromLTWH(
+                                      0,
+                                      0,
+                                      bounds.width,
+                                      bounds.height,
+                                    ),
+                                  ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.goNamed(AppRoutes.loginScreen.name);
+                                },
+                                child: PoppinsText(
+                                  "Sign in",
+                                  fontSize: PoppinsFontSizeVariant.size16,
+                                  fontWeight: PoppinsFontWeightVariant.medium,
+                                ),
+                              ),
+                            ),
+                            // Positioned(
+                            //   bottom: 0,
+                            //   left: 0,
+                            //   right: 0,
+                            //   child: Container(
+                            //     height: 1.5,
+                            //     decoration: BoxDecoration(
+                            //       gradient: LinearGradient(
+                            //         colors: [
+                            //           Color(0xFF1FCFFF),
+                            //           Color(0xFF0063FF),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
                         ),
                       ],
                     ),
@@ -320,30 +508,31 @@ class _SignupScreenState extends State<SignupScreen> {
     required ValueChanged<String?> onChanged,
   }) {
     const Color inputFieldColor = Color(0xFF17244D);
-    const Color textColor = Colors.white;
+    // const Color textColor = Colors.white;
     const Color primaryBlue = Color(0xFF1E88E5);
-
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     // Custom container to hold the radio button and text, simulating the background box
     return Container(
       // Reduced margin
-      margin: const EdgeInsets.only(right: 8, top: 8),
-      // Reduced vertical padding
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-      decoration: BoxDecoration(
-        color: inputFieldColor,
-        borderRadius: BorderRadius.circular(10), // Reduced radius
-        border: Border.all(
-          color: groupValue == value ? primaryBlue : Colors.transparent,
-          width: 2,
-        ),
-      ),
+      // margin: const EdgeInsets.only(right: 8, top: 8),
+      // // Reduced vertical padding
+      // padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+      // decoration: BoxDecoration(
+      //   color: inputFieldColor,
+      //   borderRadius: BorderRadius.circular(10), // Reduced radius
+      //   border: Border.all(
+      //     color: groupValue == value ? primaryBlue : Colors.transparent,
+      //     width: 2,
+      //   ),
+      // ),
       child: InkWell(
         onTap: () => onChanged(value),
         child: Row(
           children: [
             SizedBox(
-              height: 20, // Reduced height for the radio button
-              width: 20, // Reduced width for the radio button
+              height: 18,
+              width: 18,
               child: Radio<String>(
                 value: value,
                 groupValue: groupValue,
@@ -359,16 +548,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 }),
               ),
             ),
+            SizedBox(width: 7),
             Flexible(
-              child: Text(
+              child: PoppinsText(
                 title,
                 // Reduced size and added Poppins
-                style: const TextStyle(
-                  color: textColor,
-                  fontSize: 13,
-                  fontFamily: 'Poppins',
-                ),
-                overflow: TextOverflow.ellipsis,
+                fontSize: PoppinsFontSizeVariant.size16,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: customColors.textColor,
               ),
             ),
           ],
@@ -403,20 +590,16 @@ class _SignupScreenState extends State<SignupScreen> {
               Text(
                 icon,
                 style: const TextStyle(
-                  fontSize: 18, // Reduced size
+                  fontSize: 18,
                   color: textColor,
-                  fontFamily: 'Poppins', // Added Poppins
+                  fontFamily: 'Poppins',
                 ),
               ),
-              const SizedBox(width: 6), // Reduced spacing
-              Text(
+              const SizedBox(width: 6),
+              PoppinsText(
                 label,
-                style: const TextStyle(
-                  color: textColor,
-                  fontSize: 15, // Reduced size
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins', // Added Poppins
-                ),
+                fontSize: PoppinsFontSizeVariant.size15,
+                fontWeight: PoppinsFontWeightVariant.medium,
               ),
             ],
           ),

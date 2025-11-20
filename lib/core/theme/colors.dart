@@ -18,6 +18,8 @@ abstract final class AppColors {
   static const dSubTextColor = Color(0xFF777573); // optional custom subtext
   static const dLabel = Color(0xff999999); // optional label tone
   static const tfield = Color(0xff101317);
+    static const containerlight = Color(0xff10151c);
+
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);
