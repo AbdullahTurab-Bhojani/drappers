@@ -57,10 +57,10 @@ class ImagePickerHandler {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: PlusJakartaText(
+                                child: PoppinsText(
                                   'Take photo',
-                                  size: 18,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: PoppinsFontSizeVariant.size12,
+                                  fontWeight: PoppinsFontWeightVariant.regular,
                                   color: Colors.blue,
                                 ),
                               ),
@@ -94,10 +94,10 @@ class ImagePickerHandler {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: PlusJakartaText(
+                                child: PoppinsText(
                                   'Gallery photo',
-                                  size: 18,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: PoppinsFontSizeVariant.size12,
+                                  fontWeight: PoppinsFontWeightVariant.regular,
                                   color: Colors.blue,
                                 ),
                               ),
@@ -119,10 +119,10 @@ class ImagePickerHandler {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
-                        child: PlusJakartaText(
+                        child: PoppinsText(
                           'Cancel',
-                          size: 18,
-                          fontWeight: FontWeight.w400,
+                          fontSize: PoppinsFontSizeVariant.size12,
+                          fontWeight: PoppinsFontWeightVariant.regular,
                           color: Colors.red,
                         ),
                       ),
