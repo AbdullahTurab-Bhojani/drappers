@@ -23,8 +23,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Scaffold(
-      body: Stack(
-        children: [
+      body:
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -34,12 +33,9 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 fit: BoxFit.cover,
               ),
             ),
-          ),
-
-          Positioned(
-            top: 80,
-            left: 20,
-            child: Column(
+            child: Padding(
+              padding: EdgeInsets.only(left: 20,right: 20,top: 70),
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
@@ -95,7 +91,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                           });
                         },
                       ),
-
+                        
                       RadioTileWidget(
                         selected: !isPhone,
                         title: "Enter Phone ",
@@ -106,21 +102,21 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                           });
                         },
                       ),
-                    ],
-                  ),
-                ),
                  SizedBox(height: 24),
-              AppButton(onPressed: () {
+                        AppButton(onPressed: () {
                 context.goNamed(AppRoutes.verfiicationcodeScreen.name);
               }, title: "Send Code"),
                 
-
-               
+                        
+                    ],
+                  ),
+                ),
               ],
+                        ),
             ),
           ),
-        ],
-      ),
+
+         
     );
   }
 }

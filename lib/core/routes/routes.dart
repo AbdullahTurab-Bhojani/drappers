@@ -7,7 +7,9 @@ enum AppRoutes {
   forgetpasswordScreen('forgetpassword', '/forgetpassword'),
   verfiicationcodeScreen('verificationcode', '/verificationcode'),
   dashboard('dashboard', '/dashboard'),
-  signupScreen('signup', '/signup');
+  signupScreen('signup', '/signup'),
+  updatepasswordScreen ('updatepassword', '/updatepassword');
+
 
   final String name;
   final String path;

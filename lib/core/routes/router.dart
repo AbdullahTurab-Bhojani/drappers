@@ -38,6 +38,11 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => VerfiicationcodeScreen(),
       ),
       GoRoute(
+        path: AppRoutes.updatepasswordScreen.path,
+        name: AppRoutes.updatepasswordScreen.name,
+        builder: (context, state) => UpdatepasswordScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.signupScreen.path,
         name: AppRoutes.signupScreen.name,
         builder: (context, state) => SignupScreen(),

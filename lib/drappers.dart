@@ -56,6 +56,7 @@ import 'core/theme/app_theme.dart';
 import 'features/dashboard/presentation/nav_bar.dart';
 import 'features/login/presentation/forgetpassword_screen.dart';
 import 'features/login/presentation/login_screen.dart';
+import 'features/login/presentation/updatepassword_screen.dart';
 import 'features/login/presentation/verfiicationcode_screen.dart';
 import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/signup/presentation/views/signup.dart';
