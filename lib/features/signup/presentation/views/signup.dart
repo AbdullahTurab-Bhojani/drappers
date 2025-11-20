@@ -137,6 +137,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       // },
                     ),
                     SizedBox(height: 15),
+
+
+                    
                     NewTextField(
                       controller: _emailController,
                       // controller: _phoneController,
@@ -423,100 +426,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ),
+
                     SizedBox(height: 28),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         PoppinsText(
                           "Already have an account?",
-                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontSize: PoppinsFontSizeVariant.size14,
                           fontWeight: PoppinsFontWeightVariant.medium,
                           color: customColors.textColor,
-                        ),
-                        SizedBox(width: 4),
-                        Stack(
-                          alignment: Alignment.bottomLeft,
-                          children: [
-                            ShaderMask(
-                              shaderCallback: (bounds) =>
-                                  LinearGradient(
-                                    colors: customColors.buttonColors,
-                                  ).createShader(
-                                    Rect.fromLTWH(
-                                      0,
-                                      0,
-                                      bounds.width,
-                                      bounds.height,
-                                    ),
-                                  ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  context.goNamed(AppRoutes.loginScreen.name);
-                                },
-                                child: PoppinsText(
-                                  "Sign in",
-                                  fontSize: PoppinsFontSizeVariant.size16,
-                                  fontWeight: PoppinsFontWeightVariant.medium,
-                                ),
-                              ),
-                            ),
-                            // Positioned(
-                            //   bottom: 0,
-                            //   left: 0,
-                            //   right: 0,
-                            //   child: Container(
-                            //     height: 1.5,
-                            //     decoration: BoxDecoration(
-                            //       gradient: LinearGradient(
-                            //         colors: [
-                            //           Color(0xFF1FCFFF),
-                            //           Color(0xFF0063FF),
-                            //         ],
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            child: PoppinsText("privacy policy"),
-                          ),
-                        ),
-
-                        PoppinsText("faqs"),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      width: double.infinity,
-                      height: 52,
-                      decoration: BoxDecoration(
-                        color: AppColors.color101010,
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Continue as Guest',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 28),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account?",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: customColors.textColor,
-                          ),
                         ),
                         SizedBox(width: 4),
                         Stack(
@@ -541,12 +460,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                 onTap: () {
                                   context.goNamed(AppRoutes.loginScreen.name);
                                 },
-                                child: Text(
+                                child: PoppinsText(
                                   "Sign in",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  fontSize: PoppinsFontSizeVariant.size14,
+                                  fontWeight: PoppinsFontWeightVariant.medium,
                                 ),
                               ),
                             ),
