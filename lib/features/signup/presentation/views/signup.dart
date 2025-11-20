@@ -46,353 +46,465 @@ class _SignupScreenState extends State<SignupScreen> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Scaffold(
-      // Set background color to the main dark color
       backgroundColor: customColors.dark,
 
-      // Use a Stack to place the pattern/gradient behind the content
       body: Stack(
         children: [
-          // 1. Background Pattern/Gradient (Representing the dark, subtle background)
-          Container(decoration: BoxDecoration(color: customColors.dark)),
-
-          // 2. Main Scrollable Content
-          SafeArea(
-            child: SingleChildScrollView(
-              // Reduced overall padding
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 30.0,
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(Assets.images.screensbg.path),
+                fit: BoxFit.cover,
               ),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Center(
-                      child: Column(
+            ),
+            child: SafeArea(
+              child: SingleChildScrollView(
+                // Reduced overall padding
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 30.0,
+                ),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Center(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 30),
+                              child: Image.asset(Assets.images.logo2.path),
+                            ),
+                            SizedBox(height: 15), // Reduced spacing
+                            PoppinsText(
+                              "Get Started with Draper",
+                              fontSize: PoppinsFontSizeVariant.size24,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 25), // Reduced spacing
+                      // Full Name
+                      NewTextField(
+                        controller: _fullNameController,
+                        labelText: "Full Name",
+                        hintText: "Enter your full name",
+                        filledColor: AppColors.tfield,
+                        // validator: (value) {
+                        //   if (value == null || value.trim().isEmpty) {
+                        //     return "Full name required";
+                        //   }
+                        //   return null;
+                        // },
+                      ),
+                      SizedBox(height: 15),
+
+                      // Email Address
+                      NewTextField(
+                        controller: _emailController,
+                        labelText: "Email Address",
+                        hintText: "Enter your email",
+                        filledColor: AppColors.tfield,
+                        keyboardType: TextInputType.emailAddress,
+                        // validator: (value) {
+                        //   if (value == null || value.trim().isEmpty) {
+                        //     return "Email required";
+                        //   }
+                        //   if (!value.contains("@")) return "Enter valid email";
+                        //   return null;
+                        // },
+                      ),
+                      SizedBox(height: 15),
+
+                      // Phone Number
+                      NewTextField(
+                        controller: _emailController,
+                        // controller: _phoneController,
+                        labelText: "Phone Number",
+                        hintText: "03XXXXXXXXX",
+                        filledColor: AppColors.tfield,
+                        keyboardType: TextInputType.phone,
+                        // validator: (value) {
+                        //   if (value == null || value.trim().isEmpty) {
+                        //     return "Phone number required";
+                        //   }
+                        //   if (value.length < 11) return "Enter valid phone";
+                        //   return null;
+                        // },
+                      ),
+                      SizedBox(height: 15),
+
+                      AppPasswordField(
+                        controller: _passwordController,
+                        labelText: "Create Password",
+                        hintText: "Enter your Password ",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Full name required";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      AppPasswordField(
+                        controller: _passwordController,
+                        labelText: "Confirm Password",
+                        hintText: "Enter Confirm your Password",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Full name required";
+                          }
+                          return null;
+                        },
+                      ),
+
+                      SizedBox(height: 8), // Reduced spacing
+                      // --- Radio Buttons (Receive Code Via) ---
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.tfield,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            PoppinsText(
+                              "Receive Code Via",
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _buildRadioTile(
+                                    title: 'Email Address',
+                                    value: 'Email',
+                                    groupValue: _receiveMethod,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _receiveMethod = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: _buildRadioTile(
+                                    title: 'Phone Number',
+                                    value: 'Phone',
+                                    groupValue: _receiveMethod,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _receiveMethod = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: 10), // Reduced spacing
+                      // --- Terms and Conditions Checkbox ---
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 30),
-                            child: Image.asset(Assets.images.logo2.path),
+                          Transform.scale(
+                            scale: 0.6,
+                            child: Checkbox(
+                              value: _agreedToTerms,
+                              onChanged: (bool? newValue) {
+                                setState(() {
+                                  _agreedToTerms = newValue ?? false;
+                                });
+                              },
+                              activeColor: customColors.light,
+                              checkColor: Colors.white,
+                              side: BorderSide(
+                                color: customColors.textColor,
+                                width: 0.9,
+                              ),
+                            ),
                           ),
-                          SizedBox(height: 15), // Reduced spacing
-                          Text(
-                            "Get Started with Draper",
-                            style: TextStyle(
-                              color: customColors.textColor,
-                              fontSize: 20, // Reduced size
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins', // Added Poppins
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 0),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: PoppinsText(
+                                        "I agree to the ",
+                                        fontSize: PoppinsFontSizeVariant.size12,
+                                        color: customColors.textColor,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
+                                      ),
+                                    ),
+                                    WidgetSpan(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          // TODO: open terms screen
+                                        },
+                                        child: PoppinsText(
+                                          "Terms & Conditions",
+                                          fontSize:
+                                              PoppinsFontSizeVariant.size12,
+                                          color:
+                                              customColors.buttonColors.first,
+                                          fontWeight:
+                                              PoppinsFontWeightVariant.regular,
+
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ),
+                                    WidgetSpan(
+                                      child: PoppinsText(
+                                        " and ",
+                                        fontSize: PoppinsFontSizeVariant.size12,
+                                        color: customColors.textColor,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
+                                      ),
+                                    ),
+                                    WidgetSpan(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          // TODO: open privacy screen
+                                        },
+                                        child: PoppinsText(
+                                          "Privacy Policy.",
+                                          fontSize:
+                                              PoppinsFontSizeVariant.size12,
+                                          color: customColors.buttonColors.last,
+                                          fontWeight:
+                                              PoppinsFontWeightVariant.regular,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(height: 25), // Reduced spacing
-                    // Full Name
-                    NewTextField(
-                      controller: _fullNameController,
-                      labelText: "Full Name",
-                      hintText: "Enter your full name",
-                      filledColor: AppColors.tfield,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Full name required";
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 15),
 
-                    // Email Address
-                    NewTextField(
-                      controller: _emailController,
-                      labelText: "Email Address",
-                      hintText: "Enter your email",
-                      filledColor: AppColors.tfield,
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Email required";
-                        }
-                        if (!value.contains("@")) return "Enter valid email";
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 15),
-
-                    // Phone Number
-                    NewTextField(
-                      controller: _emailController,
-                      // controller: _phoneController,
-                      labelText: "Phone Number",
-                      hintText: "03XXXXXXXXX",
-                      filledColor: AppColors.tfield,
-                      keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Phone number required";
-                        }
-                        if (value.length < 11) return "Enter valid phone";
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 15),
-
-                    SizedBox(height: 8), // Reduced spacing
-                    // --- Radio Buttons (Receive Code Via) ---
-                    Padding(
-                      padding: EdgeInsets.only(left: 4.0),
-                      child: Text(
-                        "Receive Code Via",
-                        style: TextStyle(
-                          color: customColors.textColor,
-                          fontSize: 13,
-                          fontFamily: 'Poppins',
-                        ), // Reduced size
+                      const SizedBox(height: 20), // Reduced spacing
+                      // --- Primary Action Button (Gradient) ---
+                      AppButton(
+                        onPressed: () {
+                          context.pushReplacement(AppRoutes.home.path);
+                        },
+                        title: "Create Account",
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _buildRadioTile(
-                            title: 'Email Address',
-                            value: 'Email',
-                            groupValue: _receiveMethod,
-                            onChanged: (value) {
-                              setState(() {
-                                _receiveMethod = value;
-                              });
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: _buildRadioTile(
-                            title: 'Phone Number',
-                            value: 'Phone',
-                            groupValue: _receiveMethod,
-                            onChanged: (value) {
-                              setState(() {
-                                _receiveMethod = value;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
 
-                    const SizedBox(height: 10), // Reduced spacing
-                    // --- Terms and Conditions Checkbox ---
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          value: _agreedToTerms,
-                          onChanged: (bool? newValue) {
-                            setState(() {
-                              _agreedToTerms = newValue ?? false;
-                            });
-                          },
-                          activeColor: customColors.light,
-                          checkColor: Colors.white,
-                          side: BorderSide(
-                            color: customColors.light,
-                            width: 1.5,
+                      const SizedBox(height: 25), // Reduced spacing
+                      // --- OR Divider ---
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              color: customColors.labelColor,
+                              thickness: 1,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: RichText(
-                              text: TextSpan(
-                                text: 'I agree to the ',
-                                style: TextStyle(
-                                  color: customColors.textColor,
-                                  fontSize: 12,
-                                  fontFamily: 'Poppins',
-                                ), // Reduced size
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            child: PoppinsText(
+                              "or",
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              color: customColors.labelColor,
+                            ),
+                          ),
+                          Expanded(
+                            child: Divider(
+                              color: customColors.labelColor,
+                              thickness: 1,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 35),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 52,
+                              decoration: BoxDecoration(
+                                color: customColors.bgcontainerlight,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  TextSpan(
-                                    text: 'Terms & Conditions',
-                                    style: TextStyle(
-                                      color: customColors.lightest,
-                                      decoration: TextDecoration.underline,
-                                      fontFamily: 'Poppins',
+                                  Container(
+                                    height: 52,
+                                    width: 52,
+
+                                    decoration: BoxDecoration(
+                                      // color: customColors.bgcontainerlight,
+                                      // borderRadius: BorderRadius.circular(30),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          Assets.images.googlelogo.path,
+                                        ),
+                                      ),
                                     ),
-                                    // onTap functionality would be here
                                   ),
-                                  const TextSpan(
-                                    text: ' and ',
-                                    style: TextStyle(fontFamily: 'Poppins'),
-                                  ),
-                                  TextSpan(
-                                    text: 'Privacy Policy.',
-                                    style: TextStyle(
-                                      color: customColors.dark,
-                                      decoration: TextDecoration.underline,
-                                      fontFamily: 'Poppins',
-                                    ),
-                                    // onTap functionality would be here
+                                  PoppinsText(
+                                    "Google",
+                                    fontSize: PoppinsFontSizeVariant.size16,
+                                    fontWeight: PoppinsFontWeightVariant.medium,
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
 
-                    const SizedBox(height: 20), // Reduced spacing
-                    // --- Primary Action Button (Gradient) ---
-                    AppButton(onPressed: () {}, title: "Create Account"),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Container(
+                              height: 52,
+                              decoration: BoxDecoration(
+                                color: customColors.bgcontainerlight,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
 
-                    const SizedBox(height: 25), // Reduced spacing
-                    // --- OR Divider ---
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            color: AppColors.color6B7280,
-                            thickness: 1,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            "or",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: AppColors.color6B7280,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            color: AppColors.color6B7280,
-                            thickness: 1,
-                          ),
-                        ),
-                      ],
-                    ),
+                                children: [
+                                  Container(
+                                    height: 52,
+                                    width: 52,
 
-                    const SizedBox(height: 25), // Reduced spacing
-                    // --- Social Sign-In Buttons ---
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 52,
-                            decoration: BoxDecoration(
-                              color: AppColors.color101010,
-                              borderRadius: BorderRadius.circular(30),
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  Assets.images.googlelogo.path,
-                                ),
+                                    decoration: BoxDecoration(
+                                      // color: customColors.bgcontainerlight,
+                                      // borderRadius: BorderRadius.circular(30),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          Assets.images.applelogo.path,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  PoppinsText(
+                                    "Apple",
+                                    fontSize: PoppinsFontSizeVariant.size16,
+                                    fontWeight: PoppinsFontWeightVariant.medium,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Container(
-                            height: 52,
-                            decoration: BoxDecoration(
-                              color: AppColors.color101010,
-                              borderRadius: BorderRadius.circular(30),
-                              image: DecorationImage(
-                                image: AssetImage(Assets.images.applelogo.path),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      width: double.infinity,
-                      height: 52,
-                      decoration: BoxDecoration(
-                        color: AppColors.color101010,
-                        borderRadius: BorderRadius.circular(40),
+
+                          // Expanded(
+                          //   child: Container(
+                          //     height: 52,
+                          //     decoration: BoxDecoration(
+                          //       color: customColors.bgcontainerlight,
+                          //       borderRadius: BorderRadius.circular(30),
+                          //       image: DecorationImage(
+                          //         image: AssetImage(Assets.images.applelogo.path),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
                       ),
-                      child: Center(
-                        child: Text(
-                          'Continue as Guest',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      SizedBox(height: 10),
+                      Container(
+                        width: double.infinity,
+                        height: 52,
+                        decoration: BoxDecoration(
+                          color: customColors.bgcontainerlight,
+                          borderRadius: BorderRadius.circular(40),
                         ),
-                      ),
-                    ),
-                    SizedBox(height: 28),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account?",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                        child: Center(
+                          child: PoppinsText(
+                            'Continue as Guest',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
                         ),
-                        SizedBox(width: 4),
-                        Stack(
-                          alignment: Alignment.bottomLeft,
-                          children: [
-                            ShaderMask(
-                              shaderCallback: (bounds) =>
-                                  LinearGradient(
-                                    colors: [
-                                      Color(0xFF1FCFFF),
-                                      Color(0xFF0063FF),
-                                    ],
-                                  ).createShader(
-                                    Rect.fromLTWH(
-                                      0,
-                                      0,
-                                      bounds.width,
-                                      bounds.height,
+                      ),
+
+                      SizedBox(height: 28),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          PoppinsText(
+                            "Already have an account?",
+                            fontSize: PoppinsFontSizeVariant.size14,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          SizedBox(width: 4),
+                          Stack(
+                            alignment: Alignment.bottomLeft,
+                            children: [
+                              ShaderMask(
+                                shaderCallback: (bounds) =>
+                                    LinearGradient(
+                                      colors: [
+                                        Color(0xFF1FCFFF),
+                                        Color(0xFF0063FF),
+                                      ],
+                                    ).createShader(
+                                      Rect.fromLTWH(
+                                        0,
+                                        0,
+                                        bounds.width,
+                                        bounds.height,
+                                      ),
+                                    ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    context.goNamed(AppRoutes.loginScreen.name);
+                                  },
+                                  child: PoppinsText(
+                                    "Sign in",
+                                    fontSize: PoppinsFontSizeVariant.size14,
+                                    fontWeight: PoppinsFontWeightVariant.medium,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: Container(
+                                  height: 1.5,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xFF1FCFFF),
+                                        Color(0xFF0063FF),
+                                      ],
                                     ),
                                   ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  context.goNamed(AppRoutes.loginScreen.name);
-                                },
-                                child: Text(
-                                  "Sign in",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                height: 1.5,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF1FCFFF),
-                                      Color(0xFF0063FF),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -409,30 +521,31 @@ class _SignupScreenState extends State<SignupScreen> {
     required ValueChanged<String?> onChanged,
   }) {
     const Color inputFieldColor = Color(0xFF17244D);
-    const Color textColor = Colors.white;
+    // const Color textColor = Colors.white;
     const Color primaryBlue = Color(0xFF1E88E5);
-
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     // Custom container to hold the radio button and text, simulating the background box
     return Container(
       // Reduced margin
-      margin: const EdgeInsets.only(right: 8, top: 8),
-      // Reduced vertical padding
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-      decoration: BoxDecoration(
-        color: inputFieldColor,
-        borderRadius: BorderRadius.circular(10), // Reduced radius
-        border: Border.all(
-          color: groupValue == value ? primaryBlue : Colors.transparent,
-          width: 2,
-        ),
-      ),
+      // margin: const EdgeInsets.only(right: 8, top: 8),
+      // // Reduced vertical padding
+      // padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+      // decoration: BoxDecoration(
+      //   color: inputFieldColor,
+      //   borderRadius: BorderRadius.circular(10), // Reduced radius
+      //   border: Border.all(
+      //     color: groupValue == value ? primaryBlue : Colors.transparent,
+      //     width: 2,
+      //   ),
+      // ),
       child: InkWell(
         onTap: () => onChanged(value),
         child: Row(
           children: [
             SizedBox(
-              height: 20, // Reduced height for the radio button
-              width: 20, // Reduced width for the radio button
+              height: 18,
+              width: 18,
               child: Radio<String>(
                 value: value,
                 groupValue: groupValue,
@@ -448,16 +561,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 }),
               ),
             ),
+            SizedBox(width: 7),
             Flexible(
-              child: Text(
+              child: PoppinsText(
                 title,
                 // Reduced size and added Poppins
-                style: const TextStyle(
-                  color: textColor,
-                  fontSize: 13,
-                  fontFamily: 'Poppins',
-                ),
-                overflow: TextOverflow.ellipsis,
+                fontSize: PoppinsFontSizeVariant.size16,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: customColors.textColor,
               ),
             ),
           ],
@@ -498,14 +609,10 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               const SizedBox(width: 6),
-              Text(
+              PoppinsText(
                 label,
-                style: const TextStyle(
-                  color: textColor,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins',
-                ),
+                fontSize: PoppinsFontSizeVariant.size15,
+                fontWeight: PoppinsFontWeightVariant.medium,
               ),
             ],
           ),

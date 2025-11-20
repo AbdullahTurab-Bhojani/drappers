@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../shared/widgets/tile_widget.dart';
+import '../../privacypolicy/presentation/views/privacypolicy.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -19,13 +21,37 @@ class ProfileScreen extends StatelessWidget {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHIybZ6umH09-6J4suX89s4BGUn-CSb_4j3A&s',
     ];
     List menuList = [
-      {'title': 'Saved Items', 'image': Assets.images.menuicon1.path},
-      {'title': 'Settings & Preferences', 'image': Assets.images.menuicon2.path},
-      {'title': 'Terms & Conditions', 'image': Assets.images.menuicon3.path},
-      {'title': 'Privacy Policy', 'image': Assets.images.menuicon4.path},
-      {'title': 'FAQ’s', 'image': Assets.images.menuicon5.path},
-       {'title': 'Help & Support', 'image': Assets.images.menuicon6.path},
-        {'title': 'Sign Out', 'image': Assets.images.signouticon.path},
+      {
+        'title': 'Saved Items',
+        'image': Assets.images.menuicon1.path,
+        'route': null,
+      },
+      {
+        'title': 'Settings & Preferences',
+        'image': Assets.images.menuicon2.path,
+        'route': null,
+      },
+      {
+        'title': 'Terms & Conditions',
+        'image': Assets.images.menuicon3.path,
+        'route': null,
+      },
+      {
+        'title': 'Privacy Policy',
+        'image': Assets.images.menuicon4.path,
+        'route': PrivacypolicyScreen(),
+      }, // Target screen added here
+      {'title': 'FAQ’s', 'image': Assets.images.menuicon5.path, 'route': null},
+      {
+        'title': 'Help & Support',
+        'image': Assets.images.menuicon6.path,
+        'route': null,
+      },
+      {
+        'title': 'Sign Out',
+        'image': Assets.images.signouticon.path,
+        'route': null,
+      },
     ];
 
     final theme = Theme.of(context);
@@ -46,10 +72,15 @@ class ProfileScreen extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: [
-                  PoppinsText(
-                    "Edit",
-                    fontSize: PoppinsFontSizeVariant.size14,
-                    fontWeight: PoppinsFontWeightVariant.medium,
+                  InkWell(
+                    onTap: () {
+                      context.goNamed(AppRoutes.editprofile.name);
+                    },
+                    child: PoppinsText(
+                      "Edit",
+                      fontSize: PoppinsFontSizeVariant.size14,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                    ),
                   ),
                   SizedBox(width: 15),
                 ],
@@ -153,9 +184,27 @@ class ProfileScreen extends StatelessWidget {
                           shrinkWrap: true,
 
                           itemBuilder: (context, index) {
+                            final item = menuList[index];
+                            VoidCallback? onTileTap;
+                            if (item['route'] != null) {
+                              onTileTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => item['route'],
+                                  ),
+                                );
+                              };
+                            } else if (item['title'] == 'Sign Out') {
+                              onTileTap = () {
+                                // Add your Sign Out function here
+                                print('Handling Sign Out');
+                              };
+                            }
                             return TileWidget(
                               iconImage: menuList[index]['image'],
                               title: menuList[index]['title'],
+                              onTap: onTileTap,
                             );
                           },
                           separatorBuilder: (context, index) {

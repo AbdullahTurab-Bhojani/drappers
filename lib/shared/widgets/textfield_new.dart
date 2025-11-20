@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
 
@@ -119,6 +120,8 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -179,9 +182,9 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
               ),
               hintStyle:
                   widget.hintStyle ??
-                  textStryle.copyWith(color: AppColors.white),
+                  textStryle.copyWith(color: customColors.textColor),
               filled: false,
-              fillColor: widget.filledColor ?? AppColors.white,
+              fillColor: widget.filledColor ?? customColors.textColor,
               errorBorder: InputBorder.none,
               errorStyle: const TextStyle(height: 0, fontSize: 0),
 

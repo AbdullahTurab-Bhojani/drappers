@@ -10,7 +10,7 @@ abstract final class AppColors {
   // Default Theme //
   static const dDarkest = Color(0xFF0C0A14);
   static const dDark = Color(0xFF0E0C19);
-  static const dRegular = Color(0xFF110E1D);
+  static const dRegular = Color(0xFF00002A);
   static const dLight = Color(0xFF1A152C);
   static const dLightest = Color(0xFF1D1930);
   static const dTextColor = Color(0xFFFFFFFF);
@@ -18,6 +18,7 @@ abstract final class AppColors {
   static const dSubTextColor = Color(0xFF777573); // optional custom subtext
   static const dLabel = Color(0xff999999); // optional label tone
   static const tfield = Color(0xff101317);
+  static const containerlight = Color(0xff10151c);
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);
@@ -41,13 +42,7 @@ abstract final class AppColors {
   static const wSubTextColor = Color(0xFF736D9D); // optional
   static const wLabel = Color(0xFF919498); // same as grey
 
-
-  static const List<Color> buttoncolor = [
-    Color(0xFF1FCFFF),
-    Color(0xFF0063FF),
-  ];
-
-
+  static const List<Color> buttoncolor = [Color(0xFF1FCFFF), Color(0xFF0063FF)];
 
   static const white = Color(0xffffffff);
   static const black = Color(0xff000000);
@@ -79,9 +74,6 @@ abstract final class AppColors {
   static const color1FCFFF = Color(0xff1FCFFF);
   static const color101317 = Color(0xff101317);
   static const color101010 = Color(0xff101010);
-
-
-
 
   static get color3D3C45 => null;
 }

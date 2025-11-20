@@ -13,6 +13,8 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
   final Color labelColor;
   final Color greyColor;
   final Color textfieldColor;
+  final Color bgcontainerlight;
+
   final List<Color> buttonColors;
 
   const AppCustomColors({
@@ -28,6 +30,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     required this.greyColor,
     required this.textfieldColor,
     required this.buttonColors,
+    required this.bgcontainerlight,
   });
 
   @override
@@ -43,6 +46,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     Color? labelColor,
     Color? greyColor,
     Color? textfieldColor,
+    Color? bgcontainerlight,
     LinearGradient? buttongradient,
   }) {
     return AppCustomColors(
@@ -57,6 +61,8 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       labelColor: labelColor ?? this.labelColor,
       greyColor: greyColor ?? this.greyColor,
       textfieldColor: textfieldColor ?? this.textfieldColor,
+      bgcontainerlight: bgcontainerlight ?? this.bgcontainerlight,
+
       buttonColors: buttonColors,
     );
   }
@@ -86,6 +92,8 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       labelColor: Color.lerp(labelColor, other.labelColor, t)!,
       greyColor: Color.lerp(greyColor, other.greyColor, t)!,
       textfieldColor: Color.lerp(textfieldColor, other.textfieldColor, t)!,
+      bgcontainerlight: Color.lerp(textfieldColor, other.textfieldColor, t)!,
+
       buttonColors: lerpColorList(buttonColors, other.buttonColors, t),
     );
   }
