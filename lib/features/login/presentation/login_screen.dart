@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/textfield_new.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -46,84 +47,63 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Image.asset(Assets.images.logo2.path),
               ),
               SizedBox(height: 28),
-              Text(
+              PoppinsText(
                 "Get Started with Draper",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+                  fontSize: PoppinsFontSizeVariant.size24,
+                  fontWeight: PoppinsFontWeightVariant.semiBold,
+                  color: customColors.textColor,
               ),
               SizedBox(height: 28),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    TextFormField(
+                    NewTextField(
                       controller: _emailController,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        hintText: "Enter your Email Address or Phone*",
-                        hintStyle: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                        ),
-                        filled: true,
-                        fillColor: AppColors.color101317,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                      labelText: "Enter your Email Address or Phone*",
+                      hintText: "Enter your email",
+                      filledColor: AppColors.tfield,
+                      keyboardType: TextInputType.emailAddress,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter your email";
+                        if (value == null || value.trim().isEmpty) {
+                          return "Email required";
                         }
+                        if (!value.contains("@")) return "Enter valid email";
                         return null;
                       },
                     ),
                     SizedBox(height: 16),
-                    TextFormField(
+                    NewTextField(
                       controller: _emailController,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                      decoration: InputDecoration(
-                        hintText: "Password*",
-                        hintStyle: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                        ),
-                        suffixIcon: Image.asset(Assets.images.hideicon.path),
-                        filled: true,
-                        fillColor: Color(0xFF101317),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 18,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                      labelText: "Password",
+                      hintText: "Enter your Password",
+                      filledColor: AppColors.tfield,
+                      keyboardType: TextInputType.emailAddress,
+                      // sufixIcon: Image.asset(
+                      //   Assets.images.hideicon.path
+                      // ),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter your email";
+                        if (value == null || value.trim().isEmpty) {
+                          return "Email required";
                         }
+                        if (!value.contains("@")) return "Enter valid email";
                         return null;
                       },
-                      keyboardType: TextInputType.emailAddress,
                     ),
                     SizedBox(height: 14),
                     Row(
                       children: [
                         SizedBox(
-                          height: 22,
-                          width: 22,
+                          height: 14,
+                          width: 14,
                           child: GestureDetector(
                             onTap: () => onRememberMeChanged(!rememberMe),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
-                                border: Border.all(color: Colors.grey.shade600),
+                                border: rememberMe
+                                    ? null
+                                    : Border.all(color: Colors.grey.shade600),
                               ),
                               child: rememberMe
                                   ? Container(
@@ -138,9 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           end: Alignment.bottomRight,
                                         ),
                                       ),
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.check,
-                                        size: 16,
+                                        size: 12,
                                         color: Colors.white,
                                       ),
                                     )
@@ -150,46 +130,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
 
                         SizedBox(width: 6),
-                        Text(
+                        PoppinsText(
                           "Remember Me",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.textColor,
-                          ),
                         ),
                       ],
                     ),
                     SizedBox(height: 40),
-                    Container(
-                      width: double.infinity,
-                      height: 52,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.topRight,
-                        ),
-                        borderRadius: BorderRadius.circular(40),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 7,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Continue',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
+                    AppButton(onPressed: () {}, title: "Continue"),
                     SizedBox(height: 12),
                     Container(
                       width: double.infinity,
@@ -201,14 +151,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               AppRoutes.forgetpasswordScreen.name,
                             );
                           },
-                          child: Text(
+                          child: PoppinsText(
                             'Forgot Password?',
-                            style: TextStyle(
                               decoration: TextDecoration.underline,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                              fontSize: PoppinsFontSizeVariant.size14,
+                              fontWeight: PoppinsFontWeightVariant.medium,
                               color: Colors.white,
-                            ),
                           ),
                         ),
                       ),
@@ -225,12 +173,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
+                          child: PoppinsText(
                             "or",
-                            style: TextStyle(
                               color: AppColors.color6B7280,
-                              fontWeight: FontWeight.w400,
-                            ),
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              fontSize: PoppinsFontSizeVariant.size12,
                           ),
                         ),
                         Expanded(
@@ -322,11 +269,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                       bounds.height,
                                     ),
                                   ),
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.goNamed(AppRoutes.signupScreen.name);
+                                },
+                                child: Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),
@@ -351,6 +303,52 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSocialButton({
+    required String label,
+    required String icon,
+    required VoidCallback onPressed,
+  }) {
+    Color inputFieldColor = Color(0xFF17244D);
+    const Color textColor = Colors.white;
+
+    return Container(
+      height: 45,
+      decoration: BoxDecoration(
+        color: inputFieldColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: InkWell(
+        onTap: onPressed,
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                icon,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: textColor,
+                  fontFamily: 'Poppins',
+                ),
+              ),
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: const TextStyle(
+                  color: textColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Poppins',
                 ),
               ),
             ],

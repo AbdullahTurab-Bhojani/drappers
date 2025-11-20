@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/text_form_field_widget.dart';
 import '../../../../shared/widgets/textfield_new.dart';
 
@@ -69,24 +71,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // --- Header: Logo and Title ---
                     Center(
                       child: Column(
                         children: [
-                          // Placeholder for the "dtv" logo image
-                          Image.network(
-                            'https://placehold.co/80x40/000000/FFFFFF/png?text=dtv',
-                            height: 40,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const Text(
-                                  'dtv',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 28, // Slightly reduced
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Poppins', // Added Poppins
-                                  ),
-                                ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 30),
+                            child: Image.asset(Assets.images.logo2.path),
                           ),
                           SizedBox(height: 15), // Reduced spacing
                           Text(
@@ -102,10 +92,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     SizedBox(height: 25), // Reduced spacing
-                    // --- Form Fields ---
-                    // --- FORM FIELDS ---
-                    SizedBox(height: 25),
-
+                  
                     // Full Name
                     NewTextField(
                       controller: _fullNameController,
@@ -140,7 +127,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
                     // Phone Number
                     NewTextField(
-                      controller: _phoneController,
+                      controller: _emailController,
+                      // controller: _phoneController,
                       labelText: "Phone Number",
                       hintText: "03XXXXXXXXX",
                       filledColor: AppColors.tfield,
@@ -265,20 +253,31 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(height: 25), // Reduced spacing
                     // --- OR Divider ---
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(child: Divider(color: customColors.textColor)),
+                        Expanded(
+                          child: Divider(
+                            color: AppColors.color6B7280,
+                            thickness: 1,
+                          ),
+                        ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
                             "or",
                             style: TextStyle(
-                              color: customColors.textColor,
-                              fontSize: 15,
                               fontFamily: 'Poppins',
+                              color: AppColors.color6B7280,
+                              fontWeight: FontWeight.w400,
                             ),
-                          ), // Reduced size
+                          ),
                         ),
-                        Expanded(child: Divider(color: customColors.textColor)),
+                        Expanded(
+                          child: Divider(
+                            color: AppColors.color6B7280,
+                            thickness: 1,
+                          ),
+                        ),
                       ],
                     ),
 
@@ -287,19 +286,113 @@ class _SignupScreenState extends State<SignupScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: _buildSocialButton(
-                            label: "Google",
-                            icon: 'G', // Placeholder for Google Icon
-                            onPressed: () {},
+                          child: Container(
+                            height: 52,
+                            decoration: BoxDecoration(
+                              color: AppColors.color101010,
+                              borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  Assets.images.googlelogo.path,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 10), // Reduced spacing
+                        SizedBox(width: 10),
                         Expanded(
-                          child: _buildSocialButton(
-                            label: "Apple",
-                            icon: '', // Placeholder for Apple Icon
-                            onPressed: () {},
+                          child: Container(
+                            height: 52,
+                            decoration: BoxDecoration(
+                              color: AppColors.color101010,
+                              borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(
+                                image: AssetImage(Assets.images.applelogo.path),
+                              ),
+                            ),
                           ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: AppColors.color101010,
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Continue as Guest',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 28),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an account?",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: customColors.textColor,
+                          ),
+                        ),
+                        SizedBox(width: 4),
+                        Stack(
+                          alignment: Alignment.bottomLeft,
+                          children: [
+                            ShaderMask(
+                              shaderCallback: (bounds) =>
+                                  LinearGradient(
+                                    colors: [
+                                      Color(0xFF1FCFFF),
+                                      Color(0xFF0063FF),
+                                    ],
+                                  ).createShader(
+                                    Rect.fromLTWH(
+                                      0,
+                                      0,
+                                      bounds.width,
+                                      bounds.height,
+                                    ),
+                                  ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.goNamed(AppRoutes.loginScreen.name);
+                                },
+                                child: Text(
+                                  "Sign in",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Container(
+                                height: 1.5,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF1FCFFF),
+                                      Color(0xFF0063FF),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -403,19 +496,19 @@ class _SignupScreenState extends State<SignupScreen> {
               Text(
                 icon,
                 style: const TextStyle(
-                  fontSize: 18, // Reduced size
+                  fontSize: 18, 
                   color: textColor,
-                  fontFamily: 'Poppins', // Added Poppins
+                  fontFamily: 'Poppins', 
                 ),
               ),
-              const SizedBox(width: 6), // Reduced spacing
+              const SizedBox(width: 6), 
               Text(
                 label,
                 style: const TextStyle(
                   color: textColor,
-                  fontSize: 15, // Reduced size
+                  fontSize: 15, 
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins', // Added Poppins
+                  fontFamily: 'Poppins', 
                 ),
               ),
             ],
