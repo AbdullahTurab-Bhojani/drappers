@@ -226,6 +226,10 @@ class $AssetsImagesGen {
   AssetGenImage get cancelicon =>
       const AssetGenImage('assets/images/cancelicon.png');
 
+  /// File path: assets/images/cardimage.png
+  AssetGenImage get cardimage =>
+      const AssetGenImage('assets/images/cardimage.png');
+
   /// File path: assets/images/course_complete.png
   AssetGenImage get courseComplete =>
       const AssetGenImage('assets/images/course_complete.png');
@@ -292,6 +296,30 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo2.png
   AssetGenImage get logo2 => const AssetGenImage('assets/images/logo2.png');
 
+  /// File path: assets/images/menuicon1.png
+  AssetGenImage get menuicon1 =>
+      const AssetGenImage('assets/images/menuicon1.png');
+
+  /// File path: assets/images/menuicon2.png
+  AssetGenImage get menuicon2 =>
+      const AssetGenImage('assets/images/menuicon2.png');
+
+  /// File path: assets/images/menuicon3.png
+  AssetGenImage get menuicon3 =>
+      const AssetGenImage('assets/images/menuicon3.png');
+
+  /// File path: assets/images/menuicon4.png
+  AssetGenImage get menuicon4 =>
+      const AssetGenImage('assets/images/menuicon4.png');
+
+  /// File path: assets/images/menuicon5.png
+  AssetGenImage get menuicon5 =>
+      const AssetGenImage('assets/images/menuicon5.png');
+
+  /// File path: assets/images/menuicon6.png
+  AssetGenImage get menuicon6 =>
+      const AssetGenImage('assets/images/menuicon6.png');
+
   /// File path: assets/images/notificationicon.png
   AssetGenImage get notificationicon =>
       const AssetGenImage('assets/images/notificationicon.png');
@@ -350,6 +378,10 @@ class $AssetsImagesGen {
   AssetGenImage get signInoption =>
       const AssetGenImage('assets/images/signInoption.png');
 
+  /// File path: assets/images/signouticon.png
+  AssetGenImage get signouticon =>
+      const AssetGenImage('assets/images/signouticon.png');
+
   /// File path: assets/images/slider.png
   AssetGenImage get slider => const AssetGenImage('assets/images/slider.png');
 
@@ -377,6 +409,7 @@ class $AssetsImagesGen {
     bannerSvg,
     bellringicon,
     cancelicon,
+    cardimage,
     courseComplete,
     createpage,
     envelopeicon,
@@ -394,6 +427,12 @@ class $AssetsImagesGen {
     lessonComplete,
     likeicon,
     logo2,
+    menuicon1,
+    menuicon2,
+    menuicon3,
+    menuicon4,
+    menuicon5,
+    menuicon6,
     notificationicon,
     notificationsicon,
     onboard,
@@ -409,6 +448,7 @@ class $AssetsImagesGen {
     sentence,
     settingsicon,
     signInoption,
+    signouticon,
     slider,
     subscriptionBg,
     watchtimeicon,
