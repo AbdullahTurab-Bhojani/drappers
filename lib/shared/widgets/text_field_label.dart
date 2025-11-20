@@ -11,10 +11,11 @@ class TextFieldLabel extends ConsumerWidget {
     final customColors = theme.extension<AppCustomColors>()!;
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
-      child: PlusJakartaText(
+      child: PoppinsText(
         name,
-        fontWeight: FontWeight.w400,
         color: customColors.labelColor,
+        fontWeight: PoppinsFontWeightVariant.regular,
+        fontSize: PoppinsFontSizeVariant.size12,
       ),
     );
   }

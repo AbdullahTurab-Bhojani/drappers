@@ -38,6 +38,7 @@ class AppButton extends StatelessWidget {
         backgroundBuilder: (context, states, child) {
           return DecoratedBox(
             decoration: BoxDecoration(
+              color: color,
               gradient: LinearGradient(
                 colors: customColors.buttonColors,
                 begin: Alignment.centerLeft,
@@ -50,6 +51,9 @@ class AppButton extends StatelessWidget {
               //     offset: const Offset(0, 5),
               //   ),
               // ],
+              border: border
+                  ? Border.all(color: customColors.greyColor, width: 1)
+                  : null,
               borderRadius: BorderRadius.circular(50),
             ),
             child: IntrinsicHeight(child: child),

@@ -2,14 +2,17 @@ part of '../../drappers.dart';
 
 enum AppRoutes {
   splashScreen('splash', '/'),
-   onboardingScreen('onboarding', '/onboarding'),
-   loginScreen('login', '/login'),
-   forgetpasswordScreen('forgetpassword', '/forgetpassword'),
-   verfiicationcodeScreen('verificationcode', '/verificationcode'),
+  onboardingScreen('onboarding', '/onboarding'),
+  loginScreen('login', '/login'),
+  forgetpasswordScreen('forgetpassword', '/forgetpassword'),
+  verfiicationcodeScreen('verificationcode', '/verificationcode'),
+  home('home', '/home'),
+  discover('discover', '/discover'),
+  watchlist('watchlist', '/watchlist'),
+  signupScreen('signup', '/signup'),
+  updatepasswordScreen('updatepassword', '/updatepassword'),
+  profile ('profile', '/profile');
 
-
-
-  signupScreen('signup', '/signup');
 
   final String name;
   final String path;
@@ -18,11 +21,15 @@ enum AppRoutes {
 
   static String get initialLocation => AppRoutes.splashScreen.path;
 
-  static List<AppRoutes> bottomNavPages = [];
-
   static List<AppRoutes> get publicRoutes => [
     AppRoutes.splashScreen,
     AppRoutes.signupScreen,
+  ];
+  static List<AppRoutes> bottomNavPages = [
+    AppRoutes.home,
+    AppRoutes.discover,
+    AppRoutes.watchlist,
+    AppRoutes.profile
   ];
 
   static bool isPublicRoute(GoRouterState state) {
