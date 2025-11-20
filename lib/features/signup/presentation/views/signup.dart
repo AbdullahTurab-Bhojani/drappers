@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../../shared/widgets/text_form_field_widget.dart';
 import '../../../../shared/widgets/textfield_new.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -18,9 +16,8 @@ class _SignupScreenState extends State<SignupScreen> {
   // Key for form validation
   final _formKey = GlobalKey<FormState>();
 
-  // State variables for form fields and checkbox
   String? _fullName, _email, _phone, _password, _confirmPassword;
-  String? _receiveMethod = 'Email'; // Default radio selection
+  String? _receiveMethod = 'Email';
   bool _agreedToTerms = false;
   bool _showPassword = false;
   bool _showConfirmPassword = false;
@@ -92,7 +89,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     SizedBox(height: 25), // Reduced spacing
-                  
                     // Full Name
                     NewTextField(
                       controller: _fullNameController,
@@ -496,19 +492,19 @@ class _SignupScreenState extends State<SignupScreen> {
               Text(
                 icon,
                 style: const TextStyle(
-                  fontSize: 18, 
+                  fontSize: 18,
                   color: textColor,
-                  fontFamily: 'Poppins', 
+                  fontFamily: 'Poppins',
                 ),
               ),
-              const SizedBox(width: 6), 
+              const SizedBox(width: 6),
               Text(
                 label,
                 style: const TextStyle(
                   color: textColor,
-                  fontSize: 15, 
+                  fontSize: 15,
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins', 
+                  fontFamily: 'Poppins',
                 ),
               ),
             ],

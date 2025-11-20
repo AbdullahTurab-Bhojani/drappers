@@ -24,22 +24,22 @@ class _BottomNavigationBarShellState
 
   static final List<Map<String, dynamic>> _navItems = [
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.home.name,
       'label': 'Home',
       'icon': Assets.images.footericon1.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.discover.name,
       'label': 'Discover',
       'icon': Assets.images.footericon2.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.watchlist.name,
       'label': 'Watchlist',
       'icon': Assets.images.footericon3.path,
     },
     {
-      'path': AppRoutes.dashboard.name,
+      'path': AppRoutes.home.name,
       'label': 'Profile',
       'icon': Assets.images.shareicon.path,
     },
