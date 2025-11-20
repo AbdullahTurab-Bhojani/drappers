@@ -11,8 +11,8 @@ enum AppRoutes {
   watchlist('watchlist', '/watchlist'),
   signupScreen('signup', '/signup'),
   updatepasswordScreen('updatepassword', '/updatepassword'),
-  profile ('profile', '/profile');
-
+  profile('profile', '/profile'),
+  PrivacypolicyScreen('PrivacypolicyScreen', '/PrivacypolicyScreen');
 
   final String name;
   final String path;
@@ -29,7 +29,7 @@ enum AppRoutes {
     AppRoutes.home,
     AppRoutes.discover,
     AppRoutes.watchlist,
-    AppRoutes.profile
+    AppRoutes.profile,
   ];
 
   static bool isPublicRoute(GoRouterState state) {
