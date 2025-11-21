@@ -50,6 +50,7 @@ class NewTextField extends ConsumerStatefulWidget {
     this.onTap,
     this.borderColor,
     this.autovalidateMode,
+    required this.fieldbg,
   });
 
   final bool readOnly;
@@ -75,6 +76,7 @@ class NewTextField extends ConsumerStatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final AutovalidateMode? autovalidateMode;
   final String? labelText;
+  final Color fieldbg;
   @override
   ConsumerState<NewTextField> createState() => _NewTextFieldState();
 }
@@ -125,7 +127,7 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.tfield,
+        color: widget.fieldbg,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Column(

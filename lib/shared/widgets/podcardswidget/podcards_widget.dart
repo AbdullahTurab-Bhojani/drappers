@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../../gen/assets.gen.dart';
 
-class CardWidget extends StatefulWidget {
+class PodcardsWidget extends StatefulWidget {
   final String backgroundImage;
-  const CardWidget({super.key, required this.backgroundImage});
+
+  const PodcardsWidget({super.key, required this.backgroundImage});
 
   @override
-  State<CardWidget> createState() => _CardWidgetState();
+  State<PodcardsWidget> createState() => _PodcardsWidgetState();
 }
 
-class _CardWidgetState extends State<CardWidget> {
+class _PodcardsWidgetState extends State<PodcardsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(

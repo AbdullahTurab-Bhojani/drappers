@@ -15,9 +15,10 @@ abstract final class AppColors {
   static const dLightest = Color(0xFF1D1930);
   static const dTextColor = Color(0xFFFFFFFF);
   static const dGrey = Color(0xFF6E7480);
-  static const dSubTextColor = Color(0xFF777573); // optional custom subtext
-  static const dLabel = Color(0xff999999); // optional label tone
+  static const dSubTextColor = Color(0xFF777573); 
+  static const dLabel = Color(0xff999999); 
   static const tfield = Color(0xff101317);
+  static const newfield = Color(0xff202020);
   static const containerlight = Color(0xff10151c);
   static const graylight = Color(0xff101010);
   static const yellowlight = Color(0xffFFCC00);
@@ -79,6 +80,9 @@ abstract final class AppColors {
   static const color6B7280 = Color(0xff6B7280);
   static const color1FCFFF = Color(0xff1FCFFF);
   static const color101317 = Color(0xff101317);
+  static const color101010 = Color(0xff101010);
+  static const color202020 = Color(0xff202020);
+
 
   static get color3D3C45 => null;
 }

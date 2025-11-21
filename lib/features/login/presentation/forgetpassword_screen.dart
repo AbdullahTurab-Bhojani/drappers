@@ -23,91 +23,87 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Scaffold(
-      body:
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(Assets.images.screensbg.path),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(left: 20,right: 20,top: 70),
-              child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    context.go('/login');
-                  },
-                  child: Image.asset(
-                  Assets.images.backicon.path
-                )
-                ),
-                SizedBox(height: 40),
-                PoppinsText(
-                  "Forget Password?",
-                  fontSize: PoppinsFontSizeVariant.size24,
-                  fontWeight: PoppinsFontWeightVariant.semiBold,
-                  color: customColors.textColor,
-                ),
-                SizedBox(height: 4),
-                PoppinsText(
-                  'Don’t worry, this happens.',
-                  fontSize: PoppinsFontSizeVariant.size16,
-                  fontWeight: PoppinsFontWeightVariant.regular,
-                  color: customColors.textColor,
-                ),
-                SizedBox(height: 36),
-                PoppinsText(
-                  'Receive Code Via phone or email',
-                  fontSize: PoppinsFontSizeVariant.size16,
-                  fontWeight: PoppinsFontWeightVariant.regular,
-                  color: customColors.textColor,
-                ),
-                SizedBox(height: 24),
-                Container(
-                  width: MediaQuery.of(context).size.width - 40,
-                  child: Column(
-                    children: [
-                      RadioTileWidget(
-                        selected: isPhone,
-                        title: "Enter Your Email ",
-                        subtitle: "jo********@gmail.co|",
-                        onTap: () {
-                          setState(() {
-                            isPhone = true;
-                          });
-                        },
-                      ),
-                        
-                      RadioTileWidget(
-                        selected: !isPhone,
-                        title: "Enter Phone ",
-                        subtitle: "03xxxxxxx59",
-                        onTap: () {
-                          setState(() {
-                            isPhone = false;
-                          });
-                        },
-                      ),
-                 SizedBox(height: 24),
-                        AppButton(onPressed: () {
-                context.goNamed(AppRoutes.verfiicationcodeScreen.name);
-              }, title: "Send Code"),
-                
-                        
-                    ],
-                  ),
-                ),
-              ],
-                        ),
-            ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Assets.images.screensbg.path),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(left: 20, right: 20, top: 70),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  context.go('/login');
+                },
+                child: Image.asset(Assets.images.backicon.path),
+              ),
+              SizedBox(height: 40),
+              PoppinsText(
+                "Forget Password?",
+                fontSize: PoppinsFontSizeVariant.size24,
+                fontWeight: PoppinsFontWeightVariant.semiBold,
+                color: customColors.textColor,
+              ),
+              SizedBox(height: 4),
+              PoppinsText(
+                'Don’t worry, this happens.',
+                fontSize: PoppinsFontSizeVariant.size16,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: customColors.textColor,
+              ),
+              SizedBox(height: 36),
+              PoppinsText(
+                'Receive Code Via phone or email',
+                fontSize: PoppinsFontSizeVariant.size16,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: customColors.textColor,
+              ),
+              SizedBox(height: 24),
+              Container(
+                width: MediaQuery.of(context).size.width - 40,
+                child: Column(
+                  children: [
+                    RadioTileWidget(
+                      selected: isPhone,
+                      title: "Enter Your Email ",
+                      subtitle: "jo********@gmail.co|",
+                      onTap: () {
+                        setState(() {
+                          isPhone = true;
+                        });
+                      },
+                    ),
 
-         
+                    RadioTileWidget(
+                      selected: !isPhone,
+                      title: "Enter Phone ",
+                      subtitle: "03xxxxxxx59",
+                      onTap: () {
+                        setState(() {
+                          isPhone = false;
+                        });
+                      },
+                    ),
+                    SizedBox(height: 24),
+                    AppButton(
+                      onPressed: () {
+                        context.goNamed(AppRoutes.verfiicationcodeScreen.name);
+                      },
+                      title: "Send Code",
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

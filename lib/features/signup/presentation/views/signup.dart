@@ -90,6 +90,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(height: 25), // Reduced spacing
                       // Full Name
                       NewTextField(
+                        fieldbg: AppColors.tfield,
+
                         controller: _fullNameController,
                         labelText: "Full Name",
                         hintText: "Enter your full name",
@@ -105,6 +107,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       // Email Address
                       NewTextField(
+                        fieldbg: AppColors.tfield,
+
                         controller: _emailController,
                         labelText: "Email Address",
                         hintText: "Enter your email",
@@ -122,6 +126,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       // Phone Number
                       NewTextField(
+                        fieldbg: AppColors.tfield,
+
                         controller: _emailController,
                         // controller: _phoneController,
                         labelText: "Phone Number",

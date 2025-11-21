@@ -20,8 +20,12 @@ enum AppRoutes {
     '/SettingpreferencesScreen',
   ),
   deleteAccountScreen('deleteAccountScreen', '/deleteAccountScreen'),
-
-  termscondition('termscondition', '/termscondition');
+  termscondition('termscondition', '/termscondition'),
+  savedreel('savedreel', '/savedreel'),
+  helpsupport('helpsupport', '/helpsupport'),
+  trendingshow('trendingshow', '/trendingshow'),
+  podcasts('podcasts', '/podcasts'),
+  reelWidget('reelWidget', '/reelWidget');
 
   final String name;
   final String path;
