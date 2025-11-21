@@ -73,38 +73,18 @@ final routerConfigProvider = Provider((ref) {
             name: AppRoutes.profile.name,
             builder: (context, state) => ProfileScreen(),
           ),
-
-          GoRoute(
-            path: AppRoutes.privacypolicyScreen.path,
-            name: AppRoutes.privacypolicyScreen.name,
-            builder: (context, state) => PrivacypolicyScreen(),
-          ),
-          GoRoute(
-            path: AppRoutes.faqsScreen.path,
-            name: AppRoutes.faqsScreen.name,
-            builder: (context, state) => FaqsScreen(),
-          ),
-          GoRoute(
-            path: AppRoutes.editprofile.path,
-            name: AppRoutes.editprofile.name,
-            builder: (context, state) => EditprofileScreen(),
-          ),
-          GoRoute(
-            path: AppRoutes.termscondition.path,
-            name: AppRoutes.termscondition.name,
-            builder: (context, state) => Termscondition(),
-          ),
-          GoRoute(
-            path: AppRoutes.SettingpreferencesScreen.path,
-            name: AppRoutes.SettingpreferencesScreen.name,
-            builder: (context, state) => SettingpreferencesScreen(),
-          ),
-           GoRoute(
-            path: AppRoutes.deleteAccountScreen.path,
-            name: AppRoutes.deleteAccountScreen.name,
-            builder: (context, state) => deleteAccountScreen(),
-          ),
         ],
+      ),
+
+      GoRoute(
+        path: AppRoutes.SettingpreferencesScreen.path,
+        name: AppRoutes.SettingpreferencesScreen.name,
+        builder: (context, state) => SettingpreferencesScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.deleteAccountScreen.path,
+        name: AppRoutes.deleteAccountScreen.name,
+        builder: (context, state) => deleteAccountScreen(),
       ),
     ],
   );
