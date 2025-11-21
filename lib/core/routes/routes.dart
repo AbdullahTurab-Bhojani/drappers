@@ -15,21 +15,17 @@ enum AppRoutes {
   privacypolicyScreen('PrivacypolicyScreen', '/PrivacypolicyScreen'),
   faqsScreen('FaqsScreen', '/FaqsScreen'),
   editprofile('editprofile', '/editprofile'),
-  termscondition ('termscondition', '/termscondition'),
-  savedreel ('savedreel', '/savedreel'),
-  helpsupport ('helpsupport', '/helpsupport'),
-  trendingshow ('trendingshow', '/trendingshow'),
-  podcasts ('podcasts', '/podcasts'),
-  reelWidget ('reelWidget', '/reelWidget');
-
-
-
-
-
-
-
-
-
+  SettingpreferencesScreen(
+    'SettingpreferencesScreen',
+    '/SettingpreferencesScreen',
+  ),
+  deleteAccountScreen('deleteAccountScreen', '/deleteAccountScreen'),
+  termscondition('termscondition', '/termscondition'),
+  savedreel('savedreel', '/savedreel'),
+  helpsupport('helpsupport', '/helpsupport'),
+  trendingshow('trendingshow', '/trendingshow'),
+  podcasts('podcasts', '/podcasts'),
+  reelWidget('reelWidget', '/reelWidget');
 
   final String name;
   final String path;

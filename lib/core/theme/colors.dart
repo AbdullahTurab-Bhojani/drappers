@@ -20,6 +20,12 @@ abstract final class AppColors {
   static const tfield = Color(0xff101317);
   static const newfield = Color(0xff202020);
   static const containerlight = Color(0xff10151c);
+  static const graylight = Color(0xff101010);
+  static const yellowlight = Color(0xffFFCC00);
+  static const yellowDark = Color(0xff4d420b);
+  static const redbox = Color(0xff4a0618);
+  static const normalred = Color(0xffa10b30);
+  static const lightred = Color(0xffF81149);
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);

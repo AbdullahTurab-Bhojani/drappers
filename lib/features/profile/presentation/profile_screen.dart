@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
       {
         'title': 'Settings & Preferences',
         'image': Assets.images.menuicon2.path,
-        'route': AppRoutes.privacypolicyScreen.path,
+        'route': AppRoutes.SettingpreferencesScreen.path,
         'color': Colors.white,
         'isTap': true,
       },
@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
         'route': AppRoutes.privacypolicyScreen.path,
         'color': Colors.white,
         'isTap': true,
-      }, 
+      },
       {
         'title': 'FAQ’s',
         'image': Assets.images.menuicon5.path,

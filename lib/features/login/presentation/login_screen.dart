@@ -78,17 +78,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       SizedBox(height: 16),
-                     AppPasswordField(
-                controller: _passwordController,
-                labelText: "New Password",
-                hintText: "Enter your full name",
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Full name required";
-                  }
-                  return null;
-                },
-              ),
+                      AppPasswordField(
+                        controller: _passwordController,
+                        labelText: "New Password",
+                        hintText: "Enter your full name",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Full name required";
+                          }
+                          return null;
+                        },
+                      ),
                       SizedBox(height: 14),
                       Row(
                         children: [
@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Container(
                               height: 52,
                               decoration: BoxDecoration(
-                                color: AppColors.color101010,
+                                color: AppColors.graylight,
                                 borderRadius: BorderRadius.circular(30),
                                 image: DecorationImage(
                                   image: AssetImage(
@@ -216,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Container(
                               height: 52,
                               decoration: BoxDecoration(
-                                color: AppColors.color101010,
+                                color: AppColors.graylight,
                                 borderRadius: BorderRadius.circular(30),
                                 image: DecorationImage(
                                   image: AssetImage(
@@ -233,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: double.infinity,
                         height: 52,
                         decoration: BoxDecoration(
-                          color: AppColors.color101010,
+                          color: AppColors.graylight,
                           borderRadius: BorderRadius.circular(40),
                         ),
                         child: Center(
@@ -252,9 +252,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           PoppinsText(
                             "Need to create an account?",
-                              fontSize: PoppinsFontSizeVariant.size14,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size14,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
                           ),
                           SizedBox(width: 4),
                           Stack(
@@ -283,8 +283,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                                   child: PoppinsText(
                                     "Sign Up",
-                                      fontSize: PoppinsFontSizeVariant.size14,
-                                      fontWeight: PoppinsFontWeightVariant.medium,
+                                    fontSize: PoppinsFontSizeVariant.size14,
+                                    fontWeight: PoppinsFontWeightVariant.medium,
                                   ),
                                 ),
                               ),
