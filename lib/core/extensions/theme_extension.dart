@@ -15,6 +15,11 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
   final Color textfieldColor;
   final Color bgcontainerlight;
   final Color lightGray;
+  final Color boxyellow;
+  final Color yellowlight;
+  final Color redbox;
+  final Color redlight;
+  final Color rednormal;
 
   final List<Color> buttonColors;
 
@@ -33,6 +38,11 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     required this.buttonColors,
     required this.bgcontainerlight,
     required this.lightGray,
+    required this.boxyellow,
+    required this.yellowlight,
+    required this.redbox,
+    required this.redlight,
+    required this.rednormal,
   });
 
   @override
@@ -50,6 +60,12 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     Color? textfieldColor,
     Color? bgcontainerlight,
     Color? lightGray,
+    Color? boxyellow,
+    Color? yellowlight,
+    Color? redbox,
+    Color? redlight,
+    Color? rednormal,
+
     LinearGradient? buttongradient,
   }) {
     return AppCustomColors(
@@ -66,6 +82,11 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       textfieldColor: textfieldColor ?? this.textfieldColor,
       bgcontainerlight: bgcontainerlight ?? this.bgcontainerlight,
       lightGray: bgcontainerlight ?? this.bgcontainerlight,
+      boxyellow: boxyellow ?? this.boxyellow,
+      yellowlight: yellowlight ?? this.yellowlight,
+      redbox: redbox ?? this.redbox,
+      redlight: redlight ?? this.redlight,
+      rednormal: rednormal ?? this.rednormal,
 
       buttonColors: buttonColors,
     );
@@ -98,6 +119,11 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       textfieldColor: Color.lerp(textfieldColor, other.textfieldColor, t)!,
       bgcontainerlight: Color.lerp(textfieldColor, other.textfieldColor, t)!,
       lightGray: Color.lerp(lightGray, other.lightGray, t)!,
+      boxyellow: Color.lerp(boxyellow, other.boxyellow, t)!,
+      yellowlight: Color.lerp(yellowlight, other.yellowlight, t)!,
+      redbox: Color.lerp(redbox, other.redbox, t)!,
+      redlight: Color.lerp(redlight, other.redlight, t)!,
+      rednormal: Color.lerp(rednormal, other.rednormal, t)!,
 
       buttonColors: lerpColorList(buttonColors, other.buttonColors, t),
     );

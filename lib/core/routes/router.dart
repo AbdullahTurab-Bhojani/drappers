@@ -99,6 +99,11 @@ final routerConfigProvider = Provider((ref) {
             name: AppRoutes.SettingpreferencesScreen.name,
             builder: (context, state) => SettingpreferencesScreen(),
           ),
+           GoRoute(
+            path: AppRoutes.deleteAccountScreen.path,
+            name: AppRoutes.deleteAccountScreen.name,
+            builder: (context, state) => deleteAccountScreen(),
+          ),
         ],
       ),
     ],

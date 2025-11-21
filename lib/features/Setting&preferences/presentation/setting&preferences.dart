@@ -1,29 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart'; // Assuming PoppinsText, PoppinsFontSizeVariant, etc., are defined here
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 
-// --- Placeholder for Global Text/Strings ---
-// NOTE: Replace this with your actual global text retrieval method (e.g., AppLocalizations).
-class _GlobalStrings {
-  final String screenTitle = "Settings & Preferences";
-  final String playbackSettingsTitle = "Playback Settings";
-  final String autoplayEpisodeTitle = "Autoplay Next Episode";
-  final String autoplayEpisodeSubtitle = "Automatically play the next episode";
-  final String autoplayPreviewTitle = "Autoplay Next Preview";
-  final String autoplayPreviewSubtitle = "Play previews when browsing";
-  final String videoQualityTitle = "Video Quality";
-  final String streamingQualityTitle = "Streaming Quality";
-  final String streamingQualitySubtitle = "Choose video quality for streaming";
-  final String accessibilityTitle = "Accessibility";
-  final String subtitlesTitle = "Subtitles & Captions";
-  final String subtitlesSubtitle = "Default subtitle language";
-  final String deleteAccountButton = "Delete or Deactivate Account";
-}
-
-final _settingsStrings = _GlobalStrings();
-// -------------------------------------------------------------------------------------------------
+// 🔥 Global strings class removed as requested.
 
 class SettingpreferencesScreen extends StatefulWidget {
   const SettingpreferencesScreen({super.key});
@@ -95,16 +77,9 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    // Assume customColors.lightGray is available, otherwise use a default dark color
-    final Color dropdownBackgroundColor =
-        customColors.lightGray ?? const Color(0xFF1E2135);
-
-    final Color contentBackgroundColor =
-        customColors.regular ?? const Color(0xFF2C2F4D);
-    final Color textColor = customColors.textColor!;
     const double horizontalPadding = 20.0;
 
-    // Define your gradient colors for switches
+    // Define your gradient colors for switches (These are constant and not part of customColors)
     const Color gradientStartColor = Color(0xFF1FCFFF);
     const Color gradientEndColor = Color(0xFF0063FF);
 
@@ -123,7 +98,8 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
           children: [
             AppMainBar(
               leadingIcon: Icons.arrow_back_ios,
-              title: _settingsStrings.screenTitle,
+              // 🔥 Hardcoded Title
+              title: "Settings & Preferences",
               centerTitle: false,
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -134,33 +110,38 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // --- Playback Settings ---
                     _buildSectionHeader(
-                      _settingsStrings.playbackSettingsTitle,
-                      textColor,
+                      "Playback Settings",
+                      customColors.textColor!,
                     ),
 
                     // 1. Autoplay Next Episode Toggle
                     _buildSettingItem(
                       title: Row(
                         children: [
-                          Icon(Icons.play_arrow, color: textColor, size: 24),
+                          Icon(
+                            Icons.play_arrow,
+                            color: customColors.textColor,
+                            size: 24,
+                          ),
                           const SizedBox(width: 8.0),
                           PoppinsText(
-                            _settingsStrings.autoplayEpisodeTitle,
+                            // 🔥 Hardcoded Title
+                            "Autoplay Next Episode",
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.regular,
-                            color: textColor,
+                            color: customColors.textColor,
                           ),
                         ],
                       ),
                       subtitle: Padding(
                         padding: const EdgeInsets.only(left: 32.0),
                         child: PoppinsText(
-                          _settingsStrings.autoplayEpisodeSubtitle,
+                          // 🔥 Hardcoded Subtitle
+                          "Automatically play the next episode",
                           fontSize: PoppinsFontSizeVariant.size14,
                           fontWeight: PoppinsFontWeightVariant.regular,
-                          color: Colors.white70,
+                          color: customColors.subtextColor,
                         ),
                       ),
                       trailing: Switch(
@@ -170,7 +151,6 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                             _autoplayNextEpisode = value;
                           });
                         },
-                        // Applying gradient colors to switch
                         activeColor: gradientEndColor,
                         activeTrackColor: gradientStartColor.withOpacity(0.5),
                       ),
@@ -180,23 +160,29 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                     _buildSettingItem(
                       title: Row(
                         children: [
-                          Icon(Icons.play_arrow, color: textColor, size: 24),
+                          Icon(
+                            Icons.play_arrow,
+                            color: customColors.textColor,
+                            size: 24,
+                          ),
                           const SizedBox(width: 8.0),
                           PoppinsText(
-                            _settingsStrings.autoplayPreviewTitle,
+                            // 🔥 Hardcoded Title
+                            "Autoplay Next Preview",
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.regular,
-                            color: textColor,
+                            color: customColors.textColor,
                           ),
                         ],
                       ),
                       subtitle: Padding(
                         padding: const EdgeInsets.only(left: 32.0),
                         child: PoppinsText(
-                          _settingsStrings.autoplayPreviewSubtitle,
+                          // 🔥 Hardcoded Subtitle
+                          "Play previews when browsing",
                           fontSize: PoppinsFontSizeVariant.size14,
                           fontWeight: PoppinsFontWeightVariant.regular,
-                          color: Colors.white70,
+                          color: customColors.subtextColor,
                         ),
                       ),
                       trailing: Switch(
@@ -206,7 +192,6 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                             _autoplayNextPreview = value;
                           });
                         },
-                        // Applying gradient colors to switch
                         activeColor: gradientEndColor,
                         activeTrackColor: gradientStartColor.withOpacity(0.5),
                       ),
@@ -214,50 +199,57 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
 
                     // --- Video Quality ---
                     _buildSectionHeader(
-                      _settingsStrings.videoQualityTitle,
-                      textColor,
+                      // 🔥 Hardcoded Title
+                      "Video Quality",
+                      customColors.textColor!,
                     ),
 
-                    // 3. Streaming Quality Dropdown (Column structure for title/subtitle/dropdown is maintained)
+                    // 3. Streaming Quality Dropdown
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: horizontalPadding,
                         vertical: 8.0,
                       ),
                       child: Column(
-                        // This is the required Column wrapper
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.hd, color: textColor, size: 24),
+                              Icon(
+                                Icons.hd,
+                                color: customColors.textColor,
+                                size: 24,
+                              ),
                               const SizedBox(width: 8.0),
                               PoppinsText(
-                                _settingsStrings.streamingQualityTitle,
+                                // 🔥 Hardcoded Title
+                                "Streaming Quality",
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.regular,
-                                color: textColor,
+                                color: customColors.textColor,
                               ),
                             ],
                           ),
                           const SizedBox(height: 4.0),
                           PoppinsText(
-                            _settingsStrings.streamingQualitySubtitle,
+                            // 🔥 Hardcoded Subtitle
+                            "Choose video quality for streaming",
                             fontSize: PoppinsFontSizeVariant.size14,
                             fontWeight: PoppinsFontWeightVariant.regular,
-                            color: Colors.white70,
+                            color: customColors.subtextColor,
                           ),
                           const SizedBox(height: 8.0),
 
                           DropdownButtonFormField<String>(
                             value: _streamingQuality,
-                            // 🔥 Use dropdownBackgroundColor (customColors.lightGray)
-                            dropdownColor: dropdownBackgroundColor,
-                            style: TextStyle(color: textColor, fontSize: 16.0),
+                            dropdownColor: customColors.lightGray,
+                            style: TextStyle(
+                              color: customColors.textColor,
+                              fontSize: 16.0,
+                            ),
                             decoration: InputDecoration(
                               filled: true,
-                              // 🔥 Use dropdownBackgroundColor (customColors.lightGray)
-                              fillColor: dropdownBackgroundColor,
+                              fillColor: customColors.lightGray,
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 15.0,
                                 vertical: 10.0,
@@ -269,7 +261,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                             ),
                             icon: Icon(
                               Icons.keyboard_arrow_down,
-                              color: textColor,
+                              color: customColors.textColor,
                             ),
                             onChanged: (String? newValue) {
                               setState(() {
@@ -285,7 +277,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
-                                      color: textColor,
+                                      color: customColors.textColor,
                                     ),
                                   );
                                 })
@@ -297,54 +289,57 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
 
                     // --- Accessibility ---
                     _buildSectionHeader(
-                      _settingsStrings.accessibilityTitle,
-                      textColor,
+                      // 🔥 Hardcoded Title
+                      "Accessibility",
+                      customColors.textColor!,
                     ),
 
-                    // 4. Subtitles & Captions Dropdown (Column structure for title/subtitle/dropdown is maintained)
+                    // 4. Subtitles & Captions Dropdown
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: horizontalPadding,
                         vertical: 8.0,
                       ),
                       child: Column(
-                        // This is the required Column wrapper
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
                               Icon(
                                 Icons.closed_caption,
-                                color: textColor,
+                                color: customColors.textColor,
                                 size: 24,
                               ),
                               const SizedBox(width: 8.0),
                               PoppinsText(
-                                _settingsStrings.subtitlesTitle,
+                                // 🔥 Hardcoded Title
+                                "Subtitles & Captions",
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.regular,
-                                color: textColor,
+                                color: customColors.textColor,
                               ),
                             ],
                           ),
                           const SizedBox(height: 4.0),
                           PoppinsText(
-                            _settingsStrings.subtitlesSubtitle,
+                            // 🔥 Hardcoded Subtitle
+                            "Default subtitle language",
                             fontSize: PoppinsFontSizeVariant.size14,
                             fontWeight: PoppinsFontWeightVariant.regular,
-                            color: Colors.white70,
+                            color: customColors.subtextColor,
                           ),
                           const SizedBox(height: 8.0),
 
                           DropdownButtonFormField<String>(
                             value: _subtitlesLanguage,
-                            // 🔥 Use dropdownBackgroundColor (customColors.lightGray)
-                            dropdownColor: dropdownBackgroundColor,
-                            style: TextStyle(color: textColor, fontSize: 16.0),
+                            dropdownColor: customColors.lightGray,
+                            style: TextStyle(
+                              color: customColors.textColor,
+                              fontSize: 16.0,
+                            ),
                             decoration: InputDecoration(
                               filled: true,
-                              // 🔥 Use dropdownBackgroundColor (customColors.lightGray)
-                              fillColor: dropdownBackgroundColor,
+                              fillColor: customColors.lightGray,
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 15.0,
                                 vertical: 10.0,
@@ -356,7 +351,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                             ),
                             icon: Icon(
                               Icons.keyboard_arrow_down,
-                              color: textColor,
+                              color: customColors.textColor,
                             ),
                             onChanged: (String? newValue) {
                               setState(() {
@@ -372,7 +367,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
-                                      color: textColor,
+                                      color: customColors.textColor,
                                     ),
                                   );
                                 })
@@ -386,7 +381,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40.0),
                       child: Divider(
-                        color: Colors.white12,
+                        color: customColors.subtextColor,
                         thickness: 1,
                         height: 1,
                       ),
@@ -402,7 +397,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                       ),
                       child: InkWell(
                         onTap: () {
-                          // Handle account deletion logic
+                          context.goNamed(AppRoutes.deleteAccountScreen.name);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -416,7 +411,8 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                 ),
                                 const SizedBox(width: 10.0),
                                 PoppinsText(
-                                  _settingsStrings.deleteAccountButton,
+                                  // 🔥 Hardcoded Button Text
+                                  "Delete or Deactivate Account",
                                   fontSize: PoppinsFontSizeVariant.size16,
                                   fontWeight: PoppinsFontWeightVariant.semiBold,
                                   color: Colors.red,

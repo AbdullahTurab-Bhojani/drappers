@@ -15,10 +15,13 @@ enum AppRoutes {
   privacypolicyScreen('PrivacypolicyScreen', '/PrivacypolicyScreen'),
   faqsScreen('FaqsScreen', '/FaqsScreen'),
   editprofile('editprofile', '/editprofile'),
-  SettingpreferencesScreen('SettingpreferencesScreen', '/SettingpreferencesScreen'),
-  termscondition ('termscondition', '/termscondition');
+  SettingpreferencesScreen(
+    'SettingpreferencesScreen',
+    '/SettingpreferencesScreen',
+  ),
+  deleteAccountScreen('deleteAccountScreen', '/deleteAccountScreen'),
 
-
+  termscondition('termscondition', '/termscondition');
 
   final String name;
   final String path;
