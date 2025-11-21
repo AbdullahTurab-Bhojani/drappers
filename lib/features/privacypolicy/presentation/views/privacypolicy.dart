@@ -86,7 +86,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                       ),
 
-                      // --- 2. Purpose of Collection ---
                       Padding(
                         padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
                         child: PoppinsText(
@@ -103,7 +102,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                       ),
 
-                      // --- 3. Cookies and Tracking Technologies ---
                       Padding(
                         padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
                         child: PoppinsText(
@@ -120,7 +118,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                       ),
 
-                      // --- 4. Sharing of Personal Information ---
                       Padding(
                         padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
                         child: PoppinsText(
@@ -137,7 +134,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                       ),
 
-                      // --- 5. Data Security ---
                       Padding(
                         padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
                         child: PoppinsText(
@@ -154,7 +150,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                       ),
 
-                      // --- 6. Data Retention ---
                       Padding(
                         padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
                         child: PoppinsText(
@@ -171,7 +166,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                       ),
 
-                      // --- 7. Opt-Out Option ---
                       Padding(
                         padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
                         child: PoppinsText(

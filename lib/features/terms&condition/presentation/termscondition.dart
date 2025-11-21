@@ -17,7 +17,7 @@ class _TermsconditionState extends State<Termscondition> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    final double paddingValue = 20.0;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -32,186 +32,111 @@ class _TermsconditionState extends State<Termscondition> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppMainBar(
-              leadingIcon: Icons.arrow_back_ios,
+              leading: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+              ),
               title: "Terms & Conditions",
               centerTitle: false,
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
 
+            // 👇 Only this area scrolls
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-                child: SingleChildScrollView(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: customColors.regular,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10,),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          PoppinsText(
-                            "Welcome to Draper TV, an online platform owned by Draper Productions.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                          ),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+                  decoration: BoxDecoration(
+                    color: customColors.regular,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
 
-                          SizedBox(height: 16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PoppinsText(
+                          "Welcome to Draper TV, an online platform owned by Draper Productions.",
+                          color: customColors.textColor,
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "1. Acceptance of Terms",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "By accessing or using Draper TV, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the website.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        SizedBox(height: 16),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "2. Registration",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "Accessing certain features on Draper TV may require free registration. You are responsible for providing accurate and updated information during the registration process. You must be at least 13 years of age or older to register.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        _title("1. Acceptance of Terms", customColors),
+                        _body(
+                          "By accessing or using Draper TV, you acknowledge that you have read, "
+                          "understood, and agree to be bound by these Terms of Use. If you do not "
+                          "agree to these terms, please do not use the website.",
+                          customColors,
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "3. User Eligibility",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "Draper TV is intended for all ages and is open to users from all demographic backgrounds. By using the website, you affirm that you meet the minimum age requirement and are eligible to use the platform.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        _title("2. Registration", customColors),
+                        _body(
+                          "Accessing certain features on Draper TV may require free registration. "
+                          "You are responsible for providing accurate and updated information. "
+                          "You must be at least 13 years old to register.",
+                          customColors,
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "4. Content and Advertising",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "Draper TV provides content focused on entrepreneurship and investment. The website may contain advertising and promotional content. By using the website, you acknowledge that you may encounter advertising materials.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        _title("3. User Eligibility", customColors),
+                        _body(
+                          "Draper TV is intended for all ages and users from all demographic backgrounds. "
+                          "By using the website, you affirm that you meet the minimum age requirement.",
+                          customColors,
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "5. Intellectual Property",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "All content and materials on Draper TV, including but not limited to text, images, videos, and trademarks, are the property of Draper Productions or its licensors. Users may not use, modify, or distribute any of the content without prior written consent.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        _title("4. Content and Advertising", customColors),
+                        _body(
+                          "Draper TV focuses on entrepreneurship and investment content and may contain ads.",
+                          customColors,
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "6. Limitation of Liability",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "Draper Productions does not assume any responsibility for the accuracy, completeness, or usefulness of the information provided on Draper TV. The use of the website is at your own risk, and Draper Productions will not be liable for any damages incurred.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        _title("5. Intellectual Property", customColors),
+                        _body(
+                          "All content on Draper TV is the property of Draper Productions or its licensors. "
+                          "You may not copy or distribute any content without permission.",
+                          customColors,
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "7. Modifications to Terms",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "Draper Productions reserves the right to modify or update these Terms of Use at any time without prior notice. Continued use of the website following any changes constitutes acceptance of the modified terms.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        _title("6. Limitation of Liability", customColors),
+                        _body(
+                          "Draper Productions does not guarantee the accuracy of the information on the site. "
+                          "Use the website at your own risk.",
+                          customColors,
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "8. Governing Law",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "These Terms of Use are governed by and construed in accordance with the laws of the jurisdiction of Draper Productions without regard to its conflict of law provisions.",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        _title("7. Modifications to Terms", customColors),
+                        _body(
+                          "Draper Productions may modify these terms at any time. Continued use of the "
+                          "website means you accept the new terms.",
+                          customColors,
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                            child: PoppinsText(
-                              "9. Contact Information",
-                              color: customColors.textColor,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                            ),
-                          ),
-                          PoppinsText(
-                            "For any inquiries or concerns regarding these Terms of Use, please contact us at hello@drapertv.com",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                          ),
+                        _title("8. Governing Law", customColors),
+                        _body(
+                          "These terms are governed by the laws of Draper Productions' jurisdiction.",
+                          customColors,
+                        ),
 
-                          SizedBox(height: 30.0),
-                        ],
-                      ),
+                        _title("9. Contact Information", customColors),
+                        _body(
+                          "For inquiries, contact us at hello@drapertv.com",
+                          customColors,
+                        ),
+
+                        SizedBox(height: 20),
+                      ],
                     ),
                   ),
                 ),
@@ -220,6 +145,29 @@ class _TermsconditionState extends State<Termscondition> {
           ],
         ),
       ),
+    );
+  }
+
+  // 🔹 Title Widget
+  Widget _title(String text, AppCustomColors colors) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
+      child: PoppinsText(
+        text,
+        color: colors.textColor,
+        fontSize: PoppinsFontSizeVariant.size16,
+        fontWeight: PoppinsFontWeightVariant.medium,
+      ),
+    );
+  }
+
+  // 🔹 Body Text Widget
+  Widget _body(String text, AppCustomColors colors) {
+    return PoppinsText(
+      text,
+      color: colors.textColor,
+      fontSize: PoppinsFontSizeVariant.size12,
+      fontWeight: PoppinsFontWeightVariant.regular,
     );
   }
 }

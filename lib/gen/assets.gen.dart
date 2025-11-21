@@ -177,6 +177,10 @@ class $AssetsImagesGen {
   AssetGenImage get a2023DraperTVOfficialLogo14 =>
       const AssetGenImage('assets/images/2023_Draper_TV_Official_Logo-14.png');
 
+  /// File path: assets/images/3dotsicon.png
+  AssetGenImage get a3dotsicon =>
+      const AssetGenImage('assets/images/3dotsicon.png');
+
   /// File path: assets/images/Applelogo.png
   AssetGenImage get applelogo =>
       const AssetGenImage('assets/images/Applelogo.png');
@@ -190,6 +194,26 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/Logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/Logo.png');
+
+  /// File path: assets/images/Reelimage1.png
+  AssetGenImage get reelimage1 =>
+      const AssetGenImage('assets/images/Reelimage1.png');
+
+  /// File path: assets/images/Reelimage2.png
+  AssetGenImage get reelimage2 =>
+      const AssetGenImage('assets/images/Reelimage2.png');
+
+  /// File path: assets/images/Reelimage3.png
+  AssetGenImage get reelimage3 =>
+      const AssetGenImage('assets/images/Reelimage3.png');
+
+  /// File path: assets/images/Reelimage4.png
+  AssetGenImage get reelimage4 =>
+      const AssetGenImage('assets/images/Reelimage4.png');
+
+  /// File path: assets/images/Reelimage5.png
+  AssetGenImage get reelimage5 =>
+      const AssetGenImage('assets/images/Reelimage5.png');
 
   /// File path: assets/images/Searchicon.png
   AssetGenImage get searchicon =>
@@ -222,6 +246,10 @@ class $AssetsImagesGen {
   AssetGenImage get bellringicon =>
       const AssetGenImage('assets/images/bellringicon.png');
 
+  /// File path: assets/images/callicon.png
+  AssetGenImage get callicon =>
+      const AssetGenImage('assets/images/callicon.png');
+
   /// File path: assets/images/cancelicon.png
   AssetGenImage get cancelicon =>
       const AssetGenImage('assets/images/cancelicon.png');
@@ -229,6 +257,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/cardimage.png
   AssetGenImage get cardimage =>
       const AssetGenImage('assets/images/cardimage.png');
+
+  /// File path: assets/images/commenticon.png
+  AssetGenImage get commenticon =>
+      const AssetGenImage('assets/images/commenticon.png');
 
   /// File path: assets/images/course_complete.png
   AssetGenImage get courseComplete =>
@@ -285,6 +317,10 @@ class $AssetsImagesGen {
   AssetGenImage get guestSheet =>
       const AssetGenImage('assets/images/guest_sheet.png');
 
+  /// File path: assets/images/interestedicon.png
+  AssetGenImage get interestedicon =>
+      const AssetGenImage('assets/images/interestedicon.png');
+
   /// File path: assets/images/lesson_complete.png
   AssetGenImage get lessonComplete =>
       const AssetGenImage('assets/images/lesson_complete.png');
@@ -295,6 +331,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/logo2.png
   AssetGenImage get logo2 => const AssetGenImage('assets/images/logo2.png');
+
+  /// File path: assets/images/mentionedicon.png
+  AssetGenImage get mentionedicon =>
+      const AssetGenImage('assets/images/mentionedicon.png');
 
   /// File path: assets/images/menuicon1.png
   AssetGenImage get menuicon1 =>
@@ -327,6 +367,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/notificationsicon.png
   AssetGenImage get notificationsicon =>
       const AssetGenImage('assets/images/notificationsicon.png');
+
+  /// File path: assets/images/notinterestedicon.png
+  AssetGenImage get notinterestedicon =>
+      const AssetGenImage('assets/images/notinterestedicon.png');
 
   /// File path: assets/images/onboard.png
   AssetGenImage get onboard => const AssetGenImage('assets/images/onboard.png');
@@ -362,9 +406,21 @@ class $AssetsImagesGen {
   AssetGenImage get progressBg =>
       const AssetGenImage('assets/images/progress_bg.png');
 
+  /// File path: assets/images/reporticon.png
+  AssetGenImage get reporticon =>
+      const AssetGenImage('assets/images/reporticon.png');
+
+  /// File path: assets/images/savereelicon.png
+  AssetGenImage get savereelicon =>
+      const AssetGenImage('assets/images/savereelicon.png');
+
   /// File path: assets/images/screensbg.png
   AssetGenImage get screensbg =>
       const AssetGenImage('assets/images/screensbg.png');
+
+  /// File path: assets/images/screenshoticon.png
+  AssetGenImage get screenshoticon =>
+      const AssetGenImage('assets/images/screenshoticon.png');
 
   /// File path: assets/images/sentence.png
   AssetGenImage get sentence =>
@@ -396,10 +452,16 @@ class $AssetsImagesGen {
   /// List of all assets
   List<dynamic> get values => [
     a2023DraperTVOfficialLogo14,
+    a3dotsicon,
     applelogo,
     hideicon,
     image,
     logo,
+    reelimage1,
+    reelimage2,
+    reelimage3,
+    reelimage4,
+    reelimage5,
     searchicon,
     shareicon,
     showicon,
@@ -408,8 +470,10 @@ class $AssetsImagesGen {
     bannerPng,
     bannerSvg,
     bellringicon,
+    callicon,
     cancelicon,
     cardimage,
+    commenticon,
     courseComplete,
     createpage,
     envelopeicon,
@@ -424,9 +488,11 @@ class $AssetsImagesGen {
     guestLearning,
     guestProfile,
     guestSheet,
+    interestedicon,
     lessonComplete,
     likeicon,
     logo2,
+    mentionedicon,
     menuicon1,
     menuicon2,
     menuicon3,
@@ -435,6 +501,7 @@ class $AssetsImagesGen {
     menuicon6,
     notificationicon,
     notificationsicon,
+    notinterestedicon,
     onboard,
     onboarding1,
     onboarding2,
@@ -444,7 +511,10 @@ class $AssetsImagesGen {
     prayer,
     profileCard,
     progressBg,
+    reporticon,
+    savereelicon,
     screensbg,
+    screenshoticon,
     sentence,
     settingsicon,
     signInoption,

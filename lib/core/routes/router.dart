@@ -47,6 +47,36 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.signupScreen.name,
         builder: (context, state) => SignupScreen(),
       ),
+      GoRoute(
+        path: AppRoutes.privacypolicyScreen.path,
+        name: AppRoutes.privacypolicyScreen.name,
+        builder: (context, state) => PrivacypolicyScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.faqsScreen.path,
+        name: AppRoutes.faqsScreen.name,
+        builder: (context, state) => FaqsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.editprofile.path,
+        name: AppRoutes.editprofile.name,
+        builder: (context, state) => EditprofileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.termscondition.path,
+        name: AppRoutes.termscondition.name,
+        builder: (context, state) => Termscondition(),
+      ),
+      GoRoute(
+        path: AppRoutes.savedreel.path,
+        name: AppRoutes.savedreel.name,
+        builder: (context, state) => Savedreel(),
+      ),
+      GoRoute(
+        path: AppRoutes.helpsupport.path,
+        name: AppRoutes.helpsupport.name,
+        builder: (context, state) => Helpsupport(),
+      ),
       ShellRoute(
         navigatorKey: shellKey,
         builder: (context, state, child) {
@@ -72,27 +102,6 @@ final routerConfigProvider = Provider((ref) {
             path: AppRoutes.profile.path,
             name: AppRoutes.profile.name,
             builder: (context, state) => ProfileScreen(),
-          ),
-
-          GoRoute(
-            path: AppRoutes.privacypolicyScreen.path,
-            name: AppRoutes.privacypolicyScreen.name,
-            builder: (context, state) => PrivacypolicyScreen(),
-          ),
-          GoRoute(
-            path: AppRoutes.faqsScreen.path,
-            name: AppRoutes.faqsScreen.name,
-            builder: (context, state) => FaqsScreen(),
-          ),
-          GoRoute(
-            path: AppRoutes.editprofile.path,
-            name: AppRoutes.editprofile.name,
-            builder: (context, state) => EditprofileScreen(),
-          ),
-           GoRoute(
-            path: AppRoutes.termscondition.path,
-            name: AppRoutes.termscondition.name,
-            builder: (context, state) => Termscondition(),
           ),
         ],
       ),

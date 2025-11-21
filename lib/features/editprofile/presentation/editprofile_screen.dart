@@ -88,7 +88,9 @@ class EditprofileScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: Column(
                       children: [
+                        
                         NewTextField(
+                          fieldbg: AppColors.tfield,
                           controller: _fullNameController,
                           labelText: "Full Name*",
                           hintText: "Enter your full name",
@@ -104,6 +106,8 @@ class EditprofileScreen extends StatelessWidget {
 
                         // Email Address
                         NewTextField(
+                                                    fieldbg: AppColors.tfield,
+
                           controller: _emailController,
                           labelText: "Email Address*",
                           hintText: "Enter your email",
@@ -120,7 +124,8 @@ class EditprofileScreen extends StatelessWidget {
                         SizedBox(height: 15),
 
                         // Phone Number
-                        NewTextField(
+                        NewTextField(                          fieldbg: AppColors.tfield,
+
                           controller: _emailController,
                           // controller: _phoneController,
                           labelText: "Phone Number*",

@@ -24,11 +24,15 @@ class _CardWidgetState extends State<CardWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.only(top: 8, right: 2),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Image.asset(Assets.images.envelopeicon.path, width: 20)],
+          children: [
+            Image.asset(
+              Assets.images.a3dotsicon.path
+            )
+          ],
         ),
       ),
     );
