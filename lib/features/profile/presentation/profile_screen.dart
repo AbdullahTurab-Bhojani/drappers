@@ -22,9 +22,9 @@ class ProfileScreen extends StatelessWidget {
     ];
     List menuList = [
       {
-        'title': 'Saved Items',
+        'title': 'Saved Reel',
         'image': Assets.images.menuicon1.path,
-        'route': AppRoutes.privacypolicyScreen.path,
+        'route': AppRoutes.savedreel.path,
         'color': Colors.white,
         'isTap': true,
       },
@@ -59,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
       {
         'title': 'Help & Support',
         'image': Assets.images.menuicon6.path,
-        'route': AppRoutes.privacypolicyScreen.path,
+        'route': AppRoutes.helpsupport.path,
         'color': Colors.white,
         'isTap': true,
       },
