@@ -4,8 +4,8 @@ import '../../../../drappers.dart'; // Assuming PoppinsText, PoppinsFontSizeVari
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 
-
-// --- Placeholder for Global Text/Strings (Please replace this with your actual global constants) ---
+// --- Placeholder for Global Text/Strings ---
+// NOTE: Replace this with your actual global text retrieval method (e.g., AppLocalizations).
 class _GlobalStrings {
   final String screenTitle = "Settings & Preferences";
   final String playbackSettingsTitle = "Playback Settings";
@@ -21,9 +21,9 @@ class _GlobalStrings {
   final String subtitlesSubtitle = "Default subtitle language";
   final String deleteAccountButton = "Delete or Deactivate Account";
 }
+
 final _settingsStrings = _GlobalStrings();
 // -------------------------------------------------------------------------------------------------
-
 
 class SettingpreferencesScreen extends StatefulWidget {
   const SettingpreferencesScreen({super.key});
@@ -65,7 +65,12 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
     Widget? subtitle,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+      padding: const EdgeInsets.only(
+        left: 20.0,
+        right: 20.0,
+        top: 8.0,
+        bottom: 8.0,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -88,15 +93,20 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    // Get customColors instance
     final customColors = theme.extension<AppCustomColors>()!;
+
+    // Assume customColors.lightGray is available, otherwise use a default dark color
+    final Color dropdownBackgroundColor =
+        customColors.lightGray ?? const Color(0xFF1E2135);
+
     final Color contentBackgroundColor =
         customColors.regular ?? const Color(0xFF2C2F4D);
-    
-    // 🔥 Removed: final Color textColor = customColors.textColor ?? Colors.white; 
-    
+    final Color textColor = customColors.textColor!;
     const double horizontalPadding = 20.0;
 
+    // Define your gradient colors for switches
+    const Color gradientStartColor = Color(0xFF1FCFFF);
+    const Color gradientEndColor = Color(0xFF0063FF);
 
     return Scaffold(
       body: Container(
@@ -118,255 +128,313 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            
+
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: contentBackgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // --- Playback Settings ---
-                      // 🔥 Use customColors.textColor directly
-                      _buildSectionHeader(_settingsStrings.playbackSettingsTitle, customColors.textColor!), 
-                      
-                      // 1. Autoplay Next Episode Toggle
-                      _buildSettingItem(
-                        title: Row(
-                          children: [
-                            Icon(Icons.play_arrow, color: customColors.textColor, size: 24),
-                            const SizedBox(width: 8.0),
-                            PoppinsText(
-                              _settingsStrings.autoplayEpisodeTitle,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              color: customColors.textColor,
-                            ),
-                          ],
-                        ),
-                        subtitle: Padding(
-                          padding: const EdgeInsets.only(left: 32.0),
-                          child: PoppinsText(
-                            _settingsStrings.autoplayEpisodeSubtitle,
-                            fontSize: PoppinsFontSizeVariant.size14,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // --- Playback Settings ---
+                    _buildSectionHeader(
+                      _settingsStrings.playbackSettingsTitle,
+                      textColor,
+                    ),
+
+                    // 1. Autoplay Next Episode Toggle
+                    _buildSettingItem(
+                      title: Row(
+                        children: [
+                          Icon(Icons.play_arrow, color: textColor, size: 24),
+                          const SizedBox(width: 8.0),
+                          PoppinsText(
+                            _settingsStrings.autoplayEpisodeTitle,
+                            fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.regular,
-                            color: Colors.white70,
+                            color: textColor,
                           ),
-                        ),
-                        trailing: Switch(
-                          value: _autoplayNextEpisode,
-                          onChanged: (bool value) {
-                            setState(() {
-                              _autoplayNextEpisode = value;
-                            });
-                          },
-                          activeColor: theme.colorScheme.secondary,
+                        ],
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(left: 32.0),
+                        child: PoppinsText(
+                          _settingsStrings.autoplayEpisodeSubtitle,
+                          fontSize: PoppinsFontSizeVariant.size14,
+                          fontWeight: PoppinsFontWeightVariant.regular,
+                          color: Colors.white70,
                         ),
                       ),
-                      
-                      // 2. Autoplay Next Preview Toggle
-                      _buildSettingItem(
-                        title: Row(
-                          children: [
-                            Icon(Icons.play_arrow, color: customColors.textColor, size: 24),
-                            const SizedBox(width: 8.0),
-                            PoppinsText(
-                              _settingsStrings.autoplayPreviewTitle,
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              color: customColors.textColor,
-                            ),
-                          ],
-                        ),
-                        subtitle: Padding(
-                          padding: const EdgeInsets.only(left: 32.0),
-                          child: PoppinsText(
-                            _settingsStrings.autoplayPreviewSubtitle,
-                            fontSize: PoppinsFontSizeVariant.size14,
+                      trailing: Switch(
+                        value: _autoplayNextEpisode,
+                        onChanged: (bool value) {
+                          setState(() {
+                            _autoplayNextEpisode = value;
+                          });
+                        },
+                        // Applying gradient colors to switch
+                        activeColor: gradientEndColor,
+                        activeTrackColor: gradientStartColor.withOpacity(0.5),
+                      ),
+                    ),
+
+                    // 2. Autoplay Next Preview Toggle
+                    _buildSettingItem(
+                      title: Row(
+                        children: [
+                          Icon(Icons.play_arrow, color: textColor, size: 24),
+                          const SizedBox(width: 8.0),
+                          PoppinsText(
+                            _settingsStrings.autoplayPreviewTitle,
+                            fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.regular,
-                            color: Colors.white70,
+                            color: textColor,
                           ),
-                        ),
-                        trailing: Switch(
-                          value: _autoplayNextPreview,
-                          onChanged: (bool value) {
-                            setState(() {
-                              _autoplayNextPreview = value;
-                            });
-                          },
-                          activeColor: theme.colorScheme.secondary,
+                        ],
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(left: 32.0),
+                        child: PoppinsText(
+                          _settingsStrings.autoplayPreviewSubtitle,
+                          fontSize: PoppinsFontSizeVariant.size14,
+                          fontWeight: PoppinsFontWeightVariant.regular,
+                          color: Colors.white70,
                         ),
                       ),
-                      
-                      // --- Video Quality ---
-                      // 🔥 Use customColors.textColor directly
-                      _buildSectionHeader(_settingsStrings.videoQualityTitle, customColors.textColor!), 
-                      
-                      // 3. Streaming Quality Dropdown
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.hd, color: customColors.textColor, size: 24),
-                                const SizedBox(width: 8.0),
-                                PoppinsText(
-                                  _settingsStrings.streamingQualityTitle,
-                                  fontSize: PoppinsFontSizeVariant.size16,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
-                                  color: customColors.textColor,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 4.0),
-                            PoppinsText(
-                              _settingsStrings.streamingQualitySubtitle,
-                              fontSize: PoppinsFontSizeVariant.size14,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              color: Colors.white70,
-                            ),
-                            const SizedBox(height: 8.0),
-
-                            DropdownButtonFormField<String>(
-                              value: _streamingQuality,
-                              dropdownColor: const Color(0xFF1E2135),
-                              style: TextStyle(color: customColors.textColor, fontSize: 16.0),
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: const Color(0xFF1E2135),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: BorderSide.none,
-                                ),
-                              ),
-                              icon: Icon(Icons.keyboard_arrow_down, color: customColors.textColor),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  _streamingQuality = newValue!;
-                                });
-                              },
-                              items: _qualityOptions.map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: PoppinsText(
-                                    value,
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.regular,
-                                    color: customColors.textColor,
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        ),
+                      trailing: Switch(
+                        value: _autoplayNextPreview,
+                        onChanged: (bool value) {
+                          setState(() {
+                            _autoplayNextPreview = value;
+                          });
+                        },
+                        // Applying gradient colors to switch
+                        activeColor: gradientEndColor,
+                        activeTrackColor: gradientStartColor.withOpacity(0.5),
                       ),
+                    ),
 
-                      // --- Accessibility ---
-                      // 🔥 Use customColors.textColor directly
-                      _buildSectionHeader(_settingsStrings.accessibilityTitle, customColors.textColor!), 
+                    // --- Video Quality ---
+                    _buildSectionHeader(
+                      _settingsStrings.videoQualityTitle,
+                      textColor,
+                    ),
 
-                      // 4. Subtitles & Captions Dropdown
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.closed_caption, color: customColors.textColor, size: 24),
-                                const SizedBox(width: 8.0),
-                                PoppinsText(
-                                  _settingsStrings.subtitlesTitle,
-                                  fontSize: PoppinsFontSizeVariant.size16,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
-                                  color: customColors.textColor,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 4.0),
-                            PoppinsText(
-                              _settingsStrings.subtitlesSubtitle,
-                              fontSize: PoppinsFontSizeVariant.size14,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              color: Colors.white70,
-                            ),
-                            const SizedBox(height: 8.0),
-
-                            DropdownButtonFormField<String>(
-                              value: _subtitlesLanguage,
-                              dropdownColor: const Color(0xFF1E2135),
-                              style: TextStyle(color: customColors.textColor, fontSize: 16.0),
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: const Color(0xFF1E2135),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: BorderSide.none,
-                                ),
-                              ),
-                              icon: Icon(Icons.keyboard_arrow_down, color: customColors.textColor),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  _subtitlesLanguage = newValue!;
-                                });
-                              },
-                              items: _subtitleOptions.map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: PoppinsText(
-                                    value,
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.regular,
-                                    color: customColors.textColor,
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        ),
+                    // 3. Streaming Quality Dropdown (Column structure for title/subtitle/dropdown is maintained)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                        vertical: 8.0,
                       ),
-                      
-                      // --- Delete Account Button ---
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(horizontalPadding, 50.0, horizontalPadding, 20.0),
-                        child: InkWell(
-                          onTap: () {
-                            // Handle account deletion logic
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+                        // This is the required Column wrapper
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  const Icon(Icons.delete_forever, color: Colors.red, size: 24),
-                                  const SizedBox(width: 10.0),
-                                  PoppinsText(
-                                    _settingsStrings.deleteAccountButton,
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.semiBold,
-                                    color: Colors.red,
-                                  ),
-                                ],
+                              Icon(Icons.hd, color: textColor, size: 24),
+                              const SizedBox(width: 8.0),
+                              PoppinsText(
+                                _settingsStrings.streamingQualityTitle,
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                color: textColor,
                               ),
-                              const Icon(Icons.arrow_forward_ios, color: Colors.red, size: 18),
                             ],
                           ),
+                          const SizedBox(height: 4.0),
+                          PoppinsText(
+                            _settingsStrings.streamingQualitySubtitle,
+                            fontSize: PoppinsFontSizeVariant.size14,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: Colors.white70,
+                          ),
+                          const SizedBox(height: 8.0),
+
+                          DropdownButtonFormField<String>(
+                            value: _streamingQuality,
+                            // 🔥 Use dropdownBackgroundColor (customColors.lightGray)
+                            dropdownColor: dropdownBackgroundColor,
+                            style: TextStyle(color: textColor, fontSize: 16.0),
+                            decoration: InputDecoration(
+                              filled: true,
+                              // 🔥 Use dropdownBackgroundColor (customColors.lightGray)
+                              fillColor: dropdownBackgroundColor,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 15.0,
+                                vertical: 10.0,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            icon: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: textColor,
+                            ),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _streamingQuality = newValue!;
+                              });
+                            },
+                            items: _qualityOptions
+                                .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: PoppinsText(
+                                      value,
+                                      fontSize: PoppinsFontSizeVariant.size16,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.regular,
+                                      color: textColor,
+                                    ),
+                                  );
+                                })
+                                .toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // --- Accessibility ---
+                    _buildSectionHeader(
+                      _settingsStrings.accessibilityTitle,
+                      textColor,
+                    ),
+
+                    // 4. Subtitles & Captions Dropdown (Column structure for title/subtitle/dropdown is maintained)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                        vertical: 8.0,
+                      ),
+                      child: Column(
+                        // This is the required Column wrapper
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.closed_caption,
+                                color: textColor,
+                                size: 24,
+                              ),
+                              const SizedBox(width: 8.0),
+                              PoppinsText(
+                                _settingsStrings.subtitlesTitle,
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                color: textColor,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 4.0),
+                          PoppinsText(
+                            _settingsStrings.subtitlesSubtitle,
+                            fontSize: PoppinsFontSizeVariant.size14,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: Colors.white70,
+                          ),
+                          const SizedBox(height: 8.0),
+
+                          DropdownButtonFormField<String>(
+                            value: _subtitlesLanguage,
+                            // 🔥 Use dropdownBackgroundColor (customColors.lightGray)
+                            dropdownColor: dropdownBackgroundColor,
+                            style: TextStyle(color: textColor, fontSize: 16.0),
+                            decoration: InputDecoration(
+                              filled: true,
+                              // 🔥 Use dropdownBackgroundColor (customColors.lightGray)
+                              fillColor: dropdownBackgroundColor,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 15.0,
+                                vertical: 10.0,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            icon: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: textColor,
+                            ),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _subtitlesLanguage = newValue!;
+                              });
+                            },
+                            items: _subtitleOptions
+                                .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: PoppinsText(
+                                      value,
+                                      fontSize: PoppinsFontSizeVariant.size16,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.regular,
+                                      color: textColor,
+                                    ),
+                                  );
+                                })
+                                .toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // --- Divider ---
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40.0),
+                      child: Divider(
+                        color: Colors.white12,
+                        thickness: 1,
+                        height: 1,
+                      ),
+                    ),
+
+                    // --- Delete Account Button ---
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        horizontalPadding,
+                        20.0,
+                        horizontalPadding,
+                        20.0,
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          // Handle account deletion logic
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.delete_forever,
+                                  color: Colors.red,
+                                  size: 24,
+                                ),
+                                const SizedBox(width: 10.0),
+                                PoppinsText(
+                                  _settingsStrings.deleteAccountButton,
+                                  fontSize: PoppinsFontSizeVariant.size16,
+                                  fontWeight: PoppinsFontWeightVariant.semiBold,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.red,
+                              size: 18,
+                            ),
+                          ],
                         ),
                       ),
-                      
-                      const SizedBox(height: 40.0),
-                    ],
-                  ),
+                    ),
+
+                    const SizedBox(height: 40.0),
+                  ],
                 ),
               ),
             ),
