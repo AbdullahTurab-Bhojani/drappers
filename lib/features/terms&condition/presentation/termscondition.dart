@@ -15,7 +15,7 @@ class Termscondition extends StatefulWidget {
 class _TermsconditionState extends State<Termscondition> {
   @override
   Widget build(BuildContext context) {
-     final theme = Theme.of(context);
+    final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     final double paddingValue = 20.0;
     return Scaffold(
@@ -40,152 +40,179 @@ class _TermsconditionState extends State<Termscondition> {
             ),
 
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: customColors.regular,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
-                  ),
-                ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(
-                    paddingValue,
-                    24,
-                    paddingValue,
-                    24,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PoppinsText(
-                        "Welcome to Draper TV, an online platform owned by Draper Productions.",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.medium,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: customColors.regular,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0),
                       ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10,),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          PoppinsText(
+                            "Welcome to Draper TV, an online platform owned by Draper Productions.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                          ),
 
-                      SizedBox(height: 16),
+                          SizedBox(height: 16),
 
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: PoppinsText(
-                          "1. Acceptance of Terms",
-                          color: customColors.textColor,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                        ),
-                      ),
-                      PoppinsText(
-                        "By accessing or using Draper TV, you acknowledge that you \nhave read, understood, and agree to be bound by these Terms \nof Use. If you do not agree to these terms, please do not use the \nwebsite.",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                      ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "1. Acceptance of Terms",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "By accessing or using Draper TV, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the website.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
 
-                      Padding(
-                        padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                        child: PoppinsText(
-                          "2. Purpose of Collection",
-                          color: customColors.textColor,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                        ),
-                      ),
-                      PoppinsText(
-                        "We collect this information for the purpose of sending newsletters to our subscribers.",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                      ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "2. Registration",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "Accessing certain features on Draper TV may require free registration. You are responsible for providing accurate and updated information during the registration process. You must be at least 13 years of age or older to register.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
 
-                      // --- 3. Cookies and Tracking Technologies ---
-                      Padding(
-                        padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                        child: PoppinsText(
-                          "3. Cookies and Tracking Technologies",
-                          color: customColors.textColor,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                        ),
-                      ),
-                      PoppinsText(
-                        "We use Google Analytics to track website traffic and gather information about how visitors use our site. This information is used for internal purposes only and helps us improve our website.",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                      ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "3. User Eligibility",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "Draper TV is intended for all ages and is open to users from all demographic backgrounds. By using the website, you affirm that you meet the minimum age requirement and are eligible to use the platform.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
 
-                      // --- 4. Sharing of Personal Information ---
-                      Padding(
-                        padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                        child: PoppinsText(
-                          "4. Sharing of Personal Information",
-                          color: customColors.textColor,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                        ),
-                      ),
-                      PoppinsText(
-                        "We do not share the personal information we collect with any third parties.",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                      ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "4. Content and Advertising",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "Draper TV provides content focused on entrepreneurship and investment. The website may contain advertising and promotional content. By using the website, you acknowledge that you may encounter advertising materials.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
 
-                      // --- 5. Data Security ---
-                      Padding(
-                        padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                        child: PoppinsText(
-                          "5. Data Security",
-                          color: customColors.textColor,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                        ),
-                      ),
-                      PoppinsText(
-                        "We take appropriate measures to protect the personal information we collect. This includes using secure servers and encryption methods.",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                      ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "5. Intellectual Property",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "All content and materials on Draper TV, including but not limited to text, images, videos, and trademarks, are the property of Draper Productions or its licensors. Users may not use, modify, or distribute any of the content without prior written consent.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
 
-                      // --- 6. Data Retention ---
-                      Padding(
-                        padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                        child: PoppinsText(
-                          "6. Data Retention",
-                          color: customColors.textColor,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                        ),
-                      ),
-                      PoppinsText(
-                        "We retain the personal information you provide for an indefinite period, unless you request its deletion.",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                      ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "6. Limitation of Liability",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "Draper Productions does not assume any responsibility for the accuracy, completeness, or usefulness of the information provided on Draper TV. The use of the website is at your own risk, and Draper Productions will not be liable for any damages incurred.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
 
-                      // --- 7. Opt-Out Option ---
-                      Padding(
-                        padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
-                        child: PoppinsText(
-                          "7. Opt-Out Option",
-                          color: customColors.textColor,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                        ),
-                      ),
-                      PoppinsText(
-                        "If you no longer wish to receive our newsletters, you can opt-out by following the unsubscribe instructions provided in the email or by contacting us directly.",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                      ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "7. Modifications to Terms",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "Draper Productions reserves the right to modify or update these Terms of Use at any time without prior notice. Continued use of the website following any changes constitutes acceptance of the modified terms.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
 
-                      SizedBox(height: 50.0),
-                    ],
+                          Padding(
+                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "8. Governing Law",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "These Terms of Use are governed by and construed in accordance with the laws of the jurisdiction of Draper Productions without regard to its conflict of law provisions.",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
+
+                          Padding(
+                            padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                            child: PoppinsText(
+                              "9. Contact Information",
+                              color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                            ),
+                          ),
+                          PoppinsText(
+                            "For any inquiries or concerns regarding these Terms of Use, please contact us at hello@drapertv.com",
+                            color: customColors.textColor,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                          ),
+
+                          SizedBox(height: 30.0),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -194,8 +221,5 @@ class _TermsconditionState extends State<Termscondition> {
         ),
       ),
     );
- 
- 
- 
   }
 }
