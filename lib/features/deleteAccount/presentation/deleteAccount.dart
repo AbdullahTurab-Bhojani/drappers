@@ -14,7 +14,7 @@ class deleteAccountScreen extends StatefulWidget {
 enum AccountOption { deactivate, delete }
 
 class _deleteAccountScreenState extends State<deleteAccountScreen> {
-  AccountOption? _selectedOption = AccountOption.deactivate; // Default selected
+  AccountOption? _selectedOption = null;
 
   @override
   Widget build(BuildContext context) {
@@ -79,13 +79,18 @@ class _deleteAccountScreenState extends State<deleteAccountScreen> {
                           Radio<AccountOption>(
                             value: AccountOption.deactivate,
                             groupValue: _selectedOption,
-                            onChanged: (AccountOption? value) {
+                            onChanged: (value) {
                               setState(() {
-                                _selectedOption = value;
+                                if (_selectedOption == value) {
+                                  _selectedOption = null; // Unselect
+                                } else {
+                                  _selectedOption = value; // Select
+                                }
                               });
                             },
                             activeColor: customColors.textColor,
                           ),
+
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,13 +132,18 @@ class _deleteAccountScreenState extends State<deleteAccountScreen> {
                               Radio<AccountOption>(
                                 value: AccountOption.delete,
                                 groupValue: _selectedOption,
-                                onChanged: (AccountOption? value) {
+                                onChanged: (value) {
                                   setState(() {
-                                    _selectedOption = value;
+                                    if (_selectedOption == value) {
+                                      _selectedOption = null;
+                                    } else {
+                                      _selectedOption = value;
+                                    }
                                   });
                                 },
                                 activeColor: customColors.textColor,
                               ),
+
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,16 +195,17 @@ class _deleteAccountScreenState extends State<deleteAccountScreen> {
                                         ],
                                       ),
                                     ),
-                                    AppButton(
-                                      onPressed: () {},
-                                      title: "Delete Account Permanently",
-                                    ),
-                                    AppButton(
-                                      onPressed: () {},
-                                      title: "Deactivate Account",
-                                    ),
                                   ],
                                 ),
+
+                                // AppButton(
+                                //   onPressed: () {},
+                                //   title: "Delete Account Permanently",
+                                // ),
+                                // AppButton(
+                                //   onPressed: () {},
+                                //   title: "Deactivate Account",
+                                // ),
                               ),
                             ],
                           ),
@@ -205,6 +216,14 @@ class _deleteAccountScreenState extends State<deleteAccountScreen> {
                       ),
                     ),
                     const SizedBox(height: 40.0),
+                    if (_selectedOption == AccountOption.delete)
+                      AppButton(
+                        onPressed: () {},
+                        title: "Delete Account Permanently",
+                      ),
+
+                    if (_selectedOption == AccountOption.deactivate)
+                      AppButton(onPressed: () {}, title: "Deactivate Account"),
                   ],
                 ),
               ),
