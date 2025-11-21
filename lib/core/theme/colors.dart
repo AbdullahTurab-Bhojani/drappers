@@ -19,6 +19,7 @@ abstract final class AppColors {
   static const dLabel = Color(0xff999999); // optional label tone
   static const tfield = Color(0xff101317);
   static const containerlight = Color(0xff10151c);
+  static const graylight = Color(0xff101010);
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);
@@ -73,7 +74,6 @@ abstract final class AppColors {
   static const color6B7280 = Color(0xff6B7280);
   static const color1FCFFF = Color(0xff1FCFFF);
   static const color101317 = Color(0xff101317);
-  static const color101010 = Color(0xff101010);
 
   static get color3D3C45 => null;
 }

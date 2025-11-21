@@ -89,10 +89,15 @@ final routerConfigProvider = Provider((ref) {
             name: AppRoutes.editprofile.name,
             builder: (context, state) => EditprofileScreen(),
           ),
-           GoRoute(
+          GoRoute(
             path: AppRoutes.termscondition.path,
             name: AppRoutes.termscondition.name,
             builder: (context, state) => Termscondition(),
+          ),
+          GoRoute(
+            path: AppRoutes.SettingpreferencesScreen.path,
+            name: AppRoutes.SettingpreferencesScreen.name,
+            builder: (context, state) => SettingpreferencesScreen(),
           ),
         ],
       ),

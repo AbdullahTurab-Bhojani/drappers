@@ -15,6 +15,7 @@ enum AppRoutes {
   privacypolicyScreen('PrivacypolicyScreen', '/PrivacypolicyScreen'),
   faqsScreen('FaqsScreen', '/FaqsScreen'),
   editprofile('editprofile', '/editprofile'),
+  SettingpreferencesScreen('SettingpreferencesScreen', '/SettingpreferencesScreen'),
   termscondition ('termscondition', '/termscondition');
 
 
