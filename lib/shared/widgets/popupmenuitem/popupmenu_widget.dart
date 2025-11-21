@@ -6,9 +6,9 @@ import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
 class PopupmenuWidget extends StatefulWidget {
-  final bool showSaveIcon; 
+  final bool showSaveIcon;
 
-  const PopupmenuWidget({super.key, this.showSaveIcon = true}); 
+  const PopupmenuWidget({super.key, this.showSaveIcon = true});
 
   @override
   State<PopupmenuWidget> createState() => _PopupmenuWidgetState();
@@ -24,8 +24,9 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        if (widget.showSaveIcon)
-          Image.asset(Assets.images.savereelicon.path),
+        widget.showSaveIcon == true
+            ? Image.asset(Assets.images.savereelicon.path)
+            : SizedBox(),
 
         PopupMenuButton<String>(
           color: AppColors.dRegular,
