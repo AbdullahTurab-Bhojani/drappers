@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 
 class PrivacypolicyScreen extends StatefulWidget {
-  PrivacypolicyScreen({super.key});
+  const PrivacypolicyScreen({super.key});
 
   @override
   State<PrivacypolicyScreen> createState() => _PrivacypolicyScreenState();
@@ -61,7 +60,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Last updated date
                       PoppinsText(
                         "Last updated: 10/30/2023",
                         color: customColors.textColor,
@@ -200,5 +198,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
         ),
       ),
     );
+ 
+ 
   }
 }

@@ -3,13 +3,10 @@ import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
-import '../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../shared/widgets/textfield_new.dart';
-import '../../../shared/widgets/tile_widget.dart';
-import '../../privacypolicy/presentation/views/privacypolicy.dart';
 
-class editProfileScreen extends StatelessWidget {
-  editProfileScreen({super.key});
+class EditprofileScreen extends StatelessWidget {
+  EditprofileScreen({super.key});
 
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -44,6 +41,7 @@ class editProfileScreen extends StatelessWidget {
               Column(
                 children: [
                   Stack(
+                    clipBehavior: Clip.none,
                     children: [
                       CircleAvatar(
                         radius: 60,
@@ -138,11 +136,18 @@ class editProfileScreen extends StatelessWidget {
                           // },
                         ),
                         SizedBox(height: 15),
-                        AppButton(onPressed: () {}, title: "Save  Changes"),
+                        AppButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          title: "Save Changes",
+                        ),
                         SizedBox(height: 10),
                         AppButtonwithoudbg(
-                          onPressed: () {},
-                          title: "Discard  Changes",
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          title: "Discard Changes",
                         ),
                       ],
                     ),

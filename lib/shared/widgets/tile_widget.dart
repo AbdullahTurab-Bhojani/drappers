@@ -6,12 +6,14 @@ import '../../gen/assets.gen.dart';
 class TileWidget extends StatefulWidget {
   final String title;
   final String iconImage;
-  final VoidCallback? onTap; // ADDED TAP CALLBACK
-  TileWidget({
+  final Color textColor;
+  final bool ontaped;
+  const TileWidget({
     super.key,
     required this.title,
     required this.iconImage,
-    this.onTap,
+    required this.textColor,
+    required this.ontaped,
   });
 
   @override
@@ -34,11 +36,13 @@ class _TileWidgetState extends State<TileWidget> {
                 widget.title,
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
-                color: Colors.white,
+                color: widget.textColor,
               ),
             ],
           ),
-          Icon(Icons.arrow_forward_ios, size: 16),
+          widget.ontaped == true
+              ? Icon(Icons.arrow_forward_ios, size: 16)
+              : SizedBox(),
         ],
       ),
     );
