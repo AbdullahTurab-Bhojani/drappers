@@ -12,9 +12,11 @@ enum AppRoutes {
   signupScreen('signup', '/signup'),
   updatepasswordScreen('updatepassword', '/updatepassword'),
   profile('profile', '/profile'),
-  PrivacypolicyScreen('PrivacypolicyScreen', '/PrivacypolicyScreen'),
-  FaqsScreen('FaqsScreen', '/FaqsScreen'),
-  editprofile('editprofile', '/editprofile');
+  privacypolicyScreen('PrivacypolicyScreen', '/PrivacypolicyScreen'),
+  faqsScreen('FaqsScreen', '/FaqsScreen'),
+  editprofile('editprofile', '/editprofile'),
+  termscondition ('termscondition', '/termscondition');
+
 
 
   final String name;

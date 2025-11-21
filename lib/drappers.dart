@@ -67,6 +67,7 @@ import 'features/privacypolicy/presentation/views/privacypolicy.dart';
 import 'features/profile/presentation/profile_screen.dart';
 import 'features/signup/presentation/views/signup.dart' hide PrivacypolicyScreen;
 import 'features/splash/presentation/views/splash.dart';
+import 'features/terms&condition/presentation/termscondition.dart';
 import 'features/watchlist/presentation/watchlist_screen.dart';
 import 'gen/assets.gen.dart';
 import 'package:chewie/src/center_seek_button.dart';

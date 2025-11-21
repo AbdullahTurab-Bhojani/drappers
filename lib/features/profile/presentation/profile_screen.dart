@@ -24,33 +24,51 @@ class ProfileScreen extends StatelessWidget {
       {
         'title': 'Saved Items',
         'image': Assets.images.menuicon1.path,
-        'route': null,
+        'route': AppRoutes.privacypolicyScreen.path,
+        'color': Colors.white,
+        'isTap': true,
       },
       {
         'title': 'Settings & Preferences',
         'image': Assets.images.menuicon2.path,
-        'route': null,
+        'route': AppRoutes.privacypolicyScreen.path,
+        'color': Colors.white,
+        'isTap': true,
       },
       {
         'title': 'Terms & Conditions',
         'image': Assets.images.menuicon3.path,
-        'route': null,
+        'route': AppRoutes.termscondition.path,
+        'color': Colors.white,
+        'isTap': true,
       },
       {
         'title': 'Privacy Policy',
         'image': Assets.images.menuicon4.path,
-        'route': PrivacypolicyScreen(),
-      }, // Target screen added here
-      {'title': 'FAQ’s', 'image': Assets.images.menuicon5.path, 'route': null},
+        'route': AppRoutes.privacypolicyScreen.path,
+        'color': Colors.white,
+        'isTap': true,
+      }, 
+      {
+        'title': 'FAQ’s',
+        'image': Assets.images.menuicon5.path,
+        'route': AppRoutes.faqsScreen.path,
+        'color': Colors.white,
+        'isTap': true,
+      },
       {
         'title': 'Help & Support',
         'image': Assets.images.menuicon6.path,
-        'route': null,
+        'route': AppRoutes.privacypolicyScreen.path,
+        'color': Colors.white,
+        'isTap': true,
       },
       {
         'title': 'Sign Out',
         'image': Assets.images.signouticon.path,
-        'route': null,
+        'route': AppRoutes.privacypolicyScreen.path,
+        'color': Colors.red,
+        'isTap': false,
       },
     ];
 
@@ -74,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () {
-                      context.goNamed(AppRoutes.editprofile.name);
+                      context.push(AppRoutes.editprofile.path);
                     },
                     child: PoppinsText(
                       "Edit",
@@ -184,27 +202,16 @@ class ProfileScreen extends StatelessWidget {
                           shrinkWrap: true,
 
                           itemBuilder: (context, index) {
-                            final item = menuList[index];
-                            VoidCallback? onTileTap;
-                            if (item['route'] != null) {
-                              onTileTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => item['route'],
-                                  ),
-                                );
-                              };
-                            } else if (item['title'] == 'Sign Out') {
-                              onTileTap = () {
-                                // Add your Sign Out function here
-                                print('Handling Sign Out');
-                              };
-                            }
-                            return TileWidget(
-                              iconImage: menuList[index]['image'],
-                              title: menuList[index]['title'],
-                              onTap: onTileTap,
+                            return GestureDetector(
+                              onTap: () {
+                                context.push(menuList[index]['route']);
+                              },
+                              child: TileWidget(
+                                iconImage: menuList[index]['image'],
+                                title: menuList[index]['title'],
+                                textColor: menuList[index]['color'],
+                                ontaped: menuList[index]['isTap'],
+                              ),
                             );
                           },
                           separatorBuilder: (context, index) {

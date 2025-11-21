@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import '../../../../core/extensions/theme_extension.dart';
-import '../../../../drappers.dart';
-import '../../../../gen/assets.gen.dart';
-import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 
-class PrivacypolicyScreen extends StatefulWidget {
-  const PrivacypolicyScreen({super.key});
+import '../../../core/extensions/theme_extension.dart';
+import '../../../drappers.dart';
+import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/app_bar/main_app_bar.dart';
+
+class Termscondition extends StatefulWidget {
+  const Termscondition({super.key});
 
   @override
-  State<PrivacypolicyScreen> createState() => _PrivacypolicyScreenState();
+  State<Termscondition> createState() => _TermsconditionState();
 }
 
-class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
+class _TermsconditionState extends State<Termscondition> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    final Color contentBackgroundColor =
-        customColors.regular ?? Color(0xFF2C2F4D);
     final double paddingValue = 20.0;
-
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -35,7 +33,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
           children: [
             AppMainBar(
               leadingIcon: Icons.arrow_back_ios,
-              title: "Privacy Policy",
+              title: "Terms & Conditions",
               centerTitle: false,
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -61,7 +59,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PoppinsText(
-                        "Last updated: 10/30/2023",
+                        "Welcome to Draper TV, an online platform owned by Draper Productions.",
                         color: customColors.textColor,
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
@@ -69,24 +67,22 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
 
                       SizedBox(height: 16),
 
-                      // --- 1. Information We Collect ---
                       Padding(
                         padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: PoppinsText(
-                          "1. Information We Collect",
+                          "1. Acceptance of Terms",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
                         ),
                       ),
                       PoppinsText(
-                        "We collect email addresses and names from contact forms and newsletter sign-ups.",
+                        "By accessing or using Draper TV, you acknowledge that you \nhave read, understood, and agree to be bound by these Terms \nof Use. If you do not agree to these terms, please do not use the \nwebsite.",
                         color: customColors.textColor,
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
                       ),
 
-                      // --- 2. Purpose of Collection ---
                       Padding(
                         padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
                         child: PoppinsText(
@@ -198,6 +194,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
         ),
       ),
     );
+ 
  
  
   }
