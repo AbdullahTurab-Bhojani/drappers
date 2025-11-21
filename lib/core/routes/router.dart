@@ -77,6 +77,21 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.helpsupport.name,
         builder: (context, state) => Helpsupport(),
       ),
+       GoRoute(
+        path: AppRoutes.trendingshow.path,
+        name: AppRoutes.trendingshow.name,
+        builder: (context, state) => TrendingshowWidget(),
+      ),
+       GoRoute(
+        path: AppRoutes.podcasts.path,
+        name: AppRoutes.podcasts.name,
+        builder: (context, state) => PodcastWidget(),
+      ),
+     GoRoute(
+        path: AppRoutes.reelWidget.path,
+        name: AppRoutes.reelWidget.name,
+        builder: (context, state) => ReelWidget(),
+      ),
       ShellRoute(
         navigatorKey: shellKey,
         builder: (context, state, child) {

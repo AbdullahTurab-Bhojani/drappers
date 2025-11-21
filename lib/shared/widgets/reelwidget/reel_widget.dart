@@ -4,18 +4,17 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../shared/widgets/reelcard/reelcard_widget.dart';
+import '../app_bar/main_app_bar.dart';
+import '../reelcard/reelcard_widget.dart';
 
-class Savedreel extends StatefulWidget {
-  
-  const Savedreel({super.key});
+class ReelWidget extends StatefulWidget {
+  const ReelWidget({super.key});
 
   @override
-  State<Savedreel> createState() => _SavedreelState();
+  State<ReelWidget> createState() => _ReelWidgetState();
 }
 
-class _SavedreelState extends State<Savedreel> {
+class _ReelWidgetState extends State<ReelWidget> {
   @override
   Widget build(BuildContext context) {
   List<String> reelimages = [
@@ -50,7 +49,7 @@ List<String> reelTitles = [
             AppMainBar(
               leading: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pop();
+                  context.push(AppRoutes.home.path);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -61,7 +60,7 @@ List<String> reelTitles = [
                   ),
                 ),
               ),
-              title: "Saved Reels",
+              title: "Reels",
               centerTitle: false,
               backgroundColor: Colors.transparent,
               elevation: 0,

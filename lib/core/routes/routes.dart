@@ -17,7 +17,15 @@ enum AppRoutes {
   editprofile('editprofile', '/editprofile'),
   termscondition ('termscondition', '/termscondition'),
   savedreel ('savedreel', '/savedreel'),
-  helpsupport ('helpsupport', '/helpsupport');
+  helpsupport ('helpsupport', '/helpsupport'),
+  trendingshow ('trendingshow', '/trendingshow'),
+  podcasts ('podcasts', '/podcasts'),
+  reelWidget ('reelWidget', '/reelWidget');
+
+
+
+
+
 
 
 
