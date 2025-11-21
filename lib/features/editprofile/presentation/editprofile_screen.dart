@@ -44,6 +44,7 @@ class editProfileScreen extends StatelessWidget {
               Column(
                 children: [
                   Stack(
+                    clipBehavior: Clip.none,
                     children: [
                       CircleAvatar(
                         radius: 60,
