@@ -1,9 +1,56 @@
 import 'package:flutter/material.dart';
-
 import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
 import 'settingitem.dart';
 
+// --- Custom Gradient Switch Widget ---
+class GradientSwitch extends StatelessWidget {
+  final bool value;
+  final ValueChanged<bool> onChanged;
+  final List<Color> gradientColors;
+
+  const GradientSwitch({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    required this.gradientColors,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onChanged(!value),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        width: 55,
+        height: 30,
+        padding: const EdgeInsets.all(3),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: value ? LinearGradient(colors: gradientColors) : null,
+          color: value ? null : Colors.grey.shade400,
+        ),
+        child: AnimatedAlign(
+          duration: const Duration(milliseconds: 250),
+          alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+          child: Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 4),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// --- TOGGLE SETTING TILE ---
 class ToggleSettingTile extends StatefulWidget {
   const ToggleSettingTile({
     super.key,
@@ -27,16 +74,16 @@ class ToggleSettingTile extends StatefulWidget {
 class _ToggleSettingTileState extends State<ToggleSettingTile> {
   late bool _currentValue;
 
-  // Define the default gradient colors needed for the Switch track
   final List<Color> _defaultGradientColors = [
-    const Color(0xFF1FCFFF), // gradientStartColor
-    const Color(0xFF0063FF), // gradientEndColor
+    const Color(0xFF1FCFFF),
+    const Color(0xFF0063FF),
   ];
 
   @override
   void initState() {
     super.initState();
-    _currentValue = widget.initialValue;
+    _currentValue =
+        widget.initialValue; // <-- yeh current value set kar raha hai
   }
 
   @override
@@ -44,18 +91,10 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    // Use AppCustomColors buttonColors if available, otherwise use default
-    final List<Color> switchGradientColors =
-        customColors.buttonColors ?? _defaultGradientColors;
-
     return SettingItem(
       title: Row(
         children: [
-          Icon(
-            widget.icon,
-            color: customColors.textColor,
-            size: 24,
-          ),
+          Icon(widget.icon, color: customColors.textColor, size: 24),
           const SizedBox(width: 15.0),
           PoppinsText(
             widget.titleText,
@@ -74,16 +113,14 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
           color: customColors.textColor,
         ),
       ),
-      trailing: Switch(
+
+      trailing: GradientSwitch(
         value: _currentValue,
-        onChanged: (bool value) {
-          setState(() {
-            _currentValue = value;
-          });
-          widget.onChanged(value); 
+        onChanged: (val) {
+          setState(() => _currentValue = val); // <-- Value update
+          widget.onChanged(val); // <-- Callback
         },
-        activeColor: customColors.textColor,
-        activeTrackColor: switchGradientColors.first, 
+        gradientColors: _defaultGradientColors,
       ),
     );
   }
