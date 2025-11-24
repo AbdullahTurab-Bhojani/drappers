@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _controller =
         VideoPlayerController.network(
-            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            'https://www.pexels.com/download/video/4761738/',
           )
           ..initialize().then((_) {
             setState(() {});
@@ -458,7 +458,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                     
+
                         SizedBox(height: 50),
                       ],
                     ),
