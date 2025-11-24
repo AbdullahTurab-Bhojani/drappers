@@ -148,7 +148,11 @@ class EditprofileScreen extends StatelessWidget {
                           title: "Save Changes",
                         ),
                         SizedBox(height: 10),
-                        AppButtonwithoudbg(
+                        AppButton(
+                          color: Colors.transparent,
+                          borderColor: customColors.textColor,
+                          borderWidth: 1,
+                          border: true,
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

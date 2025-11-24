@@ -410,6 +410,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context.goNamed(AppRoutes.trendingshow.name);
                               },
                               title: "View More",
+                              borderColor: customColors.textColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                             ),
                           ],
                         ),
@@ -444,10 +448,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             AppButton(
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.textColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
                                 context.goNamed(AppRoutes.podcasts.name);
                               },
+
                               title: "View More",
                             ),
                           ],
@@ -480,9 +489,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           buttonBorderWidth: 0,
                           buttonGradient: [],
                           onTap: () {
-                            context.pushNamed(
-                              AppRoutes.applyPitch.name,
-                            );
+                            context.pushNamed(AppRoutes.applyPitch.name);
                           },
                         ),
                         SizedBox(height: 30),
@@ -519,6 +526,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             AppButton(
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.textColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
                                 context.goNamed(AppRoutes.reelWidget.name);
@@ -558,6 +569,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             AppButton(
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.textColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
                                 context.pushNamed(AppRoutes.documentries.name);

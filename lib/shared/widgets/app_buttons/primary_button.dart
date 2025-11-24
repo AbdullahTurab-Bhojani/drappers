@@ -14,6 +14,8 @@ class AppButton extends StatelessWidget {
     this.borderColor = Colors.transparent,
     this.borderWidth = 2,
     List<Color>? buttonGradient,
+    this.fontSize = PoppinsFontSizeVariant.size16,
+    this.fontWeight = PoppinsFontWeightVariant.medium,
   }) : buttonGradient = (buttonGradient != null && buttonGradient.length >= 2)
            ? buttonGradient
            : const [Color(0xFF00C6FF), Color(0xFF0072FF)];
@@ -29,10 +31,9 @@ class AppButton extends StatelessWidget {
   final Color? borderColor;
   final double? borderWidth;
   final List<Color>? buttonGradient;
+  final PoppinsFontSizeVariant fontSize;
+  final PoppinsFontWeightVariant fontWeight;
 
-  // Color get textColor => border ? AppColors.primary : AppColors.white;
-  // Color get backgroundColor =>
-  //     color ?? (border ? Colors.white : AppColors.primary);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -43,8 +44,6 @@ class AppButton extends StatelessWidget {
         minimumSize: buttonSize ?? Size(MediaQuery.of(context).size.width, 52),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         alignment: Alignment.center,
-
-        // Removes extra height
         overlayColor: WidgetStateColor.resolveWith((states) => AppColors.white),
         backgroundBuilder: (context, states, child) {
           return DecoratedBox(
@@ -55,13 +54,6 @@ class AppButton extends StatelessWidget {
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.blue.withOpacity(0.4),
-              //     blurRadius: 5,
-              //     offset: const Offset(0, 5),
-              //   ),
-              // ],
               border: border
                   ? Border.all(color: borderColor!, width: borderWidth!)
                   : null,
@@ -71,7 +63,6 @@ class AppButton extends StatelessWidget {
           );
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        // backgroundColor: backgroundColor,
       ),
       onPressed: isLoading ? () {} : onPressed,
       child: isLoading
@@ -80,29 +71,22 @@ class AppButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (prefixIcon != null) ...[
-                  const SizedBox(width: 6),
-                  prefixIcon!,
-                ],
-                SizedBox(width: 6),
+                if (prefixIcon != null) ...[prefixIcon!, SizedBox(width: 6)],
                 PoppinsText(
-                  fontSize: PoppinsFontSizeVariant.size16,
+                  fontSize: fontSize,
                   title,
-                  fontWeight: PoppinsFontWeightVariant.medium,
+                  fontWeight: fontWeight,
                   color: customColors.textColor,
                 ),
-                if (suffixIcon != null) ...[
-                  const SizedBox(width: 6),
-                  suffixIcon!,
-                ],
+                if (suffixIcon != null) ...[SizedBox(width: 6),suffixIcon!, ],
               ],
             ),
     );
   }
 }
 
-class AppButtonwithoudbg extends StatelessWidget {
-  const AppButtonwithoudbg({
+class AppButtonwithoutbg extends StatelessWidget {
+  const AppButtonwithoutbg({
     super.key,
     required this.onPressed,
     required this.title,
@@ -111,6 +95,8 @@ class AppButtonwithoudbg extends StatelessWidget {
     this.buttonSize,
     this.isLoading = false,
     this.color,
+    this.fontSize = PoppinsFontSizeVariant.size16,
+    this.fontWeight = PoppinsFontWeightVariant.medium,
   });
 
   final VoidCallback onPressed;
@@ -120,33 +106,24 @@ class AppButtonwithoudbg extends StatelessWidget {
   final bool isLoading;
   final bool border;
   final Color? color;
+  final PoppinsFontSizeVariant fontSize;
+  final PoppinsFontWeightVariant fontWeight;
 
-  // Color get textColor => border ? AppColors.primary : AppColors.white;
-  // Color get backgroundColor =>
-  //     color ?? (border ? Colors.white : AppColors.primary);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+
     return TextButton(
       style: TextButton.styleFrom(
         minimumSize: buttonSize ?? Size(MediaQuery.of(context).size.width, 52),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         alignment: Alignment.center,
-
-        // Removes extra height
         overlayColor: WidgetStateColor.resolveWith((states) => AppColors.white),
         backgroundBuilder: (context, states, child) {
           return DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.transparent,
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.blue.withOpacity(0.4),
-              //     blurRadius: 5,
-              //     offset: const Offset(0, 5),
-              //   ),
-              // ],
               border: Border.all(color: customColors.textColor, width: 0.3),
               borderRadius: BorderRadius.circular(50),
             ),
@@ -154,7 +131,6 @@ class AppButtonwithoudbg extends StatelessWidget {
           );
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        // backgroundColor: backgroundColor,
       ),
       onPressed: isLoading ? () {} : onPressed,
       child: isLoading
@@ -164,9 +140,9 @@ class AppButtonwithoudbg extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PoppinsText(
-                  fontSize: PoppinsFontSizeVariant.size16,
+                  fontSize: fontSize,
                   title,
-                  fontWeight: PoppinsFontWeightVariant.medium,
+                  fontWeight: fontWeight,
                   color: customColors.textColor,
                 ),
                 if (icon != null) ...[const SizedBox(width: 6), icon!],
