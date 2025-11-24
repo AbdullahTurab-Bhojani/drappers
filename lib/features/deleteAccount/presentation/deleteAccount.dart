@@ -1,20 +1,22 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 
-class deleteAccountScreen extends StatefulWidget {
-  const deleteAccountScreen({super.key});
+class DeleteAccount extends StatefulWidget {
+  const DeleteAccount({super.key});
 
   @override
-  State<deleteAccountScreen> createState() => _deleteAccountScreenState();
+  State<DeleteAccount> createState() => _DeleteAccountScreenState();
 }
 
 enum AccountOption { deactivate, delete }
 
-class _deleteAccountScreenState extends State<deleteAccountScreen> {
-  AccountOption? _selectedOption = null;
+class _DeleteAccountScreenState extends State<DeleteAccount> {
+  AccountOption? _selectedOption;
 
   @override
   Widget build(BuildContext context) {
@@ -218,12 +220,19 @@ class _deleteAccountScreenState extends State<deleteAccountScreen> {
                     const SizedBox(height: 40.0),
                     if (_selectedOption == AccountOption.delete)
                       AppButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         title: "Delete Account Permanently",
                       ),
 
                     if (_selectedOption == AccountOption.deactivate)
-                      AppButton(onPressed: () {}, title: "Deactivate Account"),
+                      AppButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        title: "Deactivate Account",
+                      ),
                   ],
                 ),
               ),

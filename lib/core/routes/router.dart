@@ -77,17 +77,17 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.helpsupport.name,
         builder: (context, state) => Helpsupport(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.trendingshow.path,
         name: AppRoutes.trendingshow.name,
         builder: (context, state) => TrendingshowWidget(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.podcasts.path,
         name: AppRoutes.podcasts.name,
         builder: (context, state) => PodcastWidget(),
       ),
-     GoRoute(
+      GoRoute(
         path: AppRoutes.reelWidget.path,
         name: AppRoutes.reelWidget.name,
         builder: (context, state) => ReelWidget(),
@@ -129,7 +129,7 @@ final routerConfigProvider = Provider((ref) {
       GoRoute(
         path: AppRoutes.deleteAccountScreen.path,
         name: AppRoutes.deleteAccountScreen.name,
-        builder: (context, state) => deleteAccountScreen(),
+        builder: (context, state) => DeleteAccount(),
       ),
     ],
   );
