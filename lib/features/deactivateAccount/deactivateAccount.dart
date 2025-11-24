@@ -93,7 +93,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
               SizedBox(height: 20),
               AppButton(
                 color: Colors.transparent,
-                borderColor: customColors.textColor,
+                borderColor: customColors.greyColor,
                 borderWidth: 1,
                 border: true,
                 onPressed: () {

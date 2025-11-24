@@ -20,9 +20,9 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Container(
-      height: 340,
+      height: 350,
       width: double.infinity,
-      padding: EdgeInsets.only(top: 24, bottom: 24, left: 12, right: 12),
+      padding: EdgeInsets.only(top: 24, bottom: 24, left: 32, right: 32),
       decoration: BoxDecoration(
         color: customColors.regular,
         borderRadius: BorderRadius.circular(20),
@@ -38,6 +38,7 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
             fontSize: PoppinsFontSizeVariant.size16,
             fontWeight: PoppinsFontWeightVariant.medium,
             color: customColors.textColor,
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: 40),
           AppButton(
@@ -47,31 +48,10 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
             title: "Sign Out",
           ),
 
-          // Container(
-          //   width: double.infinity,
-          //   height: 45,
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(50),
-          //     gradient:  LinearGradient(
-          //       colors: [
-          //         Color(0xFF23A6F0),
-          //         Color(0xFF3C6FF0),
-          //       ],
-          //     ),
-          //   ),
-          //   child: Center(
-          //     child: PoppinsText(
-          //       "Sign Out",
-          //       fontSize: PoppinsFontSizeVariant.size16,
-          //             fontWeight: PoppinsFontWeightVariant.medium,
-          //             color: customColors.textColor,
-          //           ),
-          //   ),
-          // ),
           SizedBox(height: 14),
           AppButton(
             color: Colors.transparent,
-            borderColor: customColors.textColor,
+            borderColor: customColors.greyColor,
             borderWidth: 1,
             border: true,
             onPressed: () {
@@ -79,23 +59,6 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
             },
             title: "Cancel",
           ),
-          // Container(
-          //   width: double.infinity,
-          //   height: 45,
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(30),
-          //     border: Border.all(color: Colors.white.withOpacity(0.3)),
-          //   ),
-          //   child: Center(
-          //     child: PoppinsText(
-          //       "Cancel",
-          //       fontSize: PoppinsFontSizeVariant.size16,
-          //             fontWeight: PoppinsFontWeightVariant.medium,
-          //             color: customColors.textColor,
-
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
