@@ -62,8 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       NewTextField(
-                                                  fieldbg: AppColors.tfield,
-
+                        fieldbg: AppColors.tfield,
                         controller: _emailController,
                         labelText: "Enter your Email Address or Phone*",
                         hintText: "Enter your email",

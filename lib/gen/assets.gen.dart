@@ -304,6 +304,10 @@ class $AssetsImagesGen {
   AssetGenImage get documentaries6 =>
       const AssetGenImage('assets/images/documentaries6.png');
 
+  /// File path: assets/images/dropdownicon.png
+  AssetGenImage get dropdownicon =>
+      const AssetGenImage('assets/images/dropdownicon.png');
+
   /// File path: assets/images/envelopeicon.png
   AssetGenImage get envelopeicon =>
       const AssetGenImage('assets/images/envelopeicon.png');
@@ -350,6 +354,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/guest_sheet.png
   AssetGenImage get guestSheet =>
       const AssetGenImage('assets/images/guest_sheet.png');
+
+  /// File path: assets/images/infoicon.png
+  AssetGenImage get infoicon =>
+      const AssetGenImage('assets/images/infoicon.png');
 
   /// File path: assets/images/interestedicon.png
   AssetGenImage get interestedicon =>
@@ -570,6 +578,7 @@ class $AssetsImagesGen {
     documentaries4,
     documentaries5,
     documentaries6,
+    dropdownicon,
     envelopeicon,
     footericon1,
     footericon2,
@@ -582,6 +591,7 @@ class $AssetsImagesGen {
     guestLearning,
     guestProfile,
     guestSheet,
+    infoicon,
     interestedicon,
     lessonComplete,
     likeicon,
