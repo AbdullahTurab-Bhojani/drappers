@@ -14,6 +14,7 @@ import '../../../../shared/widgets/documentries_card/documentries_card_widget.da
 import '../../../../shared/widgets/home_banner.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
+import '../../../../shared/widgets/watch_history.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -436,6 +437,44 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(height: 30),
 
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PoppinsText(
+                              'Continue Watching',
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                              color: customColors.textColor,
+                            ),
+                            AppButton(
+                              buttonSize: Size(80, 25),
+                              color: Colors.transparent,
+                              border: true,
+                              onPressed: () {},
+                              title: "View More",
+                              borderColor: customColors.textColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        SizedBox(
+                          height: 180,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(width: 15),
+                            itemCount: trendingimages.length,
+                            itemBuilder: (context, index) {
+                              return WatchHistory(
+                                assetImage: trendingimages[index],
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 30),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
