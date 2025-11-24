@@ -75,7 +75,7 @@ class AppButton extends StatelessWidget {
                   fontWeight: PoppinsFontWeightVariant.medium,
                   color: customColors.textColor,
                 ),
-                if (icon != null) ...[const SizedBox(width: 6), icon!],
+                if (icon != null) ...[const SizedBox(width: 10), icon!],
               ],
             ),
     );

@@ -16,16 +16,12 @@ class PodcastWidget extends StatefulWidget {
 class _PodcastWidgetState extends State<PodcastWidget> {
   @override
   Widget build(BuildContext context) {
-    List images = [
-      'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
-      'https://i.ytimg.com/vi/5HxoC-W_iq4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDGjYkZgzRShZtbRAcxcHteNwOuig',
-      'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
-      'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHIybZ6umH09-6J4suX89s4BGUn-CSb_4j3A&s',
-      'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
-      'https://i.ytimg.com/vi/5HxoC-W_iq4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDGjYkZgzRShZtbRAcxcHteNwOuig',
-      'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
-      'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
+    List <String> podcastimages = [
+     Assets.images.podcastimage1.path,
+     Assets.images.podcastimage2.path,
+     Assets.images.podcastimage3.path,
+     Assets.images.podcastimage4.path,
+     Assets.images.podcastimage5.path,
     ];
     return Scaffold(
       body: Container(
@@ -85,22 +81,22 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                         mainAxisSpacing: 10,
                         childAspectRatio: 0.7,
                       ),
-                      itemCount: images.length,
+                      itemCount: podcastimages.length,
                       itemBuilder: (context, index) {
                         return Stack(
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                images[index],
+                              child: Image.asset(
+                                podcastimages[index],
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                                 height: double.infinity,
                               ),
                             ),
                             Positioned(
-                              top: 8,
-                              right: 8,
+                              top: 0,
+                              right: 0,
                               child: PopupmenuWidget(showSaveIcon: false),
                             ),
                           ],
@@ -124,14 +120,14 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                         mainAxisSpacing: 10,
                         childAspectRatio: 0.7,
                       ),
-                      itemCount: images.length,
+                      itemCount: podcastimages.length,
                       itemBuilder: (context, index) {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Stack(
                             fit: StackFit.expand, 
                             children: [
-                              Image.network(images[index], fit: BoxFit.cover),
+                              Image.asset(podcastimages[index], fit: BoxFit.cover),
                               Positioned(
                                 top: 0,
                                 right: 0,

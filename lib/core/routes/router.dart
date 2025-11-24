@@ -92,6 +92,17 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.reelWidget.name,
         builder: (context, state) => ReelWidget(),
       ),
+      GoRoute(
+        path: AppRoutes.documentries.path,
+        name: AppRoutes.documentries.name,
+        builder: (context, state) => Documentriescard(),
+      ),
+       GoRoute(
+        path: AppRoutes.applyPitch.path,
+        name: AppRoutes.applyPitch.name,
+        builder: (context, state) => ApplyPitch(),
+      ),
+      
       ShellRoute(
         navigatorKey: shellKey,
         builder: (context, state, child) {

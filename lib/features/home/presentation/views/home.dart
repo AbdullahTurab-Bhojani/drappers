@@ -9,6 +9,7 @@ import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../../shared/widgets/cardwidget/card_widget.dart';
+import '../../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
 import '../../../../shared/widgets/reels_widget.dart';
@@ -58,6 +59,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> documentriescard = [
+      Assets.images.documentaries1.path,
+      Assets.images.documentaries2.path,
+      Assets.images.documentaries3.path,
+      Assets.images.documentaries4.path,
+      Assets.images.documentaries5.path,
+      Assets.images.documentaries6.path,
+    ];
+    List<String> podcardimages = [
+      Assets.images.podcastimage1.path,
+      Assets.images.podcastimage2.path,
+      Assets.images.podcastimage3.path,
+      Assets.images.podcastimage4.path,
+      Assets.images.podcastimage5.path,
+    ];
     List<String> reelimages = [
       Assets.images.reelimage1.path,
       Assets.images.reelimage2.path,
@@ -72,12 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
       'The Frontier - Meet The Drappers',
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
-    List images = [
-      'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
-      'https://i.ytimg.com/vi/5HxoC-W_iq4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDGjYkZgzRShZtbRAcxcHteNwOuig',
-      'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
-      'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHIybZ6umH09-6J4suX89s4BGUn-CSb_4j3A&s',
+    List trendingimages = [
+      Assets.images.trendingshowimage1.path,
+      Assets.images.trendingshowimage2.path,
+      Assets.images.trendingshowimage3.path,
+      Assets.images.trendingshowimage4.path,
+      Assets.images.trendingshowimage5.path,
+      Assets.images.trendingshowimage6.path,
+      Assets.images.trendingshowimage7.path,
     ];
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
@@ -92,7 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           Column(
             children: [
-              // --- FIXED APPBAR ---
               AppMainBar(
                 width: 285,
                 leadingText: "Welcome Back John!",
@@ -392,9 +409,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 15),
-                            itemCount: images.length,
+                            itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
-                              return CardWidget(backgroundImage: images[index]);
+                              return CardWidget(
+                                AssetImage: trendingimages[index],
+                              );
                             },
                           ),
                         ),
@@ -428,13 +447,162 @@ class _HomeScreenState extends State<HomeScreen> {
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 15),
-                            itemCount: images.length,
+                            itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                backgroundImage: images[index],
+                                AssetImage: podcardimages[index],
                               );
                             },
                           ),
+                        ),
+                        SizedBox(height: 30),
+                        Stack(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(AppRoutes.applyPitch.name);
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 240,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(Assets.images.banner1.path),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                alignment: Alignment.centerLeft,
+                                padding: EdgeInsets.only(left: 16),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    PoppinsText(
+                                      "Ready to Pitch?",
+                                      color: customColors.textColor,
+                                      fontSize: PoppinsFontSizeVariant.size24,
+                                      fontWeight: PoppinsFontWeightVariant.medium,
+                                    ),
+                                    SizedBox(height: 16),
+                                    PoppinsText(
+                                      "Submit your company details for\n meet the Drapers",
+                                      color: customColors.textColor,
+                                      fontSize: PoppinsFontSizeVariant.size16,
+                                      fontWeight: PoppinsFontWeightVariant.medium,
+                                    ),
+                                    SizedBox(height: 30),
+                                    AppButton(
+                                      onPressed: () {},
+                                      title: 'Apply to Pitch',
+                                      buttonSize: Size(186, 45),
+                                      icon: Image.asset(Assets.images.play.path),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Image.asset(Assets.images.logoText.path),
+                            ),
+
+                            Positioned(
+                              bottom: 8,
+                              right: 8,
+                              child: Image.asset(
+                                Assets.images.logo2.path,
+                                width: 36,
+                                height: 36,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 30),
+                        Stack(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 240,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(Assets.images.banner2.path),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              alignment: Alignment.centerLeft,
+                              padding: EdgeInsets.only(left: 16),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  PoppinsText(
+                                    "Ready to Pitch?",
+                                    color: customColors.textColor,
+                                    fontSize: PoppinsFontSizeVariant.size24,
+                                    fontWeight: PoppinsFontWeightVariant.medium,
+                                  ),
+                                  SizedBox(height: 16),
+                                  PoppinsText(
+                                    "Submit your company details for\n meet the Drapers",
+                                    color: customColors.textColor,
+                                    fontSize: PoppinsFontSizeVariant.size16,
+                                    fontWeight: PoppinsFontWeightVariant.medium,
+                                  ),
+                                  SizedBox(height: 30),
+                                  Container(
+                                    width: 155,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xff582983),
+                                      border: Border.all(
+                                        color: Color(0xff9333E9),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          PoppinsText(
+                                            "Vote Now",
+                                            color: customColors.textColor,
+                                            fontSize:
+                                                PoppinsFontSizeVariant.size16,
+                                            fontWeight:
+                                                PoppinsFontWeightVariant.medium,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Image.asset(Assets.images.play.path),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Image.asset(Assets.images.logoText.path),
+                            ),
+
+                            Positioned(
+                              bottom: 8,
+                              right: 8,
+                              child: Image.asset(
+                                Assets.images.logo2.path,
+                                width: 36,
+                                height: 36,
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 30),
 
@@ -458,7 +626,61 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                     
+                        SizedBox(height: 20),
+
+                        SizedBox(
+                          height: 180,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(width: 15),
+                            itemCount: reelimages.length,
+                            itemBuilder: (context, index) {
+                              return ReelcardWidget(
+                                assetImagePath: reelimages[index],
+                                title: reelTitles[index],
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 30),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PoppinsText(
+                              'Documentaries',
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                              color: customColors.textColor,
+                            ),
+                            AppButton(
+                              buttonSize: Size(80, 25),
+                              color: Colors.transparent,
+                              border: true,
+                              onPressed: () {
+                                context.pushNamed(AppRoutes.documentries.name);
+                              },
+                              title: "View More",
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        SizedBox(
+                          height: 180,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(width: 15),
+                            itemCount: documentriescard.length,
+                            itemBuilder: (context, index) {
+                              return DocumentriesCardWidget(
+                                AssetImage: documentriescard[index],
+                              );
+                            },
+                          ),
+                        ),
+
                         SizedBox(height: 50),
                       ],
                     ),

@@ -25,7 +25,12 @@ enum AppRoutes {
   helpsupport('helpsupport', '/helpsupport'),
   trendingshow('trendingshow', '/trendingshow'),
   podcasts('podcasts', '/podcasts'),
-  reelWidget('reelWidget', '/reelWidget');
+  reelWidget('reelWidget', '/reelWidget'),
+  documentries ('documentries', '/documentries'),
+  applyPitch  ('applyPitch', '/applyPitch');
+
+
+
 
   final String name;
   final String path;

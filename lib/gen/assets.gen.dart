@@ -192,6 +192,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/Image.png
   AssetGenImage get image => const AssetGenImage('assets/images/Image.png');
 
+  /// File path: assets/images/Logo Text.png
+  AssetGenImage get logoText =>
+      const AssetGenImage('assets/images/Logo Text.png');
+
   /// File path: assets/images/Logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/Logo.png');
 
@@ -242,6 +246,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/banner.svg
   SvgGenImage get bannerSvg => const SvgGenImage('assets/images/banner.svg');
 
+  /// File path: assets/images/banner1.png
+  AssetGenImage get banner1 => const AssetGenImage('assets/images/banner1.png');
+
+  /// File path: assets/images/banner2.png
+  AssetGenImage get banner2 => const AssetGenImage('assets/images/banner2.png');
+
   /// File path: assets/images/bellringicon.png
   AssetGenImage get bellringicon =>
       const AssetGenImage('assets/images/bellringicon.png');
@@ -269,6 +279,30 @@ class $AssetsImagesGen {
   /// File path: assets/images/createpage.png
   AssetGenImage get createpage =>
       const AssetGenImage('assets/images/createpage.png');
+
+  /// File path: assets/images/documentaries1.png
+  AssetGenImage get documentaries1 =>
+      const AssetGenImage('assets/images/documentaries1.png');
+
+  /// File path: assets/images/documentaries2.png
+  AssetGenImage get documentaries2 =>
+      const AssetGenImage('assets/images/documentaries2.png');
+
+  /// File path: assets/images/documentaries3.png
+  AssetGenImage get documentaries3 =>
+      const AssetGenImage('assets/images/documentaries3.png');
+
+  /// File path: assets/images/documentaries4.png
+  AssetGenImage get documentaries4 =>
+      const AssetGenImage('assets/images/documentaries4.png');
+
+  /// File path: assets/images/documentaries5.png
+  AssetGenImage get documentaries5 =>
+      const AssetGenImage('assets/images/documentaries5.png');
+
+  /// File path: assets/images/documentaries6.png
+  AssetGenImage get documentaries6 =>
+      const AssetGenImage('assets/images/documentaries6.png');
 
   /// File path: assets/images/envelopeicon.png
   AssetGenImage get envelopeicon =>
@@ -391,9 +425,32 @@ class $AssetsImagesGen {
   AssetGenImage get onboardingBg =>
       const AssetGenImage('assets/images/onboarding_bg.png');
 
+  /// File path: assets/images/play.png
+  AssetGenImage get play => const AssetGenImage('assets/images/play.png');
+
   /// File path: assets/images/playicon.png
   AssetGenImage get playicon =>
       const AssetGenImage('assets/images/playicon.png');
+
+  /// File path: assets/images/podcastimage1.png
+  AssetGenImage get podcastimage1 =>
+      const AssetGenImage('assets/images/podcastimage1.png');
+
+  /// File path: assets/images/podcastimage2.png
+  AssetGenImage get podcastimage2 =>
+      const AssetGenImage('assets/images/podcastimage2.png');
+
+  /// File path: assets/images/podcastimage3.png
+  AssetGenImage get podcastimage3 =>
+      const AssetGenImage('assets/images/podcastimage3.png');
+
+  /// File path: assets/images/podcastimage4.png
+  AssetGenImage get podcastimage4 =>
+      const AssetGenImage('assets/images/podcastimage4.png');
+
+  /// File path: assets/images/podcastimage5.png
+  AssetGenImage get podcastimage5 =>
+      const AssetGenImage('assets/images/podcastimage5.png');
 
   /// File path: assets/images/prayer.png
   AssetGenImage get prayer => const AssetGenImage('assets/images/prayer.png');
@@ -445,6 +502,34 @@ class $AssetsImagesGen {
   AssetGenImage get subscriptionBg =>
       const AssetGenImage('assets/images/subscription_bg.png');
 
+  /// File path: assets/images/trendingshowimage1.png
+  AssetGenImage get trendingshowimage1 =>
+      const AssetGenImage('assets/images/trendingshowimage1.png');
+
+  /// File path: assets/images/trendingshowimage2.png
+  AssetGenImage get trendingshowimage2 =>
+      const AssetGenImage('assets/images/trendingshowimage2.png');
+
+  /// File path: assets/images/trendingshowimage3.png
+  AssetGenImage get trendingshowimage3 =>
+      const AssetGenImage('assets/images/trendingshowimage3.png');
+
+  /// File path: assets/images/trendingshowimage4.png
+  AssetGenImage get trendingshowimage4 =>
+      const AssetGenImage('assets/images/trendingshowimage4.png');
+
+  /// File path: assets/images/trendingshowimage5.png
+  AssetGenImage get trendingshowimage5 =>
+      const AssetGenImage('assets/images/trendingshowimage5.png');
+
+  /// File path: assets/images/trendingshowimage6.png
+  AssetGenImage get trendingshowimage6 =>
+      const AssetGenImage('assets/images/trendingshowimage6.png');
+
+  /// File path: assets/images/trendingshowimage7.png
+  AssetGenImage get trendingshowimage7 =>
+      const AssetGenImage('assets/images/trendingshowimage7.png');
+
   /// File path: assets/images/watchtimeicon.png
   AssetGenImage get watchtimeicon =>
       const AssetGenImage('assets/images/watchtimeicon.png');
@@ -456,6 +541,7 @@ class $AssetsImagesGen {
     applelogo,
     hideicon,
     image,
+    logoText,
     logo,
     reelimage1,
     reelimage2,
@@ -469,6 +555,8 @@ class $AssetsImagesGen {
     bannerGuest,
     bannerPng,
     bannerSvg,
+    banner1,
+    banner2,
     bellringicon,
     callicon,
     cancelicon,
@@ -476,6 +564,12 @@ class $AssetsImagesGen {
     commenticon,
     courseComplete,
     createpage,
+    documentaries1,
+    documentaries2,
+    documentaries3,
+    documentaries4,
+    documentaries5,
+    documentaries6,
     envelopeicon,
     footericon1,
     footericon2,
@@ -507,7 +601,13 @@ class $AssetsImagesGen {
     onboarding2,
     onboarding3,
     onboardingBg,
+    play,
     playicon,
+    podcastimage1,
+    podcastimage2,
+    podcastimage3,
+    podcastimage4,
+    podcastimage5,
     prayer,
     profileCard,
     progressBg,
@@ -521,6 +621,13 @@ class $AssetsImagesGen {
     signouticon,
     slider,
     subscriptionBg,
+    trendingshowimage1,
+    trendingshowimage2,
+    trendingshowimage3,
+    trendingshowimage4,
+    trendingshowimage5,
+    trendingshowimage6,
+    trendingshowimage7,
     watchtimeicon,
   ];
 }
