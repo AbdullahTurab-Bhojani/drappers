@@ -12,6 +12,8 @@ import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
 import '../../../../shared/widgets/reels_widget.dart';
+import '../../../shared/widgets/documentries_card/documentries_card_widget.dart';
+import '../../../shared/widgets/genreboxwidget.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
@@ -65,12 +67,43 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       Assets.images.reelimage4.path,
       Assets.images.reelimage5.path,
     ];
+    List trendingimages = [
+      Assets.images.trendingshowimage1.path,
+      Assets.images.trendingshowimage2.path,
+      Assets.images.trendingshowimage3.path,
+      Assets.images.trendingshowimage4.path,
+      Assets.images.trendingshowimage5.path,
+      Assets.images.trendingshowimage6.path,
+      Assets.images.trendingshowimage7.path,
+    ];
+    List<String> podcardimages = [
+      Assets.images.podcastimage1.path,
+      Assets.images.podcastimage2.path,
+      Assets.images.podcastimage3.path,
+      Assets.images.podcastimage4.path,
+      Assets.images.podcastimage5.path,
+    ];
+    List<String> documentriescard = [
+      Assets.images.documentaries1.path,
+      Assets.images.documentaries2.path,
+      Assets.images.documentaries3.path,
+      Assets.images.documentaries4.path,
+      Assets.images.documentaries5.path,
+      Assets.images.documentaries6.path,
+    ];
     List<String> reelTitles = [
       'Rio De Janeiro - Meet The Drappers',
       'Brand Acceleration - Meet The Drappers',
       'Season 5, India - Meet The Drappers',
       'The Frontier - Meet The Drappers',
       'Season 6, Saudi Arabia - Meet The Drappers',
+    ];
+    List<String> Genretitle = [
+      'Shows',
+      'Documentaries',
+      'Podcasts',
+      'Shows',
+      'Reels',
     ];
     List images = [
       'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
@@ -115,7 +148,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 30),
+                        SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -136,25 +169,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 15),
-                            itemCount: images.length,
+                            itemCount: Genretitle.length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                height: 56,
-                                width: 115,
-                                decoration: BoxDecoration(
-                                  color: customColors.dark,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(width: 2),
-                                    PoppinsText("shows"),
-                                    Icon(Icons.arrow_forward_ios_rounded),
-                                  ],
-                                ),
-                              );
+                              return genreBoxWidget(title: Genretitle[index]);
                             },
                           ),
                         ),
@@ -180,9 +197,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 15),
-                            itemCount: images.length,
+                            itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
-                              return CardWidget(AssetImage: images[index]);
+                              return CardWidget(
+                                AssetImage: trendingimages[index],
+                              );
                             },
                           ),
                         ),
@@ -207,11 +226,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 15),
-                            itemCount: images.length,
+                            itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                AssetImage: images[index],
-
+                                AssetImage: podcardimages[index],
                               );
                             },
                           ),
@@ -227,18 +245,23 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
                             ),
-                            AppButton(
-                              buttonSize: Size(80, 25),
-                              color: Colors.transparent,
-                              border: true,
-                              onPressed: () {
-                                context.goNamed(AppRoutes.reelWidget.name);
-                              },
-                              title: "View More",
-                            ),
                           ],
                         ),
-                        
+                        SizedBox(height: 20),
+                        SizedBox(
+                          height: 180,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(width: 15),
+                            itemCount: documentriescard.length,
+                            itemBuilder: (context, index) {
+                              return DocumentriesCardWidget(
+                                AssetImage: documentriescard[index],
+                              );
+                            },
+                          ),
+                        ),
 
                         SizedBox(height: 50),
                       ],

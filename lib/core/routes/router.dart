@@ -97,17 +97,17 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.documentries.name,
         builder: (context, state) => Documentriescard(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.applyPitch.path,
         name: AppRoutes.applyPitch.name,
         builder: (context, state) => ApplyPitch(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.voteForStartupScreen.path,
         name: AppRoutes.voteForStartupScreen.name,
         builder: (context, state) => VoteForStartupScreen(),
       ),
-      
+
       ShellRoute(
         navigatorKey: shellKey,
         builder: (context, state, child) {
@@ -137,11 +137,11 @@ final routerConfigProvider = Provider((ref) {
         ],
       ),
 
-      // GoRoute(
-      //   path: AppRoutes.SettingpreferencesScreen.path,
-      //   name: AppRoutes.SettingpreferencesScreen.name,
-      //   builder: (context, state) => SettingpreferencesScreen(),
-      // ),
+      GoRoute(
+        path: AppRoutes.SettingpreferencesScreen.path,
+        name: AppRoutes.SettingpreferencesScreen.name,
+        builder: (context, state) => SettingpreferencesScreen(),
+      ),
       GoRoute(
         path: AppRoutes.deleteAccountScreen.path,
         name: AppRoutes.deleteAccountScreen.name,

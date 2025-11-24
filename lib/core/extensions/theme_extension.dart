@@ -20,6 +20,8 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
   final Color redbox;
   final Color redlight;
   final Color rednormal;
+  final Color blackshade;
+
 
   final List<Color> buttonColors;
 
@@ -43,6 +45,9 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     required this.redbox,
     required this.redlight,
     required this.rednormal,
+        required this.blackshade,
+
+
   });
 
   @override
@@ -65,6 +70,8 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     Color? redbox,
     Color? redlight,
     Color? rednormal,
+        Color? blackshade,
+
 
     LinearGradient? buttongradient,
   }) {
@@ -87,6 +94,8 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       redbox: redbox ?? this.redbox,
       redlight: redlight ?? this.redlight,
       rednormal: rednormal ?? this.rednormal,
+            blackshade: blackshade ?? this.blackshade,
+
 
       buttonColors: buttonColors,
     );
@@ -124,6 +133,8 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       redbox: Color.lerp(redbox, other.redbox, t)!,
       redlight: Color.lerp(redlight, other.redlight, t)!,
       rednormal: Color.lerp(rednormal, other.rednormal, t)!,
+            blackshade: Color.lerp(blackshade, other.blackshade, t)!,
+
 
       buttonColors: lerpColorList(buttonColors, other.buttonColors, t),
     );
