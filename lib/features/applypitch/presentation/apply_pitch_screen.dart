@@ -57,7 +57,6 @@ class _ApplyPitchState extends State<ApplyPitch> {
               elevation: 0,
             ),
 
-            // Scrollable content
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(

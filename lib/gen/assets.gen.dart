@@ -355,6 +355,10 @@ class $AssetsImagesGen {
   AssetGenImage get guestSheet =>
       const AssetGenImage('assets/images/guest_sheet.png');
 
+  /// File path: assets/images/hearticon.png
+  AssetGenImage get hearticon =>
+      const AssetGenImage('assets/images/hearticon.png');
+
   /// File path: assets/images/infoicon.png
   AssetGenImage get infoicon =>
       const AssetGenImage('assets/images/infoicon.png');
@@ -402,6 +406,10 @@ class $AssetsImagesGen {
   AssetGenImage get menuicon6 =>
       const AssetGenImage('assets/images/menuicon6.png');
 
+  /// File path: assets/images/muteicon.png
+  AssetGenImage get muteicon =>
+      const AssetGenImage('assets/images/muteicon.png');
+
   /// File path: assets/images/notificationicon.png
   AssetGenImage get notificationicon =>
       const AssetGenImage('assets/images/notificationicon.png');
@@ -439,6 +447,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/playicon.png
   AssetGenImage get playicon =>
       const AssetGenImage('assets/images/playicon.png');
+
+  /// File path: assets/images/playstrokeicon.png
+  AssetGenImage get playstrokeicon =>
+      const AssetGenImage('assets/images/playstrokeicon.png');
+
+  /// File path: assets/images/playwithbgicon.png
+  AssetGenImage get playwithbgicon =>
+      const AssetGenImage('assets/images/playwithbgicon.png');
 
   /// File path: assets/images/podcastimage1.png
   AssetGenImage get podcastimage1 =>
@@ -591,6 +607,7 @@ class $AssetsImagesGen {
     guestLearning,
     guestProfile,
     guestSheet,
+    hearticon,
     infoicon,
     interestedicon,
     lessonComplete,
@@ -603,6 +620,7 @@ class $AssetsImagesGen {
     menuicon4,
     menuicon5,
     menuicon6,
+    muteicon,
     notificationicon,
     notificationsicon,
     notinterestedicon,
@@ -613,6 +631,8 @@ class $AssetsImagesGen {
     onboardingBg,
     play,
     playicon,
+    playstrokeicon,
+    playwithbgicon,
     podcastimage1,
     podcastimage2,
     podcastimage3,

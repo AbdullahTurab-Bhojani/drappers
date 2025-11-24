@@ -27,7 +27,9 @@ enum AppRoutes {
   podcasts('podcasts', '/podcasts'),
   reelWidget('reelWidget', '/reelWidget'),
   documentries ('documentries', '/documentries'),
-  applyPitch  ('applyPitch', '/applyPitch');
+  applyPitch  ('applyPitch', '/applyPitch'),
+  voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen');
+
 
 
 

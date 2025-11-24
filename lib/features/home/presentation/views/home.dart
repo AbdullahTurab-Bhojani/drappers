@@ -523,67 +523,72 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(height: 30),
                         Stack(
                           children: [
-                            Container(
-                              width: double.infinity,
-                              height: 240,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(Assets.images.banner2.path),
-                                  fit: BoxFit.cover,
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(AppRoutes.voteForStartupScreen.name);
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 240,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(Assets.images.banner2.path),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.only(left: 16),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  PoppinsText(
-                                    "Ready to Pitch?",
-                                    color: customColors.textColor,
-                                    fontSize: PoppinsFontSizeVariant.size24,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                  ),
-                                  SizedBox(height: 16),
-                                  PoppinsText(
-                                    "Submit your company details for\n meet the Drapers",
-                                    color: customColors.textColor,
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                  ),
-                                  SizedBox(height: 30),
-                                  Container(
-                                    width: 155,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xff582983),
-                                      border: Border.all(
-                                        color: Color(0xff9333E9),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50),
+                                alignment: Alignment.centerLeft,
+                                padding: EdgeInsets.only(left: 16),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    PoppinsText(
+                                      "Vote for Startups!",
+                                      color: customColors.textColor,
+                                      fontSize: PoppinsFontSizeVariant.size24,
+                                      fontWeight: PoppinsFontWeightVariant.medium,
                                     ),
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          PoppinsText(
-                                            "Vote Now",
-                                            color: customColors.textColor,
-                                            fontSize:
-                                                PoppinsFontSizeVariant.size16,
-                                            fontWeight:
-                                                PoppinsFontWeightVariant.medium,
-                                          ),
-                                          SizedBox(width: 10),
-                                          Image.asset(Assets.images.play.path),
-                                        ],
+                                    SizedBox(height: 16),
+                                    PoppinsText(
+                                      "Cast your vote in the \ncompetition. ",
+                                      color: customColors.textColor,
+                                      fontSize: PoppinsFontSizeVariant.size16,
+                                      fontWeight: PoppinsFontWeightVariant.regular,
+                                    ),
+                                    SizedBox(height: 30),
+                                    Container(
+                                      width: 155,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xff582983),
+                                        border: Border.all(
+                                          color: Color(0xff9333E9),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            PoppinsText(
+                                              "Vote Now",
+                                              color: customColors.textColor,
+                                              fontSize:
+                                                  PoppinsFontSizeVariant.size16,
+                                              fontWeight:
+                                                  PoppinsFontWeightVariant.medium,
+                                            ),
+                                            SizedBox(width: 10),
+                                            Image.asset(Assets.images.play.path),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
 
@@ -680,6 +685,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
                         ),
+
+
+
 
                         SizedBox(height: 50),
                       ],

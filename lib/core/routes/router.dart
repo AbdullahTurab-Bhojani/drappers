@@ -102,6 +102,11 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.applyPitch.name,
         builder: (context, state) => ApplyPitch(),
       ),
+       GoRoute(
+        path: AppRoutes.voteForStartupScreen.path,
+        name: AppRoutes.voteForStartupScreen.name,
+        builder: (context, state) => VoteForStartupScreen(),
+      ),
       
       ShellRoute(
         navigatorKey: shellKey,

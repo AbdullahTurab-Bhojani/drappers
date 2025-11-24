@@ -74,6 +74,7 @@ import 'features/savereel/presentation/savedreel.dart';
 import 'features/signup/presentation/views/signup.dart' hide PrivacypolicyScreen;
 import 'features/splash/presentation/views/splash.dart';
 import 'features/terms&condition/presentation/termscondition.dart';
+import 'features/voteforstartup/presentation/vote_for_startup_screen.dart';
 import 'features/watchlist/presentation/watchlist_screen.dart';
 import 'gen/assets.gen.dart';
 import 'package:chewie/src/center_seek_button.dart';
