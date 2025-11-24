@@ -231,6 +231,9 @@ class $AssetsImagesGen {
   AssetGenImage get backicon =>
       const AssetGenImage('assets/images/backicon.png');
 
+  /// File path: assets/images/ban123.png
+  AssetGenImage get ban123 => const AssetGenImage('assets/images/ban123.png');
+
   /// File path: assets/images/banner guest.png
   AssetGenImage get bannerGuest =>
       const AssetGenImage('assets/images/banner guest.png');
@@ -269,6 +272,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/createpage.png
   AssetGenImage get createpage =>
       const AssetGenImage('assets/images/createpage.png');
+
+  /// File path: assets/images/delete123.png
+  AssetGenImage get delete123 =>
+      const AssetGenImage('assets/images/delete123.png');
 
   /// File path: assets/images/envelopeicon.png
   AssetGenImage get envelopeicon =>
@@ -331,6 +338,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/logo2.png
   AssetGenImage get logo2 => const AssetGenImage('assets/images/logo2.png');
+
+  /// File path: assets/images/logout123.png
+  AssetGenImage get logout123 =>
+      const AssetGenImage('assets/images/logout123.png');
 
   /// File path: assets/images/mentionedicon.png
   AssetGenImage get mentionedicon =>
@@ -466,6 +477,7 @@ class $AssetsImagesGen {
     shareicon,
     showicon,
     backicon,
+    ban123,
     bannerGuest,
     bannerPng,
     bannerSvg,
@@ -476,6 +488,7 @@ class $AssetsImagesGen {
     commenticon,
     courseComplete,
     createpage,
+    delete123,
     envelopeicon,
     footericon1,
     footericon2,
@@ -492,6 +505,7 @@ class $AssetsImagesGen {
     lessonComplete,
     likeicon,
     logo2,
+    logout123,
     mentionedicon,
     menuicon1,
     menuicon2,

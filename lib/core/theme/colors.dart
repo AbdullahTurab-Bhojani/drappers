@@ -26,6 +26,8 @@ abstract final class AppColors {
   static const redbox = Color(0xff4a0618);
   static const normalred = Color(0xffa10b30);
   static const lightred = Color(0xffF81149);
+  static const popupdelete = Color(0xFF030B3A);
+
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);

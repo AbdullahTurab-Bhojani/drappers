@@ -5,6 +5,7 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
+import '../../../shared/widgets/popupmenuitem/signup_popup_widget.dart';
 import '../../../shared/widgets/tile_widget.dart';
 import '../../privacypolicy/presentation/views/privacypolicy.dart';
 
@@ -203,16 +204,27 @@ class ProfileScreen extends StatelessWidget {
 
                           itemBuilder: (context, index) {
                             return GestureDetector(
-                              onTap: () {
-                                context.push(menuList[index]['route']);
-                              },
-                              child: TileWidget(
-                                iconImage: menuList[index]['image'],
-                                title: menuList[index]['title'],
-                                textColor: menuList[index]['color'],
-                                ontaped: menuList[index]['isTap'],
-                              ),
-                            );
+  onTap: () {
+    if (menuList[index]['title'] == 'Sign Out') {
+      showDialog(
+        context: context,
+        builder: (context) => const Dialog(
+          backgroundColor: Colors.transparent,
+          child: SignupPopupWidget(),
+        ),
+      );
+    } else {
+      context.push(menuList[index]['route']);
+    }
+  },
+  child: TileWidget(
+    iconImage: menuList[index]['image'],
+    title: menuList[index]['title'],
+    textColor: menuList[index]['color'],
+    ontaped: menuList[index]['isTap'],
+  ),
+);
+
                           },
                           separatorBuilder: (context, index) {
                             return Divider();
