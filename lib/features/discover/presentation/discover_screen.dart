@@ -182,7 +182,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                 SizedBox(width: 15),
                             itemCount: images.length,
                             itemBuilder: (context, index) {
-                              return CardWidget(backgroundImage: images[index]);
+                              return CardWidget(AssetImage: images[index]);
                             },
                           ),
                         ),
@@ -210,7 +210,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: images.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                backgroundImage: images[index],
+                                AssetImage: images[index],
+
                               );
                             },
                           ),
