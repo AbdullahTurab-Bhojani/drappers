@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../drappers.dart';
+import '../../../../gen/assets.gen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -50,7 +51,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             )
-          : Center(child: CircularProgressIndicator()),
+          : Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(Assets.images.nativeSplash.path),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
     );
   }
 }

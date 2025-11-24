@@ -159,7 +159,7 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(backgroundImage: images[index]);
+                              return CardWidget(AssetImage: images[index]);
                             },
                           ),
                         ),
@@ -192,7 +192,7 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(backgroundImage: images[index]);
+                              return CardWidget(AssetImage: images[index]);
                             },
                           ),
                         ),

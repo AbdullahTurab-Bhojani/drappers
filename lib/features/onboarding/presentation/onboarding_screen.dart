@@ -44,8 +44,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
       _pageController.animateToPage(
         nextPage,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
+        duration: Duration(milliseconds: 1000),
+        curve: Curves.linearToEaseOut,
       );
 
       setState(() {
@@ -71,8 +71,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: Stack(
         children: [
           PageView.builder(
+            allowImplicitScrolling: false,
             controller: _pageController,
             itemCount: images.length,
+            reverse: false,
             onPageChanged: (index) {
               setState(() => currentPage = index);
             },
@@ -97,9 +99,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
               child: PoppinsText(
                 "Skip",
-                  fontSize: PoppinsFontSizeVariant.size14,
-                  fontWeight: PoppinsFontWeightVariant.medium,
-                  color: customColors.textColor,
+                fontSize: PoppinsFontSizeVariant.size14,
+                fontWeight: PoppinsFontWeightVariant.medium,
+                color: customColors.textColor,
               ),
             ),
           ),
@@ -150,9 +152,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         PoppinsText(
                           titles[currentPage],
                           textAlign: TextAlign.center,
-                            fontSize: PoppinsFontSizeVariant.size26,
-                            fontWeight: PoppinsFontWeightVariant.extraBold,
-                            color: Colors.white,
+                          fontSize: PoppinsFontSizeVariant.size26,
+                          fontWeight: PoppinsFontWeightVariant.extraBold,
+                          color: Colors.white,
                         ),
 
                         SizedBox(height: 32),
@@ -160,10 +162,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         PoppinsText(
                           subtitles[currentPage],
                           textAlign: TextAlign.center,
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.light,
-                            color: customColors.subtextColor,
-                            height: 1.5,
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.light,
+                          color: customColors.subtextColor,
+                          height: 1.5,
                         ),
 
                         SizedBox(height: 60),
@@ -181,10 +183,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF1FCFFF),
-                            Color(0xFF0063FF),
-                          ],
+                          colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
                         ),
                         borderRadius: BorderRadius.circular(40),
                         boxShadow: [
@@ -198,9 +197,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       child: Center(
                         child: PoppinsText(
                           'Next',
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: Colors.white,
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: Colors.white,
                         ),
                       ),
                     ),

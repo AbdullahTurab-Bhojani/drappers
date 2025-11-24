@@ -7,12 +7,12 @@ import '../app_bar/main_app_bar.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class ReelcardWidget extends StatefulWidget {
-  final String backgroundImage;
+  final String assetImagePath;
   final String title;
 
   const ReelcardWidget({
     super.key,
-    required this.backgroundImage,
+    required this.assetImagePath,
     required this.title,
   });
 
@@ -25,25 +25,24 @@ class _ReelcardWidgetState extends State<ReelcardWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+
     return Container(
       width: 125,
       height: 358,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
-          image: AssetImage(widget.backgroundImage),
+          image: AssetImage(widget.assetImagePath),
           fit: BoxFit.cover,
         ),
       ),
-
       child: Padding(
-        padding: EdgeInsets.only(left: 8, top: 8, bottom: 8),
+        padding: EdgeInsets.only(left: 0, top: 0, bottom: 2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-           PopupmenuWidget(),
-
+            PopupmenuWidget(),
             PoppinsText(
               widget.title,
               fontSize: PoppinsFontSizeVariant.size14,
@@ -54,6 +53,4 @@ class _ReelcardWidgetState extends State<ReelcardWidget> {
       ),
     );
   }
-
-
 }

@@ -1,21 +1,23 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
-import '../../../../drappers.dart'; // Assuming PoppinsText, PoppinsFontSizeVariant, etc., are defined here
+import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 
-class deleteAccountScreen extends StatefulWidget {
-  const deleteAccountScreen({super.key});
+class DeleteAccount extends StatefulWidget {
+  const DeleteAccount({super.key});
 
   @override
-  State<deleteAccountScreen> createState() => _deleteAccountScreenState();
+  State<DeleteAccount> createState() => _DeleteAccountScreenState();
 }
 
 enum AccountOption { deactivate, delete }
 
-class _deleteAccountScreenState extends State<deleteAccountScreen> {
-  AccountOption? _selectedOption = null;
+class _DeleteAccountScreenState extends State<DeleteAccount> {
+  AccountOption? _selectedOption;
 
   @override
   Widget build(BuildContext context) {

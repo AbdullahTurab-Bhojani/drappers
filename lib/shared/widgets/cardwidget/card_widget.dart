@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../../gen/assets.gen.dart';
 
 class CardWidget extends StatefulWidget {
-  final String backgroundImage;
-  const CardWidget({super.key, required this.backgroundImage});
+  final String AssetImage;
+  const CardWidget({super.key, required this.AssetImage});
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -19,7 +18,7 @@ class _CardWidgetState extends State<CardWidget> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
-          image: NetworkImage(widget.backgroundImage),
+          image: AssetImage(widget.AssetImage),
           fit: BoxFit.cover,
         ),
       ),
@@ -28,11 +27,7 @@ class _CardWidgetState extends State<CardWidget> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(
-              Assets.images.a3dotsicon.path
-            )
-          ],
+          children: [Image.asset(Assets.images.a3dotsicon.path)],
         ),
       ),
     );

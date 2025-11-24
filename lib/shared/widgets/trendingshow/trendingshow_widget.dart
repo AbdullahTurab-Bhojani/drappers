@@ -17,16 +17,14 @@ class TrendingshowWidget extends StatefulWidget {
 class _TrendingshowWidgetState extends State<TrendingshowWidget> {
   @override
   Widget build(BuildContext context) {
-    List images = [
-      'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
-      'https://i.ytimg.com/vi/5HxoC-W_iq4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDGjYkZgzRShZtbRAcxcHteNwOuig',
-      'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
-      'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHIybZ6umH09-6J4suX89s4BGUn-CSb_4j3A&s',
-      'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
-      'https://i.ytimg.com/vi/5HxoC-W_iq4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDGjYkZgzRShZtbRAcxcHteNwOuig',
-      'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
-      'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
+    List<String> images  = [
+      Assets.images.trendingshowimage1.path,
+      Assets.images.trendingshowimage2.path,
+      Assets.images.trendingshowimage3.path,
+      Assets.images.trendingshowimage4.path,
+      Assets.images.trendingshowimage5.path,
+      Assets.images.trendingshowimage6.path,
+      Assets.images.trendingshowimage7.path,
     ];
     return Scaffold(
       body: Container(
@@ -43,7 +41,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
             AppMainBar(
               leading: GestureDetector(
                 onTap: () {
-                 context.push(AppRoutes.home.path);
+                  context.push(AppRoutes.home.path);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -92,7 +90,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
+                              child: Image.asset(
                                 images[index],
                                 fit: BoxFit.cover,
                                 width: double.infinity,
@@ -130,15 +128,13 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Stack(
-                            fit: StackFit.expand, 
+                            fit: StackFit.expand,
                             children: [
-                              Image.network(images[index], fit: BoxFit.cover),
+                              Image.asset(images[index], fit: BoxFit.cover),
                               Positioned(
                                 top: 0,
                                 right: 0,
-                                child: PopupmenuWidget(
-                                  showSaveIcon: false, 
-                                ),
+                                child: PopupmenuWidget(showSaveIcon: false),
                               ),
                             ],
                           ),
@@ -156,5 +152,4 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
       ),
     );
   }
-
 }

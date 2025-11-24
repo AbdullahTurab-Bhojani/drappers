@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../../../shared/widgets/buildradiotile.dart';
 import '../../../../shared/widgets/textfield_new.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -13,7 +14,6 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  // Key for form validation
   final _formKey = GlobalKey<FormState>();
 
   String? _fullName, _email, _phone, _password, _confirmPassword;
@@ -22,7 +22,6 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _showPassword = false;
   bool _showConfirmPassword = false;
 
-  // Added TextEditingControllers to correctly manage input focus and state for persistence
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -87,8 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 25), // Reduced spacing
-                      // Full Name
+                      SizedBox(height: 25), 
                       NewTextField(
                         fieldbg: AppColors.tfield,
 
@@ -124,7 +122,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(height: 15),
 
-                      // Phone Number
                       NewTextField(
                         fieldbg: AppColors.tfield,
 
@@ -168,8 +165,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                       ),
 
-                      SizedBox(height: 8), // Reduced spacing
-                      // --- Radio Buttons (Receive Code Via) ---
+                      SizedBox(height: 8), 
                       Container(
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -188,7 +184,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: _buildRadioTile(
+                                  child: CustomRadioTile(
                                     title: 'Email Address',
                                     value: 'Email',
                                     groupValue: _receiveMethod,
@@ -200,7 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   ),
                                 ),
                                 Expanded(
-                                  child: _buildRadioTile(
+                                  child: CustomRadioTile(
                                     title: 'Phone Number',
                                     value: 'Phone',
                                     groupValue: _receiveMethod,
@@ -217,8 +213,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 10), // Reduced spacing
-                      // --- Terms and Conditions Checkbox ---
+                      const SizedBox(height: 10), 
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -306,8 +301,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
 
-                      const SizedBox(height: 20), // Reduced spacing
-                      // --- Primary Action Button (Gradient) ---
+                      const SizedBox(height: 20), 
                       AppButton(
                         onPressed: () {
                           context.pushReplacement(AppRoutes.home.path);
@@ -315,8 +309,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         title: "Create Account",
                       ),
 
-                      const SizedBox(height: 25), // Reduced spacing
-                      // --- OR Divider ---
+                      const SizedBox(height: 25),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -520,114 +513,13 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Widget _buildRadioTile({
-    required String title,
-    required String value,
-    required String? groupValue,
-    required ValueChanged<String?> onChanged,
-  }) {
-    const Color inputFieldColor = Color(0xFF17244D);
-    // const Color textColor = Colors.white;
-    const Color primaryBlue = Color(0xFF1E88E5);
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
-    // Custom container to hold the radio button and text, simulating the background box
-    return Container(
-      // Reduced margin
-      // margin: const EdgeInsets.only(right: 8, top: 8),
-      // // Reduced vertical padding
-      // padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-      // decoration: BoxDecoration(
-      //   color: inputFieldColor,
-      //   borderRadius: BorderRadius.circular(10), // Reduced radius
-      //   border: Border.all(
-      //     color: groupValue == value ? primaryBlue : Colors.transparent,
-      //     width: 2,
-      //   ),
-      // ),
-      child: InkWell(
-        onTap: () => onChanged(value),
-        child: Row(
-          children: [
-            SizedBox(
-              height: 18,
-              width: 18,
-              child: Radio<String>(
-                value: value,
-                groupValue: groupValue,
-                onChanged: onChanged,
-                activeColor: primaryBlue,
-                fillColor: MaterialStateProperty.resolveWith<Color>((
-                  Set<MaterialState> states,
-                ) {
-                  if (states.contains(MaterialState.selected)) {
-                    return primaryBlue;
-                  }
-                  return Colors.white54; // Unselected color
-                }),
-              ),
-            ),
-            SizedBox(width: 7),
-            Flexible(
-              child: PoppinsText(
-                title,
-                // Reduced size and added Poppins
-                fontSize: PoppinsFontSizeVariant.size16,
-                fontWeight: PoppinsFontWeightVariant.regular,
-                color: customColors.textColor,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
-  // Helper method for social sign-in buttons
-  Widget _buildSocialButton({
-    required String label,
-    required String icon,
-    required VoidCallback onPressed,
-  }) {
-    const Color inputFieldColor = Color(0xFF17244D);
-    const Color textColor = Colors.white;
 
-    return Container(
-      height: 45, // Reduced button height
-      decoration: BoxDecoration(
-        color: inputFieldColor,
-        borderRadius: BorderRadius.circular(10), // Reduced radius
-        border: Border.all(color: Colors.white10),
-      ),
-      child: InkWell(
-        onTap: onPressed,
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Using a simple Text for the icon, you'd replace this with an SVG or an actual icon.
-              Text(
-                icon,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: textColor,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-              const SizedBox(width: 6),
-              PoppinsText(
-                label,
-                fontSize: PoppinsFontSizeVariant.size15,
-                fontWeight: PoppinsFontWeightVariant.medium,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
-  // Simple form submission function placeholder
+
+
+
+
   void _submitForm() {
     if (_formKey.currentState!.validate() && _agreedToTerms) {
       _formKey.currentState!.save();
