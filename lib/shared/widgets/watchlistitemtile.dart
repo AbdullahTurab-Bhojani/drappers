@@ -23,7 +23,7 @@ class WatchlistItemTile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 25.0, bottom: 10.0, right: 5, left: 20),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: 157,
@@ -60,14 +60,11 @@ class WatchlistItemTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 15),
-          Container(
-            margin: EdgeInsets.only(top: 20),
-            child: InkWell(
-              onTap: onTapPlay,
-              child: Image.asset(
-                "assets/images/playbutton.png",
-                color: customColors.textColor,
-              ),
+          InkWell(
+            onTap: onTapPlay,
+            child: Image.asset(
+              "assets/images/playbutton.png",
+              color: customColors.textColor,
             ),
           ),
         ],
