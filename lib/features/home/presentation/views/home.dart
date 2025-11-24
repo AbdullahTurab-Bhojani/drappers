@@ -496,7 +496,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onPressed: () {},
                                       title: 'Apply to Pitch',
                                       buttonSize: Size(186, 45),
-                                      icon: Image.asset(Assets.images.play.path),
+                                      suffixIcon: Image.asset(Assets.images.play.path),
                                     ),
                                   ],
                                 ),

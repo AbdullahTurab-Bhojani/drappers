@@ -189,6 +189,22 @@ class $AssetsImagesGen {
   AssetGenImage get hideicon =>
       const AssetGenImage('assets/images/Hideicon.png');
 
+  /// File path: assets/images/Horizontal Thumbnail.png
+  AssetGenImage get horizontalThumbnail =>
+      const AssetGenImage('assets/images/Horizontal Thumbnail.png');
+
+  /// File path: assets/images/Horizontal Thumbnail2.png
+  AssetGenImage get horizontalThumbnail2 =>
+      const AssetGenImage('assets/images/Horizontal Thumbnail2.png');
+
+  /// File path: assets/images/Horizontal Thumbnail3.png
+  AssetGenImage get horizontalThumbnail3 =>
+      const AssetGenImage('assets/images/Horizontal Thumbnail3.png');
+
+  /// File path: assets/images/Horizontal Thumbnail4.png
+  AssetGenImage get horizontalThumbnail4 =>
+      const AssetGenImage('assets/images/Horizontal Thumbnail4.png');
+
   /// File path: assets/images/Image.png
   AssetGenImage get image => const AssetGenImage('assets/images/Image.png');
 
@@ -409,6 +425,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/muteicon.png
   AssetGenImage get muteicon =>
       const AssetGenImage('assets/images/muteicon.png');
+  /// File path: assets/images/native_splash.png
+  AssetGenImage get nativeSplash =>
+      const AssetGenImage('assets/images/native_splash.png');
 
   /// File path: assets/images/notificationicon.png
   AssetGenImage get notificationicon =>
@@ -443,6 +462,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/play.png
   AssetGenImage get play => const AssetGenImage('assets/images/play.png');
+  /// File path: assets/images/playbutton.png
+  AssetGenImage get playbutton =>
+      const AssetGenImage('assets/images/playbutton.png');
 
   /// File path: assets/images/playicon.png
   AssetGenImage get playicon =>
@@ -564,6 +586,10 @@ class $AssetsImagesGen {
     a3dotsicon,
     applelogo,
     hideicon,
+    horizontalThumbnail,
+    horizontalThumbnail2,
+    horizontalThumbnail3,
+    horizontalThumbnail4,
     image,
     logoText,
     logo,
@@ -621,6 +647,7 @@ class $AssetsImagesGen {
     menuicon5,
     menuicon6,
     muteicon,
+    nativeSplash,
     notificationicon,
     notificationsicon,
     notinterestedicon,
@@ -630,6 +657,7 @@ class $AssetsImagesGen {
     onboarding3,
     onboardingBg,
     play,
+    playbutton,
     playicon,
     playstrokeicon,
     playwithbgicon,

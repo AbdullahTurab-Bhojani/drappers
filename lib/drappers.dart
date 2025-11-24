@@ -53,8 +53,12 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'core/extensions/theme_extension.dart';
 import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_theme.dart';
+<<<<<<< HEAD
 import 'features/Setting&preferences/presentation/setting&preferences.dart';
 import 'features/applypitch/presentation/apply_pitch_screen.dart';
+=======
+import 'features/setting&preferences/presentation/setting&preferences.dart';
+>>>>>>> development
 import 'features/dashboard/presentation/nav_bar.dart';
 import 'features/deleteAccount/presentation/deleteAccount.dart';
 import 'features/discover/presentation/discover_screen.dart';
@@ -71,7 +75,7 @@ import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/privacypolicy/presentation/views/privacypolicy.dart';
 import 'features/profile/presentation/profile_screen.dart';
 import 'features/savereel/presentation/savedreel.dart';
-import 'features/signup/presentation/views/signup.dart' hide PrivacypolicyScreen;
+import 'features/signup/presentation/views/signup.dart';
 import 'features/splash/presentation/views/splash.dart';
 import 'features/terms&condition/presentation/termscondition.dart';
 import 'features/voteforstartup/presentation/vote_for_startup_screen.dart';
