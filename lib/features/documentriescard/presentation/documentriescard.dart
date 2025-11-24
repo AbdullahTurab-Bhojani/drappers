@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
+import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../app_bar/main_app_bar.dart';
-import '../cardwidget/card_widget.dart';
-import '../popupmenuitem/popupmenu_widget.dart';
+import '../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../shared/widgets/documentries_card/documentries_card_widget.dart';
+import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
-class TrendingshowWidget extends StatefulWidget {
-  const TrendingshowWidget({super.key});
+class Documentriescard extends StatefulWidget {
+  const Documentriescard({super.key});
 
   @override
-  State<TrendingshowWidget> createState() => _TrendingshowWidgetState();
+  State<Documentriescard> createState() => _DocumentriescardState();
 }
 
-class _TrendingshowWidgetState extends State<TrendingshowWidget> {
+class _DocumentriescardState extends State<Documentriescard> {
   @override
   Widget build(BuildContext context) {
-    List<String> images  = [
-      Assets.images.trendingshowimage1.path,
-      Assets.images.trendingshowimage2.path,
-      Assets.images.trendingshowimage3.path,
-      Assets.images.trendingshowimage4.path,
-      Assets.images.trendingshowimage5.path,
-      Assets.images.trendingshowimage6.path,
-      Assets.images.trendingshowimage7.path,
+    List<String> documentries = [
+      Assets.images.documentaries1.path,
+      Assets.images.documentaries2.path,
+      Assets.images.documentaries3.path,
+      Assets.images.documentaries4.path,
+      Assets.images.documentaries5.path,
+      Assets.images.documentaries6.path,
     ];
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -41,7 +42,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
             AppMainBar(
               leading: GestureDetector(
                 onTap: () {
-                  context.push(AppRoutes.home.path);
+                  Navigator.of(context).pop();
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -52,7 +53,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                   ),
                 ),
               ),
-              title: "Trending Shows",
+              title: "Documentries",
               centerTitle: false,
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -68,6 +69,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
               ],
             ),
             SizedBox(height: 30),
+
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 12),
@@ -84,25 +86,24 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                         mainAxisSpacing: 10,
                         childAspectRatio: 0.7,
                       ),
-                      itemCount: images.length,
+                      itemCount: documentries.length,
                       itemBuilder: (context, index) {
-                        return Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.asset(
-                                images[index],
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Image.asset(
+                                documentries[index],
                                 fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
                               ),
-                            ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: PopupmenuWidget(showSaveIcon: false),
-                            ),
-                          ],
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: PopupmenuWidget(showSaveIcon: false),
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -123,14 +124,17 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                         mainAxisSpacing: 10,
                         childAspectRatio: 0.7,
                       ),
-                      itemCount: images.length,
+                      itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              Image.asset(images[index], fit: BoxFit.cover),
+                              Image.asset(
+                                documentries[index],
+                                fit: BoxFit.cover,
+                              ),
                               Positioned(
                                 top: 0,
                                 right: 0,

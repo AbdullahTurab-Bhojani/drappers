@@ -89,7 +89,7 @@ class _ReelWidgetState extends State<ReelWidget> {
                   ),
                   itemBuilder: (context, index) {
                     return ReelcardWidget(
-                      backgroundImage: reelimages[index],
+                      assetImagePath: reelimages[index],
                       title: reelTitles[index],
                     );
                   },

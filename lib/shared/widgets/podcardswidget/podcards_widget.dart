@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../gen/assets.gen.dart';
 
 class PodcardsWidget extends StatefulWidget {
-  final String backgroundImage;
+  final String AssetImage;
 
-  const PodcardsWidget({super.key, required this.backgroundImage});
+  const PodcardsWidget({super.key, required this.AssetImage});
 
   @override
   State<PodcardsWidget> createState() => _PodcardsWidgetState();
@@ -20,12 +20,12 @@ class _PodcardsWidgetState extends State<PodcardsWidget> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
-          image: NetworkImage(widget.backgroundImage),
+          image: AssetImage(widget.AssetImage),
           fit: BoxFit.cover,
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.only(top: 8, right: 2),
+        padding: EdgeInsets.only(top: 0, right: 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,

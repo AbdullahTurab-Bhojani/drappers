@@ -49,12 +49,11 @@ class _TermsconditionState extends State<Termscondition> {
               elevation: 0,
             ),
 
-            // 👇 Only this area scrolls
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
                   decoration: BoxDecoration(
                     color: customColors.regular,
                     borderRadius: BorderRadius.circular(20),
@@ -148,7 +147,6 @@ class _TermsconditionState extends State<Termscondition> {
     );
   }
 
-  // 🔹 Title Widget
   Widget _title(String text, AppCustomColors colors) {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
@@ -161,7 +159,6 @@ class _TermsconditionState extends State<Termscondition> {
     );
   }
 
-  // 🔹 Body Text Widget
   Widget _body(String text, AppCustomColors colors) {
     return PoppinsText(
       text,
