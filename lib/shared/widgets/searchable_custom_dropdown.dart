@@ -327,7 +327,7 @@ class _SearchableCustomDropdownState<T>
                 controller: TextEditingController(
                   text: _value != null
                       ? (widget.builder != null
-                            ? widget.builder!(_value!)
+                            ? widget.builder!(_value as T)
                             : _value.toString())
                       : '',
                 ),

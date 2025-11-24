@@ -12,14 +12,23 @@ class EditprofileScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
 
-  @override
   void dispose() {
     _fullNameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
   }
 
+  void initState() {
+    _fullNameController.text == 'johnmackson';
+    _emailController.text == 'john@gmail.com';
+    _phoneController.text == '03** *****92';
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _fullNameController.text = 'johnmackson';
+    _emailController.text = 'john@gmail.com';
+    _phoneController.text = '03** *****92';
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
@@ -125,9 +134,7 @@ class EditprofileScreen extends StatelessWidget {
                         // Phone Number
                         NewTextField(
                           fieldbg: AppColors.tfield,
-
-                          controller: _emailController,
-                          // controller: _phoneController,
+                          controller: _phoneController,
                           labelText: "Phone Number*",
                           hintText: "03XXXXXXXXX",
                           filledColor: AppColors.tfield,
@@ -148,7 +155,11 @@ class EditprofileScreen extends StatelessWidget {
                           title: "Save Changes",
                         ),
                         SizedBox(height: 10),
-                        AppButtonwithoudbg(
+                        AppButton(
+                          color: Colors.transparent,
+                          borderColor: customColors.textColor,
+                          borderWidth: 1,
+                          border: true,
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

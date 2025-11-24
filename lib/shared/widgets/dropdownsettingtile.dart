@@ -77,8 +77,8 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
           ),
           const SizedBox(height: 25.0),
           DropdownButtonFormField<String>(
-            value: _currentValue,
-            dropdownColor: customColors.regular,
+            initialValue: _currentValue,
+            dropdownColor: customColors.lightGray,
             style: TextStyle(
               color: customColors.textColor,
               fontSize: 16.0,

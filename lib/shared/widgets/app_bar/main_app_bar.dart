@@ -27,12 +27,12 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget? _leadingWidget;
+    Widget? leadingWidget;
 
     if (leading != null) {
-      _leadingWidget = leading;
+      leadingWidget = leading;
     } else if (leadingText != null) {
-      _leadingWidget = TextButton(
+      leadingWidget = TextButton(
         onPressed: () => Navigator.pop(context),
         child: PoppinsText(
           leadingText!,
@@ -42,12 +42,12 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       );
     } else if (leadingIcon != null) {
-      _leadingWidget = IconButton(
+      leadingWidget = IconButton(
         icon: Icon(leadingIcon, color: Colors.white),
         onPressed: () => Navigator.pop(context),
       );
     } else {
-      _leadingWidget = IconButton(
+      leadingWidget = IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => Navigator.pop(context),
       );
@@ -56,7 +56,7 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: backgroundColor ?? Colors.black,
       elevation: elevation,
-      leading: _leadingWidget,
+      leading: leadingWidget,
       leadingWidth: width > 0 ? width : null,
       scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,

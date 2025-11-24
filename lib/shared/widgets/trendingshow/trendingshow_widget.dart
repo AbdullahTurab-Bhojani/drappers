@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../app_bar/main_app_bar.dart';
-import '../cardwidget/card_widget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class TrendingshowWidget extends StatefulWidget {

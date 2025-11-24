@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import '../../drappers.dart';
-import '../../gen/assets.gen.dart';
 
 class TileWidget extends StatefulWidget {
   final String title;

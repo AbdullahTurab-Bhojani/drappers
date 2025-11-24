@@ -752,7 +752,6 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
   }
 
   void _updateState() {
-    print('updateState');
     if (!mounted) return;
 
     final videoPlayer = ref.read(customVideoPlayerProvider(widget.videoSource));

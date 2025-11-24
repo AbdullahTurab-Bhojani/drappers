@@ -200,7 +200,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return CardWidget(
-                                AssetImage: trendingimages[index],
+                                assetImage: trendingimages[index],
                               );
                             },
                           ),
@@ -229,7 +229,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                AssetImage: podcardimages[index],
+                                assetImage: podcardimages[index],
                               );
                             },
                           ),
@@ -257,7 +257,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: documentriescard.length,
                             itemBuilder: (context, index) {
                               return DocumentriesCardWidget(
-                                AssetImage: documentriescard[index],
+                                assetImage: documentriescard[index],
                               );
                             },
                           ),

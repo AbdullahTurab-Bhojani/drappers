@@ -21,12 +21,11 @@ class _ThumbnailVideoPreviewState extends State<ThumbnailVideoPreview> {
   VideoPlayerController? controller;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     onInit();
   }
 
-  onInit() async {
+  Future<void> onInit() async {
     if (widget.file != null) {
       controller = VideoPlayerController.file(File(widget.file!.path));
       await controller?.initialize();
@@ -39,7 +38,6 @@ class _ThumbnailVideoPreviewState extends State<ThumbnailVideoPreview> {
 
   @override
   void didUpdateWidget(covariant ThumbnailVideoPreview oldWidget) {
-    // TODO: implement didUpdateWidget
     if (oldWidget.network != widget.network) {
       onInit();
     }

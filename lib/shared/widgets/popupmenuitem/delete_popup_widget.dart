@@ -22,65 +22,50 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
     return Container(
       height: 350,
       width: double.infinity,
-      padding:  EdgeInsets.only(top: 24, bottom: 24, left: 12, right: 12),
+      padding: EdgeInsets.only(top: 24, bottom: 24, left: 32, right: 32),
       decoration: BoxDecoration(
-        color:  customColors.regular,
+        color: customColors.regular,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(Assets.images.delete123.path, height: 54, width: 54,),
+          Image.asset(Assets.images.delete123.path, height: 54, width: 54),
           SizedBox(height: 40),
-           PoppinsText(
-                      "Are you sure you want to delete",
-                      fontSize: PoppinsFontSizeVariant.size16,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                    ),
-                    PoppinsText(
-                      "your account?",
-                      fontSize: PoppinsFontSizeVariant.size16,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                    ),
-           SizedBox(height: 40), 
-           AppButton(
-                        onPressed: () {
-                          context.pushReplacement(AppRoutes.loginScreen.path);
-                        },
-                        title: "Yes, delette",
-                      ),
-          // Container(
-          //   width: double.infinity,
-          //   height: 45,
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(50),
-          //     gradient:  LinearGradient(
-          //       colors: [
-          //         Color(0xFF23A6F0),
-          //         Color(0xFF3C6FF0),
-          //       ],
-          //     ),
-          //   ),
-          //   child: Center(
-          //     child: PoppinsText(
-          //       "Yes, delette",
-          //       fontSize: PoppinsFontSizeVariant.size16,
-          //             fontWeight: PoppinsFontWeightVariant.medium,
-          //             color: customColors.textColor,
-          //           ),
-          //   ),
-          // ),
+          PoppinsText(
+            "Are you sure you want to delete",
+            fontSize: PoppinsFontSizeVariant.size16,
+            fontWeight: PoppinsFontWeightVariant.medium,
+            color: customColors.textColor,
+          ),
+          PoppinsText(
+            "your account?",
+            fontSize: PoppinsFontSizeVariant.size16,
+            fontWeight: PoppinsFontWeightVariant.medium,
+            color: customColors.textColor,
+          ),
+          SizedBox(height: 40),
+          AppButton(
+            onPressed: () {
+              context.pushReplacement(AppRoutes.loginScreen.path);
+            },
+            title: "Yes, delete",
+          ),
 
-           SizedBox(height: 14),
-          AppButtonwithoudbg(
-                        onPressed: () {
-                          context.pop();
-                        },
-                        title: "Cancel",
-                      ),
+         
+          SizedBox(height: 11),
+          AppButton(
+            color: Colors.transparent,
+            borderColor: customColors.greyColor,
+            borderWidth: 1,
+            border: true,
+            onPressed: () {
+              context.pop();
+            },
+            title: "Cancel",
+          ),
+
           // Container(
           //   width: double.infinity,
           //   height: 45,
@@ -94,14 +79,12 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
           //       fontSize: PoppinsFontSizeVariant.size16,
           //             fontWeight: PoppinsFontWeightVariant.medium,
           //             color: customColors.textColor,
-                    
+
           //     ),
           //   ),
           // ),
-       
         ],
       ),
     );
   }
 }
-

@@ -138,8 +138,8 @@ final routerConfigProvider = Provider((ref) {
       ),
 
       GoRoute(
-        path: AppRoutes.SettingpreferencesScreen.path,
-        name: AppRoutes.SettingpreferencesScreen.name,
+        path: AppRoutes.settingpreferencesScreen.path,
+        name: AppRoutes.settingpreferencesScreen.name,
         builder: (context, state) => SettingpreferencesScreen(),
       ),
       GoRoute(

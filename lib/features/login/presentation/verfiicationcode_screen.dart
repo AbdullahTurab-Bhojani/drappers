@@ -30,7 +30,6 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
 
     final otp = _otpControllers.map((c) => c.text).join();
     if (otp.length == 6) {
-      print("Entered OTP: $otp");
       context.goNamed(AppRoutes.updatepasswordScreen.name);
     }
   }
@@ -66,8 +65,12 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
   void dispose() {
     _timer?.cancel();
 
-    _otpControllers.forEach((c) => c.dispose());
-    _focusNodes.forEach((f) => f.dispose());
+    for (var c in _otpControllers) {
+      c.dispose();
+    }
+    for (var f in _focusNodes) {
+      f.dispose();
+    }
     super.dispose();
   }
 
@@ -95,9 +98,7 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                 onTap: () {
                   context.go('/forgetpassword');
                 },
-                child: Image.asset(
-                  Assets.images.backicon.path
-                )
+                child: Image.asset(Assets.images.backicon.path),
               ),
               SizedBox(height: 40),
               PoppinsText(

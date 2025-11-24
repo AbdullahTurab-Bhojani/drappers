@@ -43,7 +43,7 @@ class SharedPreferencesService implements SharedPrefService {
 
   @override
   Future<bool> setAccessToken(String token) async {
-    debugPrint("setAccessToken ${token}");
+    debugPrint("setAccessToken $token");
 
     await sharedPreferences.setBool(isGuestKey, false);
     return await sharedPreferences.setString(_tokenKey, token);

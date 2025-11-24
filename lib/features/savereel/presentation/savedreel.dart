@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../core/extensions/theme_extension.dart';
-import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/reelcard/reelcard_widget.dart';
@@ -32,8 +28,6 @@ class _SavedreelState extends State<Savedreel> {
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
 
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
       body: Container(
         width: double.infinity,

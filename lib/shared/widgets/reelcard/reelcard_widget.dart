@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
-import '../../../gen/assets.gen.dart';
-import '../app_bar/main_app_bar.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class ReelcardWidget extends StatefulWidget {
@@ -23,9 +19,6 @@ class ReelcardWidget extends StatefulWidget {
 class _ReelcardWidgetState extends State<ReelcardWidget> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
-
     return Container(
       width: 125,
       height: 358,

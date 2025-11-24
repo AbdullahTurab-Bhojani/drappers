@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
 class Documentriescard extends StatefulWidget {
@@ -25,8 +22,6 @@ class _DocumentriescardState extends State<Documentriescard> {
       Assets.images.documentaries5.path,
       Assets.images.documentaries6.path,
     ];
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
       body: Container(
         width: double.infinity,
