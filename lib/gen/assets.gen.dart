@@ -376,6 +376,10 @@ class $AssetsImagesGen {
   AssetGenImage get menuicon6 =>
       const AssetGenImage('assets/images/menuicon6.png');
 
+  /// File path: assets/images/native_splash.png
+  AssetGenImage get nativeSplash =>
+      const AssetGenImage('assets/images/native_splash.png');
+
   /// File path: assets/images/notificationicon.png
   AssetGenImage get notificationicon =>
       const AssetGenImage('assets/images/notificationicon.png');
@@ -523,6 +527,7 @@ class $AssetsImagesGen {
     menuicon4,
     menuicon5,
     menuicon6,
+    nativeSplash,
     notificationicon,
     notificationsicon,
     notinterestedicon,
