@@ -302,6 +302,7 @@ class $AssetsImagesGen {
   /// File path: assets/images/delete123.png
   AssetGenImage get delete123 =>
       const AssetGenImage('assets/images/delete123.png');
+
   /// File path: assets/images/documentaries1.png
   AssetGenImage get documentaries1 =>
       const AssetGenImage('assets/images/documentaries1.png');
@@ -435,6 +436,7 @@ class $AssetsImagesGen {
   /// File path: assets/images/muteicon.png
   AssetGenImage get muteicon =>
       const AssetGenImage('assets/images/muteicon.png');
+
   /// File path: assets/images/native_splash.png
   AssetGenImage get nativeSplash =>
       const AssetGenImage('assets/images/native_splash.png');
@@ -472,6 +474,7 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/play.png
   AssetGenImage get play => const AssetGenImage('assets/images/play.png');
+
   /// File path: assets/images/playbutton.png
   AssetGenImage get playbutton =>
       const AssetGenImage('assets/images/playbutton.png');
