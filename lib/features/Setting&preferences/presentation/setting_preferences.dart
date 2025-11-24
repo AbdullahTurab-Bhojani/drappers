@@ -128,7 +128,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(top: 40.0),
+                      padding: EdgeInsets.only(top: 40.0),
                       child: Divider(
                         color: customColors.labelColor.withOpacity(0.2),
                         thickness: 0.3,
@@ -152,17 +152,18 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                           children: [
                             Row(
                               children: [
-                                Icon(
-                                  Icons.delete_forever,
-                                  color: customColors.redlight,
-                                  size: 24,
+                                Image.asset(
+                                  Assets.images.delete123.path,
+                                  height: 26,
+                                  width: 26,
+                                  color: customColors.rednormal,
                                 ),
-                                const SizedBox(width: 10.0),
+                                const SizedBox(width: 15.0),
                                 PoppinsText(
                                   "Delete or Deactivate Account",
                                   fontSize: PoppinsFontSizeVariant.size16,
-                                  fontWeight: PoppinsFontWeightVariant.semiBold,
-                                  color: customColors.redlight,
+                                  fontWeight: PoppinsFontWeightVariant.medium,
+                                  color: customColors.rednormal,
                                 ),
                               ],
                             ),

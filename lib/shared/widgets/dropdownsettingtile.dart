@@ -39,7 +39,8 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    const double horizontalPadding = 20.0; // Defined in the original build context
+    const double horizontalPadding =
+        20.0; // Defined in the original build context
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -52,11 +53,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
           // Row with Icon and Title/Subtitle
           Row(
             children: [
-              Icon(
-                widget.icon,
-                color: customColors.textColor,
-                size: 24,
-              ),
+              Icon(widget.icon, color: customColors.textColor, size: 24),
               const SizedBox(width: 15.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +76,6 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
             ],
           ),
           const SizedBox(height: 25.0),
-
-          // Dropdown Field
           DropdownButtonFormField<String>(
             initialValue: _currentValue,
             dropdownColor: customColors.lightGray,
@@ -92,7 +87,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
             decoration: InputDecoration(
               filled: true,
               fillColor: customColors.lightGray,
-              contentPadding: const EdgeInsets.symmetric(
+              contentPadding: EdgeInsets.symmetric(
                 horizontal: 15.0,
                 vertical: 10.0,
               ),
@@ -114,8 +109,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
                 widget.onChanged(newValue);
               }
             },
-            items: widget.options
-                .map<DropdownMenuItem<String>>((String value) {
+            items: widget.options.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: PoppinsText(

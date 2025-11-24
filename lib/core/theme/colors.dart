@@ -32,6 +32,8 @@ abstract final class AppColors {
   static const mahroon = Color(0xff4a0516);
   static const purple = Color(0xff582983);
   static const purplenew = Color(0xff9333E9);
+  static const blackshadeboxbg= Color(0xff141414);
+
 
 
 
