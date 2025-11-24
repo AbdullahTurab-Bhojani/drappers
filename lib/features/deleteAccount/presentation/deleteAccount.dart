@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart'; // Assuming PoppinsText, PoppinsFontSizeVariant, etc., are defined here
 import '../../../../gen/assets.gen.dart';
@@ -218,12 +219,16 @@ class _deleteAccountScreenState extends State<deleteAccountScreen> {
                     const SizedBox(height: 40.0),
                     if (_selectedOption == AccountOption.delete)
                       AppButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.pushReplacement(AppRoutes.deleteDetailScreen.path);
+                        },
                         title: "Delete Account Permanently",
                       ),
 
                     if (_selectedOption == AccountOption.deactivate)
-                      AppButton(onPressed: () {}, title: "Deactivate Account"),
+                      AppButton(onPressed: () {
+                      context.pushReplacement(AppRoutes.deactivateAccountScreen.path);
+                      }, title: "Deactivate Account"),
                   ],
                 ),
               ),

@@ -21,6 +21,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
   final Color redlight;
   final Color rednormal;
   final Color popupdelete;
+  final Color mahroon;
 
   final List<Color> buttonColors;
 
@@ -45,6 +46,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     required this.redlight,
     required this.rednormal,
     required this.popupdelete,
+    required this.mahroon,
   });
 
   @override
@@ -67,6 +69,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     Color? redbox,
     Color? redlight,
     Color? rednormal,
+    Color? mahroon,
 
     LinearGradient? buttongradient,
   }) {
@@ -90,6 +93,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       redlight: redlight ?? this.redlight,
       rednormal: rednormal ?? this.rednormal,
       popupdelete: popupdelete ?? this.popupdelete,
+      mahroon: mahroon ?? this.mahroon,
       buttonColors: buttonColors,
     );
   }
@@ -130,6 +134,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
 
       buttonColors: lerpColorList(buttonColors, other.buttonColors, t),
       popupdelete: Color.lerp(popupdelete, other.popupdelete, t)!,
+      mahroon: Color.lerp(mahroon, other.mahroon, t)!,
     );
   }
 }

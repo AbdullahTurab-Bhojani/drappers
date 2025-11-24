@@ -24,7 +24,7 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
       width: double.infinity,
       padding:  EdgeInsets.only(top: 24, bottom: 24, left: 12, right: 12),
       decoration: BoxDecoration(
-        color:  customColors.popupdelete,
+        color:  customColors.regular,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(

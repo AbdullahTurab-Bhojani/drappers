@@ -27,6 +27,7 @@ abstract final class AppColors {
   static const normalred = Color(0xffa10b30);
   static const lightred = Color(0xffF81149);
   static const popupdelete = Color(0xFF030B3A);
+  static const mahroon = Color(0xff4a0516);
 
 
   // Dark Theme //

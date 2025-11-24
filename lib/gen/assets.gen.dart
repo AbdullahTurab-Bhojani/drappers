@@ -421,6 +421,10 @@ class $AssetsImagesGen {
   AssetGenImage get reporticon =>
       const AssetGenImage('assets/images/reporticon.png');
 
+  /// File path: assets/images/reset123.png
+  AssetGenImage get reset123 =>
+      const AssetGenImage('assets/images/reset123.png');
+
   /// File path: assets/images/savereelicon.png
   AssetGenImage get savereelicon =>
       const AssetGenImage('assets/images/savereelicon.png');
@@ -444,6 +448,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/signInoption.png
   AssetGenImage get signInoption =>
       const AssetGenImage('assets/images/signInoption.png');
+
+  /// File path: assets/images/signout1234.png
+  AssetGenImage get signout1234 =>
+      const AssetGenImage('assets/images/signout1234.png');
 
   /// File path: assets/images/signouticon.png
   AssetGenImage get signouticon =>
@@ -526,12 +534,14 @@ class $AssetsImagesGen {
     profileCard,
     progressBg,
     reporticon,
+    reset123,
     savereelicon,
     screensbg,
     screenshoticon,
     sentence,
     settingsicon,
     signInoption,
+    signout1234,
     signouticon,
     slider,
     subscriptionBg,
