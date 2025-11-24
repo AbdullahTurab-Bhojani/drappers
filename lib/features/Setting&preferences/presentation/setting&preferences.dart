@@ -156,7 +156,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                   width: 26,
                                   color: customColors.rednormal,
                                 ),
-                                const SizedBox(width: 10.0),
+                                const SizedBox(width: 15.0),
                                 PoppinsText(
                                   "Delete or Deactivate Account",
                                   fontSize: PoppinsFontSizeVariant.size16,
