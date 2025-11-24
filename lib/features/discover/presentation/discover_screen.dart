@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 

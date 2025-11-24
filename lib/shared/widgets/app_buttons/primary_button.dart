@@ -11,7 +11,12 @@ class AppButton extends StatelessWidget {
     this.buttonSize,
     this.isLoading = false,
     this.color,
-  });
+    this.borderColor = Colors.transparent,
+    this.borderWidth = 2,
+    List<Color>? buttonGradient,
+  }) : buttonGradient = (buttonGradient != null && buttonGradient.length >= 2)
+           ? buttonGradient
+           : const [Color(0xFF00C6FF), Color(0xFF0072FF)];
 
   final VoidCallback onPressed;
   final Widget? prefixIcon;
@@ -21,6 +26,9 @@ class AppButton extends StatelessWidget {
   final bool isLoading;
   final bool border;
   final Color? color;
+  final Color? borderColor;
+  final double? borderWidth;
+  final List<Color>? buttonGradient;
 
   // Color get textColor => border ? AppColors.primary : AppColors.white;
   // Color get backgroundColor =>
@@ -29,6 +37,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+
     return TextButton(
       style: TextButton.styleFrom(
         minimumSize: buttonSize ?? Size(MediaQuery.of(context).size.width, 52),
@@ -42,7 +51,7 @@ class AppButton extends StatelessWidget {
             decoration: BoxDecoration(
               color: color,
               gradient: LinearGradient(
-                colors: customColors.buttonColors,
+                colors: buttonGradient!,
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
@@ -54,7 +63,7 @@ class AppButton extends StatelessWidget {
               //   ),
               // ],
               border: border
-                  ? Border.all(color: customColors.greyColor, width: 1)
+                  ? Border.all(color: borderColor!, width: borderWidth!)
                   : null,
               borderRadius: BorderRadius.circular(50),
             ),
@@ -75,6 +84,7 @@ class AppButton extends StatelessWidget {
                   const SizedBox(width: 6),
                   prefixIcon!,
                 ],
+                SizedBox(width: 6),
                 PoppinsText(
                   fontSize: PoppinsFontSizeVariant.size16,
                   title,

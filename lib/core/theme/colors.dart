@@ -1,3 +1,5 @@
+// ignore_for_file: strict_top_level_inference
+
 part of '../../drappers.dart';
 
 @immutable

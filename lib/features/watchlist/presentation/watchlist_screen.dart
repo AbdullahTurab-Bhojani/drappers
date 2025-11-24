@@ -85,7 +85,6 @@ class WatchlistScreen extends StatelessWidget {
                       title: item.title,
                       year: item.year,
                       onTapPlay: () {
-                        print('Playing: ${item.title}');
                       },
                     );
                   },

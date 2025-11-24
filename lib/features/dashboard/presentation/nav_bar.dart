@@ -81,9 +81,7 @@ class _BottomNavigationBarShellState
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final customColors = Theme.of(context).extension<AppCustomColors>()!;
-
     return PopScope(
       canPop: false,
       child: Scaffold(

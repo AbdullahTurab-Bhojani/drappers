@@ -6,7 +6,7 @@ import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         title: "Continue",
                       ),
                       SizedBox(height: 12),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: 52,
                         child: Center(
@@ -318,49 +318,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSocialButton({
-    required String label,
-    required String icon,
-    required VoidCallback onPressed,
-  }) {
-    Color inputFieldColor = Color(0xFF17244D);
-    const Color textColor = Colors.white;
-
-    return Container(
-      height: 45,
-      decoration: BoxDecoration(
-        color: inputFieldColor,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.white10),
-      ),
-      child: InkWell(
-        onTap: onPressed,
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                icon,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: textColor,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-              const SizedBox(width: 6),
-              Text(
-                label,
-                style: const TextStyle(
-                  color: textColor,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }

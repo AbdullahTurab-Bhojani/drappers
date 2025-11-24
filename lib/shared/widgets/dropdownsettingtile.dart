@@ -82,7 +82,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
 
           // Dropdown Field
           DropdownButtonFormField<String>(
-            value: _currentValue,
+            initialValue: _currentValue,
             dropdownColor: customColors.lightGray,
             style: TextStyle(
               color: customColors.textColor,

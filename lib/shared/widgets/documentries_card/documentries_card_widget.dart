@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../../../core/extensions/theme_extension.dart';
-import '../../../drappers.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class DocumentriesCardWidget extends StatefulWidget {
-  final String AssetImage;
+  final String assetImage;
 
-  const DocumentriesCardWidget({super.key, required this.AssetImage});
+  const DocumentriesCardWidget({super.key, required this.assetImage});
 
   @override
   State<DocumentriesCardWidget> createState() => _DocumentriesCardWidgetState();
@@ -16,15 +13,13 @@ class DocumentriesCardWidget extends StatefulWidget {
 class _DocumentriesCardWidgetState extends State<DocumentriesCardWidget> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
     return Container(
       width: 125,
       height: 358,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
-          image: AssetImage(widget.AssetImage),
+          image: AssetImage(widget.assetImage),
           fit: BoxFit.cover,
         ),
       ),

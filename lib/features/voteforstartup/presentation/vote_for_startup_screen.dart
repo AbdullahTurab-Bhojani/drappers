@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+// ignore_for_file: deprecated_member_use
 
+import 'package:flutter/material.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -224,16 +224,16 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                       SizedBox(height: 30),
                       Container(
                         width: double.infinity,
-                        height: 650,
                         decoration: BoxDecoration(
                           color: customColors.dark,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
                               width: double.infinity,
-                              height: 275,
+                              height: 215,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(20),
@@ -263,118 +263,112 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                 ],
                               ),
                             ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.all(20.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  color: customColors.dark,
-                                  child: Column(
-                                    crossAxisAlignment: .start,
-                                    children: [
-                                      PoppinsText(
-                                        'Echo Tech Solutions',
-                                        fontSize: PoppinsFontSizeVariant.size22,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.medium,
-                                      ),
-                                      SizedBox(height: 2),
-
-                                      PoppinsText(
-                                        'Sustainable energy Revolution',
-                                        fontSize: PoppinsFontSizeVariant.size16,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.regular,
-                                        color: customColors.subtextColor,
-                                      ),
-                                      SizedBox(height: 10),
-                                      PoppinsText(
-                                        'simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.',
-                                        fontSize: PoppinsFontSizeVariant.size12,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.regular,
-                                        color: customColors.subtextColor,
-                                      ),
-                                      SizedBox(height: 20),
-                                      PoppinsText(
-                                        'Meet the Drapers S512',
-                                        fontSize: PoppinsFontSizeVariant.size16,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.regular,
-                                        color: customColors.textColor,
-                                      ),
-                                      SizedBox(height: 30),
-                                      Row(
-                                        children: [
-                                          AppButton(
-                                            prefixIcon: Image.asset(
-                                              Assets.images.playstrokeicon.path,
-                                              width: 14,
-                                              height: 14,
-                                            ),
-                                            suffixIcon: Image.asset(
-                                              Assets.images.playstrokeicon.path,
-                                              width: 14,
-                                              height: 14,
-                                            ),
-                                            onPressed: () {},
-                                            title: 'Watch Episode',
-                                            buttonSize: Size(180, 52),
+                            Padding(
+                              padding: EdgeInsets.all(15),
+                              child: Container(
+                                width: double.infinity,
+                                color: customColors.dark,
+                                child: Column(
+                                  crossAxisAlignment: .start,
+                                  children: [
+                                    PoppinsText(
+                                      'Echo Tech Solutions',
+                                      fontSize: PoppinsFontSizeVariant.size22,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.medium,
+                                    ),
+                                    SizedBox(height: 2),
+                            
+                                    PoppinsText(
+                                      'Sustainable energy Revolution',
+                                      fontSize: PoppinsFontSizeVariant.size16,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.regular,
+                                      color: customColors.subtextColor,
+                                    ),
+                                    SizedBox(height: 10),
+                                    PoppinsText(
+                                      'simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.',
+                                      fontSize: PoppinsFontSizeVariant.size12,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.regular,
+                                      color: customColors.subtextColor,
+                                    ),
+                                    SizedBox(height: 20),
+                                    PoppinsText(
+                                      'Meet the Drapers S512',
+                                      fontSize: PoppinsFontSizeVariant.size16,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.regular,
+                                      color: customColors.textColor,
+                                    ),
+                                    SizedBox(height: 30),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        AppButton(
+                                          prefixIcon: Image.asset(
+                                            Assets.images.playstrokeicon.path,
+                                            width: 14,
+                                            height: 14,
                                           ),
-                                          SizedBox(width: 8),
-                                          Container(
-                                            width: 156,
-                                            height: 52,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: customColors.greyColor,
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
+                                          onPressed: () {},
+                                          title: 'Watch Episode',
+                                          buttonSize: Size(175, 52),
+                                          suffixIcon: SizedBox(),
+                                        ),
+                                        Container(
+                                          width: 148,
+                                          height: 52,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: customColors.greyColor,
+                                              width: 2,
                                             ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment: .center,
-                                                children: [
-                                                  Image.asset(
-                                                    Assets
-                                                        .images
-                                                        .hearticon
-                                                        .path,
-                                                    width: 20,
-                                                    height: 20,
-                                                  ),
-                                                  SizedBox(width: 8),
-                                                  PoppinsText(
-                                                    'Vote',
-                                                    fontSize:
-                                                        PoppinsFontSizeVariant
-                                                            .size16,
-                                                    fontWeight:
-                                                        PoppinsFontWeightVariant
-                                                            .medium,
-                                                    color: customColors
-                                                        .subtextColor,
-                                                  ),
-                                                ],
-                                              ),
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment: .center,
+                                              children: [
+                                                Image.asset(
+                                                  Assets
+                                                      .images
+                                                      .hearticon
+                                                      .path,
+                                                  width: 20,
+                                                  height: 20,
+                                                ),
+                                                SizedBox(width: 8),
+                                                PoppinsText(
+                                                  'Vote',
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size16,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .medium,
+                                                  color: customColors
+                                                      .subtextColor,
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          //  AppButton(
-                                          //   onPressed: () {},
-                                          //   icon: Image.asset(
-                                          //     Assets.images.playstrokeicon.path,
-                                          //     width: 14,
-                                          //     height: 14,
-                                          //   ),
-                                          //   title: 'Vote',
-                                          //   buttonSize: Size(158, 52),
-                                          // ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                        ),
+                                        //  AppButton(
+                                        //   onPressed: () {},
+                                        //   icon: Image.asset(
+                                        //     Assets.images.playstrokeicon.path,
+                                        //     width: 14,
+                                        //     height: 14,
+                                        //   ),
+                                        //   title: 'Vote',
+                                        //   buttonSize: Size(158, 52),
+                                        // ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

@@ -13,7 +13,7 @@ class FaqItem {
 }
 
 class FaqsScreen extends StatefulWidget {
-  FaqsScreen({super.key});
+  const FaqsScreen({super.key});
 
   @override
   State<FaqsScreen> createState() => _FaqsScreenState();
@@ -72,15 +72,12 @@ class _FaqsScreenState extends State<FaqsScreen> {
           "Yes, basic access is free. Some features may require registration, but there are typically fees for using the platform.",
     ),
   ];
+  Set<int> expandedIndices = {};
 
-  Set<int> _expandedIndices = {};
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    final Color contentBackgroundColor =
-        customColors.regular ?? Color(0xFF2C2F4D);
-    // double paddingValue = 20.0;
 
     return Scaffold(
       body: Container(
@@ -115,7 +112,7 @@ class _FaqsScreenState extends State<FaqsScreen> {
                   itemCount: _faqs.length,
                   itemBuilder: (context, index) {
                     final item = _faqs[index];
-                    final isExpanded = _expandedIndices.contains(index);
+                    final isExpanded = expandedIndices.contains(index);
                     return Padding(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 25),
                       child: ClipRRect(
@@ -161,9 +158,9 @@ class _FaqsScreenState extends State<FaqsScreen> {
                             onExpansionChanged: (expanded) {
                               setState(() {
                                 if (expanded) {
-                                  _expandedIndices.add(index);
+                                  expandedIndices.add(index);
                                 } else {
-                                  _expandedIndices.remove(index);
+                                  expandedIndices.remove(index);
                                 }
                               });
                             },

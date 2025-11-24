@@ -6,7 +6,6 @@ import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../shared/widgets/tile_widget.dart';
-import '../../privacypolicy/presentation/views/privacypolicy.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -31,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
       {
         'title': 'Settings & Preferences',
         'image': Assets.images.menuicon2.path,
-        'route': AppRoutes.SettingpreferencesScreen.path,
+        'route': AppRoutes.settingpreferencesScreen.path,
         'color': Colors.white,
         'isTap': true,
       },
@@ -158,7 +157,7 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(AssetImage: images[index]);
+                              return CardWidget(assetImage: images[index]);
                             },
                           ),
                         ),
@@ -191,7 +190,7 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(AssetImage: images[index]);
+                              return CardWidget(assetImage: images[index]);
                             },
                           ),
                         ),

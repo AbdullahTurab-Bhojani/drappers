@@ -1,18 +1,19 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../core/extensions/theme_extension.dart';
-import '../../../../core/theme/app_theme.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/documentries_card/documentries_card_widget.dart';
+import '../../../../shared/widgets/home_banner.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
-import '../../../../shared/widgets/reels_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -97,10 +98,14 @@ class _HomeScreenState extends State<HomeScreen> {
       Assets.images.trendingshowimage6.path,
       Assets.images.trendingshowimage7.path,
     ];
+    List<String> hometab = [
+      'Live Pitches',
+      'Success Stories',
+      'Overnight Success',
+      'Entrepreneur Stories',
+    ];
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    final playerWidth = 400.0;
-    final playerHeight = 500.0;
     return Scaffold(
       body: Stack(
         children: [
@@ -147,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 10),
                             shrinkWrap: true,
-                            itemCount: 10,
+                            itemCount: hometab.length,
                             itemBuilder: (context, index) {
                               return Container(
                                 padding: EdgeInsets.symmetric(
@@ -157,11 +162,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                   border: Border.all(
-                                    color: Colors.white,
+                                    color: customColors.greyColor,
                                     width: 1,
                                   ),
                                 ),
-                                child: Center(child: PoppinsText('data')),
+                                child: Center(
+                                  child: PoppinsText(
+                                    hometab[index],
+                                    fontSize: PoppinsFontSizeVariant.size16,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
+                                    color: customColors.textColor,
+                                  ),
+                                ),
                               );
                             },
                           ),
@@ -412,7 +425,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return CardWidget(
-                                AssetImage: trendingimages[index],
+                                assetImage: trendingimages[index],
                               );
                             },
                           ),
@@ -450,165 +463,48 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                AssetImage: podcardimages[index],
+                                assetImage: podcardimages[index],
                               );
                             },
                           ),
                         ),
                         SizedBox(height: 30),
-                        Stack(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                context.pushNamed(AppRoutes.applyPitch.name);
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: 240,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(Assets.images.banner1.path),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.only(left: 16),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PoppinsText(
-                                      "Ready to Pitch?",
-                                      color: customColors.textColor,
-                                      fontSize: PoppinsFontSizeVariant.size24,
-                                      fontWeight: PoppinsFontWeightVariant.medium,
-                                    ),
-                                    SizedBox(height: 16),
-                                    PoppinsText(
-                                      "Submit your company details for\n meet the Drapers",
-                                      color: customColors.textColor,
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight: PoppinsFontWeightVariant.medium,
-                                    ),
-                                    SizedBox(height: 30),
-                                    AppButton(
-                                      onPressed: () {},
-                                      title: 'Apply to Pitch',
-                                      buttonSize: Size(186, 45),
-                                      suffixIcon: Image.asset(Assets.images.play.path),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: Image.asset(Assets.images.logoText.path),
-                            ),
-
-                            Positioned(
-                              bottom: 8,
-                              right: 8,
-                              child: Image.asset(
-                                Assets.images.logo2.path,
-                                width: 36,
-                                height: 36,
-                              ),
-                            ),
-                          ],
+                        HomeBanner(
+                          title: 'Ready to Pitch?',
+                          subtitle:
+                              'Submit your company details for\nmeet the Drapers',
+                          buttonText: 'Apply to Pitch',
+                          buttonColor: Colors.white,
+                          buttonBorderColor: Colors.transparent,
+                          backgroundImage: Assets.images.banner1.path,
+                          buttonBorderWidth: 0,
+                          buttonGradient: [],
+                          onTap: () {
+                            context.pushNamed(
+                              AppRoutes.applyPitch.name,
+                            );
+                          },
                         ),
                         SizedBox(height: 30),
-                        Stack(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                context.pushNamed(AppRoutes.voteForStartupScreen.name);
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: 240,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(Assets.images.banner2.path),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.only(left: 16),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PoppinsText(
-                                      "Vote for Startups!",
-                                      color: customColors.textColor,
-                                      fontSize: PoppinsFontSizeVariant.size24,
-                                      fontWeight: PoppinsFontWeightVariant.medium,
-                                    ),
-                                    SizedBox(height: 16),
-                                    PoppinsText(
-                                      "Cast your vote in the \ncompetition. ",
-                                      color: customColors.textColor,
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight: PoppinsFontWeightVariant.regular,
-                                    ),
-                                    SizedBox(height: 30),
-                                    Container(
-                                      width: 155,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xff582983),
-                                        border: Border.all(
-                                          color: Color(0xff9333E9),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            PoppinsText(
-                                              "Vote Now",
-                                              color: customColors.textColor,
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size16,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant.medium,
-                                            ),
-                                            SizedBox(width: 10),
-                                            Image.asset(Assets.images.play.path),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: Image.asset(Assets.images.logoText.path),
-                            ),
-
-                            Positioned(
-                              bottom: 8,
-                              right: 8,
-                              child: Image.asset(
-                                Assets.images.logo2.path,
-                                width: 36,
-                                height: 36,
-                              ),
-                            ),
+                        HomeBanner(
+                          title: "Vote for Startups!",
+                          subtitle: "Cast your vote in the \ncompetition. ",
+                          buttonText: "Vote Now",
+                          buttonColor: Color(0xff582983),
+                          buttonBorderColor: Color(0xff9333E9),
+                          backgroundImage: Assets.images.banner2.path,
+                          buttonBorderWidth: 2,
+                          buttonGradient: [
+                            Color(0xff582983),
+                            Color(0xff582983),
                           ],
+                          onTap: () {
+                            context.pushNamed(
+                              AppRoutes.voteForStartupScreen.name,
+                            );
+                          },
                         ),
+
                         SizedBox(height: 30),
 
                         Row(
@@ -680,14 +576,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: documentriescard.length,
                             itemBuilder: (context, index) {
                               return DocumentriesCardWidget(
-                                AssetImage: documentriescard[index],
+                                assetImage: documentriescard[index],
                               );
                             },
                           ),
                         ),
-
-
-
 
                         SizedBox(height: 50),
                       ],

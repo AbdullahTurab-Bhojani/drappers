@@ -16,11 +16,8 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  String? _fullName, _email, _phone, _password, _confirmPassword;
   String? _receiveMethod = 'Email';
   bool _agreedToTerms = false;
-  bool _showPassword = false;
-  bool _showConfirmPassword = false;
 
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -86,7 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 25), 
+                      SizedBox(height: 25),
                       NewTextField(
                         fieldbg: AppColors.tfield,
 
@@ -165,7 +162,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                       ),
 
-                      SizedBox(height: 8), 
+                      SizedBox(height: 8),
                       Container(
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
@@ -213,7 +210,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 10), 
+                      const SizedBox(height: 10),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -252,9 +249,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ),
                                     WidgetSpan(
                                       child: GestureDetector(
-                                        onTap: () {
-                                          // TODO: open terms screen
-                                        },
+                                        onTap: () {},
                                         child: PoppinsText(
                                           "Terms & Conditions",
                                           fontSize:
@@ -279,9 +274,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ),
                                     WidgetSpan(
                                       child: GestureDetector(
-                                        onTap: () {
-                                          // TODO: open privacy screen
-                                        },
+                                        onTap: () {},
                                         child: PoppinsText(
                                           "Privacy Policy.",
                                           fontSize:
@@ -301,7 +294,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
 
-                      const SizedBox(height: 20), 
+                      const SizedBox(height: 20),
                       AppButton(
                         onPressed: () {
                           context.pushReplacement(AppRoutes.home.path);
@@ -511,26 +504,5 @@ class _SignupScreenState extends State<SignupScreen> {
         ],
       ),
     );
-  }
-
-
-
-
-
-
-
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate() && _agreedToTerms) {
-      _formKey.currentState!.save();
-      // Logic for signing up the user would go here
-      print('Form Submitted:');
-      print('Name: $_fullName');
-      print('Email: $_email');
-      print('Phone: $_phone');
-      print('Receive Code Via: $_receiveMethod');
-    } else if (!_agreedToTerms) {
-      print('Error: Must agree to terms.');
-    }
   }
 }

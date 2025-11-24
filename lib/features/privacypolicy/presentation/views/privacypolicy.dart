@@ -16,8 +16,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    final Color contentBackgroundColor =
-        customColors.regular ?? Color(0xFF2C2F4D);
     final double paddingValue = 20.0;
 
     return Scaffold(

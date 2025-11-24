@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../app_bar/main_app_bar.dart';
@@ -32,8 +30,6 @@ class _ReelWidgetState extends State<ReelWidget> {
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
 
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
       body: Container(
         width: double.infinity,

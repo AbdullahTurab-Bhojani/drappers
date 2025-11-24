@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -173,7 +170,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                 ),
                               ),
                             );
-                          }).toList(),
+                          }),
 
                           Container(
                             width: double.infinity,
@@ -218,8 +215,9 @@ class _HelpsupportState extends State<Helpsupport> {
                                           value.trim().isEmpty) {
                                         return "Email required";
                                       }
-                                      if (!value.contains("@"))
+                                      if (!value.contains("@")) {
                                         return "Enter valid email";
+                                      }
                                       return null;
                                     },
                                   ),
