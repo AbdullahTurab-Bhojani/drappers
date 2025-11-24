@@ -6,14 +6,16 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     required this.title,
     this.border = false,
-    this.icon,
+    this.prefixIcon,
+    this.suffixIcon,
     this.buttonSize,
     this.isLoading = false,
     this.color,
   });
 
   final VoidCallback onPressed;
-  final Widget? icon;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final String title;
   final Size? buttonSize;
   final bool isLoading;
@@ -69,13 +71,20 @@ class AppButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                if (prefixIcon != null) ...[
+                  const SizedBox(width: 6),
+                  prefixIcon!,
+                ],
                 PoppinsText(
                   fontSize: PoppinsFontSizeVariant.size16,
                   title,
                   fontWeight: PoppinsFontWeightVariant.medium,
                   color: customColors.textColor,
                 ),
-                if (icon != null) ...[const SizedBox(width: 6), icon!],
+                if (suffixIcon != null) ...[
+                  const SizedBox(width: 6),
+                  suffixIcon!,
+                ],
               ],
             ),
     );

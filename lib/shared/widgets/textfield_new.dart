@@ -360,7 +360,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                   ),
                 ),
 
-                suffixIconConstraints: const BoxConstraints(
+                suffixIconConstraints: BoxConstraints(
                   minWidth: 32,
                   minHeight: 32,
                 ),

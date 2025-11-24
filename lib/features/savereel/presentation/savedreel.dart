@@ -8,7 +8,6 @@ import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/reelcard/reelcard_widget.dart';
 
 class Savedreel extends StatefulWidget {
-  
   const Savedreel({super.key});
 
   @override
@@ -18,20 +17,20 @@ class Savedreel extends StatefulWidget {
 class _SavedreelState extends State<Savedreel> {
   @override
   Widget build(BuildContext context) {
-  List<String> reelimages = [
-  Assets.images.reelimage1.path,
-  Assets.images.reelimage2.path,
-  Assets.images.reelimage3.path,
-  Assets.images.reelimage4.path,
-  Assets.images.reelimage5.path,
-];
-List<String> reelTitles = [
-  'Rio De Janeiro - Meet The Drappers',
-  'Brand Acceleration - Meet The Drappers',
-  'Season 5, India - Meet The Drappers',
-  'The Frontier - Meet The Drappers',
-  'Season 6, Saudi Arabia - Meet The Drappers',
-];
+    List<String> reelimages = [
+      Assets.images.reelimage1.path,
+      Assets.images.reelimage2.path,
+      Assets.images.reelimage3.path,
+      Assets.images.reelimage4.path,
+      Assets.images.reelimage5.path,
+    ];
+    List<String> reelTitles = [
+      'Rio De Janeiro - Meet The Drappers',
+      'Brand Acceleration - Meet The Drappers',
+      'Season 5, India - Meet The Drappers',
+      'The Frontier - Meet The Drappers',
+      'Season 6, Saudi Arabia - Meet The Drappers',
+    ];
 
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
@@ -78,7 +77,7 @@ List<String> reelTitles = [
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15,vertical: 24),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: reelimages.length,
@@ -89,7 +88,10 @@ List<String> reelTitles = [
                     childAspectRatio: 0.5,
                   ),
                   itemBuilder: (context, index) {
-                    return ReelcardWidget(backgroundImage: reelimages[index], title: reelTitles[index],);
+                    return ReelcardWidget(
+                      assetImagePath: reelimages[index],
+                      title: reelTitles[index],
+                    );
                   },
                 ),
               ),
@@ -98,6 +100,5 @@ List<String> reelTitles = [
         ),
       ),
     );
- 
   }
 }

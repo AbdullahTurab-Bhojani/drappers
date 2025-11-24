@@ -1,20 +1,19 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/textfield_new.dart';
 
 class ForgetpasswordScreen extends StatefulWidget {
-  ForgetpasswordScreen({super.key});
+  const ForgetpasswordScreen({super.key});
 
   @override
   State<ForgetpasswordScreen> createState() => _ForgetpasswordScreenState();
 }
 
 class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
-  final _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
   bool isPhone = true;
 
   @override
@@ -65,7 +64,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 color: customColors.textColor,
               ),
               SizedBox(height: 24),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width - 40,
                 child: Column(
                   children: [
@@ -114,7 +113,7 @@ class RadioTileWidget extends StatelessWidget {
   final String subtitle;
   final VoidCallback onTap;
 
-  RadioTileWidget({
+  const RadioTileWidget({
     super.key,
     required this.selected,
     required this.title,

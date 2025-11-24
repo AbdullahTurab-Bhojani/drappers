@@ -62,7 +62,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                     // --- PLAYBACK SETTINGS ---
                     SettingSectionHeader(
                       title: "Playback Settings",
-                      color: customColors.textColor!,
+                      color: customColors.textColor,
                     ),
 
                     ToggleSettingTile(
@@ -91,7 +91,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
 
                     SettingSectionHeader(
                       title: "Video Quality",
-                      color: customColors.textColor!,
+                      color: customColors.textColor,
                     ),
 
                     DropdownSettingTile(
@@ -109,7 +109,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
 
                     SettingSectionHeader(
                       title: "Accessibility",
-                      color: customColors.textColor!,
+                      color: customColors.textColor,
                     ),
 
                     DropdownSettingTile(
