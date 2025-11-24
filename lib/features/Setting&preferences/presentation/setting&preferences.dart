@@ -160,7 +160,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                 PoppinsText(
                                   "Delete or Deactivate Account",
                                   fontSize: PoppinsFontSizeVariant.size16,
-                                  fontWeight: PoppinsFontWeightVariant.semiBold,
+                                  fontWeight: PoppinsFontWeightVariant.medium,
                                   color: customColors.rednormal,
                                 ),
                               ],
