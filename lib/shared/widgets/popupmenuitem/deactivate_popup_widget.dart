@@ -41,7 +41,7 @@ class _DeactivatePopupWidget extends State<DeactivatePopupWidget> {
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
                 color: customColors.textColor,
-                textAlign: TextAlign.center, 
+                textAlign: TextAlign.center,
               ),
             ],
           ),

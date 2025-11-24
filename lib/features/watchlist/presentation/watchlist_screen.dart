@@ -63,15 +63,15 @@ class WatchlistScreen extends StatelessWidget {
                 centerTitle: false,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                actions: [
-                  PoppinsText(
-                    "Edit",
-                    fontSize: PoppinsFontSizeVariant.size14,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: customColors.textColor,
-                  ),
-                  SizedBox(width: 10),
-                ],
+                // actions: [
+                //   PoppinsText(
+                //     "Edit",
+                //     fontSize: PoppinsFontSizeVariant.size14,
+                //     fontWeight: PoppinsFontWeightVariant.medium,
+                //     color: customColors.textColor,
+                //   ),
+                //   SizedBox(width: 10),
+                // ],
               ),
 
               Expanded(
