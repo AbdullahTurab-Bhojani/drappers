@@ -10,11 +10,11 @@ class DeactivateAccountScreen extends StatefulWidget {
   const DeactivateAccountScreen({super.key});
 
   @override
-  State<DeactivateAccountScreen> createState() => _DeactivateAccountScreenState();
+  State<DeactivateAccountScreen> createState() =>
+      _DeactivateAccountScreenState();
 }
 
 class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -30,13 +30,11 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child:
-         Padding(
-           padding: EdgeInsets.all(12.0),
-           child: Column(
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
               AppMainBar(
                 leadingIcon: Icons.arrow_back_ios,
                 title: "",
@@ -51,60 +49,63 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 fontWeight: PoppinsFontWeightVariant.semiBold,
                 color: customColors.textColor,
               ),
-               SizedBox(height: 20),
+              SizedBox(height: 20),
               PoppinsText(
                 'Temporarily pause your account',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-               SizedBox(height: 30),
+              SizedBox(height: 30),
               PoppinsText(
                 'What happens when you deactivate:',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
                 color: customColors.textColor,
               ),
-               SizedBox(height: 16),
+              SizedBox(height: 16),
               PoppinsText(
-                            '• All your data will be preserved',
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.textColor,
-                          ),
-                                 SizedBox(height: 6),
+                '• All your data will be preserved',
+                fontSize: PoppinsFontSizeVariant.size12,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: customColors.textColor,
+              ),
+              SizedBox(height: 6),
               PoppinsText(
                 '• You can reactivate anytime by signing in',
                 fontSize: PoppinsFontSizeVariant.size12,
                 fontWeight: PoppinsFontWeightVariant.regular,
-               color: customColors.textColor,
-              ),       
-              SizedBox(height: 40),    
-              AppButton(
-                          onPressed:() {
-  showDialog(
-    context: context,
-    builder: (context) =>  Dialog(
-      backgroundColor: Colors.transparent,
-      child: DeactivatePopupWidget(),
-    ),
-  );
-},
-     title: "Deactivate Account",
-                        ),
-              SizedBox(height: 20),
-              AppButtonwithoudbg(
-                          onPressed: () {
-                            context.pop();
-                          },
-                          title: "Cancel",
-                        ),
-               SizedBox(height: 15)
-              
-              
-              ]
+                color: customColors.textColor,
               ),
-         ))
+              SizedBox(height: 40),
+              AppButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => Dialog(
+                      backgroundColor: Colors.transparent,
+                      child: DeactivatePopupWidget(),
+                    ),
+                  );
+                },
+                title: "Deactivate Account",
+              ),
+              SizedBox(height: 20),
+              AppButton(
+                color: Colors.transparent,
+                borderColor: customColors.textColor,
+                borderWidth: 1,
+                border: true,
+                onPressed: () {
+                  context.pop();
+                },
+                title: "Cancel",
+              ),
+              SizedBox(height: 15),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
