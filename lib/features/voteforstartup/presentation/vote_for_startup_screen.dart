@@ -307,7 +307,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                       Row(
                                         children: [
                                           AppButton(
-                                            icon: Image.asset(
+                                            prefixIcon: Image.asset(
                                               Assets.images.playstrokeicon.path,
                                               width: 14,
                                               height: 14,
