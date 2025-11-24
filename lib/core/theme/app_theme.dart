@@ -62,6 +62,8 @@ class AppThemes {
           redbox: AppColors.redbox,
           redlight: AppColors.normalred,
           rednormal: AppColors.lightred,
+          popupdelete: AppColors.popupdelete,
+          mahroon: AppColors.mahroon,
         ),
       ],
     ),
@@ -90,6 +92,9 @@ class AppThemes {
           redbox: AppColors.redbox,
           redlight: AppColors.normalred,
           rednormal: AppColors.lightred,
+          popupdelete: AppColors.popupdelete,
+          mahroon: AppColors.mahroon,
+
         ),
       ],
     ),
@@ -119,6 +124,9 @@ class AppThemes {
           redbox: AppColors.redbox,
           redlight: AppColors.normalred,
           rednormal: AppColors.lightred,
+          popupdelete: AppColors.popupdelete,
+          mahroon: AppColors.mahroon,
+
         ),
       ],
     ),

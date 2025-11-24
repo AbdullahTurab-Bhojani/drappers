@@ -57,6 +57,8 @@ import 'features/Setting&preferences/presentation/setting_preferences.dart';
 import 'features/applypitch/presentation/apply_pitch_screen.dart';
 import 'features/dashboard/presentation/nav_bar.dart';
 import 'features/deleteAccount/presentation/delete_account.dart';
+import 'features/deactivateAccount/deactivateAccount.dart';
+import 'features/delete_detail/presentation/deleteDetail.dart';
 import 'features/discover/presentation/discover_screen.dart';
 import 'features/documentriescard/presentation/documentriescard.dart';
 import 'features/editprofile/presentation/editprofile_screen.dart';

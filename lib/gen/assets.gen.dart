@@ -251,6 +251,9 @@ class $AssetsImagesGen {
   AssetGenImage get backicon =>
       const AssetGenImage('assets/images/backicon.png');
 
+  /// File path: assets/images/ban123.png
+  AssetGenImage get ban123 => const AssetGenImage('assets/images/ban123.png');
+
   /// File path: assets/images/banner guest.png
   AssetGenImage get bannerGuest =>
       const AssetGenImage('assets/images/banner guest.png');
@@ -296,6 +299,9 @@ class $AssetsImagesGen {
   AssetGenImage get createpage =>
       const AssetGenImage('assets/images/createpage.png');
 
+  /// File path: assets/images/delete123.png
+  AssetGenImage get delete123 =>
+      const AssetGenImage('assets/images/delete123.png');
   /// File path: assets/images/documentaries1.png
   AssetGenImage get documentaries1 =>
       const AssetGenImage('assets/images/documentaries1.png');
@@ -393,6 +399,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/logo2.png
   AssetGenImage get logo2 => const AssetGenImage('assets/images/logo2.png');
+
+  /// File path: assets/images/logout123.png
+  AssetGenImage get logout123 =>
+      const AssetGenImage('assets/images/logout123.png');
 
   /// File path: assets/images/mentionedicon.png
   AssetGenImage get mentionedicon =>
@@ -513,6 +523,10 @@ class $AssetsImagesGen {
   AssetGenImage get reporticon =>
       const AssetGenImage('assets/images/reporticon.png');
 
+  /// File path: assets/images/reset123.png
+  AssetGenImage get reset123 =>
+      const AssetGenImage('assets/images/reset123.png');
+
   /// File path: assets/images/savereelicon.png
   AssetGenImage get savereelicon =>
       const AssetGenImage('assets/images/savereelicon.png');
@@ -536,6 +550,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/signInoption.png
   AssetGenImage get signInoption =>
       const AssetGenImage('assets/images/signInoption.png');
+
+  /// File path: assets/images/signout1234.png
+  AssetGenImage get signout1234 =>
+      const AssetGenImage('assets/images/signout1234.png');
 
   /// File path: assets/images/signouticon.png
   AssetGenImage get signouticon =>
@@ -602,6 +620,7 @@ class $AssetsImagesGen {
     shareicon,
     showicon,
     backicon,
+    ban123,
     bannerGuest,
     bannerPng,
     bannerSvg,
@@ -614,6 +633,7 @@ class $AssetsImagesGen {
     commenticon,
     courseComplete,
     createpage,
+    delete123,
     documentaries1,
     documentaries2,
     documentaries3,
@@ -639,6 +659,7 @@ class $AssetsImagesGen {
     lessonComplete,
     likeicon,
     logo2,
+    logout123,
     mentionedicon,
     menuicon1,
     menuicon2,
@@ -670,12 +691,14 @@ class $AssetsImagesGen {
     profileCard,
     progressBg,
     reporticon,
+    reset123,
     savereelicon,
     screensbg,
     screenshoticon,
     sentence,
     settingsicon,
     signInoption,
+    signout1234,
     signouticon,
     slider,
     subscriptionBg,
