@@ -147,6 +147,17 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.deleteAccountScreen.name,
         builder: (context, state) => DeleteAccount(),
       ),
+      GoRoute(
+        path: AppRoutes.deactivateAccountScreen.path,
+        name: AppRoutes.deactivateAccountScreen.name,
+        builder: (context, state) => DeactivateAccountScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.deleteDetailScreen.path,
+        name: AppRoutes.deleteDetailScreen.name,
+        builder: (context, state) => DeleteDetailScreen(),
+      ),
+      
     ],
   );
 });

@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
@@ -221,18 +222,15 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                     if (_selectedOption == AccountOption.delete)
                       AppButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          context.pushReplacement(AppRoutes.deleteDetailScreen.path);
                         },
                         title: "Delete Account Permanently",
                       ),
 
                     if (_selectedOption == AccountOption.deactivate)
-                      AppButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        title: "Deactivate Account",
-                      ),
+                      AppButton(onPressed: () {
+                      context.pushReplacement(AppRoutes.deactivateAccountScreen.path);
+                      }, title: "Deactivate Account"),
                   ],
                 ),
               ),
