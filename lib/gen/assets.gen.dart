@@ -189,6 +189,22 @@ class $AssetsImagesGen {
   AssetGenImage get hideicon =>
       const AssetGenImage('assets/images/Hideicon.png');
 
+  /// File path: assets/images/Horizontal Thumbnail.png
+  AssetGenImage get horizontalThumbnail =>
+      const AssetGenImage('assets/images/Horizontal Thumbnail.png');
+
+  /// File path: assets/images/Horizontal Thumbnail2.png
+  AssetGenImage get horizontalThumbnail2 =>
+      const AssetGenImage('assets/images/Horizontal Thumbnail2.png');
+
+  /// File path: assets/images/Horizontal Thumbnail3.png
+  AssetGenImage get horizontalThumbnail3 =>
+      const AssetGenImage('assets/images/Horizontal Thumbnail3.png');
+
+  /// File path: assets/images/Horizontal Thumbnail4.png
+  AssetGenImage get horizontalThumbnail4 =>
+      const AssetGenImage('assets/images/Horizontal Thumbnail4.png');
+
   /// File path: assets/images/Image.png
   AssetGenImage get image => const AssetGenImage('assets/images/Image.png');
 
@@ -391,6 +407,10 @@ class $AssetsImagesGen {
   AssetGenImage get onboardingBg =>
       const AssetGenImage('assets/images/onboarding_bg.png');
 
+  /// File path: assets/images/playbutton.png
+  AssetGenImage get playbutton =>
+      const AssetGenImage('assets/images/playbutton.png');
+
   /// File path: assets/images/playicon.png
   AssetGenImage get playicon =>
       const AssetGenImage('assets/images/playicon.png');
@@ -455,6 +475,10 @@ class $AssetsImagesGen {
     a3dotsicon,
     applelogo,
     hideicon,
+    horizontalThumbnail,
+    horizontalThumbnail2,
+    horizontalThumbnail3,
+    horizontalThumbnail4,
     image,
     logo,
     reelimage1,
@@ -507,6 +531,7 @@ class $AssetsImagesGen {
     onboarding2,
     onboarding3,
     onboardingBg,
+    playbutton,
     playicon,
     prayer,
     profileCard,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/extensions/theme_extension.dart';
-import '../../../../drappers.dart'; // Assuming PoppinsText, PoppinsFontSizeVariant, etc., are defined here
+import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 
