@@ -52,7 +52,7 @@ class _ReportContentState extends State<ReportContent> {
       subtitle: "Duplicate titles, wrong order, or accessibility issues",
       isValue: false,
     ),
-    ReportItem(title: "Something Else", isValue: false, subtitle: ""),
+    ReportItem(title: "", isValue: false, subtitle: "Something Else"),
   ];
   bool isSelected = false;
 
@@ -76,7 +76,17 @@ class _ReportContentState extends State<ReportContent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppMainBar(
-              leadingIcon: Icons.arrow_back_ios,
+              leading: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+              ),
               title: "",
               centerTitle: false,
               backgroundColor: Colors.transparent,
@@ -97,6 +107,7 @@ class _ReportContentState extends State<ReportContent> {
                       fontWeight: PoppinsFontWeightVariant.semiBold,
                       color: customColors.textColor,
                     ),
+                    SizedBox(height: 20,),
                     PoppinsText(
                       "Help us improve your experience by sharing what's wrong.",
                       fontSize: PoppinsFontSizeVariant.size16,
@@ -112,6 +123,7 @@ class _ReportContentState extends State<ReportContent> {
                     ),
                     SizedBox(height: 30),
                     ListView.separated(
+                      padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: _reportcontenr.length,
@@ -126,7 +138,7 @@ class _ReportContentState extends State<ReportContent> {
                               }
 
                               _reportcontenr[index].isValue = true;
-                              isSelected =  _reportcontenr[index].isValue = true;
+                              isSelected = _reportcontenr[index].isValue = true;
                             });
                           },
                           child: ReportContentWidget(
@@ -135,20 +147,22 @@ class _ReportContentState extends State<ReportContent> {
                             item.isValue,
                           ),
                         );
-                      }, separatorBuilder: (BuildContext context, int index) { return SizedBox(
-                        height: 10,
-                      ) ;},
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(height: 10);
+                      },
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 30.0),
                     if (isSelected)
                       AppButton(
                         onPressed: () {
-                          context.pushReplacement(
+                          context.push(
                             AppRoutes.reportContentSomehingElse.path,
                           );
                         },
                         title: "Submit",
                       ),
+                    SizedBox(height: 30),
                   ],
                 ),
               ),

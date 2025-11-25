@@ -56,6 +56,8 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 _buildMenuItem(
+                  routePath: AppRoutes.reportContent.name,
+
                   iconPath: Assets.images.reporticon.path,
                   text: 'Report',
                   customColors: customColors,
@@ -64,11 +66,13 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
                   iconPath: Assets.images.interestedicon.path,
                   text: 'Interested',
                   customColors: customColors,
+                  routePath: AppRoutes.reportContent.name,
                 ),
                 _buildMenuItem(
                   iconPath: Assets.images.notinterestedicon.path,
                   text: 'Not Interested',
                   customColors: customColors,
+                  routePath: AppRoutes.reportContent.name,
                 ),
               ],
             ),
@@ -79,11 +83,15 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
   }
 
   PopupMenuItem<String> _buildMenuItem({
+    required String routePath,
     required String iconPath,
     required String text,
     required AppCustomColors customColors,
   }) {
     return PopupMenuItem<String>(
+      onTap: () {
+        context.pushNamed(routePath);
+      },
       value: text,
       child: SizedBox(
         width: 120,

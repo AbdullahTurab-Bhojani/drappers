@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
@@ -39,7 +40,17 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppMainBar(
-              leadingIcon: Icons.arrow_back_ios,
+              leading: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+              ),
               title: "",
               centerTitle: false,
               backgroundColor: Colors.transparent,
@@ -60,7 +71,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                       fontWeight: PoppinsFontWeightVariant.semiBold,
                       color: customColors.textColor,
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     PoppinsText(
                       "Help us improve your experience by sharing what's wrong.",
                       fontSize: PoppinsFontSizeVariant.size16,
@@ -79,7 +90,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                       "(Help us understand the specific issue.)",
                       fontSize: PoppinsFontSizeVariant.size12,
                       fontWeight: PoppinsFontWeightVariant.regular,
-                      color: customColors.labelColor,
+                      color: customColors.textColor,
                     ),
                     SizedBox(height: 12.0),
                     NewTextField(
@@ -87,10 +98,14 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                       controller: _controller,
                       labelText: "Description",
                       hintText: "Add reason",
-                      hintStyle: TextStyle(fontSize: 16, color: customColors.textColor, fontWeight: FontWeight.w400),
+                      hintStyle: GoogleFonts.poppins(
+                        fontSize: 16,
+                        color: customColors.textColor,
+                        fontWeight: FontWeight.w400,
+                      ),
                       maxLines: 5,
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 12),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: PoppinsText(
@@ -135,9 +150,12 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                       ),
                     ),
                     SizedBox(height: 30),
-                    AppButton(onPressed: () {
-                      context.pushReplacement(AppRoutes.home.path);
-                    }, title: "Submit"),
+                    AppButton(
+                      onPressed: () {
+                        context.goNamed(AppRoutes.home.name);
+                      },
+                      title: "Submit",
+                    ),
                   ],
                 ),
               ),
