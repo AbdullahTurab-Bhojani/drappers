@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
@@ -114,7 +115,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -171,7 +172,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return CardWidget(
-                                assetImage: trendingimages[index], showSaveIcon: false,
+                                assetImage: trendingimages[index],
+                                showSaveIcon: false,
                               );
                             },
                           ),
@@ -200,7 +202,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                assetImage: podcardimages[index], title: '', showSaveIcon: false, fontSizeVariant: PoppinsFontSizeVariant.size14,
+                                assetImage: podcardimages[index],
+                                title: '',
+                                showSaveIcon: false,
+                                fontSizeVariant: PoppinsFontSizeVariant.size14,
                               );
                             },
                           ),
@@ -228,7 +233,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: documentriescard.length,
                             itemBuilder: (context, index) {
                               return DocumentriesCardWidget(
-                                assetImage: documentriescard[index], showSaveIcon: false,
+                                assetImage: documentriescard[index],
+                                showSaveIcon: false,
                               );
                             },
                           ),

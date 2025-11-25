@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
-import '../../../shared/widgets/historyitemTile.dart';
 import '../../../shared/widgets/reelcard/reelcard_widget.dart';
 
 class Likecontent extends StatefulWidget {
@@ -73,7 +75,6 @@ class _LikecontentState extends State<Likecontent>
         ),
         child: Column(
           children: [
-            // ─────────── App Bar ───────────
             AppMainBar(
               leading: GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
@@ -91,14 +92,16 @@ class _LikecontentState extends State<Likecontent>
               backgroundColor: Colors.transparent,
               elevation: 0,
               actions: [
-                Padding(
-                  padding: EdgeInsets.only(right: 16),
+                InkWell(
+                  onTap: () {
+                    context.pushNamed(AppRoutes.Searchscreen.name);
+                  },
                   child: Image.asset(
-                    "assets/images/Searchicon.png",
-                    width: 20,
-                    height: 20,
+                    Assets.images.searchicon.path,
+                    color: customColors.textColor,
                   ),
                 ),
+                SizedBox(width: 20,),
               ],
             ),
 
@@ -120,6 +123,10 @@ class _LikecontentState extends State<Likecontent>
                   indicatorColor: customColors.textColor,
                   labelColor: customColors.textColor,
                   unselectedLabelColor: customColors.labelColor,
+                  labelStyle: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                   tabs: const [
                     Tab(text: "Videos"),
                     Tab(text: "Reels"),
@@ -129,47 +136,54 @@ class _LikecontentState extends State<Likecontent>
             ),
             SizedBox(height: 30),
             Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  SizedBox(
-                    height: 180,
-                    child: GridView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: trendingimages.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 15,
-                            crossAxisSpacing: 15,
-                            childAspectRatio: 0.6,
-                          ),
-                      itemBuilder: (context, index) {
-                        return CardWidget(assetImage: trendingimages[index]);
-                      },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    SizedBox(
+                      height: 182,
+                      child: GridView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: trendingimages.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 0.6,
+                            ),
+                        itemBuilder: (context, index) {
+                          return CardWidget(
+                            assetImage: trendingimages[index],
+                            showSaveIcon: false,
+                          );
+                        },
+                      ),
                     ),
-                  ),
 
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
-                    child: GridView.builder(
+                    GridView.builder(
                       padding: EdgeInsets.zero,
                       itemCount: reelimages.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
+                        crossAxisSpacing: 15,
                         childAspectRatio: 0.5,
                       ),
                       itemBuilder: (context, index) {
                         return ReelcardWidget(
                           assetImagePath: reelimages[index],
                           title: reelTitles[index],
+                          reelCardHeight: 100,
+                          reelCardWidth: 100,
+                          fontSizeVariant: PoppinsFontSizeVariant.size14,
+                          showSaveIcon: false,
                         );
                       },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
