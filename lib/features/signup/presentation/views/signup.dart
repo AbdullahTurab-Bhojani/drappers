@@ -17,7 +17,6 @@ class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String? _receiveMethod = 'Email';
-  bool _agreedToTerms = false;
 
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -25,6 +24,13 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  bool rememberMe = false;
+
+  void onRememberMeChanged(bool? value) {
+    setState(() {
+      rememberMe = value ?? false;
+    });
+  }
 
   @override
   void dispose() {
@@ -89,7 +95,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                         controller: _fullNameController,
                         labelText: "Full Name",
-                        hintText: "Enter your full name",
+                        hintText: "John Mackson",
                         filledColor: AppColors.tfield,
                         // validator: (value) {
                         //   if (value == null || value.trim().isEmpty) {
@@ -100,13 +106,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(height: 15),
 
-                      // Email Address
                       NewTextField(
                         fieldbg: AppColors.tfield,
 
                         controller: _emailController,
-                        labelText: "Email Address",
-                        hintText: "Enter your email",
+                        labelText: "Enter your Email Address*",
+                        hintText: "Jerrymackson@gmail.com",
                         filledColor: AppColors.tfield,
                         keyboardType: TextInputType.emailAddress,
                         // validator: (value) {
@@ -124,7 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                         controller: _emailController,
                         // controller: _phoneController,
-                        labelText: "Phone Number",
+                        labelText: "Enter your Phone Number*",
                         hintText: "03XXXXXXXXX",
                         filledColor: AppColors.tfield,
                         keyboardType: TextInputType.phone,
@@ -140,8 +145,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       AppPasswordField(
                         controller: _passwordController,
-                        labelText: "Create Password",
-                        hintText: "Enter your Password ",
+                        labelText: "Create Password*",
+                        hintText: "**********",
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return "Full name required";
@@ -152,8 +157,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(height: 15),
                       AppPasswordField(
                         controller: _passwordController,
-                        labelText: "Confirm Password",
-                        hintText: "Enter Confirm your Password",
+                        labelText: "Confirm Password*",
+                        hintText: "**********",
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return "Full name required";
@@ -176,6 +181,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               "Receive Code Via",
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
+                              color: customColors.labelColor,
                             ),
                             SizedBox(height: 10),
                             Row(
@@ -215,80 +221,118 @@ class _SignupScreenState extends State<SignupScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Transform.scale(
-                            scale: 0.6,
-                            child: Checkbox(
-                              value: _agreedToTerms,
-                              onChanged: (bool? newValue) {
-                                setState(() {
-                                  _agreedToTerms = newValue ?? false;
-                                });
-                              },
-                              activeColor: customColors.light,
-                              checkColor: Colors.white,
-                              side: BorderSide(
-                                color: customColors.textColor,
-                                width: 0.9,
+                          SizedBox(
+                            height: 14,
+                            width: 14,
+                            child: GestureDetector(
+                              onTap: () => onRememberMeChanged(!rememberMe),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  border: rememberMe
+                                      ? null
+                                      : Border.all(color: Colors.white),
+                                ),
+                                child: rememberMe
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            4,
+                                          ),
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFF1FCFFF),
+                                              Color(0xFF0063FF),
+                                            ],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                          ),
+                                        ),
+                                        child: Icon(
+                                          Icons.check,
+                                          size: 12,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : null,
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 0),
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    WidgetSpan(
-                                      child: PoppinsText(
-                                        "I agree to the ",
-                                        fontSize: PoppinsFontSizeVariant.size12,
-                                        color: customColors.textColor,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.regular,
-                                      ),
-                                    ),
-                                    WidgetSpan(
-                                      child: GestureDetector(
-                                        onTap: () {},
-                                        child: PoppinsText(
-                                          "Terms & Conditions",
-                                          fontSize:
-                                              PoppinsFontSizeVariant.size12,
-                                          color:
-                                              customColors.buttonColors.first,
-                                          fontWeight:
-                                              PoppinsFontWeightVariant.regular,
-
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                      ),
-                                    ),
-                                    WidgetSpan(
-                                      child: PoppinsText(
-                                        " and ",
-                                        fontSize: PoppinsFontSizeVariant.size12,
-                                        color: customColors.textColor,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.regular,
-                                      ),
-                                    ),
-                                    WidgetSpan(
-                                      child: GestureDetector(
-                                        onTap: () {},
-                                        child: PoppinsText(
-                                          "Privacy Policy.",
-                                          fontSize:
-                                              PoppinsFontSizeVariant.size12,
-                                          color: customColors.buttonColors.last,
-                                          fontWeight:
-                                              PoppinsFontWeightVariant.regular,
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                          SizedBox(width: 5),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                WidgetSpan(
+                                  child: PoppinsText(
+                                    "I agree to the ",
+                                    fontSize: PoppinsFontSizeVariant.size12,
+                                    color: customColors.textColor,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
+                                  ),
                                 ),
-                              ),
+                                WidgetSpan(
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: ShaderMask(
+                                      shaderCallback: (bounds) =>
+                                          LinearGradient(
+                                            colors: customColors.buttonColors,
+                                          ).createShader(
+                                            Rect.fromLTWH(
+                                              0,
+                                              0,
+                                              bounds.width,
+                                              bounds.height,
+                                            ),
+                                          ),
+                                      child: PoppinsText(
+                                        "Terms & Conditions",
+                                        fontSize: PoppinsFontSizeVariant.size12,
+                                        color: Colors.white,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                WidgetSpan(
+                                  child: PoppinsText(
+                                    " and ",
+                                    fontSize: PoppinsFontSizeVariant.size12,
+                                    color: customColors.textColor,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
+                                  ),
+                                ),
+                                WidgetSpan(
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: ShaderMask(
+                                      shaderCallback: (bounds) =>
+                                          LinearGradient(
+                                            colors: customColors.buttonColors,
+                                          ).createShader(
+                                            Rect.fromLTWH(
+                                              0,
+                                              0,
+                                              bounds.width,
+                                              bounds.height,
+                                            ),
+                                          ),
+                                      child: PoppinsText(
+                                        "Privacy Policy.",
+                                        fontSize: PoppinsFontSizeVariant.size12,
+                                        color: Colors.white,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -332,107 +376,48 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       const SizedBox(height: 35),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Container(
-                              height: 52,
-                              decoration: BoxDecoration(
-                                color: customColors.bgcontainerlight,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 52,
-                                    width: 52,
-
-                                    decoration: BoxDecoration(
-                                      // color: customColors.bgcontainerlight,
-                                      // borderRadius: BorderRadius.circular(30),
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          Assets.images.googlelogo.path,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  PoppinsText(
-                                    "Google",
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                  ),
-                                ],
-                              ),
+                          AppButton(
+                            onPressed: () {},
+                            title: 'Google',
+                            buttonSize: Size(180, 52),
+                            color: Color(0xff202020),
+                            prefixIcon: Image.asset(
+                              Assets.images.googleicon.path,
+                              width: 26,
+                              height: 26,
                             ),
+                            buttonGradient: [
+                              Color(0xff202020),
+                              Color(0xff202020),
+                            ],
                           ),
-
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Container(
-                              height: 52,
-                              decoration: BoxDecoration(
-                                color: customColors.bgcontainerlight,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-
-                                children: [
-                                  Container(
-                                    height: 52,
-                                    width: 52,
-
-                                    decoration: BoxDecoration(
-                                      // color: customColors.bgcontainerlight,
-                                      // borderRadius: BorderRadius.circular(30),
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          Assets.images.applelogo.path,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  PoppinsText(
-                                    "Apple",
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                  ),
-                                ],
-                              ),
+                          AppButton(
+                            onPressed: () {},
+                            title: 'Apple',
+                            buttonSize: Size(180, 52),
+                            color: Color(0xff202020),
+                            prefixIcon: Image.asset(
+                              Assets.images.appleicon.path,
+                              width: 26,
+                              height: 26,
                             ),
+                            buttonGradient: [
+                              Color(0xff202020),
+                              Color(0xff202020),
+                            ],
                           ),
-
-                          // Expanded(
-                          //   child: Container(
-                          //     height: 52,
-                          //     decoration: BoxDecoration(
-                          //       color: customColors.bgcontainerlight,
-                          //       borderRadius: BorderRadius.circular(30),
-                          //       image: DecorationImage(
-                          //         image: AssetImage(Assets.images.applelogo.path),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                       SizedBox(height: 10),
-                      Container(
-                        width: double.infinity,
-                        height: 52,
-                        decoration: BoxDecoration(
-                          color: customColors.bgcontainerlight,
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: Center(
-                          child: PoppinsText(
-                            'Continue as Guest',
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
-                          ),
-                        ),
+                      AppButton(
+                        onPressed: () {
+                          context.goNamed(AppRoutes.home.name);
+                        },
+                        title: 'Continue as Guest',
+                        buttonGradient: [Color(0xff202020), Color(0xff202020)],
+                        color: Color(0xff202020),
                       ),
 
                       SizedBox(height: 28),
@@ -445,53 +430,33 @@ class _SignupScreenState extends State<SignupScreen> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          SizedBox(width: 4),
-                          Stack(
-                            alignment: Alignment.bottomLeft,
-                            children: [
-                              ShaderMask(
-                                shaderCallback: (bounds) =>
-                                    LinearGradient(
-                                      colors: [
-                                        Color(0xFF1FCFFF),
-                                        Color(0xFF0063FF),
-                                      ],
-                                    ).createShader(
-                                      Rect.fromLTWH(
-                                        0,
-                                        0,
-                                        bounds.width,
-                                        bounds.height,
-                                      ),
-                                    ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    context.goNamed(AppRoutes.loginScreen.name);
-                                  },
-                                  child: PoppinsText(
-                                    "Sign in",
-                                    fontSize: PoppinsFontSizeVariant.size14,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
+                          SizedBox(width: 10),
+                          ShaderMask(
+                            shaderCallback: (bounds) =>
+                                LinearGradient(
+                                  colors: [
+                                    Color(0xFF1FCFFF),
+                                    Color(0xFF0063FF),
+                                  ],
+                                ).createShader(
+                                  Rect.fromLTWH(
+                                    0,
+                                    0,
+                                    bounds.width,
+                                    bounds.height,
                                   ),
                                 ),
+                            child: GestureDetector(
+                              onTap: () {
+                                context.goNamed(AppRoutes.loginScreen.name);
+                              },
+                              child: PoppinsText(
+                                "Sign in",
+                                fontSize: PoppinsFontSizeVariant.size14,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                decoration: TextDecoration.underline,
                               ),
-                              Positioned(
-                                bottom: 0,
-                                left: 0,
-                                right: 0,
-                                child: Container(
-                                  height: 1.5,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color(0xFF1FCFFF),
-                                        Color(0xFF0063FF),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),

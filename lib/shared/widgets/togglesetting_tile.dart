@@ -1,11 +1,10 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
 import 'settingitem.dart';
 
-// --- Custom Gradient Switch Widget ---
 class GradientSwitch extends StatelessWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
@@ -23,17 +22,17 @@ class GradientSwitch extends StatelessWidget {
     return GestureDetector(
       onTap: () => onChanged(!value),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
+        duration: Duration(milliseconds: 250),
         width: 55,
         height: 30,
-        padding: const EdgeInsets.all(3),
+        padding: EdgeInsets.all(3),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: value ? LinearGradient(colors: gradientColors) : null,
           color: value ? null : Colors.grey.shade400,
         ),
         child: AnimatedAlign(
-          duration: const Duration(milliseconds: 250),
+          duration: Duration(milliseconds: 250),
           alignment: value ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
             width: 24,
@@ -52,18 +51,22 @@ class GradientSwitch extends StatelessWidget {
   }
 }
 
-// --- TOGGLE SETTING TILE ---
 class ToggleSettingTile extends StatefulWidget {
   const ToggleSettingTile({
     super.key,
-    required this.icon,
+    this.icon,
+    this.image,
     required this.titleText,
     required this.subtitleText,
     required this.initialValue,
     required this.onChanged,
-  });
+  }) : assert(
+         icon != null || image != null,
+         'Either icon or image must be provided',
+       );
 
-  final IconData icon;
+  final IconData? icon;
+  final ImageProvider? image;
   final String titleText;
   final String subtitleText;
   final bool initialValue;
@@ -77,15 +80,14 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
   late bool _currentValue;
 
   final List<Color> _defaultGradientColors = [
-    const Color(0xFF1FCFFF),
-    const Color(0xFF0063FF),
+    Color(0xFF1FCFFF),
+    Color(0xFF0063FF),
   ];
 
   @override
   void initState() {
     super.initState();
-    _currentValue =
-        widget.initialValue; // <-- yeh current value set kar raha hai
+    _currentValue = widget.initialValue;
   }
 
   @override
@@ -93,34 +95,56 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
+    Widget leadingWidget;
+    if (widget.icon != null) {
+      leadingWidget = Icon(
+        widget.icon,
+        color: customColors.textColor,
+        size: 24,
+      );
+    } else if (widget.image != null) {
+      leadingWidget = Image(
+        image: widget.image!,
+        width: 24,
+        height: 24,
+        fit: BoxFit.cover,
+      );
+    } else {
+      leadingWidget = SizedBox.shrink();
+    }
+
     return SettingItem(
       title: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(widget.icon, color: customColors.textColor, size: 24),
-          const SizedBox(width: 15.0),
-          PoppinsText(
-            widget.titleText,
-            fontSize: PoppinsFontSizeVariant.size16,
-            fontWeight: PoppinsFontWeightVariant.medium,
-            color: customColors.textColor,
+          leadingWidget,
+          SizedBox(width: 20.0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PoppinsText(
+                widget.titleText,
+                fontSize: PoppinsFontSizeVariant.size16,
+                fontWeight: PoppinsFontWeightVariant.medium,
+                color: customColors.textColor,
+              ),
+              SizedBox(height: 4),
+              PoppinsText(
+                widget.subtitleText,
+                fontSize: PoppinsFontSizeVariant.size12,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: customColors.textColor,
+              ),
+            ],
           ),
         ],
       ),
-      subtitle: Padding(
-        padding: const EdgeInsets.only(left: 40.0),
-        child: PoppinsText(
-          widget.subtitleText,
-          fontSize: PoppinsFontSizeVariant.size12,
-          fontWeight: PoppinsFontWeightVariant.regular,
-          color: customColors.textColor,
-        ),
-      ),
-
       trailing: GradientSwitch(
         value: _currentValue,
         onChanged: (val) {
-          setState(() => _currentValue = val); // <-- Value update
-          widget.onChanged(val); // <-- Callback
+          setState(() => _currentValue = val);
+          widget.onChanged(val);
         },
         gradientColors: _defaultGradientColors,
       ),

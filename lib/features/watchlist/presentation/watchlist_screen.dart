@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../core/extensions/theme_extension.dart';
 import '../../../shared/widgets/watchlistitemtile.dart';
 // Import the new reusable widget
 // Assuming WatchlistItemTile is available
@@ -44,9 +42,6 @@ class WatchlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -84,8 +79,7 @@ class WatchlistScreen extends StatelessWidget {
                       thumbnailPath: item.thumbnailPath,
                       title: item.title,
                       year: item.year,
-                      onTapPlay: () {
-                      },
+                      onTapPlay: () {},
                     );
                   },
                 ),

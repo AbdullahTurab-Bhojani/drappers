@@ -5,6 +5,9 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
+// Assuming you have defined AppRoutes, AppButton, PoppinsText, AppColors,
+// and AppCustomColors in your project.
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -38,19 +41,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       int nextPage = currentPage + 1;
       if (nextPage >= images.length) nextPage = 0;
 
       _pageController.animateToPage(
         nextPage,
-        duration: Duration(milliseconds: 1000),
+        duration: const Duration(milliseconds: 1000),
         curve: Curves.linearToEaseOut,
       );
-
-      setState(() {
-        currentPage = nextPage;
-      });
     });
   }
 
@@ -67,7 +66,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Scaffold(
-      backgroundColor: customColors.dark,
       body: Stack(
         children: [
           PageView.builder(
@@ -89,7 +87,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
           ),
-
           Positioned(
             top: 60,
             right: 20,
@@ -105,109 +102,81 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
           ),
-
-          SafeArea(
-            top: true,
-            bottom: false,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.fromLTRB(40, 16, 40, 20),
-                    color: Colors.black38,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            images.length,
-                            (index) => AnimatedContainer(
-                              duration: Duration(milliseconds: 300),
-                              margin: EdgeInsets.symmetric(horizontal: 4),
-                              width: currentPage == index ? 26 : 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                gradient: currentPage == index
-                                    ? LinearGradient(
-                                        colors: [
-                                          Color(0xFF1FCFFF),
-                                          Color(0xFF0063FF),
-                                        ],
-                                      )
-                                    : null,
-                                color: currentPage != index
-                                    ? AppColors.wDark
-                                    : null,
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 32),
-
-                        PoppinsText(
-                          titles[currentPage],
-                          textAlign: TextAlign.center,
-                          fontSize: PoppinsFontSizeVariant.size26,
-                          fontWeight: PoppinsFontWeightVariant.extraBold,
-                          color: Colors.white,
-                        ),
-
-                        SizedBox(height: 32),
-
-                        PoppinsText(
-                          subtitles[currentPage],
-                          textAlign: TextAlign.center,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.light,
-                          color: customColors.subtextColor,
-                          height: 1.5,
-                        ),
-
-                        SizedBox(height: 60),
-                      ],
-                    ),
-                  ),
-
-                  GestureDetector(
-                    onTap: () {
-                      context.pushNamed(AppRoutes.loginScreen.name);
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 52,
-                      margin: EdgeInsets.symmetric(horizontal: 20),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    images.length,
+                    (index) => AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      margin: EdgeInsets.symmetric(horizontal: 2),
+                      width: currentPage == index ? 26 : 8,
+                      height: 8,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
-                        ),
-                        borderRadius: BorderRadius.circular(40),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 7,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: PoppinsText(
-                          'Next',
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: Colors.white,
-                        ),
+                        gradient: currentPage == index
+                            ?  LinearGradient(
+                                colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
+                              )
+                            : null,
+                        color: currentPage != index ? AppColors.wDark : null,
+                        borderRadius: BorderRadius.circular(4),
                       ),
                     ),
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 28),
+                  child: Column(
+                    children: [
+                     SizedBox(height: 32),
+                      PoppinsText(
+                        titles[currentPage],
+                        textAlign: TextAlign.center,
+                        fontSize: PoppinsFontSizeVariant.size32,
+                        fontWeight: PoppinsFontWeightVariant.medium,
+                        color: customColors.textColor,
+                        height: 1.3,
+                      ),
+                       SizedBox(height: 32),
+                      PoppinsText(
+                        subtitles[currentPage],
+                        textAlign: TextAlign.center,
+                        fontSize: PoppinsFontSizeVariant.size16,
+                        fontWeight: PoppinsFontWeightVariant.light,
+                        color: customColors.textColor,
+                        height: 1.7,
+                      ),
+                      const SizedBox(height: 120),
+                    ],
+                  ),
+                ),
 
-                  SizedBox(height: 80),
-                ],
-              ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: AppButton(
+                    onPressed: () {
+                      if (currentPage < images.length - 1) {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        );
+                      } else {
+                        context.pushNamed(AppRoutes.loginScreen.name);
+                      }
+                    },
+                    title: currentPage == images.length - 1
+                        ? 'Get Started'
+                        : 'Next',
+                  ),
+                ),
+                const SizedBox(height: 80),
+              ],
             ),
           ),
         ],

@@ -56,26 +56,26 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
               AppPasswordField(
                 controller: _passwordController,
                 labelText: "New Password",
-                hintText: "Enter your full name",
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Full name required";
-                  }
-                  return null;
-                },
+                hintText: "********",
+                // validator: (value) {
+                //   if (value == null || value.trim().isEmpty) {
+                //     return "Full name required";
+                //   }
+                //   return null;
+                // },
               ),
               SizedBox(height: 15),
               AppPasswordField(
                 controller: _confirmPasswordController,
-                labelText: "Confirm Password",
+                labelText: "Confirm Password*",
                 hintText:
-                    "Enter your full name", 
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Full name required";
-                  }
-                  return null;
-                },
+                    "********", 
+                // validator: (value) {
+                //   if (value == null || value.trim().isEmpty) {
+                //     return "Full name required";
+                //   }
+                //   return null;
+                // },
               ),
               SizedBox(height: 15),
               PoppinsText(

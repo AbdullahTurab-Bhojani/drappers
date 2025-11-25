@@ -32,7 +32,15 @@ enum AppRoutes {
   reelWidget('reelWidget', '/reelWidget'),
   documentries ('documentries', '/documentries'),
   applyPitch  ('applyPitch', '/applyPitch'),
-  voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen');
+  voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
+  continueWatchingViewmore  ('continueWatchingViewmore', '/continueWatchingViewmore'),
+  watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore'),
+  notificationScreen('notificationScreen', '/notificationScreen'),
+  notificationSetting  ('notificationSetting', '/notificationSetting');
+
+
+
+
 
 
 
