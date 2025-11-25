@@ -114,13 +114,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   children: List.generate(
                     images.length,
                     (index) => AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      duration: Duration(milliseconds: 300),
+                      margin: EdgeInsets.symmetric(horizontal: 2),
                       width: currentPage == index ? 26 : 8,
                       height: 8,
                       decoration: BoxDecoration(
                         gradient: currentPage == index
-                            ? const LinearGradient(
+                            ?  LinearGradient(
                                 colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
                               )
                             : null,
@@ -131,10 +131,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 35),
+                  padding: EdgeInsets.symmetric(horizontal: 28),
                   child: Column(
                     children: [
-                      const SizedBox(height: 32),
+                     SizedBox(height: 32),
                       PoppinsText(
                         titles[currentPage],
                         textAlign: TextAlign.center,
@@ -143,7 +143,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         color: customColors.textColor,
                         height: 1.3,
                       ),
-                      const SizedBox(height: 25),
+                       SizedBox(height: 32),
                       PoppinsText(
                         subtitles[currentPage],
                         textAlign: TextAlign.center,
@@ -152,13 +152,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         color: customColors.textColor,
                         height: 1.7,
                       ),
-                      const SizedBox(height: 100),
+                      const SizedBox(height: 120),
                     ],
                   ),
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: AppButton(
                     onPressed: () {
                       if (currentPage < images.length - 1) {
@@ -175,7 +175,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         : 'Next',
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 80),
               ],
             ),
           ),

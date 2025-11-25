@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.only(top: 110),
                   child: Image.asset(Assets.images.logo2.path),
                 ),
-                SizedBox(height: 28),
+                SizedBox(height: 26),
                 PoppinsText(
                   "Get Started with Draper",
                   fontSize: PoppinsFontSizeVariant.size24,
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         fieldbg: AppColors.tfield,
                         controller: _emailController,
                         labelText: "Enter your Email Address or Phone*",
-                        hintText: "Enter your email",
+                        hintText: "example@mailinator.com",
                         filledColor: AppColors.tfield,
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
@@ -79,8 +79,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 16),
                       AppPasswordField(
                         controller: _passwordController,
-                        labelText: "New Password",
-                        hintText: "Enter your full name",
+                        labelText: "Password*",
+                        hintText: "**********",
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return "Full name required";
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderRadius: BorderRadius.circular(4),
                                   border: rememberMe
                                       ? null
-                                      : Border.all(color: Colors.grey.shade600),
+                                      : Border.all(color: Colors.white),
                                 ),
                                 child: rememberMe
                                     ? Container(
@@ -195,56 +195,46 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: 40),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Container(
-                              height: 52,
-                              decoration: BoxDecoration(
-                                color: AppColors.graylight,
-                                borderRadius: BorderRadius.circular(30),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    Assets.images.googlelogo.path,
-                                  ),
-                                ),
-                              ),
+                          AppButton(
+                            onPressed: () {},
+                            title: '',
+                            buttonSize: Size(180, 52),
+                            color: AppColors.graylight,
+                            prefixIcon: Image.asset(
+                              Assets.images.googlelogo.path,
                             ),
+                            buttonGradient: [
+                              AppColors.graylight,
+                              AppColors.graylight,
+                            ],
                           ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Container(
-                              height: 52,
-                              decoration: BoxDecoration(
-                                color: AppColors.graylight,
-                                borderRadius: BorderRadius.circular(30),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    Assets.images.applelogo.path,
-                                  ),
-                                ),
-                              ),
+                          AppButton(
+                            onPressed: () {},
+                            title: '',
+                            buttonSize: Size(180, 52),
+                            color: AppColors.graylight,
+                            prefixIcon: Image.asset(
+                              Assets.images.applelogo.path,
                             ),
+                            buttonGradient: [
+                              AppColors.graylight,
+                              AppColors.graylight,
+                            ],
                           ),
                         ],
                       ),
                       SizedBox(height: 10),
-                      Container(
-                        width: double.infinity,
-                        height: 52,
-                        decoration: BoxDecoration(
-                          color: AppColors.graylight,
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Continue as Guest',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
+                      AppButton(
+                        onPressed: () {
+                          context.goNamed(AppRoutes.home.name);
+                        },
+                        title: 'Continue as Guest',
+                        buttonGradient: [AppColors.graylight, AppColors.graylight,],
+                        color: AppColors.graylight,
                       ),
+
                       SizedBox(height: 28),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -255,55 +245,33 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          SizedBox(width: 4),
-                          Stack(
-                            alignment: Alignment.bottomLeft,
-                            children: [
-                              ShaderMask(
-                                shaderCallback: (bounds) =>
-                                    LinearGradient(
-                                      colors: [
-                                        Color(0xFF1FCFFF),
-                                        Color(0xFF0063FF),
-                                      ],
-                                    ).createShader(
-                                      Rect.fromLTWH(
-                                        0,
-                                        0,
-                                        bounds.width,
-                                        bounds.height,
-                                      ),
-                                    ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    context.goNamed(
-                                      AppRoutes.signupScreen.name,
-                                    );
-                                  },
-                                  child: PoppinsText(
-                                    "Sign Up",
-                                    fontSize: PoppinsFontSizeVariant.size14,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
+                          SizedBox(width: 10),
+                          ShaderMask(
+                            shaderCallback: (bounds) =>
+                                LinearGradient(
+                                  colors: [
+                                    Color(0xFF1FCFFF),
+                                    Color(0xFF0063FF),
+                                  ],
+                                ).createShader(
+                                  Rect.fromLTWH(
+                                    0,
+                                    0,
+                                    bounds.width,
+                                    bounds.height,
                                   ),
                                 ),
+                            child: GestureDetector(
+                              onTap: () {
+                                context.goNamed(AppRoutes.signupScreen.name);
+                              },
+                              child: PoppinsText(
+                                "Sign Up",
+                                fontSize: PoppinsFontSizeVariant.size14,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                decoration: TextDecoration.underline,
                               ),
-                              Positioned(
-                                bottom: 0,
-                                left: 0,
-                                right: 0,
-                                child: Container(
-                                  height: 1.5,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color(0xFF1FCFFF),
-                                        Color(0xFF0063FF),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -317,5 +285,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }
