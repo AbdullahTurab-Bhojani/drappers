@@ -247,6 +247,10 @@ class $AssetsImagesGen {
   AssetGenImage get showicon =>
       const AssetGenImage('assets/images/Showicon.png');
 
+  /// File path: assets/images/appleicon.png
+  AssetGenImage get appleicon =>
+      const AssetGenImage('assets/images/appleicon.png');
+
   /// File path: assets/images/backicon.png
   AssetGenImage get backicon =>
       const AssetGenImage('assets/images/backicon.png');
@@ -327,6 +331,10 @@ class $AssetsImagesGen {
   AssetGenImage get documentaries6 =>
       const AssetGenImage('assets/images/documentaries6.png');
 
+  /// File path: assets/images/dots_icon.png
+  AssetGenImage get dotsIcon =>
+      const AssetGenImage('assets/images/dots_icon.png');
+
   /// File path: assets/images/dropdownicon.png
   AssetGenImage get dropdownicon =>
       const AssetGenImage('assets/images/dropdownicon.png');
@@ -357,6 +365,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/girl.png
   AssetGenImage get girl => const AssetGenImage('assets/images/girl.png');
+
+  /// File path: assets/images/googleicon.png
+  AssetGenImage get googleicon =>
+      const AssetGenImage('assets/images/googleicon.png');
 
   /// File path: assets/images/googlelogo.png
   AssetGenImage get googlelogo =>
@@ -445,9 +457,13 @@ class $AssetsImagesGen {
   AssetGenImage get notificationicon =>
       const AssetGenImage('assets/images/notificationicon.png');
 
-  /// File path: assets/images/notificationsicon.png
-  AssetGenImage get notificationsicon =>
-      const AssetGenImage('assets/images/notificationsicon.png');
+  /// File path: assets/images/notificationsfillicon.png
+  AssetGenImage get notificationsfillicon =>
+      const AssetGenImage('assets/images/notificationsfillicon.png');
+
+  /// File path: assets/images/notificationsiconnew.png
+  AssetGenImage get notificationsiconnew =>
+      const AssetGenImage('assets/images/notificationsiconnew.png');
 
   /// File path: assets/images/notinterestedicon.png
   AssetGenImage get notinterestedicon =>
@@ -482,6 +498,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/playicon.png
   AssetGenImage get playicon =>
       const AssetGenImage('assets/images/playicon.png');
+
+  /// File path: assets/images/playnewicon.png
+  AssetGenImage get playnewicon =>
+      const AssetGenImage('assets/images/playnewicon.png');
 
   /// File path: assets/images/playstrokeicon.png
   AssetGenImage get playstrokeicon =>
@@ -530,6 +550,10 @@ class $AssetsImagesGen {
   AssetGenImage get reset123 =>
       const AssetGenImage('assets/images/reset123.png');
 
+  /// File path: assets/images/save_icon.png
+  AssetGenImage get saveIcon =>
+      const AssetGenImage('assets/images/save_icon.png');
+
   /// File path: assets/images/savereelicon.png
   AssetGenImage get savereelicon =>
       const AssetGenImage('assets/images/savereelicon.png');
@@ -545,6 +569,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/sentence.png
   AssetGenImage get sentence =>
       const AssetGenImage('assets/images/sentence.png');
+
+  /// File path: assets/images/settingicon.png
+  AssetGenImage get settingicon =>
+      const AssetGenImage('assets/images/settingicon.png');
 
   /// File path: assets/images/settingsicon.png
   AssetGenImage get settingsicon =>
@@ -622,6 +650,7 @@ class $AssetsImagesGen {
     searchicon,
     shareicon,
     showicon,
+    appleicon,
     backicon,
     ban123,
     bannerGuest,
@@ -643,6 +672,7 @@ class $AssetsImagesGen {
     documentaries4,
     documentaries5,
     documentaries6,
+    dotsIcon,
     dropdownicon,
     envelopeicon,
     footericon1,
@@ -651,6 +681,7 @@ class $AssetsImagesGen {
     galleryFavorite,
     gifticon,
     girl,
+    googleicon,
     googlelogo,
     guestCourseCardImage,
     guestLearning,
@@ -673,7 +704,8 @@ class $AssetsImagesGen {
     muteicon,
     nativeSplash,
     notificationicon,
-    notificationsicon,
+    notificationsfillicon,
+    notificationsiconnew,
     notinterestedicon,
     onboard,
     onboarding1,
@@ -683,6 +715,7 @@ class $AssetsImagesGen {
     play,
     playbutton,
     playicon,
+    playnewicon,
     playstrokeicon,
     playwithbgicon,
     podcastimage1,
@@ -695,10 +728,12 @@ class $AssetsImagesGen {
     progressBg,
     reporticon,
     reset123,
+    saveIcon,
     savereelicon,
     screensbg,
     screenshoticon,
     sentence,
+    settingicon,
     settingsicon,
     signInoption,
     signout1234,

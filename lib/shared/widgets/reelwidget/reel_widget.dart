@@ -85,8 +85,12 @@ class _ReelWidgetState extends State<ReelWidget> {
                   ),
                   itemBuilder: (context, index) {
                     return ReelcardWidget(
+                      reelCardHeight: 385,
+                      reelCardWidth: 180,
+                      fontSizeVariant: PoppinsFontSizeVariant.size14,
                       assetImagePath: reelimages[index],
                       title: reelTitles[index],
+                      showSaveIcon: false,
                     );
                   },
                 ),

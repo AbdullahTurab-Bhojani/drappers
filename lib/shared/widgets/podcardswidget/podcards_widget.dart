@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
-
-import '../../../gen/assets.gen.dart';
+import '../../../drappers.dart';
+import '../popupmenuitem/popupmenu_widget.dart';
 
 class PodcardsWidget extends StatefulWidget {
+  final String title;
+  final bool showSaveIcon;
+  final PoppinsFontSizeVariant fontSizeVariant;
+
   final String assetImage;
 
-  const PodcardsWidget({super.key, required this.assetImage});
+  const PodcardsWidget({
+    super.key,
+    required this.assetImage,
+    required this.title,
+    required this.showSaveIcon,
+    required this.fontSizeVariant,
+  });
 
   @override
   State<PodcardsWidget> createState() => _PodcardsWidgetState();
@@ -25,18 +35,22 @@ class _PodcardsWidgetState extends State<PodcardsWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.only(top: 0, right: 0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+        padding: widget.showSaveIcon
+            ? EdgeInsets.only(left: 8, top: 5, bottom: 5, right: 8)
+            : EdgeInsetsGeometry.only(top: 5),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              Assets.images.a3dotsicon.path
-            )
+            PopupmenuWidget(showSaveIcon: widget.showSaveIcon),
+            PoppinsText(
+              widget.title,
+              fontSize: widget.fontSizeVariant,
+              fontWeight: PoppinsFontWeightVariant.medium,
+            ),
           ],
         ),
       ),
     );
   }
-
 }

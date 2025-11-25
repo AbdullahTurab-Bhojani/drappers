@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class DocumentriesCardWidget extends StatefulWidget {
+  final bool showSaveIcon;
+
   final String assetImage;
 
-  const DocumentriesCardWidget({super.key, required this.assetImage});
+  const DocumentriesCardWidget({super.key, required this.assetImage, required this.showSaveIcon});
 
   @override
   State<DocumentriesCardWidget> createState() => _DocumentriesCardWidgetState();
@@ -25,12 +27,14 @@ class _DocumentriesCardWidgetState extends State<DocumentriesCardWidget> {
       ),
 
       child: Padding(
-        padding: EdgeInsets.only(left: 0, top: 0, bottom: 8),
+         padding: widget.showSaveIcon ? EdgeInsets.only(left: 8, top: 5, bottom: 5,right: 8)  : EdgeInsetsGeometry.only(top: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-           PopupmenuWidget(),
+           PopupmenuWidget(
+             showSaveIcon: widget.showSaveIcon,
+           ),
 
             // PoppinsText(
             //   widget.title,

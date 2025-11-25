@@ -86,10 +86,10 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
     // borderSide: BorderSide(color: widget.borderColor ?? AppColors.borderColor),
     borderRadius: BorderRadius.circular(10),
   );
-  TextStyle get textStryle => GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.w500,
-    fontSize: 13,
-    color: AppColors.color9CA3AF,
+  TextStyle get textStryle => GoogleFonts.poppins(
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+    color: AppColors.white,
   );
   bool obSecure = false;
   var focusNode = FocusNode();
@@ -313,8 +313,9 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
 
               style: GoogleFonts.poppins(
                 color: AppColors.white,
-                fontSize: 14,
-                height: 1.1,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                // height: 1.1,
               ),
 
               decoration: InputDecoration(
@@ -330,8 +331,8 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                     widget.hintStyle ??
                     GoogleFonts.poppins(
                       color: AppColors.white,
-                      fontSize: 14,
-                      height: 1.1,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400
                     ),
 
                 prefixIcon: widget.prefixIcon != null
