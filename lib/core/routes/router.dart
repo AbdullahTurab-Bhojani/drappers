@@ -157,7 +157,16 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.deleteDetailScreen.name,
         builder: (context, state) => DeleteDetailScreen(),
       ),
-      
+      GoRoute(
+        path: AppRoutes.reportContent.path,
+        name: AppRoutes.reportContent.name,
+        builder: (context, state) => ReportContent(),
+      ),
+      GoRoute(
+        path: AppRoutes.reportContentSomehingElse.path,
+        name: AppRoutes.reportContentSomehingElse.name,
+        builder: (context, state) => ReportContentSomehingElse(),
+      ),
     ],
   );
 });

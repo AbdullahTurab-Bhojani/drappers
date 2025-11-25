@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -48,11 +49,16 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
                   children: [
                     Image.asset(Assets.images.reporticon.path),
                     SizedBox(width: 10),
-                    PoppinsText(
-                      'Report',
-                      fontSize: PoppinsFontSizeVariant.size12,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
+                    GestureDetector(
+                      onTap: () {
+                        context.pushReplacement(AppRoutes.reportContent.path);
+                      },
+                      child: PoppinsText(
+                        'Report',
+                        fontSize: PoppinsFontSizeVariant.size12,
+                        fontWeight: PoppinsFontWeightVariant.medium,
+                        color: customColors.textColor,
+                      ),
                     ),
                   ],
                 ),
