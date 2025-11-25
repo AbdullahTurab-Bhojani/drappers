@@ -22,6 +22,8 @@ enum AppRoutes {
   deleteDetailScreen('deleteDetailScreen', '/deleteDetailScreen'),
   deleteAccountScreen('deleteAccountScreen', '/deleteAccountScreen'),
   deactivateAccountScreen('deactivateAccountScreen', '/deactivateAccountScreen'),
+  reportContent('reportContent', '/reportContent'),
+  reportContentSomehingElse('reportContentSomehingElse', '/reportContentSomehingElse'),
   termscondition('termscondition', '/termscondition'),
   savedreel('savedreel', '/savedreel'),
   helpsupport('helpsupport', '/helpsupport'),
