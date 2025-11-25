@@ -70,176 +70,186 @@ class _SearchscreenlState extends State<Searchscreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          children: [
-            AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              leading: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
-              ),
-
-              title: Padding(
-                padding: const EdgeInsets.only(right: 15.0),
-                child: Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppColors.color202020.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 15),
-                      Image.asset(
-                        "assets/images/searchicon3x.png",
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  automaticallyImplyLeading: false,
+                  leading: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Image.asset(
+                        "assets/images/backicon.png",
                         width: 20,
                         height: 20,
                       ),
-                      const SizedBox(width: 10),
-                      const Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: "Search content", 
-                            hintStyle: TextStyle(
-                              color: AppColors.shadegreycolor6B6B6B,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            border: InputBorder.none,
-                            isDense: true,
-                            contentPadding: EdgeInsets.zero,
+                    ),
+                  ),
+
+                  title: Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: AppColors.color202020.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 15),
+                          Image.asset(
+                            "assets/images/searchicon3x.png",
+                            width: 20,
+                            height: 20,
                           ),
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                          cursorColor: Colors.blue,
+                          const SizedBox(width: 10),
+                          const Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: "Search content",
+                                hintStyle: TextStyle(
+                                  color: AppColors.shadegreycolor6B6B6B,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                border: InputBorder.none,
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                              ),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                              cursorColor: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  titleSpacing: 0,
+                  centerTitle: false,
+                  actions: const [],
+                  scrolledUnderElevation: 0,
+                ),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Recent Searches ',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          PoppinsText(
+                            'Clear All ',
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: customColors.textColor,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 20),
+                      SizedBox(
+                        height: 185,
+                        child: Expanded(
+                          child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            itemCount: dummyHistory.length,
+                            itemBuilder: (context, index) {
+                              final item = dummyHistory[index];
+                              return HistoryItemTile(
+                                title: item.title,
+                                thumbnailPath: item.thumbnailPath,
+                                onTapRemove: () {
+                                  print('Removed: ${item.title}');
+                                },
+                                onTapTile: () {
+                                  print('Tapped: ${item.title}');
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-
-              titleSpacing: 0,
-              centerTitle: false,
-              actions: const [],
-            ),
-
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        PoppinsText(
-                          'Recent Searches ',
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: customColors.textColor,
-                        ),
-                        PoppinsText(
-                          'Clear All ',
-                          fontSize: PoppinsFontSizeVariant.size12,
-                          fontWeight: PoppinsFontWeightVariant.regular,
-                          color: customColors.textColor,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 20),
-                    SizedBox(
-                      height: 185,
-                      child: Expanded(
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          itemCount: dummyHistory.length,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Genre',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(
+                        height: 56,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: 15),
+                          itemCount: Genretitle.length,
                           itemBuilder: (context, index) {
-                            final item = dummyHistory[index];
-                            return HistoryItemTile(
-                              title: item.title,
-                              thumbnailPath: item.thumbnailPath,
-                              onTapRemove: () {
-                                print('Removed: ${item.title}');
-                              },
-                              onTapTile: () {
-                                print('Tapped: ${item.title}');
-                              },
-                            );
+                            return genreBoxWidget(title: Genretitle[index]);
                           },
                         ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        PoppinsText(
-                          'Genre',
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: customColors.textColor,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    SizedBox(
-                      height: 56,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(width: 15),
-                        itemCount: Genretitle.length,
-                        itemBuilder: (context, index) {
-                          return genreBoxWidget(title: Genretitle[index]);
-                        },
+
+                      SizedBox(height: 30),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Trending ',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                        ],
                       ),
-                    ),
 
-                    SizedBox(height: 30),
+                      SizedBox(height: 20),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        PoppinsText(
-                          'Trending ',
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: customColors.textColor,
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 20),
-
-                    SizedBox(
-                      height: 180,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(width: 15),
+                      GridView.builder(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
                         itemCount: trendingimages.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 15,
+                              crossAxisSpacing: 15,
+                              childAspectRatio: 0.6,
+                            ),
                         itemBuilder: (context, index) {
                           return CardWidget(assetImage: trendingimages[index]);
                         },
                       ),
-                    ),
-                    SizedBox(height: 30),
-                  ],
+                      SizedBox(height: 30),
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

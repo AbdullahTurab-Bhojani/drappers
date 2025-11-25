@@ -124,9 +124,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: [
-                  Image.asset(
-                    Assets.images.searchicon.path,
-                    color: Colors.white,
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.Searchscreen.name);
+                    },
+                    child: Image.asset(
+                      Assets.images.searchicon.path,
+                      color: customColors.textColor,
+                    ),
                   ),
                   SizedBox(width: 16),
                   Image.asset(
