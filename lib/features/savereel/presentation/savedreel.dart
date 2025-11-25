@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/reelcard/reelcard_widget.dart';
@@ -85,6 +86,10 @@ class _SavedreelState extends State<Savedreel> {
                     return ReelcardWidget(
                       assetImagePath: reelimages[index],
                       title: reelTitles[index],
+                      reelCardHeight: 385,
+                      reelCardWidth: 180,
+                      fontSizeVariant: PoppinsFontSizeVariant.size14,
+                      showSaveIcon: true,
                     );
                   },
                 ),

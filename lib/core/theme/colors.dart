@@ -34,6 +34,8 @@ abstract final class AppColors {
   static const purplenew = Color(0xff9333E9);
   static const blackshadeboxbg = Color(0xff141414);
   static const grayshadeboxbg = Color(0xff101a28);
+  static const searchbarbg = Color(0xff19193E);
+  static const color1A1E24 = Color(0xff1A1E24);
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);

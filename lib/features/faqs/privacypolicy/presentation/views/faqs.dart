@@ -172,6 +172,7 @@ class _FaqsScreenState extends State<FaqsScreen> {
                 ),
               ),
             ),
+         
           ],
         ),
       ),

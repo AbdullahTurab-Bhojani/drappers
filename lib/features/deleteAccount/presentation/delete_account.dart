@@ -48,7 +48,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(
+                padding:  EdgeInsets.symmetric(
                   horizontal: horizontalPadding,
                   vertical: 10.0,
                 ),
@@ -104,7 +104,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                   fontWeight: PoppinsFontWeightVariant.regular,
                                   color: customColors.yellowlight,
                                 ),
-                                const SizedBox(height: 5.0),
+                                 SizedBox(height: 5.0),
                                 PoppinsText(
                                   "Your profile, watchlist, history, preferences, and downloads will be saved. You can reactivate anytime by signing in again.",
                                   fontSize: PoppinsFontSizeVariant.size16,

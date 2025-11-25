@@ -46,7 +46,7 @@ class CustomRadioTile extends StatelessWidget {
                 if (states.contains(WidgetState.selected)) {
                   return primaryBlue;
                 }
-                return Colors.white54;
+                return Colors.white;
               }),
             ),
           ),

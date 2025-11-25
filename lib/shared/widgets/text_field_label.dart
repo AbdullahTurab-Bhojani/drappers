@@ -10,7 +10,7 @@ class TextFieldLabel extends ConsumerWidget {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     return Padding(
-      padding: EdgeInsets.only(bottom: 6),
+      padding: EdgeInsets.only(bottom: 2),
       child: PoppinsText(
         name,
         color: customColors.labelColor,

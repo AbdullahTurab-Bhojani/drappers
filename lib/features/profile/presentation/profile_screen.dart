@@ -142,6 +142,10 @@ class ProfileScreen extends StatelessWidget {
                             AppButton(
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.greyColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
                                 context.pushNamed(AppRoutes.likecontent.name);
@@ -160,7 +164,10 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(assetImage: images[index]);
+                              return CardWidget(
+                                assetImage: images[index],
+                                showSaveIcon: false,
+                              );
                             },
                           ),
                         ),
@@ -177,8 +184,16 @@ class ProfileScreen extends StatelessWidget {
                             AppButton(
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.greyColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pushNamed(
+                                  AppRoutes.watchHistoryViewmore.name,
+                                );
+                              },
                               title: "View More",
                             ),
                           ],
@@ -193,7 +208,10 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(assetImage: images[index]);
+                              return CardWidget(
+                                assetImage: images[index],
+                                showSaveIcon: false,
+                              );
                             },
                           ),
                         ),

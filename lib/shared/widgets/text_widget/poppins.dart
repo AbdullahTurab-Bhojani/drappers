@@ -22,6 +22,7 @@ enum PoppinsFontSizeVariant {
   size24,
   size25,
   size26,
+  size32,
 }
 
 /// 🔹 Font Weights
@@ -110,6 +111,8 @@ class PoppinsText extends Text {
         return 25;
       case PoppinsFontSizeVariant.size26:
         return 26;
+      case PoppinsFontSizeVariant.size32:
+        return 32;
     }
   }
 

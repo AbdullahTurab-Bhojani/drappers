@@ -107,6 +107,26 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.voteForStartupScreen.name,
         builder: (context, state) => VoteForStartupScreen(),
       ),
+      GoRoute(
+        path: AppRoutes.continueWatchingViewmore.path,
+        name: AppRoutes.continueWatchingViewmore.name,
+        builder: (context, state) => ContinueWatchingViewmore(),
+      ),
+      GoRoute(
+        path: AppRoutes.watchHistoryViewmore.path,
+        name: AppRoutes.watchHistoryViewmore.name,
+        builder: (context, state) => WatchHistoryViewmore(),
+      ),
+      GoRoute(
+        path: AppRoutes.notificationScreen.path,
+        name: AppRoutes.notificationScreen.name,
+        builder: (context, state) => NotificationScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.notificationSetting.path,
+        name: AppRoutes.notificationSetting.name,
+        builder: (context, state) => NotificationSetting(),
+      ),
 
       ShellRoute(
         navigatorKey: shellKey,
@@ -166,6 +186,16 @@ final routerConfigProvider = Provider((ref) {
         path: AppRoutes.deleteDetailScreen.path,
         name: AppRoutes.deleteDetailScreen.name,
         builder: (context, state) => DeleteDetailScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.reportContent.path,
+        name: AppRoutes.reportContent.name,
+        builder: (context, state) => ReportContent(),
+      ),
+      GoRoute(
+        path: AppRoutes.reportContentSomehingElse.path,
+        name: AppRoutes.reportContentSomehingElse.name,
+        builder: (context, state) => ReportContentSomehingElse(),
       ),
     ],
   );

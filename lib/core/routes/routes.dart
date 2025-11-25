@@ -25,6 +25,11 @@ enum AppRoutes {
     'deactivateAccountScreen',
     '/deactivateAccountScreen',
   ),
+  reportContent('reportContent', '/reportContent'),
+  reportContentSomehingElse(
+    'reportContentSomehingElse',
+    '/reportContentSomehingElse',
+  ),
   termscondition('termscondition', '/termscondition'),
   savedreel('savedreel', '/savedreel'),
   helpsupport('helpsupport', '/helpsupport'),
@@ -33,9 +38,15 @@ enum AppRoutes {
   reelWidget('reelWidget', '/reelWidget'),
   documentries('documentries', '/documentries'),
   applyPitch('applyPitch', '/applyPitch'),
-  voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
   likecontent('likecontent', '/likecontent'),
-
+  voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
+  continueWatchingViewmore(
+    'continueWatchingViewmore',
+    '/continueWatchingViewmore',
+  ),
+  watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore'),
+  notificationScreen('notificationScreen', '/notificationScreen'),
+  notificationSetting('notificationSetting', '/notificationSetting'),
   Searchscreen('searchscreen', '/searchscreen');
 
   final String name;
