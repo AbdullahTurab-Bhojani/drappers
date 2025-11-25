@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../gen/assets.gen.dart';
 import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
 
-class genreBoxWidget extends StatefulWidget {
+class GenreBoxWidget extends StatefulWidget {
   final String title;
-  const genreBoxWidget({super.key, required this.title});
+  const GenreBoxWidget({super.key, required this.title});
 
   @override
-  State<genreBoxWidget> createState() => _genreBoxWidgetState();
+  State<GenreBoxWidget> createState() => _GenreBoxWidgetState();
 }
 
-class _genreBoxWidgetState extends State<genreBoxWidget> {
+class _GenreBoxWidgetState extends State<GenreBoxWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

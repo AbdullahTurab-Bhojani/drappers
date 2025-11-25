@@ -106,82 +106,77 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      images.length,
-                      (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                        width: currentPage == index ? 26 : 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          gradient: currentPage == index
-                              ? const LinearGradient(
-                                  colors: [
-                                    Color(0xFF1FCFFF),
-                                    Color(0xFF0063FF),
-                                  ],
-                                )
-                              : null,
-                          color: currentPage != index ? AppColors.wDark : null,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    images.length,
+                    (index) => AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      width: currentPage == index ? 26 : 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        gradient: currentPage == index
+                            ? const LinearGradient(
+                                colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
+                              )
+                            : null,
+                        color: currentPage != index ? AppColors.wDark : null,
+                        borderRadius: BorderRadius.circular(4),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 35),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 32),
-                        PoppinsText(
-                          titles[currentPage],
-                          textAlign: TextAlign.center,
-                          fontSize: PoppinsFontSizeVariant.size32,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: customColors.textColor,
-                          height: 1.3,
-                        ),
-                        const SizedBox(height: 25),
-                        PoppinsText(
-                          subtitles[currentPage],
-                          textAlign: TextAlign.center,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.light,
-                          color: customColors.textColor,
-                          height: 1.7,
-                        ),
-                        const SizedBox(height: 100),
-                      ],
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 35),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 32),
+                      PoppinsText(
+                        titles[currentPage],
+                        textAlign: TextAlign.center,
+                        fontSize: PoppinsFontSizeVariant.size32,
+                        fontWeight: PoppinsFontWeightVariant.medium,
+                        color: customColors.textColor,
+                        height: 1.3,
+                      ),
+                      const SizedBox(height: 25),
+                      PoppinsText(
+                        subtitles[currentPage],
+                        textAlign: TextAlign.center,
+                        fontSize: PoppinsFontSizeVariant.size16,
+                        fontWeight: PoppinsFontWeightVariant.light,
+                        color: customColors.textColor,
+                        height: 1.7,
+                      ),
+                      const SizedBox(height: 100),
+                    ],
                   ),
+                ),
 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: AppButton(
-                      onPressed: () {
-                        if (currentPage < images.length - 1) {
-                          _pageController.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeIn,
-                          );
-                        } else {
-                          context.pushNamed(AppRoutes.loginScreen.name);
-                        }
-                      },
-                      title: currentPage == images.length - 1
-                          ? 'Get Started'
-                          : 'Next',
-                    ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: AppButton(
+                    onPressed: () {
+                      if (currentPage < images.length - 1) {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        );
+                      } else {
+                        context.pushNamed(AppRoutes.loginScreen.name);
+                      }
+                    },
+                    title: currentPage == images.length - 1
+                        ? 'Get Started'
+                        : 'Next',
                   ),
-                  const SizedBox(height: 40),
-                ],
-              ),
+                ),
+                const SizedBox(height: 40),
+              ],
             ),
           ),
         ],
