@@ -28,10 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
   VideoPlayerController? _controller;
   bool _showControls = true;
   final posterPath = '/mnt/data/Live Tv.png';
+  VoidCallback? _controllerListener;
 
   @override
   void initState() {
     super.initState();
+
     _controller =
         VideoPlayerController.network(
             'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
@@ -41,14 +43,23 @@ class _HomeScreenState extends State<HomeScreen> {
             _controller!.play();
           });
 
-    // Keep controls visible when user interacts
-    _controller!.addListener(() => setState(() {}));
+    // Define listener and store reference
+    _controllerListener = () {
+      setState(() {}); // Update UI whenever controller changes
+    };
+
+    _controller!.addListener(_controllerListener!);
   }
 
   @override
   void dispose() {
-    _controller!.removeListener(() {});
-    _controller!.dispose();
+    // Remove the listener properly
+    if (_controllerListener != null) {
+      _controller!.removeListener(_controllerListener!);
+    }
+
+    // Dispose controller
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -125,9 +136,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: [
-                  Image.asset(
-                    Assets.images.searchicon.path,
-                    color: customColors.textColor,
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.Searchscreen.name);
+                    },
+                    child: Image.asset(
+                      Assets.images.searchicon.path,
+                      color: customColors.textColor,
+                    ),
                   ),
                   SizedBox(width: 16),
                   GestureDetector(
@@ -500,7 +516,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return CardWidget(
-                                assetImage: trendingimages[index], showSaveIcon: false,
+                                assetImage: trendingimages[index],
+                                showSaveIcon: false,
                               );
                             },
                           ),
@@ -543,7 +560,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return WatchHistory(
-                                assetImage: trendingimages[index], showSaveIcon: false,
+                                assetImage: trendingimages[index],
+                                showSaveIcon: false,
                               );
                             },
                           ),
@@ -585,7 +603,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                assetImage: podcardimages[index], title: '', showSaveIcon: false, fontSizeVariant: PoppinsFontSizeVariant.size14,
+                                assetImage: podcardimages[index],
+                                title: '',
+                                showSaveIcon: false,
+                                fontSizeVariant: PoppinsFontSizeVariant.size14,
                               );
                             },
                           ),
@@ -667,8 +688,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSizeVariant: PoppinsFontSizeVariant.size12,
                                 assetImagePath: reelimages[index],
                                 title: reelTitles[index],
-                                                      showSaveIcon: false,
-
+                                showSaveIcon: false,
                               );
                             },
                           ),
@@ -709,7 +729,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: documentriescard.length,
                             itemBuilder: (context, index) {
                               return DocumentriesCardWidget(
-                                assetImage: documentriescard[index], showSaveIcon: false,
+                                assetImage: documentriescard[index],
+                                showSaveIcon: false,
                               );
                             },
                           ),

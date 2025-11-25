@@ -32,8 +32,8 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
     if (leading != null) {
       leadingWidget = leading;
     } else if (leadingText != null) {
-      leadingWidget = TextButton(
-        onPressed: () => Navigator.pop(context),
+      leadingWidget = Padding(
+        padding: const EdgeInsets.only(left: 20,top: 10),
         child: PoppinsText(
           leadingText!,
           color: Colors.white,

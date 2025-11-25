@@ -86,15 +86,23 @@ class _BottomNavigationBarShellState
       canPop: false,
       child: Scaffold(
         backgroundColor: customColors.dark,
-        body: Container(color: customColors.dark, child: widget.child),
+        body: Container(child: widget.child),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(color: customColors.dark),
+          padding: EdgeInsets.symmetric(vertical: 15),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(0, 12, 29, 1),
+                Color.fromRGBO(2, 37, 88, 1),
+              ],
+              begin: AlignmentGeometry.topCenter,
+              end: AlignmentGeometry.bottomCenter
+            ),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(_navItems.length, (index) {
-              final bool isProfileTab =
-                  index == _navItems.length - 1; 
+              final bool isProfileTab = index == _navItems.length - 1;
 
               final isSelected = selectedIndex == index;
               return InkWell(

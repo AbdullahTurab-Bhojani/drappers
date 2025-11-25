@@ -21,30 +21,33 @@ enum AppRoutes {
   ),
   deleteDetailScreen('deleteDetailScreen', '/deleteDetailScreen'),
   deleteAccountScreen('deleteAccountScreen', '/deleteAccountScreen'),
-  deactivateAccountScreen('deactivateAccountScreen', '/deactivateAccountScreen'),
+  deactivateAccountScreen(
+    'deactivateAccountScreen',
+    '/deactivateAccountScreen',
+  ),
   reportContent('reportContent', '/reportContent'),
-  reportContentSomehingElse('reportContentSomehingElse', '/reportContentSomehingElse'),
+  reportContentSomehingElse(
+    'reportContentSomehingElse',
+    '/reportContentSomehingElse',
+  ),
   termscondition('termscondition', '/termscondition'),
   savedreel('savedreel', '/savedreel'),
   helpsupport('helpsupport', '/helpsupport'),
   trendingshow('trendingshow', '/trendingshow'),
   podcasts('podcasts', '/podcasts'),
   reelWidget('reelWidget', '/reelWidget'),
-  documentries ('documentries', '/documentries'),
-  applyPitch  ('applyPitch', '/applyPitch'),
+  documentries('documentries', '/documentries'),
+  applyPitch('applyPitch', '/applyPitch'),
+  likecontent('likecontent', '/likecontent'),
   voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
-  continueWatchingViewmore  ('continueWatchingViewmore', '/continueWatchingViewmore'),
+  continueWatchingViewmore(
+    'continueWatchingViewmore',
+    '/continueWatchingViewmore',
+  ),
   watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore'),
   notificationScreen('notificationScreen', '/notificationScreen'),
-  notificationSetting  ('notificationSetting', '/notificationSetting');
-
-
-
-
-
-
-
-
+  notificationSetting('notificationSetting', '/notificationSetting'),
+  Searchscreen('searchscreen', '/searchscreen');
 
   final String name;
   final String path;

@@ -303,6 +303,13 @@ class $AssetsImagesGen {
   AssetGenImage get createpage =>
       const AssetGenImage('assets/images/createpage.png');
 
+  /// File path: assets/images/cuticon.png
+  AssetGenImage get cuticon => const AssetGenImage('assets/images/cuticon.png');
+
+  /// File path: assets/images/cuticon3x.png
+  AssetGenImage get cuticon3x =>
+      const AssetGenImage('assets/images/cuticon3x.png');
+
   /// File path: assets/images/delete123.png
   AssetGenImage get delete123 =>
       const AssetGenImage('assets/images/delete123.png');
@@ -566,6 +573,10 @@ class $AssetsImagesGen {
   AssetGenImage get screenshoticon =>
       const AssetGenImage('assets/images/screenshoticon.png');
 
+  /// File path: assets/images/searchicon3x.png
+  AssetGenImage get searchicon3x =>
+      const AssetGenImage('assets/images/searchicon3x.png');
+
   /// File path: assets/images/sentence.png
   AssetGenImage get sentence =>
       const AssetGenImage('assets/images/sentence.png');
@@ -596,6 +607,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/subscription_bg.png
   AssetGenImage get subscriptionBg =>
       const AssetGenImage('assets/images/subscription_bg.png');
+
+  /// File path: assets/images/time3x.png
+  AssetGenImage get time3x => const AssetGenImage('assets/images/time3x.png');
+
+  /// File path: assets/images/timericon.png
+  AssetGenImage get timericon =>
+      const AssetGenImage('assets/images/timericon.png');
 
   /// File path: assets/images/trendingshowimage1.png
   AssetGenImage get trendingshowimage1 =>
@@ -665,6 +683,8 @@ class $AssetsImagesGen {
     commenticon,
     courseComplete,
     createpage,
+    cuticon,
+    cuticon3x,
     delete123,
     documentaries1,
     documentaries2,
@@ -732,6 +752,7 @@ class $AssetsImagesGen {
     savereelicon,
     screensbg,
     screenshoticon,
+    searchicon3x,
     sentence,
     settingicon,
     settingsicon,
@@ -740,6 +761,8 @@ class $AssetsImagesGen {
     signouticon,
     slider,
     subscriptionBg,
+    time3x,
+    timericon,
     trendingshowimage1,
     trendingshowimage2,
     trendingshowimage3,

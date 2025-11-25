@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
@@ -56,6 +57,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       Assets.images.trendingshowimage6.path,
       Assets.images.trendingshowimage7.path,
     ];
+
     List<String> podcardimages = [
       Assets.images.podcastimage1.path,
       Assets.images.podcastimage2.path,
@@ -97,9 +99,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: [
-                  Image.asset(
-                    Assets.images.searchicon.path,
-                    color: Colors.white,
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.Searchscreen.name);
+                    },
+                    child: Image.asset(
+                      Assets.images.searchicon.path,
+                      color: customColors.textColor,
+                    ),
                   ),
                   SizedBox(width: 15),
                 ],
@@ -108,7 +115,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -139,6 +146,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             },
                           ),
                         ),
+
                         SizedBox(height: 30),
 
                         Row(
@@ -164,7 +172,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return CardWidget(
-                                assetImage: trendingimages[index], showSaveIcon: false,
+                                assetImage: trendingimages[index],
+                                showSaveIcon: false,
                               );
                             },
                           ),
@@ -193,7 +202,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                assetImage: podcardimages[index], title: '', showSaveIcon: false, fontSizeVariant: PoppinsFontSizeVariant.size14,
+                                assetImage: podcardimages[index],
+                                title: '',
+                                showSaveIcon: false,
+                                fontSizeVariant: PoppinsFontSizeVariant.size14,
                               );
                             },
                           ),
@@ -221,7 +233,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: documentriescard.length,
                             itemBuilder: (context, index) {
                               return DocumentriesCardWidget(
-                                assetImage: documentriescard[index], showSaveIcon: false,
+                                assetImage: documentriescard[index],
+                                showSaveIcon: false,
                               );
                             },
                           ),

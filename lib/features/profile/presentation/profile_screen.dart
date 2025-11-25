@@ -139,7 +139,7 @@ class ProfileScreen extends StatelessWidget {
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
                             ),
-                           AppButton(
+                            AppButton(
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
                               borderColor: customColors.greyColor,
@@ -148,9 +148,8 @@ class ProfileScreen extends StatelessWidget {
                               fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
-                                // context.goNamed(AppRoutes.podcasts.name);
+                                context.pushNamed(AppRoutes.likecontent.name);
                               },
-
                               title: "View More",
                             ),
                           ],
@@ -165,7 +164,10 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(assetImage: images[index], showSaveIcon: false,);
+                              return CardWidget(
+                                assetImage: images[index],
+                                showSaveIcon: false,
+                              );
                             },
                           ),
                         ),
@@ -188,7 +190,9 @@ class ProfileScreen extends StatelessWidget {
                               fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
-                                context.pushNamed(AppRoutes.watchHistoryViewmore.name);
+                                context.pushNamed(
+                                  AppRoutes.watchHistoryViewmore.name,
+                                );
                               },
                               title: "View More",
                             ),
@@ -204,7 +208,10 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(assetImage: images[index], showSaveIcon: false,);
+                              return CardWidget(
+                                assetImage: images[index],
+                                showSaveIcon: false,
+                              );
                             },
                           ),
                         ),
@@ -216,27 +223,26 @@ class ProfileScreen extends StatelessWidget {
 
                           itemBuilder: (context, index) {
                             return GestureDetector(
-  onTap: () {
-    if (menuList[index]['title'] == 'Sign Out') {
-      showDialog(
-        context: context,
-        builder: (context) => const Dialog(
-          backgroundColor: Colors.transparent,
-          child: SignupPopupWidget(),
-        ),
-      );
-    } else {
-      context.push(menuList[index]['route']);
-    }
-  },
-  child: TileWidget(
-    iconImage: menuList[index]['image'],
-    title: menuList[index]['title'],
-    textColor: menuList[index]['color'],
-    ontaped: menuList[index]['isTap'],
-  ),
-);
-
+                              onTap: () {
+                                if (menuList[index]['title'] == 'Sign Out') {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => const Dialog(
+                                      backgroundColor: Colors.transparent,
+                                      child: SignupPopupWidget(),
+                                    ),
+                                  );
+                                } else {
+                                  context.push(menuList[index]['route']);
+                                }
+                              },
+                              child: TileWidget(
+                                iconImage: menuList[index]['image'],
+                                title: menuList[index]['title'],
+                                textColor: menuList[index]['color'],
+                                ontaped: menuList[index]['isTap'],
+                              ),
+                            );
                           },
                           separatorBuilder: (context, index) {
                             return Divider();

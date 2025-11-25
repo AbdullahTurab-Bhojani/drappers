@@ -173,6 +173,16 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => DeactivateAccountScreen(),
       ),
       GoRoute(
+        path: AppRoutes.Searchscreen.path,
+        name: AppRoutes.Searchscreen.name,
+        builder: (context, state) => Searchscreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.likecontent.path,
+        name: AppRoutes.likecontent.name,
+        builder: (context, state) => Likecontent(),
+      ),
+      GoRoute(
         path: AppRoutes.deleteDetailScreen.path,
         name: AppRoutes.deleteDetailScreen.name,
         builder: (context, state) => DeleteDetailScreen(),
