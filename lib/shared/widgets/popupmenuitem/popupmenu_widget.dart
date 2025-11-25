@@ -51,7 +51,7 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
                     SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
-                        context.pushReplacement(AppRoutes.reportContent.path);
+                        context.pushNamed(AppRoutes.reportContent.path);
                       },
                       child: PoppinsText(
                         'Report',

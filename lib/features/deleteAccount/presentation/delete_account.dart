@@ -55,16 +55,11 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        context.pushReplacement(AppRoutes.reportContent.path);
-                      },
-                      child: PoppinsText(
-                        "Delete or Deactivate Account",
-                        fontSize: PoppinsFontSizeVariant.size24,
-                        fontWeight: PoppinsFontWeightVariant.semiBold,
-                        color: customColors.textColor,
-                      ),
+                    PoppinsText(
+                      "Delete or Deactivate Account",
+                      fontSize: PoppinsFontSizeVariant.size24,
+                      fontWeight: PoppinsFontWeightVariant.semiBold,
+                      color: customColors.textColor,
                     ),
                     // Subtitle
                     PoppinsText(
