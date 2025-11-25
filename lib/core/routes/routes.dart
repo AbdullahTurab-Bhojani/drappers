@@ -21,22 +21,22 @@ enum AppRoutes {
   ),
   deleteDetailScreen('deleteDetailScreen', '/deleteDetailScreen'),
   deleteAccountScreen('deleteAccountScreen', '/deleteAccountScreen'),
-  deactivateAccountScreen('deactivateAccountScreen', '/deactivateAccountScreen'),
+  deactivateAccountScreen(
+    'deactivateAccountScreen',
+    '/deactivateAccountScreen',
+  ),
   termscondition('termscondition', '/termscondition'),
   savedreel('savedreel', '/savedreel'),
   helpsupport('helpsupport', '/helpsupport'),
   trendingshow('trendingshow', '/trendingshow'),
   podcasts('podcasts', '/podcasts'),
   reelWidget('reelWidget', '/reelWidget'),
-  documentries ('documentries', '/documentries'),
-  applyPitch  ('applyPitch', '/applyPitch'),
+  documentries('documentries', '/documentries'),
+  applyPitch('applyPitch', '/applyPitch'),
   voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
+  likecontent('likecontent', '/likecontent'),
+
   Searchscreen('searchscreen', '/searchscreen');
-
-
-
-
-
 
   final String name;
   final String path;

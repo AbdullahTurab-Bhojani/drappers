@@ -144,7 +144,7 @@ class ProfileScreen extends StatelessWidget {
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
-                                context.pushNamed(AppRoutes.savedreel.name);
+                                context.pushNamed(AppRoutes.likecontent.name);
                               },
                               title: "View More",
                             ),

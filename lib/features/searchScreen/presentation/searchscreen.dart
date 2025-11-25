@@ -110,7 +110,7 @@ class _SearchscreenlState extends State<Searchscreen> {
                       const Expanded(
                         child: TextField(
                           decoration: InputDecoration(
-                            hintText: "Search content",
+                            hintText: "Search content", 
                             hintStyle: TextStyle(
                               color: AppColors.shadegreycolor6B6B6B,
                               fontSize: 16,
