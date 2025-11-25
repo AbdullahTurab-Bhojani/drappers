@@ -143,7 +143,9 @@ class ProfileScreen extends StatelessWidget {
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
                               border: true,
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pushNamed(AppRoutes.savedreel.name);
+                              },
                               title: "View More",
                             ),
                           ],
@@ -203,27 +205,26 @@ class ProfileScreen extends StatelessWidget {
 
                           itemBuilder: (context, index) {
                             return GestureDetector(
-  onTap: () {
-    if (menuList[index]['title'] == 'Sign Out') {
-      showDialog(
-        context: context,
-        builder: (context) => const Dialog(
-          backgroundColor: Colors.transparent,
-          child: SignupPopupWidget(),
-        ),
-      );
-    } else {
-      context.push(menuList[index]['route']);
-    }
-  },
-  child: TileWidget(
-    iconImage: menuList[index]['image'],
-    title: menuList[index]['title'],
-    textColor: menuList[index]['color'],
-    ontaped: menuList[index]['isTap'],
-  ),
-);
-
+                              onTap: () {
+                                if (menuList[index]['title'] == 'Sign Out') {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => const Dialog(
+                                      backgroundColor: Colors.transparent,
+                                      child: SignupPopupWidget(),
+                                    ),
+                                  );
+                                } else {
+                                  context.push(menuList[index]['route']);
+                                }
+                              },
+                              child: TileWidget(
+                                iconImage: menuList[index]['image'],
+                                title: menuList[index]['title'],
+                                textColor: menuList[index]['color'],
+                                ontaped: menuList[index]['isTap'],
+                              ),
+                            );
                           },
                           separatorBuilder: (context, index) {
                             return Divider();

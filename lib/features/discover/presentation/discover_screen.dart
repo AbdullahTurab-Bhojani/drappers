@@ -76,6 +76,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       Assets.images.trendingshowimage6.path,
       Assets.images.trendingshowimage7.path,
     ];
+   
+   
+   
     List<String> podcardimages = [
       Assets.images.podcastimage1.path,
       Assets.images.podcastimage2.path,
@@ -133,9 +136,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: [
-                  Image.asset(
-                    Assets.images.searchicon.path,
-                    color: Colors.white,
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.Searchscreen.name);
+                    },
+                    child: Image.asset(
+                      Assets.images.searchicon.path,
+                      color: Colors.white,
+                    ),
                   ),
                   SizedBox(width: 15),
                 ],
@@ -175,6 +183,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             },
                           ),
                         ),
+                       
                         SizedBox(height: 30),
 
                         Row(

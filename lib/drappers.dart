@@ -73,6 +73,7 @@ import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/privacypolicy/presentation/views/privacypolicy.dart';
 import 'features/profile/presentation/profile_screen.dart';
 import 'features/savereel/presentation/savedreel.dart';
+import 'features/searchScreen/presentation/searchScreen.dart';
 import 'features/signup/presentation/views/signup.dart';
 import 'features/splash/presentation/views/splash.dart';
 import 'features/terms&condition/presentation/termscondition.dart';

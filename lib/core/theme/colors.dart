@@ -17,8 +17,8 @@ abstract final class AppColors {
   static const dLightest = Color(0xFF1D1930);
   static const dTextColor = Color(0xFFFFFFFF);
   static const dGrey = Color(0xFF6E7480);
-  static const dSubTextColor = Color(0xFF777573); 
-  static const dLabel = Color(0xff999999); 
+  static const dSubTextColor = Color(0xFF777573);
+  static const dLabel = Color(0xff999999);
   static const tfield = Color(0xff101317);
   static const newfield = Color(0xff202020);
   static const containerlight = Color(0xff10151c);
@@ -32,10 +32,8 @@ abstract final class AppColors {
   static const mahroon = Color(0xff4a0516);
   static const purple = Color(0xff582983);
   static const purplenew = Color(0xff9333E9);
-  static const blackshadeboxbg= Color(0xff141414);
-
-
-
+  static const blackshadeboxbg = Color(0xff141414);
+  static const grayshadeboxbg = Color(0xff101a28);
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);
@@ -92,7 +90,7 @@ abstract final class AppColors {
   static const color101317 = Color(0xff101317);
   static const color101010 = Color(0xff101010);
   static const color202020 = Color(0xff202020);
-
+  static const shadegreycolor6B6B6B = Color(0xff6B6B6B);
 
   static get color3D3C45 => null;
 }
