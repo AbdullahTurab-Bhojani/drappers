@@ -139,11 +139,18 @@ class ProfileScreen extends StatelessWidget {
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
                             ),
-                            AppButton(
+                           AppButton(
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.greyColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
-                              onPressed: () {},
+                              onPressed: () {
+                                // context.goNamed(AppRoutes.podcasts.name);
+                              },
+
                               title: "View More",
                             ),
                           ],
@@ -175,8 +182,14 @@ class ProfileScreen extends StatelessWidget {
                             AppButton(
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.greyColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pushNamed(AppRoutes.watchHistoryViewmore.name);
+                              },
                               title: "View More",
                             ),
                           ],

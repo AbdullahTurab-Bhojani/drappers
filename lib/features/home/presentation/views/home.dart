@@ -12,6 +12,7 @@ import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../../shared/widgets/home_banner.dart';
+import '../../../../shared/widgets/more_info_bottom_sheet.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
 import '../../../../shared/widgets/watch_history.dart';
@@ -314,35 +315,81 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         Align(
                                           alignment: Alignment.centerRight,
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 14,
-                                              vertical: 6,
-                                            ),
-                                            height: 36,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black.withOpacity(
-                                                0.35,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              showModalBottomSheet(
+                                                context: context,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                isScrollControlled: true,
+                                                isDismissible: true,
+                                                enableDrag: true,
+                                                builder: (context) {
+                                                  return Align(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    child: ConstrainedBox(
+                                                      constraints:
+                                                          BoxConstraints(
+                                                            maxWidth: 384,
+                                                          ),
+                                                      child: Material(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                              topLeft:
+                                                                  Radius.circular(
+                                                                    12,
+                                                                  ),
+                                                              topRight:
+                                                                  Radius.circular(
+                                                                    12,
+                                                                  ),
+                                                            ),
+                                                        color:
+                                                            AppColors.dRegular,
+                                                        child:
+                                                            MoreInfoBottomSheet(),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 14,
+                                                vertical: 6,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Icon(
-                                                  Icons.info_outline,
-                                                  size: 18,
-                                                  color: Colors.white,
+                                              height: 36,
+                                              decoration: BoxDecoration(
+                                                color: Colors.black.withOpacity(
+                                                  0.35,
                                                 ),
-                                                SizedBox(width: 8),
-                                                Text(
-                                                  'More Info',
-                                                  style: TextStyle(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Icon(
+                                                    Icons.info_outline,
+                                                    size: 18,
                                                     color: Colors.white,
                                                   ),
-                                                ),
-                                              ],
+                                                  SizedBox(width: 8),
+                                                  PoppinsText(
+                                                    'More Info',
+                                                    color:
+                                                        customColors.textColor,
+                                                    fontSize:
+                                                        PoppinsFontSizeVariant
+                                                            .size12,
+                                                    fontWeight:
+                                                        PoppinsFontWeightVariant
+                                                            .medium,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -450,7 +497,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               buttonSize: Size(80, 25),
                               color: Colors.transparent,
                               border: true,
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pushNamed(AppRoutes.continueWatchingViewmore.name);
+                              },
                               title: "View More",
                               borderColor: customColors.textColor,
                               borderWidth: 1,

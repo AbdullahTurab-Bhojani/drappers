@@ -33,6 +33,8 @@ abstract final class AppColors {
   static const purple = Color(0xff582983);
   static const purplenew = Color(0xff9333E9);
   static const blackshadeboxbg= Color(0xff141414);
+  static const searchbarbg = Color(0xff19193E);
+
 
 
 

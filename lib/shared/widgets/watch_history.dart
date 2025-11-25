@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../gen/assets.gen.dart';
 
 class WatchHistory extends StatefulWidget {
-  final String assetImage; // can be asset path or network URL
-  const WatchHistory({super.key, required this.assetImage});
+  final String assetImage; 
+   WatchHistory({super.key, required this.assetImage});
 
   @override
   State<WatchHistory> createState() => _WatchHistoryState();
@@ -35,9 +35,8 @@ class _WatchHistoryState extends State<WatchHistory> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Top row with three dots
               Padding(
-                padding: const EdgeInsets.only(top: 8, right: 2, bottom: 0),
+                padding:  EdgeInsets.only(top: 8, right: 2, bottom: 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -51,7 +50,7 @@ class _WatchHistoryState extends State<WatchHistory> {
               ),
               Image.asset(Assets.images.playwithbgicon.path),
               Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 10),
+                padding:  EdgeInsets.only(left: 8, right: 8, bottom: 10),
                 child: SliderTheme(
                   data: SliderTheme.of(context).copyWith(
                     trackHeight: 3,

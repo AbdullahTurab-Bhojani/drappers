@@ -107,6 +107,16 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.voteForStartupScreen.name,
         builder: (context, state) => VoteForStartupScreen(),
       ),
+       GoRoute(
+            path: AppRoutes.continueWatchingViewmore.path,
+            name: AppRoutes.continueWatchingViewmore.name,
+            builder: (context, state) => ContinueWatchingViewmore(),
+          ),
+          GoRoute(
+            path: AppRoutes.watchHistoryViewmore.path,
+            name: AppRoutes.watchHistoryViewmore.name,
+            builder: (context, state) => WatchHistoryViewmore(),
+          ),
 
       ShellRoute(
         navigatorKey: shellKey,
@@ -134,6 +144,7 @@ final routerConfigProvider = Provider((ref) {
             name: AppRoutes.profile.name,
             builder: (context, state) => ProfileScreen(),
           ),
+         
         ],
       ),
 
