@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 import '../../../gen/assets.gen.dart';
+import 'popupmenuitem/popupmenu_widget.dart';
 
 class WatchHistory extends StatefulWidget {
   final String assetImage; 
-   WatchHistory({super.key, required this.assetImage});
+  final bool showSaveIcon;
+
+   const WatchHistory({super.key, required this.assetImage, required this.showSaveIcon});
 
   @override
   State<WatchHistory> createState() => _WatchHistoryState();
@@ -38,18 +41,23 @@ class _WatchHistoryState extends State<WatchHistory> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding:  EdgeInsets.only(top: 8, right: 2, bottom: 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Image.asset(
-                      Assets.images.a3dotsicon.path,
-                      width: 20,
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ),
+         padding: widget.showSaveIcon ? EdgeInsets.only(left: 8, top: 5, bottom: 5,right: 8)  : EdgeInsetsGeometry.only(top: 5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+           PopupmenuWidget(
+             showSaveIcon: widget.showSaveIcon,
+           ),
+
+            // PoppinsText(
+            //   widget.title,
+            //   fontSize: PoppinsFontSizeVariant.size14,
+            //   fontWeight: PoppinsFontWeightVariant.medium,
+            // ),
+          ],
+        ),
+      ),
               Image.asset(Assets.images.playwithbgicon.path),
               Padding(
                 padding:  EdgeInsets.only(left: 8, right: 8, bottom: 10),

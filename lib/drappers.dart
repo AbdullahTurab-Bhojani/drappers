@@ -69,6 +69,8 @@ import 'features/login/presentation/forgetpassword_screen.dart';
 import 'features/login/presentation/login_screen.dart';
 import 'features/login/presentation/updatepassword_screen.dart';
 import 'features/login/presentation/verfiicationcode_screen.dart';
+import 'features/notificationscreen/presentation/notification_screen.dart';
+import 'features/notificationscreen/presentation/notification_setting.dart';
 import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/privacypolicy/presentation/views/privacypolicy.dart';
 import 'features/profile/presentation/profile_screen.dart';

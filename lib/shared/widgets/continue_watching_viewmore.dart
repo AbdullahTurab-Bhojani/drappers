@@ -16,7 +16,7 @@ class Podcast {
 }
 
 class ContinueWatchingViewmore extends StatefulWidget {
-  ContinueWatchingViewmore({super.key});
+  const ContinueWatchingViewmore({super.key});
 
   @override
   State<ContinueWatchingViewmore> createState() =>

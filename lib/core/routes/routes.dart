@@ -32,7 +32,11 @@ enum AppRoutes {
   applyPitch  ('applyPitch', '/applyPitch'),
   voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
   continueWatchingViewmore  ('continueWatchingViewmore', '/continueWatchingViewmore'),
-  watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore');
+  watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore'),
+  notificationScreen('notificationScreen', '/notificationScreen'),
+  notificationSetting  ('notificationSetting', '/notificationSetting');
+
+
 
 
 

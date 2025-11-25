@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../gen/assets.gen.dart';
+import '../popupmenuitem/popupmenu_widget.dart';
 
 class CardWidget extends StatefulWidget {
-  final String assetImage; // can be asset path or network URL
-  const CardWidget({super.key, required this.assetImage});
+  final bool showSaveIcon;
+
+  final String assetImage; 
+  const CardWidget({super.key, required this.assetImage, required this.showSaveIcon});
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -27,12 +30,20 @@ class _CardWidgetState extends State<CardWidget> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 8, right: 2),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+         padding: widget.showSaveIcon ? EdgeInsets.only(left: 8, top: 5, bottom: 5,right: 8)  : EdgeInsetsGeometry.only(top: 5),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(Assets.images.a3dotsicon.path),
+           PopupmenuWidget(
+             showSaveIcon: widget.showSaveIcon,
+           ),
+
+            // PoppinsText(
+            //   widget.title,
+            //   fontSize: PoppinsFontSizeVariant.size14,
+            //   fontWeight: PoppinsFontWeightVariant.medium,
+            // ),
           ],
         ),
       ),

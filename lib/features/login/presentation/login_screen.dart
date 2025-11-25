@@ -203,7 +203,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             buttonSize: Size(180, 52),
                             color: AppColors.graylight,
                             prefixIcon: Image.asset(
-                              Assets.images.googlelogo.path,
+                              Assets.images.googleicon.path,
+                              width: 26,
+                              height: 26,
                             ),
                             buttonGradient: [
                               AppColors.graylight,
@@ -216,7 +218,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             buttonSize: Size(180, 52),
                             color: AppColors.graylight,
                             prefixIcon: Image.asset(
-                              Assets.images.applelogo.path,
+                              Assets.images.appleicon.path,
+                              width: 26,
+                              height: 26,
                             ),
                             buttonGradient: [
                               AppColors.graylight,
@@ -231,7 +235,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           context.goNamed(AppRoutes.home.name);
                         },
                         title: 'Continue as Guest',
-                        buttonGradient: [AppColors.graylight, AppColors.graylight,],
+                        buttonGradient: [
+                          AppColors.graylight,
+                          AppColors.graylight,
+                        ],
                         color: AppColors.graylight,
                       ),
 

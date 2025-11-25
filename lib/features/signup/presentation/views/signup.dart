@@ -384,7 +384,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             buttonSize: Size(180, 52),
                             color: Color(0xff202020),
                             prefixIcon: Image.asset(
-                              Assets.images.googlelogo.path,
+                              Assets.images.googleicon.path,
+                              width: 26,
+                              height: 26,
                             ),
                             buttonGradient: [
                               Color(0xff202020),
@@ -397,7 +399,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             buttonSize: Size(180, 52),
                             color: Color(0xff202020),
                             prefixIcon: Image.asset(
-                              Assets.images.applelogo.path,
+                              Assets.images.appleicon.path,
+                              width: 26,
+                              height: 26,
                             ),
                             buttonGradient: [
                               Color(0xff202020),

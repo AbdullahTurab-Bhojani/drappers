@@ -164,7 +164,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return CardWidget(
-                                assetImage: trendingimages[index],
+                                assetImage: trendingimages[index], showSaveIcon: false,
                               );
                             },
                           ),
@@ -193,7 +193,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                assetImage: podcardimages[index],
+                                assetImage: podcardimages[index], title: '', showSaveIcon: false, fontSizeVariant: PoppinsFontSizeVariant.size14,
                               );
                             },
                           ),
@@ -221,7 +221,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             itemCount: documentriescard.length,
                             itemBuilder: (context, index) {
                               return DocumentriesCardWidget(
-                                assetImage: documentriescard[index],
+                                assetImage: documentriescard[index], showSaveIcon: false,
                               );
                             },
                           ),

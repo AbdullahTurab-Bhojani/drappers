@@ -127,12 +127,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   Image.asset(
                     Assets.images.searchicon.path,
-                    color: Colors.white,
+                    color: customColors.textColor,
                   ),
                   SizedBox(width: 16),
-                  Image.asset(
-                    Assets.images.notificationsicon.path,
-                    color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.notificationScreen.name);
+                    },
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          Assets.images.notificationsiconnew.path,
+                          width: 24,
+                          height: 24,
+                          color: customColors.textColor,
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 2,
+                          child: Container(
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(width: 10),
                 ],
@@ -477,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return CardWidget(
-                                assetImage: trendingimages[index],
+                                assetImage: trendingimages[index], showSaveIcon: false,
                               );
                             },
                           ),
@@ -498,7 +521,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
-                                context.pushNamed(AppRoutes.continueWatchingViewmore.name);
+                                context.pushNamed(
+                                  AppRoutes.continueWatchingViewmore.name,
+                                );
                               },
                               title: "View More",
                               borderColor: customColors.textColor,
@@ -518,7 +543,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
                               return WatchHistory(
-                                assetImage: trendingimages[index],
+                                assetImage: trendingimages[index], showSaveIcon: false,
                               );
                             },
                           ),
@@ -560,7 +585,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: podcardimages.length,
                             itemBuilder: (context, index) {
                               return PodcardsWidget(
-                                assetImage: podcardimages[index],
+                                assetImage: podcardimages[index], title: '', showSaveIcon: false, fontSizeVariant: PoppinsFontSizeVariant.size14,
                               );
                             },
                           ),
@@ -629,7 +654,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(height: 20),
 
                         SizedBox(
-                          height: 180,
+                          height: 273,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
@@ -637,8 +662,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: reelimages.length,
                             itemBuilder: (context, index) {
                               return ReelcardWidget(
+                                reelCardHeight: 273,
+                                reelCardWidth: 149,
+                                fontSizeVariant: PoppinsFontSizeVariant.size12,
                                 assetImagePath: reelimages[index],
                                 title: reelTitles[index],
+                                                      showSaveIcon: false,
+
                               );
                             },
                           ),
@@ -679,7 +709,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: documentriescard.length,
                             itemBuilder: (context, index) {
                               return DocumentriesCardWidget(
-                                assetImage: documentriescard[index],
+                                assetImage: documentriescard[index], showSaveIcon: false,
                               );
                             },
                           ),
