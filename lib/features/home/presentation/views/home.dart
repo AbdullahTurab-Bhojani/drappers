@@ -241,11 +241,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                             : Container(
                                                 color: Colors.grey[900],
                                               )),
-                        
+
                                   Container(
                                     color: Colors.black.withOpacity(0.18),
                                   ),
-                        
+
                                   Positioned(
                                     top: 12,
                                     left: 14,
@@ -257,8 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             'Meet The Drapers - Live',
                                             color: Colors.white,
                                             fontWeight:
-                                                PoppinsFontWeightVariant
-                                                    .medium,
+                                                PoppinsFontWeightVariant.medium,
                                             fontSize:
                                                 PoppinsFontSizeVariant.size14,
                                           ),
@@ -273,8 +272,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               color: Colors.white,
                                               width: 1,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
                                           ),
                                           child: Row(
                                             children: [
@@ -290,9 +290,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 fontWeight:
                                                     PoppinsFontWeightVariant
                                                         .regular,
-                                                fontSize:
-                                                    PoppinsFontSizeVariant
-                                                        .size12,
+                                                fontSize: PoppinsFontSizeVariant
+                                                    .size12,
                                               ),
                                             ],
                                           ),
@@ -305,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                        
+
                                   Positioned.fill(
                                     child: GestureDetector(
                                       onTap: () => setState(
@@ -313,9 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       child: Center(
                                         child: AnimatedOpacity(
-                                          duration: Duration(
-                                            milliseconds: 200,
-                                          ),
+                                          duration: Duration(milliseconds: 200),
                                           opacity: _showControls ? 1 : 0,
                                           child: Container(
                                             padding: EdgeInsets.all(12),
@@ -346,7 +343,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
-                        
+
                                   Positioned(
                                     bottom: 10,
                                     left: 12,
@@ -381,8 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 SizedBox(width: 8),
                                                 PoppinsText(
                                                   'More Info',
-                                                  color:
-                                                      customColors.textColor,
+                                                  color: customColors.textColor,
                                                   fontSize:
                                                       PoppinsFontSizeVariant
                                                           .size12,
@@ -394,6 +390,52 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                         ),
+                                        SizedBox(height: 10),
+                                        if (_controller!.value.isInitialized)
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Slider(
+                                                  activeColor: Colors.white,
+                                                  value: _controller!
+                                                      .value
+                                                      .position
+                                                      .inMilliseconds
+                                                      .toDouble(),
+                                                  max: _controller!
+                                                      .value
+                                                      .duration
+                                                      .inMilliseconds
+                                                      .toDouble(),
+                                                  onChanged: (v) {
+                                                    _controller!.seekTo(
+                                                      Duration(
+                                                        milliseconds: v.round(),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                              Text(
+                                                _format(
+                                                  _controller!.value.position,
+                                                ),
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              SizedBox(width: 8),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  context.pushNamed(AppRoutes.videoScreen.name);
+                                                },
+                                                child: Image.asset(Assets.images.screenrotationicon.path,
+                                                width: 24,
+                                                height: 24,
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                       ],
                                     ),
                                   ),

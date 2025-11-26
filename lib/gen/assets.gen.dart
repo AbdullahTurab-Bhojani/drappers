@@ -575,6 +575,10 @@ class $AssetsImagesGen {
   AssetGenImage get savereelicon =>
       const AssetGenImage('assets/images/savereelicon.png');
 
+  /// File path: assets/images/screenrotationicon.png
+  AssetGenImage get screenrotationicon =>
+      const AssetGenImage('assets/images/screenrotationicon.png');
+
   /// File path: assets/images/screensbg.png
   AssetGenImage get screensbg =>
       const AssetGenImage('assets/images/screensbg.png');
@@ -767,6 +771,7 @@ class $AssetsImagesGen {
     reset123,
     saveIcon,
     savereelicon,
+    screenrotationicon,
     screensbg,
     screenshoticon,
     searchicon3x,
