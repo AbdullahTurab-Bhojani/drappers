@@ -193,6 +193,11 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => ReportContent(),
       ),
       GoRoute(
+        path: AppRoutes.ReelsviewScreen.path,
+        name: AppRoutes.ReelsviewScreen.name,
+        builder: (context, state) => ReelsviewScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.reportContentSomehingElse.path,
         name: AppRoutes.reportContentSomehingElse.name,
         builder: (context, state) => ReportContentSomehingElse(),

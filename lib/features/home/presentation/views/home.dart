@@ -689,6 +689,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 assetImagePath: reelimages[index],
                                 title: reelTitles[index],
                                 showSaveIcon: false,
+                                
                               );
                             },
                           ),

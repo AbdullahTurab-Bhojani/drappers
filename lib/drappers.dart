@@ -75,6 +75,7 @@ import 'features/notificationscreen/presentation/notification_setting.dart';
 import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/privacypolicy/presentation/views/privacypolicy.dart';
 import 'features/profile/presentation/profile_screen.dart';
+import 'features/reelsScreen/presentation/reelsView.dart';
 import 'features/report_content/presentation/report_content.dart';
 import 'features/savereel/presentation/savedreel.dart';
 import 'features/searchScreen/presentation/searchScreen.dart';

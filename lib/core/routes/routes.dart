@@ -47,6 +47,7 @@ enum AppRoutes {
   watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore'),
   notificationScreen('notificationScreen', '/notificationScreen'),
   notificationSetting('notificationSetting', '/notificationSetting'),
+  ReelsviewScreen('ReelsviewScreen', '/ReelsviewScreen'),
   Searchscreen('searchscreen', '/searchscreen');
 
   final String name;
