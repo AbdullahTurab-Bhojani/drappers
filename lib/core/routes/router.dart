@@ -173,8 +173,8 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => DeactivateAccountScreen(),
       ),
       GoRoute(
-        path: AppRoutes.Searchscreen.path,
-        name: AppRoutes.Searchscreen.name,
+        path: AppRoutes.searchscreen.path,
+        name: AppRoutes.searchscreen.name,
         builder: (context, state) => Searchscreen(),
       ),
       GoRoute(
@@ -196,6 +196,12 @@ final routerConfigProvider = Provider((ref) {
         path: AppRoutes.reportContentSomehingElse.path,
         name: AppRoutes.reportContentSomehingElse.name,
         builder: (context, state) => ReportContentSomehingElse(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.videoScreen.path,
+        name: AppRoutes.videoScreen.name,
+        builder: (context, state) => CustomVideoPlayerScreen(),
       ),
     ],
   );

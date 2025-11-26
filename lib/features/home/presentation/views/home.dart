@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   InkWell(
                     onTap: () {
-                      context.pushNamed(AppRoutes.Searchscreen.name);
+                      context.pushNamed(AppRoutes.searchscreen.name);
                     },
                     child: Image.asset(
                       Assets.images.searchicon.path,
@@ -223,177 +223,144 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         SizedBox(height: 30),
 
-                        Center(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(18),
-                            child: SizedBox(
-                              width: 400,
-                              height: 500,
-                              child: Stack(
-                                children: [
-                                  _controller!.value.isInitialized
-                                      ? VideoPlayer(_controller!)
-                                      : (File(posterPath).existsSync()
-                                            ? Image.file(
-                                                File(posterPath),
-                                                fit: BoxFit.cover,
-                                              )
-                                            : Container(
-                                                color: Colors.grey[900],
-                                              )),
+                        GestureDetector(
+                          onTap: () {
+                            context.push(AppRoutes.videoScreen.path);
+                          },
+                          child: Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(18),
+                              child: SizedBox(
+                                width: 400,
+                                height: 500,
+                                child: Stack(
+                                  children: [
+                                    _controller!.value.isInitialized
+                                        ? VideoPlayer(_controller!)
+                                        : (File(posterPath).existsSync()
+                                              ? Image.file(
+                                                  File(posterPath),
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Container(
+                                                  color: Colors.grey[900],
+                                                )),
 
-                                  Container(
-                                    color: Colors.black.withOpacity(0.18),
-                                  ),
-
-                                  Positioned(
-                                    top: 12,
-                                    left: 14,
-                                    right: 14,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: PoppinsText(
-                                            'Meet The Drapers - Live',
-                                            color: Colors.white,
-                                            fontWeight:
-                                                PoppinsFontWeightVariant.medium,
-                                            fontSize:
-                                                PoppinsFontSizeVariant.size14,
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 10,
-                                            vertical: 6,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: Colors.white,
-                                              width: 1,
-                                            ),
-                                            borderRadius: BorderRadius.circular(
-                                              20,
-                                            ),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.circle,
-                                                size: 8,
-                                                color: Colors.red,
-                                              ),
-                                              SizedBox(width: 6),
-                                              PoppinsText(
-                                                'Live TV',
-                                                color: Colors.white,
-                                                fontWeight:
-                                                    PoppinsFontWeightVariant
-                                                        .regular,
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size12,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(width: 8),
-                                        Icon(
-                                          Icons.more_vert,
-                                          color: Colors.white,
-                                        ),
-                                      ],
+                                    Container(
+                                      color: Colors.black.withOpacity(0.18),
                                     ),
-                                  ),
 
-                                  Positioned.fill(
-                                    child: GestureDetector(
-                                      onTap: () => setState(
-                                        () => _showControls = !_showControls,
-                                      ),
-                                      child: Center(
-                                        child: AnimatedOpacity(
-                                          duration: Duration(milliseconds: 200),
-                                          opacity: _showControls ? 1 : 0,
-                                          child: Container(
-                                            padding: EdgeInsets.all(12),
+                                    Positioned(
+                                      top: 12,
+                                      left: 14,
+                                      right: 14,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: PoppinsText(
+                                              'Meet The Drapers - Live',
+                                              color: Colors.white,
+                                              fontWeight:
+                                                  PoppinsFontWeightVariant
+                                                      .medium,
+                                              fontSize:
+                                                  PoppinsFontSizeVariant.size14,
+                                            ),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                              vertical: 6,
+                                            ),
                                             decoration: BoxDecoration(
-                                              color: Colors.black.withOpacity(
-                                                0.45,
+                                              border: Border.all(
+                                                color: Colors.white,
+                                                width: 1,
                                               ),
-                                              shape: BoxShape.circle,
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
                                             ),
-                                            child: IconButton(
-                                              iconSize: 36,
-                                              color: Colors.white,
-                                              icon: Icon(
-                                                _controller!.value.isPlaying
-                                                    ? Icons.pause
-                                                    : Icons.play_arrow,
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.circle,
+                                                  size: 8,
+                                                  color: Colors.red,
+                                                ),
+                                                SizedBox(width: 6),
+                                                PoppinsText(
+                                                  'Live TV',
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .regular,
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size12,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(width: 8),
+                                          Icon(
+                                            Icons.more_vert,
+                                            color: Colors.white,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    Positioned.fill(
+                                      child: GestureDetector(
+                                        onTap: () => setState(
+                                          () => _showControls = !_showControls,
+                                        ),
+                                        child: Center(
+                                          child: AnimatedOpacity(
+                                            duration: Duration(
+                                              milliseconds: 200,
+                                            ),
+                                            opacity: _showControls ? 1 : 0,
+                                            child: Container(
+                                              padding: EdgeInsets.all(12),
+                                              decoration: BoxDecoration(
+                                                color: Colors.black.withOpacity(
+                                                  0.45,
+                                                ),
+                                                shape: BoxShape.circle,
                                               ),
-                                              onPressed: () {
-                                                setState(() {
+                                              child: IconButton(
+                                                iconSize: 36,
+                                                color: Colors.white,
+                                                icon: Icon(
                                                   _controller!.value.isPlaying
-                                                      ? _controller!.pause()
-                                                      : _controller!.play();
-                                                });
-                                              },
+                                                      ? Icons.pause
+                                                      : Icons.play_arrow,
+                                                ),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _controller!.value.isPlaying
+                                                        ? _controller!.pause()
+                                                        : _controller!.play();
+                                                  });
+                                                },
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
 
-                                  Positioned(
-                                    bottom: 10,
-                                    left: 12,
-                                    right: 12,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Align(
-                                          alignment: Alignment.centerRight,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              showModalBottomSheet(
-                                                context: context,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                isScrollControlled: true,
-                                                isDismissible: true,
-                                                enableDrag: true,
-                                                builder: (context) {
-                                                  return Align(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: ConstrainedBox(
-                                                      constraints:
-                                                          BoxConstraints(
-                                                            maxWidth: 384,
-                                                          ),
-                                                      child: Material(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                              topLeft:
-                                                                  Radius.circular(
-                                                                    12,
-                                                                  ),
-                                                              topRight:
-                                                                  Radius.circular(
-                                                                    12,
-                                                                  ),
-                                                            ),
-                                                        color:
-                                                            AppColors.dRegular,
-                                                        child:
-                                                            MoreInfoBottomSheet(),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
+                                    Positioned(
+                                      bottom: 10,
+                                      left: 12,
+                                      right: 12,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.centerRight,
                                             child: Container(
                                               padding: EdgeInsets.symmetric(
                                                 horizontal: 14,
@@ -431,48 +398,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        if (_controller!.value.isInitialized)
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Slider(
-                                                  activeColor: Colors.white,
-                                                  value: _controller!
-                                                      .value
-                                                      .position
-                                                      .inMilliseconds
-                                                      .toDouble(),
-                                                  max: _controller!
-                                                      .value
-                                                      .duration
-                                                      .inMilliseconds
-                                                      .toDouble(),
-                                                  onChanged: (v) {
-                                                    _controller!.seekTo(
-                                                      Duration(
-                                                        milliseconds: v.round(),
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(width: 8),
-                                              Text(
-                                                _format(
-                                                  _controller!.value.position,
-                                                ),
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),

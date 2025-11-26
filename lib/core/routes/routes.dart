@@ -39,7 +39,6 @@ enum AppRoutes {
   documentries('documentries', '/documentries'),
   applyPitch('applyPitch', '/applyPitch'),
   likecontent('likecontent', '/likecontent'),
-  voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
   continueWatchingViewmore(
     'continueWatchingViewmore',
     '/continueWatchingViewmore',
@@ -47,7 +46,9 @@ enum AppRoutes {
   watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore'),
   notificationScreen('notificationScreen', '/notificationScreen'),
   notificationSetting('notificationSetting', '/notificationSetting'),
-  Searchscreen('searchscreen', '/searchscreen');
+  searchscreen('searchscreen', '/searchscreen'),
+  voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
+  videoScreen('videoScreen', '/videoScreen');
 
   final String name;
   final String path;
