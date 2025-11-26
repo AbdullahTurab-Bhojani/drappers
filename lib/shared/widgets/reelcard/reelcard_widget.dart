@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
@@ -27,31 +28,36 @@ class ReelcardWidget extends StatefulWidget {
 class _ReelcardWidgetState extends State<ReelcardWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.reelCardWidth,
-      height: widget.reelCardHeight,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          image: AssetImage(widget.assetImagePath),
-          fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        context.pushNamed(AppRoutes.ReelsviewScreen.name);
+      },
+      child: Container(
+        width: widget.reelCardWidth,
+        height: widget.reelCardHeight,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          image: DecorationImage(
+            image: AssetImage(widget.assetImagePath),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Padding(
-        padding: widget.showSaveIcon ? EdgeInsets.only(left: 8, top: 5, bottom: 5,right: 8)  : EdgeInsetsGeometry.only(top: 5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            PopupmenuWidget(
-              showSaveIcon: widget.showSaveIcon,
-            ),
-            PoppinsText(
-              widget.title,
-              fontSize: widget.fontSizeVariant,
-              fontWeight: PoppinsFontWeightVariant.medium,
-            ),
-          ],
+        child: Padding(
+          padding: widget.showSaveIcon
+              ? EdgeInsets.only(left: 8, top: 5, bottom: 5, right: 8)
+              : EdgeInsetsGeometry.only(top: 5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              PopupmenuWidget(showSaveIcon: widget.showSaveIcon),
+              PoppinsText(
+                widget.title,
+                fontSize: widget.fontSizeVariant,
+                fontWeight: PoppinsFontWeightVariant.medium,
+              ),
+            ],
+          ),
         ),
       ),
     );

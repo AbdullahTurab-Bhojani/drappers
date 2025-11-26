@@ -46,6 +46,7 @@ enum AppRoutes {
   watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore'),
   notificationScreen('notificationScreen', '/notificationScreen'),
   notificationSetting('notificationSetting', '/notificationSetting'),
+  ReelsviewScreen('ReelsviewScreen', '/ReelsviewScreen'),
   searchscreen('searchscreen', '/searchscreen'),
   createAccountCodeScreen('createAccountCodeScreen', '/createAccountCodeScreen'),
   contentDetail('contentDetail', '/contentDetail'),
