@@ -127,6 +127,16 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.notificationSetting.name,
         builder: (context, state) => NotificationSetting(),
       ),
+       GoRoute(
+        path: AppRoutes.createAccountCodeScreen.path,
+        name: AppRoutes.createAccountCodeScreen.name,
+        builder: (context, state) => CreateAccountCodeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.contentDetail.path,
+        name: AppRoutes.contentDetail.name,
+        builder: (context, state) => ContentDetail(),
+      ),
 
       ShellRoute(
         navigatorKey: shellKey,
@@ -173,8 +183,8 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => DeactivateAccountScreen(),
       ),
       GoRoute(
-        path: AppRoutes.Searchscreen.path,
-        name: AppRoutes.Searchscreen.name,
+        path: AppRoutes.searchscreen.path,
+        name: AppRoutes.searchscreen.name,
         builder: (context, state) => Searchscreen(),
       ),
       GoRoute(
@@ -193,9 +203,20 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => ReportContent(),
       ),
       GoRoute(
+        path: AppRoutes.ReelsviewScreen.path,
+        name: AppRoutes.ReelsviewScreen.name,
+        builder: (context, state) => ReelsviewScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.reportContentSomehingElse.path,
         name: AppRoutes.reportContentSomehingElse.name,
         builder: (context, state) => ReportContentSomehingElse(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.videoScreen.path,
+        name: AppRoutes.videoScreen.name,
+        builder: (context, state) => CustomVideoPlayerScreen(),
       ),
     ],
   );

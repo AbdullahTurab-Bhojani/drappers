@@ -15,7 +15,7 @@ class TrendingshowWidget extends StatefulWidget {
 class _TrendingshowWidgetState extends State<TrendingshowWidget> {
   @override
   Widget build(BuildContext context) {
-    List<String> images  = [
+    List<String> images = [
       Assets.images.trendingshowimage1.path,
       Assets.images.trendingshowimage2.path,
       Assets.images.trendingshowimage3.path,
@@ -84,23 +84,28 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                       ),
                       itemCount: images.length,
                       itemBuilder: (context, index) {
-                        return Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.asset(
-                                images[index],
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
+                        return GestureDetector(
+                          onTap: () {
+                            context.pushNamed(AppRoutes.contentDetail.name);
+                          },
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.asset(
+                                  images[index],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: PopupmenuWidget(showSaveIcon: false),
-                            ),
-                          ],
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: PopupmenuWidget(showSaveIcon: false),
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -123,18 +128,23 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                       ),
                       itemCount: images.length,
                       itemBuilder: (context, index) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Image.asset(images[index], fit: BoxFit.cover),
-                              Positioned(
-                                top: 0,
-                                right: 0,
-                                child: PopupmenuWidget(showSaveIcon: false),
-                              ),
-                            ],
+                        return GestureDetector(
+                          onTap: () {
+                            context.pushNamed(AppRoutes.contentDetail.name);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                Image.asset(images[index], fit: BoxFit.cover),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: PopupmenuWidget(showSaveIcon: false),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

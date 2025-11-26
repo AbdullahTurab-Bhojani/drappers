@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/watchlistitemtile.dart';
-// Import the new reusable widget
-// Assuming WatchlistItemTile is available
 
-// --- DUMMY DATA ---
 class WatchlistData {
   final String thumbnailPath;
   final String title;
