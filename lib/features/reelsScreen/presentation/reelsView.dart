@@ -20,48 +20,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
 
   bool _isPlaying = true;
 
-  Widget _buildActionButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onTap,
-    String count = '',
-  }) {
-    final bool isLikeButton = label.isEmpty && count.isNotEmpty;
-
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Icon(icon, color: Colors.white, size: 24),
-                if (isLikeButton) ...[
-                  SizedBox(width: 6),
-                  PoppinsText(
-                    count,
-                    fontSize: PoppinsFontSizeVariant.size16,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: Colors.white,
-                  ),
-                ],
-              ],
-            ),
-            if (!isLikeButton && label.isNotEmpty) ...[
-              const SizedBox(height: 4),
-              PoppinsText(
-                label,
-                fontSize: PoppinsFontSizeVariant.size14,
-                fontWeight: PoppinsFontWeightVariant.regular,
-                color: Colors.white,
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
+  // Removed the _buildActionButton helper method as requested
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +31,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
+          // 1. Video Player Area (Placeholder, Full Screen)
           Positioned.fill(
             child: GestureDetector(
               onTap: () {
@@ -102,6 +62,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
             ),
           ),
 
+          // 2. Gradient Overlay
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -119,6 +80,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
             ),
           ),
 
+          // 3. Metadata and Social Actions
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(left: 15, right: 15, bottom: 0),
@@ -126,18 +88,19 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 4),
+                  // --- Title and Metadata ---
                   PoppinsText(
                     _reelTitle,
                     fontSize: PoppinsFontSizeVariant.size18,
                     fontWeight: PoppinsFontWeightVariant.medium,
                     color: customColors.textColor,
                   ),
+                  const SizedBox(height: 4),
                   PoppinsText(
                     '$_date • $_viewsCount',
                     fontSize: PoppinsFontSizeVariant.size14,
                     fontWeight: PoppinsFontWeightVariant.regular,
-                    color: customColors.labelColor,
+                    color: Colors.white70,
                   ),
                   const SizedBox(height: 8),
                   PoppinsText(
@@ -150,39 +113,82 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // Like Button
-                      _buildActionButton(
-                        icon: Icons.thumb_up_alt_outlined,
-                        label: '',
-                        count: '12',
-                        onTap: () {
-                          // Handle Like/Unlike
-                        },
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/like.png",
+                                    width: 24,
+                                    height: 24,
+                                    color: customColors.textColor,
+                                  ),
+                                  SizedBox(width: 10),
+                                  PoppinsText(
+                                    '12',
+                                    fontSize: PoppinsFontSizeVariant.size14,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
+                                    color: customColors.textColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: 30),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/shareiconnew.png",
+                                    width: 24,
+                                    height: 24,
+                                    color: customColors.textColor,
+                                  ),
+                                  SizedBox(width: 10),
+                                  PoppinsText(
+                                    'Share',
+                                    fontSize: PoppinsFontSizeVariant.size14,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
+                                    color: customColors.textColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
 
-                      // Share Button
-                      _buildActionButton(
-                        icon: Icons.send_outlined,
-                        label: 'Share',
-                        onTap: () {
-                          // Handle Share
-                        },
-                        count: '',
-                      ),
-
-                      // Save Button
-                      _buildActionButton(
-                        icon: Icons.add,
-                        label: 'Save',
-                        onTap: () {
-                          // Handle Save to Watchlist
-                        },
-                        count: '',
-                      ),
-                    ],
+                        GestureDetector(
+                          onTap: () {},
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/add.png",
+                                width: 18,
+                                height: 18,
+                                color: customColors.textColor,
+                              ),
+                              SizedBox(width: 10),
+                              PoppinsText(
+                                'Save',
+                                fontSize: PoppinsFontSizeVariant.size14,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                color: customColors.textColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 10),
                 ],
@@ -190,7 +196,6 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
             ),
           ),
 
-          // 4. Top Controls (Back Button and Menu)
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(
@@ -201,7 +206,6 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Back Button
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
                     child: const CircleAvatar(
@@ -214,15 +218,13 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                       ),
                     ),
                   ),
-                  // Menu Button
                   GestureDetector(
-                    onTap: () {
-                      // Handle Menu
-                    },
-                    child: const Icon(
-                      Icons.more_vert,
-                      color: Colors.white,
-                      size: 28,
+                    onTap: () {},
+                    child: Image.asset(
+                      "assets/images/3dotsicon.png",
+                      height: 24,
+                      width: 24,
+                      color: customColors.textColor,
                     ),
                   ),
                 ],
