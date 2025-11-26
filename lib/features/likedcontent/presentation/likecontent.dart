@@ -94,14 +94,14 @@ class _LikecontentState extends State<Likecontent>
               actions: [
                 InkWell(
                   onTap: () {
-                    context.pushNamed(AppRoutes.Searchscreen.name);
+                    context.pushNamed(AppRoutes.searchscreen.name);
                   },
                   child: Image.asset(
                     Assets.images.searchicon.path,
                     color: customColors.textColor,
                   ),
                 ),
-                SizedBox(width: 20,),
+                SizedBox(width: 20),
               ],
             ),
 

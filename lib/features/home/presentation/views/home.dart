@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   InkWell(
                     onTap: () {
-                      context.pushNamed(AppRoutes.Searchscreen.name);
+                      context.pushNamed(AppRoutes.searchscreen.name);
                     },
                     child: Image.asset(
                       Assets.images.searchicon.path,
@@ -354,81 +354,39 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         Align(
                                           alignment: Alignment.centerRight,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              showModalBottomSheet(
-                                                context: context,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                isScrollControlled: true,
-                                                isDismissible: true,
-                                                enableDrag: true,
-                                                builder: (context) {
-                                                  return Align(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: ConstrainedBox(
-                                                      constraints:
-                                                          BoxConstraints(
-                                                            maxWidth: 384,
-                                                          ),
-                                                      child: Material(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                              topLeft:
-                                                                  Radius.circular(
-                                                                    12,
-                                                                  ),
-                                                              topRight:
-                                                                  Radius.circular(
-                                                                    12,
-                                                                  ),
-                                                            ),
-                                                        color:
-                                                            AppColors.dRegular,
-                                                        child:
-                                                            MoreInfoBottomSheet(),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 14,
-                                                vertical: 6,
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 14,
+                                              vertical: 6,
+                                            ),
+                                            height: 36,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black.withOpacity(
+                                                0.35,
                                               ),
-                                              height: 36,
-                                              decoration: BoxDecoration(
-                                                color: Colors.black.withOpacity(
-                                                  0.35,
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(
+                                                  Icons.info_outline,
+                                                  size: 18,
+                                                  color: Colors.white,
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                              ),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Icon(
-                                                    Icons.info_outline,
-                                                    size: 18,
-                                                    color: Colors.white,
-                                                  ),
-                                                  SizedBox(width: 8),
-                                                  PoppinsText(
-                                                    'More Info',
-                                                    color:
-                                                        customColors.textColor,
-                                                    fontSize:
-                                                        PoppinsFontSizeVariant
-                                                            .size12,
-                                                    fontWeight:
-                                                        PoppinsFontWeightVariant
-                                                            .medium,
-                                                  ),
-                                                ],
-                                              ),
+                                                SizedBox(width: 8),
+                                                PoppinsText(
+                                                  'More Info',
+                                                  color: customColors.textColor,
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size12,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .medium,
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -458,7 +416,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   },
                                                 ),
                                               ),
-                                              SizedBox(width: 8),
                                               Text(
                                                 _format(
                                                   _controller!.value.position,
@@ -467,6 +424,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.white,
                                                 ),
                                               ),
+                                              SizedBox(width: 8),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  context.pushNamed(AppRoutes.videoScreen.name);
+                                                },
+                                                child: Image.asset(Assets.images.screenrotationicon.path,
+                                                width: 24,
+                                                height: 24,
+                                                ),
+                                              )
                                             ],
                                           ),
                                       ],
@@ -515,9 +482,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 SizedBox(width: 15),
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
-                              return CardWidget(
-                                assetImage: trendingimages[index],
-                                showSaveIcon: false,
+                              return GestureDetector(
+                                onTap: () {
+                                  context.pushNamed(
+                                    AppRoutes.contentDetail.name,
+                                  );
+                                },
+                                child: CardWidget(
+                                  assetImage: trendingimages[index],
+                                  showSaveIcon: false,
+                                ),
                               );
                             },
                           ),

@@ -164,9 +164,16 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(
-                                assetImage: images[index],
-                                showSaveIcon: false,
+                              return GestureDetector(
+                                onTap: () {
+                                  context.pushNamed(
+                                    AppRoutes.contentDetail.name,
+                                  );
+                                },
+                                child: CardWidget(
+                                  assetImage: images[index],
+                                  showSaveIcon: false,
+                                ),
                               );
                             },
                           ),
@@ -208,9 +215,16 @@ class ProfileScreen extends StatelessWidget {
                             itemCount: images.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return CardWidget(
-                                assetImage: images[index],
-                                showSaveIcon: false,
+                              return GestureDetector(
+                                onTap: () {
+                                  context.pushNamed(
+                                    AppRoutes.contentDetail.name,
+                                  );
+                                },
+                                child: CardWidget(
+                                  assetImage: images[index],
+                                  showSaveIcon: false,
+                                ),
                               );
                             },
                           ),
