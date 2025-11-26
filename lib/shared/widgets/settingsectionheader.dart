@@ -15,11 +15,11 @@ class SettingSectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 15.0),
+      padding:  EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10),
       child: PoppinsText(
         title,
         fontSize: PoppinsFontSizeVariant.size16,
-        fontWeight: PoppinsFontWeightVariant.semiBold,
+        fontWeight: PoppinsFontWeightVariant.medium,
         color: color,
       ),
     );

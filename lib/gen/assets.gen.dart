@@ -185,6 +185,12 @@ class $AssetsImagesGen {
   AssetGenImage get applelogo =>
       const AssetGenImage('assets/images/Applelogo.png');
 
+  /// File path: assets/images/CC123.png
+  AssetGenImage get cc123 => const AssetGenImage('assets/images/CC123.png');
+
+  /// File path: assets/images/HD123.png
+  AssetGenImage get hd123 => const AssetGenImage('assets/images/HD123.png');
+
   /// File path: assets/images/Hideicon.png
   AssetGenImage get hideicon =>
       const AssetGenImage('assets/images/Hideicon.png');
@@ -509,9 +515,17 @@ class $AssetsImagesGen {
   AssetGenImage get playbutton =>
       const AssetGenImage('assets/images/playbutton.png');
 
+  /// File path: assets/images/playbutton123.png
+  AssetGenImage get playbutton123 =>
+      const AssetGenImage('assets/images/playbutton123.png');
+
   /// File path: assets/images/playicon.png
   AssetGenImage get playicon =>
       const AssetGenImage('assets/images/playicon.png');
+
+  /// File path: assets/images/playicon1234.png
+  AssetGenImage get playicon1234 =>
+      const AssetGenImage('assets/images/playicon1234.png');
 
   /// File path: assets/images/playnewicon.png
   AssetGenImage get playnewicon =>
@@ -670,6 +684,8 @@ class $AssetsImagesGen {
     a2023DraperTVOfficialLogo14,
     a3dotsicon,
     applelogo,
+    cc123,
+    hd123,
     hideicon,
     horizontalThumbnail,
     horizontalThumbnail2,
@@ -754,7 +770,9 @@ class $AssetsImagesGen {
     onboardingBg,
     play,
     playbutton,
+    playbutton123,
     playicon,
+    playicon1234,
     playnewicon,
     playstrokeicon,
     playwithbgicon,
