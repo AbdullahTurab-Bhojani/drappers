@@ -207,6 +207,12 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.reportContentSomehingElse.name,
         builder: (context, state) => ReportContentSomehingElse(),
       ),
+
+      GoRoute(
+        path: AppRoutes.videoScreen.path,
+        name: AppRoutes.videoScreen.name,
+        builder: (context, state) => CustomVideoPlayerScreen(),
+      ),
     ],
   );
 });

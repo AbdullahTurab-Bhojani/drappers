@@ -84,6 +84,7 @@ import 'features/signup/presentation/views/signup.dart';
 import 'features/something_Else/presentation/reportContent_SomethingElse.dart';
 import 'features/splash/presentation/views/splash.dart';
 import 'features/terms&condition/presentation/termscondition.dart';
+import 'features/video_player/presentation/video_player_screen.dart';
 import 'features/voteforstartup/presentation/vote_for_startup_screen.dart';
 import 'features/watchlist/presentation/watchlist_screen.dart';
 import 'gen/assets.gen.dart';

@@ -241,11 +241,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                             : Container(
                                                 color: Colors.grey[900],
                                               )),
-
+                        
                                   Container(
                                     color: Colors.black.withOpacity(0.18),
                                   ),
-
+                        
                                   Positioned(
                                     top: 12,
                                     left: 14,
@@ -257,7 +257,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             'Meet The Drapers - Live',
                                             color: Colors.white,
                                             fontWeight:
-                                                PoppinsFontWeightVariant.medium,
+                                                PoppinsFontWeightVariant
+                                                    .medium,
                                             fontSize:
                                                 PoppinsFontSizeVariant.size14,
                                           ),
@@ -272,9 +273,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               color: Colors.white,
                                               width: 1,
                                             ),
-                                            borderRadius: BorderRadius.circular(
-                                              20,
-                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
                                           ),
                                           child: Row(
                                             children: [
@@ -290,8 +290,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 fontWeight:
                                                     PoppinsFontWeightVariant
                                                         .regular,
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size12,
+                                                fontSize:
+                                                    PoppinsFontSizeVariant
+                                                        .size12,
                                               ),
                                             ],
                                           ),
@@ -304,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-
+                        
                                   Positioned.fill(
                                     child: GestureDetector(
                                       onTap: () => setState(
@@ -312,7 +313,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       child: Center(
                                         child: AnimatedOpacity(
-                                          duration: Duration(milliseconds: 200),
+                                          duration: Duration(
+                                            milliseconds: 200,
+                                          ),
                                           opacity: _showControls ? 1 : 0,
                                           child: Container(
                                             padding: EdgeInsets.all(12),
@@ -343,7 +346,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
-
+                        
                                   Positioned(
                                     bottom: 10,
                                     left: 12,
@@ -354,119 +357,43 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         Align(
                                           alignment: Alignment.centerRight,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              showModalBottomSheet(
-                                                context: context,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                isScrollControlled: true,
-                                                isDismissible: true,
-                                                enableDrag: true,
-                                                builder: (context) {
-                                                  return Align(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: ConstrainedBox(
-                                                      constraints:
-                                                          BoxConstraints(
-                                                            maxWidth: 384,
-                                                          ),
-                                                      child: Material(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                              topLeft:
-                                                                  Radius.circular(
-                                                                    12,
-                                                                  ),
-                                                              topRight:
-                                                                  Radius.circular(
-                                                                    12,
-                                                                  ),
-                                                            ),
-                                                        color:
-                                                            AppColors.dRegular,
-                                                        child:
-                                                            MoreInfoBottomSheet(),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 14,
-                                                vertical: 6,
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 14,
+                                              vertical: 6,
+                                            ),
+                                            height: 36,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black.withOpacity(
+                                                0.35,
                                               ),
-                                              height: 36,
-                                              decoration: BoxDecoration(
-                                                color: Colors.black.withOpacity(
-                                                  0.35,
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(
+                                                  Icons.info_outline,
+                                                  size: 18,
+                                                  color: Colors.white,
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                              ),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Icon(
-                                                    Icons.info_outline,
-                                                    size: 18,
-                                                    color: Colors.white,
-                                                  ),
-                                                  SizedBox(width: 8),
-                                                  PoppinsText(
-                                                    'More Info',
-                                                    color:
-                                                        customColors.textColor,
-                                                    fontSize:
-                                                        PoppinsFontSizeVariant
-                                                            .size12,
-                                                    fontWeight:
-                                                        PoppinsFontWeightVariant
-                                                            .medium,
-                                                  ),
-                                                ],
-                                              ),
+                                                SizedBox(width: 8),
+                                                PoppinsText(
+                                                  'More Info',
+                                                  color:
+                                                      customColors.textColor,
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size12,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .medium,
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                        SizedBox(height: 10),
-                                        if (_controller!.value.isInitialized)
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Slider(
-                                                  activeColor: Colors.white,
-                                                  value: _controller!
-                                                      .value
-                                                      .position
-                                                      .inMilliseconds
-                                                      .toDouble(),
-                                                  max: _controller!
-                                                      .value
-                                                      .duration
-                                                      .inMilliseconds
-                                                      .toDouble(),
-                                                  onChanged: (v) {
-                                                    _controller!.seekTo(
-                                                      Duration(
-                                                        milliseconds: v.round(),
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(width: 8),
-                                              PoppinsText(
-                                                _format(
-                                                  _controller!.value.position,
-                                                ),
-                                                color: customColors.textColor,
-                                              ),
-                                            ],
-                                          ),
                                       ],
                                     ),
                                   ),

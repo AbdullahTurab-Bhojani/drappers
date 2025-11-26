@@ -101,7 +101,7 @@ class _LikecontentState extends State<Likecontent>
                     color: customColors.textColor,
                   ),
                 ),
-                SizedBox(width: 20,),
+                SizedBox(width: 20),
               ],
             ),
 
