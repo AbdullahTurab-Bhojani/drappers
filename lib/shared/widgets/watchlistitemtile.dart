@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
 
@@ -59,9 +60,13 @@ class WatchlistItemTile extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 15),
+          SizedBox(width: 15),
           InkWell(
-            onTap: onTapPlay,
+            onTap: () {
+              context.pushNamed(
+                AppRoutes.contentDetail.name,
+              );
+            },
             child: Image.asset(
               "assets/images/playbutton.png",
               color: customColors.textColor,

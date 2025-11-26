@@ -112,10 +112,8 @@ class EditprofileScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 15),
 
-                        // Email Address
                         NewTextField(
                           fieldbg: AppColors.tfield,
-
                           controller: _emailController,
                           labelText: "Email Address*",
                           hintText: "Enter your email",
@@ -131,7 +129,6 @@ class EditprofileScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 15),
 
-                        // Phone Number
                         NewTextField(
                           fieldbg: AppColors.tfield,
                           controller: _phoneController,

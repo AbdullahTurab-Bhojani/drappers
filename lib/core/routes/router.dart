@@ -127,6 +127,16 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.notificationSetting.name,
         builder: (context, state) => NotificationSetting(),
       ),
+       GoRoute(
+        path: AppRoutes.createAccountCodeScreen.path,
+        name: AppRoutes.createAccountCodeScreen.name,
+        builder: (context, state) => CreateAccountCodeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.contentDetail.path,
+        name: AppRoutes.contentDetail.name,
+        builder: (context, state) => ContentDetail(),
+      ),
 
       ShellRoute(
         navigatorKey: shellKey,
