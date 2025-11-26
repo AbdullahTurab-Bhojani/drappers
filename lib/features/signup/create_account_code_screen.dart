@@ -1,18 +1,20 @@
-import 'dart:async';
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/extensions/theme_extension.dart';
-import '../../../drappers.dart';
-import '../../../gen/assets.gen.dart';
+import 'dart:async';
+import '../../core/extensions/theme_extension.dart';
+import '../../drappers.dart';
+import '../../gen/assets.gen.dart';
 
-class VerfiicationcodeScreen extends StatefulWidget {
-  const VerfiicationcodeScreen({super.key});
+class CreateAccountCodeScreen extends StatefulWidget {
+  const CreateAccountCodeScreen({super.key});
 
   @override
-  State<VerfiicationcodeScreen> createState() => _EnterotpScreenState();
+  State<CreateAccountCodeScreen> createState() => _CreateAccountCodeScreenState();
 }
 
-class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
+class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
   final List<TextEditingController> _otpControllers = List.generate(
     6,
     (_) => TextEditingController(),
@@ -29,7 +31,7 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
 
     final otp = _otpControllers.map((c) => c.text).join();
     if (otp.length == 6) {
-      context.goNamed(AppRoutes.updatepasswordScreen.name);
+      context.goNamed(AppRoutes.home.name);
     }
   }
 
@@ -72,7 +74,6 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
     }
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -95,20 +96,20 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  context.go('/forgetpassword');
+                  context.go('/signup');
                 },
                 child: Image.asset(Assets.images.backicon.path),
               ),
               SizedBox(height: 40),
               PoppinsText(
-                "Enter OTP",
+                "Create an Account",
                 fontSize: PoppinsFontSizeVariant.size24,
                 fontWeight: PoppinsFontWeightVariant.semiBold,
                 color: customColors.textColor,
               ),
               SizedBox(height: 20),
               PoppinsText(
-                'Sent a 6-digit code to jo*******@gmail.com.\nPlease confirm it’s yours so you can update\nyour password.',
+                'sent a 6-digit code to johnmackson@gmail.com Confirm it belongs to you to keep your account secure.',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,

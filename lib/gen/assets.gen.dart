@@ -247,6 +247,9 @@ class $AssetsImagesGen {
   AssetGenImage get showicon =>
       const AssetGenImage('assets/images/Showicon.png');
 
+  /// File path: assets/images/addicon.png
+  AssetGenImage get addicon => const AssetGenImage('assets/images/addicon.png');
+
   /// File path: assets/images/appleicon.png
   AssetGenImage get appleicon =>
       const AssetGenImage('assets/images/appleicon.png');
@@ -349,6 +352,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/envelopeicon.png
   AssetGenImage get envelopeicon =>
       const AssetGenImage('assets/images/envelopeicon.png');
+
+  /// File path: assets/images/flagicon.png
+  AssetGenImage get flagicon =>
+      const AssetGenImage('assets/images/flagicon.png');
 
   /// File path: assets/images/footericon1.png
   AssetGenImage get footericon1 =>
@@ -541,6 +548,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/prayer.png
   AssetGenImage get prayer => const AssetGenImage('assets/images/prayer.png');
 
+  /// File path: assets/images/preview.png
+  AssetGenImage get preview => const AssetGenImage('assets/images/preview.png');
+
   /// File path: assets/images/profile card.png
   AssetGenImage get profileCard =>
       const AssetGenImage('assets/images/profile card.png');
@@ -588,6 +598,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/settingsicon.png
   AssetGenImage get settingsicon =>
       const AssetGenImage('assets/images/settingsicon.png');
+
+  /// File path: assets/images/shareiconnew.png
+  AssetGenImage get shareiconnew =>
+      const AssetGenImage('assets/images/shareiconnew.png');
 
   /// File path: assets/images/signInoption.png
   AssetGenImage get signInoption =>
@@ -668,6 +682,7 @@ class $AssetsImagesGen {
     searchicon,
     shareicon,
     showicon,
+    addicon,
     appleicon,
     backicon,
     ban123,
@@ -695,6 +710,7 @@ class $AssetsImagesGen {
     dotsIcon,
     dropdownicon,
     envelopeicon,
+    flagicon,
     footericon1,
     footericon2,
     footericon3,
@@ -744,6 +760,7 @@ class $AssetsImagesGen {
     podcastimage4,
     podcastimage5,
     prayer,
+    preview,
     profileCard,
     progressBg,
     reporticon,
@@ -756,6 +773,7 @@ class $AssetsImagesGen {
     sentence,
     settingicon,
     settingsicon,
+    shareiconnew,
     signInoption,
     signout1234,
     signouticon,

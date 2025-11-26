@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   InkWell(
                     onTap: () {
-                      context.pushNamed(AppRoutes.Searchscreen.name);
+                      context.pushNamed(AppRoutes.searchscreen.name);
                     },
                     child: Image.asset(
                       Assets.images.searchicon.path,
@@ -459,13 +459,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ),
                                               ),
                                               SizedBox(width: 8),
-                                              Text(
+                                              PoppinsText(
                                                 _format(
                                                   _controller!.value.position,
                                                 ),
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
+                                                color: customColors.textColor,
                                               ),
                                             ],
                                           ),
@@ -515,9 +513,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 SizedBox(width: 15),
                             itemCount: trendingimages.length,
                             itemBuilder: (context, index) {
-                              return CardWidget(
-                                assetImage: trendingimages[index],
-                                showSaveIcon: false,
+                              return GestureDetector(
+                                onTap: () {
+                                  context.pushNamed(
+                                    AppRoutes.contentDetail.name,
+                                  );
+                                },
+                                child: CardWidget(
+                                  assetImage: trendingimages[index],
+                                  showSaveIcon: false,
+                                ),
                               );
                             },
                           ),

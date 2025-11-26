@@ -101,7 +101,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 actions: [
                   InkWell(
                     onTap: () {
-                      context.pushNamed(AppRoutes.Searchscreen.name);
+                      context.pushNamed(AppRoutes.searchscreen.name);
                     },
                     child: Image.asset(
                       Assets.images.searchicon.path,

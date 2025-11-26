@@ -341,7 +341,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 20),
                       AppButton(
                         onPressed: () {
-                          context.pushReplacement(AppRoutes.home.path);
+                          context.pushNamed(AppRoutes.createAccountCodeScreen.name);
                         },
                         title: "Create Account",
                       ),
