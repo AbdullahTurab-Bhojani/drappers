@@ -23,11 +23,11 @@ class GradientSwitch extends StatelessWidget {
       onTap: () => onChanged(!value),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 250),
-        width: 55,
-        height: 30,
+        width: 52,
+        height: 28,
         padding: EdgeInsets.all(3),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(100),
           gradient: value ? LinearGradient(colors: gradientColors) : null,
           color: value ? null : Colors.grey.shade400,
         ),

@@ -61,14 +61,14 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // --- PLAYBACK SETTINGS ---
+                    SizedBox(height: 10),
                     SettingSectionHeader(
                       title: "Playback Settings",
                       color: customColors.textColor,
                     ),
 
                     ToggleSettingTile(
-                      icon: Icons.play_arrow,
+                      image: AssetImage(Assets.images.playbutton123.path),
                       titleText: "Autoplay Next Episode",
                       subtitleText: "Automatically play the next episode",
                       initialValue: _autoplayNextEpisode,
@@ -78,9 +78,9 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         });
                       },
                     ),
-
+                     SizedBox(height: 15),
                     ToggleSettingTile(
-                      icon: Icons.play_arrow,
+                      image: AssetImage(Assets.images.playicon1234.path),
                       titleText: "Autoplay Next Preview",
                       subtitleText: "Play previews when browsing",
                       initialValue: _autoplayNextPreview,
@@ -90,14 +90,17 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         });
                       },
                     ),
-
+                    SizedBox(height: 20),
+                    Divider(
+                      color: customColors.labelColor.withOpacity(0.2),
+                    ),
                     SettingSectionHeader(
                       title: "Video Quality",
                       color: customColors.textColor,
                     ),
-
+                 SizedBox(height: 15),
                     DropdownSettingTile(
-                      icon: Icons.hd,
+                     image:   AssetImage(Assets.images.hd123.path),
                       titleText: "Streaming Quality",
                       subtitleText: "Choose video quality for streaming",
                       options: _qualityOptions,
@@ -108,14 +111,17 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         });
                       },
                     ),
-
+                    SizedBox(height: 30),
+                 Divider(
+                   color: customColors.labelColor.withOpacity(0.2),
+                 ),
                     SettingSectionHeader(
                       title: "Accessibility",
                       color: customColors.textColor,
                     ),
-
+                       SizedBox(height: 10),
                     DropdownSettingTile(
-                      icon: Icons.closed_caption,
+                     image:   AssetImage(Assets.images.cc123.path),
                       titleText: "Subtitles & Captions",
                       subtitleText: "Default subtitle language",
                       options: _subtitleOptions,
@@ -137,7 +143,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(
+                      padding:  EdgeInsets.fromLTRB(
                         horizontalPadding,
                         20.0,
                         horizontalPadding,
@@ -158,7 +164,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                   width: 26,
                                   color: customColors.rednormal,
                                 ),
-                                const SizedBox(width: 15.0),
+                                 SizedBox(width: 15.0),
                                 PoppinsText(
                                   "Delete or Deactivate Account",
                                   fontSize: PoppinsFontSizeVariant.size16,

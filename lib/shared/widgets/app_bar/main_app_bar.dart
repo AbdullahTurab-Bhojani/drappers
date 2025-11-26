@@ -33,7 +33,7 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidget = leading;
     } else if (leadingText != null) {
       leadingWidget = Padding(
-        padding: const EdgeInsets.only(left: 20,top: 10),
+        padding:  EdgeInsets.only(left: 20,top: 10),
         child: PoppinsText(
           leadingText!,
           color: Colors.white,

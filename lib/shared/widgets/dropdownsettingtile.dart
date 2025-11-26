@@ -7,7 +7,7 @@ import '../../drappers.dart';
 class DropdownSettingTile extends StatefulWidget {
   const DropdownSettingTile({
     super.key,
-    required this.icon,
+    required this.image,
     required this.titleText,
     required this.subtitleText,
     required this.options,
@@ -15,7 +15,8 @@ class DropdownSettingTile extends StatefulWidget {
     required this.onChanged,
   });
 
-  final IconData icon;
+ 
+  final ImageProvider image;
   final String titleText;
   final String subtitleText;
   final List<String> options;
@@ -34,27 +35,38 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
     super.initState();
     _currentValue = widget.initialValue;
   }
+ 
+    
+    
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     const double horizontalPadding =
-        20.0; // Defined in the original build context
-
+        15; 
+      Widget leadingWidget;
+    
+      leadingWidget = Image(
+        image: widget.image!,
+        width: 24,
+        height: 24,
+        fit: BoxFit.cover,
+      );
     return Padding(
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
-        vertical: 8.0,
+        vertical: 0,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Row with Icon and Title/Subtitle
           Row(
             children: [
-              Icon(widget.icon, color: customColors.textColor, size: 24),
-              const SizedBox(width: 15.0),
+              SizedBox(width: 10),
+              leadingWidget,
+              // Icon(widget.icon, color: customColors.textColor, size: 24),
+               SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -64,7 +76,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
                     fontWeight: PoppinsFontWeightVariant.medium,
                     color: customColors.textColor,
                   ),
-                  const SizedBox(height: 4.0),
+                   SizedBox(height: 4),
                   PoppinsText(
                     widget.subtitleText,
                     fontSize: PoppinsFontSizeVariant.size12,
@@ -75,20 +87,20 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
               ),
             ],
           ),
-          const SizedBox(height: 25.0),
+           SizedBox(height: 20),
           DropdownButtonFormField<String>(
             initialValue: _currentValue,
             dropdownColor: customColors.lightGray,
             style: TextStyle(
               color: customColors.textColor,
-              fontSize: 16.0,
+              fontSize: 16,
               fontWeight: FontWeight.w400,
             ),
             decoration: InputDecoration(
               filled: true,
               fillColor: customColors.lightGray,
               contentPadding: EdgeInsets.symmetric(
-                horizontal: 15.0,
+                horizontal: 10.0,
                 vertical: 10.0,
               ),
               border: OutlineInputBorder(
