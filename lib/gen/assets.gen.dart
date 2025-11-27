@@ -253,6 +253,9 @@ class $AssetsImagesGen {
   AssetGenImage get showicon =>
       const AssetGenImage('assets/images/Showicon.png');
 
+  /// File path: assets/images/add.png
+  AssetGenImage get add => const AssetGenImage('assets/images/add.png');
+
   /// File path: assets/images/addicon.png
   AssetGenImage get addicon => const AssetGenImage('assets/images/addicon.png');
 
@@ -355,6 +358,10 @@ class $AssetsImagesGen {
   AssetGenImage get dropdownicon =>
       const AssetGenImage('assets/images/dropdownicon.png');
 
+  /// File path: assets/images/dummyprofile.png
+  AssetGenImage get dummyprofile =>
+      const AssetGenImage('assets/images/dummyprofile.png');
+
   /// File path: assets/images/envelopeicon.png
   AssetGenImage get envelopeicon =>
       const AssetGenImage('assets/images/envelopeicon.png');
@@ -425,6 +432,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/lesson_complete.png
   AssetGenImage get lessonComplete =>
       const AssetGenImage('assets/images/lesson_complete.png');
+
+  /// File path: assets/images/like.png
+  AssetGenImage get like => const AssetGenImage('assets/images/like.png');
 
   /// File path: assets/images/likeicon.png
   AssetGenImage get likeicon =>
@@ -617,6 +627,9 @@ class $AssetsImagesGen {
   AssetGenImage get settingsicon =>
       const AssetGenImage('assets/images/settingsicon.png');
 
+  /// File path: assets/images/share3x.png
+  AssetGenImage get share3x => const AssetGenImage('assets/images/share3x.png');
+
   /// File path: assets/images/shareiconnew.png
   AssetGenImage get shareiconnew =>
       const AssetGenImage('assets/images/shareiconnew.png');
@@ -635,6 +648,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/slider.png
   AssetGenImage get slider => const AssetGenImage('assets/images/slider.png');
+
+  /// File path: assets/images/studio.png
+  AssetGenImage get studio => const AssetGenImage('assets/images/studio.png');
 
   /// File path: assets/images/subscription_bg.png
   AssetGenImage get subscriptionBg =>
@@ -702,6 +718,7 @@ class $AssetsImagesGen {
     searchicon,
     shareicon,
     showicon,
+    add,
     addicon,
     appleicon,
     backicon,
@@ -729,6 +746,7 @@ class $AssetsImagesGen {
     documentaries6,
     dotsIcon,
     dropdownicon,
+    dummyprofile,
     envelopeicon,
     flagicon,
     footericon1,
@@ -747,6 +765,7 @@ class $AssetsImagesGen {
     infoicon,
     interestedicon,
     lessonComplete,
+    like,
     likeicon,
     logo2,
     logout123,
@@ -796,11 +815,13 @@ class $AssetsImagesGen {
     sentence,
     settingicon,
     settingsicon,
+    share3x,
     shareiconnew,
     signInoption,
     signout1234,
     signouticon,
     slider,
+    studio,
     subscriptionBg,
     time3x,
     timericon,

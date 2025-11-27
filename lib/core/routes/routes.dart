@@ -48,9 +48,12 @@ enum AppRoutes {
   notificationSetting('notificationSetting', '/notificationSetting'),
   ReelsviewScreen('ReelsviewScreen', '/ReelsviewScreen'),
   searchscreen('searchscreen', '/searchscreen'),
-  createAccountCodeScreen('createAccountCodeScreen', '/createAccountCodeScreen'),
+  Startupdetails('Startupdetails', '/Startupdetails'),
+  createAccountCodeScreen(
+    'createAccountCodeScreen',
+    '/createAccountCodeScreen',
+  ),
   contentDetail('contentDetail', '/contentDetail'),
-
 
   voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
   videoScreen('videoScreen', '/videoScreen');

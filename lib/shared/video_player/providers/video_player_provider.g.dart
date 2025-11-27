@@ -64,7 +64,7 @@ final class CustomVideoPlayerProvider
   }
 }
 
-String _$customVideoPlayerHash() => r'0145205c1910266d06cd6c39817a4eaf875e20cb';
+String _$customVideoPlayerHash() => r'3734878edc5311ee2bcfe25d6aa15d4b8aea0d9a';
 
 final class CustomVideoPlayerFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<ChewieController>, String> {
