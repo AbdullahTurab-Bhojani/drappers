@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../core/extensions/theme_extension.dart';
+import '../../../drappers.dart';
 import '../../../shared/widgets/watchlistitemtile.dart';
+
 
 class WatchlistData {
   final String thumbnailPath;
@@ -39,6 +43,8 @@ class WatchlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
       body: Stack(
         children: [
@@ -55,15 +61,15 @@ class WatchlistScreen extends StatelessWidget {
                 centerTitle: false,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                // actions: [
-                //   PoppinsText(
-                //     "Edit",
-                //     fontSize: PoppinsFontSizeVariant.size14,
-                //     fontWeight: PoppinsFontWeightVariant.medium,
-                //     color: customColors.textColor,
-                //   ),
-                //   SizedBox(width: 10),
-                // ],
+                actions: [
+                  PoppinsText(
+                    "Edit",
+                    fontSize: PoppinsFontSizeVariant.size14,
+                    fontWeight: PoppinsFontWeightVariant.medium,
+                    color: customColors.textColor
+                  ),
+                  SizedBox(width: 10),
+                ],
               ),
 
               Expanded(
@@ -72,12 +78,18 @@ class WatchlistScreen extends StatelessWidget {
                   itemCount: dummyWatchlist.length,
                   itemBuilder: (context, index) {
                     final item = dummyWatchlist[index];
-                    return WatchlistItemTile(
+                      return GestureDetector(
+                                onTap: () {
+                                  context.pushNamed(
+                                    AppRoutes.contentDetail.name,
+                                  );
+                                },
+                                child: WatchlistItemTile(
                       thumbnailPath: item.thumbnailPath,
                       title: item.title,
                       year: item.year,
                       onTapPlay: () {},
-                    );
+                       ) );
                   },
                 ),
               ),
