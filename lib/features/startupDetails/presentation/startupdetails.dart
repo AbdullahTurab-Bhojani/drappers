@@ -127,6 +127,14 @@ class _StartupdetailsState extends State<Startupdetails> {
               centerTitle: false,
               backgroundColor: Colors.transparent,
               elevation: 0,
+              actions: [
+                Image.asset(
+                  Assets.images.shareicon.path,
+                  height: 18,
+                  width: 18,
+                ),
+                SizedBox(width: 15),
+              ],
               // trailing: Padding(
               //   padding: const EdgeInsets.only(right: 16.0),
               //   // Using the share icon from the previous design suggestion
@@ -150,7 +158,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
-                            image: AssetImage(Assets.images.podcastimage1.path),
+                            image: AssetImage(Assets.images.studio.path),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -322,7 +330,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                 CircleAvatar(
                                   radius: 30,
                                   backgroundImage: AssetImage(
-                                    Assets.images.guestProfile.path,
+                                    Assets.images.dummyprofile.path,
                                   ),
                                 ),
                                 const SizedBox(width: 15),
@@ -417,7 +425,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
-                                          Assets.images.podcastimage1.path,
+                                          Assets.images.documentaries4.path,
                                         ),
                                         fit: BoxFit.cover,
                                       ),
