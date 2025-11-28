@@ -43,9 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
             _controller!.play();
           });
 
-    // Define listener and store reference
     _controllerListener = () {
-      setState(() {}); // Update UI whenever controller changes
+      setState(() {});
     };
 
     _controller!.addListener(_controllerListener!);
@@ -427,13 +426,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                               SizedBox(width: 8),
                                               GestureDetector(
                                                 onTap: () {
-                                                  context.pushNamed(AppRoutes.videoScreen.name);
+                                                  context.pushNamed(
+                                                    AppRoutes.videoScreen.name,
+                                                  );
                                                 },
-                                                child: Image.asset(Assets.images.screenrotationicon.path,
-                                                width: 24,
-                                                height: 24,
+                                                child: Image.asset(
+                                                  Assets
+                                                      .images
+                                                      .screenrotationicon
+                                                      .path,
+                                                  width: 24,
+                                                  height: 24,
                                                 ),
-                                              )
+                                              ),
                                             ],
                                           ),
                                       ],
@@ -663,7 +668,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 assetImagePath: reelimages[index],
                                 title: reelTitles[index],
                                 showSaveIcon: false,
-                                
                               );
                             },
                           ),

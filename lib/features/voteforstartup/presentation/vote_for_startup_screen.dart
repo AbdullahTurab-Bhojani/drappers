@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -231,36 +232,43 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              height: 215,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    Assets.images.podcastimage1.path,
+                            InkWell(
+                              onTap: () {
+                                context.pushNamed(
+                                  AppRoutes.Startupdetails.name,
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 215,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
                                   ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              child: Stack(
-                                children: [
-                                  Center(
-                                    child: Image.asset(
-                                      Assets.images.playwithbgicon.path,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      Assets.images.podcastimage1.path,
                                     ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  Positioned(
-                                    bottom: 10,
-                                    right: 10,
-                                    child: Image.asset(
-                                      Assets.images.muteicon.path,
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Center(
+                                      child: Image.asset(
+                                        Assets.images.playwithbgicon.path,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    Positioned(
+                                      bottom: 10,
+                                      right: 10,
+                                      child: Image.asset(
+                                        Assets.images.muteicon.path,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Padding(
@@ -278,7 +286,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                           PoppinsFontWeightVariant.medium,
                                     ),
                                     SizedBox(height: 2),
-                            
+
                                     PoppinsText(
                                       'Sustainable energy Revolution',
                                       fontSize: PoppinsFontSizeVariant.size16,
@@ -304,7 +312,8 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     ),
                                     SizedBox(height: 30),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         AppButton(
                                           prefixIcon: Image.asset(
@@ -325,18 +334,16 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                               color: customColors.greyColor,
                                               width: 2,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(50),
+                                            borderRadius: BorderRadius.circular(
+                                              50,
+                                            ),
                                           ),
                                           child: Center(
                                             child: Row(
                                               mainAxisAlignment: .center,
                                               children: [
                                                 Image.asset(
-                                                  Assets
-                                                      .images
-                                                      .hearticon
-                                                      .path,
+                                                  Assets.images.hearticon.path,
                                                   width: 20,
                                                   height: 20,
                                                 ),
@@ -349,8 +356,8 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                                   fontWeight:
                                                       PoppinsFontWeightVariant
                                                           .medium,
-                                                  color: customColors
-                                                      .subtextColor,
+                                                  color:
+                                                      customColors.subtextColor,
                                                 ),
                                               ],
                                             ),
