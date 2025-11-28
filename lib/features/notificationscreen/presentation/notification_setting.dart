@@ -59,7 +59,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 });
               },
             ),
-            SizedBox(height: 36),
+            SizedBox(height: 10),
             ToggleSettingTile(
               image: AssetImage(Assets.images.envelopeicon.path,),
               titleText: "Email Notifications",
@@ -71,7 +71,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 });
               },
             ),
-            SizedBox(height: 36),
+            SizedBox(height: 26),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Align(
@@ -84,7 +84,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 ),
               ),
             ),
-            SizedBox(height: 36),
+            SizedBox(height: 20),
             ToggleSettingTile(
               image: AssetImage(Assets.images.playnewicon.path,),
               titleText: "New Episode",
@@ -96,7 +96,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 });
               },
             ),
-            SizedBox(height: 36),
+            SizedBox(height: 10),
             ToggleSettingTile(
               image: AssetImage(Assets.images.bellringicon.path,),
               titleText: "Watch Reminders",
@@ -108,7 +108,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 });
               },
             ),
-            SizedBox(height: 36),
+            SizedBox(height: 26),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Align(
@@ -121,7 +121,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 ),
               ),
             ),
-            SizedBox(height: 36),
+            SizedBox(height: 20),
             ToggleSettingTile(
               image: AssetImage(Assets.images.gifticon.path,),
               titleText: "Promotions & Offers",
