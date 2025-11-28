@@ -80,196 +80,194 @@ class ProfileScreen extends StatelessWidget {
           Positioned.fill(
             child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
           ),
-          Column(
-            children: [
-              AppMainBar(
-                leadingText: "Profile",
-                width: 120,
-                title: "",
-                centerTitle: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                actions: [
-                  InkWell(
-                    onTap: () {
-                      context.push(AppRoutes.editprofile.path);
-                    },
-                    child: PoppinsText(
-                      "Edit",
-                      fontSize: PoppinsFontSizeVariant.size14,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                AppMainBar(
+                  leadingText: "Profile",
+                  width: 120,
+                  title: "",
+                  centerTitle: false,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  actions: [
+                    InkWell(
+                      onTap: () {
+                        context.push(AppRoutes.editprofile.path);
+                      },
+                      child: PoppinsText(
+                        "Edit",
+                        fontSize: PoppinsFontSizeVariant.size14,
+                        fontWeight: PoppinsFontWeightVariant.medium,
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                  ],
+                ),
+                SizedBox(height: 50),
+                Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      // radius: isSelected ? 15 : 15,
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: NetworkImage(
+                        'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    PoppinsText(
+                      'Jerry Mackson',
+                      fontSize: PoppinsFontSizeVariant.size22,
                       fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
                     ),
-                  ),
-                  SizedBox(width: 15),
-                ],
-              ),
-              SizedBox(height: 50),
-              Column(
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    // radius: isSelected ? 15 : 15,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(
-                      'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  PoppinsText(
-                    'Jerry Mackson',
-                    fontSize: PoppinsFontSizeVariant.size22,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: customColors.textColor,
-                  ),
-                  SizedBox(height: 20),
-                ],
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Liked Content',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
-                            ),
-                            AppButton(
-                              buttonSize: Size(80, 25),
-                              color: Colors.transparent,
-                              borderColor: customColors.greyColor,
-                              borderWidth: 1,
-                              fontSize: PoppinsFontSizeVariant.size12,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              border: true,
-                              onPressed: () {
-                                context.pushNamed(AppRoutes.likecontent.name);
-                              },
-                              title: "View More",
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        SizedBox(
-                          height: 180,
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) {
-                              return SizedBox(width: 15);
-                            },
-                            itemCount: images.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  context.pushNamed(
-                                    AppRoutes.contentDetail.name,
-                                  );
-                                },
-                                child: CardWidget(
-                                  assetImage: images[index],
-                                  showSaveIcon: false,
-                                ),
-                              );
-                            },
+                    SizedBox(height: 20),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Liked Content',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
                           ),
-                        ),
-                        SizedBox(height: 30),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Watch History',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
-                            ),
-                            AppButton(
-                              buttonSize: Size(80, 25),
-                              color: Colors.transparent,
-                              borderColor: customColors.greyColor,
-                              borderWidth: 1,
-                              fontSize: PoppinsFontSizeVariant.size12,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              border: true,
-                              onPressed: () {
-                                context.pushNamed(
-                                  AppRoutes.watchHistoryViewmore.name,
-                                );
-                              },
-                              title: "View More",
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        SizedBox(
-                          height: 180,
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) {
-                              return SizedBox(width: 15);
+                          AppButton(
+                            buttonSize: Size(80, 25),
+                            color: Colors.transparent,
+                            borderColor: customColors.greyColor,
+                            borderWidth: 1.2,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            border: true,
+                            onPressed: () {
+                              context.pushNamed(AppRoutes.likecontent.name);
                             },
-                            itemCount: images.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  context.pushNamed(
-                                    AppRoutes.contentDetail.name,
-                                  );
-                                },
-                                child: CardWidget(
-                                  assetImage: images[index],
-                                  showSaveIcon: false,
-                                ),
-                              );
-                            },
+                            title: "View More",
                           ),
-                        ),
-                        SizedBox(height: 30),
-                        ListView.separated(
-                          physics: NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.all(0),
-                          shrinkWrap: true,
-
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(
+                        height: 180,
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return SizedBox(width: 15);
+                          },
+                          itemCount: images.length,
+                          scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                if (menuList[index]['title'] == 'Sign Out') {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => const Dialog(
-                                      backgroundColor: Colors.transparent,
-                                      child: SignupPopupWidget(),
-                                    ),
-                                  );
-                                } else {
-                                  context.push(menuList[index]['route']);
-                                }
+                                context.pushNamed(
+                                  AppRoutes.contentDetail.name,
+                                );
                               },
-                              child: TileWidget(
-                                iconImage: menuList[index]['image'],
-                                title: menuList[index]['title'],
-                                textColor: menuList[index]['color'],
-                                ontaped: menuList[index]['isTap'],
+                              child: CardWidget(
+                                assetImage: images[index],
+                                showSaveIcon: false,
                               ),
                             );
                           },
-                          separatorBuilder: (context, index) {
-                            return Divider();
-                          },
-                          itemCount: menuList.length,
                         ),
-                        SizedBox(height: 30),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Watch History',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          AppButton(
+                            buttonSize: Size(80, 25),
+                            color: Colors.transparent,
+                            borderColor: customColors.greyColor,
+                            borderWidth: 1,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            border: true,
+                            onPressed: () {
+                              context.pushNamed(
+                                AppRoutes.watchHistoryViewmore.name,
+                              );
+                            },
+                            title: "View More",
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(
+                        height: 180,
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return SizedBox(width: 15);
+                          },
+                          itemCount: images.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                context.pushNamed(
+                                  AppRoutes.contentDetail.name,
+                                );
+                              },
+                              child: CardWidget(
+                                assetImage: images[index],
+                                showSaveIcon: false,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                      ListView.separated(
+                        physics: NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.all(0),
+                        shrinkWrap: true,
+                
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              if (menuList[index]['title'] == 'Sign Out') {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => const Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    child: SignupPopupWidget(),
+                                  ),
+                                );
+                              } else {
+                                context.push(menuList[index]['route']);
+                              }
+                            },
+                            child: TileWidget(
+                              iconImage: menuList[index]['image'],
+                              title: menuList[index]['title'],
+                              textColor: menuList[index]['color'],
+                              ontaped: menuList[index]['isTap'],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return Divider();
+                        },
+                        itemCount: menuList.length,
+                      ),
+                      SizedBox(height: 30),
+                    ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

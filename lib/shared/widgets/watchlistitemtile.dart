@@ -22,7 +22,7 @@ class WatchlistItemTile extends StatelessWidget {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     return Padding(
-      padding: EdgeInsets.only(top: 25.0, bottom: 10.0, right: 5, left: 20),
+      padding: EdgeInsets.only(top: 10, bottom: 10.0, right: 10, left: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -37,7 +37,7 @@ class WatchlistItemTile extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 15),
+           SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ class WatchlistItemTile extends StatelessWidget {
                   maxLines: 2,
                   textOverflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 4),
+                 SizedBox(height: 4),
                 PoppinsText(
                   '($year)',
                   fontSize: PoppinsFontSizeVariant.size16,
@@ -60,7 +60,7 @@ class WatchlistItemTile extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 15),
+          SizedBox(width: 10),
           InkWell(
             onTap: () {
               context.pushNamed(
