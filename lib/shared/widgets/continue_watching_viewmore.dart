@@ -209,7 +209,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                       SizedBox(width: 20),
                                       Image.asset(
                                         Assets.images.cancelicon.path,
-                                        height: 40,
+                                        height: 24, width: 24,
                                       ),
                                     ],
                                   ),
