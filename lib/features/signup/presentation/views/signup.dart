@@ -16,7 +16,7 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  String? _receiveMethod = 'Email';
+  String? _receiveMethod = null;
 
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -24,11 +24,35 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
   bool rememberMe = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _emailController.addListener(_autoSelectReceiveMethod);
+    _phoneController.addListener(_autoSelectReceiveMethod);
+  }
 
   void onRememberMeChanged(bool? value) {
     setState(() {
       rememberMe = value ?? false;
+    });
+  }
+
+  void _autoSelectReceiveMethod() {
+    String email = _emailController.text.trim();
+    String phone = _phoneController.text.trim();
+
+    setState(() {
+      if (email.isNotEmpty && phone.isEmpty) {
+        _receiveMethod = "Email";
+      } else if (phone.isNotEmpty && email.isEmpty) {
+        _receiveMethod = "Phone";
+      } else if (email.isNotEmpty && phone.isNotEmpty) {
+        _receiveMethod = null; // Both filled → user must choose manually
+      }
     });
   }
 
@@ -49,7 +73,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
     return Scaffold(
       backgroundColor: customColors.dark,
-
       body: Stack(
         children: [
           Container(
@@ -63,7 +86,6 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             child: SafeArea(
               child: SingleChildScrollView(
-                // Reduced overall padding
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
                   vertical: 30.0,
@@ -80,7 +102,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               padding: EdgeInsets.only(top: 30),
                               child: Image.asset(Assets.images.logo2.path),
                             ),
-                            SizedBox(height: 15), // Reduced spacing
+                            SizedBox(height: 15),
                             PoppinsText(
                               "Get Started with Draper",
                               fontSize: PoppinsFontSizeVariant.size24,
@@ -92,57 +114,30 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(height: 25),
                       NewTextField(
                         fieldbg: AppColors.tfield,
-
                         controller: _fullNameController,
                         labelText: "Full Name",
                         hintText: "John Mackson",
                         filledColor: AppColors.tfield,
-                        // validator: (value) {
-                        //   if (value == null || value.trim().isEmpty) {
-                        //     return "Full name required";
-                        //   }
-                        //   return null;
-                        // },
                       ),
                       SizedBox(height: 15),
-
                       NewTextField(
                         fieldbg: AppColors.tfield,
-
                         controller: _emailController,
                         labelText: "Enter your Email Address*",
                         hintText: "Jerrymackson@gmail.com",
                         filledColor: AppColors.tfield,
                         keyboardType: TextInputType.emailAddress,
-                        // validator: (value) {
-                        //   if (value == null || value.trim().isEmpty) {
-                        //     return "Email required";
-                        //   }
-                        //   if (!value.contains("@")) return "Enter valid email";
-                        //   return null;
-                        // },
                       ),
                       SizedBox(height: 15),
-
                       NewTextField(
                         fieldbg: AppColors.tfield,
-
-                        controller: _emailController,
-                        // controller: _phoneController,
+                        controller: _phoneController,
                         labelText: "Enter your Phone Number*",
                         hintText: "03XXXXXXXXX",
                         filledColor: AppColors.tfield,
                         keyboardType: TextInputType.phone,
-                        // validator: (value) {
-                        //   if (value == null || value.trim().isEmpty) {
-                        //     return "Phone number required";
-                        //   }
-                        //   if (value.length < 11) return "Enter valid phone";
-                        //   return null;
-                        // },
                       ),
                       SizedBox(height: 15),
-
                       AppPasswordField(
                         controller: _passwordController,
                         labelText: "Create Password*",
@@ -156,7 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(height: 15),
                       AppPasswordField(
-                        controller: _passwordController,
+                        controller: _confirmPasswordController, // FIXED
                         labelText: "Confirm Password*",
                         hintText: "**********",
                         validator: (value) {
@@ -166,7 +161,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                       ),
-
                       SizedBox(height: 8),
                       Container(
                         padding: EdgeInsets.all(10),
@@ -215,8 +209,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           ],
                         ),
                       ),
-
                       const SizedBox(height: 10),
+
+                      // Checkbox area
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -341,12 +336,14 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 20),
                       AppButton(
                         onPressed: () {
-                          context.pushNamed(AppRoutes.createAccountCodeScreen.name);
+                          context.pushNamed(
+                            AppRoutes.createAccountCodeScreen.name,
+                          );
                         },
                         title: "Create Account",
                       ),
-
                       const SizedBox(height: 25),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -410,6 +407,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ],
                       ),
+
                       SizedBox(height: 10),
                       AppButton(
                         onPressed: () {
