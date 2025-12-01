@@ -192,11 +192,11 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
 
   Widget _buildControlIcon(IconData icon, String label, VoidCallback onTap) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12),
+      padding: EdgeInsets.symmetric(vertical: 6),
       child: GestureDetector(
         onTap: onTap,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 6.0),
           child: Row(
             children: [
               Icon(icon, color: Colors.white, size: 28),
