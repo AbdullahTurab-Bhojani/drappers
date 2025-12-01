@@ -60,10 +60,10 @@ class EditprofileScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        bottom: -10,
+                        bottom: -12,
                         right: 42,
                         child: Container(
-                          padding: EdgeInsets.all(4),
+                          padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: customColors.buttonColors.first,
                             shape: BoxShape.circle,
@@ -72,10 +72,12 @@ class EditprofileScreen extends StatelessWidget {
                             //   width: 1,
                             // ),
                           ),
-                          child: Icon(
-                            Icons.camera_alt,
-                            color: customColors.textColor,
-                            size: 20,
+                          child: Center(
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: customColors.textColor,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ),
@@ -144,14 +146,14 @@ class EditprofileScreen extends StatelessWidget {
                           //   return null;
                           // },
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 25),
                         AppButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                           title: "Save Changes",
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 12),
                         AppButton(
                           color: Colors.transparent,
                           borderColor: customColors.textColor,
