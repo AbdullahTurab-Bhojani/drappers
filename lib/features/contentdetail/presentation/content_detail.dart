@@ -26,6 +26,7 @@ List trendingimages = [
 class _ContentDetailState extends State<ContentDetail>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  bool isAdded = false;
 
   @override
   void initState() {
@@ -121,7 +122,7 @@ class _ContentDetailState extends State<ContentDetail>
 
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 19, vertical: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 9, vertical: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -198,8 +199,7 @@ class _ContentDetailState extends State<ContentDetail>
                                   child: PoppinsText(
                                     'HQ',
                                     fontSize: PoppinsFontSizeVariant.size8,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.semiBold,
+                                    fontWeight: PoppinsFontWeightVariant.semiBold,
                                     color: customColors.textColor,
                                   ),
                                 ),
@@ -211,34 +211,48 @@ class _ContentDetailState extends State<ContentDetail>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            AppButton(
-                              onPressed: () {},
-                              title: 'Play',
-                              prefixIcon: Image.asset(
-                                Assets.images.playstrokeicon.path,
-                                width: 16,
-                                height: 16,
+                            SizedBox(
+                              width: 192, height: 45,
+                              child: AppButton(
+                                onPressed: () {},
+                                title: 'Play',
+                                prefixIcon: Image.asset(
+                                  Assets.images.playstrokeicon.path,
+                                  width: 16,
+                                  height: 16,
+                                ),
+                                buttonSize: Size(175, 45),
+                                fontSize: PoppinsFontSizeVariant.size16,
                               ),
-                              buttonSize: Size(175, 45),
-                              fontSize: PoppinsFontSizeVariant.size16,
                             ),
-                            AppButton(
-                              onPressed: () {},
-                              title: 'Add To Watch List',
-                              color: Colors.transparent,
-                              borderColor: customColors.greyColor,
-                              borderWidth: 1,
-                              border: true,
-                              prefixIcon: Image.asset(
-                                Assets.images.addicon.path,
-                                width: 16,
-                                height: 16,
-                              ),
-                              buttonSize: Size(155, 45),
-                              fontSize: PoppinsFontSizeVariant.size16,
-                            ),
-                          ],
-                        ),
+                          SizedBox(
+  width: 192,
+  height: 45,
+  child: AppButton(
+    onPressed: () {
+      setState(() {
+        isAdded = !isAdded;
+      });
+    },
+    title: isAdded ? 'Added' : 'Add To Watch List',
+    color: Colors.transparent,
+    borderColor: customColors.greyColor,
+    borderWidth: 1,
+    border: true,
+    prefixIcon: isAdded
+        ? Icon(Icons.check, size: 18, color: customColors.textColor)
+        : Image.asset(
+            Assets.images.addicon.path,
+            width: 16,
+            height: 16,
+          ),
+    buttonSize:  Size(155, 45),
+    fontSize: PoppinsFontSizeVariant.size16,
+  ),
+)
+
+                     ]),
+                        
                         SizedBox(height: 15),
                         PoppinsText(
                           '"The Wolf of Wall Street" is a captivating film about Jordan Belforts rise and fall."',
@@ -341,61 +355,73 @@ class _ContentDetailState extends State<ContentDetail>
                         ),
 
                         SizedBox(height: 10),
-
-                        Builder(
-                          builder: (context) {
-                            return Column(
-                              children: [
-                                if (_tabController.index == 0)
-                                  GridView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    padding: EdgeInsets.zero,
-                                    itemCount: trendingimages.length,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 3,
-                                          mainAxisSpacing: 10,
-                                          crossAxisSpacing: 10,
-                                          childAspectRatio: 0.6,
-                                        ),
-                                    itemBuilder: (context, index) {
-                                      return CardWidget(
-                                        assetImage: trendingimages[index],
-                                        showSaveIcon: false,
-                                      );
-                                    },
-                                  )
-                                else
-                                  GridView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    padding: EdgeInsets.zero,
-                                    itemCount: reelimages.length,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          mainAxisSpacing: 10,
-                                          crossAxisSpacing: 15,
-                                          childAspectRatio: 0.5,
-                                        ),
-                                    itemBuilder: (context, index) {
-                                      return ReelcardWidget(
-                                        assetImagePath: reelimages[index],
-                                        title: reelTitles[index],
-                                        reelCardHeight: 100,
-                                        reelCardWidth: 100,
-                                        fontSizeVariant:
-                                            PoppinsFontSizeVariant.size14,
-                                        showSaveIcon: false,
-                                      );
-                                    },
-                                  ),
-                              ],
-                            );
-                          },
-                        ),
-                        SizedBox(height: 50),
+                     Builder(
+                     builder: (context) {
+                     return Column(
+                     children: [
+                     if (_tabController.index == 0) 
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              PoppinsText(
+                "Season 01",
+                color: customColors.textColor,
+                 fontSize : PoppinsFontSizeVariant.size12,
+                  fontWeight: PoppinsFontWeightVariant.regular
+                ),
+                 PoppinsText(
+                  "View All",
+                  color: customColors.textColor,
+                  fontSize: PoppinsFontSizeVariant.size14,
+                  fontWeight: PoppinsFontWeightVariant.regular,
+                ),
+            ],
+          ),
+         SizedBox(height: 12),
+        if (_tabController.index == 0)
+          GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            itemCount: trendingimages.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 0.6,
+            ),
+            itemBuilder: (context, index) {
+              return CardWidget(
+                assetImage: trendingimages[index],
+                showSaveIcon: false,
+              );
+            },
+          )
+        else
+          GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            itemCount: reelimages.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 15,
+              childAspectRatio: 0.5,
+            ),
+            itemBuilder: (context, index) {
+              return ReelcardWidget(
+                assetImagePath: reelimages[index],
+                title: reelTitles[index],
+                reelCardHeight: 100,
+                reelCardWidth: 100,
+                fontSizeVariant: PoppinsFontSizeVariant.size14,
+                showSaveIcon: false,
+              );
+            })]);
+          
+  }),
+              SizedBox(height: 50),
                       ],
                     ),
                   ),
