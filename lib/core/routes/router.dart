@@ -127,7 +127,7 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.notificationSetting.name,
         builder: (context, state) => NotificationSetting(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.createAccountCodeScreen.path,
         name: AppRoutes.createAccountCodeScreen.name,
         builder: (context, state) => CreateAccountCodeScreen(),
@@ -212,7 +212,11 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.reportContentSomehingElse.name,
         builder: (context, state) => ReportContentSomehingElse(),
       ),
-
+      GoRoute(
+        path: AppRoutes.Startupdetails.path,
+        name: AppRoutes.Startupdetails.name,
+        builder: (context, state) => Startupdetails(),
+      ),
       GoRoute(
         path: AppRoutes.videoScreen.path,
         name: AppRoutes.videoScreen.name,

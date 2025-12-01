@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -82,6 +83,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<AppCustomColors>()!;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -99,7 +101,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               leading: GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 10, right: 5),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
@@ -120,8 +122,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     },
                     child: Image.asset(
                       Assets.images.settingicon.path,
-                      width: 20,
-                      height: 20,
+                      width: 25,
+                      height: 25,
                     ),
                   ),
                 ),
@@ -141,18 +143,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       height: 31,
                       decoration: BoxDecoration(
                         color: AppColors.color1A1E24,
-                        borderRadius: BorderRadius.circular(40),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: Center(
                         child: PoppinsText(
                           'Today',
+                          color:  customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 11),
 
                   ...notifications.map((item) {
                     return GestureDetector(
@@ -173,9 +176,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(20),
+                          padding: EdgeInsets.only(top:20, bottom:10, left:20, right:20),
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                 child: Column(
@@ -183,23 +186,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   children: [
                                     PoppinsText(
                                       item['title'],
+                                      color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
+                                      fontWeight:PoppinsFontWeightVariant.regular,
                                     ),
-                                    SizedBox(height: 12),
+                                    SizedBox(height: 4),
                                     PoppinsText(
                                       item['time'],
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      color: AppColors.bGrey,
+                                      fontSize: PoppinsFontSizeVariant.size12,
+                                      fontWeight: PoppinsFontWeightVariant.regular,
+                                      color: customColors.textColor,
                                     ),
                                   ],
                                 ),
                               ),
                               SizedBox(width: 12),
                               Container(
-                                width: 73,
-                                height: 42,
+                                margin: EdgeInsets.only(top: 6),
+                                width: 78,
+                                height: 44,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
@@ -214,7 +219,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   "New!",
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   fontWeight: PoppinsFontWeightVariant.semiBold,
-                                  color: AppColors.wDark,
+                                  color: customColors.textColor
                                 ),
                               ],
                             ],
@@ -237,6 +242,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       child: Center(
                         child: PoppinsText(
                           'Yesterday',
+                          color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
                         ),
@@ -253,13 +259,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.transparent, // showExtra logic hat gaya
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(20),
+                          padding: EdgeInsets.only(top:20, bottom:10, left:20, right:20),
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                 child: Column(
@@ -267,23 +273,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   children: [
                                     PoppinsText(
                                       item['title'],
+                                      color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
+                                      fontWeight:PoppinsFontWeightVariant.regular,
                                     ),
-                                    SizedBox(height: 12),
+                                    SizedBox(height: 4),
                                     PoppinsText(
                                       item['time'],
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      color: AppColors.bGrey,
+                                      fontSize: PoppinsFontSizeVariant.size12,
+                                      fontWeight: PoppinsFontWeightVariant.regular,
+                                      color: customColors.textColor,
                                     ),
                                   ],
                                 ),
                               ),
                               SizedBox(width: 12),
                               Container(
-                                width: 73,
-                                height: 42,
+                                margin: EdgeInsets.only(top: 6),
+                                width: 78,
+                                height: 44,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
@@ -330,9 +338,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(20),
+                          padding: EdgeInsets.only(top:20, bottom:10, left:20, right:20),
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                 child: Column(
@@ -340,23 +348,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   children: [
                                     PoppinsText(
                                       item['title'],
+                                      color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
+                                      fontWeight:PoppinsFontWeightVariant.regular,
                                     ),
-                                    SizedBox(height: 12),
+                                    SizedBox(height: 4),
                                     PoppinsText(
                                       item['time'],
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      color: AppColors.bGrey,
+                                      fontWeight: PoppinsFontWeightVariant.regular,
+                                      fontSize: PoppinsFontSizeVariant.size12,
+                                      color: customColors.textColor,
                                     ),
                                   ],
                                 ),
                               ),
                               SizedBox(width: 12),
                               Container(
-                                width: 73,
-                                height: 42,
+                                margin: EdgeInsets.only(top: 6),
+                                width: 78,
+                                height: 44,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
@@ -372,7 +382,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     );
                   }).toList(),
 
-                  SizedBox(height: 40),
+                  SizedBox(height: 10),
                 ],
               ),
             ),
