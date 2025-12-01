@@ -215,11 +215,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               ),
                               if (item['showExtra']) ...[
                                 SizedBox(width: 12),
-                                PoppinsText(
-                                  "New!",
-                                  fontSize: PoppinsFontSizeVariant.size12,
-                                  fontWeight: PoppinsFontWeightVariant.semiBold,
-                                  color: customColors.textColor
+                                Container(
+                                  margin: EdgeInsets.only(top: 15),
+                                  child: PoppinsText(
+                                    "New!",
+                                    fontSize: PoppinsFontSizeVariant.size12,
+                                    fontWeight: PoppinsFontWeightVariant.semiBold,
+                                    color: customColors.textColor
+                                  ),
                                 ),
                               ],
                             ],

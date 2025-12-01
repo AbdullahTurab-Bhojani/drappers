@@ -5,6 +5,7 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
+import '../../../shared/widgets/popupmenuitem/delete_popup_widget.dart';
 import '../../../shared/widgets/popupmenuitem/signup_popup_widget.dart';
 import '../../../shared/widgets/tile_widget.dart';
 
@@ -67,7 +68,14 @@ class ProfileScreen extends StatelessWidget {
         'title': 'Sign Out',
         'image': Assets.images.signouticon.path,
         'route': AppRoutes.privacypolicyScreen.path,
-        'color': Colors.red,
+        'color': Colors.white,
+        'isTap': false,
+      },
+      {
+        'title': 'Delete Account',
+        'image': Assets.images.deleteRed24.path,
+        'route': AppRoutes.privacypolicyScreen.path,
+        'color': Colors.white,
         'isTap': false,
       },
     ];
@@ -245,7 +253,17 @@ class ProfileScreen extends StatelessWidget {
                                     child: SignupPopupWidget(),
                                   ),
                                 );
-                              } else {
+                              }
+                              if (menuList[index]['title'] == 'Delete Account') {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => const Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    child: DeletePopupWidget(),
+                                  ),
+                                );
+                              }
+                               else {
                                 context.push(menuList[index]['route']);
                               }
                             },

@@ -326,6 +326,10 @@ class $AssetsImagesGen {
   AssetGenImage get delete123 =>
       const AssetGenImage('assets/images/delete123.png');
 
+  /// File path: assets/images/deleteRed24.png
+  AssetGenImage get deleteRed24 =>
+      const AssetGenImage('assets/images/deleteRed24.png');
+
   /// File path: assets/images/documentaries1.png
   AssetGenImage get documentaries1 =>
       const AssetGenImage('assets/images/documentaries1.png');
@@ -738,6 +742,7 @@ class $AssetsImagesGen {
     cuticon,
     cuticon3x,
     delete123,
+    deleteRed24,
     documentaries1,
     documentaries2,
     documentaries3,
