@@ -129,7 +129,7 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
                 fontWeight: PoppinsFontWeightVariant.medium,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 4),
+              SizedBox(height: 2),
               PoppinsText(
                 widget.subtitleText,
                 fontSize: PoppinsFontSizeVariant.size12,

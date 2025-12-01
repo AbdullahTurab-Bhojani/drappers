@@ -35,7 +35,7 @@ class _TermsconditionState extends State<Termscondition> {
               leading: GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding:  EdgeInsets.only(left: 10),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,

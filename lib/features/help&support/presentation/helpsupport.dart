@@ -89,7 +89,7 @@ class _HelpsupportState extends State<Helpsupport> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -98,65 +98,51 @@ class _HelpsupportState extends State<Helpsupport> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 12,
-                        vertical: 8,
+                        vertical: 0,
                       ),
                       child: Column(
                         children: [
                           ...chatItems.map((item) {
                             return Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8.0),
+                              padding: EdgeInsets.symmetric(vertical: 8),
                               child: Container(
                                 width: double.infinity,
-                                height: 130,
+                                height: 125,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: AppColors.color202020,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(15.0),
+                                  padding: EdgeInsets.all(15),
                                   child: Column(
                                     children: [
                                       Row(
                                         children: [
-                                          Image.asset(item.iconPath),
+                                          Image.asset(item.iconPath, height: 24, width: 24, color: customColors.textColor,),
                                           SizedBox(width: 20),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               PoppinsText(
                                                 item.title,
-                                                color: Theme.of(context)
-                                                    .extension<
-                                                      AppCustomColors
-                                                    >()!
+                                                color: Theme.of(context).extension<AppCustomColors>()!
                                                     .textColor,
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size16,
-                                                fontWeight:
-                                                    PoppinsFontWeightVariant
-                                                        .medium,
+                                                fontSize: PoppinsFontSizeVariant.size16,
+                                                fontWeight: PoppinsFontWeightVariant.medium,
                                               ),
                                               PoppinsText(
                                                 item.subtitle,
-                                                color: Theme.of(context)
-                                                    .extension<
-                                                      AppCustomColors
-                                                    >()!
+                                               color: Theme.of(context).extension<AppCustomColors>()!
                                                     .textColor,
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size12,
-                                                fontWeight:
-                                                    PoppinsFontWeightVariant
-                                                        .regular,
+                                                fontSize: PoppinsFontSizeVariant.size12,
+                                                fontWeight: PoppinsFontWeightVariant.regular,
                                               ),
                                             ],
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 20),
+                                      SizedBox(height: 10),
                                       SizedBox(
                                         width: double.infinity,
                                         height: 40,
@@ -175,129 +161,126 @@ class _HelpsupportState extends State<Helpsupport> {
                           Container(
                             width: double.infinity,
                             height: 730,
-                            margin: EdgeInsets.symmetric(vertical: 12),
+                            margin: EdgeInsets.symmetric(vertical: 10,),
                             decoration: BoxDecoration(
                               color: customColors.regular,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  PoppinsText(
-                                    "Submit a Ticket",
-                                    fontSize: PoppinsFontSizeVariant.size22,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                    color: customColors.textColor,
-                                  ),
-                                  SizedBox(height: 20),
-                                  NewTextField(
-                                    fieldbg: AppColors.newfield,
-
-                                    controller: _fullNameController,
-                                    labelText: "Full Name*",
-                                    hintText: "Enter your full name",
-                                    filledColor: AppColors.newfield,
-                                  ),
-                                  SizedBox(height: 15),
-                                  NewTextField(
-                                    fieldbg: AppColors.newfield,
-
-                                    controller: _emailController,
-                                    labelText:
-                                        "Enter your Email Address or Phone*",
-                                    hintText: "Enter your email",
-                                    filledColor: AppColors.newfield,
-                                    keyboardType: TextInputType.emailAddress,
-                                    validator: (value) {
-                                      if (value == null ||
-                                          value.trim().isEmpty) {
-                                        return "Email required";
-                                      }
-                                      if (!value.contains("@")) {
-                                        return "Enter valid email";
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  SizedBox(height: 15),
-                                  NewTextField(
-                                    fieldbg: AppColors.newfield,
-
-                                    controller: _subjectController,
-                                    labelText: "Subject*",
-                                    hintText: "Subject here",
-                                    filledColor: AppColors.newfield,
-                                  ),
-                                  SizedBox(height: 15),
-                                  NewTextField(
-                                    fieldbg: AppColors.newfield,
-
-                                    maxLines: 6,
-                                    controller: _describeController,
-                                    labelText: "Describe your issue*",
-                                    hintText:
-                                        "Describe your issue in detail...",
-                                    filledColor: AppColors.newfield,
-                                  ),
-                                  SizedBox(height: 14),
-                                  PoppinsText(
-                                    "00/500 Characters",
-                                    fontSize: PoppinsFontSizeVariant.size12,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    color: AppColors.dLabel,
-                                  ),
-                                  SizedBox(height: 14),
-                                  PoppinsText(
-                                    "Upload Screenshot (Optional)",
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    color: customColors.textColor,
-                                  ),
-                                  SizedBox(height: 20),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 55,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.newfield,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          Assets.images.screenshoticon.path,
-                                          height: 24,
-                                          width: 24,
-                                        ),
-                                        SizedBox(width: 14),
-                                        PoppinsText(
-                                          "Add Screenshot",
-                                          fontSize:
-                                              PoppinsFontSizeVariant.size16,
-                                          fontWeight:
-                                              PoppinsFontWeightVariant.regular,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                 Container(
+                                  margin: EdgeInsets.only(top: 10, left: 15),
+                                   child: PoppinsText(
+                                          "Submit a Ticket",
+                                          fontSize: PoppinsFontSizeVariant.size22,
+                                          fontWeight: PoppinsFontWeightVariant.medium,
                                           color: customColors.textColor,
                                         ),
-                                      ],
-                                    ),
+                                 ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: 10),
+                                      NewTextField( 
+                                        fieldbg: customColors.bgcontainerlight,
+                                        controller: _fullNameController,
+                                        labelText: "Full Name*",
+                                        hintText: "Enter your full name",
+                                        filledColor: customColors.bgcontainerlight,
+                                      ),
+                                      SizedBox(height: 15),
+                                      NewTextField(
+                                        fieldbg: customColors.bgcontainerlight,
+                                        controller: _emailController,
+                                        labelText:"Enter your Email Address or Phone*",
+                                        hintText: "Enter your email",
+                                        filledColor: customColors.bgcontainerlight,
+                                        keyboardType: TextInputType.emailAddress,
+                                        validator: (value) {
+                                          if (value == null ||
+                                              value.trim().isEmpty) {
+                                            return "Email required";
+                                          }
+                                          if (!value.contains("@")) {
+                                            return "Enter valid email";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(height: 15),
+                                      NewTextField(
+                                        fieldbg: customColors.bgcontainerlight,
+                                        controller: _subjectController,
+                                        labelText: "Subject*",
+                                        hintText: "Subject here",
+                                        filledColor: customColors.bgcontainerlight,
+                                      ),
+                                      SizedBox(height: 15),
+                                      NewTextField(
+                                        fieldbg: customColors.bgcontainerlight,
+                                        maxLines: 6,
+                                        controller: _describeController,
+                                        labelText: "Describe your issue*",
+                                        hintText:"Describe your issue in detail...",
+                                        filledColor: customColors.bgcontainerlight,
+                                      ),
+                                      SizedBox(height: 10),
+                                      PoppinsText(
+                                        "00/500 Characters",
+                                        fontSize: PoppinsFontSizeVariant.size12,
+                                        fontWeight: PoppinsFontWeightVariant.regular,
+                                        color: customColors.greyColor,
+                                      ),
+                                      SizedBox(height: 10),
+                                      PoppinsText(
+                                        "Upload Screenshot (Optional)",
+                                        fontSize: PoppinsFontSizeVariant.size16,
+                                        fontWeight: PoppinsFontWeightVariant.regular,
+                                        color: customColors.textColor,
+                                      ),
+                                      SizedBox(height: 15),
+                                      Container(
+                                        width: double.infinity,
+                                        height: 55,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: customColors.bgcontainerlight,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                              Assets.images.screenshoticon.path,
+                                              height: 24,  width: 24,
+                                            ),
+                                            SizedBox(width: 14),
+                                            PoppinsText(
+                                              "Add Screenshot",
+                                              fontSize: PoppinsFontSizeVariant.size16,
+                                              fontWeight: PoppinsFontWeightVariant.regular,
+                                              color: customColors.textColor,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 30),
+                                      AppButton(
+                                        buttonSize: Size(double.infinity, 40),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        title: "Submit Ticket",
+                                      ),
+                                    ],
                                   ),
-                                  SizedBox(height: 40),
-                                  AppButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    title: "Submit Ticket",
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ],

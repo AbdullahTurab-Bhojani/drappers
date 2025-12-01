@@ -40,20 +40,18 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
             ),
 
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: customColors.regular,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  decoration: BoxDecoration(
+                    color: customColors.regular,
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-                child: SingleChildScrollView(
+                  child: SingleChildScrollView(
                   padding: EdgeInsets.fromLTRB(
-                    paddingValue,
-                    24,
-                    paddingValue,
-                    24,
+                    paddingValue, 20,
+                    paddingValue, 20,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,13 +177,12 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
                       ),
-
                       SizedBox(height: 50.0),
                     ],
                   ),
                 ),
               ),
-            ),
+            ),),
           ],
         ),
       ),
