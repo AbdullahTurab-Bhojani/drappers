@@ -120,7 +120,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       height: 8,
                       decoration: BoxDecoration(
                         gradient: currentPage == index
-                            ?  LinearGradient(
+                            ? LinearGradient(
                                 colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
                               )
                             : null,
@@ -134,7 +134,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 28),
                   child: Column(
                     children: [
-                     SizedBox(height: 32),
+                      SizedBox(height: 32),
                       PoppinsText(
                         titles[currentPage],
                         textAlign: TextAlign.center,
@@ -143,7 +143,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         color: customColors.textColor,
                         height: 1.3,
                       ),
-                       SizedBox(height: 32),
+                      SizedBox(height: 32),
                       PoppinsText(
                         subtitles[currentPage],
                         textAlign: TextAlign.center,
@@ -161,18 +161,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: AppButton(
                     onPressed: () {
-                      if (currentPage < images.length - 1) {
-                        _pageController.nextPage(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeIn,
-                        );
-                      } else {
-                        context.pushNamed(AppRoutes.loginScreen.name);
-                      }
+                      context.pushNamed(AppRoutes.loginScreen.name);
                     },
-                    title: currentPage == images.length - 1
-                        ? 'Get Started'
-                        : 'Next',
+                    title: currentPage == images.length - 1 ? 'Next' : 'Next',
                   ),
                 ),
                 const SizedBox(height: 80),
