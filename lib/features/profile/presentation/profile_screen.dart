@@ -111,7 +111,7 @@ class ProfileScreen extends StatelessWidget {
                         fontWeight: PoppinsFontWeightVariant.medium,
                       ),
                     ),
-                    SizedBox(width: 15),
+                    SizedBox(width: 20),
                   ],
                 ),
                 SizedBox(height: 50),

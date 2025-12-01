@@ -104,6 +104,7 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _fullNameController,
                           labelText: "Full Name*",
                           hintText: "Enter your full name",
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                           filledColor: AppColors.tfield,
                           // validator: (value) {
                           //   if (value == null || value.trim().isEmpty) {
@@ -119,6 +120,7 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _emailController,
                           labelText: "Email Address*",
                           hintText: "Enter your email",
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.emailAddress,
                           // validator: (value) {
@@ -136,6 +138,7 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _phoneController,
                           labelText: "Phone Number*",
                           hintText: "03XXXXXXXXX",
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.phone,
                           // validator: (value) {
