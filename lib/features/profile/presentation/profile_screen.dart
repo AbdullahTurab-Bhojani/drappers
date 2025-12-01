@@ -14,6 +14,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     List images = [
       'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
       'https://i.ytimg.com/vi/5HxoC-W_iq4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDGjYkZgzRShZtbRAcxcHteNwOuig',
@@ -26,62 +28,61 @@ class ProfileScreen extends StatelessWidget {
         'title': 'Saved Reel',
         'image': Assets.images.menuicon1.path,
         'route': AppRoutes.savedreel.path,
-        'color': Colors.white,
+        'color': customColors.textColor,
         'isTap': true,
       },
       {
         'title': 'Settings & Preferences',
         'image': Assets.images.menuicon2.path,
         'route': AppRoutes.settingpreferencesScreen.path,
-        'color': Colors.white,
+        'color': customColors.textColor,
         'isTap': true,
       },
       {
         'title': 'Terms & Conditions',
         'image': Assets.images.menuicon3.path,
         'route': AppRoutes.termscondition.path,
-        'color': Colors.white,
+        'color': customColors.textColor,
         'isTap': true,
       },
       {
         'title': 'Privacy Policy',
         'image': Assets.images.menuicon4.path,
         'route': AppRoutes.privacypolicyScreen.path,
-        'color': Colors.white,
+        'color': customColors.textColor,
         'isTap': true,
       },
       {
         'title': 'FAQ’s',
         'image': Assets.images.menuicon5.path,
         'route': AppRoutes.faqsScreen.path,
-        'color': Colors.white,
+        'color': customColors.textColor,
         'isTap': true,
       },
       {
         'title': 'Help & Support',
         'image': Assets.images.menuicon6.path,
         'route': AppRoutes.helpsupport.path,
-        'color': Colors.white,
+        'color': customColors.textColor,
         'isTap': true,
       },
       {
         'title': 'Sign Out',
-        'image': Assets.images.signouticon.path,
+        'image': Assets.images.logout009.path, 
         'route': AppRoutes.privacypolicyScreen.path,
-        'color': Colors.white,
+        'color': customColors.textColor,
         'isTap': false,
       },
       {
         'title': 'Delete Account',
-        'image': Assets.images.deleteRed24.path,
+        'image': Assets.images.deleteicon2.path,
         'route': AppRoutes.privacypolicyScreen.path,
-        'color': Colors.white,
+        'color': customColors.rednormal,
         'isTap': false,
       },
     ];
 
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
+    
     return Scaffold(
       body: Stack(
         children: [
