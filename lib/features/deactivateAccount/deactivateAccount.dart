@@ -33,7 +33,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(12.0),
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,21 +51,21 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 fontWeight: PoppinsFontWeightVariant.semiBold,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 5),
               PoppinsText(
                 'Temporarily pause your account',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               PoppinsText(
                 'What happens when you deactivate:',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 10),
               PoppinsText(
                 '• All your data will be preserved',
                 fontSize: PoppinsFontSizeVariant.size12,
@@ -79,7 +79,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 30),
               AppButton(
                 onPressed: () {
                   showDialog(

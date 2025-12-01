@@ -326,6 +326,10 @@ class $AssetsImagesGen {
   AssetGenImage get delete123 =>
       const AssetGenImage('assets/images/delete123.png');
 
+  /// File path: assets/images/deleteicon2.png
+  AssetGenImage get deleteicon2 =>
+      const AssetGenImage('assets/images/deleteicon2.png');
+
   /// File path: assets/images/documentaries1.png
   AssetGenImage get documentaries1 =>
       const AssetGenImage('assets/images/documentaries1.png');
@@ -443,9 +447,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo2.png
   AssetGenImage get logo2 => const AssetGenImage('assets/images/logo2.png');
 
+  /// File path: assets/images/logout009.png
+  AssetGenImage get logout009 =>
+      const AssetGenImage('assets/images/logout009.png');
+
   /// File path: assets/images/logout123.png
   AssetGenImage get logout123 =>
       const AssetGenImage('assets/images/logout123.png');
+
+  /// File path: assets/images/logoutprofile.png
+  AssetGenImage get logoutprofile =>
+      const AssetGenImage('assets/images/logoutprofile.png');
 
   /// File path: assets/images/mentionedicon.png
   AssetGenImage get mentionedicon =>
@@ -738,6 +750,7 @@ class $AssetsImagesGen {
     cuticon,
     cuticon3x,
     delete123,
+    deleteicon2,
     documentaries1,
     documentaries2,
     documentaries3,
@@ -768,7 +781,9 @@ class $AssetsImagesGen {
     like,
     likeicon,
     logo2,
+    logout009,
     logout123,
+    logoutprofile,
     mentionedicon,
     menuicon1,
     menuicon2,

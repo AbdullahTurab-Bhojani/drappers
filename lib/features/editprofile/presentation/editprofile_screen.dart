@@ -60,10 +60,10 @@ class EditprofileScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        bottom: -10,
+                        bottom: -12,
                         right: 42,
                         child: Container(
-                          padding: EdgeInsets.all(4),
+                          padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: customColors.buttonColors.first,
                             shape: BoxShape.circle,
@@ -72,10 +72,12 @@ class EditprofileScreen extends StatelessWidget {
                             //   width: 1,
                             // ),
                           ),
-                          child: Icon(
-                            Icons.camera_alt,
-                            color: customColors.textColor,
-                            size: 20,
+                          child: Center(
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: customColors.textColor,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ),
@@ -102,6 +104,7 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _fullNameController,
                           labelText: "Full Name*",
                           hintText: "Enter your full name",
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                           filledColor: AppColors.tfield,
                           // validator: (value) {
                           //   if (value == null || value.trim().isEmpty) {
@@ -117,6 +120,7 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _emailController,
                           labelText: "Email Address*",
                           hintText: "Enter your email",
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.emailAddress,
                           // validator: (value) {
@@ -134,6 +138,7 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _phoneController,
                           labelText: "Phone Number*",
                           hintText: "03XXXXXXXXX",
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.phone,
                           // validator: (value) {
@@ -144,14 +149,14 @@ class EditprofileScreen extends StatelessWidget {
                           //   return null;
                           // },
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 25),
                         AppButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                           title: "Save Changes",
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 12),
                         AppButton(
                           color: Colors.transparent,
                           borderColor: customColors.textColor,
