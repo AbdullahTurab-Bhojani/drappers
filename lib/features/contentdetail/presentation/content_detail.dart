@@ -4,10 +4,12 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
+import '../../../shared/widgets/dropdownsettingtile.dart';
 import '../../../shared/widgets/reelcard/reelcard_widget.dart';
 
 class ContentDetail extends StatefulWidget {
   ContentDetail({super.key});
+  
 
   @override
   State<ContentDetail> createState() => _ContentDetailState();
@@ -27,6 +29,7 @@ class _ContentDetailState extends State<ContentDetail>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool isAdded = false;
+  
 
   @override
   void initState() {
@@ -41,6 +44,7 @@ class _ContentDetailState extends State<ContentDetail>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+    String selectedSeason = "Season 01";
 
     List<String> reelimages = [
       Assets.images.reelimage1.path,
@@ -360,22 +364,47 @@ class _ContentDetailState extends State<ContentDetail>
                      return Column(
                      children: [
                      if (_tabController.index == 0) 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              PoppinsText(
-                "Season 01",
-                color: customColors.textColor,
-                 fontSize : PoppinsFontSizeVariant.size12,
-                  fontWeight: PoppinsFontWeightVariant.regular
-                ),
-                 PoppinsText(
-                  "View All",
+          Padding(
+            padding:  EdgeInsets.only(left: 10, right: 10, top:0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                   DropdownButtonHideUnderline(
+                 child: DropdownButton<String>(
+                value: selectedSeason,
+                icon: Icon(
+                 Icons.keyboard_arrow_down,
                   color: customColors.textColor,
-                  fontSize: PoppinsFontSizeVariant.size14,
-                  fontWeight: PoppinsFontWeightVariant.regular,
+                      size: 20,
                 ),
-            ],
+                items: [
+                  "Season 01",
+                  "Season 02",
+                  "Season 03",
+                  "Season 04",
+                  "Season 05",
+                ].map((season) {
+                  return DropdownMenuItem(
+                    value: season,
+                    child: PoppinsText(
+            season,
+            color: customColors.textColor,
+            fontSize: PoppinsFontSizeVariant.size12,
+            fontWeight: PoppinsFontWeightVariant.regular,
+                    ),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedSeason = value!;
+                  });
+                },
+              ),
+            ),
+            Image.asset(Assets.images.infoicon.path,
+            height: 18, width: 18,)
+              ],
+            ),
           ),
          SizedBox(height: 12),
         if (_tabController.index == 0)
