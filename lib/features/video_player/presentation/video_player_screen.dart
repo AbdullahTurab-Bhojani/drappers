@@ -18,6 +18,32 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   bool _isLocked = false;
   bool _showEpisodes = false;
   bool _isSpeedPopupVisible = false;
+  bool _isQualityPopupVisible = false;
+
+  void _toggleEpisodes() {
+    setState(() {
+      _showEpisodes = !_showEpisodes;
+      _isSpeedPopupVisible = false;
+      _isQualityPopupVisible = false;
+    });
+    // Ensure controls are visible when episode list is open
+    if (_showEpisodes) {
+      setState(() => _controlsVisible = true);
+    }
+  }
+
+  final List<Map<String, String>> episodesData = List.generate(
+    10,
+    (index) => {
+      "title": index == 0
+          ? "E14 FINALE"
+          : (index % 3 == 0 ? "Semifinals 2" : "Episode ${index + 1}"),
+      "subtitle": "Meet The Drapers Season 6 (2023)",
+      "url":
+          "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "image": Assets.images.horizontalThumbnail.path, // Placeholder asset path
+    },
+  );
 
   final String videoUrl =
       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
@@ -186,7 +212,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                 height: 80,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: episodes.length,
+                  itemCount: episodes
+                      .length, // NOTE: this uses 'episodes' which is now unused
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
@@ -215,6 +242,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   }
 
   Widget _buildControls() {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Container(
       color: Colors.black.withOpacity(0.3),
       child: Stack(
@@ -294,27 +323,49 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
             Positioned(
               bottom: 20,
               left: 15,
-              child: Row(
-                children: [
-                  _btn(Icons.speed, "Speed (1x)", _changeSpeed),
-                  _btn(Icons.lock_open, "Lock", _toggleLock),
-                  _btn(Icons.dashboard, "Episodes", () {
-                    setState(() => _showEpisodes = !_showEpisodes);
-                  }),
-                  _btn(Icons.subtitles, "Audio & Subtitles", _toggleSubtitles),
-                  _btn(Icons.hd, "Quality", _changeQuality),
-                  _btn(Icons.skip_next, "Next Ep.", () {
-                    // Placeholder for actual next episode logic
-                    _playEpisode(0);
-                  }),
-                  // _btn(Icons.hd, "Quality", _changeQuality),
-                  // const SizedBox(width: 20),
-                  // _btn(Icons.subtitles, "Subtitles", _toggleSubtitles),
-                  // const SizedBox(width: 20),
-                  // _btn(Icons.list, "Episodes", () {
-                  //   setState(() => _showEpisodes = !_showEpisodes);
-                  // }),
-                ],
+              child: Container(
+                width: screenSize.width - 30,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // SizedBox(width: 20),
+                    _btn(Icons.speed, "Speed (1x)", _changeSpeed),
+
+                    // SizedBox(width: 20),
+                    _btn(Icons.lock_open, "Lock", _toggleLock),
+
+                    // SizedBox(width: 20),
+                    _btn(Icons.dashboard, "Episodes", () {
+                      setState(() => _showEpisodes = !_showEpisodes);
+                    }),
+
+                    // SizedBox(width: 20),
+                    _btn(
+                      Icons.subtitles,
+                      "Audio & Subtitles",
+                      _toggleSubtitles,
+                    ),
+
+                    // SizedBox(width: 20),
+                    _btn(Icons.hd, "Quality", _changeQuality),
+
+                    // SizedBox(width: 20),
+                    _btn(Icons.skip_next, "Next Ep.", () {
+                      if (episodesData.length > 1) {
+                        _playEpisode(1);
+                      } else {}
+                    }),
+                    // SizedBox(width: 20),
+
+                    // _btn(Icons.hd, "Quality", _changeQuality),
+                    // const SizedBox(width: 20),
+                    // _btn(Icons.subtitles, "Subtitles", _toggleSubtitles),
+                    // const SizedBox(width: 20),
+                    // _btn(Icons.list, "Episodes", () {
+                    //   setState(() => _showEpisodes = !_showEpisodes);
+                    // }),
+                  ],
+                ),
               ),
             ),
 
@@ -345,6 +396,149 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           Text(
             label,
             style: const TextStyle(color: Colors.white, fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEpisodesSidebar() {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double sidebarWidth = screenWidth * 0.45; // Takes up 45% of width
+
+    return Positioned.fill(
+      // Use GestureDetector to handle taps outside the sidebar to close it
+      child: GestureDetector(
+        onTap:
+            _toggleEpisodes, // Assumes _toggleEpisodes sets _showEpisodes = false
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Container(
+            width: sidebarWidth,
+            // Use a dark, slightly translucent color for the sidebar background
+            color: Colors.black.withOpacity(0.8),
+            child: Column(
+              children: [
+                // Title (optional header) or just padding
+                const SizedBox(height: 20),
+
+                // Episode List
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: episodesData.length,
+                    itemBuilder: (context, index) {
+                      final episode = episodesData[index];
+                      // Use InkWell for better tap visual feedback
+                      return InkWell(
+                        onTap: () =>
+                            _playEpisode(index), // Assumes _playEpisode exists
+                        child: _buildEpisodeListItem(episode, index),
+                      );
+                    },
+                  ),
+                ),
+
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      onPressed: _toggleEpisodes,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEpisodeListItem(Map<String, String> episode, int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Left: History Icon and Text
+          const Padding(
+            padding: EdgeInsets.only(top: 8.0, right: 8.0),
+            child: Column(
+              children: [
+                Icon(Icons.history, color: Colors.white54, size: 18),
+                SizedBox(height: 2),
+                Text(
+                  "38:47",
+                  style: TextStyle(color: Colors.white70, fontSize: 10),
+                ),
+              ],
+            ),
+          ),
+
+          // Center: Title and Subtitle Text
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  episode['title']!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  episode['subtitle']!,
+                  style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+
+          // Right: Thumbnail
+          const SizedBox(width: 10),
+          Container(
+            width: 80,
+            height: 45,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              image: DecorationImage(
+                image: AssetImage(
+                  Assets.images.horizontalThumbnail.path,
+                ), // Use your asset path
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                episode['title'] == "E14 FINALE" ? "E14\nFINALE" : "",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  shadows: [Shadow(blurRadius: 2, color: Colors.black)],
+                ),
+              ),
+            ),
+          ),
+
+          // Small X button for removing from history (optional)
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0, top: 12),
+            child: Icon(Icons.close, color: Colors.white54, size: 18),
           ),
         ],
       ),
