@@ -105,7 +105,7 @@ class EditprofileScreen extends StatelessWidget {
                           labelText: "Full Name*",
                           hintText: "Enter your full name",
                           hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                          filledColor: AppColors.tfield,
+                          filledColor: customColors.textColor,
                           // validator: (value) {
                           //   if (value == null || value.trim().isEmpty) {
                           //     return "Full name required";

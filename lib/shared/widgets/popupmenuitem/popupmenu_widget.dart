@@ -29,17 +29,17 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
           ? MainAxisAlignment.spaceBetween
           : MainAxisAlignment.end,
       children: [
-        // Save Icon
         if (widget.showSaveIcon)
           Image.asset(Assets.images.saveIcon.path, width: 30, height: 30),
 
         Align(
-          alignment: Alignment.centerRight, // optional: align it to right
+          alignment: Alignment.centerRight, 
           child: SizedBox(
-            width: 30, // same width as your icon
-            height: 20, // same height as your icon
+            width: 30, 
+            height: 20,
             child: PopupMenuButton<String>(
-              padding: EdgeInsets.zero,
+              // padding: EdgeInsets.zero,
+              padding: EdgeInsets.only(top: 5),
               color: AppColors.dRegular,
               elevation: 0,
               shape: RoundedRectangleBorder(
