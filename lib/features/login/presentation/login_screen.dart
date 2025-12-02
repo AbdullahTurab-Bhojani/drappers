@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -232,6 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 10),
                       AppButton(
                         onPressed: () {
+                          GuestHelper.isGuest = true;
                           context.goNamed(AppRoutes.home.name);
                         },
                         title: 'Continue as Guest',

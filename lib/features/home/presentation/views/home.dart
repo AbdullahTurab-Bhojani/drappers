@@ -11,9 +11,11 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/documentries_card/documentries_card_widget.dart';
+import '../../../../shared/widgets/guestloginwidget.dart';
 import '../../../../shared/widgets/home_banner.dart';
 import '../../../../shared/widgets/more_info_bottom_sheet.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
+import '../../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
 import '../../../../shared/widgets/watch_history.dart';
 
@@ -116,8 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
       'Overnight Success',
       'Entrepreneur Stories',
     ];
+
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -137,6 +141,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   InkWell(
                     onTap: () {
+                      if (GuestHelper.isGuest) {
+                        GuestHelper.checkGuest(context);
+                        return;
+                      }
                       context.pushNamed(AppRoutes.searchscreen.name);
                     },
                     child: Image.asset(
@@ -147,6 +155,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(width: 16),
                   GestureDetector(
                     onTap: () {
+                      if (GuestHelper.isGuest) {
+                        GuestHelper.checkGuest(context);
+                        return;
+                      }
                       context.pushNamed(AppRoutes.notificationScreen.name);
                     },
                     child: Stack(
@@ -240,11 +252,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             : Container(
                                                 color: Colors.grey[900],
                                               )),
-
                                   Container(
                                     color: Colors.black.withOpacity(0.18),
                                   ),
-
                                   Positioned(
                                     top: 12,
                                     left: 14,
@@ -275,30 +285,41 @@ class _HomeScreenState extends State<HomeScreen> {
                                               20,
                                             ),
                                           ),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.circle,
-                                                size: 8,
-                                                color: Colors.red,
-                                              ),
-                                              SizedBox(width: 6),
-                                              PoppinsText(
-                                                'Live TV',
-                                                color: Colors.white,
-                                                fontWeight:
-                                                    PoppinsFontWeightVariant
-                                                        .regular,
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size12,
-                                              ),
-                                            ],
+                                          child: InkWell(
+                                            onTap: () {
+                                              PopupmenuWidget(
+                                                showSaveIcon: false,
+                                              );
+                                            },
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.circle,
+                                                  size: 8,
+                                                  color: Colors.red,
+                                                ),
+                                                SizedBox(width: 6),
+                                                PoppinsText(
+                                                  'Live TV',
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .regular,
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size12,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         SizedBox(width: 8),
-                                        Icon(
-                                          Icons.more_vert,
-                                          color: Colors.white,
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.more_vert,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -306,9 +327,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                   Positioned.fill(
                                     child: GestureDetector(
-                                      onTap: () => setState(
-                                        () => _showControls = !_showControls,
-                                      ),
+                                      onTap: () {
+                                        if (GuestHelper.isGuest) {
+                                          GuestHelper.checkGuest(context);
+                                          return;
+                                        }
+
+                                        setState(
+                                          () => _showControls = !_showControls,
+                                        );
+                                      },
                                       child: Center(
                                         child: AnimatedOpacity(
                                           duration: Duration(milliseconds: 200),
@@ -330,6 +358,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     : Icons.play_arrow,
                                               ),
                                               onPressed: () {
+                                                if (GuestHelper.isGuest) {
+                                                  GuestHelper.checkGuest(
+                                                    context,
+                                                  );
+                                                  return;
+                                                }
                                                 setState(() {
                                                   _controller!.value.isPlaying
                                                       ? _controller!.pause()
@@ -353,39 +387,56 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: [
                                         Align(
                                           alignment: Alignment.centerRight,
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 14,
-                                              vertical: 6,
-                                            ),
-                                            height: 36,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black.withOpacity(
-                                                0.35,
+                                          child: InkWell(
+                                            onTap: () {
+                                              if (GuestHelper.isGuest) {
+                                                GuestHelper.checkGuest(context);
+                                                return;
+                                              }
+                                              showModalBottomSheet(
+                                                context: context,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                isScrollControlled: true,
+                                                builder: (context) =>
+                                                    MoreInfoBottomSheet(),
+                                              );
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 14,
+                                                vertical: 6,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Icon(
-                                                  Icons.info_outline,
-                                                  size: 18,
-                                                  color: Colors.white,
+                                              height: 36,
+                                              decoration: BoxDecoration(
+                                                color: Colors.black.withOpacity(
+                                                  0.35,
                                                 ),
-                                                SizedBox(width: 8),
-                                                PoppinsText(
-                                                  'More Info',
-                                                  color: customColors.textColor,
-                                                  fontSize:
-                                                      PoppinsFontSizeVariant
-                                                          .size12,
-                                                  fontWeight:
-                                                      PoppinsFontWeightVariant
-                                                          .medium,
-                                                ),
-                                              ],
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Icon(
+                                                    Icons.info_outline,
+                                                    size: 18,
+                                                    color: Colors.white,
+                                                  ),
+                                                  SizedBox(width: 8),
+                                                  PoppinsText(
+                                                    'More Info',
+                                                    color:
+                                                        customColors.textColor,
+                                                    fontSize:
+                                                        PoppinsFontSizeVariant
+                                                            .size12,
+                                                    fontWeight:
+                                                        PoppinsFontWeightVariant
+                                                            .medium,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -426,6 +477,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                               SizedBox(width: 8),
                                               GestureDetector(
                                                 onTap: () {
+                                                  if (GuestHelper.isGuest) {
+                                                    GuestHelper.checkGuest(
+                                                      context,
+                                                    );
+                                                    return;
+                                                  }
                                                   context.pushNamed(
                                                     AppRoutes.videoScreen.name,
                                                   );
@@ -466,6 +523,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
+                                if (GuestHelper.isGuest) {
+                                  GuestHelper.checkGuest(context);
+                                  return;
+                                }
                                 context.goNamed(AppRoutes.trendingshow.name);
                               },
                               title: "View More",
@@ -489,6 +550,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
+                                  if (GuestHelper.isGuest) {
+                                    GuestHelper.checkGuest(context);
+                                    return;
+                                  }
                                   context.pushNamed(
                                     AppRoutes.contentDetail.name,
                                   );
@@ -517,6 +582,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
+                                if (GuestHelper.isGuest) {
+                                  GuestHelper.checkGuest(context);
+                                  return;
+                                }
                                 context.pushNamed(
                                   AppRoutes.continueWatchingViewmore.name,
                                 );
@@ -564,6 +633,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
+                                if (GuestHelper.isGuest) {
+                                  GuestHelper.checkGuest(context);
+                                  return;
+                                }
                                 context.goNamed(AppRoutes.podcasts.name);
                               },
 
@@ -602,6 +675,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           buttonBorderWidth: 0,
                           buttonGradient: [],
                           onTap: () {
+                            if (GuestHelper.isGuest) {
+                              GuestHelper.checkGuest(context);
+                              return;
+                            }
                             context.pushNamed(AppRoutes.applyPitch.name);
                           },
                         ),
@@ -619,6 +696,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             Color(0xff582983),
                           ],
                           onTap: () {
+                            if (GuestHelper.isGuest) {
+                              GuestHelper.checkGuest(context);
+                              return;
+                            }
                             context.pushNamed(
                               AppRoutes.voteForStartupScreen.name,
                             );
@@ -636,18 +717,31 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
                             ),
-                            AppButton(
-                              buttonSize: Size(80, 25),
-                              color: Colors.transparent,
-                              borderColor: customColors.textColor,
-                              borderWidth: 1,
-                              fontSize: PoppinsFontSizeVariant.size12,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              border: true,
-                              onPressed: () {
+                            InkWell(
+                              onTap: () {
+                                if (GuestHelper.isGuest) {
+                                  GuestHelper.checkGuest(context);
+                                  return;
+                                }
                                 context.goNamed(AppRoutes.reelWidget.name);
                               },
-                              title: "View More",
+                              child: AppButton(
+                                buttonSize: Size(80, 25),
+                                color: Colors.transparent,
+                                borderColor: customColors.textColor,
+                                borderWidth: 1,
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                border: true,
+                                onPressed: () {
+                                  if (GuestHelper.isGuest) {
+                                    GuestHelper.checkGuest(context);
+                                    return;
+                                  }
+                                  context.goNamed(AppRoutes.reelWidget.name);
+                                },
+                                title: "View More",
+                              ),
                             ),
                           ],
                         ),
@@ -692,6 +786,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
+                                if (GuestHelper.isGuest) {
+                                  GuestHelper.checkGuest(context);
+                                  return;
+                                }
                                 context.pushNamed(AppRoutes.documentries.name);
                               },
                               title: "View More",
