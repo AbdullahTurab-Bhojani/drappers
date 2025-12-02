@@ -119,7 +119,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                       ),
                       SizedBox(height: 16),
 
-                      AppPasswordField(
+                      DropDownField(
                         controller: _locationController,
                         labelText: "Location*",
                         hintText: "Select your location",
@@ -130,11 +130,11 @@ class _ApplyPitchState extends State<ApplyPitch> {
                         //   }
                         //   return null;
                         // },
-                        // sufixIcon: Icon(
-                        //   Icons.keyboard_arrow_down,
-                        //   color: Colors.red,
-                        //   size: 24,
-                        // ),
+                        sufixIcon: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                          size: 24,
+                        ),
                       ),
                       SizedBox(height: 16),
 
