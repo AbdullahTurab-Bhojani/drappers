@@ -484,7 +484,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     return;
                                                   }
                                                   context.pushNamed(
-                                                    AppRoutes.videoScreen.name,
+                                                    AppRoutes.newliveScreen.name,
                                                   );
                                                 },
                                                 child: Image.asset(

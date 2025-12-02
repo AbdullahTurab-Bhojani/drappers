@@ -56,6 +56,8 @@ enum AppRoutes {
   contentDetail('contentDetail', '/contentDetail'),
 
   voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
+    newliveScreen('newliveScreen', '/newliveScreen'),
+
   videoScreen('videoScreen', '/videoScreen');
 
   final String name;
