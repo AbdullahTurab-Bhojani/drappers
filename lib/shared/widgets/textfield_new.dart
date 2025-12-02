@@ -30,6 +30,7 @@ class NewTextField extends ConsumerStatefulWidget {
     required this.controller,
     required this.hintText,
     this.labelText,
+    this.labelStyle,
     this.validator,
     this.textInputAction,
     this.keyboardType,
@@ -61,6 +62,7 @@ class NewTextField extends ConsumerStatefulWidget {
   final String hintText;
   final TextStyle? hintStyle;
   final TextStyle? errorStyle;
+  final TextStyle? labelStyle;
   final String? Function(String?)? validator;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;

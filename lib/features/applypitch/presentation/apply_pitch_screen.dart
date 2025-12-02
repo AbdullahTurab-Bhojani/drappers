@@ -38,7 +38,6 @@ class _ApplyPitchState extends State<ApplyPitch> {
         ),
         child: Column(
           children: [
-            // Fixed App Bar
             AppMainBar(
               leading: GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
@@ -82,8 +81,9 @@ class _ApplyPitchState extends State<ApplyPitch> {
                       NewTextField(
                         fieldbg: AppColors.tfield,
                         controller: _fullNameController,
-                        labelText: "Full Name",
+                        labelText: "Full Name*",
                         hintText: "johnmackson",
+                        hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: customColors.textColor),
                       ),
                       SizedBox(height: 16),
 
@@ -92,22 +92,23 @@ class _ApplyPitchState extends State<ApplyPitch> {
                         controller: _startupController,
                         labelText: "Startup Name*",
                         hintText: "Krypto",
+                        hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: customColors.textColor),
                       ),
                       SizedBox(height: 16),
-
                       NewTextField(
                         fieldbg: AppColors.tfield,
                         controller: _emailController,
-                        labelText: "Email Address",
+                        labelText: "Email Address*",
                         hintText: "Enter your email",
+                        hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: customColors.textColor),
                       ),
                       SizedBox(height: 16),
-
                       NewTextField(
                         fieldbg: AppColors.tfield,
                         controller: _linkController,
                         labelText: "Shareable link for your pitch deck*",
                         hintText: "www.link.com",
+                        hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: customColors.textColor),
                       ),
                       SizedBox(height: 16),
                       PoppinsText(
@@ -122,17 +123,18 @@ class _ApplyPitchState extends State<ApplyPitch> {
                         controller: _locationController,
                         labelText: "Location*",
                         hintText: "Select your location",
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return "Full name required";
-                          }
-                          return null;
-                        },
-                        sufixIcon: Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.white,
-                          size: 24,
-                        ),
+                        hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: customColors.textColor),
+                        // validator: (value) {
+                        //   if (value == null || value.trim().isEmpty) {
+                        //     return "Full name required";
+                        //   }
+                        //   return null;
+                        // },
+                        // sufixIcon: Icon(
+                        //   Icons.keyboard_arrow_down,
+                        //   color: Colors.red,
+                        //   size: 24,
+                        // ),
                       ),
                       SizedBox(height: 16),
 
