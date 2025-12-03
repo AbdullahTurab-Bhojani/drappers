@@ -64,6 +64,7 @@ import 'features/delete_detail/presentation/deleteDetail.dart';
 import 'features/discover/presentation/discover_screen.dart';
 import 'features/documentriescard/presentation/documentriescard.dart';
 import 'features/editprofile/presentation/editprofile_screen.dart';
+import 'features/editwatchlist/presentation/editwatchlist_screen.dart';
 import 'features/faqs/privacypolicy/presentation/views/faqs.dart';
 import 'features/help&support/presentation/helpsupport.dart';
 import 'features/home/presentation/views/home.dart';

@@ -10,6 +10,8 @@ enum AppRoutes {
   home('home', '/home'),
   discover('discover', '/discover'),
   watchlist('watchlist', '/watchlist'),
+    EditWatchlistScreen('EditWatchlistScreen', '/EditWatchlistScreen'),
+
   signupScreen('signup', '/signup'),
   updatepasswordScreen('updatepassword', '/updatepassword'),
   profile('profile', '/profile'),

@@ -6,7 +6,6 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../shared/widgets/watchlistitemtile.dart';
 
-
 class WatchlistData {
   final String thumbnailPath;
   final String title;
@@ -62,11 +61,16 @@ class WatchlistScreen extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: [
-                  PoppinsText(
-                    "Edit",
-                    fontSize: PoppinsFontSizeVariant.size14,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: customColors.textColor
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.EditWatchlistScreen.name);
+                    },
+                    child: PoppinsText(
+                      "Edit",
+                      fontSize: PoppinsFontSizeVariant.size14,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
+                    ),
                   ),
                   SizedBox(width: 10),
                 ],
@@ -78,18 +82,17 @@ class WatchlistScreen extends StatelessWidget {
                   itemCount: dummyWatchlist.length,
                   itemBuilder: (context, index) {
                     final item = dummyWatchlist[index];
-                      return GestureDetector(
-                                onTap: () {
-                                  context.pushNamed(
-                                    AppRoutes.contentDetail.name,
-                                  );
-                                },
-                                child: WatchlistItemTile(
-                      thumbnailPath: item.thumbnailPath,
-                      title: item.title,
-                      year: item.year,
-                      onTapPlay: () {},
-                       ) );
+                    return GestureDetector(
+                      onTap: () {
+                        context.pushNamed(AppRoutes.contentDetail.name);
+                      },
+                      child: WatchlistItemTile(
+                        thumbnailPath: item.thumbnailPath,
+                        title: item.title,
+                        year: item.year,
+                        onTapPlay: () {},
+                      ),
+                    );
                   },
                 ),
               ),

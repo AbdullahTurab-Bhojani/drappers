@@ -1,6 +1,7 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../core/extensions/theme_extension.dart';
 import '../../../gen/assets.gen.dart';
 
 class newliveScreen extends StatefulWidget {
@@ -127,9 +128,9 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     );
   }
 
-  // Place this inside your video player screen's state class, or a dedicated controls widget
   Widget _buildSpeedPopupMenu(BuildContext context) {
-    // Use the speeds from your image (Normal is 1.0x)
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     final Map<double, String> speedOptions = {
       1.0: 'Normal',
       0.75: '0.75x',
@@ -137,17 +138,12 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       0.25: '0.25x',
     };
 
-    final theme = Theme.of(context);
-    // Assuming you have a dark background color for the popup
-    final Color popupColor = Colors.black.withOpacity(0.8);
-    final Color checkColor = Colors.blue; // Or your primary highlight color
+    final Color popupColor = customColors.regular;
+    final Color checkColor = customColors.textColor;
 
-    // Get the current speed for highlighting
     final double currentSpeed =
         _betterPlayerController.videoPlayerController!.value.speed;
 
-    // The height of the popup needs to be dynamically calculated or fixed.
-    // For simplicity, let's use a fixed height and width that fits the content.
     const double popupWidth = 150.0;
 
     return Align(
@@ -193,9 +189,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               return InkWell(
                 onTap: () {
                   _betterPlayerController.setSpeed(speed);
-                  // After setting speed, hide the popup.
-                  // You will need to call a setState in your main player widget here
-                  // to set _isSpeedPopupVisible = false.
+
                   setState(() {
                     _isSpeedPopupVisible = false;
                   });
@@ -231,8 +225,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               );
             }).toList(),
 
-            // Close Button (like the 'X' in the bottom right of your design)
-            const Spacer(), // Pushes the close button to the bottom
+            const Spacer(),
             InkWell(
               onTap: () {
                 setState(() {
