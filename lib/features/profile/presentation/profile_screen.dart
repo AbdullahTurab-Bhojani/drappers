@@ -103,7 +103,7 @@ class ProfileScreen extends StatelessWidget {
                   actions: [
                     InkWell(
                       onTap: () {
-                        context.push(AppRoutes.editprofile.path);
+                        context.pushNamed(AppRoutes.editprofile.name);
                       },
                       child: PoppinsText(
                         "Edit",
