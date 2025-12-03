@@ -136,7 +136,8 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20),
+                  // padding: EdgeInsets.only(left: 20, right: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: [
                       Row(
@@ -167,9 +168,12 @@ class ProfileScreen extends StatelessWidget {
                       SizedBox(
                         height: 180,
                         child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          clipBehavior: Clip.none,
                           separatorBuilder: (context, index) {
                             return SizedBox(width: 15);
                           },
+                          shrinkWrap: true,
                           itemCount: images.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -218,6 +222,8 @@ class ProfileScreen extends StatelessWidget {
                       SizedBox(
                         height: 180,
                         child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          clipBehavior: Clip.none,
                           separatorBuilder: (context, index) {
                             return SizedBox(width: 15);
                           },
