@@ -82,7 +82,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -120,7 +120,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: 15),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,8 +131,9 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
                                           PoppinsFontWeightVariant.medium,
+                                      textOverflow: TextOverflow.ellipsis,
                                     ),
-                                    SizedBox(height: 6),
+                                    // SizedBox(height: 6),
                                     PoppinsText(
                                       "Vote for your favourites startup from \nseason 5, Episode 12.",
                                       fontSize: PoppinsFontSizeVariant.size12,

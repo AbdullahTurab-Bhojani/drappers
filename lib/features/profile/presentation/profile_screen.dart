@@ -68,18 +68,11 @@ class ProfileScreen extends StatelessWidget {
       },
       {
         'title': 'Sign Out',
-        'image': Assets.images.logout009.path,
+        'image': Assets.images.signouticon.path,
         'route': AppRoutes.privacypolicyScreen.path,
-        'color': customColors.textColor,
+        'color': customColors.rednormal,
         'isTap': false,
       },
-      // {
-      //   'title': 'Delete Account',
-      //   'image': Assets.images.deleteicon2.path,
-      //   'route': AppRoutes.privacypolicyScreen.path,
-      //   'color': customColors.rednormal,
-      //   'isTap': false,
-      // },
     ];
 
     return Scaffold(
@@ -233,6 +226,7 @@ class ProfileScreen extends StatelessWidget {
                               child: CardWidget(
                                 assetImage: images[index],
                                 showSaveIcon: false,
+                                
                               ),
                             );
                           },
@@ -253,16 +247,6 @@ class ProfileScreen extends StatelessWidget {
                                   builder: (context) => const Dialog(
                                     backgroundColor: Colors.transparent,
                                     child: SignupPopupWidget(),
-                                  ),
-                                );
-                              }
-                              if (menuList[index]['title'] ==
-                                  'Delete Account') {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => const Dialog(
-                                    backgroundColor: Colors.transparent,
-                                    child: DeletePopupWidget(),
                                   ),
                                 );
                               } else {
