@@ -33,6 +33,11 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => ForgetpasswordScreen(),
       ),
       GoRoute(
+        path: AppRoutes.changePassword.path,
+        name: AppRoutes.changePassword.name,
+        builder: (context, state) => ChangePassword(),
+      ),
+      GoRoute(
         path: AppRoutes.verfiicationcodeScreen.path,
         name: AppRoutes.verfiicationcodeScreen.name,
         builder: (context, state) => VerfiicationcodeScreen(),

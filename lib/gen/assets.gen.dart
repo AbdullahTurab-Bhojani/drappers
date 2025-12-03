@@ -444,6 +444,9 @@ class $AssetsImagesGen {
   AssetGenImage get likeicon =>
       const AssetGenImage('assets/images/likeicon.png');
 
+  /// File path: assets/images/lock786.png
+  AssetGenImage get lock786 => const AssetGenImage('assets/images/lock786.png');
+
   /// File path: assets/images/logo2.png
   AssetGenImage get logo2 => const AssetGenImage('assets/images/logo2.png');
 
@@ -780,6 +783,7 @@ class $AssetsImagesGen {
     lessonComplete,
     like,
     likeicon,
+    lock786,
     logo2,
     logout009,
     logout123,
