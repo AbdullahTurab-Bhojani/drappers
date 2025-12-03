@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 40),
                       AppButton(
                         onPressed: () {
-                          context.pushReplacement(AppRoutes.home.path);
+                          context.pushNamed(AppRoutes.home.name);
                         },
                         title: "Continue",
                       ),
@@ -153,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
-                              context.goNamed(
+                              context.pushNamed(
                                 AppRoutes.forgetpasswordScreen.name,
                               );
                             },

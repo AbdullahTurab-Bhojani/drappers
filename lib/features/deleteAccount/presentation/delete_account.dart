@@ -222,14 +222,14 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                     if (_selectedOption == AccountOption.delete)
                       AppButton(
                         onPressed: () {
-                          context.pushReplacement(AppRoutes.deleteDetailScreen.path);
+                          context.pushNamed(AppRoutes.deleteDetailScreen.name);
                         },
                         title: "Delete Account Permanently",
                       ),
 
                     if (_selectedOption == AccountOption.deactivate)
                       AppButton(onPressed: () {
-                      context.pushReplacement(AppRoutes.deactivateAccountScreen.path);
+                      context.pushNamed(AppRoutes.deactivateAccountScreen.name);
                       }, title: "Deactivate Account"),
                   ],
                 ),

@@ -43,7 +43,7 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
           SizedBox(height: 40),
           AppButton(
             onPressed: () {
-              context.pushReplacement(AppRoutes.loginScreen.path);
+              context.pushNamed(AppRoutes.loginScreen.name);
             },
             title: "Sign Out",
           ),

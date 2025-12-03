@@ -18,6 +18,7 @@ class _CardWidgetState extends State<CardWidget> {
     bool isNetworkImage = widget.assetImage.startsWith('http');
 
     return Container(
+      margin: EdgeInsets.zero,
       width: 125,
       height: 180,
       decoration: BoxDecoration(

@@ -5,6 +5,7 @@ enum AppRoutes {
   onboardingScreen('onboarding', '/onboarding'),
   loginScreen('login', '/login'),
   forgetpasswordScreen('forgetpassword', '/forgetpassword'),
+  changePassword('changePassword', '/changePassword'),
   verfiicationcodeScreen('verificationcode', '/verificationcode'),
   home('home', '/home'),
   discover('discover', '/discover'),

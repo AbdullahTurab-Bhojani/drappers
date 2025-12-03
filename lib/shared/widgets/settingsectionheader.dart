@@ -15,7 +15,7 @@ class SettingSectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10),
+      padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10),
       child: PoppinsText(
         title,
         fontSize: PoppinsFontSizeVariant.size16,

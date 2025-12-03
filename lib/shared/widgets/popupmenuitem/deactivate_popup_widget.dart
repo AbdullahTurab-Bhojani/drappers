@@ -49,7 +49,7 @@ class _DeactivatePopupWidget extends State<DeactivatePopupWidget> {
           SizedBox(height: 40),
           AppButton(
             onPressed: () {
-              context.pushReplacement(AppRoutes.loginScreen.path);
+              context.goNamed(AppRoutes.loginScreen.name);
             },
             title: "Yes, deactivate",
           ),
