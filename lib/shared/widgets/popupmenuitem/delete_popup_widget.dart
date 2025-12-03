@@ -34,18 +34,14 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
           Image.asset(Assets.images.delete123.path, height: 54, width: 54),
           SizedBox(height: 40),
           PoppinsText(
-            "Are you sure you want to delete",
+            "Are you sure you want to delete your account?",
             fontSize: PoppinsFontSizeVariant.size16,
             fontWeight: PoppinsFontWeightVariant.medium,
             color: customColors.textColor,
+            textAlign: TextAlign.center,
           ),
-          PoppinsText(
-            "your account?",
-            fontSize: PoppinsFontSizeVariant.size16,
-            fontWeight: PoppinsFontWeightVariant.medium,
-            color: customColors.textColor,
-          ),
-          SizedBox(height: 40),
+
+          SizedBox(height: 25),
           AppButton(
             onPressed: () {
               context.pushNamed(AppRoutes.loginScreen.name);
@@ -53,7 +49,6 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
             title: "Yes, delete",
           ),
 
-         
           SizedBox(height: 11),
           AppButton(
             color: Colors.transparent,
