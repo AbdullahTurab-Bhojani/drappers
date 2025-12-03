@@ -60,7 +60,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
               SizedBox(height: 30),
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: Color(0xFF1E1E1E),
                   borderRadius: BorderRadius.circular(12),
@@ -98,7 +98,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
               SizedBox(height: 14),
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: Color(0xFF1E1E1E),
                   borderRadius: BorderRadius.circular(12),
@@ -127,6 +127,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
                           fontSize: PoppinsFontSizeVariant.size16,
                           color: customColors.textColor,
                           fontWeight: PoppinsFontWeightVariant.regular,
+                          textOverflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
