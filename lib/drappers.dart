@@ -55,6 +55,7 @@ import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_theme.dart';
 import 'features/Setting&preferences/presentation/setting_preferences.dart';
 import 'features/applypitch/presentation/apply_pitch_screen.dart';
+import 'features/changepassword/change_password.dart';
 import 'features/contentdetail/presentation/content_detail.dart';
 import 'features/dashboard/presentation/nav_bar.dart';
 import 'features/deleteAccount/presentation/delete_account.dart';

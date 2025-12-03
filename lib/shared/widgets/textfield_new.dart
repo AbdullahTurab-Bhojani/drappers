@@ -268,6 +268,7 @@ class AppPasswordField extends StatefulWidget {
     this.textInputAction,
     this.keyboardType,
     this.sufixIcon,
+    this.isObscure = true,
     this.prefixIcon,
     this.hintStyle,
     this.labelText,
@@ -280,6 +281,7 @@ class AppPasswordField extends StatefulWidget {
   final TextInputType? keyboardType;
   final Widget? prefixIcon;
   final Widget? sufixIcon;
+  final bool isObscure;
   final TextStyle? hintStyle;
   final String? labelText;
 
@@ -289,6 +291,7 @@ class AppPasswordField extends StatefulWidget {
 
 class _AppPasswordFieldState extends State<AppPasswordField> {
   bool isShow = true;
+  late bool _obscure;
 
   @override
   Widget build(BuildContext context) {
@@ -296,7 +299,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
       padding: const EdgeInsets.only(left: 14, right: 14, top: 12, bottom: 0),
       decoration: BoxDecoration(
         color: AppColors.tfield,
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -310,6 +313,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
               cursorColor: AppColors.white,
               validator: widget.validator,
               obscureText: isShow,
+              // obscureText: isObscure,
               controller: widget.controller,
               inputFormatters: [NoOnlyWhitespaceFormatter()],
               keyboardType: widget.keyboardType,

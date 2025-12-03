@@ -49,12 +49,17 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppMainBar(
-              leadingIcon: Icons.arrow_back_ios,
-              title: "Settings & Preferences",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: horizontalPadding,
+              ),
+              child: AppMainBar(
+                leading: Image.asset(Assets.images.backicon.path),
+                title: "Settings & Preferences",
+                centerTitle: false,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -62,92 +67,159 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 10),
-                    SettingSectionHeader(
-                      title: "Playback Settings",
-                      color: customColors.textColor,
-                    ),
-
-                    ToggleSettingTile(
-                      image: AssetImage(Assets.images.playbutton123.path),
-                      titleText: "Autoplay Next Episode",
-                      subtitleText: "Automatically play the next episode",
-                      initialValue: _autoplayNextEpisode,
-                      onChanged: (value) {
-                        setState(() {
-                          _autoplayNextEpisode = value;
-                        });
-                      },
-                    ),
-                     SizedBox(height: 15),
-                    ToggleSettingTile(
-                      image: AssetImage(Assets.images.playicon1234.path),
-                      titleText: "Autoplay Next Preview",
-                      subtitleText: "Play previews when browsing",
-                      initialValue: _autoplayNextPreview,
-                      onChanged: (value) {
-                        setState(() {
-                          _autoplayNextPreview = value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    Divider(
-                      color: customColors.labelColor.withOpacity(0.2),
-                    ),
-                    SettingSectionHeader(
-                      title: "Video Quality",
-                      color: customColors.textColor,
-                    ),
-                 SizedBox(height: 15),
-                    DropdownSettingTile(
-                     image:   AssetImage(Assets.images.hd123.path),
-                      titleText: "Streaming Quality",
-                      subtitleText: "Choose video quality for streaming",
-                      options: _qualityOptions,
-                      initialValue: _streamingQuality,
-                      onChanged: (value) {
-                        setState(() {
-                          _streamingQuality = value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 30),
-                 Divider(
-                   color: customColors.labelColor.withOpacity(0.2),
-                 ),
-                    SettingSectionHeader(
-                      title: "Accessibility",
-                      color: customColors.textColor,
-                    ),
-                       SizedBox(height: 10),
-                    DropdownSettingTile(
-                     image:   AssetImage(Assets.images.cc123.path),
-                      titleText: "Subtitles & Captions",
-                      subtitleText: "Default subtitle language",
-                      options: _subtitleOptions,
-                      initialValue: _subtitlesLanguage,
-                      onChanged: (value) {
-                        setState(() {
-                          _subtitlesLanguage = value;
-                        });
-                      },
-                    ),
-
                     Padding(
-                      padding: EdgeInsets.only(top: 40.0),
-                      child: Divider(
-                        color: customColors.labelColor.withOpacity(0.2),
-                        thickness: 0.3,
-                        height: 1,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                      ),
+                      child: SettingSectionHeader(
+                        title: "Playback Settings",
+                        color: customColors.textColor,
                       ),
                     ),
 
                     Padding(
-                      padding:  EdgeInsets.fromLTRB(
-                        horizontalPadding,
-                        20.0,
-                        horizontalPadding,
-                        20.0,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                      ),
+                      child: ToggleSettingTile(
+                        image: AssetImage(Assets.images.playbutton123.path),
+                        titleText: "Autoplay Next Episode",
+                        subtitleText: "Automatically play the next episode",
+                        initialValue: _autoplayNextEpisode,
+                        onChanged: (value) {
+                          setState(() {
+                            _autoplayNextEpisode = value;
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                      ),
+                      child: ToggleSettingTile(
+                        image: AssetImage(Assets.images.playicon1234.path),
+                        titleText: "Autoplay Next Preview",
+                        subtitleText: "Play previews when browsing",
+                        initialValue: _autoplayNextPreview,
+                        onChanged: (value) {
+                          setState(() {
+                            _autoplayNextPreview = value;
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Divider(color: customColors.labelColor.withOpacity(0.2)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SettingSectionHeader(
+                            title: "Video Quality",
+                            color: customColors.textColor,
+                          ),
+                          SizedBox(height: 15),
+                          DropdownSettingTile(
+                            image: AssetImage(Assets.images.hd123.path),
+                            titleText: "Streaming Quality",
+                            subtitleText: "Choose video quality for streaming",
+                            options: _qualityOptions,
+                            initialValue: _streamingQuality,
+                            onChanged: (value) {
+                              setState(() {
+                                _streamingQuality = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 40),
+                    Divider(color: customColors.labelColor.withOpacity(0.2)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SettingSectionHeader(
+                            title: "Accessibility",
+                            color: customColors.textColor,
+                          ),
+                          SizedBox(height: 10),
+                          DropdownSettingTile(
+                            image: AssetImage(Assets.images.cc123.path),
+                            titleText: "Subtitles & Captions",
+                            subtitleText: "Default subtitle language",
+                            options: _subtitleOptions,
+                            initialValue: _subtitlesLanguage,
+                            onChanged: (value) {
+                              setState(() {
+                                _subtitlesLanguage = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 40.0),
+                      child: Divider(
+                        color: customColors.labelColor.withOpacity(0.2),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: horizontalPadding + horizontalPadding,
+                        right: horizontalPadding + horizontalPadding,
+                        top: horizontalPadding,
+                        bottom: horizontalPadding,
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          context.pushNamed(AppRoutes.changePassword.name);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  Assets.images.lock786.path,
+                                  height: 26,
+                                  width: 26,
+                                ),
+                                SizedBox(width: 15.0),
+                                PoppinsText(
+                                  "Change Password",
+                                  fontSize: PoppinsFontSizeVariant.size16,
+                                  fontWeight: PoppinsFontWeightVariant.medium,
+                                  color: customColors.textColor,
+                                ),
+                              ],
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: customColors.textColor,
+                              size: 18,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(color: customColors.labelColor.withOpacity(0.2)),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: horizontalPadding + horizontalPadding,
+                        right: horizontalPadding + horizontalPadding,
+                        top: horizontalPadding,
+                        bottom: horizontalPadding,
                       ),
                       child: InkWell(
                         onTap: () {
@@ -164,7 +236,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                   width: 26,
                                   color: customColors.rednormal,
                                 ),
-                                 SizedBox(width: 15.0),
+                                SizedBox(width: 15.0),
                                 PoppinsText(
                                   "Delete or Deactivate Account",
                                   fontSize: PoppinsFontSizeVariant.size16,
@@ -182,7 +254,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 40.0),
+                    SizedBox(height: 40.0),
                   ],
                 ),
               ),

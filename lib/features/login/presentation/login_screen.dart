@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 40),
                       AppButton(
                         onPressed: () {
-                          context.pushReplacement(AppRoutes.home.path);
+                          context.pushNamed(AppRoutes.home.name);
                         },
                         title: "Continue",
                       ),

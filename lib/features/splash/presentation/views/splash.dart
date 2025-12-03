@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
         _controller.play();
         _controller.addListener(() {
           if (_controller.value.position == _controller.value.duration) {
-            context.pushReplacement(AppRoutes.onboardingScreen.path);
+            context.pushNamed(AppRoutes.onboardingScreen.name);
           }
         });
       });
