@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../app_bar/main_app_bar.dart';
@@ -23,6 +24,8 @@ class _PodcastWidgetState extends State<PodcastWidget> {
      Assets.images.podcastimage4.path,
      Assets.images.podcastimage5.path,
     ];
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -64,7 +67,7 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 12),
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 12),
@@ -79,7 +82,7 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                         crossAxisCount: 3,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
-                        childAspectRatio: 0.7,
+                        childAspectRatio: 0.65,
                       ),
                       itemCount: podcastimages.length,
                       itemBuilder: (context, index) {
@@ -106,8 +109,9 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                     SizedBox(height: 20),
                     PoppinsText(
                       "More like this",
-                      fontSize: PoppinsFontSizeVariant.size16,
+                      fontSize: PoppinsFontSizeVariant.size15,
                       fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
                     ),
                     SizedBox(height: 20),
                     GridView.builder(
