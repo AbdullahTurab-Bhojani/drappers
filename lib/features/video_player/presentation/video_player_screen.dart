@@ -27,9 +27,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       _isQualityPopupVisible = false;
     });
     // Ensure controls are visible when episode list is open
-    if (_showEpisodes) {
-      setState(() => _controlsVisible = true);
-    }
+    // NOTE: Removed call to _buildEpisodesSidebar as it's no longer used for toggling
   }
 
   final List<Map<String, String>> episodesData = List.generate(
@@ -174,10 +172,120 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   void _playEpisode(int index) {
     final source = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      episodes[index],
+      // Use the URL from episodesData list
+      episodesData[index]['url']!,
     );
 
     _betterPlayerController.setupDataSource(source);
+  }
+
+  /// ------------------------------------------------
+  /// 🆕 NEW: Horizontal Episode Item Builder
+  /// ------------------------------------------------
+  Widget _buildHorizontalEpisodeItem(Map<String, String> episode, int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      child: GestureDetector(
+        onTap: () {
+          _playEpisode(index);
+          setState(() => _showEpisodes = false);
+        },
+        child: Container(
+          width: 150,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.black.withOpacity(0.6),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 75,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(8),
+                  ),
+                  image: DecorationImage(
+                    image: AssetImage(episode['image']!),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: episode['title']!.contains('FINALE')
+                    ? const Center(
+                        child: Text(
+                          "E14\nFINALE",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(blurRadius: 3, color: Colors.black),
+                            ],
+                          ),
+                        ),
+                      )
+                    : null,
+              ),
+
+              // 2. Text Details
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      episode['title']!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      episode['subtitle']!,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 10,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEpisodesHorizontalBar() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(color: Colors.deepPurple),
+        child: Container(
+          height: 160,
+          color: Colors.black.withOpacity(0.5),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            itemCount: episodesData.length,
+            itemBuilder: (context, index) {
+              final episode = episodesData[index];
+              return _buildHorizontalEpisodeItem(episode, index);
+            },
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -202,7 +310,11 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
 
           if (_controlsVisible) _buildControls(),
 
-          // ✅ HORIZONTAL EPISODES BAR
+          // ✅ HORIZONTAL EPISODES BAR - REPLACED WITH NEW DESIGN
+          if (_showEpisodes)
+            _buildEpisodesHorizontalBar(), // <-- Using the new rich bar here
+          // The old block of code is removed/replaced by the call above:
+          /*
           if (_showEpisodes)
             Positioned(
               bottom: 70,
@@ -236,6 +348,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                 ),
               ),
             ),
+          */
         ],
       ),
     );
@@ -402,148 +515,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     );
   }
 
-  Widget _buildEpisodesSidebar() {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double sidebarWidth = screenWidth * 0.45; // Takes up 45% of width
-
-    return Positioned.fill(
-      // Use GestureDetector to handle taps outside the sidebar to close it
-      child: GestureDetector(
-        onTap:
-            _toggleEpisodes, // Assumes _toggleEpisodes sets _showEpisodes = false
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: Container(
-            width: sidebarWidth,
-            // Use a dark, slightly translucent color for the sidebar background
-            color: Colors.black.withOpacity(0.8),
-            child: Column(
-              children: [
-                // Title (optional header) or just padding
-                const SizedBox(height: 20),
-
-                // Episode List
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: episodesData.length,
-                    itemBuilder: (context, index) {
-                      final episode = episodesData[index];
-                      // Use InkWell for better tap visual feedback
-                      return InkWell(
-                        onTap: () =>
-                            _playEpisode(index), // Assumes _playEpisode exists
-                        child: _buildEpisodeListItem(episode, index),
-                      );
-                    },
-                  ),
-                ),
-
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      onPressed: _toggleEpisodes,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildEpisodeListItem(Map<String, String> episode, int index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Left: History Icon and Text
-          const Padding(
-            padding: EdgeInsets.only(top: 8.0, right: 8.0),
-            child: Column(
-              children: [
-                Icon(Icons.history, color: Colors.white54, size: 18),
-                SizedBox(height: 2),
-                Text(
-                  "38:47",
-                  style: TextStyle(color: Colors.white70, fontSize: 10),
-                ),
-              ],
-            ),
-          ),
-
-          // Center: Title and Subtitle Text
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  episode['title']!,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  episode['subtitle']!,
-                  style: const TextStyle(color: Colors.white70, fontSize: 12),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-
-          // Right: Thumbnail
-          const SizedBox(width: 10),
-          Container(
-            width: 80,
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              image: DecorationImage(
-                image: AssetImage(
-                  Assets.images.horizontalThumbnail.path,
-                ), // Use your asset path
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Center(
-              child: Text(
-                episode['title'] == "E14 FINALE" ? "E14\nFINALE" : "",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  shadows: [Shadow(blurRadius: 2, color: Colors.black)],
-                ),
-              ),
-            ),
-          ),
-
-          // Small X button for removing from history (optional)
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0, top: 12),
-            child: Icon(Icons.close, color: Colors.white54, size: 18),
-          ),
-        ],
-      ),
-    );
-  }
+  // NOTE: Removed the unused _buildEpisodesSidebar and _buildEpisodeListItem functions
+  // since you confirmed you want the horizontal bar design.
 
   @override
   void dispose() {

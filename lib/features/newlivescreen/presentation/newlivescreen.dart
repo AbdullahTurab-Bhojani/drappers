@@ -127,9 +127,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     );
   }
 
-  // Place this inside your video player screen's state class, or a dedicated controls widget
   Widget _buildSpeedPopupMenu(BuildContext context) {
-    // Use the speeds from your image (Normal is 1.0x)
     final Map<double, String> speedOptions = {
       1.0: 'Normal',
       0.75: '0.75x',
@@ -138,16 +136,12 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     };
 
     final theme = Theme.of(context);
-    // Assuming you have a dark background color for the popup
-    final Color popupColor = Colors.black.withOpacity(0.8);
+    final Color popupColor = const Color.fromARGB(255, 214, 53, 53).withOpacity(0.8);
     final Color checkColor = Colors.blue; // Or your primary highlight color
 
-    // Get the current speed for highlighting
     final double currentSpeed =
         _betterPlayerController.videoPlayerController!.value.speed;
 
-    // The height of the popup needs to be dynamically calculated or fixed.
-    // For simplicity, let's use a fixed height and width that fits the content.
     const double popupWidth = 150.0;
 
     return Align(
@@ -231,8 +225,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               );
             }).toList(),
 
-            // Close Button (like the 'X' in the bottom right of your design)
-            const Spacer(), // Pushes the close button to the bottom
+            const Spacer(),
             InkWell(
               onTap: () {
                 setState(() {
