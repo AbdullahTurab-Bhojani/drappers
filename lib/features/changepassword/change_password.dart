@@ -45,7 +45,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    context.go('/login');
+                    context.pop();
                   },
                   child: Image.asset(Assets.images.backicon.path),
                 ),

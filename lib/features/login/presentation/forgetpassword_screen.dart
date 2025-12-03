@@ -38,7 +38,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  context.go('/login');
+                  context.pop();
                 },
                 child: Image.asset(Assets.images.backicon.path),
               ),
