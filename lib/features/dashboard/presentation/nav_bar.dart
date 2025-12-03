@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 
 class BottomNavigationBarShell extends ConsumerStatefulWidget {
   final Widget child;
@@ -72,11 +73,26 @@ class _BottomNavigationBarShellState
     });
   }
 
+  // old void _onTap(BuildContext context, int index) {
+  //   selectedIndex = index;
+  //   setState(() {});
+  //   final path = _navItems[index]['path'];
+  //   if (path.isNotEmpty) context.goNamed(path);
+  // }
+
   void _onTap(BuildContext context, int index) {
+    if (GuestHelper.isGuest) {
+      GuestHelper.checkGuest(context);
+      return;
+    }
+
     selectedIndex = index;
     setState(() {});
+
     final path = _navItems[index]['path'];
-    if (path.isNotEmpty) context.goNamed(path);
+    if (path.isNotEmpty) {
+      context.goNamed(path);
+    }
   }
 
   @override
@@ -96,7 +112,7 @@ class _BottomNavigationBarShellState
                 Color.fromRGBO(2, 37, 88, 1),
               ],
               begin: AlignmentGeometry.topCenter,
-              end: AlignmentGeometry.bottomCenter
+              end: AlignmentGeometry.bottomCenter,
             ),
           ),
           child: Row(

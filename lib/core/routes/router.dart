@@ -218,6 +218,11 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => Startupdetails(),
       ),
       GoRoute(
+        path: AppRoutes.newliveScreen.path,
+        name: AppRoutes.newliveScreen.name,
+        builder: (context, state) => newliveScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.videoScreen.path,
         name: AppRoutes.videoScreen.name,
         builder: (context, state) => CustomVideoPlayerScreen(),

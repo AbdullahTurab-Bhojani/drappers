@@ -3,47 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../gen/assets.gen.dart';
 
-class CustomVideoPlayerScreen extends StatefulWidget {
-  const CustomVideoPlayerScreen({super.key});
+class newliveScreen extends StatefulWidget {
+  const newliveScreen({super.key});
 
   @override
-  State<CustomVideoPlayerScreen> createState() =>
-      _CustomVideoPlayerScreenState();
+  State<newliveScreen> createState() => _newliveScreenScreenState();
 }
 
-class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
+class _newliveScreenScreenState extends State<newliveScreen> {
   late BetterPlayerController _betterPlayerController;
 
   bool _controlsVisible = true;
   bool _isLocked = false;
   bool _showEpisodes = false;
   bool _isSpeedPopupVisible = false;
-  bool _isQualityPopupVisible = false;
-
-  void _toggleEpisodes() {
+  void _changeSpeed() {
     setState(() {
-      _showEpisodes = !_showEpisodes;
-      _isSpeedPopupVisible = false;
-      _isQualityPopupVisible = false;
+      _isSpeedPopupVisible = !_isSpeedPopupVisible;
     });
-    // Ensure controls are visible when episode list is open
-    if (_showEpisodes) {
-      setState(() => _controlsVisible = true);
-    }
   }
-
-  final List<Map<String, String>> episodesData = List.generate(
-    10,
-    (index) => {
-      "title": index == 0
-          ? "E14 FINALE"
-          : (index % 3 == 0 ? "Semifinals 2" : "Episode ${index + 1}"),
-      "subtitle": "Meet The Drapers Season 6 (2023)",
-      "url":
-          "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      "image": Assets.images.horizontalThumbnail.path, // Placeholder asset path
-    },
-  );
 
   final String videoUrl =
       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
@@ -67,12 +45,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       DeviceOrientation.landscapeRight,
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  }
-
-  void _changeSpeed() {
-    setState(() {
-      _isSpeedPopupVisible = !_isSpeedPopupVisible;
-    });
   }
 
   void _initializePlayer() {
@@ -155,6 +127,132 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     );
   }
 
+  // Place this inside your video player screen's state class, or a dedicated controls widget
+  Widget _buildSpeedPopupMenu(BuildContext context) {
+    // Use the speeds from your image (Normal is 1.0x)
+    final Map<double, String> speedOptions = {
+      1.0: 'Normal',
+      0.75: '0.75x',
+      0.5: '0.5x',
+      0.25: '0.25x',
+    };
+
+    final theme = Theme.of(context);
+    // Assuming you have a dark background color for the popup
+    final Color popupColor = Colors.black.withOpacity(0.8);
+    final Color checkColor = Colors.blue; // Or your primary highlight color
+
+    // Get the current speed for highlighting
+    final double currentSpeed =
+        _betterPlayerController.videoPlayerController!.value.speed;
+
+    // The height of the popup needs to be dynamically calculated or fixed.
+    // For simplicity, let's use a fixed height and width that fits the content.
+    const double popupWidth = 150.0;
+
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        width: popupWidth,
+        height: 250, // Example height, adjust as needed
+        decoration: BoxDecoration(
+          color: popupColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            // Title
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 16,
+                right: 16,
+                top: 8,
+                bottom: 8,
+              ),
+              child: Text(
+                'Speed',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            // Separator line
+            const Divider(color: Colors.white24, height: 1),
+
+            // Speed Options
+            ...speedOptions.entries.map((entry) {
+              final double speed = entry.key;
+              final String label = entry.value;
+              final bool isSelected = currentSpeed == speed;
+
+              return InkWell(
+                onTap: () {
+                  _betterPlayerController.setSpeed(speed);
+                  // After setting speed, hide the popup.
+                  // You will need to call a setState in your main player widget here
+                  // to set _isSpeedPopupVisible = false.
+                  setState(() {
+                    _isSpeedPopupVisible = false;
+                  });
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  color: isSelected
+                      ? Colors.white10
+                      : Colors.transparent, // Highlight selected
+                  child: Row(
+                    children: [
+                      Icon(
+                        isSelected ? Icons.check : null,
+                        color: checkColor,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        label,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: isSelected
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+
+            // Close Button (like the 'X' in the bottom right of your design)
+            const Spacer(), // Pushes the close button to the bottom
+            InkWell(
+              onTap: () {
+                setState(() {
+                  _isSpeedPopupVisible = false;
+                });
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(right: 16, bottom: 8),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Icon(Icons.close, color: Colors.white, size: 24),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   void _toggleSubtitles() async {
     final list = _betterPlayerController.betterPlayerSubtitlesSourceList;
 
@@ -189,6 +287,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           Positioned.fill(
             child: BetterPlayer(controller: _betterPlayerController),
           ),
+          if (_isSpeedPopupVisible) _buildSpeedPopupMenu(context),
 
           if (!_isLocked)
             Positioned.fill(
@@ -212,8 +311,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                 height: 80,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: episodes
-                      .length, // NOTE: this uses 'episodes' which is now unused
+                  itemCount: episodes.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
@@ -242,8 +340,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   }
 
   Widget _buildControls() {
-    final Size screenSize = MediaQuery.of(context).size;
-
     return Container(
       color: Colors.black.withOpacity(0.3),
       child: Stack(
@@ -322,50 +418,18 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           if (!_isLocked)
             Positioned(
               bottom: 20,
-              left: 15,
-              child: Container(
-                width: screenSize.width - 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // SizedBox(width: 20),
-                    _btn(Icons.speed, "Speed (1x)", _changeSpeed),
-
-                    // SizedBox(width: 20),
-                    _btn(Icons.lock_open, "Lock", _toggleLock),
-
-                    // SizedBox(width: 20),
-                    _btn(Icons.dashboard, "Episodes", () {
-                      setState(() => _showEpisodes = !_showEpisodes);
-                    }),
-
-                    // SizedBox(width: 20),
-                    _btn(
-                      Icons.subtitles,
-                      "Audio & Subtitles",
-                      _toggleSubtitles,
-                    ),
-
-                    // SizedBox(width: 20),
-                    _btn(Icons.hd, "Quality", _changeQuality),
-
-                    // SizedBox(width: 20),
-                    _btn(Icons.skip_next, "Next Ep.", () {
-                      if (episodesData.length > 1) {
-                        _playEpisode(1);
-                      } else {}
-                    }),
-                    // SizedBox(width: 20),
-
-                    // _btn(Icons.hd, "Quality", _changeQuality),
-                    // const SizedBox(width: 20),
-                    // _btn(Icons.subtitles, "Subtitles", _toggleSubtitles),
-                    // const SizedBox(width: 20),
-                    // _btn(Icons.list, "Episodes", () {
-                    //   setState(() => _showEpisodes = !_showEpisodes);
-                    // }),
-                  ],
-                ),
+              left: 185,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _btn(Icons.hd, "Speed(1x)", _changeSpeed),
+                  SizedBox(width: 20),
+                  _btn(Icons.subtitles, "Audio & Subtitles", _toggleSubtitles),
+                  SizedBox(width: 20),
+                  _btn(Icons.list, "Picture In Picture", () {
+                    // setState(() => _showEpisodes = !_showEpisodes);
+                  }),
+                ],
               ),
             ),
 
@@ -390,155 +454,13 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, color: Colors.white, size: 26),
           const SizedBox(width: 6),
           Text(
             label,
             style: const TextStyle(color: Colors.white, fontSize: 14),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEpisodesSidebar() {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double sidebarWidth = screenWidth * 0.45; // Takes up 45% of width
-
-    return Positioned.fill(
-      // Use GestureDetector to handle taps outside the sidebar to close it
-      child: GestureDetector(
-        onTap:
-            _toggleEpisodes, // Assumes _toggleEpisodes sets _showEpisodes = false
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: Container(
-            width: sidebarWidth,
-            // Use a dark, slightly translucent color for the sidebar background
-            color: Colors.black.withOpacity(0.8),
-            child: Column(
-              children: [
-                // Title (optional header) or just padding
-                const SizedBox(height: 20),
-
-                // Episode List
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: episodesData.length,
-                    itemBuilder: (context, index) {
-                      final episode = episodesData[index];
-                      // Use InkWell for better tap visual feedback
-                      return InkWell(
-                        onTap: () =>
-                            _playEpisode(index), // Assumes _playEpisode exists
-                        child: _buildEpisodeListItem(episode, index),
-                      );
-                    },
-                  ),
-                ),
-
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      onPressed: _toggleEpisodes,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildEpisodeListItem(Map<String, String> episode, int index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Left: History Icon and Text
-          const Padding(
-            padding: EdgeInsets.only(top: 8.0, right: 8.0),
-            child: Column(
-              children: [
-                Icon(Icons.history, color: Colors.white54, size: 18),
-                SizedBox(height: 2),
-                Text(
-                  "38:47",
-                  style: TextStyle(color: Colors.white70, fontSize: 10),
-                ),
-              ],
-            ),
-          ),
-
-          // Center: Title and Subtitle Text
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  episode['title']!,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  episode['subtitle']!,
-                  style: const TextStyle(color: Colors.white70, fontSize: 12),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-
-          // Right: Thumbnail
-          const SizedBox(width: 10),
-          Container(
-            width: 80,
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              image: DecorationImage(
-                image: AssetImage(
-                  Assets.images.horizontalThumbnail.path,
-                ), // Use your asset path
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Center(
-              child: Text(
-                episode['title'] == "E14 FINALE" ? "E14\nFINALE" : "",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  shadows: [Shadow(blurRadius: 2, color: Colors.black)],
-                ),
-              ),
-            ),
-          ),
-
-          // Small X button for removing from history (optional)
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0, top: 12),
-            child: Icon(Icons.close, color: Colors.white54, size: 18),
           ),
         ],
       ),
@@ -552,3 +474,49 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     super.dispose();
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:go_router/go_router.dart';
+// import '../../../core/extensions/theme_extension.dart';
+// import '../../../drappers.dart';
+// import '../../../gen/assets.gen.dart';
+// import '../../../shared/widgets/app_bar/main_app_bar.dart';
+
+// class newliveScreen extends StatefulWidget {
+//   const newliveScreen({super.key});
+
+//   @override
+//   State<newliveScreen> createState() => _newliveScreenState();
+// }
+
+// class _newliveScreenState extends State<newliveScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final customColors = Theme.of(context).extension<AppCustomColors>()!;
+//     return Scaffold(
+//       body: Column(children: [
+        
+       
+//         ],
+//       ),
+//     );
+//   }
+// }

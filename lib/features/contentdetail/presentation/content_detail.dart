@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
@@ -9,7 +10,6 @@ import '../../../shared/widgets/reelcard/reelcard_widget.dart';
 
 class ContentDetail extends StatefulWidget {
   ContentDetail({super.key});
-  
 
   @override
   State<ContentDetail> createState() => _ContentDetailState();
@@ -29,7 +29,6 @@ class _ContentDetailState extends State<ContentDetail>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool isAdded = false;
-  
 
   @override
   void initState() {
@@ -88,17 +87,27 @@ class _ContentDetailState extends State<ContentDetail>
                       ),
                       child: Stack(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(16),
+                          InkWell(
+                            onTap: () {
+                              context.pushNamed(AppRoutes.videoScreen.name);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                             ),
                           ),
-                          Center(
-                            child: Image.asset(
-                              Assets.images.playwithbgicon.path,
-                              width: 60,
-                              height: 60,
+                          InkWell(
+                            onTap: () {
+                              context.pushNamed(AppRoutes.videoScreen.name);
+                            },
+                            child: Center(
+                              child: Image.asset(
+                                Assets.images.playwithbgicon.path,
+                                width: 60,
+                                height: 60,
+                              ),
                             ),
                           ),
                           Positioned(
@@ -203,7 +212,8 @@ class _ContentDetailState extends State<ContentDetail>
                                   child: PoppinsText(
                                     'HQ',
                                     fontSize: PoppinsFontSizeVariant.size8,
-                                    fontWeight: PoppinsFontWeightVariant.semiBold,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.semiBold,
                                     color: customColors.textColor,
                                   ),
                                 ),
@@ -216,7 +226,8 @@ class _ContentDetailState extends State<ContentDetail>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              width: 192, height: 45,
+                              width: 192,
+                              height: 45,
                               child: AppButton(
                                 onPressed: () {},
                                 title: 'Play',
@@ -229,34 +240,38 @@ class _ContentDetailState extends State<ContentDetail>
                                 fontSize: PoppinsFontSizeVariant.size16,
                               ),
                             ),
-                          SizedBox(
-  width: 192,
-  height: 45,
-  child: AppButton(
-    onPressed: () {
-      setState(() {
-        isAdded = !isAdded;
-      });
-    },
-    title: isAdded ? 'Added' : 'Add To Watch List',
-    color: Colors.transparent,
-    borderColor: customColors.greyColor,
-    borderWidth: 1,
-    border: true,
-    prefixIcon: isAdded
-        ? Icon(Icons.check, size: 18, color: customColors.textColor)
-        : Image.asset(
-            Assets.images.addicon.path,
-            width: 16,
-            height: 16,
-          ),
-    buttonSize:  Size(155, 45),
-    fontSize: PoppinsFontSizeVariant.size16,
-  ),
-)
+                            SizedBox(
+                              width: 192,
+                              height: 45,
+                              child: AppButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isAdded = !isAdded;
+                                  });
+                                },
+                                title: isAdded ? 'Added' : 'Add To Watch List',
+                                color: Colors.transparent,
+                                borderColor: customColors.greyColor,
+                                borderWidth: 1,
+                                border: true,
+                                prefixIcon: isAdded
+                                    ? Icon(
+                                        Icons.check,
+                                        size: 18,
+                                        color: customColors.textColor,
+                                      )
+                                    : Image.asset(
+                                        Assets.images.addicon.path,
+                                        width: 16,
+                                        height: 16,
+                                      ),
+                                buttonSize: Size(155, 45),
+                                fontSize: PoppinsFontSizeVariant.size16,
+                              ),
+                            ),
+                          ],
+                        ),
 
-                     ]),
-                        
                         SizedBox(height: 15),
                         PoppinsText(
                           '"The Wolf of Wall Street" is a captivating film about Jordan Belforts rise and fall."',
@@ -359,98 +374,118 @@ class _ContentDetailState extends State<ContentDetail>
                         ),
 
                         SizedBox(height: 10),
-                     Builder(
-                     builder: (context) {
-                     return Column(
-                     children: [
-                     if (_tabController.index == 0) 
-          Padding(
-            padding:  EdgeInsets.only(left: 10, right: 10, top:0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                   DropdownButtonHideUnderline(
-                 child: DropdownButton<String>(
-                value: selectedSeason,
-                icon: Icon(
-                 Icons.keyboard_arrow_down,
-                  color: customColors.textColor,
-                      size: 20,
-                ),
-                items: [
-                  "Season 01",
-                  "Season 02",
-                  "Season 03",
-                  "Season 04",
-                  "Season 05",
-                ].map((season) {
-                  return DropdownMenuItem(
-                    value: season,
-                    child: PoppinsText(
-            season,
-            color: customColors.textColor,
-            fontSize: PoppinsFontSizeVariant.size12,
-            fontWeight: PoppinsFontWeightVariant.regular,
-                    ),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedSeason = value!;
-                  });
-                },
-              ),
-            ),
-            Image.asset(Assets.images.infoicon.path,
-            height: 18, width: 18,)
-              ],
-            ),
-          ),
-         SizedBox(height: 12),
-        if (_tabController.index == 0)
-          GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
-            itemCount: trendingimages.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 0.6,
-            ),
-            itemBuilder: (context, index) {
-              return CardWidget(
-                assetImage: trendingimages[index],
-                showSaveIcon: false,
-              );
-            },
-          )
-        else
-          GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
-            itemCount: reelimages.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 15,
-              childAspectRatio: 0.5,
-            ),
-            itemBuilder: (context, index) {
-              return ReelcardWidget(
-                assetImagePath: reelimages[index],
-                title: reelTitles[index],
-                reelCardHeight: 100,
-                reelCardWidth: 100,
-                fontSizeVariant: PoppinsFontSizeVariant.size14,
-                showSaveIcon: false,
-              );
-            })]);
-          
-  }),
-              SizedBox(height: 50),
+                        Builder(
+                          builder: (context) {
+                            return Column(
+                              children: [
+                                if (_tabController.index == 0)
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                      right: 10,
+                                      top: 0,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        DropdownButtonHideUnderline(
+                                          child: DropdownButton<String>(
+                                            value: selectedSeason,
+                                            icon: Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: customColors.textColor,
+                                              size: 20,
+                                            ),
+                                            items:
+                                                [
+                                                  "Season 01",
+                                                  "Season 02",
+                                                  "Season 03",
+                                                  "Season 04",
+                                                  "Season 05",
+                                                ].map((season) {
+                                                  return DropdownMenuItem(
+                                                    value: season,
+                                                    child: PoppinsText(
+                                                      season,
+                                                      color: customColors
+                                                          .textColor,
+                                                      fontSize:
+                                                          PoppinsFontSizeVariant
+                                                              .size12,
+                                                      fontWeight:
+                                                          PoppinsFontWeightVariant
+                                                              .regular,
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                            onChanged: (value) {
+                                              setState(() {
+                                                selectedSeason = value!;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        Image.asset(
+                                          Assets.images.infoicon.path,
+                                          height: 18,
+                                          width: 18,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                SizedBox(height: 12),
+                                if (_tabController.index == 0)
+                                  GridView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    padding: EdgeInsets.zero,
+                                    itemCount: trendingimages.length,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          mainAxisSpacing: 10,
+                                          crossAxisSpacing: 10,
+                                          childAspectRatio: 0.6,
+                                        ),
+                                    itemBuilder: (context, index) {
+                                      return CardWidget(
+                                        assetImage: trendingimages[index],
+                                        showSaveIcon: false,
+                                      );
+                                    },
+                                  )
+                                else
+                                  GridView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    padding: EdgeInsets.zero,
+                                    itemCount: reelimages.length,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          mainAxisSpacing: 10,
+                                          crossAxisSpacing: 15,
+                                          childAspectRatio: 0.5,
+                                        ),
+                                    itemBuilder: (context, index) {
+                                      return ReelcardWidget(
+                                        assetImagePath: reelimages[index],
+                                        title: reelTitles[index],
+                                        reelCardHeight: 100,
+                                        reelCardWidth: 100,
+                                        fontSizeVariant:
+                                            PoppinsFontSizeVariant.size14,
+                                        showSaveIcon: false,
+                                      );
+                                    },
+                                  ),
+                              ],
+                            );
+                          },
+                        ),
+                        SizedBox(height: 50),
                       ],
                     ),
                   ),
