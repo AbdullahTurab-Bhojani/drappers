@@ -160,6 +160,11 @@ final routerConfigProvider = Provider((ref) {
             builder: (context, state) => WatchlistScreen(),
           ),
           GoRoute(
+            path: AppRoutes.EditWatchlistScreen.path,
+            name: AppRoutes.EditWatchlistScreen.name,
+            builder: (context, state) => EditWatchlistScreen(),
+          ),
+          GoRoute(
             path: AppRoutes.profile.path,
             name: AppRoutes.profile.name,
             builder: (context, state) => ProfileScreen(),

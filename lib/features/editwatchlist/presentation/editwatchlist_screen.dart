@@ -1,0 +1,178 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../core/extensions/theme_extension.dart';
+import '../../../drappers.dart';
+// Note: Assuming EditWatchlistItemTile is correctly imported from shared/widgets/editwatchlisttitle.dart
+// You should ensure the path in your original project is correct.
+import '../../../shared/widgets/editwatchlisttitle.dart';
+
+// 1. Updated Data Model to include selection state
+class WatchlistData {
+  final String thumbnailPath;
+  final String title;
+  final String year;
+  bool isSelected; // Added state for the checkbox
+
+  WatchlistData(
+    this.thumbnailPath,
+    this.title,
+    this.year, {
+    this.isSelected = false,
+  });
+}
+
+// 2. Updated dummy data initialization
+final List<WatchlistData> _dummyWatchlist = [
+  WatchlistData(
+    Assets.images.horizontalThumbnail.path,
+    'Finale – Meet The Drapers Season 07',
+    '2025',
+  ),
+  WatchlistData(
+    Assets.images.horizontalThumbnail2.path,
+    'Semifinals 2 – Meet The Drapers Season 6',
+    '2024',
+  ),
+  WatchlistData(
+    Assets.images.horizontalThumbnail3.path,
+    'Semifinals 1 – Meet The Drapers Season 6',
+    '2023',
+  ),
+  WatchlistData(
+    Assets.images.horizontalThumbnail4.path,
+    'Sri Sri University – Meet The Drapers Season 6',
+    '2023',
+  ),
+];
+
+// 3. Converted to StatefulWidget
+class EditWatchlistScreen extends StatefulWidget {
+  const EditWatchlistScreen({super.key});
+
+  @override
+  State<EditWatchlistScreen> createState() => _EditWatchlistScreenState();
+}
+
+class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
+  // Use the modifiable list in the State class
+  final List<WatchlistData> watchlistItems = _dummyWatchlist;
+
+  int get selectedCount =>
+      watchlistItems.where((item) => item.isSelected).length;
+
+  void _onItemToggle(int index, bool newValue) {
+    setState(() {
+      watchlistItems[index].isSelected = newValue;
+    });
+  }
+
+  void _onDeleteSelected() {
+    if (selectedCount == 0) return; // Prevent action if nothing is selected
+
+    // Show a SnackBar first (optional, but good practice before mutation)
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${selectedCount} items removed from watchlist.')),
+    );
+
+    setState(() {
+      watchlistItems.removeWhere((item) => item.isSelected);
+      // Optional: Add logic here to sync changes to a backend/database
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
+
+    // Determine if the remove button should be enabled
+    final isRemoveEnabled = selectedCount > 0;
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          // Background image
+          Positioned.fill(
+            child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
+          ),
+
+          Column(
+            children: [
+              // App Bar (Now simplified back to 'Cancel' only)
+              AppMainBar(
+                leadingText: "Watchlist",
+                width: 150,
+                title: "",
+                centerTitle: false,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                actions: [
+                  InkWell(
+                    onTap: () => context.pop(), // Simple Cancel action
+                    child: PoppinsText(
+                      "Cancel",
+                      fontSize: PoppinsFontSizeVariant.size14,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
+
+              // Watchlist List
+              Expanded(
+                child: ListView.builder(
+                  // Added padding at the bottom to ensure the last item isn't covered by the remove button
+                  padding: const EdgeInsets.only(bottom: 100),
+                  itemCount: watchlistItems.length,
+                  itemBuilder: (context, index) {
+                    final item = watchlistItems[index];
+
+                    return EditWatchlistItemTile(
+                      thumbnailPath: item.thumbnailPath,
+                      title: item.title,
+                      year: item.year,
+                      isChecked: item.isSelected,
+                      onToggle: (newValue) => _onItemToggle(index, newValue),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+
+          // 5. Gradient Remove Button at the bottom
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: InkWell(
+                // onTap: isRemoveEnabled ? _onDeleteSelected : null,
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50.0),
+                    color: customColors.redshade,
+                  ),
+                  child: Center(
+                    child: PoppinsText(
+                      'Remove',
+                      fontSize: PoppinsFontSizeVariant.size14,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
