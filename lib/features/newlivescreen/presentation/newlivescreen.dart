@@ -1,6 +1,7 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../core/extensions/theme_extension.dart';
 import '../../../gen/assets.gen.dart';
 
 class newliveScreen extends StatefulWidget {
@@ -128,6 +129,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   }
 
   Widget _buildSpeedPopupMenu(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     final Map<double, String> speedOptions = {
       1.0: 'Normal',
       0.75: '0.75x',
@@ -135,9 +138,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       0.25: '0.25x',
     };
 
-    final theme = Theme.of(context);
-    final Color popupColor = const Color.fromARGB(255, 214, 53, 53).withOpacity(0.8);
-    final Color checkColor = Colors.blue; // Or your primary highlight color
+    final Color popupColor = customColors.regular;
+    final Color checkColor = customColors.textColor;
 
     final double currentSpeed =
         _betterPlayerController.videoPlayerController!.value.speed;
@@ -187,9 +189,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               return InkWell(
                 onTap: () {
                   _betterPlayerController.setSpeed(speed);
-                  // After setting speed, hide the popup.
-                  // You will need to call a setState in your main player widget here
-                  // to set _isSpeedPopupVisible = false.
+
                   setState(() {
                     _isSpeedPopupVisible = false;
                   });
