@@ -11,7 +11,6 @@ import '../../../shared/widgets/tile_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -69,21 +68,13 @@ class ProfileScreen extends StatelessWidget {
       },
       {
         'title': 'Sign Out',
-        'image': Assets.images.logout009.path, 
-        'route': AppRoutes.privacypolicyScreen.path,
-        'color': customColors.textColor,
-        'isTap': false,
-      },
-      {
-        'title': 'Delete Account',
-        'image': Assets.images.deleteicon2.path,
+        'image': Assets.images.signouticon.path,
         'route': AppRoutes.privacypolicyScreen.path,
         'color': customColors.rednormal,
         'isTap': false,
       },
     ];
 
-    
     return Scaffold(
       body: Stack(
         children: [
@@ -179,9 +170,7 @@ class ProfileScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                context.pushNamed(
-                                  AppRoutes.contentDetail.name,
-                                );
+                                context.pushNamed(AppRoutes.contentDetail.name);
                               },
                               child: CardWidget(
                                 assetImage: images[index],
@@ -232,13 +221,12 @@ class ProfileScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                context.pushNamed(
-                                  AppRoutes.contentDetail.name,
-                                );
+                                context.pushNamed(AppRoutes.contentDetail.name);
                               },
                               child: CardWidget(
                                 assetImage: images[index],
                                 showSaveIcon: false,
+                                
                               ),
                             );
                           },
@@ -249,7 +237,7 @@ class ProfileScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.all(0),
                         shrinkWrap: true,
-                
+
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
@@ -261,17 +249,7 @@ class ProfileScreen extends StatelessWidget {
                                     child: SignupPopupWidget(),
                                   ),
                                 );
-                              }
-                              if (menuList[index]['title'] == 'Delete Account') {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => const Dialog(
-                                    backgroundColor: Colors.transparent,
-                                    child: DeletePopupWidget(),
-                                  ),
-                                );
-                              }
-                               else {
+                              } else {
                                 context.push(menuList[index]['route']);
                               }
                             },
