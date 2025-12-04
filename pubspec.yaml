@@ -51,6 +51,8 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_native_splash: ^2.4.7
   better_player_plus: ^1.1.5
+  country_picker: ^2.0.27
+
 
 
 dev_dependencies:

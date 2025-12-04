@@ -3,6 +3,7 @@ import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../shared/widgets/phonefield_code.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class EditprofileScreen extends StatelessWidget {
@@ -11,6 +12,8 @@ class EditprofileScreen extends StatelessWidget {
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final phoneController = TextEditingController();
+  final otpController = TextEditingController();
 
   void dispose() {
     _fullNameController.dispose();
@@ -41,15 +44,15 @@ class EditprofileScreen extends StatelessWidget {
             children: [
               AppMainBar(
                 leading: GestureDetector(
-                onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Image.asset(
+                      "assets/images/backicon.png",
+                      width: 20,
+                      height: 20,
+                    ),
                   ),
-                ),
                 ),
                 title: "Edit Profile",
                 centerTitle: false,
@@ -63,7 +66,7 @@ class EditprofileScreen extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       CircleAvatar(
-                        radius: 20,
+                        radius: 60,
                         backgroundColor: Colors.transparent,
                         backgroundImage: NetworkImage(
                           'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
@@ -71,7 +74,7 @@ class EditprofileScreen extends StatelessWidget {
                       ),
                       Positioned(
                         bottom: -14,
-                        right: 42,
+                        right: 38,
                         child: Container(
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -83,8 +86,11 @@ class EditprofileScreen extends StatelessWidget {
                             // ),
                           ),
                           child: Center(
-                            child: Image.asset(Assets.images.screenshoticon.path,
-                            width: 24, height: 24,)
+                            child: Image.asset(
+                              Assets.images.screenshoticon.path,
+                              width: 24,
+                              height: 24,
+                            ),
                           ),
                         ),
                       ),
@@ -111,7 +117,10 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _fullNameController,
                           labelText: "Full Name*",
                           hintText: "Enter your full name",
-                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          hintStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
                           filledColor: customColors.textColor,
                           // validator: (value) {
                           //   if (value == null || value.trim().isEmpty) {
@@ -127,7 +136,10 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _emailController,
                           labelText: "Email Address*",
                           hintText: "Enter your email",
-                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          hintStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.emailAddress,
                           // validator: (value) {
@@ -145,7 +157,10 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _phoneController,
                           labelText: "Phone Number*",
                           hintText: "03XXXXXXXXX",
-                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          hintStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.phone,
                           // validator: (value) {
@@ -157,6 +172,16 @@ class EditprofileScreen extends StatelessWidget {
                           // },
                         ),
                         SizedBox(height: 25),
+
+                        PhoneOtpField(
+                          phoneController: phoneController,
+                          otpController: otpController,
+                          fieldbg: AppColors.tfield,
+                          labelText: 'Phone Number*',
+                          onSendCode: () {
+                            print("OTP API CALL HERE");
+                          },
+                        ),
                         AppButton(
                           onPressed: () {
                             Navigator.of(context).pop();
