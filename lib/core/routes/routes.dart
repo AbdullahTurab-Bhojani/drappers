@@ -60,6 +60,7 @@ enum AppRoutes {
 
   voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
     newliveScreen('newliveScreen', '/newliveScreen'),
+    LivepitchesScreen('LivepitchesScreen', '/LivepitchesScreen'),
 
   videoScreen('videoScreen', '/videoScreen');
 

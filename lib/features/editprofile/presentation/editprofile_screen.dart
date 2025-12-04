@@ -3,6 +3,8 @@ import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../shared/widgets/phonecountrytextfield.dart';
+import '../../../shared/widgets/sendcodefield.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class EditprofileScreen extends StatelessWidget {
@@ -104,7 +106,10 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _fullNameController,
                           labelText: "Full Name*",
                           hintText: "Enter your full name",
-                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          hintStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
                           filledColor: customColors.textColor,
                           // validator: (value) {
                           //   if (value == null || value.trim().isEmpty) {
@@ -120,25 +125,54 @@ class EditprofileScreen extends StatelessWidget {
                           controller: _emailController,
                           labelText: "Email Address*",
                           hintText: "Enter your email",
-                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          hintStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.emailAddress,
-                          // validator: (value) {
-                          //   if (value == null || value.trim().isEmpty) {
-                          //     return "Email required";
-                          //   }
-                          //   if (!value.contains("@")) return "Enter valid email";
-                          //   return null;
-                          // },
+                          sufixIcon: Container(
+                            height: 28,
+                            width: 84,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: customColors.buttonColors.first,
+                            ),
+                            child: Center(
+                              child: PoppinsText(
+                                "Send Code",
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                color: customColors.textColor,
+                              ),
+                            ),
+                          ),
                         ),
+                        
+                        VerificationCodeField(
+                          length: 6,
+                          onCompleted: (code) {
+                            print('Entered code: $code');
+                          },
+                        ),
+
                         SizedBox(height: 15),
 
+                        PhoneNumberInputField(
+                          onChanged: (fullNumber) {
+                            print('Full Phone Number: $fullNumber');
+                          },
+                        ),
+                        SizedBox(height: 15),
                         NewTextField(
                           fieldbg: AppColors.tfield,
                           controller: _phoneController,
                           labelText: "Phone Number*",
                           hintText: "03XXXXXXXXX",
-                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          hintStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.phone,
                           // validator: (value) {
@@ -149,6 +183,7 @@ class EditprofileScreen extends StatelessWidget {
                           //   return null;
                           // },
                         ),
+
                         SizedBox(height: 25),
                         AppButton(
                           onPressed: () {

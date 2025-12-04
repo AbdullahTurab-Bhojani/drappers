@@ -69,6 +69,7 @@ import 'features/faqs/privacypolicy/presentation/views/faqs.dart';
 import 'features/help&support/presentation/helpsupport.dart';
 import 'features/home/presentation/views/home.dart';
 import 'features/likedcontent/presentation/likecontent.dart';
+import 'features/livepitches/presentation/livepitches.dart';
 import 'features/login/presentation/forgetpassword_screen.dart';
 import 'features/login/presentation/login_screen.dart';
 import 'features/login/presentation/updatepassword_screen.dart';

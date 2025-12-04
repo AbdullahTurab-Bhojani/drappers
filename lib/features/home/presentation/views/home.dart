@@ -200,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 45,
                           child: ListView.separated(
-                             padding: EdgeInsets.zero,
+                            padding: EdgeInsets.zero,
                             clipBehavior: Clip.none,
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
@@ -208,25 +208,36 @@ class _HomeScreenState extends State<HomeScreen> {
                             shrinkWrap: true,
                             itemCount: hometab.length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(
-                                    color: customColors.greyColor,
-                                    width: 1,
+                              return InkWell(
+                                onTap: () {
+                                  if (GuestHelper.isGuest) {
+                                    GuestHelper.checkGuest(context);
+                                    return;
+                                  }
+                                  context.pushNamed(
+                                    AppRoutes.LivepitchesScreen.name,
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 8,
                                   ),
-                                ),
-                                child: Center(
-                                  child: PoppinsText(
-                                    hometab[index],
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    color: customColors.textColor,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(
+                                      color: customColors.greyColor,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: PoppinsText(
+                                      hometab[index],
+                                      fontSize: PoppinsFontSizeVariant.size16,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.regular,
+                                      color: customColors.textColor,
+                                    ),
                                   ),
                                 ),
                               );
@@ -486,7 +497,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     return;
                                                   }
                                                   context.pushNamed(
-                                                    AppRoutes.newliveScreen.name,
+                                                    AppRoutes
+                                                        .newliveScreen
+                                                        .name,
                                                   );
                                                 },
                                                 child: Image.asset(
