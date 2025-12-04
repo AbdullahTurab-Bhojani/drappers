@@ -3,8 +3,7 @@ import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
-import '../../../shared/widgets/phonecountrytextfield.dart';
-import '../../../shared/widgets/sendcodefield.dart';
+import '../../../shared/widgets/phonefield_code.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class EditprofileScreen extends StatelessWidget {
@@ -13,6 +12,8 @@ class EditprofileScreen extends StatelessWidget {
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final phoneController = TextEditingController();
+  final otpController = TextEditingController();
 
   void dispose() {
     _fullNameController.dispose();
@@ -42,7 +43,17 @@ class EditprofileScreen extends StatelessWidget {
           Column(
             children: [
               AppMainBar(
-                leadingIcon: Icons.arrow_back_ios,
+                leading: GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Image.asset(
+                      "assets/images/backicon.png",
+                      width: 20,
+                      height: 20,
+                    ),
+                  ),
+                ),
                 title: "Edit Profile",
                 centerTitle: false,
                 backgroundColor: Colors.transparent,
@@ -62,8 +73,8 @@ class EditprofileScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        bottom: -12,
-                        right: 42,
+                        bottom: -14,
+                        right: 38,
                         child: Container(
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -75,10 +86,10 @@ class EditprofileScreen extends StatelessWidget {
                             // ),
                           ),
                           child: Center(
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: customColors.textColor,
-                              size: 20,
+                            child: Image.asset(
+                              Assets.images.screenshoticon.path,
+                              width: 24,
+                              height: 24,
                             ),
                           ),
                         ),
@@ -149,20 +160,20 @@ class EditprofileScreen extends StatelessWidget {
                           ),
                         ),
                         
-                        VerificationCodeField(
-                          length: 6,
-                          onCompleted: (code) {
-                            print('Entered code: $code');
-                          },
-                        ),
+                        // VerificationCodeField(
+                        //   length: 6,
+                        //   onCompleted: (code) {
+                        //     print('Entered code: $code');
+                        //   },
+                        // ),
 
-                        SizedBox(height: 15),
+                        // SizedBox(height: 15),
 
-                        PhoneNumberInputField(
-                          onChanged: (fullNumber) {
-                            print('Full Phone Number: $fullNumber');
-                          },
-                        ),
+                        // PhoneNumberInputField(
+                        //   onChanged: (fullNumber) {
+                        //     print('Full Phone Number: $fullNumber');
+                        //   },
+                        // ),
                         SizedBox(height: 15),
                         NewTextField(
                           fieldbg: AppColors.tfield,
@@ -185,6 +196,16 @@ class EditprofileScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 25),
+
+                        PhoneOtpField(
+                          phoneController: phoneController,
+                          otpController: otpController,
+                          fieldbg: AppColors.tfield,
+                          labelText: 'Phone Number*',
+                          onSendCode: () {
+                            print("OTP API CALL HERE");
+                          },
+                        ),
                         AppButton(
                           onPressed: () {
                             Navigator.of(context).pop();

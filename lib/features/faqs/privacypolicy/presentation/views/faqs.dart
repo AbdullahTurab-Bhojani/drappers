@@ -93,7 +93,17 @@ class _FaqsScreenState extends State<FaqsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppMainBar(
-              leadingIcon: Icons.arrow_back_ios,
+              leading: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+                ),
               title: "FAQ's",
               centerTitle: false,
               backgroundColor: Colors.transparent,

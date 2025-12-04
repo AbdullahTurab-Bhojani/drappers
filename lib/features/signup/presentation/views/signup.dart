@@ -139,6 +139,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(height: 15),
                       AppPasswordField(
+                        keyboardType: TextInputType.numberWithOptions(),
                         controller: _passwordController,
                         labelText: "Create Password*",
                         hintText: "**********",
@@ -151,7 +152,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(height: 15),
                       AppPasswordField(
-                        controller: _confirmPasswordController, // FIXED
+                        keyboardType: TextInputType.numberWithOptions(),
+                        controller: _confirmPasswordController, 
                         labelText: "Confirm Password*",
                         hintText: "**********",
                         validator: (value) {
