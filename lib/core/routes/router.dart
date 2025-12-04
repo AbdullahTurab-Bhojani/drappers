@@ -232,6 +232,11 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.newliveScreen.name,
         builder: (context, state) => newliveScreen(),
       ),
+         GoRoute(
+        path: AppRoutes.LivepitchesScreen.path,
+        name: AppRoutes.LivepitchesScreen.name,
+        builder: (context, state) => LivepitchesScreen(),
+      ),
       GoRoute(
         path: AppRoutes.videoScreen.path,
         name: AppRoutes.videoScreen.name,

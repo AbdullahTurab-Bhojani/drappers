@@ -4,7 +4,13 @@ import '../../drappers.dart';
 
 class GenreBoxWidget extends StatefulWidget {
   final String title;
-  const GenreBoxWidget({super.key, required this.title});
+  final bool showBorder;
+
+  const GenreBoxWidget({
+    super.key,
+    required this.title,
+    this.showBorder = false,
+  });
 
   @override
   State<GenreBoxWidget> createState() => _GenreBoxWidgetState();
@@ -15,13 +21,21 @@ class _GenreBoxWidgetState extends State<GenreBoxWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+
     return Container(
       height: 56,
-      // width: 100,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-        color: customColors.blackshade,
-        borderRadius: BorderRadius.circular(8),
+        color: customColors.regular,
+        borderRadius: BorderRadius.circular(5),
+        border: widget.showBorder
+            ? Border(
+                left: BorderSide(
+                  color: customColors.buttonColors.first,
+                  width: 4,
+                ),
+              )
+            : null,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

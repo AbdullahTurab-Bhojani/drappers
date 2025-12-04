@@ -310,7 +310,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                       shaderCallback: (bounds) =>
                                           LinearGradient(
                                             colors: customColors.buttonColors,
-                                          ).createShader(
+                                          ).
+                                          createShader(
                                             Rect.fromLTWH(
                                               0,
                                               0,

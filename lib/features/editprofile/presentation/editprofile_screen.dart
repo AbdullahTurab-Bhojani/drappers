@@ -142,16 +142,39 @@ class EditprofileScreen extends StatelessWidget {
                           ),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.emailAddress,
-                          // validator: (value) {
-                          //   if (value == null || value.trim().isEmpty) {
-                          //     return "Email required";
-                          //   }
-                          //   if (!value.contains("@")) return "Enter valid email";
-                          //   return null;
-                          // },
+                          sufixIcon: Container(
+                            height: 28,
+                            width: 84,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: customColors.buttonColors.first,
+                            ),
+                            child: Center(
+                              child: PoppinsText(
+                                "Send Code",
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                color: customColors.textColor,
+                              ),
+                            ),
+                          ),
                         ),
-                        SizedBox(height: 15),
+                        
+                        // VerificationCodeField(
+                        //   length: 6,
+                        //   onCompleted: (code) {
+                        //     print('Entered code: $code');
+                        //   },
+                        // ),
 
+                        // SizedBox(height: 15),
+
+                        // PhoneNumberInputField(
+                        //   onChanged: (fullNumber) {
+                        //     print('Full Phone Number: $fullNumber');
+                        //   },
+                        // ),
+                        SizedBox(height: 15),
                         NewTextField(
                           fieldbg: AppColors.tfield,
                           controller: _phoneController,
@@ -171,6 +194,7 @@ class EditprofileScreen extends StatelessWidget {
                           //   return null;
                           // },
                         ),
+
                         SizedBox(height: 25),
 
                         PhoneOtpField(
