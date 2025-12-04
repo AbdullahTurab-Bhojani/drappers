@@ -329,28 +329,23 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
-
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-
                 hintText: widget.hintText,
-                hintStyle:
-                    widget.hintStyle ??
+                hintStyle: widget.hintStyle ??
                     GoogleFonts.poppins(
                       color: AppColors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
-
-                prefixIcon: widget.prefixIcon != null
+                    prefixIcon: widget.prefixIcon != null
                     ? Center(child: widget.prefixIcon!)
                     : null,
                 prefixIconConstraints: const BoxConstraints(
                   minWidth: 32,
                   minHeight: 32,
                 ),
-
                 suffixIcon: widget.sufixIcon != null
                     ? Padding(
                         padding: EdgeInsetsGeometry.only(bottom: 10),
@@ -366,17 +361,13 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                             isShow
                                 ? Assets.images.hideicon.path
                                 : Assets.images.showicon.path,
-
                             color: Colors.white,
-                            width: 18,
-                            height: 18,
+                            width: 18, height: 18,
                           ),
                         ),
                       ),
-
                 suffixIconConstraints: BoxConstraints(
-                  minWidth: 32,
-                  minHeight: 32,
+                  minWidth: 32, minHeight: 32,
                 ),
               ),
             ),

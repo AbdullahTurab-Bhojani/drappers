@@ -266,6 +266,7 @@ class ProfileScreen extends StatelessWidget {
                         },
                         itemCount: menuList.length,
                       ),
+                     
                       SizedBox(height: 30),
                     ],
                   ),

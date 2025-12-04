@@ -129,7 +129,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                           return TextField(
                             controller: _otpControllers[index],
                             focusNode: _focusNodes[index],
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.numberWithOptions(),
                             textAlign: TextAlign.center,
                             textAlignVertical: TextAlignVertical.center,
                             maxLength: 1,

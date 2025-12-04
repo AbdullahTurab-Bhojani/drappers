@@ -54,6 +54,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
               ),
               SizedBox(height: 40),
               AppPasswordField(
+                keyboardType: TextInputType.numberWithOptions(),
                 controller: _passwordController,
                 labelText: "New Password",
                 hintText: "********",
@@ -66,10 +67,10 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
               ),
               SizedBox(height: 15),
               AppPasswordField(
+                keyboardType: TextInputType.numberWithOptions(),
                 controller: _confirmPasswordController,
                 labelText: "Confirm Password*",
-                hintText:
-                    "********", 
+                hintText:"********", 
                 // validator: (value) {
                 //   if (value == null || value.trim().isEmpty) {
                 //     return "Full name required";
