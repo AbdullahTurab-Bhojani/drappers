@@ -2,10 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:video_player/video_player.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../drappers.dart';
-import '../../../../gen/assets.gen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,52 +14,31 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late VideoPlayerController _controller;
-
   @override
   void initState() {
     super.initState();
-
-    _controller = VideoPlayerController.asset("assets/splash.mp4")
-      ..initialize().then((_) {
-        setState(() {});
-        _controller.play();
-        _controller.addListener(() {
-          if (_controller.value.position == _controller.value.duration) {
-            context.pushNamed(AppRoutes.onboardingScreen.name);
-          }
-        });
-      });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _controller.value.isInitialized
-          ? SizedBox.expand(
-              child: FittedBox(
-                fit: BoxFit.cover,
-                child: SizedBox(
-                  width: _controller.value.size.width,
-                  height: _controller.value.size.height,
-                  child: VideoPlayer(_controller),
-                ),
-              ),
-            )
-          : Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(Assets.images.nativeSplash.path),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+      body: Stack(
+        children: [
+          Lottie.asset(
+            'assets/data.json',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            animate: true,
+            repeat: false,
+            onLoaded: (composition) {
+              Future.delayed(composition.duration, () {
+                context.pushNamed(AppRoutes.onboardingScreen.name);
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }
