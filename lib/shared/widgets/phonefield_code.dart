@@ -25,68 +25,55 @@ class PhoneOtpField extends ConsumerStatefulWidget {
   ConsumerState<PhoneOtpField> createState() => _PhoneOtpFieldState();
 }
 
-class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField>
-    with WidgetsBindingObserver {
+class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
   Country selectedCountry = Country.parse("US");
 
   bool showSendButton = false;
   bool showOtpField = false;
   bool isTimerRunning = false;
+  bool showResendButton = false;
 
   int seconds = 30;
   Timer? _timer;
 
-  String maskedText = "";
-
   late final List<TextEditingController> _otpControllers;
   late final List<FocusNode> _focusNodes;
-
-  bool _mounted = true;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
-
     _otpControllers = List.generate(6, (_) => TextEditingController());
     _focusNodes = List.generate(6, (_) => FocusNode());
   }
 
+  /// -------------------- TIMER --------------------
   void _startTimer() {
     seconds = 30;
-    isTimerRunning = true;
+
+    setState(() {
+      isTimerRunning = true;
+      showResendButton = false;
+      showOtpField = true; // ✅ show otp on send & resend
+    });
 
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!_mounted) {
-        timer.cancel();
-        return;
-      }
+      if (!mounted) return;
 
       if (seconds == 0) {
         timer.cancel();
-        if (mounted) {
-          setState(() {
-            isTimerRunning = false;
-            showSendButton = true;
-          });
-        }
+        setState(() {
+          isTimerRunning = false;
+          showResendButton = true;
+          showOtpField = false; // ✅ OTP HIDE AFTER TIMER
+        });
       } else {
-        if (mounted) {
-          setState(() => seconds--);
-        }
+        setState(() => seconds--);
       }
     });
   }
 
-  String _maskNumber(String value) {
-    if (value.length <= 4) return value;
-    return "${"*" * (value.length - 4)}${value.substring(value.length - 4)}";
-  }
-
   void _onOtpChanged(int index, String value) {
-    if (!_mounted) return;
-
     if (value.isNotEmpty && index < 5) {
       _focusNodes[index + 1].requestFocus();
     } else if (value.isEmpty && index > 0) {
@@ -98,9 +85,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField>
 
   @override
   void dispose() {
-    _mounted = false;
-    WidgetsBinding.instance.removeObserver(this);
-
     _timer?.cancel();
 
     for (final c in _otpControllers) {
@@ -108,7 +92,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField>
     }
 
     for (final f in _focusNodes) {
-      f.unfocus();
       f.dispose();
     }
 
@@ -133,9 +116,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField>
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () async {
-                      if (!mounted) return;
-
+                    onTap: () {
                       showCountryPicker(
                         context: context,
                         showPhoneCode: true,
@@ -157,6 +138,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField>
                       ),
                     ),
                   ),
+
                   Expanded(
                     child: TextFormField(
                       controller: widget.phoneController,
@@ -172,47 +154,25 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField>
                         border: InputBorder.none,
                       ),
                       onChanged: (value) {
-                        if (!mounted) return;
                         setState(() {
-                          maskedText = _maskNumber(value);
                           showSendButton = value.length == 10;
                         });
                       },
                     ),
                   ),
 
-                  /// SEND BUTTON
-                  if (showSendButton && !isTimerRunning)
+                  /// ✅ SEND BUTTON
+                  if (showSendButton && !isTimerRunning && !showResendButton)
                     GestureDetector(
                       onTap: () {
-                        if (!mounted) return;
-
                         widget.onSendCode();
-
-                        setState(() {
-                          showOtpField = true;
-                          showSendButton = false;
-                        });
-
+                        showSendButton = false;
                         _startTimer();
                       },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: const Text(
-                          "Send Code",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                      child: _actionButton("Send"),
                     ),
 
-                  /// TIMER
+                  /// ✅ TIMER
                   if (isTimerRunning)
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
@@ -220,6 +180,16 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField>
                         "00:$seconds",
                         style: const TextStyle(color: Colors.red),
                       ),
+                    ),
+
+                  /// ✅ RESEND BUTTON
+                  if (showResendButton)
+                    GestureDetector(
+                      onTap: () {
+                        widget.onSendCode();
+                        _startTimer();
+                      },
+                      child: _actionButton("Resend"),
                     ),
                 ],
               ),
@@ -259,6 +229,19 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField>
 
         const SizedBox(height: 30),
       ],
+    );
+  }
+
+  /// ---------------- BUTTON UI ----------------
+  Widget _actionButton(String text) {
+    return Container(
+      margin: const EdgeInsets.only(left: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(text, style: const TextStyle(color: Colors.white)),
     );
   }
 }
