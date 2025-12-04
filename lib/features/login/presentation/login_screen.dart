@@ -79,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: 16),
                       AppPasswordField(
+                        keyboardType: TextInputType.numberWithOptions(),
                         controller: _passwordController,
                         labelText: "Password*",
                         hintText: "**********",

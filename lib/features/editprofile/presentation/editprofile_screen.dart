@@ -40,7 +40,17 @@ class EditprofileScreen extends StatelessWidget {
           Column(
             children: [
               AppMainBar(
-                leadingIcon: Icons.arrow_back_ios,
+                leading: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+                ),
                 title: "Edit Profile",
                 centerTitle: false,
                 backgroundColor: Colors.transparent,
@@ -53,14 +63,14 @@ class EditprofileScreen extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       CircleAvatar(
-                        radius: 60,
+                        radius: 20,
                         backgroundColor: Colors.transparent,
                         backgroundImage: NetworkImage(
                           'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
                         ),
                       ),
                       Positioned(
-                        bottom: -12,
+                        bottom: -14,
                         right: 42,
                         child: Container(
                           padding: EdgeInsets.all(8),
@@ -73,11 +83,8 @@ class EditprofileScreen extends StatelessWidget {
                             // ),
                           ),
                           child: Center(
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: customColors.textColor,
-                              size: 20,
-                            ),
+                            child: Image.asset(Assets.images.screenshoticon.path,
+                            width: 24, height: 24,)
                           ),
                         ),
                       ),

@@ -182,12 +182,15 @@ class _ApplyPitchState extends State<ApplyPitch> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 50),
-                      AppButton(
-                        onPressed: () {
-                          context.goNamed(AppRoutes.home.name);
-                        },
-                        title: 'Submit',
+                      SizedBox(height: 30),
+                      Container(
+                        height: 50, width: 390,
+                        child: AppButton(
+                          onPressed: () {
+                            context.goNamed(AppRoutes.home.name);
+                          },
+                          title: 'Submit',
+                        ),
                       ),
                       SizedBox(height: 100),
                     ],

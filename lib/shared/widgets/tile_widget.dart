@@ -19,29 +19,38 @@ class TileWidget extends StatefulWidget {
 }
 
 class _TileWidgetState extends State<TileWidget> {
+  GestureTapCallback? ontaped;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 12, bottom: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: ontaped,
+      child: Container(
+        color: Colors.transparent,
+        child: Padding(
+          padding: EdgeInsets.only(top: 12, bottom: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(widget.iconImage),
-              SizedBox(width: 20),
-              PoppinsText(
-                widget.title,
-                fontSize: PoppinsFontSizeVariant.size16,
-                fontWeight: PoppinsFontWeightVariant.medium,
-                color: widget.textColor,
+              Row(
+                children: [
+                  Image.asset(widget.iconImage),
+                  SizedBox(width: 20),
+                  PoppinsText(
+                    widget.title,
+                    fontSize: PoppinsFontSizeVariant.size16,
+                    fontWeight: PoppinsFontWeightVariant.medium,
+                    color: widget.textColor,
+                  ),
+                ],
               ),
+              widget.ontaped == true
+                  ? Icon(Icons.arrow_forward_ios, size: 16)
+                  : SizedBox(),
             ],
           ),
-          widget.ontaped == true
-              ? Icon(Icons.arrow_forward_ios, size: 16)
-              : SizedBox(),
-        ],
+        ),
       ),
     );
   }

@@ -54,12 +54,19 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                 horizontal: horizontalPadding,
               ),
               child: AppMainBar(
-                leading: Image.asset(Assets.images.backicon.path),
-                title: "Settings & Preferences",
-                centerTitle: false,
                 backgroundColor: Colors.transparent,
-                elevation: 0,
-              ),
+                title: "Settings & Preferences",
+                leading: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+                ))
             ),
             Expanded(
               child: SingleChildScrollView(

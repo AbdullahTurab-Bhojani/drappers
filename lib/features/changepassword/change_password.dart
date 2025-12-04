@@ -62,7 +62,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   child: Column(
                     children: [
                       AppPasswordField(
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.numberWithOptions(),
                           controller: _changePasswordController,
                           labelText: "Old Password*",
                           hintText: "123456789",
@@ -75,7 +75,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         ),
                         SizedBox(height: 15),
                         AppPasswordField(
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.numberWithOptions(),
                           controller: _changePasswordController,
                           labelText: "Create Password*",
                           hintText: "**********",
@@ -88,7 +88,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         ),
                         SizedBox(height: 15),
                         AppPasswordField(
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.numberWithOptions(),
                           controller: _changePasswordController,
                           labelText: "Confirm Password*",
                           hintText: "**********",
