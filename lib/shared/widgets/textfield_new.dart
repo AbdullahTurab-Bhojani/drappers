@@ -306,8 +306,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
         children: [
           if (widget.labelText != null) TextFieldLabel(name: widget.labelText!),
 
-          SizedBox(
-            // height: 38,
+          SizedBox(// height: 38,
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               cursorColor: AppColors.white,
@@ -318,14 +317,12 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
               inputFormatters: [NoOnlyWhitespaceFormatter()],
               keyboardType: widget.keyboardType,
               textInputAction: widget.textInputAction,
-
               style: GoogleFonts.poppins(
                 color: AppColors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 // height: 1.1,
               ),
-
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.zero,

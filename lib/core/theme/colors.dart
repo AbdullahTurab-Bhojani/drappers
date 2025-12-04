@@ -5,8 +5,10 @@ part of '../../drappers.dart';
 @immutable
 abstract final class AppColors {
   static const List<Color> buttongradientcolor = [
-    Color(0xFF00C6FF),
-    Color(0xFF0072FF),
+    // Color(0xFF00C6FF),
+    // Color(0xFF0072FF),
+    Color(0xFF4DA0FF), 
+        Color(0xFF0066FF),
   ];
 
   // Default Theme //
