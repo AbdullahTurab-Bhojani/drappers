@@ -303,7 +303,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                           PoppinsFontWeightVariant.regular,
                                       color: customColors.subtextColor,
                                     ),
-                                    SizedBox(height: 20),
+                                    SizedBox(height: 15),
                                     PoppinsText(
                                       'Meet the Drapers S512',
                                       fontSize: PoppinsFontSizeVariant.size16,
@@ -311,7 +311,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                           PoppinsFontWeightVariant.regular,
                                       color: customColors.textColor,
                                     ),
-                                    SizedBox(height: 30),
+                                    SizedBox(height: 20),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
