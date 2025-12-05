@@ -3,7 +3,9 @@ import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../shared/widgets/phonecountrytextfield.dart';
 import '../../../shared/widgets/phonefield_code.dart';
+import '../../../shared/widgets/sendcodefield.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class EditprofileScreen extends StatelessWidget {
@@ -142,32 +144,31 @@ class EditprofileScreen extends StatelessWidget {
                           ),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.emailAddress,
-                          sufixIcon: Container(
-                            height: 28,
-                            width: 84,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: customColors.buttonColors.first,
-                            ),
-                            child: Center(
-                              child: PoppinsText(
-                                "Send Code",
-                                fontSize: PoppinsFontSizeVariant.size12,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                color: customColors.textColor,
-                              ),
-                            ),
-                          ),
+                          // sufixIcon: Container(
+                          //   height: 28,
+                          //   width: 84,
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(20),
+                          //     color: customColors.buttonColors.first,
+                          //   ),
+                          //   child: Center(
+                          //     child: PoppinsText(
+                          //       "Send Code",
+                          //       fontSize: PoppinsFontSizeVariant.size12,
+                          //       fontWeight: PoppinsFontWeightVariant.regular,
+                          //       color: customColors.textColor,
+                          //     ),
+                          //   ),
+                          // ),
                         ),
-                        
+
                         // VerificationCodeField(
                         //   length: 6,
                         //   onCompleted: (code) {
                         //     print('Entered code: $code');
                         //   },
                         // ),
-
-                        // SizedBox(height: 15),
+                        SizedBox(height: 15),
 
                         // PhoneNumberInputField(
                         //   onChanged: (fullNumber) {
