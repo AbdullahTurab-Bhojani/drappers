@@ -74,12 +74,21 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       Assets.images.documentaries6.path,
     ];
     List<String> genretitle = [
-      'Shows',
-      'Documentaries',
+      'All',
+      'Live pitches',
+      'Success Store',
       'Podcasts',
       'Shows',
       'Reels',
     ];
+    final Map<String, String> genreRoutes = {
+      'All': '/LivepitchesScreen',
+      'Live pitches': '/LivepitchesScreen',
+      'Success Store': '/LivepitchesScreen',
+      'Podcasts': '/LivepitchesScreen',
+      'Shows': '/LivepitchesScreen',
+      'Reels': '/LivepitchesScreen',
+    };
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
@@ -142,9 +151,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                 SizedBox(width: 15),
                             itemCount: genretitle.length,
                             itemBuilder: (context, index) {
-                              return GenreBoxWidget(title: genretitle[index],
-                                      showBorder: index == 0,   // 👈 Only first item gets border
+                              final title = genretitle[index];
 
+                              return GenreBoxWidget(
+                                title: title,
+                                showBorder: index == 0,
+                                onTap: () {
+                                  final route = genreRoutes[title];
+                                  if (route != null) {
+                                    context.push(route);
+                                  }
+                                },
                               );
                             },
                           ),
@@ -249,9 +266,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   ),
                 ),
               ),
-           
-           
-           
             ],
           ),
         ],

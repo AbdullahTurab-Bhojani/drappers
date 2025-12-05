@@ -95,9 +95,6 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 20),
-
-                        SizedBox(height: 30),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -115,6 +112,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                         SizedBox(
                           height: 180,
                           child: ListView.separated(
+                            clipBehavior: Clip.none,
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 15),
@@ -145,6 +143,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                         SizedBox(
                           height: 180,
                           child: ListView.separated(
+                            clipBehavior: Clip.none,
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 15),

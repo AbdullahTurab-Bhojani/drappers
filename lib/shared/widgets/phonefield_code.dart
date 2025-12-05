@@ -3,6 +3,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
 
 class PhoneOtpField extends ConsumerStatefulWidget {
@@ -100,6 +101,8 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     return Column(
       children: [
         /// ---------------- PHONE FIELD ----------------
@@ -219,6 +222,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                     fillColor: AppColors.color101317,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
+                      
                     ),
                   ),
                   onChanged: (val) => _onOtpChanged(index, val),
@@ -235,13 +239,17 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
   /// ---------------- BUTTON UI ----------------
   Widget _actionButton(String text) {
     return Container(
+      height: 28,
+      width: 84,
       margin: const EdgeInsets.only(left: 8),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.circular(6),
+        color: AppColors.buttoncolor.first,
+        borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(text, style: const TextStyle(color: Colors.white)),
+      child: Center(
+        child: Text(text, style: const TextStyle(color: Colors.white)),
+      ),
     );
   }
 }
