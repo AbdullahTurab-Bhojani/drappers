@@ -81,39 +81,43 @@ class ProfileScreen extends StatelessWidget {
           Positioned.fill(
             child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
           ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                AppMainBar(
-                  leadingText: "Profile",
-                  width: 120,
-                  title: "",
-                  centerTitle: false,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  actions: [
-                    InkWell(
-                      onTap: () {
-                        context.pushNamed(AppRoutes.editprofile.name);
-                      },
-                      child: PoppinsText(
-                        "Edit",
-                        fontSize: PoppinsFontSizeVariant.size14,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                      ),
+          Column(
+            children: [
+              AppMainBar(
+                leadingText: "Profile",
+                width: 120,
+                title: "",
+                centerTitle: false,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                actions: [
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.editprofile.name);
+                    },
+                    child: PoppinsText(
+                      "Edit",
+                      fontSize: PoppinsFontSizeVariant.size14,
+                      fontWeight: PoppinsFontWeightVariant.medium,
                     ),
-                    SizedBox(width: 20),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Column(
+                  ),
+                  SizedBox(width: 20),
+                ],
+              ),
+              SizedBox(height: 50),
+              Expanded(
+                child: SingleChildScrollView(
+                  child:   Column(
                   children: [
-                    CircleAvatar(
-                      radius: 60,
-                      // radius: isSelected ? 15 : 15,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(
-                        'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                    Container(
+                      height: 114.82, width: 114.82,
+                      child: CircleAvatar(
+                        radius: 60,
+                        // radius: isSelected ? 15 : 15,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(
+                          'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                        ),
                       ),
                     ),
                     SizedBox(height: 20),
@@ -124,9 +128,7 @@ class ProfileScreen extends StatelessWidget {
                       color: customColors.textColor,
                     ),
                     SizedBox(height: 20),
-                  ],
-                ),
-                Padding(
+                          Padding(
                   // padding: EdgeInsets.only(left: 20, right: 20),
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -216,6 +218,7 @@ class ProfileScreen extends StatelessWidget {
                           separatorBuilder: (context, index) {
                             return SizedBox(width: 15);
                           },
+                          shrinkWrap: true,
                           itemCount: images.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -226,7 +229,6 @@ class ProfileScreen extends StatelessWidget {
                               child: CardWidget(
                                 assetImage: images[index],
                                 showSaveIcon: false,
-                                
                               ),
                             );
                           },
@@ -237,7 +239,7 @@ class ProfileScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.all(0),
                         shrinkWrap: true,
-
+                          
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
@@ -271,8 +273,15 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
+                           
+                  ],
+                ),
+                            
+                ),
+              ),
+            
+           
+            ],
           ),
         ],
       ),

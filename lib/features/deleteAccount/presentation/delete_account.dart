@@ -78,10 +78,9 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: customColors.textColor,
                     ),
-                    const SizedBox(height: 30.0),
-
+                     SizedBox(height: 30.0),
                     Container(
-                      padding: const EdgeInsets.all(14.0),
+                      padding:  EdgeInsets.all(14.0),
                       decoration: BoxDecoration(
                         color: customColors.boxyellow,
                         borderRadius: BorderRadius.circular(10.0),
@@ -95,15 +94,14 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                             onChanged: (value) {
                               setState(() {
                                 if (_selectedOption == value) {
-                                  _selectedOption = null; // Unselect
+                                  _selectedOption = null;
                                 } else {
-                                  _selectedOption = value; // Select
+                                  _selectedOption = value;
                                 }
                               });
                             },
-                            activeColor: customColors.textColor,
+                            activeColor:  customColors.buttonColors.first,
                           ),
-
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,10 +126,9 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20.0),
-
+                     SizedBox(height: 20.0),
                     Container(
-                      padding: const EdgeInsets.all(14.0),
+                      padding:  EdgeInsets.all(14.0),
                       decoration: BoxDecoration(
                         color: customColors.redbox,
                         borderRadius: BorderRadius.circular(10.0),
@@ -154,7 +151,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                     }
                                   });
                                 },
-                                activeColor: customColors.textColor,
+                                activeColor: customColors.buttonColors.first,
                               ),
 
                               Expanded(
@@ -168,7 +165,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                           PoppinsFontWeightVariant.regular,
                                       color: customColors.redlight,
                                     ),
-                                    const SizedBox(height: 8.0),
+                                     SizedBox(height: 8.0),
                                     PoppinsText(
                                       "All your data will be permanently removed, including watch history, preferences, profiles, downloads, payment data, and saved settings.",
                                       fontSize: PoppinsFontSizeVariant.size16,
