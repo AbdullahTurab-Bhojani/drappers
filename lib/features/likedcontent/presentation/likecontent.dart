@@ -203,11 +203,218 @@ class _LikecontentState extends State<Likecontent>
                          Expanded(child: Column(
                           children: [
                             Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("data"),  Text("data"),
+                            PoppinsText(
+                              'Reels',
+                              fontSize: PoppinsFontSizeVariant.size16,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                              color: customColors.textColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                context.goNamed(AppRoutes.reelWidget.name);
+                              },
+                              child: AppButton(
+                                buttonSize: Size(80, 25),
+                                color: Colors.transparent,
+                                borderColor: customColors.textColor,
+                                borderWidth: 1,
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                border: true,
+                                onPressed: () {
+                                  context.goNamed(AppRoutes.reelWidget.name);
+                                },
+                                title: "View More",
+                              ),
+                            ),
                           ],
-                         ),
-
+                        ),
+                        SizedBox(height: 20),
+                        SizedBox(
+                          height: 273,
+                          child: ListView.separated(
+                            padding: EdgeInsets.zero,
+                            clipBehavior: Clip.none,
+                            scrollDirection: Axis.horizontal,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(width: 15),
+                            itemCount: reelimages.length,
+                            itemBuilder: (context, index) {
+                              return ReelcardWidget(
+                                reelCardHeight: 273,
+                                reelCardWidth: 149,
+                                fontSizeVariant: PoppinsFontSizeVariant.size12,
+                                assetImagePath: reelimages[index],
+                                title: reelTitles[index],
+                                showSaveIcon: false,
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                        Divider(
+                          height: 1, thickness: 0.5, color: customColors.greyColor,
+                        ),
+                        SizedBox(height: 20),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              PoppinsText(
+                                'Videos',
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: customColors.textColor,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  context.goNamed(AppRoutes.reelWidget.name);
+                                },
+                                child: AppButton(
+                                  buttonSize: Size(80, 25),
+                                  color: Colors.transparent,
+                                  borderColor: customColors.textColor,
+                                  borderWidth: 1,
+                                  fontSize: PoppinsFontSizeVariant.size12,
+                                  fontWeight: PoppinsFontWeightVariant.regular,
+                                  border: true,
+                                  onPressed: () {
+                                    context.goNamed(AppRoutes.reelWidget.name);
+                                  },
+                                  title: "View More",
+                                ),
+                              ),
+                              Expanded(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: 20),
+                                            child: ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              itemCount: _podcasts.length,
+                                              itemBuilder: (context, index) {
+                                                final podcast = _podcasts[index]['data'] as watch_History;
+                                                double sliderValue = _podcasts[index]['slider'];
+                                                return  Padding(
+                                                  padding: EdgeInsets.only(bottom: 20),
+                                                  child: IntrinsicHeight(
+                                                    child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Container(
+                                width: 120, height: 173,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(podcast.imagePath),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    PoppinsText(
+                                      podcast.title,
+                                      color: customColors.textColor,
+                                      fontSize: PoppinsFontSizeVariant.size16,
+                                      fontWeight: PoppinsFontWeightVariant.medium,
+                                      textOverflow: TextOverflow.ellipsis,
+                                    ),
+                                    SizedBox(height: 20),
+                                    PoppinsText(
+                                      podcast.description,
+                                      fontSize: PoppinsFontSizeVariant.size14,
+                                      fontWeight: PoppinsFontWeightVariant.regular,
+                                      color: customColors.greyColor,
+                                      maxLines: 2,
+                                      textOverflow: TextOverflow.ellipsis,
+                                    ),
+                                    SizedBox(height: 20),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: SliderTheme(
+                                            data: SliderTheme.of(context)
+                                                .copyWith(
+                                                  trackHeight: 3,
+                                                  thumbShape:
+                                                      RoundSliderThumbShape(
+                                                        enabledThumbRadius: 0,
+                                                      ),
+                                                  overlayShape:
+                                                      RoundSliderOverlayShape(
+                                                        overlayRadius: 0,
+                                                      ),
+                                                ),
+                                            child: Slider(
+                                              activeColor: Color(0xFF0072FF),
+                                              inactiveColor: Color(0xFF00002A),
+                                              value: sliderValue,
+                                              min: 0,
+                                              max: 100,
+                                              onChanged: (v) {
+                                                setState(() {
+                                                  _podcasts[index]['slider'] = v;
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 8),
+                                        PoppinsText(
+                                          '-12:34',
+                                          fontSize: PoppinsFontSizeVariant.size10,
+                                          fontWeight: PoppinsFontWeightVariant.regular,
+                                          color: customColors.textColor,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 20),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            height: 40, width: 267.86,
+                                            child: AppButton(
+                                              onPressed: () {},
+                                              title: 'Continue',
+                                              buttonSize: Size(double.infinity, 40),
+                                              prefixIcon: Image.asset(
+                                                Assets.images.playstrokeicon.path,
+                                                width: 14,
+                                                height: 14,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 20),
+                                        Image.asset(
+                                          Assets.images.cancelicon.path,
+                                          height: 40,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                                                    ),
+                                                  ),
+                                                );
+                                                }
+                                                ),),)
+                            ],
+                                                    ),
+                    
+                              ],
+                            ),
+                          ),
+                        SizedBox(height: 20),
                           ],
                          )),
                            Expanded(
