@@ -81,32 +81,33 @@ class ProfileScreen extends StatelessWidget {
           Positioned.fill(
             child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
           ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                AppMainBar(
-                  leadingText: "Profile",
-                  width: 120,
-                  title: "",
-                  centerTitle: false,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  actions: [
-                    InkWell(
-                      onTap: () {
-                        context.pushNamed(AppRoutes.editprofile.name);
-                      },
-                      child: PoppinsText(
-                        "Edit",
-                        fontSize: PoppinsFontSizeVariant.size14,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                      ),
+          Column(
+            children: [
+              AppMainBar(
+                leadingText: "Profile",
+                width: 120,
+                title: "",
+                centerTitle: false,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                actions: [
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.editprofile.name);
+                    },
+                    child: PoppinsText(
+                      "Edit",
+                      fontSize: PoppinsFontSizeVariant.size14,
+                      fontWeight: PoppinsFontWeightVariant.medium,
                     ),
-                    SizedBox(width: 20),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Column(
+                  ),
+                  SizedBox(width: 20),
+                ],
+              ),
+              SizedBox(height: 50),
+              Expanded(
+                child: SingleChildScrollView(
+                  child:   Column(
                   children: [
                     CircleAvatar(
                       radius: 60,
@@ -124,9 +125,7 @@ class ProfileScreen extends StatelessWidget {
                       color: customColors.textColor,
                     ),
                     SizedBox(height: 20),
-                  ],
-                ),
-                Padding(
+                          Padding(
                   // padding: EdgeInsets.only(left: 20, right: 20),
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -237,7 +236,7 @@ class ProfileScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.all(0),
                         shrinkWrap: true,
-
+                          
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
@@ -271,8 +270,15 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
+                           
+                  ],
+                ),
+                            
+                ),
+              ),
+            
+           
+            ],
           ),
         ],
       ),
