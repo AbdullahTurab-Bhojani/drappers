@@ -61,13 +61,13 @@ class _ApplyPitchState extends State<ApplyPitch> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 20),
+                  SizedBox(height: 30),
                   PoppinsText(
                     "Submit Your Pitch",
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
                   ),
-                  SizedBox(height: 18),
+                  SizedBox(height: 8),
                   PoppinsText(
                     "Apply to appeal on Meet the Drapers and pitch your startup to investors.",
                     fontSize: PoppinsFontSizeVariant.size12,
@@ -75,7 +75,6 @@ class _ApplyPitchState extends State<ApplyPitch> {
                     height: 1.7,
                   ),
                   SizedBox(height: 16),
-            
                   NewTextField(
                     fieldbg: AppColors.tfield,
                     controller: _fullNameController,
@@ -84,7 +83,6 @@ class _ApplyPitchState extends State<ApplyPitch> {
                     hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: customColors.textColor),
                   ),
                   SizedBox(height: 16),
-            
                   NewTextField(
                     fieldbg: AppColors.tfield,
                     controller: _startupController,
@@ -116,7 +114,6 @@ class _ApplyPitchState extends State<ApplyPitch> {
                     height: 1.7,
                   ),
                   SizedBox(height: 16),
-            
                   DropDownField(
                     controller: _locationController,
                     labelText: "Location*",
@@ -135,7 +132,6 @@ class _ApplyPitchState extends State<ApplyPitch> {
                     ),
                   ),
                   SizedBox(height: 16),
-            
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.all(12),
@@ -182,7 +178,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                   ),
                   SizedBox(height: 30),
                   Container(
-                    height: 50, width: 390,
+                    height: 45, width: 390,
                     child: AppButton(
                       onPressed: () {
                         context.goNamed(AppRoutes.home.name);
@@ -190,7 +186,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                       title: 'Submit',
                     ),
                   ),
-                  SizedBox(height: 80),
+                  SizedBox(height: 50),
                 ],
               ),
             ),
