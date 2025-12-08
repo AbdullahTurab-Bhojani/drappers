@@ -91,7 +91,7 @@ class _LikecontentState extends State<Likecontent>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -161,7 +161,6 @@ class _LikecontentState extends State<Likecontent>
                 SizedBox(width: 20),
               ],
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: Container(
@@ -187,6 +186,7 @@ class _LikecontentState extends State<Likecontent>
                     fontWeight: FontWeight.w600,
                   ),
                   tabs: const [
+                    Tab(text: 'All'),
                     Tab(text: "Videos"),
                     Tab(text: "Reels"),
                   ],
@@ -200,6 +200,16 @@ class _LikecontentState extends State<Likecontent>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
+                         Expanded(child: Column(
+                          children: [
+                            Row(
+                          children: [
+                            Text("data"),  Text("data"),
+                          ],
+                         ),
+
+                          ],
+                         )),
                            Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -217,7 +227,7 @@ class _LikecontentState extends State<Likecontent>
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Container(
-                              width: 120,
+                              width: 120, height: 173,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(podcast.imagePath),
@@ -233,6 +243,7 @@ class _LikecontentState extends State<Likecontent>
                                 children: [
                                   PoppinsText(
                                     podcast.title,
+                                    color: customColors.textColor,
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
                                     textOverflow: TextOverflow.ellipsis,
@@ -241,9 +252,8 @@ class _LikecontentState extends State<Likecontent>
                                   PoppinsText(
                                     podcast.description,
                                     fontSize: PoppinsFontSizeVariant.size14,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    color: Colors.grey,
+                                    fontWeight: PoppinsFontWeightVariant.regular,
+                                    color: customColors.greyColor,
                                     maxLines: 2,
                                     textOverflow: TextOverflow.ellipsis,
                                   ),
@@ -282,9 +292,8 @@ class _LikecontentState extends State<Likecontent>
                                       PoppinsText(
                                         '-12:34',
                                         fontSize: PoppinsFontSizeVariant.size10,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.regular,
-                                        color: AppColors.wDark,
+                                        fontWeight: PoppinsFontWeightVariant.regular,
+                                        color: customColors.textColor,
                                       ),
                                     ],
                                   ),
@@ -292,14 +301,17 @@ class _LikecontentState extends State<Likecontent>
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: AppButton(
-                                          onPressed: () {},
-                                          title: 'Continue',
-                                          buttonSize: Size(double.infinity, 40),
-                                          prefixIcon: Image.asset(
-                                            Assets.images.playstrokeicon.path,
-                                            width: 14,
-                                            height: 14,
+                                        child: Container(
+                                          height: 40, width: 267.86,
+                                          child: AppButton(
+                                            onPressed: () {},
+                                            title: 'Continue',
+                                            buttonSize: Size(double.infinity, 40),
+                                            prefixIcon: Image.asset(
+                                              Assets.images.playstrokeicon.path,
+                                              width: 14,
+                                              height: 14,
+                                            ),
                                           ),
                                         ),
                                       ),

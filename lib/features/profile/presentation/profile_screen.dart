@@ -218,6 +218,7 @@ class ProfileScreen extends StatelessWidget {
                           separatorBuilder: (context, index) {
                             return SizedBox(width: 15);
                           },
+                          shrinkWrap: true,
                           itemCount: images.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -228,7 +229,6 @@ class ProfileScreen extends StatelessWidget {
                               child: CardWidget(
                                 assetImage: images[index],
                                 showSaveIcon: false,
-                                
                               ),
                             );
                           },
