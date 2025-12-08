@@ -94,7 +94,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
             ),
             decoration: InputDecoration(
               filled: true,
-              fillColor: customColors.lightGray,
+              fillColor: customColors.containergrey,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 10.0,
                 vertical: 10.0,
