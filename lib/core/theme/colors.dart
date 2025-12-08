@@ -39,6 +39,7 @@ abstract final class AppColors {
   static const searchbarbg = Color(0xff19193E);
   static const color1A1E24 = Color(0xff1A1E24);
     static const redF81149 = Color(0xffF81149);
+    static const white0xffbdbdbe = Color(0xffbdbdbe);
 
 
   // Dark Theme //

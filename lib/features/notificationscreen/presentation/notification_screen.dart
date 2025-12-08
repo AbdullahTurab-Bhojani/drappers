@@ -115,7 +115,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               elevation: 0,
               actions: [
                 Padding(
-                  padding: EdgeInsets.only(right: 16),
+                  padding: EdgeInsets.only(right: 25),
                   child: GestureDetector(
                     onTap: () {
                       context.pushNamed(AppRoutes.notificationSetting.name);
