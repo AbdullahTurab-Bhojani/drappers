@@ -60,14 +60,14 @@ class _SavedreelState extends State<Savedreel> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               actions: [
-                Padding(
-                  padding: EdgeInsets.only(right: 16),
-                  child: Image.asset(
-                    "assets/images/Searchicon.png",
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.only(right: 16),
+                //   child: Image.asset(
+                //     "assets/images/Searchicon.png",
+                //     width: 20,
+                //     height: 20,
+                //   ),
+                // ),
               ],
             ),
             Expanded(
@@ -86,8 +86,8 @@ class _SavedreelState extends State<Savedreel> {
                     return ReelcardWidget(
                       assetImagePath: reelimages[index],
                       title: reelTitles[index],
-                      reelCardHeight: 385,
-                      reelCardWidth: 180,
+                      reelCardHeight: 358,
+                      reelCardWidth: 195,
                       fontSizeVariant: PoppinsFontSizeVariant.size14,
                       showSaveIcon: true,
                     );
