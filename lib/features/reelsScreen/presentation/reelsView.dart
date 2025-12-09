@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
 class ReelsviewScreen extends StatefulWidget {
-  const ReelsviewScreen({super.key});
+  final bool showSaveIcon;
 
+  const ReelsviewScreen({super.key, this.showSaveIcon = false});
   @override
   State<ReelsviewScreen> createState() => _ReelsviewScreenState();
 }
@@ -218,8 +220,10 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {},
+                  InkWell(
+                    onTap: () {
+                      PopupmenuWidget(showSaveIcon: widget.showSaveIcon);
+                    },
                     child: Image.asset(
                       "assets/images/3dotsicon.png",
                       height: 24,

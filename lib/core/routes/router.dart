@@ -232,7 +232,7 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.newliveScreen.name,
         builder: (context, state) => newliveScreen(),
       ),
-         GoRoute(
+      GoRoute(
         path: AppRoutes.LivepitchesScreen.path,
         name: AppRoutes.LivepitchesScreen.name,
         builder: (context, state) => LivepitchesScreen(),
