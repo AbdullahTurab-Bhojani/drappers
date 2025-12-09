@@ -6,8 +6,9 @@ import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
 class ReelsviewScreen extends StatefulWidget {
-  const ReelsviewScreen({super.key});
+  final bool showSaveIcon;
 
+  const ReelsviewScreen({super.key, this.showSaveIcon = false});
   @override
   State<ReelsviewScreen> createState() => _ReelsviewScreenState();
 }
