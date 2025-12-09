@@ -172,7 +172,6 @@ class EditprofileScreen extends StatelessWidget {
                         //     print('Entered code: $code');
                         //   },
                         // ),
-                        SizedBox(height: 15),
 
                         // PhoneNumberInputField(
                         //   onChanged: (fullNumber) {
@@ -211,10 +210,6 @@ class EditprofileScreen extends StatelessWidget {
                             print("OTP API CALL HERE");
                           },
                         ),
-
-
-
-
 
                         AppButton(
                           onPressed: () {

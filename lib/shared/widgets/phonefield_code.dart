@@ -144,6 +144,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
                   Expanded(
                     child: TextFormField(
+                      
                       controller: widget.phoneController,
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
@@ -161,6 +162,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                           showSendButton = value.length == 10;
                         });
                       },
+                      
                     ),
                   ),
 
