@@ -68,7 +68,8 @@ class EditprofileScreen extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       Container(
-                        height: 114.82, width: 114.82,
+                        height: 114.82,
+                        width: 114.82,
                         child: CircleAvatar(
                           radius: 60,
                           backgroundColor: Colors.transparent,
@@ -171,7 +172,6 @@ class EditprofileScreen extends StatelessWidget {
                         //     print('Entered code: $code');
                         //   },
                         // ),
-                        SizedBox(height: 15),
 
                         // PhoneNumberInputField(
                         //   onChanged: (fullNumber) {
@@ -179,28 +179,28 @@ class EditprofileScreen extends StatelessWidget {
                         //   },
                         // ),
                         SizedBox(height: 15),
-                        NewTextField(
-                          fieldbg: AppColors.tfield,
-                          controller: _phoneController,
-                          labelText: "Phone Number*",
-                          hintText: "03XXXXXXXXX",
-                          hintStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          filledColor: AppColors.tfield,
-                          keyboardType: TextInputType.phone,
-                          // validator: (value) {
-                          //   if (value == null || value.trim().isEmpty) {
-                          //     return "Phone number required";
-                          //   }
-                          //   if (value.length < 11) return "Enter valid phone";
-                          //   return null;
-                          // },
-                        ),
 
-                        SizedBox(height: 25),
+                        // NewTextField(
+                        //   fieldbg: AppColors.tfield,
+                        //   controller: _phoneController,
+                        //   labelText: "Phone Number*",
+                        //   hintText: "03XXXXXXXXX",
+                        //   hintStyle: TextStyle(
+                        //     fontSize: 16,
+                        //     fontWeight: FontWeight.w400,
+                        //   ),
+                        //   filledColor: AppColors.tfield,
+                        //   keyboardType: TextInputType.phone,
+                        //   // validator: (value) {
+                        //   //   if (value == null || value.trim().isEmpty) {
+                        //   //     return "Phone number required";
+                        //   //   }
+                        //   //   if (value.length < 11) return "Enter valid phone";
+                        //   //   return null;
+                        //   // },
+                        // ),
 
+                        // SizedBox(height: 25),
                         PhoneOtpField(
                           phoneController: phoneController,
                           otpController: otpController,
@@ -210,6 +210,7 @@ class EditprofileScreen extends StatelessWidget {
                             print("OTP API CALL HERE");
                           },
                         ),
+
                         AppButton(
                           onPressed: () {
                             Navigator.of(context).pop();

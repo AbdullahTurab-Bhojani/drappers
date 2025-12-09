@@ -144,6 +144,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
                   Expanded(
                     child: TextFormField(
+                      
                       controller: widget.phoneController,
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
@@ -161,6 +162,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                           showSendButton = value.length == 10;
                         });
                       },
+                      
                     ),
                   ),
 
@@ -222,7 +224,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                     fillColor: AppColors.color101317,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      
                     ),
                   ),
                   onChanged: (val) => _onOtpChanged(index, val),
@@ -230,8 +231,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
               );
             }),
           ),
-
-        const SizedBox(height: 30),
       ],
     );
   }
