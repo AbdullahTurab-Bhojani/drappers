@@ -5,19 +5,9 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../shared/widgets/cardwidget/card_widget.dart';
+import '../../../shared/widgets/continue_watching_viewmore.dart';
+import '../../../shared/widgets/historywatchitemtile.dart';
 import '../../../shared/widgets/reelcard/reelcard_widget.dart';
-class watch_History {
-  final String title;
-  final String description;
-  final String imagePath;
-
-  watch_History({
-    required this.title,
-    required this.description,
-    required this.imagePath,
-  });
-}
 
 class Likecontent extends StatefulWidget {
   const Likecontent({super.key});
@@ -26,76 +16,26 @@ class Likecontent extends StatefulWidget {
   State<Likecontent> createState() => _LikecontentState();
 }
 
-List trendingimages = [
-  Assets.images.trendingshowimage1.path,
-  Assets.images.trendingshowimage2.path,
-  Assets.images.trendingshowimage3.path,
-  Assets.images.trendingshowimage4.path,
-  Assets.images.trendingshowimage5.path,
-  Assets.images.trendingshowimage6.path,
-  Assets.images.trendingshowimage7.path,
-  Assets.images.trendingshowimage3.path,
-  Assets.images.trendingshowimage4.path,
-  Assets.images.trendingshowimage5.path,
-];
-
 class _LikecontentState extends State<Likecontent>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<Map<String, dynamic>> _podcasts = [
-    {
-      'data': watch_History(
-        title: 'Finale – Meet The Drapers \nSeason 07 (2025)',
-        description:
-            'Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode,',
-        imagePath: Assets.images.podcastimage1.path,
-      ),
-      'slider': 60.0,
-    },
-    {
-      'data': watch_History(
-        title: 'Episode 2 – Startup Stories',
-        description:
-            'Dive into inspiring stories of new entrepreneurs and their journey.',
-        imagePath: Assets.images.podcastimage2.path,
-      ),
-      'slider': 20.0,
-    },
-    {
-      'data': watch_History(
-        title: 'Episode 3 – Tech Innovations',
-        description: 'Latest updates on tech, AI, and innovative startups.',
-        imagePath: Assets.images.podcastimage3.path,
-      ),
-      'slider': 40.0,
-    },
-    {
-      'data': watch_History(
-        title: 'Episode 2 – Startup Stories',
-        description:
-            'Dive into inspiring stories of new entrepreneurs and their journey.',
-        imagePath: Assets.images.podcastimage2.path,
-      ),
-      'slider': 20.0,
-    },
-     {
-      'data': watch_History(
-        title: 'Episode 3 – Tech Innovations',
-        description: 'Latest updates on tech, AI, and innovative startups.',
-        imagePath: Assets.images.podcastimage3.path,
-      ),
-      'slider': 40.0,
-    },
-  ];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(_onTabChange);
+  }
+
+  void _onTabChange() {
+    if (_tabController.indexIsChanging && mounted) {
+      setState(() {});
+    }
   }
 
   @override
   void dispose() {
+    _tabController.removeListener(_onTabChange);
     _tabController.dispose();
     super.dispose();
   }
@@ -118,6 +58,44 @@ class _LikecontentState extends State<Likecontent>
       'The Frontier - Meet The Drappers',
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
+    final List<Map<String, dynamic>> historyItems = const [
+      {
+        'image': 'Assets.images.podcastimage1.path',
+        'title': 'Finale – Meet The Drapers Season 07 (2025)',
+        'subtitle': 'EP.5 - YAT SIU',
+        'remaining': '-12:34',
+        'showSave': true,
+        'progress': 75.0,
+      },
+      {
+        'image': 'Assets.images.podcastimage2.path',
+        'title': 'Episode 2 – Startup Stories',
+        'subtitle': 'Dive into inspiring stories of new entrepreneurs...',
+        'remaining': '-12:34',
+        'showSave': false,
+        'progress': 40.0,
+      },
+      {
+        'image': 'Assets.images.podcastimage3.path',
+        'title': 'Episode 3 – Tech Innovation',
+        'subtitle': 'Latest updates on tech, AI, and innovative startups.',
+        'remaining': '-12:34',
+        'showSave': true,
+        'progress': 60.0,
+      },
+    ];
+    final Map<String, dynamic> podcastData = {
+      'podcast': Podcast(
+        imagePath: Assets.images.podcastimage3.path,
+        title: 'Podcast Title Placeholder',
+        description: 'This is a description placeholder for the podcast item.',
+      ),
+      'slider': 75.0,
+    };
+
+    void _onSliderChange(double v, int index) {}
+
+    void _onContinue(int index) {}
 
     return Scaffold(
       body: Container(
@@ -136,7 +114,7 @@ class _LikecontentState extends State<Likecontent>
               leading: GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 5),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
@@ -148,423 +126,263 @@ class _LikecontentState extends State<Likecontent>
               centerTitle: false,
               backgroundColor: Colors.transparent,
               elevation: 0,
-              actions: [
-                InkWell(
-                  onTap: () {
-                    context.pushNamed(AppRoutes.searchscreen.name);
-                  },
-                  child: Image.asset(
-                    Assets.images.searchicon.path,
-                    color: customColors.textColor,
-                  ),
-                ),
-                SizedBox(width: 20),
-              ],
+              // actions: [
+              //   Image.asset(
+              //     Assets.images.searchicon.path,
+              //     color: customColors.textColor,
+              //   ),
+              //   SizedBox(width: 20),
+              // ],
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.transparent)),
+            SizedBox(height: 20),
+
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TabBar(
+                tabAlignment: TabAlignment.start,
+                controller: _tabController,
+                isScrollable: true,
+                dividerHeight: 0,
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicator: BoxDecoration(
+                  color: customColors.textColor,
+
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                child: TabBar(
-                  indicator: BoxDecoration(
-                    color: customColors.textColor,
-                    borderRadius: BorderRadius.circular(30)
-                  ),
-                  dividerHeight: 0,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  controller: _tabController,
-                
-                  tabAlignment: TabAlignment.start,
-                  isScrollable: true,
-                  indicatorColor: customColors.textColor,
-                  labelColor: customColors.blackshade,
-                  unselectedLabelColor: customColors.labelColor,
-                  labelStyle: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  tabs: const [
-                    Tab(text: 'All'),
-                    Tab(text: "Videos"),
-                    Tab(text: "Reels"),
-                  ],
+                labelColor: customColors.blackshade,
+                unselectedLabelColor: customColors.labelColor,
+                labelStyle: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
                 ),
+                labelPadding: EdgeInsets.symmetric(horizontal: 7),
+
+                tabs: [
+                  Container(
+                    height: 40,
+                    padding: const EdgeInsets.symmetric(horizontal: 17),
+                    decoration: BoxDecoration(
+                      border: _tabController.index == 0
+                          ? null
+                          : Border.all(
+                              color: customColors.labelColor,
+                              width: 0.5,
+                            ),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Tab(text: "All"),
+                  ),
+                  Container(
+                    height: 40,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      border: _tabController.index == 1
+                          ? null
+                          : Border.all(
+                              color: customColors.labelColor,
+                              width: 0.5,
+                            ),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Tab(text: "Videos"),
+                  ),
+                  Container(
+                    height: 40,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      border: _tabController.index == 2
+                          ? null
+                          : Border.all(
+                              color: customColors.labelColor,
+                              width: 0.5,
+                            ),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Tab(text: "Reels"),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 30),
+
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                         Expanded(child: Column(
-                          children: [
-                            Row(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  /// ------------------------------------------------------------------
+                  /// TAB 1 — ALL (Combined Reels + Videos)
+                  /// ------------------------------------------------------------------
+                  ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            PoppinsText(
+                            Text(
                               'Reels',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                context.goNamed(AppRoutes.reelWidget.name);
-                              },
-                              child: AppButton(
-                                buttonSize: Size(80, 25),
-                                color: Colors.transparent,
-                                borderColor: customColors.textColor,
-                                borderWidth: 1,
-                                fontSize: PoppinsFontSizeVariant.size12,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                border: true,
-                                onPressed: () {
-                                  context.goNamed(AppRoutes.reelWidget.name);
-                                },
-                                title: "View More",
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: customColors.textColor,
                               ),
+                            ),
+                            AppButton(
+                              buttonSize: Size(80, 25),
+                              color: Colors.transparent,
+                              border: true,
+                              onPressed: () {
+                                context.goNamed(AppRoutes.trendingshow.name);
+                              },
+                              title: "View More",
+                              borderColor: customColors.textColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
-                        SizedBox(
-                          height: 273,
+                      ),
+                      const SizedBox(height: 16),
+
+                      SizedBox(
+                        height: 250,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: ListView.separated(
-                            padding: EdgeInsets.zero,
-                            clipBehavior: Clip.none,
                             scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
                             itemCount: reelimages.length,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(width: 10),
                             itemBuilder: (context, index) {
                               return ReelcardWidget(
-                                reelCardHeight: 273,
-                                reelCardWidth: 149,
-                                fontSizeVariant: PoppinsFontSizeVariant.size12,
                                 assetImagePath: reelimages[index],
                                 title: reelTitles[index],
-                                showSaveIcon: false,
+                                reelCardHeight: 273,
+                                reelCardWidth: 149,
+                                fontSizeVariant: PoppinsFontSizeVariant.size14,
+                                showSaveIcon: true,
                               );
                             },
                           ),
                         ),
-                        SizedBox(height: 30),
-                        Divider(
-                          height: 1, thickness: 0.5, color: customColors.greyColor,
-                        ),
-                        SizedBox(height: 20),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PoppinsText(
-                                'Videos',
-                                fontSize: PoppinsFontSizeVariant.size16,
-                                fontWeight: PoppinsFontWeightVariant.medium,
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Videos',
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
                                 color: customColors.textColor,
                               ),
-                              InkWell(
-                                onTap: () {
-                                  context.goNamed(AppRoutes.reelWidget.name);
-                                },
-                                child: AppButton(
-                                  buttonSize: Size(80, 25),
-                                  color: Colors.transparent,
-                                  borderColor: customColors.textColor,
-                                  borderWidth: 1,
-                                  fontSize: PoppinsFontSizeVariant.size12,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
-                                  border: true,
-                                  onPressed: () {
-                                    context.goNamed(AppRoutes.reelWidget.name);
-                                  },
-                                  title: "View More",
-                                ),
-                              ),
-                              Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 20),
-                                            child: ListView.builder(
-                                              padding: EdgeInsets.zero,
-                                              itemCount: _podcasts.length,
-                                              itemBuilder: (context, index) {
-                                                final podcast = _podcasts[index]['data'] as watch_History;
-                                                double sliderValue = _podcasts[index]['slider'];
-                                                return  Padding(
-                                                  padding: EdgeInsets.only(bottom: 20),
-                                                  child: IntrinsicHeight(
-                                                    child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Container(
-                                width: 120, height: 173,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(podcast.imagePath),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PoppinsText(
-                                      podcast.title,
-                                      color: customColors.textColor,
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight: PoppinsFontWeightVariant.medium,
-                                      textOverflow: TextOverflow.ellipsis,
-                                    ),
-                                    SizedBox(height: 20),
-                                    PoppinsText(
-                                      podcast.description,
-                                      fontSize: PoppinsFontSizeVariant.size14,
-                                      fontWeight: PoppinsFontWeightVariant.regular,
-                                      color: customColors.greyColor,
-                                      maxLines: 2,
-                                      textOverflow: TextOverflow.ellipsis,
-                                    ),
-                                    SizedBox(height: 20),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: SliderTheme(
-                                            data: SliderTheme.of(context)
-                                                .copyWith(
-                                                  trackHeight: 3,
-                                                  thumbShape:
-                                                      RoundSliderThumbShape(
-                                                        enabledThumbRadius: 0,
-                                                      ),
-                                                  overlayShape:
-                                                      RoundSliderOverlayShape(
-                                                        overlayRadius: 0,
-                                                      ),
-                                                ),
-                                            child: Slider(
-                                              activeColor: Color(0xFF0072FF),
-                                              inactiveColor: Color(0xFF00002A),
-                                              value: sliderValue,
-                                              min: 0,
-                                              max: 100,
-                                              onChanged: (v) {
-                                                setState(() {
-                                                  _podcasts[index]['slider'] = v;
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(width: 8),
-                                        PoppinsText(
-                                          '-12:34',
-                                          fontSize: PoppinsFontSizeVariant.size10,
-                                          fontWeight: PoppinsFontWeightVariant.regular,
-                                          color: customColors.textColor,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 20),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            height: 40, width: 267.86,
-                                            child: AppButton(
-                                              onPressed: () {},
-                                              title: 'Continue',
-                                              buttonSize: Size(double.infinity, 40),
-                                              prefixIcon: Image.asset(
-                                                Assets.images.playstrokeicon.path,
-                                                width: 14,
-                                                height: 14,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(width: 20),
-                                        Image.asset(
-                                          Assets.images.cancelicon.path,
-                                          height: 40,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                                                    ),
-                                                  ),
-                                                );
-                                                }
-                                                ),),)
-                            ],
-                                                    ),
-                    
-                              ],
                             ),
-                          ),
-                        SizedBox(height: 20),
-                          ],
-                         )),
-                           Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: _podcasts.length,
-                  itemBuilder: (context, index) {
-                    final podcast = _podcasts[index]['data'] as watch_History;
-                    double sliderValue = _podcasts[index]['slider'];
-
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: IntrinsicHeight(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Container(
-                              width: 120, height: 173,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(podcast.imagePath),
-                                  fit: BoxFit.cover,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                            SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  PoppinsText(
-                                    podcast.title,
-                                    color: customColors.textColor,
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                    textOverflow: TextOverflow.ellipsis,
-                                  ),
-                                  SizedBox(height: 20),
-                                  PoppinsText(
-                                    podcast.description,
-                                    fontSize: PoppinsFontSizeVariant.size14,
-                                    fontWeight: PoppinsFontWeightVariant.regular,
-                                    color: customColors.greyColor,
-                                    maxLines: 2,
-                                    textOverflow: TextOverflow.ellipsis,
-                                  ),
-                                  SizedBox(height: 20),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: SliderTheme(
-                                          data: SliderTheme.of(context)
-                                              .copyWith(
-                                                trackHeight: 3,
-                                                thumbShape:
-                                                    RoundSliderThumbShape(
-                                                      enabledThumbRadius: 0,
-                                                    ),
-                                                overlayShape:
-                                                    RoundSliderOverlayShape(
-                                                      overlayRadius: 0,
-                                                    ),
-                                              ),
-                                          child: Slider(
-                                            activeColor: Color(0xFF0072FF),
-                                            inactiveColor: Color(0xFF00002A),
-                                            value: sliderValue,
-                                            min: 0,
-                                            max: 100,
-                                            onChanged: (v) {
-                                              setState(() {
-                                                _podcasts[index]['slider'] = v;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 8),
-                                      PoppinsText(
-                                        '-12:34',
-                                        fontSize: PoppinsFontSizeVariant.size10,
-                                        fontWeight: PoppinsFontWeightVariant.regular,
-                                        color: customColors.textColor,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 20),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          height: 40, width: 267.86,
-                                          child: AppButton(
-                                            onPressed: () {},
-                                            title: 'Continue',
-                                            buttonSize: Size(double.infinity, 40),
-                                            prefixIcon: Image.asset(
-                                              Assets.images.playstrokeicon.path,
-                                              width: 14,
-                                              height: 14,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 20),
-                                      Image.asset(
-                                        Assets.images.cancelicon.path,
-                                        height: 40,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                            AppButton(
+                              buttonSize: Size(80, 25),
+                              color: Colors.transparent,
+                              border: true,
+                              onPressed: () {
+                                context.goNamed(AppRoutes.trendingshow.name);
+                              },
+                              title: "View More",
+                              borderColor: customColors.textColor,
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                             ),
                           ],
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ),
-              
-                  GridView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: reelimages.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 15,
-                        childAspectRatio: 0.5,
-                      ),
-                      itemBuilder: (context, index) {
-                        return ReelcardWidget(
-                        
-                          assetImagePath: reelimages[index],
-                          title: reelTitles[index],
-                          reelCardHeight: 100,
-                          reelCardWidth: 100,
-                          fontSizeVariant: PoppinsFontSizeVariant.size14,
-                          showSaveIcon: false,
+                      const SizedBox(height: 16),
+
+                      ...historyItems.asMap().entries.map((entry) {
+                        final index = entry.key;
+                        final item = entry.value;
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 8,
+                          ),
+                          child: VideosBoxWidget(
+                            context: context,
+                            podcast: Podcast(
+                              imagePath:
+                                  item['image'].toString().contains(
+                                    'Assets.images',
+                                  )
+                                  ? Assets
+                                        .images
+                                        .podcastimage1
+                                        .path // Placeholder for asset lookup logic
+                                  : item['image'] as String,
+                              title: item['title'] as String,
+                              description: item['subtitle'] as String,
+                            ),
+                            sliderValue: item['progress'] as double,
+                            index: index,
+                            onSliderChanged: _onSliderChange,
+                            onContinuePressed: () => _onContinue(index),
+                          ),
                         );
-                      },
+                      }).toList(),
+                    ],
+                  ),
+
+                  /// ------------------------------------------------------------------
+                  /// TAB 2 — VIDEOS (Original Vertical List)
+                  /// ------------------------------------------------------------------
+                  ListView.builder(
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: historyItems.length,
+                    itemBuilder: (context, index) {
+                      final item = historyItems[index];
+                      return VideosBoxWidget(
+                        context: context,
+                        podcast: podcastData['podcast'],
+                        sliderValue: podcastData['slider'],
+                        index: index,
+                        onSliderChanged: _onSliderChange,
+                        onContinuePressed: () => _onContinue(index),
+                      );
+                    },
+                  ),
+
+                  /// ------------------------------------------------------------------
+                  /// TAB 3 — REELS (Original Grid View)
+                  /// ------------------------------------------------------------------
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 24,
+                      ),
+                      child: GridView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: reelimages.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 0.5,
+                        ),
+                        itemBuilder: (context, index) {
+                          return ReelcardWidget(
+                            assetImagePath: reelimages[index],
+                            title: reelTitles[index],
+                            reelCardHeight: 358,
+                            reelCardWidth: 195,
+                            fontSizeVariant: PoppinsFontSizeVariant.size14,
+                            showSaveIcon: true,
+                          );
+                        },
+                      ),
                     ),
-         
-                 ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
