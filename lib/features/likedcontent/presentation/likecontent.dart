@@ -236,7 +236,7 @@ class _LikecontentState extends State<Likecontent>
                               },
                               title: "View More",
                               borderColor: customColors.textColor,
-                              borderWidth: 1,
+                              borderWidth: 0.3,
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
                             ),
@@ -290,7 +290,7 @@ class _LikecontentState extends State<Likecontent>
                               },
                               title: "View More",
                               borderColor: customColors.textColor,
-                              borderWidth: 1,
+                              borderWidth: 0.3,
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
                             ),
@@ -354,32 +354,27 @@ class _LikecontentState extends State<Likecontent>
                   /// ------------------------------------------------------------------
                   /// TAB 3 — REELS (Original Grid View)
                   /// ------------------------------------------------------------------
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 24,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
+                    child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: reelimages.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.5,
                       ),
-                      child: GridView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: reelimages.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.5,
-                        ),
-                        itemBuilder: (context, index) {
-                          return ReelcardWidget(
-                            assetImagePath: reelimages[index],
-                            title: reelTitles[index],
-                            reelCardHeight: 358,
-                            reelCardWidth: 195,
-                            fontSizeVariant: PoppinsFontSizeVariant.size14,
-                            showSaveIcon: true,
-                          );
-                        },
-                      ),
+                      itemBuilder: (context, index) {
+                        return ReelcardWidget(
+                          assetImagePath: reelimages[index],
+                          title: reelTitles[index],
+                          reelCardHeight: 358,
+                          reelCardWidth: 195,
+                          fontSizeVariant: PoppinsFontSizeVariant.size14,
+                          showSaveIcon: true,
+                        );
+                      },
                     ),
                   ),
                 ],
