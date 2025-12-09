@@ -4,6 +4,7 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/buildradiotile.dart';
+import '../../../../shared/widgets/phonefield_code.dart';
 import '../../../../shared/widgets/textfield_new.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -22,6 +23,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final otpController = TextEditingController();
+
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
@@ -129,15 +132,15 @@ class _SignupScreenState extends State<SignupScreen> {
                         keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(height: 15),
-                      NewTextField(
+                      PhoneOtpField(
+                        phoneController: _phoneController,
+                        otpController: otpController,
                         fieldbg: AppColors.tfield,
-                        controller: _phoneController,
-                        labelText: "Enter your Phone Number*",
-                        hintText: "03XXXXXXXXX",
-                        filledColor: AppColors.tfield,
-                        keyboardType: TextInputType.phone,
+                        labelText: 'Phone Number*',
+                        onSendCode: () {
+                          print("OTP API CALL HERE");
+                        },
                       ),
-                      SizedBox(height: 15),
                       AppPasswordField(
                         keyboardType: TextInputType.numberWithOptions(),
                         controller: _passwordController,
@@ -153,7 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(height: 15),
                       AppPasswordField(
                         keyboardType: TextInputType.numberWithOptions(),
-                        controller: _confirmPasswordController, 
+                        controller: _confirmPasswordController,
                         labelText: "Confirm Password*",
                         hintText: "**********",
                         validator: (value) {
@@ -310,8 +313,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       shaderCallback: (bounds) =>
                                           LinearGradient(
                                             colors: customColors.buttonColors,
-                                          ).
-                                          createShader(
+                                          ).createShader(
                                             Rect.fromLTWH(
                                               0,
                                               0,
