@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
@@ -34,7 +32,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    const double horizontalPadding = 5.0;
+    const double horizontalPadding = 10.0;
 
     return Scaffold(
       body: Container(
@@ -50,24 +48,23 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
+              padding:  EdgeInsets.symmetric(
                 horizontal: horizontalPadding,
               ),
               child: AppMainBar(
                 backgroundColor: Colors.transparent,
                 title: "Settings & Preferences",
                 leading: GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Image.asset(
-                      "assets/images/backicon.png",
-                      width: 20,
-                      height: 20,
-                    ),
+                onTap: () => Navigator.of(context).pop(),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
                   ),
                 ),
-              ),
+                ))
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -119,7 +116,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    Divider(color: customColors.labelColor.withOpacity(0.1)),
+                    Divider(color: customColors.labelColor.withOpacity(0.2)),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: horizontalPadding,
@@ -148,9 +145,9 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                       ),
                     ),
                     SizedBox(height: 40),
-                    Divider(color: customColors.labelColor.withOpacity(0.1)),
+                    Divider(color: customColors.labelColor.withOpacity(0.2)),
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: horizontalPadding,
                       ),
                       child: Column(
@@ -184,8 +181,8 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: 25,
-                        right: 25,
+                        left: horizontalPadding + horizontalPadding,
+                        right: horizontalPadding + horizontalPadding,
                         top: horizontalPadding,
                         bottom: horizontalPadding,
                       ),
@@ -221,11 +218,11 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         ),
                       ),
                     ),
-                    Divider(color: customColors.labelColor.withOpacity(0.1)),
+                    Divider(color: customColors.labelColor.withOpacity(0.2)),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: 25,
-                        right: 25,
+                        left: horizontalPadding + horizontalPadding,
+                        right: horizontalPadding + horizontalPadding,
                         top: horizontalPadding,
                         bottom: horizontalPadding,
                       ),

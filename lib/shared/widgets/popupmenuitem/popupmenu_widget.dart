@@ -57,7 +57,6 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 _buildMenuItem(
                   routePath: AppRoutes.reportContent.name,
-
                   iconPath: Assets.images.reporticon.path,
                   text: 'Report',
                   customColors: customColors,
