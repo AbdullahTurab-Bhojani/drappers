@@ -180,7 +180,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                                 buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor,
-                                borderWidth: 1,
+                                borderWidth: 0.3,
                                 fontSize: PoppinsFontSizeVariant.size12,
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
