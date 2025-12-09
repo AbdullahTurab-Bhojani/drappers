@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
 class ReelsviewScreen extends StatefulWidget {
   const ReelsviewScreen({super.key});
@@ -196,43 +197,117 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
             ),
           ),
 
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 10.0,
-                left: 10.0,
-                right: 10.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.black54,
-                      radius: 20,
-                      child: Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: const CircleAvatar(
+                    backgroundColor: Colors.black54,
+                    radius: 20,
+                    child: Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.white,
+                      size: 20,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Image.asset(
-                      "assets/images/3dotsicon.png",
-                      height: 24,
-                      width: 24,
-                      color: customColors.textColor,
-                    ),
-                  ),
-                ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      barrierColor: Colors.transparent,
+                      builder: (context) {
+                        return Align(
+  alignment: Alignment.topRight,
+  child: Padding(
+    padding: const EdgeInsets.only(top: 20, right: 10),
+    child: Material(
+      elevation: 0,
+      borderRadius: BorderRadius.circular(10),
+      color: customColors.regular,
+      child: SizedBox(
+        width: 174,
+        height: 142,
+        child: Container(
+          padding:  EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _popupRow(
+                routePath: AppRoutes.reportContent.name,
+                imagePath: Assets.images.reporticon.path,
+                title: "Report",
+                customColors: customColors,
               ),
-            ),
+              _popupRow(
+                routePath: AppRoutes.reportContent.name,
+                imagePath: Assets.images.interestedicon.path,
+                title: "Interested",
+                customColors: customColors,
+              ),
+              _popupRow(
+                routePath: AppRoutes.reportContent.name,
+                imagePath: Assets.images.notinterestedicon.path,
+                title: "Not Interested",
+                customColors: customColors,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
-    );
+    ),
+  ),
+);
+
+                          
+                      },
+                    );
+                  },
+                  child: Image.asset(
+                    "assets/images/3dotsicon.png",
+                    height: 24,
+                    width: 24,
+                    color: customColors.textColor,
+                  ),
+                )
+        ])
+        )
+        ]));
+      
   }
+  Widget _popupRow({
+    required String routePath,
+  required String imagePath,
+  required String title,
+  required AppCustomColors customColors,
+}) {
+  return GestureDetector(
+    onTap: () {
+       context.pushNamed(routePath);
+    },
+    child: Row(
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Image.asset(
+          imagePath,
+          width: 22,
+          height: 22,
+        ),
+         SizedBox(width: 20),
+        PoppinsText(
+          title,
+          fontSize: PoppinsFontSizeVariant.size12,
+          fontWeight: PoppinsFontWeightVariant.medium,
+          color: customColors.textColor,
+        ),
+      ],
+    ),
+  );
 }
+}
+
+
