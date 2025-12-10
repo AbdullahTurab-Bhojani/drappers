@@ -349,6 +349,10 @@ class $AssetsImagesGen {
   AssetGenImage get deleteicon2 =>
       const AssetGenImage('assets/images/deleteicon2.png');
 
+  /// File path: assets/images/discower786.png
+  AssetGenImage get discower786 =>
+      const AssetGenImage('assets/images/discower786.png');
+
   /// File path: assets/images/documentaries1.png
   AssetGenImage get documentaries1 =>
       const AssetGenImage('assets/images/documentaries1.png');
@@ -743,6 +747,10 @@ class $AssetsImagesGen {
   AssetGenImage get videolock =>
       const AssetGenImage('assets/images/videolock.png');
 
+  /// File path: assets/images/watchlist786.png
+  AssetGenImage get watchlist786 =>
+      const AssetGenImage('assets/images/watchlist786.png');
+
   /// File path: assets/images/watchtimeicon.png
   AssetGenImage get watchtimeicon =>
       const AssetGenImage('assets/images/watchtimeicon.png');
@@ -796,6 +804,7 @@ class $AssetsImagesGen {
     cuticon3x,
     delete123,
     deleteicon2,
+    discower786,
     documentaries1,
     documentaries2,
     documentaries3,
@@ -898,6 +907,7 @@ class $AssetsImagesGen {
     trendingshowimage6,
     trendingshowimage7,
     videolock,
+    watchlist786,
     watchtimeicon,
   ];
 }
