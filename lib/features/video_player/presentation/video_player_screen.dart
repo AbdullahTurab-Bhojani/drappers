@@ -1,6 +1,8 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:video_player/video_player.dart';
+import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
 class CustomVideoPlayerScreen extends StatefulWidget {
@@ -12,34 +14,40 @@ class CustomVideoPlayerScreen extends StatefulWidget {
 }
 
 class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
+  VideoPlayerController? _controller;
   late BetterPlayerController _betterPlayerController;
-
+  String? _selectedSubtitle;
+  String? _selectedAudio;
   bool _controlsVisible = true;
   bool _isLocked = false;
   bool _showEpisodes = false;
   bool _isSpeedPopupVisible = false;
   bool _isQualityPopupVisible = false;
+  String _selectedQuality = "720p";
 
+  String _selectedSpeed = "1x";
   void _toggleEpisodes() {
     setState(() {
       _showEpisodes = !_showEpisodes;
       _isSpeedPopupVisible = false;
       _isQualityPopupVisible = false;
     });
-    // Ensure controls are visible when episode list is open
-    // NOTE: Removed call to _buildEpisodesSidebar as it's no longer used for toggling
+  }
+
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+    return "${twoDigits(duration.inHours)}:$minutes:$seconds";
   }
 
   final List<Map<String, String>> episodesData = List.generate(
     10,
     (index) => {
-      "title": index == 0
-          ? "E14 FINALE"
-          : (index % 3 == 0 ? "Semifinals 2" : "Episode ${index + 1}"),
-      "subtitle": "Meet The Drapers Season 6 (2023)",
+      "title": "Meet The Drapers Season 6 (2023)",
       "url":
           "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      "image": Assets.images.horizontalThumbnail.path, // Placeholder asset path
+      "image": Assets.images.horizontalThumbnail.path,
     },
   );
 
@@ -59,6 +67,14 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     _initializePlayer();
   }
 
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+    _betterPlayerController.dispose();
+
+    super.dispose();
+  }
+
   void _setLandscapeAndFullscreen() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
@@ -68,9 +84,74 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   }
 
   void _changeSpeed() {
-    setState(() {
-      _isSpeedPopupVisible = !_isSpeedPopupVisible;
-    });
+    showDialog(context: context, builder: (_) => _speedPopup());
+  }
+
+  void _videoQuality() {
+    final List<String> qualityOptions = ["4K", "1440p", "1080p", "720p"];
+
+    showDialog(
+      context: context,
+      builder: (_) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: Container(
+            width: 336,
+            padding: const EdgeInsets.only(
+              top: 32,
+              left: 24,
+              right: 24,
+              bottom: 24,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.dRegular,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PoppinsText(
+                      "Quality",
+                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontWeight: PoppinsFontWeightVariant.regular,
+                      color: AppColors.wDark,
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(Icons.close, color: Colors.white),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                const Divider(),
+                const SizedBox(height: 12),
+                ...qualityOptions.map(
+                  (option) =>
+                      _optionItem(option, _selectedQuality == option, () {
+                        final resolutions = _betterPlayerController
+                            .betterPlayerDataSource
+                            ?.resolutions;
+                        if (resolutions != null &&
+                            resolutions.containsKey(option)) {
+                          setState(() {
+                            _selectedQuality = option;
+                            _betterPlayerController.setResolution(
+                              resolutions[option]!,
+                            );
+                          });
+                        }
+                        Navigator.pop(context);
+                      }),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   void _initializePlayer() {
@@ -109,7 +190,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       betterPlayerDataSource: source,
     );
 
-    // ✅ FORCE ENABLE SUBTITLES AFTER LOAD
     Future.delayed(const Duration(seconds: 1), () async {
       if (_betterPlayerController.betterPlayerSubtitlesSourceList.isNotEmpty) {
         await _betterPlayerController.setupSubtitleSource(
@@ -129,7 +209,12 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     });
   }
 
-  void _toggleLock() => setState(() => _isLocked = !_isLocked);
+  void _toggleLock() {
+    setState(() {
+      _isLocked = true;
+      _controlsVisible = true;
+    });
+  }
 
   void _changeQuality() {
     showModalBottomSheet(
@@ -153,6 +238,102 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     );
   }
 
+  void _openAudioSubtitlePopup() {
+    final List<String> subtitleOptions = ["Off", "English", "Urdu", "Arabic"];
+
+    final List<String> audioOptions = ["English"];
+
+    showDialog(
+      context: context,
+      builder: (_) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: Container(
+            width: 336,
+            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+            decoration: BoxDecoration(
+              color: AppColors.dRegular,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PoppinsText(
+                      "Audio & Subtitles",
+                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontWeight: PoppinsFontWeightVariant.regular,
+                      color: AppColors.wDark,
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(Icons.close, color: Colors.white),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Divider(),
+                SizedBox(height: 12),
+                ...subtitleOptions
+                    .map(
+                      (option) =>
+                          _audioSubtitleOption(option, isSubtitle: true),
+                    )
+                    .toList(),
+                SizedBox(height: 12),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _speedPopup() {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: Center(
+        child: Container(
+          width: 336,
+          padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+          decoration: BoxDecoration(
+            color: AppColors.dRegular,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PoppinsText(
+                    "Speed",
+                    fontSize: PoppinsFontSizeVariant.size12,
+                    fontWeight: PoppinsFontWeightVariant.regular,
+                    color: AppColors.wDark,
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Icon(Icons.close, color: Colors.white),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Divider(),
+              SizedBox(height: 12),
+              _speedOption("0.5x"),
+              _speedOption("1x"),
+              _speedOption("1.5x"),
+              _speedOption("2x"),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   void _toggleSubtitles() async {
     final list = _betterPlayerController.betterPlayerSubtitlesSourceList;
 
@@ -172,118 +353,136 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   void _playEpisode(int index) {
     final source = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      // Use the URL from episodesData list
       episodesData[index]['url']!,
     );
 
     _betterPlayerController.setupDataSource(source);
   }
 
-  /// ------------------------------------------------
-  /// 🆕 NEW: Horizontal Episode Item Builder
-  /// ------------------------------------------------
   Widget _buildHorizontalEpisodeItem(Map<String, String> episode, int index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      child: GestureDetector(
-        onTap: () {
-          _playEpisode(index);
-          setState(() => _showEpisodes = false);
-        },
-        child: Container(
-          width: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Colors.black.withOpacity(0.6),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 75,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(8),
-                  ),
-                  image: DecorationImage(
-                    image: AssetImage(episode['image']!),
-                    fit: BoxFit.cover,
-                  ),
+    return GestureDetector(
+      onTap: () {
+        _playEpisode(index);
+        setState(() => _showEpisodes = false);
+      },
+      child: Container(
+        width: 255,
+        // height: 144,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 144,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(8),
                 ),
-                child: episode['title']!.contains('FINALE')
-                    ? const Center(
-                        child: Text(
-                          "E14\nFINALE",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            shadows: [
-                              Shadow(blurRadius: 3, color: Colors.black),
-                            ],
-                          ),
+                image: DecorationImage(
+                  image: AssetImage(episode['image']!),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: episode['title']!.contains('FINALE')
+                  ? const Center(
+                      child: Text(
+                        "E14\nFINALE",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          shadows: [Shadow(blurRadius: 3, color: Colors.black)],
                         ),
-                      )
-                    : null,
-              ),
+                      ),
+                    )
+                  : null,
+            ),
 
-              // 2. Text Details
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      episode['title']!,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      episode['subtitle']!,
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 10,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+            Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  PoppinsText(
+                    episode['title']!,
+                    fontSize: PoppinsFontSizeVariant.size16,
+                    fontWeight: PoppinsFontWeightVariant.medium,
+                    color: AppColors.wDark,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildEpisodesHorizontalBar() {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        height: 60,
-        decoration: BoxDecoration(color: Colors.deepPurple),
-        child: Container(
-          height: 160,
-          color: Colors.black.withOpacity(0.5),
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            itemCount: episodesData.length,
-            itemBuilder: (context, index) {
-              final episode = episodesData[index];
-              return _buildHorizontalEpisodeItem(episode, index);
+    if (!_showEpisodes) return SizedBox.shrink();
+
+    return Positioned.fill(
+      child: Stack(
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _showEpisodes = false;
+              });
             },
+            child: Container(color: Colors.transparent),
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: GestureDetector(
+              onTap: () {},
+              onVerticalDragUpdate: (details) {
+                if (details.delta.dy > 5) {
+                  setState(() {
+                    _showEpisodes = false;
+                  });
+                }
+              },
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    color: AppColors.color000032,
+                    child: PoppinsText(
+                      'E14 Finale',
+                      fontSize: PoppinsFontSizeVariant.size24,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: AppColors.wDark,
+                    ),
+                  ),
+                  Container(
+                    height: 190,
+                    color: AppColors.color040412,
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return SizedBox(width: 20);
+                      },
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.only(left: 20),
+                      itemCount: episodesData.length,
+                      itemBuilder: (context, index) {
+                        final episode = episodesData[index];
+                        return _buildHorizontalEpisodeItem(episode, index);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -310,45 +509,42 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
 
           if (_controlsVisible) _buildControls(),
 
-          // ✅ HORIZONTAL EPISODES BAR - REPLACED WITH NEW DESIGN
-          if (_showEpisodes)
-            _buildEpisodesHorizontalBar(), // <-- Using the new rich bar here
-          // The old block of code is removed/replaced by the call above:
-          /*
-          if (_showEpisodes)
-            Positioned(
-              bottom: 70,
-              left: 0,
-              right: 0,
-              child: SizedBox(
-                height: 80,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: episodes
-                      .length, // NOTE: this uses 'episodes' which is now unused
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        _playEpisode(index);
-                        setState(() => _showEpisodes = false);
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(6),
-                        padding: const EdgeInsets.all(12),
-                        color: Colors.black54,
-                        child: Center(
-                          child: Text(
-                            "EP ${index + 1}",
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          */
+          if (_showEpisodes) _buildEpisodesHorizontalBar(),
+          // /*
+          // // if (_showEpisodes)
+          // //   Positioned(
+          // //     bottom: 70,
+          // //     left: 0,
+          // //     right: 0,
+          // //     child: SizedBox(
+          // //       height: 80,
+          // //       child: ListView.builder(
+          // //         scrollDirection: Axis.horizontal,
+          // //         itemCount: episodes
+          // //             .length, // NOTE: this uses 'episodes' which is now unused
+          // //         itemBuilder: (context, index) {
+          // //           return GestureDetector(
+          // //             onTap: () {
+          // //               _playEpisode(index);
+          // //               setState(() => _showEpisodes = false);
+          // //             },
+          // //             child: Container(
+          // //               margin: const EdgeInsets.all(6),
+          // //               padding: const EdgeInsets.all(12),
+          // //               color: Colors.black54,
+          // //               child: Center(
+          // //                 child: Text(
+          // //                   "EP ${index + 1}",
+          // //                   style: const TextStyle(color: Colors.white),
+          // //                 ),
+          // //               ),
+          // //             ),
+          // //           );
+          // //         },
+          // //       ),
+          // //     ),
+          // //   ),
+          // */
         ],
       ),
     );
@@ -361,30 +557,16 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       color: Colors.black.withOpacity(0.3),
       child: Stack(
         children: [
-          // LOCK
-          Positioned(
-            left: 15,
-            top: 80,
-            child: IconButton(
-              icon: Icon(
-                _isLocked ? Icons.lock : Icons.lock_open,
-                color: Colors.white,
-                size: 35,
-              ),
-              onPressed: _toggleLock,
-            ),
-          ),
-
           if (!_isLocked)
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: const Icon(
-                      Icons.replay_10,
-                      color: Colors.white,
-                      size: 44,
+                    icon: Image.asset(
+                      Assets.images.back10seconds.path,
+                      width: 64,
+                      height: 64,
                     ),
                     onPressed: () {
                       final pos = _betterPlayerController
@@ -402,7 +584,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       _betterPlayerController.isPlaying()!
                           ? Icons.pause_circle
                           : Icons.play_circle,
-                      color: Colors.white,
                       size: 90,
                     ),
                     onPressed: () {
@@ -411,12 +592,12 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           : _betterPlayerController.play();
                     },
                   ),
-                  const SizedBox(width: 40),
+                  SizedBox(width: 40),
                   IconButton(
-                    icon: const Icon(
-                      Icons.forward_10,
-                      color: Colors.white,
-                      size: 44,
+                    icon: Image.asset(
+                      Assets.images.forward10seconds.path,
+                      width: 64,
+                      height: 64,
                     ),
                     onPressed: () {
                       final pos = _betterPlayerController
@@ -435,93 +616,344 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           if (!_isLocked)
             Positioned(
               bottom: 20,
-              left: 15,
               child: Container(
-                width: screenSize.width - 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                width: screenSize.width - 0,
+                child: Column(
                   children: [
-                    // SizedBox(width: 20),
-                    _btn(Icons.speed, "Speed (1x)", _changeSpeed),
+                    if (_betterPlayerController
+                        .videoPlayerController!
+                        .value
+                        .initialized)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Slider(
+                              activeColor: Colors.white,
+                              inactiveColor: AppColors.sliderbar4C4C4C,
+                              value: _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .position
+                                  .inMilliseconds
+                                  .toDouble(),
+                              max: _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .duration!
+                                  .inMilliseconds
+                                  .toDouble(),
+                              onChanged: (v) {
+                                _betterPlayerController.seekTo(
+                                  Duration(milliseconds: v.round()),
+                                );
+                              },
+                            ),
+                          ),
+                          PoppinsText(
+                            _formatDuration(
+                              _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .position,
+                            ),
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: AppColors.wDark,
+                          ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
 
-                    // SizedBox(width: 20),
-                    _btn(Icons.lock_open, "Lock", _toggleLock),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _btn(
+                          Assets.images.speed.path,
+                          "Speed ($_selectedSpeed)",
+                          _changeSpeed,
+                        ),
 
-                    // SizedBox(width: 20),
-                    _btn(Icons.dashboard, "Episodes", () {
-                      setState(() => _showEpisodes = !_showEpisodes);
-                    }),
+                        SizedBox(width: 40),
 
-                    // SizedBox(width: 20),
-                    _btn(
-                      Icons.subtitles,
-                      "Audio & Subtitles",
-                      _toggleSubtitles,
+                        _btn(Assets.images.videolock.path, "Lock", _toggleLock),
+                        SizedBox(width: 40),
+
+                        _btn(Assets.images.episode.path, "Episodes", () {
+                          setState(() => _showEpisodes = !_showEpisodes);
+                        }),
+                        SizedBox(width: 40),
+
+                        _btn(
+                          Assets.images.audioSubtitles.path,
+                          "Audio & Subtitles",
+                          _openAudioSubtitlePopup,
+                        ),
+                        SizedBox(width: 40),
+
+                        _btn(
+                          Assets.images.quality.path,
+                          "Quality",
+                          _videoQuality,
+                        ),
+
+                        SizedBox(width: 40),
+
+                        _btn(Assets.images.nextepisode.path, "Next Ep.", () {
+                          if (episodesData.length > 1) _playEpisode(1);
+                        }),
+                      ],
                     ),
-
-                    // SizedBox(width: 20),
-                    _btn(Icons.hd, "Quality", _changeQuality),
-
-                    // SizedBox(width: 20),
-                    _btn(Icons.skip_next, "Next Ep.", () {
-                      if (episodesData.length > 1) {
-                        _playEpisode(1);
-                      } else {}
-                    }),
-                    // SizedBox(width: 20),
-
-                    // _btn(Icons.hd, "Quality", _changeQuality),
-                    // const SizedBox(width: 20),
-                    // _btn(Icons.subtitles, "Subtitles", _toggleSubtitles),
-                    // const SizedBox(width: 20),
-                    // _btn(Icons.list, "Episodes", () {
-                    //   setState(() => _showEpisodes = !_showEpisodes);
-                    // }),
                   ],
                 ),
               ),
             ),
 
-          Positioned(
-            top: 10,
-            right: 10,
-            child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: Image.asset(
-                Assets.images.cancelicon.path,
-                width: 30,
-                color: Colors.white,
+          if (_isLocked)
+            Positioned(
+              top: 36,
+              right: 32,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isLocked = false;
+                  });
+                },
+                child: Container(
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        Assets.images.videolock.path,
+                        width: 15,
+                        height: 15,
+                        fit: BoxFit.contain,
+                      ),
+                      SizedBox(width: 8),
+                      PoppinsText(
+                        "Locked",
+                        fontSize: PoppinsFontSizeVariant.size12,
+                        fontWeight: PoppinsFontWeightVariant.semiBold,
+                        color: AppColors.wDark,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
+
+          if (!_isLocked)
+            Positioned(
+              top: 34,
+              left: 0,
+              right: 0,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 52),
+                    child: Image.asset(
+                      Assets.images.casting.path,
+                      width: 30,
+                      color: AppColors.white,
+                    ),
+                  ),
+
+                  Expanded(
+                    child: Center(
+                      child: PoppinsText(
+                        'Finale – Meet The Drapers Seaso....',
+                        fontSize: PoppinsFontSizeVariant.size22,
+                        fontWeight: PoppinsFontWeightVariant.medium,
+                        color: AppColors.white,
+                        maxLines: 1,
+                        textOverflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 28),
+                      child: Image.asset(
+                        Assets.images.cancelicon.path,
+                        width: 30,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );
   }
 
-  Widget _btn(IconData icon, String label, VoidCallback onTap) {
+  Widget _btn(String imagePath, String label, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Row(
         children: [
-          Icon(icon, color: Colors.white, size: 26),
-          const SizedBox(width: 6),
-          Text(
+          Image.asset(imagePath, width: 20, height: 20, fit: BoxFit.contain),
+          SizedBox(width: 6),
+          PoppinsText(
             label,
-            style: const TextStyle(color: Colors.white, fontSize: 14),
+            fontSize: PoppinsFontSizeVariant.size12,
+            fontWeight: PoppinsFontWeightVariant.semiBold,
+            color: AppColors.wDark,
           ),
         ],
       ),
     );
   }
 
-  // NOTE: Removed the unused _buildEpisodesSidebar and _buildEpisodeListItem functions
-  // since you confirmed you want the horizontal bar design.
+  Widget _speedOption(String text) {
+    bool isSelected = _selectedSpeed == text;
 
-  @override
-  void dispose() {
-    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-    _betterPlayerController.dispose();
-    super.dispose();
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedSpeed = text;
+          _betterPlayerController.setSpeed(
+            double.parse(text.replaceAll('x', '')),
+          );
+        });
+        Navigator.pop(context);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColors.popselectcolor19193F
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 20,
+              alignment: Alignment.center,
+              child: isSelected
+                  ? Icon(Icons.check, color: Colors.white, size: 20)
+                  : SizedBox.shrink(),
+            ),
+            SizedBox(width: 12),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: PoppinsText(
+                  text,
+                  fontSize: PoppinsFontSizeVariant.size12,
+                  fontWeight: PoppinsFontWeightVariant.regular,
+                  color: AppColors.wDark,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _audioSubtitleOption(String text, {required bool isSubtitle}) {
+    bool isSelected = isSubtitle
+        ? _selectedSubtitle == text
+        : _selectedAudio == text;
+
+    return GestureDetector(
+      onTap: () async {
+        setState(() {
+          if (isSubtitle) {
+            _selectedSubtitle = text;
+          } else {
+            _selectedAudio = text;
+          }
+        });
+
+        if (isSubtitle) {
+          if (text == "Off") {
+            await _betterPlayerController.setupSubtitleSource(
+              BetterPlayerSubtitlesSource(
+                type: BetterPlayerSubtitlesSourceType.none,
+              ),
+            );
+          } else {
+            final subSource = BetterPlayerSubtitlesSource(
+              type: BetterPlayerSubtitlesSourceType.network,
+              name: text,
+              urls: ["https://example.com/${text.toLowerCase()}.vtt"],
+            );
+            await _betterPlayerController.setupSubtitleSource(subSource);
+          }
+        } else {}
+
+        Navigator.pop(context);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColors.popselectcolor19193F
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 20,
+              child: isSelected
+                  ? Icon(Icons.check, color: Colors.white, size: 20)
+                  : SizedBox.shrink(),
+            ),
+            SizedBox(width: 12),
+            Expanded(
+              child: PoppinsText(
+                text,
+                fontSize: PoppinsFontSizeVariant.size12,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: AppColors.wDark,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _optionItem(String text, bool isSelected, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColors.popselectcolor19193F
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 20,
+              child: isSelected
+                  ? Icon(Icons.check, color: Colors.white, size: 20)
+                  : SizedBox.shrink(),
+            ),
+            SizedBox(width: 12),
+            Expanded(
+              child: PoppinsText(
+                text,
+                fontSize: PoppinsFontSizeVariant.size12,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: AppColors.wDark,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

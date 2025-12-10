@@ -54,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // Remove the listener properly
     if (_controllerListener != null) {
       _controller!.removeListener(_controllerListener!);
     }
@@ -141,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   InkWell(
                     onTap: () {
+                      _controller!.pause();
                       if (GuestHelper.isGuest) {
                         GuestHelper.checkGuest(context);
                         return;
@@ -155,6 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(width: 16),
                   GestureDetector(
                     onTap: () {
+                      _controller!.pause();
+
                       if (GuestHelper.isGuest) {
                         GuestHelper.checkGuest(context);
                         return;
@@ -210,6 +212,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
+                                  _controller!.pause();
+
                                   if (GuestHelper.isGuest) {
                                     GuestHelper.checkGuest(context);
                                     return;
@@ -490,6 +494,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               SizedBox(width: 8),
                                               GestureDetector(
                                                 onTap: () {
+                                                  _controller!.pause();
+
                                                   if (GuestHelper.isGuest) {
                                                     GuestHelper.checkGuest(
                                                       context,
@@ -567,6 +573,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
+                                  _controller!.pause();
+
                                   if (GuestHelper.isGuest) {
                                     GuestHelper.checkGuest(context);
                                     return;
@@ -599,6 +607,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
+                                _controller!.pause();
+
                                 if (GuestHelper.isGuest) {
                                   GuestHelper.checkGuest(context);
                                   return;
@@ -696,6 +706,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           buttonBorderWidth: 0,
                           buttonGradient: [],
                           onTap: () {
+                            _controller!.pause();
+
                             if (GuestHelper.isGuest) {
                               GuestHelper.checkGuest(context);
                               return;
@@ -717,6 +729,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Color(0xff582983),
                           ],
                           onTap: () {
+                            _controller!.pause();
+
                             if (GuestHelper.isGuest) {
                               GuestHelper.checkGuest(context);
                               return;
@@ -809,6 +823,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
+                                _controller!.pause();
+
                                 if (GuestHelper.isGuest) {
                                   GuestHelper.checkGuest(context);
                                   return;

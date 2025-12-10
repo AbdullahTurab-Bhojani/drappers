@@ -72,7 +72,7 @@ class WatchlistScreen extends StatelessWidget {
                       color: customColors.textColor,
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 20),
                 ],
               ),
 

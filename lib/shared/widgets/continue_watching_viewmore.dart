@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
@@ -25,7 +26,6 @@ class ContinueWatchingViewmore extends StatefulWidget {
 }
 
 class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
-  
   final List<Map<String, dynamic>> _podcasts = [
     {
       'data': Podcast(
@@ -62,7 +62,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
       ),
       'slider': 20.0,
     },
-     {
+    {
       'data': Podcast(
         title: 'Episode 3 – Tech Innovations',
         description: 'Latest updates on tech, AI, and innovative startups.',
@@ -75,7 +75,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-   final customColors = theme.extension<AppCustomColors>()!;
+    final customColors = theme.extension<AppCustomColors>()!;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -106,10 +106,10 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            SizedBox(height: 30),
+            // SizedBox(height: 30),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: _podcasts.length,
@@ -149,7 +149,8 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                   PoppinsText(
                                     podcast.description,
                                     fontSize: PoppinsFontSizeVariant.size14,
-                                    fontWeight:PoppinsFontWeightVariant.regular,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
                                     color: customColors.greyColor,
                                     maxLines: 2,
                                     textOverflow: TextOverflow.ellipsis,
@@ -189,7 +190,8 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                       PoppinsText(
                                         '-12:34',
                                         fontSize: PoppinsFontSizeVariant.size10,
-                                        fontWeight:PoppinsFontWeightVariant.regular,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
                                         color: customColors.textColor,
                                       ),
                                     ],
@@ -199,7 +201,11 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                     children: [
                                       Expanded(
                                         child: AppButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            context.pushNamed(
+                                              AppRoutes.videoScreen.name,
+                                            );
+                                          },
                                           title: 'Continue',
                                           buttonSize: Size(double.infinity, 0),
                                           prefixIcon: Image.asset(
@@ -212,7 +218,8 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                       SizedBox(width: 20),
                                       Image.asset(
                                         Assets.images.cancelicon.path,
-                                        height: 24, width: 24,
+                                        height: 24,
+                                        width: 24,
                                       ),
                                     ],
                                   ),
@@ -231,6 +238,5 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
         ),
       ),
     );
-  
   }
 }

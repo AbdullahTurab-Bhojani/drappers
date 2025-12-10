@@ -5,7 +5,6 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
-import '../../../shared/widgets/dropdownsettingtile.dart';
 import '../../../shared/widgets/reelcard/reelcard_widget.dart';
 
 class ContentDetail extends StatefulWidget {
