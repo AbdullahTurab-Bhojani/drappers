@@ -1,7 +1,7 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../core/extensions/theme_extension.dart';
+import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
 class newliveScreen extends StatefulWidget {
@@ -13,7 +13,9 @@ class newliveScreen extends StatefulWidget {
 
 class _newliveScreenScreenState extends State<newliveScreen> {
   late BetterPlayerController _betterPlayerController;
-
+  String _selectedSpeed = "1x";
+  String? _selectedSubtitle;
+  String? _selectedAudio;
   bool _controlsVisible = true;
   bool _isLocked = false;
   bool _showEpisodes = false;
@@ -96,6 +98,13 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     _hideControlsAfterDelay();
   }
 
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+    return "${twoDigits(duration.inHours)}:$minutes:$seconds";
+  }
+
   void _hideControlsAfterDelay() {
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted && _betterPlayerController.isPlaying() == true) {
@@ -128,119 +137,48 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     );
   }
 
-  Widget _buildSpeedPopupMenu(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
-    final Map<double, String> speedOptions = {
-      1.0: 'Normal',
-      0.75: '0.75x',
-      0.5: '0.5x',
-      0.25: '0.25x',
-    };
-
-    final Color popupColor = customColors.regular;
-    final Color checkColor = customColors.textColor;
-
-    final double currentSpeed =
-        _betterPlayerController.videoPlayerController!.value.speed;
-
-    const double popupWidth = 150.0;
-
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Container(
-        width: popupWidth,
-        height: 250, // Example height, adjust as needed
-        decoration: BoxDecoration(
-          color: popupColor,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.only(top: 10, bottom: 10),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            // Title
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: 8,
-                bottom: 8,
-              ),
-              child: Text(
-                'Speed',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-
-            // Separator line
-            const Divider(color: Colors.white24, height: 1),
-
-            // Speed Options
-            ...speedOptions.entries.map((entry) {
-              final double speed = entry.key;
-              final String label = entry.value;
-              final bool isSelected = currentSpeed == speed;
-
-              return InkWell(
-                onTap: () {
-                  _betterPlayerController.setSpeed(speed);
-
-                  setState(() {
-                    _isSpeedPopupVisible = false;
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
+  Widget _speedPopup() {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: Center(
+        child: Container(
+          width: 336,
+          padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+          decoration: BoxDecoration(
+            color: AppColors.dRegular,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PoppinsText(
+                    "Speed",
+                    fontSize: PoppinsFontSizeVariant.size12,
+                    fontWeight: PoppinsFontWeightVariant.regular,
+                    color: AppColors.wDark,
                   ),
-                  color: isSelected
-                      ? Colors.white10
-                      : Colors.transparent, // Highlight selected
-                  child: Row(
-                    children: [
-                      Icon(
-                        isSelected ? Icons.check : null,
-                        color: checkColor,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        label,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: isSelected
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _isSpeedPopupVisible = false;
+                      });
+                    },
+                    child: Icon(Icons.close, color: Colors.white),
                   ),
-                ),
-              );
-            }).toList(),
-
-            const Spacer(),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  _isSpeedPopupVisible = false;
-                });
-              },
-              child: const Padding(
-                padding: EdgeInsets.only(right: 16, bottom: 8),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Icon(Icons.close, color: Colors.white, size: 24),
-                ),
+                ],
               ),
-            ),
-          ],
+              SizedBox(height: 16),
+              Divider(),
+              SizedBox(height: 12),
+              _speedOption("0.5x"),
+              _speedOption("1x"),
+              _speedOption("1.5x"),
+              _speedOption("2x"),
+            ],
+          ),
         ),
       ),
     );
@@ -262,6 +200,59 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     }
   }
 
+  void _openAudioSubtitlePopup() {
+    final List<String> subtitleOptions = ["Off", "English", "Urdu", "Arabic"];
+
+    final List<String> audioOptions = ["English"];
+
+    showDialog(
+      context: context,
+      builder: (_) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: Container(
+            width: 336,
+            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+            decoration: BoxDecoration(
+              color: AppColors.dRegular,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PoppinsText(
+                      "Audio & Subtitles",
+                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontWeight: PoppinsFontWeightVariant.regular,
+                      color: AppColors.wDark,
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(Icons.close, color: Colors.white),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Divider(),
+                SizedBox(height: 12),
+                ...subtitleOptions
+                    .map(
+                      (option) =>
+                          _audioSubtitleOption(option, isSubtitle: true),
+                    )
+                    .toList(),
+                SizedBox(height: 12),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   void _playEpisode(int index) {
     final source = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
@@ -280,7 +271,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
           Positioned.fill(
             child: BetterPlayer(controller: _betterPlayerController),
           ),
-          if (_isSpeedPopupVisible) _buildSpeedPopupMenu(context),
 
           if (!_isLocked)
             Positioned.fill(
@@ -294,7 +284,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
 
           if (_controlsVisible) _buildControls(),
 
-          // ✅ HORIZONTAL EPISODES BAR
           if (_showEpisodes)
             Positioned(
               bottom: 70,
@@ -312,8 +301,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                         setState(() => _showEpisodes = false);
                       },
                       child: Container(
-                        margin: const EdgeInsets.all(6),
-                        padding: const EdgeInsets.all(12),
+                        margin: EdgeInsets.all(6),
+                        padding: EdgeInsets.all(12),
                         color: Colors.black54,
                         child: Center(
                           child: Text(
@@ -327,40 +316,30 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                 ),
               ),
             ),
+
+          if (_isSpeedPopupVisible) Center(child: _speedPopup()),
         ],
       ),
     );
   }
 
   Widget _buildControls() {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Container(
       color: Colors.black.withOpacity(0.3),
       child: Stack(
         children: [
-          // LOCK
-          Positioned(
-            left: 15,
-            top: 80,
-            child: IconButton(
-              icon: Icon(
-                _isLocked ? Icons.lock : Icons.lock_open,
-                color: Colors.white,
-                size: 35,
-              ),
-              onPressed: _toggleLock,
-            ),
-          ),
-
           if (!_isLocked)
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: const Icon(
-                      Icons.replay_10,
-                      color: Colors.white,
-                      size: 44,
+                    icon: Image.asset(
+                      Assets.images.back10seconds.path,
+                      width: 64,
+                      height: 64,
                     ),
                     onPressed: () {
                       final pos = _betterPlayerController
@@ -378,7 +357,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       _betterPlayerController.isPlaying()!
                           ? Icons.pause_circle
                           : Icons.play_circle,
-                      color: Colors.white,
                       size: 90,
                     ),
                     onPressed: () {
@@ -387,12 +365,12 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           : _betterPlayerController.play();
                     },
                   ),
-                  const SizedBox(width: 40),
+                  SizedBox(width: 40),
                   IconButton(
-                    icon: const Icon(
-                      Icons.forward_10,
-                      color: Colors.white,
-                      size: 44,
+                    icon: Image.asset(
+                      Assets.images.forward10seconds.path,
+                      width: 64,
+                      height: 64,
                     ),
                     onPressed: () {
                       final pos = _betterPlayerController
@@ -411,24 +389,84 @@ class _newliveScreenScreenState extends State<newliveScreen> {
           if (!_isLocked)
             Positioned(
               bottom: 20,
-              left: 185,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _btn(Icons.hd, "Speed(1x)", _changeSpeed),
-                  SizedBox(width: 20),
-                  _btn(Icons.subtitles, "Audio & Subtitles", _toggleSubtitles),
-                  SizedBox(width: 20),
-                  _btn(Icons.list, "Picture In Picture", () {
-                    // setState(() => _showEpisodes = !_showEpisodes);
-                  }),
-                ],
+              child: Container(
+                width: screenSize.width - 0,
+                child: Column(
+                  children: [
+                    if (_betterPlayerController
+                        .videoPlayerController!
+                        .value
+                        .initialized)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Slider(
+                              activeColor: Colors.white,
+                              inactiveColor: AppColors.sliderbar4C4C4C,
+                              value: _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .position
+                                  .inMilliseconds
+                                  .toDouble(),
+                              max: _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .duration!
+                                  .inMilliseconds
+                                  .toDouble(),
+                              onChanged: (v) {
+                                _betterPlayerController.seekTo(
+                                  Duration(milliseconds: v.round()),
+                                );
+                              },
+                            ),
+                          ),
+                          PoppinsText(
+                            _formatDuration(
+                              _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .position,
+                            ),
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: AppColors.wDark,
+                          ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _btn(
+                          Assets.images.speed.path,
+                          "Speed (1x)",
+                          _changeSpeed,
+                        ),
+                        SizedBox(width: 20),
+                        _btn(
+                          Assets.images.audioSubtitles.path,
+                          "Audio & Subtitles",
+                          _openAudioSubtitlePopup,
+                        ),
+                        SizedBox(width: 20),
+                        _btn(
+                          Assets.images.audioSubtitles.path,
+                          "Picture In Picture",
+                          () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
 
           Positioned(
-            top: 10,
-            right: 10,
+            top: 34,
+            right: 28,
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
               child: Image.asset(
@@ -443,17 +481,133 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     );
   }
 
-  Widget _btn(IconData icon, String label, VoidCallback onTap) {
+  Widget _speedOption(String text) {
+    bool isSelected = _selectedSpeed == text;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedSpeed = text;
+          _betterPlayerController.setSpeed(
+            double.parse(text.replaceAll('x', '')),
+          );
+        });
+        Navigator.pop(context);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColors.popselectcolor19193F
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 20,
+              alignment: Alignment.center,
+              child: isSelected
+                  ? Icon(Icons.check, color: Colors.white, size: 20)
+                  : SizedBox.shrink(),
+            ),
+            SizedBox(width: 12),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: PoppinsText(
+                  text,
+                  fontSize: PoppinsFontSizeVariant.size12,
+                  fontWeight: PoppinsFontWeightVariant.regular,
+                  color: AppColors.wDark,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _audioSubtitleOption(String text, {required bool isSubtitle}) {
+    bool isSelected = isSubtitle
+        ? _selectedSubtitle == text
+        : _selectedAudio == text;
+
+    return GestureDetector(
+      onTap: () async {
+        setState(() {
+          if (isSubtitle) {
+            _selectedSubtitle = text;
+          } else {
+            _selectedAudio = text;
+          }
+        });
+
+        if (isSubtitle) {
+          if (text == "Off") {
+            await _betterPlayerController.setupSubtitleSource(
+              BetterPlayerSubtitlesSource(
+                type: BetterPlayerSubtitlesSourceType.none,
+              ),
+            );
+          } else {
+            final subSource = BetterPlayerSubtitlesSource(
+              type: BetterPlayerSubtitlesSourceType.network,
+              name: text,
+              urls: ["https://example.com/${text.toLowerCase()}.vtt"],
+            );
+            await _betterPlayerController.setupSubtitleSource(subSource);
+          }
+        } else {}
+
+        Navigator.pop(context);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColors.popselectcolor19193F
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 20,
+              child: isSelected
+                  ? Icon(Icons.check, color: Colors.white, size: 20)
+                  : SizedBox.shrink(),
+            ),
+            SizedBox(width: 12),
+            Expanded(
+              child: PoppinsText(
+                text,
+                fontSize: PoppinsFontSizeVariant.size12,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: AppColors.wDark,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _btn(String imagePath, String label, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: Colors.white, size: 26),
-          const SizedBox(width: 6),
-          Text(
+          Image.asset(imagePath, width: 20, height: 20, fit: BoxFit.contain),
+          SizedBox(width: 8),
+          PoppinsText(
             label,
-            style: const TextStyle(color: Colors.white, fontSize: 14),
+            fontSize: PoppinsFontSizeVariant.size12,
+            fontWeight: PoppinsFontWeightVariant.semiBold,
+            color: AppColors.wDark,
           ),
         ],
       ),

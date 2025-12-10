@@ -186,6 +186,10 @@ class $AssetsImagesGen {
   AssetGenImage get applelogo =>
       const AssetGenImage('assets/images/Applelogo.png');
 
+  /// File path: assets/images/Audio & Subtitles.png
+  AssetGenImage get audioSubtitles =>
+      const AssetGenImage('assets/images/Audio & Subtitles.png');
+
   /// File path: assets/images/CC123.png
   AssetGenImage get cc123 => const AssetGenImage('assets/images/CC123.png');
 
@@ -221,6 +225,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/Logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/Logo.png');
+
+  /// File path: assets/images/Quality.png
+  AssetGenImage get quality => const AssetGenImage('assets/images/Quality.png');
 
   /// File path: assets/images/Reelimage1.png
   AssetGenImage get reelimage1 =>
@@ -268,6 +275,10 @@ class $AssetsImagesGen {
   AssetGenImage get appleicon =>
       const AssetGenImage('assets/images/appleicon.png');
 
+  /// File path: assets/images/back10seconds.png
+  AssetGenImage get back10seconds =>
+      const AssetGenImage('assets/images/back10seconds.png');
+
   /// File path: assets/images/backicon.png
   AssetGenImage get backicon =>
       const AssetGenImage('assets/images/backicon.png');
@@ -307,6 +318,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/cardimage.png
   AssetGenImage get cardimage =>
       const AssetGenImage('assets/images/cardimage.png');
+
+  /// File path: assets/images/casting.png
+  AssetGenImage get casting => const AssetGenImage('assets/images/casting.png');
 
   /// File path: assets/images/commenticon.png
   AssetGenImage get commenticon =>
@@ -375,6 +389,9 @@ class $AssetsImagesGen {
   AssetGenImage get envelopeicon =>
       const AssetGenImage('assets/images/envelopeicon.png');
 
+  /// File path: assets/images/episode.png
+  AssetGenImage get episode => const AssetGenImage('assets/images/episode.png');
+
   /// File path: assets/images/flagicon.png
   AssetGenImage get flagicon =>
       const AssetGenImage('assets/images/flagicon.png');
@@ -390,6 +407,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/footericon3.png
   AssetGenImage get footericon3 =>
       const AssetGenImage('assets/images/footericon3.png');
+
+  /// File path: assets/images/forward10seconds.png
+  AssetGenImage get forward10seconds =>
+      const AssetGenImage('assets/images/forward10seconds.png');
 
   /// File path: assets/images/gallery-favorite.png
   AssetGenImage get galleryFavorite =>
@@ -502,6 +523,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/native_splash.png
   AssetGenImage get nativeSplash =>
       const AssetGenImage('assets/images/native_splash.png');
+
+  /// File path: assets/images/nextepisode.png
+  AssetGenImage get nextepisode =>
+      const AssetGenImage('assets/images/nextepisode.png');
 
   /// File path: assets/images/notificationicon.png
   AssetGenImage get notificationicon =>
@@ -669,6 +694,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/slider.png
   AssetGenImage get slider => const AssetGenImage('assets/images/slider.png');
 
+  /// File path: assets/images/speed.png
+  AssetGenImage get speed => const AssetGenImage('assets/images/speed.png');
+
   /// File path: assets/images/studio.png
   AssetGenImage get studio => const AssetGenImage('assets/images/studio.png');
 
@@ -711,6 +739,10 @@ class $AssetsImagesGen {
   AssetGenImage get trendingshowimage7 =>
       const AssetGenImage('assets/images/trendingshowimage7.png');
 
+  /// File path: assets/images/videolock.png
+  AssetGenImage get videolock =>
+      const AssetGenImage('assets/images/videolock.png');
+
   /// File path: assets/images/watchtimeicon.png
   AssetGenImage get watchtimeicon =>
       const AssetGenImage('assets/images/watchtimeicon.png');
@@ -720,6 +752,7 @@ class $AssetsImagesGen {
     a2023DraperTVOfficialLogo14,
     a3dotsicon,
     applelogo,
+    audioSubtitles,
     cc123,
     hd123,
     hideicon,
@@ -730,6 +763,7 @@ class $AssetsImagesGen {
     image,
     logoText,
     logo,
+    quality,
     reelimage1,
     reelimage2,
     reelimage3,
@@ -742,6 +776,7 @@ class $AssetsImagesGen {
     addicon,
     appIcon,
     appleicon,
+    back10seconds,
     backicon,
     ban123,
     bannerGuest,
@@ -753,6 +788,7 @@ class $AssetsImagesGen {
     callicon,
     cancelicon,
     cardimage,
+    casting,
     commenticon,
     courseComplete,
     createpage,
@@ -770,10 +806,12 @@ class $AssetsImagesGen {
     dropdownicon,
     dummyprofile,
     envelopeicon,
+    episode,
     flagicon,
     footericon1,
     footericon2,
     footericon3,
+    forward10seconds,
     galleryFavorite,
     gifticon,
     girl,
@@ -803,6 +841,7 @@ class $AssetsImagesGen {
     menuicon6,
     muteicon,
     nativeSplash,
+    nextepisode,
     notificationicon,
     notificationsfillicon,
     notificationsiconnew,
@@ -846,6 +885,7 @@ class $AssetsImagesGen {
     signout1234,
     signouticon,
     slider,
+    speed,
     studio,
     subscriptionBg,
     time3x,
@@ -857,6 +897,7 @@ class $AssetsImagesGen {
     trendingshowimage5,
     trendingshowimage6,
     trendingshowimage7,
+    videolock,
     watchtimeicon,
   ];
 }

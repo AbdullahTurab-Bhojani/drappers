@@ -41,6 +41,10 @@ abstract final class AppColors {
     static const redF81149 = Color(0xffF81149);
     static const white0xffbdbdbe = Color(0xffbdbdbe);
     static const containergrey = Color(0xff323232);
+    static const popselectcolor19193F = Color(0xff19193F);
+    static const sliderbar4C4C4C = Color(0xff4C4C4C);
+
+
 
 
   // Dark Theme //
@@ -97,6 +101,8 @@ abstract final class AppColors {
   static const color1FCFFF = Color(0xff1FCFFF);
   static const color101317 = Color(0xff101317);
   static const color101010 = Color(0xff101010);
+  static const color040412 = Color(0xff040412);
+  static const color000032 = Color(0xff000032);
   static const color202020 = Color(0xff202020);
   static const shadegreycolor6B6B6B = Color(0xff6B6B6B);
 

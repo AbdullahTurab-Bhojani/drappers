@@ -8,7 +8,7 @@ class GuestHelper {
 
   static void checkGuest(BuildContext context) {
     if (isGuest) {
-      isGuest = false; // optional: guest ko reset karna ho to
+      isGuest = false;
       context.goNamed(AppRoutes.loginScreen.name);
     }
   }
