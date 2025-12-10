@@ -69,8 +69,10 @@ class WatchlistItemTile extends StatelessWidget {
             },
             child: Image.asset(
               "assets/images/playbutton.png",
-              color: customColors.textColor,
-            ),
+              // color: customColors.textColor,
+            fit: BoxFit.contain, height: 32, width: 32,
+)
+
           ),
         ],
       ),

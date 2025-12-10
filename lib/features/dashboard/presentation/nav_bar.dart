@@ -23,7 +23,7 @@ class _BottomNavigationBarShellState
   bool isOpen = false;
   bool isEditing = false;
 
-  static final List<Map<String, dynamic>> _navItems = [
+   final List<Map<String, dynamic>> _navItems = [
     {
       'path': AppRoutes.home.name,
       'label': 'Home',
@@ -32,12 +32,12 @@ class _BottomNavigationBarShellState
     {
       'path': AppRoutes.discover.name,
       'label': 'Discover',
-      'icon': Assets.images.footericon2.path,
+      'icon': Assets.images.discower786.path,
     },
     {
       'path': AppRoutes.watchlist.name,
       'label': 'Watchlist',
-      'icon': Assets.images.footericon3.path,
+      'icon': Assets.images.watchlist786.path,
     },
     {
       'path': AppRoutes.profile.name,
