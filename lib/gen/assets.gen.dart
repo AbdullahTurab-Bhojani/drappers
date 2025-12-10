@@ -578,6 +578,14 @@ class $AssetsImagesGen {
   AssetGenImage get playbutton123 =>
       const AssetGenImage('assets/images/playbutton123.png');
 
+  /// File path: assets/images/playcircleicon.png
+  AssetGenImage get playcircleicon =>
+      const AssetGenImage('assets/images/playcircleicon.png');
+
+  /// File path: assets/images/playfillnewicon.png
+  AssetGenImage get playfillnewicon =>
+      const AssetGenImage('assets/images/playfillnewicon.png');
+
   /// File path: assets/images/playicon.png
   AssetGenImage get playicon =>
       const AssetGenImage('assets/images/playicon.png');
@@ -863,6 +871,8 @@ class $AssetsImagesGen {
     play,
     playbutton,
     playbutton123,
+    playcircleicon,
+    playfillnewicon,
     playicon,
     playicon1234,
     playnewicon,

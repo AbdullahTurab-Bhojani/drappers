@@ -71,11 +71,14 @@ class _HomeBannerState extends State<HomeBanner> {
               ),
               SizedBox(height: 30),
               AppButton(
-                onPressed:
-                    widget.onTap ?? () {}, // <-- fallback to empty function
+                onPressed: widget.onTap ?? () {},
                 title: widget.buttonText,
                 buttonSize: Size(186, 45),
-                suffixIcon: Image.asset(Assets.images.play.path),
+                suffixIcon: Image.asset(
+                  Assets.images.playfillnewicon.path,
+                  width: 12,
+                  height: 12,
+                ),
                 border: true,
                 color: widget.buttonColor,
                 borderColor: widget.buttonBorderColor,
