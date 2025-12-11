@@ -43,19 +43,24 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
           SizedBox(height: 40),
           AppButton(
             onPressed: () {
-              context.pushNamed(AppRoutes.loginScreen.name);
+              Navigator.pop(context);
+
+              Future.microtask(() {
+                context.goNamed(AppRoutes.loginScreen.name);
+              });
             },
             title: "Sign Out",
           ),
 
           SizedBox(height: 14),
+
           AppButton(
             color: Colors.transparent,
             borderColor: customColors.greyColor,
             borderWidth: 1,
             border: true,
             onPressed: () {
-              context.pop();
+              Navigator.pop(context, false);
             },
             title: "Cancel",
           ),
