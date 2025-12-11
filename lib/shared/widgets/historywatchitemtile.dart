@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
@@ -39,14 +40,14 @@ import '../../gen/assets.gen.dart';
 //   Podcast(this.imagePath, this.title, this.description);
 // }
 
-
 class VideosBoxWidget extends StatelessWidget {
-  final dynamic podcast; // Replace 'dynamic' with your actual Podcast model class
+  final dynamic
+  podcast; // Replace 'dynamic' with your actual Podcast model class
   final double sliderValue;
   final int index;
   final Function(double v, int index) onSliderChanged;
   final VoidCallback onContinuePressed;
-  final BuildContext context; // Pass context to access SliderTheme
+  final BuildContext context;
 
   const VideosBoxWidget({
     super.key,
@@ -55,28 +56,21 @@ class VideosBoxWidget extends StatelessWidget {
     required this.index,
     required this.onSliderChanged,
     required this.onContinuePressed,
-    required this.context, // Context is required for SliderTheme.of(context)
+    required this.context,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Note: It's usually better to not require BuildContext in the constructor,
-    // but in this specific case, it's needed for SliderTheme.of(context).
-    // A better approach would be to pass the relevant style/theme data as parameters.
-    // However, I've kept it close to the original intent of the provided code.
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // --- Image Container ---
             Container(
               width: 120,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  // Ensure 'podcast' has an 'imagePath' property
                   image: AssetImage(podcast.imagePath),
                   fit: BoxFit.cover,
                 ),
@@ -84,22 +78,19 @@ class VideosBoxWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            // --- Content Column ---
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // --- Title ---
                   PoppinsText(
-                    podcast.title, // Ensure 'podcast' has a 'title' property
+                    podcast.title,
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
                     textOverflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 20),
-                  // --- Description ---
                   PoppinsText(
-                    podcast.description, // Ensure 'podcast' has a 'description' property
+                    podcast.description,
                     fontSize: PoppinsFontSizeVariant.size14,
                     fontWeight: PoppinsFontWeightVariant.regular,
                     color: Colors.grey,
@@ -107,14 +98,12 @@ class VideosBoxWidget extends StatelessWidget {
                     textOverflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 20),
-                  // --- Slider and Time Row ---
                   Row(
                     children: [
                       Expanded(
                         child: SliderTheme(
                           data: SliderTheme.of(context).copyWith(
                             trackHeight: 3,
-                            // Set thumb and overlay radius to 0 for minimal look
                             thumbShape: const RoundSliderThumbShape(
                               enabledThumbRadius: 0,
                             ),
@@ -136,7 +125,7 @@ class VideosBoxWidget extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       PoppinsText(
-                        '-12:34', // Hardcoded time: consider making this a parameter
+                        '-12:34',
                         fontSize: PoppinsFontSizeVariant.size10,
                         fontWeight: PoppinsFontWeightVariant.regular,
                         color: AppColors.wDark,
@@ -144,12 +133,13 @@ class VideosBoxWidget extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  // --- Button Row ---
                   Row(
                     children: [
                       Expanded(
                         child: AppButton(
-                          onPressed: onContinuePressed,
+                          onPressed: () {
+                            context.pushNamed(AppRoutes.videoScreen.name);
+                          },
                           title: 'Continue',
                           buttonSize: const Size(double.infinity, 40),
                           prefixIcon: Image.asset(
@@ -160,11 +150,7 @@ class VideosBoxWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      // Hardcoded cancel icon
-                      Image.asset(
-                        Assets.images.cancelicon.path,
-                        height: 40,
-                      ),
+                      Image.asset(Assets.images.cancelicon.path, height: 40),
                     ],
                   ),
                 ],

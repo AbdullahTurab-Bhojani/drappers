@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -72,26 +73,25 @@ class _SearchscreenState extends State<Searchscreen> {
 
         child: Column(
           children: [
-            /// ------------------ APPBAR ------------------
             AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
               automaticallyImplyLeading: false,
               leading: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  context.pop();
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 10),
                   child: Image.asset(
-                    "assets/images/backicon.png",
+                    Assets.images.backicon.path,
                     width: 20,
                     height: 20,
                   ),
                 ),
               ),
               title: Padding(
-                padding: const EdgeInsets.only(right: 15.0),
+                padding: EdgeInsets.only(right: 15.0),
                 child: Container(
                   height: 40,
                   decoration: BoxDecoration(
@@ -100,14 +100,14 @@ class _SearchscreenState extends State<Searchscreen> {
                   ),
                   child: Row(
                     children: [
-                      const SizedBox(width: 15),
+                       SizedBox(width: 15),
                       Image.asset(
                         "assets/images/searchicon3x.png",
                         width: 20,
                         height: 20,
                       ),
-                      const SizedBox(width: 10),
-                      const Expanded(
+                       SizedBox(width: 10),
+                       Expanded(
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: "Search content",
@@ -132,7 +132,6 @@ class _SearchscreenState extends State<Searchscreen> {
               titleSpacing: 0,
             ),
 
-            /// ------------------ BODY ------------------
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -143,8 +142,6 @@ class _SearchscreenState extends State<Searchscreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      
-                      /// ------------------ RECENT SEARCHES ------------------
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -206,9 +203,7 @@ class _SearchscreenState extends State<Searchscreen> {
                               const SizedBox(width: 15),
                           itemCount: Genretitle.length,
                           itemBuilder: (context, index) {
-                            return GenreBoxWidget(
-                              title: Genretitle[index],
-                            );
+                            return GenreBoxWidget(title: Genretitle[index]);
                           },
                         ),
                       ),
@@ -232,11 +227,11 @@ class _SearchscreenState extends State<Searchscreen> {
                         itemCount: trendingimages.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 15,
-                          crossAxisSpacing: 15,
-                          childAspectRatio: 0.6,
-                        ),
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 15,
+                              crossAxisSpacing: 15,
+                              childAspectRatio: 0.6,
+                            ),
                         itemBuilder: (context, index) {
                           return CardWidget(
                             assetImage: trendingimages[index],

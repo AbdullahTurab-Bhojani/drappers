@@ -7,8 +7,8 @@ abstract final class AppColors {
   static const List<Color> buttongradientcolor = [
     // Color(0xFF00C6FF),
     // Color(0xFF0072FF),
-    Color(0xFF4DA0FF), 
-        Color(0xFF0066FF),
+    Color(0xFF4DA0FF),
+    Color(0xFF0066FF),
   ];
 
   // Default Theme //
@@ -38,14 +38,16 @@ abstract final class AppColors {
   static const grayshadeboxbg = Color(0xff101a28);
   static const searchbarbg = Color(0xff19193E);
   static const color1A1E24 = Color(0xff1A1E24);
-    static const redF81149 = Color(0xffF81149);
-    static const white0xffbdbdbe = Color(0xffbdbdbe);
-    static const containergrey = Color(0xff323232);
-    static const popselectcolor19193F = Color(0xff19193F);
-    static const sliderbar4C4C4C = Color(0xff4C4C4C);
+  static const redF81149 = Color(0xffF81149);
+  static const submitticket0E0E0E = Color(0xff0E0E0E);
+  static const submitfield181818 = Color(0xff181818);
 
 
-
+  static const white0xffbdbdbe = Color(0xffbdbdbe);
+  static const containergrey = Color(0xff323232);
+  static const popselectcolor19193F = Color(0xff19193F);
+  static const sliderbar4C4C4C = Color(0xff4C4C4C);
+  static const helpsupport = Color(0xff242424);
 
   // Dark Theme //
   static const bDarkest = Color(0xFF000000);

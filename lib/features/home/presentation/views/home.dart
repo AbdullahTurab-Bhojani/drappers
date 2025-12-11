@@ -758,7 +758,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   GuestHelper.checkGuest(context);
                                   return;
                                 }
-                                context.goNamed(AppRoutes.reelWidget.name);
+                                context.pushNamed(AppRoutes.reelWidget.name);
                               },
                               child: AppButton(
                                 buttonSize: Size(80, 25),

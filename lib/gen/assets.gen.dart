@@ -261,11 +261,19 @@ class $AssetsImagesGen {
   AssetGenImage get showicon =>
       const AssetGenImage('assets/images/Showicon.png');
 
+  /// File path: assets/images/TGBT-aimation.json
+  LottieGenImage get tGBTAimation =>
+      const LottieGenImage('assets/images/TGBT-aimation.json');
+
   /// File path: assets/images/add.png
   AssetGenImage get add => const AssetGenImage('assets/images/add.png');
 
   /// File path: assets/images/addicon.png
   AssetGenImage get addicon => const AssetGenImage('assets/images/addicon.png');
+
+  /// File path: assets/images/animation.json
+  LottieGenImage get animation =>
+      const LottieGenImage('assets/images/animation.json');
 
   /// File path: assets/images/app_icon.png
   AssetGenImage get appIcon =>
@@ -455,6 +463,10 @@ class $AssetsImagesGen {
   AssetGenImage get hearticon =>
       const AssetGenImage('assets/images/hearticon.png');
 
+  /// File path: assets/images/icon_app.png
+  AssetGenImage get iconApp =>
+      const AssetGenImage('assets/images/icon_app.png');
+
   /// File path: assets/images/infoicon.png
   AssetGenImage get infoicon =>
       const AssetGenImage('assets/images/infoicon.png');
@@ -496,6 +508,10 @@ class $AssetsImagesGen {
   AssetGenImage get mentionedicon =>
       const AssetGenImage('assets/images/mentionedicon.png');
 
+  /// File path: assets/images/mentionicon.png
+  AssetGenImage get mentionicon =>
+      const AssetGenImage('assets/images/mentionicon.png');
+
   /// File path: assets/images/menuicon1.png
   AssetGenImage get menuicon1 =>
       const AssetGenImage('assets/images/menuicon1.png');
@@ -527,6 +543,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/native_splash.png
   AssetGenImage get nativeSplash =>
       const AssetGenImage('assets/images/native_splash.png');
+
+  /// File path: assets/images/new_app_icon.png
+  AssetGenImage get newAppIcon =>
+      const AssetGenImage('assets/images/new_app_icon.png');
 
   /// File path: assets/images/nextepisode.png
   AssetGenImage get nextepisode =>
@@ -566,6 +586,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/onboarding_bg.png
   AssetGenImage get onboardingBg =>
       const AssetGenImage('assets/images/onboarding_bg.png');
+
+  /// File path: assets/images/phonecallicon.png
+  AssetGenImage get phonecallicon =>
+      const AssetGenImage('assets/images/phonecallicon.png');
 
   /// File path: assets/images/play.png
   AssetGenImage get play => const AssetGenImage('assets/images/play.png');
@@ -788,8 +812,10 @@ class $AssetsImagesGen {
     searchicon,
     shareicon,
     showicon,
+    tGBTAimation,
     add,
     addicon,
+    animation,
     appIcon,
     appleicon,
     back10seconds,
@@ -839,6 +865,7 @@ class $AssetsImagesGen {
     guestProfile,
     guestSheet,
     hearticon,
+    iconApp,
     infoicon,
     interestedicon,
     lessonComplete,
@@ -850,6 +877,7 @@ class $AssetsImagesGen {
     logout123,
     logoutprofile,
     mentionedicon,
+    mentionicon,
     menuicon1,
     menuicon2,
     menuicon3,
@@ -858,6 +886,7 @@ class $AssetsImagesGen {
     menuicon6,
     muteicon,
     nativeSplash,
+    newAppIcon,
     nextepisode,
     notificationicon,
     notificationsfillicon,
@@ -868,6 +897,7 @@ class $AssetsImagesGen {
     onboarding2,
     onboarding3,
     onboardingBg,
+    phonecallicon,
     play,
     playbutton,
     playbutton123,
@@ -937,13 +967,9 @@ class Assets {
 
   static const String package = 'drappers';
 
-  static const LottieGenImage data = LottieGenImage('assets/data.json');
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
-
-  /// List of all assets
-  static List<LottieGenImage> get values => [data];
 }
 
 class AssetGenImage {
