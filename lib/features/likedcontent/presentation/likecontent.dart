@@ -208,9 +208,6 @@ class _LikecontentState extends State<Likecontent>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  /// ------------------------------------------------------------------
-                  /// TAB 1 — ALL (Combined Reels + Videos)
-                  /// ------------------------------------------------------------------
                   ListView(
                     padding: EdgeInsets.zero,
                     children: [
@@ -232,7 +229,7 @@ class _LikecontentState extends State<Likecontent>
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
-                                context.goNamed(AppRoutes.trendingshow.name);
+                                context.pushNamed(AppRoutes.reelWidget.name);
                               },
                               title: "View More",
                               borderColor: customColors.textColor,
@@ -286,7 +283,7 @@ class _LikecontentState extends State<Likecontent>
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
-                                context.goNamed(AppRoutes.trendingshow.name);
+                                context.pushNamed(AppRoutes.reelWidget.name);
                               },
                               title: "View More",
                               borderColor: customColors.textColor,
@@ -314,10 +311,7 @@ class _LikecontentState extends State<Likecontent>
                                   item['image'].toString().contains(
                                     'Assets.images',
                                   )
-                                  ? Assets
-                                        .images
-                                        .podcastimage1
-                                        .path // Placeholder for asset lookup logic
+                                  ? Assets.images.podcastimage1.path
                                   : item['image'] as String,
                               title: item['title'] as String,
                               description: item['subtitle'] as String,

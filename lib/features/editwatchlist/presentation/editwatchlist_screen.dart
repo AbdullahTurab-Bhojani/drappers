@@ -4,16 +4,13 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
-// Note: Assuming EditWatchlistItemTile is correctly imported from shared/widgets/editwatchlisttitle.dart
-// You should ensure the path in your original project is correct.
 import '../../../shared/widgets/editwatchlisttitle.dart';
 
-// 1. Updated Data Model to include selection state
 class WatchlistData {
   final String thumbnailPath;
   final String title;
   final String year;
-  bool isSelected; // Added state for the checkbox
+  bool isSelected; 
 
   WatchlistData(
     this.thumbnailPath,
@@ -23,7 +20,6 @@ class WatchlistData {
   });
 }
 
-// 2. Updated dummy data initialization
 final List<WatchlistData> _dummyWatchlist = [
   WatchlistData(
     Assets.images.horizontalThumbnail.path,
@@ -47,7 +43,6 @@ final List<WatchlistData> _dummyWatchlist = [
   ),
 ];
 
-// 3. Converted to StatefulWidget
 class EditWatchlistScreen extends StatefulWidget {
   const EditWatchlistScreen({super.key});
 
@@ -56,7 +51,6 @@ class EditWatchlistScreen extends StatefulWidget {
 }
 
 class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
-  // Use the modifiable list in the State class
   final List<WatchlistData> watchlistItems = _dummyWatchlist;
 
   int get selectedCount =>
@@ -69,16 +63,14 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
   }
 
   void _onDeleteSelected() {
-    if (selectedCount == 0) return; // Prevent action if nothing is selected
+    if (selectedCount == 0) return; 
 
-    // Show a SnackBar first (optional, but good practice before mutation)
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('${selectedCount} items removed from watchlist.')),
     );
 
     setState(() {
       watchlistItems.removeWhere((item) => item.isSelected);
-      // Optional: Add logic here to sync changes to a backend/database
     });
   }
 
@@ -87,30 +79,27 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    // Determine if the remove button should be enabled
     final isRemoveEnabled = selectedCount > 0;
 
     return Scaffold(
       body: Stack(
         children: [
-          // Background image
           Positioned.fill(
             child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
           ),
 
           Column(
             children: [
-              // App Bar (Now simplified back to 'Cancel' only)
               AppMainBar(
-                leadingText: "Watchlist",
-                width: 150,
+                leadingText: "Edit Watchlist",
+                width: 200,
                 title: "",
                 centerTitle: false,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: [
                   InkWell(
-                    onTap: () => context.pop(), // Simple Cancel action
+                    onTap: () => context.pop(), 
                     child: PoppinsText(
                       "Cancel",
                       fontSize: PoppinsFontSizeVariant.size14,
@@ -118,14 +107,12 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
                       color: customColors.textColor,
                     ),
                   ),
-                  const SizedBox(width: 10),
+                 SizedBox(width: 20),
                 ],
               ),
 
-              // Watchlist List
               Expanded(
                 child: ListView.builder(
-                  // Added padding at the bottom to ensure the last item isn't covered by the remove button
                   padding: const EdgeInsets.only(bottom: 100),
                   itemCount: watchlistItems.length,
                   itemBuilder: (context, index) {
@@ -144,7 +131,6 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
             ],
           ),
 
-          // 5. Gradient Remove Button at the bottom
           Positioned(
             bottom: 0,
             left: 0,
@@ -152,7 +138,6 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: InkWell(
-                // onTap: isRemoveEnabled ? _onDeleteSelected : null,
                 child: Container(
                   height: 40,
                   decoration: BoxDecoration(

@@ -17,12 +17,12 @@ class PodcastWidget extends StatefulWidget {
 class _PodcastWidgetState extends State<PodcastWidget> {
   @override
   Widget build(BuildContext context) {
-    List <String> podcastimages = [
-     Assets.images.podcastimage1.path,
-     Assets.images.podcastimage2.path,
-     Assets.images.podcastimage3.path,
-     Assets.images.podcastimage4.path,
-     Assets.images.podcastimage5.path,
+    List<String> podcastimages = [
+      Assets.images.podcastimage1.path,
+      Assets.images.podcastimage2.path,
+      Assets.images.podcastimage3.path,
+      Assets.images.podcastimage4.path,
+      Assets.images.podcastimage5.path,
     ];
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
@@ -41,12 +41,12 @@ class _PodcastWidgetState extends State<PodcastWidget> {
             AppMainBar(
               leading: GestureDetector(
                 onTap: () {
-                 context.push(AppRoutes.home.path);
+                  context.pop();
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Image.asset(
-                    "assets/images/backicon.png",
+                    Assets.images.backicon.path,
                     width: 20,
                     height: 20,
                   ),
@@ -129,15 +129,16 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Stack(
-                            fit: StackFit.expand, 
+                            fit: StackFit.expand,
                             children: [
-                              Image.asset(podcastimages[index], fit: BoxFit.cover),
+                              Image.asset(
+                                podcastimages[index],
+                                fit: BoxFit.cover,
+                              ),
                               Positioned(
                                 top: 0,
                                 right: 0,
-                                child: PopupmenuWidget(
-                                  showSaveIcon: false, 
-                                ),
+                                child: PopupmenuWidget(showSaveIcon: false),
                               ),
                             ],
                           ),
@@ -155,5 +156,4 @@ class _PodcastWidgetState extends State<PodcastWidget> {
       ),
     );
   }
-
 }

@@ -178,6 +178,19 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
                             ),
+                            AppButton(
+                              buttonSize: Size(80, 25),
+                              color: Colors.transparent,
+                              borderColor: customColors.textColor,
+                              borderWidth: 0.3,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              border: true,
+                              onPressed: () {
+                                context.pushNamed(AppRoutes.trendingshow.name);
+                              },
+                              title: "View More",
+                            ),
                           ],
                         ),
 
@@ -208,6 +221,19 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               fontSize: PoppinsFontSizeVariant.size16,
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
+                            ),
+                            AppButton(
+                              buttonSize: Size(80, 25),
+                              color: Colors.transparent,
+                              borderColor: customColors.textColor,
+                              borderWidth: 0.3,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              border: true,
+                              onPressed: () {
+                                context.pushNamed(AppRoutes.podcasts.name);
+                              },
+                              title: "View More",
                             ),
                           ],
                         ),
@@ -240,6 +266,19 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               fontSize: PoppinsFontSizeVariant.size16,
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
+                            ),
+                            AppButton(
+                              buttonSize: Size(80, 25),
+                              color: Colors.transparent,
+                              borderColor: customColors.textColor,
+                              borderWidth: 0.3,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              border: true,
+                              onPressed: () {
+                                context.pushNamed(AppRoutes.documentries.name);
+                              },
+                              title: "View More",
                             ),
                           ],
                         ),

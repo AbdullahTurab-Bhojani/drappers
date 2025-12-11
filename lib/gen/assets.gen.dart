@@ -496,6 +496,10 @@ class $AssetsImagesGen {
   AssetGenImage get mentionedicon =>
       const AssetGenImage('assets/images/mentionedicon.png');
 
+  /// File path: assets/images/mentionicon.png
+  AssetGenImage get mentionicon =>
+      const AssetGenImage('assets/images/mentionicon.png');
+
   /// File path: assets/images/menuicon1.png
   AssetGenImage get menuicon1 =>
       const AssetGenImage('assets/images/menuicon1.png');
@@ -527,6 +531,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/native_splash.png
   AssetGenImage get nativeSplash =>
       const AssetGenImage('assets/images/native_splash.png');
+
+  /// File path: assets/images/new_app_icon.png
+  AssetGenImage get newAppIcon =>
+      const AssetGenImage('assets/images/new_app_icon.png');
 
   /// File path: assets/images/nextepisode.png
   AssetGenImage get nextepisode =>
@@ -566,6 +574,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/onboarding_bg.png
   AssetGenImage get onboardingBg =>
       const AssetGenImage('assets/images/onboarding_bg.png');
+
+  /// File path: assets/images/phonecallicon.png
+  AssetGenImage get phonecallicon =>
+      const AssetGenImage('assets/images/phonecallicon.png');
 
   /// File path: assets/images/play.png
   AssetGenImage get play => const AssetGenImage('assets/images/play.png');
@@ -850,6 +862,7 @@ class $AssetsImagesGen {
     logout123,
     logoutprofile,
     mentionedicon,
+    mentionicon,
     menuicon1,
     menuicon2,
     menuicon3,
@@ -858,6 +871,7 @@ class $AssetsImagesGen {
     menuicon6,
     muteicon,
     nativeSplash,
+    newAppIcon,
     nextepisode,
     notificationicon,
     notificationsfillicon,
@@ -868,6 +882,7 @@ class $AssetsImagesGen {
     onboarding2,
     onboarding3,
     onboardingBg,
+    phonecallicon,
     play,
     playbutton,
     playbutton123,

@@ -39,12 +39,12 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
             AppMainBar(
               leading: GestureDetector(
                 onTap: () {
-                  context.push(AppRoutes.home.path);
+                  context.pop();
                 },
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Image.asset(
-                    "assets/images/backicon.png",
+                    Assets.images.backicon.path,
                     width: 20,
                     height: 20,
                   ),
