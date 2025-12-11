@@ -261,11 +261,19 @@ class $AssetsImagesGen {
   AssetGenImage get showicon =>
       const AssetGenImage('assets/images/Showicon.png');
 
+  /// File path: assets/images/TGBT-aimation.json
+  LottieGenImage get tGBTAimation =>
+      const LottieGenImage('assets/images/TGBT-aimation.json');
+
   /// File path: assets/images/add.png
   AssetGenImage get add => const AssetGenImage('assets/images/add.png');
 
   /// File path: assets/images/addicon.png
   AssetGenImage get addicon => const AssetGenImage('assets/images/addicon.png');
+
+  /// File path: assets/images/animation.json
+  LottieGenImage get animation =>
+      const LottieGenImage('assets/images/animation.json');
 
   /// File path: assets/images/app_icon.png
   AssetGenImage get appIcon =>
@@ -454,6 +462,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/hearticon.png
   AssetGenImage get hearticon =>
       const AssetGenImage('assets/images/hearticon.png');
+
+  /// File path: assets/images/icon_app.png
+  AssetGenImage get iconApp =>
+      const AssetGenImage('assets/images/icon_app.png');
 
   /// File path: assets/images/infoicon.png
   AssetGenImage get infoicon =>
@@ -800,8 +812,10 @@ class $AssetsImagesGen {
     searchicon,
     shareicon,
     showicon,
+    tGBTAimation,
     add,
     addicon,
+    animation,
     appIcon,
     appleicon,
     back10seconds,
@@ -851,6 +865,7 @@ class $AssetsImagesGen {
     guestProfile,
     guestSheet,
     hearticon,
+    iconApp,
     infoicon,
     interestedicon,
     lessonComplete,
@@ -952,13 +967,9 @@ class Assets {
 
   static const String package = 'drappers';
 
-  static const LottieGenImage data = LottieGenImage('assets/data.json');
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
-
-  /// List of all assets
-  static List<LottieGenImage> get values => [data];
 }
 
 class AssetGenImage {
