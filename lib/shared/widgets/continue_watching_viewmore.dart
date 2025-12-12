@@ -234,6 +234,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                 ),
               ),
             ),
+          
           ],
         ),
       ),

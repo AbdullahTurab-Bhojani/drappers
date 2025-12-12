@@ -357,6 +357,18 @@ class $AssetsImagesGen {
   AssetGenImage get deleteicon2 =>
       const AssetGenImage('assets/images/deleteicon2.png');
 
+  /// File path: assets/images/discover grey.png
+  AssetGenImage get discoverGrey =>
+      const AssetGenImage('assets/images/discover grey.png');
+
+  /// File path: assets/images/discovernanewvbaricon.png
+  AssetGenImage get discovernanewvbaricon =>
+      const AssetGenImage('assets/images/discovernanewvbaricon.png');
+
+  /// File path: assets/images/discovernavbaricon.png
+  AssetGenImage get discovernavbaricon =>
+      const AssetGenImage('assets/images/discovernavbaricon.png');
+
   /// File path: assets/images/discower786.png
   AssetGenImage get discower786 =>
       const AssetGenImage('assets/images/discower786.png');
@@ -392,6 +404,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/dropdownicon.png
   AssetGenImage get dropdownicon =>
       const AssetGenImage('assets/images/dropdownicon.png');
+
+  /// File path: assets/images/dtvlogogrey.png
+  AssetGenImage get dtvlogogrey =>
+      const AssetGenImage('assets/images/dtvlogogrey.png');
 
   /// File path: assets/images/dummyprofile.png
   AssetGenImage get dummyprofile =>
@@ -783,6 +799,14 @@ class $AssetsImagesGen {
   AssetGenImage get watchlist786 =>
       const AssetGenImage('assets/images/watchlist786.png');
 
+  /// File path: assets/images/watchlistgrey.png
+  AssetGenImage get watchlistgrey =>
+      const AssetGenImage('assets/images/watchlistgrey.png');
+
+  /// File path: assets/images/watchlistnavbaricon.png
+  AssetGenImage get watchlistnavbaricon =>
+      const AssetGenImage('assets/images/watchlistnavbaricon.png');
+
   /// File path: assets/images/watchtimeicon.png
   AssetGenImage get watchtimeicon =>
       const AssetGenImage('assets/images/watchtimeicon.png');
@@ -838,6 +862,9 @@ class $AssetsImagesGen {
     cuticon3x,
     delete123,
     deleteicon2,
+    discoverGrey,
+    discovernanewvbaricon,
+    discovernavbaricon,
     discower786,
     documentaries1,
     documentaries2,
@@ -847,6 +874,7 @@ class $AssetsImagesGen {
     documentaries6,
     dotsIcon,
     dropdownicon,
+    dtvlogogrey,
     dummyprofile,
     envelopeicon,
     episode,
@@ -948,6 +976,8 @@ class $AssetsImagesGen {
     trendingshowimage7,
     videolock,
     watchlist786,
+    watchlistgrey,
+    watchlistnavbaricon,
     watchtimeicon,
   ];
 }

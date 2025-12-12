@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -83,21 +84,26 @@ class _DocumentriescardState extends State<Documentriescard> {
                       ),
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Image.asset(
-                                documentries[index],
-                                fit: BoxFit.cover,
-                              ),
-                              Positioned(
-                                top: 0,
-                                right: 0,
-                                child: PopupmenuWidget(showSaveIcon: false),
-                              ),
-                            ],
+                        return GestureDetector(
+                          onTap: () {
+                            context.pushNamed(AppRoutes.contentDetail.name);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                Image.asset(
+                                  documentries[index],
+                                  fit: BoxFit.cover,
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: PopupmenuWidget(showSaveIcon: false),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -121,21 +127,26 @@ class _DocumentriescardState extends State<Documentriescard> {
                       ),
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Image.asset(
-                                documentries[index],
-                                fit: BoxFit.cover,
-                              ),
-                              Positioned(
-                                top: 0,
-                                right: 0,
-                                child: PopupmenuWidget(showSaveIcon: false),
-                              ),
-                            ],
+                        return GestureDetector(
+                          onTap: () {
+                            context.pushNamed(AppRoutes.contentDetail.name);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                Image.asset(
+                                  documentries[index],
+                                  fit: BoxFit.cover,
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: PopupmenuWidget(showSaveIcon: false),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

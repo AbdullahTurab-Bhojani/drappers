@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../shared/widgets/watch_history_viewmore.dart';
 
 class Startupdetails extends StatefulWidget {
   const Startupdetails({super.key});
@@ -79,6 +78,10 @@ class _CompanyInfoRow extends StatelessWidget {
 }
 
 class _StartupdetailsState extends State<Startupdetails> {
+  bool isSaved = false;
+  bool isVoted = false;
+
+  double sliderValue = 40;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -128,10 +131,15 @@ class _StartupdetailsState extends State<Startupdetails> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               actions: [
-                Image.asset(
-                  Assets.images.shareicon.path,
-                  height: 18,
-                  width: 18,
+                GestureDetector(
+                  onTap: () {
+                    context.pushNamed(AppRoutes.searchscreen.name);
+                  },
+                  child: Image.asset(
+                    Assets.images.shareicon.path,
+                    height: 18,
+                    width: 18,
+                  ),
                 ),
                 SizedBox(width: 15),
               ],
@@ -141,52 +149,67 @@ class _StartupdetailsState extends State<Startupdetails> {
               //   child: Icon(Icons.send, color: customColors.textColor, size: 24),
               // ),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: horizontalPadding,
+              ),
+              child: Container(
+                width: double.infinity,
+                height: 215,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                    image: AssetImage(Assets.images.podcastimage1.path),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Stack(
                   children: [
-                    // --- VIDEO CONTAINER ---
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: horizontalPadding,
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          context.pushNamed(AppRoutes.videoScreen.name);
+                        },
+                        child: Image.asset(Assets.images.playwithbgicon.path),
                       ),
-                      child: Container(
-                        width: double.infinity,
-                        height: 215,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                            image: AssetImage(Assets.images.studio.path),
-                            fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      right: 10,
+                      child: Image.asset(Assets.images.muteicon.path),
+                    ),
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.pop();
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: AppColors.color000011,
+                            shape: BoxShape.circle,
                           ),
-                        ),
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                Assets.images.playwithbgicon.path,
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 10,
-                              right: 10,
-                              child: Image.asset(Assets.images.muteicon.path),
-                            ),
-                            Positioned(
-                              top: 10,
-                              right: 10,
-                              child: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 24,
-                              ),
-                            ),
-                          ],
+                          child: Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 16,
+                          ),
                         ),
                       ),
                     ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: horizontalPadding,
@@ -236,9 +259,14 @@ class _StartupdetailsState extends State<Startupdetails> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
-                          AppButton(onPressed: () {}, title: "Watch Episode"),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 30),
+                          AppButton(
+                            onPressed: () {
+                              context.pushNamed(AppRoutes.videoScreen.name);
+                            },
+                            title: "Watch Episode",
+                          ),
+                          SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -249,7 +277,11 @@ class _StartupdetailsState extends State<Startupdetails> {
                                         10) /
                                     2,
                                 child: OutlinedButton.icon(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isSaved = !isSaved;
+                                    });
+                                  },
                                   style: OutlinedButton.styleFrom(
                                     side: BorderSide(
                                       color: customColors.greyColor,
@@ -263,21 +295,26 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     ),
                                     backgroundColor: Colors.transparent,
                                   ),
+
                                   icon: Icon(
-                                    Icons.bookmark_border,
+                                    isSaved
+                                        ? Icons.bookmark
+                                        : Icons.bookmark_border,
                                     size: 24,
-                                    color: customColors.textColor,
+                                    color: AppColors.wDark,
                                   ),
+
                                   label: PoppinsText(
-                                    'Save',
+                                    isSaved ? 'Saved' : 'Save',
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
-                                    color: customColors.subtextColor,
+                                    color: AppColors.wDark,
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 10),
-                              // Vote Button
+
+                              SizedBox(width: 10),
+
                               SizedBox(
                                 width:
                                     (MediaQuery.of(context).size.width -
@@ -285,7 +322,11 @@ class _StartupdetailsState extends State<Startupdetails> {
                                         10) /
                                     2,
                                 child: OutlinedButton.icon(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      isVoted = !isVoted;
+                                    });
+                                  },
                                   style: OutlinedButton.styleFrom(
                                     side: BorderSide(
                                       color: customColors.greyColor,
@@ -294,26 +335,31 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50),
                                     ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 12,
-                                    ),
+                                    padding: EdgeInsets.symmetric(vertical: 12),
                                     backgroundColor: Colors.transparent,
                                   ),
+
                                   icon: Icon(
-                                    Icons.favorite_border,
+                                    isVoted
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
                                     size: 24,
-                                    color: customColors.textColor,
+                                    color: isVoted
+                                        ? Colors.red
+                                        : customColors.textColor,
                                   ),
+
                                   label: PoppinsText(
-                                    'Vote',
+                                    isVoted ? 'Voted' : 'Vote',
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
-                                    color: customColors.subtextColor,
+                                    color: AppColors.wDark,
                                   ),
                                 ),
                               ),
                             ],
                           ),
+
                           const SizedBox(height: 30),
                           Container(
                             padding: const EdgeInsets.all(12),
@@ -416,112 +462,142 @@ class _StartupdetailsState extends State<Startupdetails> {
                           const SizedBox(height: 10),
                           Padding(
                             padding: EdgeInsets.only(bottom: 20),
-                            child: IntrinsicHeight(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Container(
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          Assets.images.documentaries4.path,
+                            child: GestureDetector(
+                              onTap: () {
+                                context.pushNamed(AppRoutes.contentDetail.name);
+                              },
+                              child: IntrinsicHeight(
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Container(
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            Assets.images.documentaries4.path,
+                                          ),
+                                          fit: BoxFit.cover,
                                         ),
-                                        fit: BoxFit.cover,
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
                                     ),
-                                  ),
-                                  SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        PoppinsText(
-                                          "podcast.title",
-                                          fontSize:
-                                              PoppinsFontSizeVariant.size16,
-                                          fontWeight:
-                                              PoppinsFontWeightVariant.medium,
-                                          textOverflow: TextOverflow.ellipsis,
-                                        ),
-                                        SizedBox(height: 20),
-                                        PoppinsText(
-                                          "podcast.description",
-                                          fontSize:
-                                              PoppinsFontSizeVariant.size14,
-                                          fontWeight:
-                                              PoppinsFontWeightVariant.regular,
-                                          color: Colors.grey,
-                                          maxLines: 2,
-                                          textOverflow: TextOverflow.ellipsis,
-                                        ),
-                                        SizedBox(height: 20),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: SliderTheme(
-                                                data: SliderTheme.of(context)
-                                                    .copyWith(
-                                                      trackHeight: 3,
-                                                      thumbShape:
-                                                          RoundSliderThumbShape(
-                                                            enabledThumbRadius:
-                                                                0,
-                                                          ),
-                                                      overlayShape:
-                                                          RoundSliderOverlayShape(
-                                                            overlayRadius: 0,
-                                                          ),
+
+                                    SizedBox(width: 12),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          PoppinsText(
+                                            "Finale – Meet The Drapers Season 07 (2025)",
+                                            fontSize:
+                                                PoppinsFontSizeVariant.size16,
+                                            fontWeight:
+                                                PoppinsFontWeightVariant.medium,
+                                            textOverflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                          ),
+                                          SizedBox(height: 6),
+                                          PoppinsText(
+                                            "Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode, spotlighting visionary startups from across the world. Judges Nikki Farb, TikTok executive Tim Natividad, and legendary investor Bill Draper evaluate groundbreaking innovations in connectivity, accessibility, and education. From CleverFi’s seamless WiFi to Zeality’s immersive AR/VR tech, WeWALK’s smart cane, and Taleemabad’s educational revolution, this episode is a thrilling showcase of entrepreneurial brilliance",
+                                            fontSize:
+                                                PoppinsFontSizeVariant.size14,
+                                            fontWeight: PoppinsFontWeightVariant
+                                                .regular,
+                                            color: Colors.grey,
+                                            maxLines: 2,
+                                            textOverflow: TextOverflow.ellipsis,
+                                          ),
+                                          SizedBox(height: 20),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: SliderTheme(
+                                                  data: SliderTheme.of(context)
+                                                      .copyWith(
+                                                        trackHeight: 3,
+                                                        thumbShape:
+                                                            RoundSliderThumbShape(
+                                                              enabledThumbRadius:
+                                                                  0,
+                                                            ),
+                                                        overlayShape:
+                                                            RoundSliderOverlayShape(
+                                                              overlayRadius: 0,
+                                                            ),
+                                                      ),
+                                                  child: Slider(
+                                                    activeColor: const Color(
+                                                      0xFF0072FF,
                                                     ),
-                                                child: Column(),
-                                              ),
-                                            ),
-                                            SizedBox(width: 8),
-                                            PoppinsText(
-                                              '-12:34',
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size10,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant
-                                                      .regular,
-                                              color: AppColors.wDark,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 20),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: AppButton(
-                                                onPressed: () {},
-                                                title: 'Continue',
-                                                buttonSize: Size(
-                                                  double.infinity,
-                                                  40,
-                                                ),
-                                                prefixIcon: Image.asset(
-                                                  Assets
-                                                      .images
-                                                      .playstrokeicon
-                                                      .path,
-                                                  width: 14,
-                                                  height: 14,
+                                                    inactiveColor: const Color(
+                                                      0xFF00002A,
+                                                    ),
+                                                    value: sliderValue,
+                                                    min: 0,
+                                                    max: 100,
+                                                    onChanged: (v) {
+                                                      setState(() {
+                                                        sliderValue = v;
+                                                      });
+                                                    },
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(width: 20),
-                                            Image.asset(
-                                              Assets.images.cancelicon.path,
-                                              height: 40,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                              const SizedBox(width: 8),
+                                              PoppinsText(
+                                                '-12:34',
+                                                fontSize: PoppinsFontSizeVariant
+                                                    .size10,
+                                                fontWeight:
+                                                    PoppinsFontWeightVariant
+                                                        .regular,
+                                                color: customColors.textColor,
+                                              ),
+                                            ],
+                                          ),
+
+                                          SizedBox(height: 20),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: AppButton(
+                                                  onPressed: () {
+                                                    context.pushNamed(
+                                                      AppRoutes
+                                                          .videoScreen
+                                                          .name,
+                                                    );
+                                                  },
+                                                  title: 'Watch Episode',
+                                                  buttonSize: Size(
+                                                    double.infinity,
+                                                    40,
+                                                  ),
+                                                  prefixIcon: Image.asset(
+                                                    Assets
+                                                        .images
+                                                        .playstrokeicon
+                                                        .path,
+                                                    width: 14,
+                                                    height: 14,
+                                                  ),
+                                                ),
+                                              ),
+                                              // SizedBox(width: 20),
+                                              // Image.asset(
+                                              //   Assets.images.cancelicon.path,
+                                              //   height: 40,
+                                              // ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
