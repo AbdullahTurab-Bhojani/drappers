@@ -292,7 +292,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
-                                context.goNamed(AppRoutes.trendingshow.name);
+                                context.pushNamed(AppRoutes.trendingshow.name);
                               },
                               title: "View More",
                               borderColor: customColors.textColor,

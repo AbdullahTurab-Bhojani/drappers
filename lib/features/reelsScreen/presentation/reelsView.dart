@@ -1,9 +1,11 @@
+// reelsview_screen.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:video_player/video_player.dart';
+
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
 class ReelsviewScreen extends StatefulWidget {
   final bool showSaveIcon;
@@ -14,207 +16,347 @@ class ReelsviewScreen extends StatefulWidget {
 }
 
 class _ReelsviewScreenState extends State<ReelsviewScreen> {
-  final String _reelTitle = 'Rio de Janeiro – Meet the Drapers Season 6 (2023)';
-  final String _reelDescription =
-      'Welcome to ‘Meet the Drapers’ at Websummit Rio de Janeiro! Tim Draper, with judges Luis Justo and Cris Arcangeli, assess startups Renova, Voxcell Bio, Instor Robotics, and Aprix. Which Rio startup advances to the semi-finals? find out in this exciting episode!';
-  final String _viewsCount = '2.2k views';
-  final String _date = '12 July 2025';
+  final List<String> _videoPaths = [
+    "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+    "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+    "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+  ];
 
-  bool _isPlaying = true;
+  late final PageController _pageController;
+  late final List<VideoPlayerController> _videoControllers;
 
-  // Removed the _buildActionButton helper method as requested
+  late final List<bool> _isLiked;
+  late final List<int> _likeCounts;
+  late final List<bool> _isSaved;
+  late final List<bool> _expanded;
+
+  final List<String> _titles = [
+    'Rio de Janeiro – Meet the Drapers Season 6 (2023)',
+    'Startup Spotlight — Episode 2',
+    'Behind the Scenes — Drapers Live',
+  ];
+
+  final List<String> _descriptions = [
+    'Welcome to ‘Meet the Drapers’ at Websummit Rio de Janeiro! Tim Draper, with judges Luis Justo and Cris Arcangeli, assess startups Renova, Voxcell Bio, Instor Robotics, and Aprix. Which Rio startup advances to the semi-finals?',
+    'Quick highlight of our latest startup pitch — watch till the end!',
+    'Short Behind-the-Scenes from our last founder meetup — raw and real.',
+  ];
+
+  final List<String> _dates = ['12 July 2025', '10 July 2025', '08 July 2025'];
+
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pageController = PageController();
+
+    _isLiked = List.generate(_videoPaths.length, (_) => false);
+    _likeCounts = List.generate(_videoPaths.length, (_) => 0);
+    _isSaved = List.generate(_videoPaths.length, (_) => false);
+    _expanded = List.generate(_videoPaths.length, (_) => false);
+
+    _videoControllers = _videoPaths
+        // ignore: deprecated_member_use
+        .map((url) => VideoPlayerController.network(url))
+        .toList();
+
+    for (int i = 0; i < _videoControllers.length; i++) {
+      final c = _videoControllers[i];
+      c.setLooping(true);
+      c.initialize().then((_) {
+        if (i == 0) c.play();
+        if (mounted) setState(() {});
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    for (var c in _videoControllers) {
+      c.dispose();
+    }
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _playOnlyAt(int index) {
+    for (int i = 0; i < _videoControllers.length; i++) {
+      if (_videoControllers[i].value.isInitialized) {
+        i == index ? _videoControllers[i].play() : _videoControllers[i].pause();
+      }
+    }
+    setState(() => _currentPage = index);
+  }
+
+  Widget _popupRow({
+    required String routePath,
+    required String imagePath,
+    required String title,
+    required AppCustomColors customColors,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pop();
+        context.pushNamed(routePath);
+      },
+      child: Row(
+        children: [
+          Image.asset(imagePath, width: 22, height: 22),
+          const SizedBox(width: 20),
+          PoppinsText(
+            title,
+            fontSize: PoppinsFontSizeVariant.size12,
+            color: customColors.textColor,
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
+    final customColors = Theme.of(context).extension<AppCustomColors>()!;
 
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // 1. Video Player Area (Placeholder, Full Screen)
-          Positioned.fill(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _isPlaying = !_isPlaying;
-                });
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  image: DecorationImage(
-                    image: AssetImage(Assets.images.reelimage2.path),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Center(
-                  // AnimatedOpacity(
-                  //   opacity: _isPlaying ? 0.0 : 1.0,
-                  //   duration: const Duration(milliseconds: 300),
-                  //   child: const Icon(
-                  //     Icons.play_arrow,
-                  //     color: Colors.white,
-                  //     size: 80,
-                  //   ),
-                  // ),
-                ),
-              ),
-            ),
-          ),
+          PageView.builder(
+            controller: _pageController,
+            scrollDirection: Axis.vertical,
+            itemCount: _videoControllers.length,
+            onPageChanged: _playOnlyAt,
+            itemBuilder: (context, index) {
+              final controller = _videoControllers[index];
 
-          // 2. Gradient Overlay
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 300,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.transparent, Colors.black87, Colors.black],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.0, 0.7, 1.0],
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          // 3. Metadata and Social Actions
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // --- Title and Metadata ---
-                  PoppinsText(
-                    _reelTitle,
-                    fontSize: PoppinsFontSizeVariant.size18,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: customColors.textColor,
-                  ),
-                  const SizedBox(height: 4),
-                  PoppinsText(
-                    '$_date • $_viewsCount',
-                    fontSize: PoppinsFontSizeVariant.size14,
-                    fontWeight: PoppinsFontWeightVariant.regular,
-                    color: Colors.white70,
-                  ),
-                  const SizedBox(height: 8),
-                  PoppinsText(
-                    _reelDescription,
-                    fontSize: PoppinsFontSizeVariant.size14,
-                    fontWeight: PoppinsFontWeightVariant.regular,
-                    color: customColors.textColor,
-                    maxLines: 4,
-                    textOverflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 20),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    "assets/images/like.png",
-                                    width: 24,
-                                    height: 24,
-                                    color: customColors.textColor,
-                                  ),
-                                  SizedBox(width: 10),
-                                  PoppinsText(
-                                    '12',
-                                    fontSize: PoppinsFontSizeVariant.size14,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    color: customColors.textColor,
-                                  ),
-                                ],
+              return GestureDetector(
+                onTap: () {
+                  if (!controller.value.isInitialized) return;
+                  controller.value.isPlaying
+                      ? controller.pause()
+                      : controller.play();
+                  setState(() {});
+                },
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: controller.value.isInitialized
+                          ? FittedBox(
+                              fit: BoxFit.cover,
+                              child: SizedBox(
+                                width: controller.value.size.width,
+                                height: controller.value.size.height,
+                                child: VideoPlayer(controller),
+                              ),
+                            )
+                          : const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
                               ),
                             ),
-                            SizedBox(width: 30),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    "assets/images/shareiconnew.png",
-                                    width: 24,
-                                    height: 24,
-                                    color: customColors.textColor,
-                                  ),
-                                  SizedBox(width: 10),
-                                  PoppinsText(
-                                    'Share',
-                                    fontSize: PoppinsFontSizeVariant.size14,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    color: customColors.textColor,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                    ),
+
+                    if (controller.value.isInitialized &&
+                        !controller.value.isPlaying)
+                      const Center(
+                        child: Icon(
+                          Icons.play_arrow,
+                          size: 70,
+                          color: Colors.white70,
                         ),
+                      ),
 
-                        GestureDetector(
-                          onTap: () {},
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                "assets/images/add.png",
-                                width: 18,
-                                height: 18,
-                                color: customColors.textColor,
-                              ),
-                              SizedBox(width: 10),
-                              PoppinsText(
-                                'Save',
-                                fontSize: PoppinsFontSizeVariant.size14,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                color: customColors.textColor,
-                              ),
-                            ],
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 260,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.transparent,
+                                Colors.black87,
+                                Colors.black,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
+                  ],
+                ),
+              );
+            },
+          ),
+          Positioned(
+            left: 15,
+            right: 15,
+            bottom: 95,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PoppinsText(
+                  _titles[_currentPage],
+                  fontSize: PoppinsFontSizeVariant.size18,
+                  fontWeight: PoppinsFontWeightVariant.medium,
+                  color: customColors.textColor,
+                ),
+                const SizedBox(height: 4),
+
+                PoppinsText(
+                  "${_dates[_currentPage]} • 2.2k views",
+                  fontSize: PoppinsFontSizeVariant.size14,
+                  color: Colors.white70,
+                ),
+                const SizedBox(height: 8),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PoppinsText(
+                      _descriptions[_currentPage],
+                      fontSize: PoppinsFontSizeVariant.size14,
+                      color: customColors.textColor,
+                      maxLines: _expanded[_currentPage] ? 20 : 3,
+                      textOverflow: TextOverflow.ellipsis,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _expanded[_currentPage] = !_expanded[_currentPage];
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: PoppinsText(
+                          _expanded[_currentPage] ? "Read Less" : "Read More",
+                          color: customColors.textColor,
+                          fontSize: PoppinsFontSizeVariant.size13,
+                          fontWeight: PoppinsFontWeightVariant.semiBold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            left: 15,
+            right: 15,
+            bottom: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _isLiked[_currentPage] = !_isLiked[_currentPage];
+                          _likeCounts[_currentPage] += _isLiked[_currentPage]
+                              ? 1
+                              : -1;
+                        });
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+
+                        children: [
+                          Image.asset(
+                            _isLiked[_currentPage]
+                                ? Assets.images.like.path
+                                : Assets.images.likeicon.path,
+                            width: 26,
+                            height: 26,
+                            color: _isLiked[_currentPage]
+                                ? customColors.buttonColors[0]
+                                : null,
+                          ),
+                          const SizedBox(width: 8),
+                          PoppinsText(
+                            "${_likeCounts[_currentPage]}",
+                            fontSize: PoppinsFontSizeVariant.size14,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 22),
+
+                    GestureDetector(
+                      onTap: () {},
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/images/shareiconnew.png",
+                            width: 24,
+                            height: 24,
+                            color: customColors.textColor,
+                          ),
+                          const SizedBox(width: 8),
+                          PoppinsText(
+                            "Share",
+                            fontSize: PoppinsFontSizeVariant.size14,
+                            color: customColors.textColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                AppButton(
+                  buttonSize: Size(0, 0),
+                  onPressed: () {
+                    setState(() {
+                      _isSaved[_currentPage] = !_isSaved[_currentPage];
+                    });
+                  },
+                  title: _isSaved[_currentPage] ? " Saved" : " Save",
+                  color: Colors.transparent,
+                  prefixIcon: _isSaved[_currentPage]
+                      ? Icon(
+                          Icons.check,
+                          size: 17,
+                          color: customColors.textColor,
+                        )
+                      : Image.asset(Assets.images.addicon.path, width: 15),
+                  fontSize: PoppinsFontSizeVariant.size14,
+                ),
+              ],
             ),
           ),
 
           Padding(
-            padding: const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
+            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    _videoControllers[_currentPage].pause();
+                    Navigator.pop(context);
+                  },
                   child: const CircleAvatar(
                     backgroundColor: Colors.black54,
                     radius: 20,
                     child: Icon(
                       Icons.arrow_back_ios_new,
-                      color: Colors.white,
                       size: 20,
+                      color: Colors.white,
                     ),
                   ),
                 ),
+
                 GestureDetector(
                   onTap: () {
                     showDialog(
@@ -222,93 +364,71 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                       barrierColor: Colors.transparent,
                       builder: (context) {
                         return Align(
-  alignment: Alignment.topRight,
-  child: Padding(
-    padding: const EdgeInsets.only(top: 20, right: 10),
-    child: Material(
-      elevation: 0,
-      borderRadius: BorderRadius.circular(10),
-      color: customColors.regular,
-      child: SizedBox(
-        width: 174,
-        height: 142,
-        child: Container(
-          padding:  EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _popupRow(
-                routePath: AppRoutes.reportContent.name,
-                imagePath: Assets.images.reporticon.path,
-                title: "Report",
-                customColors: customColors,
-              ),
-              _popupRow(
-                routePath: AppRoutes.reportContent.name,
-                imagePath: Assets.images.interestedicon.path,
-                title: "Interested",
-                customColors: customColors,
-              ),
-              _popupRow(
-                routePath: AppRoutes.reportContent.name,
-                imagePath: Assets.images.notinterestedicon.path,
-                title: "Not Interested",
-                customColors: customColors,
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
-  ),
-);
-
-                          
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 30, right: 10),
+                            child: Material(
+                              borderRadius: BorderRadius.circular(10),
+                              color: customColors.regular,
+                              child: SizedBox(
+                                width: 174,
+                                height: 142,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 16,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      _popupRow(
+                                        routePath: AppRoutes.reportContent.name,
+                                        imagePath:
+                                            Assets.images.reporticon.path,
+                                        title: "Report",
+                                        customColors: customColors,
+                                      ),
+                                      _popupRow(
+                                        routePath: AppRoutes.reportContent.name,
+                                        imagePath:
+                                            Assets.images.interestedicon.path,
+                                        title: "Interested",
+                                        customColors: customColors,
+                                      ),
+                                      _popupRow(
+                                        routePath: AppRoutes.reportContent.name,
+                                        imagePath: Assets
+                                            .images
+                                            .notinterestedicon
+                                            .path,
+                                        title: "Not Interested",
+                                        customColors: customColors,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
                       },
                     );
                   },
                   child: Image.asset(
                     "assets/images/3dotsicon.png",
-                    height: 24,
                     width: 24,
+                    height: 24,
                     color: customColors.textColor,
                   ),
-                )
-        ])
-        )
-        ]));
-      
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
-  Widget _popupRow({
-    required String routePath,
-  required String imagePath,
-  required String title,
-  required AppCustomColors customColors,
-}) {
-  return GestureDetector(
-    onTap: () {
-       context.pushNamed(routePath);
-    },
-    child: Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Image.asset(
-          imagePath,
-          width: 22,
-          height: 22,
-        ),
-         SizedBox(width: 20),
-        PoppinsText(
-          title,
-          fontSize: PoppinsFontSizeVariant.size12,
-          fontWeight: PoppinsFontWeightVariant.medium,
-          color: customColors.textColor,
-        ),
-      ],
-    ),
-  );
 }
-}
-
-

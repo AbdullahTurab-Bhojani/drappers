@@ -55,14 +55,17 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               actions: [
-                Padding(
-                  padding: EdgeInsets.only(right: 16),
+                GestureDetector(
+                  onTap: () {
+                    context.pushNamed(AppRoutes.searchscreen.name);
+                  },
                   child: Image.asset(
-                    "assets/images/Searchicon.png",
-                    width: 20,
-                    height: 20,
+                    Assets.images.searchicon.path,
+                    width: 24,
+                    height: 24,
                   ),
                 ),
+                SizedBox(width: 20,)
               ],
             ),
             SizedBox(height: 30),
