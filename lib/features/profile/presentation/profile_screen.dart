@@ -144,10 +144,11 @@ class ProfileScreen extends StatelessWidget {
                                   color: customColors.textColor,
                                 ),
                                 AppButton(
-                                  buttonSize: Size(80, 25),
+                                  buttonSize: Size(90, 25),
                                   color: Colors.transparent,
-                                  borderColor: customColors.greyColor,
-                                  borderWidth: 0.4,
+                                  borderColor: customColors.textColor
+                                      .withOpacity(0.5),
+                                  borderWidth: 1,
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   fontWeight: PoppinsFontWeightVariant.regular,
                                   border: true,
@@ -198,10 +199,11 @@ class ProfileScreen extends StatelessWidget {
                                   color: customColors.textColor,
                                 ),
                                 AppButton(
-                                  buttonSize: Size(80, 25),
+                                  buttonSize: Size(90, 25),
                                   color: Colors.transparent,
-                                  borderColor: customColors.greyColor,
-                                  borderWidth: 0.4,
+                                  borderColor: customColors.textColor
+                                      .withOpacity(0.5),
+                                  borderWidth: 1,
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   fontWeight: PoppinsFontWeightVariant.regular,
                                   border: true,
@@ -272,7 +274,9 @@ class ProfileScreen extends StatelessWidget {
                                 );
                               },
                               separatorBuilder: (context, index) {
-                                return Divider();
+                                return Divider(
+                                  color: customColors.textColor.withOpacity(0.1),
+                                );
                               },
                               itemCount: menuList.length,
                             ),

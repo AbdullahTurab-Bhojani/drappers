@@ -65,112 +65,115 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          PageView.builder(
-            allowImplicitScrolling: false,
-            controller: _pageController,
-            itemCount: images.length,
-            reverse: false,
-            onPageChanged: (index) {
-              setState(() => currentPage = index);
-            },
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(images[index]),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              );
-            },
-          ),
-          Positioned(
-            top: 60,
-            right: 20,
-            child: GestureDetector(
-              onTap: () {
-                context.pushNamed(AppRoutes.loginScreen.name);
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            PageView.builder(
+              allowImplicitScrolling: false,
+              controller: _pageController,
+              itemCount: images.length,
+              reverse: false,
+              onPageChanged: (index) {
+                setState(() => currentPage = index);
               },
-              child: PoppinsText(
-                "Skip",
-                fontSize: PoppinsFontSizeVariant.size14,
-                fontWeight: PoppinsFontWeightVariant.medium,
-                color: customColors.textColor,
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(images[index]),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
+            ),
+            Positioned(
+              top: 60,
+              right: 20,
+              child: GestureDetector(
+                onTap: () {
+                  context.pushNamed(AppRoutes.loginScreen.name);
+                },
+                child: PoppinsText(
+                  "Skip",
+                  fontSize: PoppinsFontSizeVariant.size14,
+                  fontWeight: PoppinsFontWeightVariant.medium,
+                  color: customColors.textColor,
+                ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    images.length,
-                    (index) => AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      margin: EdgeInsets.symmetric(horizontal: 2),
-                      width: currentPage == index ? 26 : 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        gradient: currentPage == index
-                            ? LinearGradient(
-                                colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
-                              )
-                            : null,
-                        color: currentPage != index ? AppColors.wDark : null,
-                        borderRadius: BorderRadius.circular(4),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      images.length,
+                      (index) => AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        margin: EdgeInsets.symmetric(horizontal: 2),
+                        width: currentPage == index ? 26 : 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          gradient: currentPage == index
+                              ? LinearGradient(
+                                  colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
+                                )
+                              : null,
+                          color: currentPage != index ? AppColors.wDark : null,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 28),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 32),
-                      PoppinsText(
-                        titles[currentPage],
-                        textAlign: TextAlign.center,
-                        fontSize: PoppinsFontSizeVariant.size32,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                        color: customColors.textColor,
-                        height: 1.3,
-                      ),
-                      SizedBox(height: 32),
-                      PoppinsText(
-                        subtitles[currentPage],
-                        textAlign: TextAlign.center,
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.light,
-                        color: customColors.textColor,
-                        height: 1.7,
-                      ),
-                      const SizedBox(height: 120),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 28),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 32),
+                        PoppinsText(
+                          titles[currentPage],
+                          textAlign: TextAlign.center,
+                          fontSize: PoppinsFontSizeVariant.size32,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                          height: 1.3,
+                        ),
+                        SizedBox(height: 32),
+                        PoppinsText(
+                          subtitles[currentPage],
+                          textAlign: TextAlign.center,
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.light,
+                          color: customColors.textColor,
+                          height: 1.7,
+                        ),
+                        const SizedBox(height: 120),
+                      ],
+                    ),
                   ),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: AppButton(
-                    onPressed: () {
-                      context.pushNamed(AppRoutes.loginScreen.name);
-                    },
-                    title: currentPage == images.length - 1 ? 'Next' : 'Next',
+      
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: AppButton(
+                      onPressed: () {
+                        context.pushNamed(AppRoutes.loginScreen.name);
+                      },
+                      title: currentPage == images.length - 1 ? 'Next' : 'Next',
+                    ),
                   ),
-                ),
-                const SizedBox(height: 80),
-              ],
+                  const SizedBox(height: 80),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

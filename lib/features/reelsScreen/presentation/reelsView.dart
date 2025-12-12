@@ -193,8 +193,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
             },
           ),
           Positioned(
-            left: 15,
-            right: 15,
+            left: 20,
+            right: 20,
             bottom: 95,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,8 +246,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
             ),
           ),
           Positioned(
-            left: 15,
-            right: 15,
+            left: 20,
+            right: 20,
             bottom: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -337,7 +337,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+            padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/theme_extension.dart';
@@ -52,6 +53,8 @@ class _ContentDetailState extends State<ContentDetail>
     _tabController.addListener(() {
       setState(() {});
     });
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
   }
 
   @override
@@ -397,7 +400,7 @@ class _ContentDetailState extends State<ContentDetail>
                                       ),
                                     ),
                                     SizedBox(height: 12),
-
+      
                                     /// Episodes Grid
                                     GridView.builder(
                                       shrinkWrap: true,
@@ -450,7 +453,7 @@ class _ContentDetailState extends State<ContentDetail>
                           );
                         },
                       ),
-
+      
                       SizedBox(height: 50),
                     ],
                   ),

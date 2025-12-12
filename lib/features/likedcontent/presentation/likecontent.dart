@@ -279,17 +279,19 @@ class _LikecontentState extends State<Likecontent>
                               ),
                             ),
                             AppButton(
-                              buttonSize: Size(80, 25),
+                              buttonSize: Size(90, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.textColor.withOpacity(
+                                0.5,
+                              ),
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
                                 context.pushNamed(AppRoutes.reelWidget.name);
                               },
                               title: "View More",
-                              borderColor: customColors.textColor,
-                              borderWidth: 0.3,
-                              fontSize: PoppinsFontSizeVariant.size12,
-                              fontWeight: PoppinsFontWeightVariant.regular,
                             ),
                           ],
                         ),

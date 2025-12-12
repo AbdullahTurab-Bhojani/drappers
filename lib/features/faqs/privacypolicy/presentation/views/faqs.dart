@@ -96,14 +96,14 @@ class _FaqsScreenState extends State<FaqsScreen> {
               leading: GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 20),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
                     height: 20,
                   ),
                 ),
-                ),
+              ),
               title: "FAQ's",
               centerTitle: false,
               backgroundColor: Colors.transparent,
@@ -124,7 +124,7 @@ class _FaqsScreenState extends State<FaqsScreen> {
                     final item = _faqs[index];
                     final isExpanded = expandedIndices.contains(index);
                     return Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 25),
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
                         child: Theme(
@@ -134,9 +134,9 @@ class _FaqsScreenState extends State<FaqsScreen> {
                           child: ExpansionTile(
                             key: ValueKey(index),
                             initiallyExpanded: isExpanded,
-                            backgroundColor: customColors.regular,
-                            collapsedBackgroundColor: customColors.regular,
-
+                            backgroundColor: AppColors.submitticket0E0E0E,
+                            collapsedBackgroundColor:
+                                AppColors.submitticket0E0E0E,
                             title: PoppinsText(
                               item.question,
                               fontSize: PoppinsFontSizeVariant.size16,
@@ -151,8 +151,8 @@ class _FaqsScreenState extends State<FaqsScreen> {
                             children: <Widget>[
                               Padding(
                                 padding: EdgeInsets.only(
-                                  left: 16.0,
-                                  right: 16.0,
+                                  left: 20.0,
+                                  right: 20.0,
                                   bottom: 16.0,
                                   top: 0,
                                 ),
@@ -182,7 +182,6 @@ class _FaqsScreenState extends State<FaqsScreen> {
                 ),
               ),
             ),
-         
           ],
         ),
       ),

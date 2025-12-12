@@ -55,7 +55,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   decoration: BoxDecoration(
-                    color: customColors.regular,
+                    color: AppColors.submitticket0E0E0E,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: SingleChildScrollView(

@@ -177,10 +177,12 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                                 context.goNamed(AppRoutes.reelWidget.name);
                               },
                               child: AppButton(
-                                buttonSize: Size(80, 25),
+                                buttonSize: Size(90, 25),
                                 color: Colors.transparent,
-                                borderColor: customColors.textColor,
-                                borderWidth: 0.3,
+                                borderColor: customColors.textColor.withOpacity(
+                                  0.5,
+                                ),
+                                borderWidth: 1,
                                 fontSize: PoppinsFontSizeVariant.size12,
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,

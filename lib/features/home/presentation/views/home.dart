@@ -186,14 +186,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 20),
                 ],
               ),
 
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -540,17 +540,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: customColors.textColor,
                             ),
                             AppButton(
-                              buttonSize: Size(80, 25),
+                              buttonSize: Size(90, 25),
                               color: Colors.transparent,
+                              borderColor: customColors.textColor.withOpacity(
+                                0.5,
+                              ),
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
                                 context.pushNamed(AppRoutes.trendingshow.name);
                               },
                               title: "View More",
-                              borderColor: customColors.textColor,
-                              borderWidth: 0.3,
-                              fontSize: PoppinsFontSizeVariant.size12,
-                              fontWeight: PoppinsFontWeightVariant.regular,
                             ),
                           ],
                         ),
@@ -599,9 +601,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: customColors.textColor,
                             ),
                             AppButton(
-                              buttonSize: Size(80, 25),
-                              color: Colors.transparent,
-                              border: true,
                               onPressed: () {
                                 _controller!.pause();
 
@@ -614,10 +613,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               },
                               title: "View More",
-                              borderColor: customColors.textColor,
-                              borderWidth: 0.3,
+                              buttonSize: Size(90, 25),
+                              color: Colors.transparent,
+                              borderColor: customColors.textColor.withOpacity(
+                                0.5,
+                              ),
+                              borderWidth: 1,
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
+                              border: true,
                             ),
                           ],
                         ),
@@ -650,10 +654,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: customColors.textColor,
                             ),
                             AppButton(
-                              buttonSize: Size(80, 25),
+                              buttonSize: Size(90, 25),
                               color: Colors.transparent,
-                              borderColor: customColors.textColor,
-                              borderWidth: 0.3,
+                              borderColor: customColors.textColor.withOpacity(
+                                0.5,
+                              ),
+                              borderWidth: 1,
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
@@ -757,10 +763,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context.pushNamed(AppRoutes.reelWidget.name);
                               },
                               child: AppButton(
-                                buttonSize: Size(80, 25),
+                                buttonSize: Size(90, 25),
                                 color: Colors.transparent,
-                                borderColor: customColors.textColor,
-                                borderWidth: 0.3,
+                                borderColor: customColors.textColor.withOpacity(
+                                  0.5,
+                                ),
+                                borderWidth: 1,
                                 fontSize: PoppinsFontSizeVariant.size12,
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
@@ -811,10 +819,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: customColors.textColor,
                             ),
                             AppButton(
-                              buttonSize: Size(80, 25),
+                              buttonSize: Size(90, 25),
                               color: Colors.transparent,
-                              borderColor: customColors.textColor,
-                              borderWidth: 0.3,
+                              borderColor: customColors.textColor.withOpacity(
+                                0.5,
+                              ),
+                              borderWidth: 1,
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
@@ -850,7 +860,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
 
-                        SizedBox(height: 50),
+                        SizedBox(height: 20),
                       ],
                     ),
                   ),

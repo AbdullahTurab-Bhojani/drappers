@@ -35,8 +35,6 @@ class _BottomNavigationBarShellState
       'label': 'Discover',
       'icon': Assets.images.discovernanewvbaricon.path,
       'icon2': Assets.images.discoverGrey.path,
-
-      
     },
     {
       'path': AppRoutes.watchlist.name,
