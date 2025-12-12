@@ -5,12 +5,13 @@ import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../shared/widgets/editwatchlisttitle.dart';
+import '../../../shared/widgets/popupmenuitem/remove_popup.dart';
 
 class WatchlistData {
   final String thumbnailPath;
   final String title;
   final String year;
-  bool isSelected; 
+  bool isSelected;
 
   WatchlistData(
     this.thumbnailPath,
@@ -63,7 +64,7 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
   }
 
   void _onDeleteSelected() {
-    if (selectedCount == 0) return; 
+    if (selectedCount == 0) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('${selectedCount} items removed from watchlist.')),
@@ -99,7 +100,7 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
                 elevation: 0,
                 actions: [
                   InkWell(
-                    onTap: () => context.pop(), 
+                    onTap: () => context.pop(),
                     child: PoppinsText(
                       "Cancel",
                       fontSize: PoppinsFontSizeVariant.size14,
@@ -107,7 +108,7 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
                       color: customColors.textColor,
                     ),
                   ),
-                 SizedBox(width: 20),
+                  SizedBox(width: 20),
                 ],
               ),
 
@@ -135,26 +136,32 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: InkWell(
-                child: Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50.0),
-                    color: customColors.redshade,
-                  ),
-                  child: Center(
-                    child: PoppinsText(
-                      'Remove',
-                      fontSize: PoppinsFontSizeVariant.size14,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
+            child: selectedCount > 0
+                ? Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: InkWell(
+                      child: AppButton(
+                        buttonSize: Size(400, 40),
+                        color: customColors.redshade,
+                        buttonGradient: [
+                          customColors.redshade,
+                          customColors.redshade,
+                        ],
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                              backgroundColor: Colors.transparent,
+                              child: RemovePopup(),
+                            ),
+                          );
+                        },
+                        title: "Remove",
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  )
+                : SizedBox.shrink(),
+
           ),
         ],
       ),

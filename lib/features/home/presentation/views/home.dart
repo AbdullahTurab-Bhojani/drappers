@@ -544,10 +544,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.transparent,
                               border: true,
                               onPressed: () {
-                                if (GuestHelper.isGuest) {
-                                  GuestHelper.checkGuest(context);
-                                  return;
-                                }
                                 context.pushNamed(AppRoutes.trendingshow.name);
                               },
                               title: "View More",
@@ -773,7 +769,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     GuestHelper.checkGuest(context);
                                     return;
                                   }
-                                  context.goNamed(AppRoutes.reelWidget.name);
+                                  context.pushNamed(AppRoutes.reelWidget.name);
                                 },
                                 title: "View More",
                               ),
