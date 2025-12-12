@@ -53,10 +53,15 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
               actions: [
                 Padding(
                   padding: EdgeInsets.only(right: 16),
-                  child: Image.asset(
-                    "assets/images/Searchicon.png",
-                    width: 20,
-                    height: 20,
+                  child: GestureDetector(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.searchscreen.name);
+                    },
+                    child: Image.asset(
+                      Assets.images.searchicon.path,
+                      width: 20,
+                      height: 20,
+                    ),
                   ),
                 ),
               ],

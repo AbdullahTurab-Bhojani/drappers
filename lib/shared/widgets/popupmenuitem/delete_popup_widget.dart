@@ -44,7 +44,9 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
           SizedBox(height: 25),
           AppButton(
             onPressed: () {
-              context.pushNamed(AppRoutes.loginScreen.name);
+              Navigator.of(context, rootNavigator: true).pop();
+
+              context.goNamed(AppRoutes.loginScreen.name);
             },
             title: "Yes, delete",
           ),

@@ -250,7 +250,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                       SizedBox(height: 15),
                                       NewTextField(
                                         fieldbg: AppColors.submitfield181818,
-                                        maxLines: 6,
+                                        maxLines: 3,
                                         controller: _describeController,
                                         labelText: "Describe your issue*",
                                         hintText:

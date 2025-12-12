@@ -38,15 +38,15 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
             children: [
               AppMainBar(
                 leading: GestureDetector(
-                onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Image.asset(
+                      Assets.images.backicon.path,
+                      width: 20,
+                      height: 20,
+                    ),
                   ),
-                ),
                 ),
                 title: "",
                 centerTitle: false,

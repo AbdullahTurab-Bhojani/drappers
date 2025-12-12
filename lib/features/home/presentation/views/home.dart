@@ -548,7 +548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   GuestHelper.checkGuest(context);
                                   return;
                                 }
-                                context.goNamed(AppRoutes.trendingshow.name);
+                                context.pushNamed(AppRoutes.trendingshow.name);
                               },
                               title: "View More",
                               borderColor: customColors.textColor,

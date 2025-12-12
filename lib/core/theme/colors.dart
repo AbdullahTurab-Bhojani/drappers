@@ -106,6 +106,8 @@ abstract final class AppColors {
   static const color040412 = Color(0xff040412);
   static const color000032 = Color(0xff000032);
   static const color202020 = Color(0xff202020);
+  static const color000011 = Color(0xff000011);
+  static const color8C8C8C = Color(0xff8C8C8C);
   static const shadegreycolor6B6B6B = Color(0xff6B6B6B);
 
   static get color3D3C45 => null;

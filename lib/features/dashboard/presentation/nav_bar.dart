@@ -23,26 +23,32 @@ class _BottomNavigationBarShellState
   bool isOpen = false;
   bool isEditing = false;
 
-   final List<Map<String, dynamic>> _navItems = [
+  final List<Map<String, dynamic>> _navItems = [
     {
       'path': AppRoutes.home.name,
       'label': 'Home',
       'icon': Assets.images.footericon1.path,
+      'icon2': Assets.images.dtvlogogrey.path,
     },
     {
       'path': AppRoutes.discover.name,
       'label': 'Discover',
-      'icon': Assets.images.discower786.path,
+      'icon': Assets.images.discovernanewvbaricon.path,
+      'icon2': Assets.images.discoverGrey.path,
+
+      
     },
     {
       'path': AppRoutes.watchlist.name,
       'label': 'Watchlist',
-      'icon': Assets.images.watchlist786.path,
+      'icon': Assets.images.watchlistnavbaricon.path,
+      'icon2': Assets.images.watchlistgrey.path,
     },
     {
       'path': AppRoutes.profile.name,
       'label': 'Profile',
       'icon': Assets.images.shareicon.path,
+      'icon2': Assets.images.footericon1.path,
     },
   ];
 
@@ -137,13 +143,15 @@ class _BottomNavigationBarShellState
                         ),
                       )
                     else
-                      Image(
-                        image: AssetImage(_navItems[index]['icon']),
-                        height: 24,
-                        color: isSelected
-                            ? customColors.textColor
-                            : customColors.greyColor,
-                      ),
+                      isSelected
+                          ? Image(
+                              image: AssetImage(_navItems[index]['icon']),
+                              height: 24,
+                            )
+                          : Image(
+                              image: AssetImage(_navItems[index]['icon2']),
+                              height: 24,
+                            ),
 
                     const SizedBox(height: 4),
 

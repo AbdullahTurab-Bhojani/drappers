@@ -71,7 +71,6 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                       fontWeight: PoppinsFontWeightVariant.semiBold,
                       color: customColors.textColor,
                     ),
-                    // Subtitle
                     PoppinsText(
                       "Choose how you'd like to manage your account",
                       fontSize: PoppinsFontSizeVariant.size16,
