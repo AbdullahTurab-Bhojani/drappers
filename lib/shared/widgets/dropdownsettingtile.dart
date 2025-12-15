@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
-import '../../gen/assets.gen.dart';
 
 class DropdownSettingTile extends StatefulWidget {
   const DropdownSettingTile({
@@ -13,15 +12,16 @@ class DropdownSettingTile extends StatefulWidget {
     required this.options,
     required this.initialValue,
     required this.onChanged,
+  required this.isMenuOpen,
   });
 
   final ImageProvider image;
   final String titleText;
   final String subtitleText;
-  final List<String> options;
+  final List<dynamic> options;
   final String initialValue;
   final ValueChanged<String> onChanged;
-
+  final bool isMenuOpen;
   @override
   State<DropdownSettingTile> createState() => _DropdownSettingTileState();
 }
@@ -84,87 +84,87 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
           ),
           const SizedBox(height: 20),
 
-          DropdownButtonFormField<String>(
-            initialValue: _currentValue,
-            dropdownColor: customColors.regular,
-            style: TextStyle(
-              color: customColors.textColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: AppColors.helpsupport,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 10.0,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide.none,
-              ),
-            ),
-            icon: Image.asset(
-              Assets.images.dropdownicon.path,
-              height: 14,
-              width: 14,
-              scale: 2.5,
-            ),
+          // DropdownButtonFormField<String>(
+          //   // padding: EdgeInsets.all(20),
+          //   initialValue: _currentValue,
+          //   dropdownColor: customColors.regular,
+          //   style: TextStyle(
+          //     color: customColors.textColor,
+          //     fontSize: 16,
+          //     fontWeight: FontWeight.w400,
+          //   ),
+          //   decoration: InputDecoration(
+          //     filled: true,
+          //     fillColor: AppColors.helpsupport,
+          //     contentPadding: const EdgeInsets.symmetric(
+          //       horizontal: 10.0,
+          //       vertical: 10.0,
+          //     ),
+          //     border: OutlineInputBorder(
+          //       borderRadius: BorderRadius.circular(10.0),
+          //       borderSide: BorderSide.none,
+          //     ),
+          //   ),
+          //   icon: Image.asset(
+          //     Assets.images.dropdownicon.path,
+          //     height: 14,
+          //     width: 14,
+          //     scale: 2.5,
+          //   ),
 
-            onChanged: (String? newValue) {
-              if (newValue != null) {
-                setState(() {
-                  _currentValue = newValue;
-                });
-                widget.onChanged(newValue);
-              }
-            },
+          //   onChanged: (String? newValue) {
+          //     if (newValue != null) {
+          //       setState(() {
+          //         _currentValue = newValue;
+          //       });
+          //       widget.onChanged(newValue);
+          //     }
+          //   },
 
-            items: widget.options.map<DropdownMenuItem<String>>((String value) {
-              final isSelected = value == _currentValue;
+          //   items: widget.options.map<DropdownMenuItem<String>>((String value) {
+          //     final isSelected = value == _currentValue;
 
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    // horizontal: 16, 
-                    // vertical: 8,
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.check,
-                        color: isSelected
-                            ? customColors.textColor
-                            : Colors.transparent,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: PoppinsText(
-                          value,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.regular,
-                          color: customColors.textColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
+          //     return DropdownMenuItem<String>(
+          //       value: value,
+          //       child: Row(
+          //         children: [
+          //           Icon(
+          //             Icons.check,
+          //             color: isSelected
+          //                 ? customColors.textColor
+          //                 : Colors.transparent,
+          //             size: 20,
+          //           ),
+          //           const SizedBox(width: 10),
+          //           Expanded(
+          //             child: PoppinsText(
+          //               value,
+          //               fontSize: PoppinsFontSizeVariant.size16,
+          //               fontWeight: PoppinsFontWeightVariant.regular,
+          //               color: customColors.textColor,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     );
+          //   }).toList(),
 
-            selectedItemBuilder: (context) {
-              return widget.options.map((String item) {
-                return PoppinsText(
-                  item,
-                  fontSize: PoppinsFontSizeVariant.size16,
-                  fontWeight: PoppinsFontWeightVariant.regular,
-                  color: customColors.textColor,
-                );
-              }).toList();
-            },
-          ),
+          //   selectedItemBuilder: (context) {
+          //     return widget.options.map((String item) {
+          //       return PoppinsText(
+          //         item,
+          //         fontSize: PoppinsFontSizeVariant.size16,
+          //         fontWeight: PoppinsFontWeightVariant.regular,
+          //         color: customColors.textColor,
+          //       );
+          //     }).toList();
+          //   },
+          // ),
+          CustomDropdown( 
+            hintText: _currentValue,
+            dynamicValues: widget.options,
+            isOpen: widget.isMenuOpen,
+          )
         ],
       ),
     );

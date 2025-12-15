@@ -120,7 +120,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                             setState(() {
                               _streamingQuality = value;
                             });
-                          },
+                          }, isMenuOpen: false,
                         ),
                       ],
                     ),
@@ -138,6 +138,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         ),
                         SizedBox(height: 10),
                         DropdownSettingTile(
+                          isMenuOpen: false,
                           image: AssetImage(Assets.images.cc123.path),
                           titleText: "Subtitles & Captions",
                           subtitleText: "Default subtitle language",
@@ -241,7 +242,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 40.0),
+                    SizedBox(height: 80.0),
                   ],
                 ),
               ),

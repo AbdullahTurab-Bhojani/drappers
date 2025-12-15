@@ -62,7 +62,9 @@ enum AppRoutes {
   newliveScreen('newliveScreen', '/newliveScreen'),
   livepitchesScreen('LivepitchesScreen', '/LivepitchesScreen'),
 
-  videoScreen('videoScreen', '/videoScreen');
+  videoScreen('videoScreen', '/videoScreen'),
+  searchView ('searchView', '/searchView');
+
 
   final String name;
   final String path;

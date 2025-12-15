@@ -114,21 +114,6 @@ class _ChangePasswordState extends State<ChangePassword> {
                         },
                         title: "Continue",
                       ),
-                      SizedBox(height: 40),
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-
-                        onTap: () {
-                          context.goNamed(AppRoutes.forgetpasswordScreen.name);
-                        },
-                        child: PoppinsText(
-                          'Forgot Password?',
-                          decoration: TextDecoration.underline,
-                          fontSize: PoppinsFontSizeVariant.size14,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: Colors.white,
-                        ),
-                      ),
                     ],
                   ),
                 ),

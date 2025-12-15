@@ -23,12 +23,12 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
   @override
   Widget build(BuildContext context) {
     List<String> documentriescard = [
-      Assets.images.documentaries1.path,
-      Assets.images.documentaries2.path,
-      Assets.images.documentaries3.path,
-      Assets.images.documentaries4.path,
-      Assets.images.documentaries5.path,
-      Assets.images.documentaries6.path,
+      Assets.images.documentriesimage1.path,
+      Assets.images.documentriesimage2.path,
+      Assets.images.documentriesimage3.path,
+      Assets.images.documentriesimage4.path,
+      Assets.images.documentriesimage5.path,
+      Assets.images.documentriesimage6.path,
     ];
     List<String> podcardimages = [
       Assets.images.podcastimage1.path,
@@ -73,193 +73,259 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppMainBar(
-                leadingIcon: Icons.arrow_back_ios,
-                title: "Live Pitches",
-                centerTitle: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppMainBar(
+              leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => Navigator.of(context).pop(),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
               ),
+              title: "Live Pitches",
+              centerTitle: false,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
 
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Trending Show',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 20),
-
-                        SizedBox(
-                          height: 180,
-                          child: ListView.separated(
-                            clipBehavior: Clip.none,
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
-                            itemCount: trendingimages.length,
-                            itemBuilder: (context, index) {
-                              return CardWidget(
-                                assetImage: trendingimages[index],
-                                showSaveIcon: false,
-                              );
-                            },
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Trending Shows',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
                           ),
-                        ),
-                        SizedBox(height: 30),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Podcasts',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
+                          AppButton(
+                            buttonSize: Size(90, 25),
+                            color: Colors.transparent,
+                            borderColor: customColors.textColor.withOpacity(
+                              0.5,
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-
-                        SizedBox(
-                          height: 180,
-                          child: ListView.separated(
-                            clipBehavior: Clip.none,
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
-                            itemCount: podcardimages.length,
-                            itemBuilder: (context, index) {
-                              return PodcardsWidget(
-                                assetImage: podcardimages[index],
-                                title: '',
-                                showSaveIcon: false,
-                                fontSizeVariant: PoppinsFontSizeVariant.size14,
-                              );
+                            borderWidth: 1,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            border: true,
+                            onPressed: () {
+                              if (GuestHelper.isGuest) {
+                                GuestHelper.checkGuest(context);
+                                return;
+                              }
+                              context.pushNamed(AppRoutes.trendingshow.name);
                             },
+                            title: "View More",
                           ),
-                        ),
-                        SizedBox(height: 30),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Reels',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
-                            ),
-                            GestureDetector(
-                              behavior: HitTestBehavior.opaque,
+                        ],
+                      ),
 
-                              onTap: () {
+                      SizedBox(height: 20),
+
+                      SizedBox(
+                        height: 180,
+                        child: ListView.separated(
+                          clipBehavior: Clip.none,
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: 15),
+                          itemCount: trendingimages.length,
+                          itemBuilder: (context, index) {
+                            return CardWidget(
+                              assetImage: trendingimages[index],
+                              showSaveIcon: false,
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 30),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Podcasts',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          AppButton(
+                            buttonSize: Size(90, 25),
+                            color: Colors.transparent,
+                            borderColor: customColors.textColor.withOpacity(
+                              0.5,
+                            ),
+                            borderWidth: 1,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            border: true,
+                            onPressed: () {
+                              if (GuestHelper.isGuest) {
+                                GuestHelper.checkGuest(context);
+                                return;
+                              }
+                              context.pushNamed(AppRoutes.podcasts.name);
+                            },
+
+                            title: "View More",
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+
+                      SizedBox(
+                        height: 180,
+                        child: ListView.separated(
+                          clipBehavior: Clip.none,
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: 15),
+                          itemCount: podcardimages.length,
+                          itemBuilder: (context, index) {
+                            return PodcardsWidget(
+                              assetImage: podcardimages[index],
+                              title: '',
+                              showSaveIcon: false,
+                              fontSizeVariant: PoppinsFontSizeVariant.size14,
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Reels',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+
+                            onTap: () {
+                              if (GuestHelper.isGuest) {
+                                GuestHelper.checkGuest(context);
+                                return;
+                              }
+                              context.goNamed(AppRoutes.reelWidget.name);
+                            },
+                            child: AppButton(
+                              buttonSize: Size(90, 25),
+                              color: Colors.transparent,
+                              borderColor: customColors.textColor.withOpacity(
+                                0.5,
+                              ),
+                              borderWidth: 1,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              border: true,
+                              onPressed: () {
                                 if (GuestHelper.isGuest) {
                                   GuestHelper.checkGuest(context);
                                   return;
                                 }
                                 context.goNamed(AppRoutes.reelWidget.name);
                               },
-                              child: AppButton(
-                                buttonSize: Size(90, 25),
-                                color: Colors.transparent,
-                                borderColor: customColors.textColor.withOpacity(
-                                  0.5,
-                                ),
-                                borderWidth: 1,
-                                fontSize: PoppinsFontSizeVariant.size12,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                border: true,
-                                onPressed: () {
-                                  if (GuestHelper.isGuest) {
-                                    GuestHelper.checkGuest(context);
-                                    return;
-                                  }
-                                  context.goNamed(AppRoutes.reelWidget.name);
-                                },
-                                title: "View More",
-                              ),
+                              title: "View More",
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-
-                        SizedBox(
-                          height: 273,
-                          child: ListView.separated(
-                            padding: EdgeInsets.zero,
-                            clipBehavior: Clip.none,
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
-                            itemCount: reelimages.length,
-                            itemBuilder: (context, index) {
-                              return ReelcardWidget(
-                                reelCardHeight: 273,
-                                reelCardWidth: 149,
-                                fontSizeVariant: PoppinsFontSizeVariant.size12,
-                                assetImagePath: reelimages[index],
-                                title: reelTitles[index],
-                                showSaveIcon: false,
-                              );
-                            },
                           ),
-                        ),
-                        SizedBox(height: 30),
+                        ],
+                      ),
+                      SizedBox(height: 20),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Documentaries',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
+                      SizedBox(
+                        height: 273,
+                        child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          clipBehavior: Clip.none,
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: 15),
+                          itemCount: reelimages.length,
+                          itemBuilder: (context, index) {
+                            return ReelcardWidget(
+                              reelCardHeight: 273,
+                              reelCardWidth: 149,
+                              fontSizeVariant: PoppinsFontSizeVariant.size12,
+                              assetImagePath: reelimages[index],
+                              title: reelTitles[index],
+                              showSaveIcon: false,
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 30),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            'Documentaries',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          AppButton(
+                            buttonSize: Size(90, 25),
+                            color: Colors.transparent,
+                            borderColor: customColors.textColor.withOpacity(
+                              0.5,
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        SizedBox(
-                          height: 180,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
-                            itemCount: documentriescard.length,
-                            itemBuilder: (context, index) {
-                              return DocumentriesCardWidget(
-                                assetImage: documentriescard[index],
-                                showSaveIcon: false,
-                              );
+                            borderWidth: 1,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            border: true,
+                            onPressed: () {
+                              if (GuestHelper.isGuest) {
+                                GuestHelper.checkGuest(context);
+                                return;
+                              }
+                              context.pushNamed(AppRoutes.documentries.name);
                             },
+                            title: "View More",
                           ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      SizedBox(
+                        height: 180,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: 15),
+                          itemCount: documentriescard.length,
+                          itemBuilder: (context, index) {
+                            return DocumentriesCardWidget(
+                              assetImage: documentriescard[index],
+                              showSaveIcon: false,
+                            );
+                          },
                         ),
+                      ),
 
-                        SizedBox(height: 50),
-                      ],
-                    ),
+                      SizedBox(height: 10),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -44,13 +44,22 @@ class _SearchscreenState extends State<Searchscreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    List<String> genreTitle = [
-      'Shows',
-      'Documentaries',
+    List<String> genretitle = [
+      'All',
+      'Live pitches',
+      'Success Store',
       'Podcasts',
       'Shows',
       'Reels',
     ];
+    final Map<String, String> genreRoutes = {
+      'All': '/LivepitchesScreen',
+      'Live pitches': '/LivepitchesScreen',
+      'Success Store': '/LivepitchesScreen',
+      'Podcasts': '/LivepitchesScreen',
+      'Shows': '/LivepitchesScreen',
+      'Reels': '/LivepitchesScreen',
+    };
 
     List trendingimages = [
       Assets.images.trendingimage1.path,
@@ -113,6 +122,10 @@ class _SearchscreenState extends State<Searchscreen> {
                       SizedBox(width: 10),
                       Expanded(
                         child: TextField(
+                          onTap: () {
+                            context.pushNamed(AppRoutes.searchView.name);
+                          },
+                          readOnly: true,
                           decoration: InputDecoration(
                             hintText: "Search content",
                             hintStyle: TextStyle(
@@ -192,13 +205,25 @@ class _SearchscreenState extends State<Searchscreen> {
                       const SizedBox(height: 20),
 
                       SizedBox(
+                        height: 56,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) =>
-                              const SizedBox(width: 15),
-                          itemCount: genreTitle.length,
+                              SizedBox(width: 15),
+                          itemCount: genretitle.length,
                           itemBuilder: (context, index) {
-                            return GenreBoxWidget(title: genreTitle[index]);
+                            final title = genretitle[index];
+
+                            return GenreBoxWidget(
+                              title: title,
+                              showBorder: index == 0,
+                              onTap: () {
+                                final route = genreRoutes[title];
+                                if (route != null) {
+                                  context.push(route);
+                                }
+                              },
+                            );
                           },
                         ),
                       ),

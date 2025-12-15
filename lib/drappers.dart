@@ -84,6 +84,7 @@ import 'features/reelsScreen/presentation/reelsView.dart';
 import 'features/report_content/presentation/report_content.dart';
 import 'features/savereel/presentation/savedreel.dart';
 import 'features/searchScreen/presentation/searchScreen.dart';
+import 'features/searchview/presentation/searchview.dart';
 import 'features/signup/create_account_code_screen.dart';
 import 'features/signup/presentation/views/signup.dart';
 import 'features/something_Else/presentation/reportContent_SomethingElse.dart';

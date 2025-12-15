@@ -35,7 +35,7 @@ class _TileWidgetState extends State<TileWidget> {
             children: [
               Row(
                 children: [
-                  Image.asset(widget.iconImage),
+                  Image.asset(widget.iconImage, width: 24, height: 24),
                   SizedBox(width: 20),
                   PoppinsText(
                     widget.title,

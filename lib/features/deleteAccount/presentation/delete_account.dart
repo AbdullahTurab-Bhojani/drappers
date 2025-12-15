@@ -73,6 +73,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                       fontWeight: PoppinsFontWeightVariant.semiBold,
                       color: customColors.textColor,
                     ),
+                    SizedBox(height: 20),
                     PoppinsText(
                       "Choose how you'd like to manage your account",
                       fontSize: PoppinsFontSizeVariant.size16,
@@ -248,6 +249,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                 ),
               ),
             ),
+          
           ],
         ),
       ),

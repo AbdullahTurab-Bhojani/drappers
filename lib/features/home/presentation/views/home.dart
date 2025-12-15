@@ -161,7 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         context.pushNamed(AppRoutes.searchscreen.name);
                       },
                       child: Image.asset(
-                        Assets.images.searchicon.path,
+                        Assets.images.searchstokeicon.path,
+                        width: 24,
+                        height: 24,
                         color: customColors.textColor,
                       ),
                     ),
@@ -290,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Colors.black.withOpacity(0.18),
                                     ),
                                     Positioned(
-                                      top: 12,
+                                      top: 18,
                                       left: 14,
                                       right: 14,
                                       child: Row(

@@ -20,29 +20,14 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
-  VideoPlayerController? _controller;
-  final posterPath = '/mnt/data/Live Tv.png';
 
   @override
   void initState() {
     super.initState();
-    _controller =
-        VideoPlayerController.network(
-            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-          )
-          ..initialize().then((_) {
-            setState(() {});
-            _controller!.play();
-          });
-
-    // Keep controls visible when user interacts
-    _controller!.addListener(() => setState(() {}));
   }
 
   @override
   void dispose() {
-    _controller!.removeListener(() {});
-    _controller!.dispose();
     super.dispose();
   }
 
@@ -326,7 +311,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             ),
                           ),
 
-                          SizedBox(height: 50),
+                          SizedBox(height: 10),
                         ],
                       ),
                     ),

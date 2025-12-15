@@ -257,6 +257,10 @@ class $AssetsImagesGen {
   AssetGenImage get searchicon =>
       const AssetGenImage('assets/images/Searchicon.png');
 
+  /// File path: assets/images/Settings&Preferencesicon.png
+  AssetGenImage get settingsPreferencesicon =>
+      const AssetGenImage('assets/images/Settings&Preferencesicon.png');
+
   /// File path: assets/images/Shareicon.png
   AssetGenImage get shareicon =>
       const AssetGenImage('assets/images/Shareicon.png');
@@ -437,6 +441,10 @@ class $AssetsImagesGen {
   AssetGenImage get dotsIcon =>
       const AssetGenImage('assets/images/dots_icon.png');
 
+  /// File path: assets/images/drapersplashvideo
+  String get drapersplashvideo =>
+      'packages/drappers/assets/images/drapersplashvideo';
+
   /// File path: assets/images/dropdownicon.png
   AssetGenImage get dropdownicon =>
       const AssetGenImage('assets/images/dropdownicon.png');
@@ -455,6 +463,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/episode.png
   AssetGenImage get episode => const AssetGenImage('assets/images/episode.png');
+
+  /// File path: assets/images/faqsicon.png
+  AssetGenImage get faqsicon =>
+      const AssetGenImage('assets/images/faqsicon.png');
 
   /// File path: assets/images/flagicon.png
   AssetGenImage get flagicon =>
@@ -514,6 +526,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/hearticon.png
   AssetGenImage get hearticon =>
       const AssetGenImage('assets/images/hearticon.png');
+
+  /// File path: assets/images/helpsupportnewicon.png
+  AssetGenImage get helpsupportnewicon =>
+      const AssetGenImage('assets/images/helpsupportnewicon.png');
 
   /// File path: assets/images/icon_app.png
   AssetGenImage get iconApp =>
@@ -708,6 +724,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/preview.png
   AssetGenImage get preview => const AssetGenImage('assets/images/preview.png');
 
+  /// File path: assets/images/privacyolicyicon.png
+  AssetGenImage get privacyolicyicon =>
+      const AssetGenImage('assets/images/privacyolicyicon.png');
+
   /// File path: assets/images/profile card.png
   AssetGenImage get profileCard =>
       const AssetGenImage('assets/images/profile card.png');
@@ -747,6 +767,10 @@ class $AssetsImagesGen {
   AssetGenImage get savereelicon =>
       const AssetGenImage('assets/images/savereelicon.png');
 
+  /// File path: assets/images/savereelnewicon.png
+  AssetGenImage get savereelnewicon =>
+      const AssetGenImage('assets/images/savereelnewicon.png');
+
   /// File path: assets/images/screenrotationicon.png
   AssetGenImage get screenrotationicon =>
       const AssetGenImage('assets/images/screenrotationicon.png');
@@ -762,6 +786,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/searchicon3x.png
   AssetGenImage get searchicon3x =>
       const AssetGenImage('assets/images/searchicon3x.png');
+
+  /// File path: assets/images/searchstokeicon.png
+  AssetGenImage get searchstokeicon =>
+      const AssetGenImage('assets/images/searchstokeicon.png');
 
   /// File path: assets/images/sentence.png
   AssetGenImage get sentence =>
@@ -806,6 +834,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/subscription_bg.png
   AssetGenImage get subscriptionBg =>
       const AssetGenImage('assets/images/subscription_bg.png');
+
+  /// File path: assets/images/termconditionicon.png
+  AssetGenImage get termconditionicon =>
+      const AssetGenImage('assets/images/termconditionicon.png');
 
   /// File path: assets/images/time3x.png
   AssetGenImage get time3x => const AssetGenImage('assets/images/time3x.png');
@@ -894,6 +926,7 @@ class $AssetsImagesGen {
     reelimage4,
     reelimage5,
     searchicon,
+    settingsPreferencesicon,
     shareicon,
     showicon,
     tGBTAimation,
@@ -941,11 +974,13 @@ class $AssetsImagesGen {
     documentriesimage5,
     documentriesimage6,
     dotsIcon,
+    drapersplashvideo,
     dropdownicon,
     dtvlogogrey,
     dummyprofile,
     envelopeicon,
     episode,
+    faqsicon,
     flagicon,
     footericon1,
     footericon2,
@@ -961,6 +996,7 @@ class $AssetsImagesGen {
     guestProfile,
     guestSheet,
     hearticon,
+    helpsupportnewicon,
     iconApp,
     infoicon,
     interestedicon,
@@ -1011,6 +1047,7 @@ class $AssetsImagesGen {
     podcastimage5,
     prayer,
     preview,
+    privacyolicyicon,
     profileCard,
     progressBg,
     reel1,
@@ -1022,10 +1059,12 @@ class $AssetsImagesGen {
     reset123,
     saveIcon,
     savereelicon,
+    savereelnewicon,
     screenrotationicon,
     screensbg,
     screenshoticon,
     searchicon3x,
+    searchstokeicon,
     sentence,
     settingicon,
     settingsicon,
@@ -1038,6 +1077,7 @@ class $AssetsImagesGen {
     speed,
     studio,
     subscriptionBg,
+    termconditionicon,
     time3x,
     timericon,
     trendingimage1,

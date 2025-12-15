@@ -32,7 +32,7 @@ class _GenreBoxWidgetState extends State<GenreBoxWidget> {
         height: 50,
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: AppColors.blackshadeboxbg,
+          color: AppColors.color000032,
           borderRadius: BorderRadius.circular(5),
           border: widget.showBorder
               ? Border(
