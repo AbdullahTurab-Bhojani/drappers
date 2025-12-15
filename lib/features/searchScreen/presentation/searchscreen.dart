@@ -240,7 +240,7 @@ class _SearchscreenState extends State<Searchscreen> {
                         },
                       ),
 
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),

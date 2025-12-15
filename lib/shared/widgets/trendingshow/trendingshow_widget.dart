@@ -153,7 +153,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                       },
                     ),
 
-                    SizedBox(height: 50),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
