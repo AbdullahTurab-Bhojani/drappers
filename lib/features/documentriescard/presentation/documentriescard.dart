@@ -37,6 +37,8 @@ class _DocumentriescardState extends State<Documentriescard> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   Navigator.of(context).pop();
                 },
@@ -85,6 +87,8 @@ class _DocumentriescardState extends State<Documentriescard> {
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
@@ -128,6 +132,8 @@ class _DocumentriescardState extends State<Documentriescard> {
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },

@@ -40,6 +40,8 @@ class _PodcastWidgetState extends State<PodcastWidget> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.pop();
                 },

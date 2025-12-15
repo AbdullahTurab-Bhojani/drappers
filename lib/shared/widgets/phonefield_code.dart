@@ -3,7 +3,6 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
 
 class PhoneOtpField extends ConsumerStatefulWidget {
@@ -101,11 +100,9 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
+    Theme.of(context);
     return Column(
       children: [
-        /// ---------------- PHONE FIELD ----------------
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -119,6 +116,8 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
               Row(
                 children: [
                   GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+
                     onTap: () {
                       showCountryPicker(
                         context: context,
@@ -144,7 +143,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
                   Expanded(
                     child: TextFormField(
-                      
                       controller: widget.phoneController,
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
@@ -162,13 +160,14 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                           showSendButton = value.length == 10;
                         });
                       },
-                      
                     ),
                   ),
 
                   /// ✅ SEND BUTTON
                   if (showSendButton && !isTimerRunning && !showResendButton)
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () {
                         widget.onSendCode();
                         showSendButton = false;
@@ -190,6 +189,8 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                   /// ✅ RESEND BUTTON
                   if (showResendButton)
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () {
                         widget.onSendCode();
                         _startTimer();

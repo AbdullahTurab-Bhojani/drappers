@@ -26,7 +26,9 @@ class CustomRadioTile extends StatelessWidget {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return InkWell(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () => onChanged(value),
       child: Row(
         children: [

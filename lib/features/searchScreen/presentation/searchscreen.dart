@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
@@ -24,15 +26,15 @@ class HistoryData {
 final List<HistoryData> dummyHistory = [
   HistoryData(
     'Semifinals 1 – Meet The Drapers Season...',
-    Assets.images.trendingshowimage1.path,
+    Assets.images.trendingimage1.path,
   ),
   HistoryData(
     'Rio de Janeiro – Meet the Drapers Season...',
-    Assets.images.trendingshowimage2.path,
+    Assets.images.trendingimage2.path,
   ),
   HistoryData(
     'Paris – Meet The Drapers Season 6 (2...',
-    Assets.images.trendingshowimage3.path,
+    Assets.images.trendingimage3.path,
   ),
 ];
 
@@ -42,7 +44,7 @@ class _SearchscreenState extends State<Searchscreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    List<String> Genretitle = [
+    List<String> genreTitle = [
       'Shows',
       'Documentaries',
       'Podcasts',
@@ -51,13 +53,13 @@ class _SearchscreenState extends State<Searchscreen> {
     ];
 
     List trendingimages = [
-      Assets.images.trendingshowimage1.path,
-      Assets.images.trendingshowimage2.path,
-      Assets.images.trendingshowimage3.path,
-      Assets.images.trendingshowimage4.path,
-      Assets.images.trendingshowimage5.path,
-      Assets.images.trendingshowimage6.path,
-      Assets.images.trendingshowimage7.path,
+      Assets.images.trendingimage1.path,
+      Assets.images.trendingimage2.path,
+      Assets.images.trendingimage3.path,
+      Assets.images.trendingimage4.path,
+      Assets.images.trendingimage5.path,
+      Assets.images.trendingimage6.path,
+      Assets.images.trendingimage7.path,
     ];
 
     return Scaffold(
@@ -78,6 +80,8 @@ class _SearchscreenState extends State<Searchscreen> {
               elevation: 0,
               automaticallyImplyLeading: false,
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.pop();
                 },
@@ -100,14 +104,14 @@ class _SearchscreenState extends State<Searchscreen> {
                   ),
                   child: Row(
                     children: [
-                       SizedBox(width: 15),
+                      SizedBox(width: 15),
                       Image.asset(
                         "assets/images/searchicon3x.png",
                         width: 20,
                         height: 20,
                       ),
-                       SizedBox(width: 10),
-                       Expanded(
+                      SizedBox(width: 10),
+                      Expanded(
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: "Search content",
@@ -135,10 +139,7 @@ class _SearchscreenState extends State<Searchscreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 24,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -173,12 +174,8 @@ class _SearchscreenState extends State<Searchscreen> {
                             return HistoryItemTile(
                               title: item.title,
                               thumbnailPath: item.thumbnailPath,
-                              onTapRemove: () {
-                                print('Removed: ${item.title}');
-                              },
-                              onTapTile: () {
-                                print('Tapped: ${item.title}');
-                              },
+                              onTapRemove: () {},
+                              onTapTile: () {},
                             );
                           },
                         ),
@@ -186,7 +183,6 @@ class _SearchscreenState extends State<Searchscreen> {
 
                       const SizedBox(height: 30),
 
-                      /// ------------------ GENRE ------------------
                       PoppinsText(
                         'Genre',
                         fontSize: PoppinsFontSizeVariant.size16,
@@ -196,21 +192,19 @@ class _SearchscreenState extends State<Searchscreen> {
                       const SizedBox(height: 20),
 
                       SizedBox(
-                        height: 56,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) =>
                               const SizedBox(width: 15),
-                          itemCount: Genretitle.length,
+                          itemCount: genreTitle.length,
                           itemBuilder: (context, index) {
-                            return GenreBoxWidget(title: Genretitle[index]);
+                            return GenreBoxWidget(title: genreTitle[index]);
                           },
                         ),
                       ),
 
                       const SizedBox(height: 30),
 
-                      /// ------------------ TRENDING ------------------
                       PoppinsText(
                         'Trending',
                         fontSize: PoppinsFontSizeVariant.size16,

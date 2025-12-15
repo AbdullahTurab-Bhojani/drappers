@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
@@ -116,6 +118,7 @@ class _StartupdetailsState extends State<Startupdetails> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10),
@@ -132,6 +135,8 @@ class _StartupdetailsState extends State<Startupdetails> {
               elevation: 0,
               actions: [
                 GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+
                   onTap: () {
                     context.pushNamed(AppRoutes.searchscreen.name);
                   },
@@ -167,6 +172,8 @@ class _StartupdetailsState extends State<Startupdetails> {
                   children: [
                     Center(
                       child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+
                         onTap: () {
                           context.pushNamed(AppRoutes.videoScreen.name);
                         },
@@ -182,6 +189,8 @@ class _StartupdetailsState extends State<Startupdetails> {
                       top: 10,
                       right: 10,
                       child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+
                         onTap: () {
                           context.pop();
                         },
@@ -428,15 +437,13 @@ class _StartupdetailsState extends State<Startupdetails> {
                             color: customColors.textColor,
                           ),
                           const SizedBox(height: 10),
-                          ...companyInfo
-                              .map(
-                                (info) => _CompanyInfoRow(
-                                  label: info['label']!,
-                                  value: info['value']!,
-                                  customColors: customColors,
-                                ),
-                              )
-                              .toList(),
+                          ...companyInfo.map(
+                            (info) => _CompanyInfoRow(
+                              label: info['label']!,
+                              value: info['value']!,
+                              customColors: customColors,
+                            ),
+                          ),
                           const SizedBox(height: 25),
                           PoppinsText(
                             'About the Startup',
@@ -463,6 +470,8 @@ class _StartupdetailsState extends State<Startupdetails> {
                           Padding(
                             padding: EdgeInsets.only(bottom: 20),
                             child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+
                               onTap: () {
                                 context.pushNamed(AppRoutes.contentDetail.name);
                               },

@@ -10,7 +10,7 @@ enum AppRoutes {
   home('home', '/home'),
   discover('discover', '/discover'),
   watchlist('watchlist', '/watchlist'),
-    EditWatchlistScreen('EditWatchlistScreen', '/EditWatchlistScreen'),
+  editWatchlistScreen('EditWatchlistScreen', '/EditWatchlistScreen'),
 
   signupScreen('signup', '/signup'),
   updatepasswordScreen('updatepassword', '/updatepassword'),
@@ -49,9 +49,9 @@ enum AppRoutes {
   watchHistoryViewmore('watchHistoryViewmore', '/watchHistoryViewmore'),
   notificationScreen('notificationScreen', '/notificationScreen'),
   notificationSetting('notificationSetting', '/notificationSetting'),
-  ReelsviewScreen('ReelsviewScreen', '/ReelsviewScreen'),
+  reelsviewScreen('ReelsviewScreen', '/ReelsviewScreen'),
   searchscreen('searchscreen', '/searchscreen'),
-  Startupdetails('Startupdetails', '/Startupdetails'),
+  startupdetails('Startupdetails', '/Startupdetails'),
   createAccountCodeScreen(
     'createAccountCodeScreen',
     '/createAccountCodeScreen',
@@ -59,8 +59,8 @@ enum AppRoutes {
   contentDetail('contentDetail', '/contentDetail'),
 
   voteForStartupScreen('voteForStartupScreen', '/voteForStartupScreen'),
-    newliveScreen('newliveScreen', '/newliveScreen'),
-    LivepitchesScreen('LivepitchesScreen', '/LivepitchesScreen'),
+  newliveScreen('newliveScreen', '/newliveScreen'),
+  livepitchesScreen('LivepitchesScreen', '/LivepitchesScreen'),
 
   videoScreen('videoScreen', '/videoScreen');
 

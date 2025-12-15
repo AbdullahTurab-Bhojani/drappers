@@ -11,7 +11,8 @@ class CreateAccountCodeScreen extends StatefulWidget {
   const CreateAccountCodeScreen({super.key});
 
   @override
-  State<CreateAccountCodeScreen> createState() => _CreateAccountCodeScreenState();
+  State<CreateAccountCodeScreen> createState() =>
+      _CreateAccountCodeScreenState();
 }
 
 class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
@@ -74,6 +75,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
     }
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -95,6 +97,8 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.go('/signup');
                 },

@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -97,9 +97,9 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
       'slider': 75.0,
     };
 
-    void _onSliderChange(double v, int index) {}
+    void onSliderChange(double v, int index) {}
 
-    void _onContinue(int index) {}
+    void onContinue(int index) {}
 
     return Scaffold(
       body: Container(
@@ -116,6 +116,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 5),
@@ -334,11 +335,11 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                             ),
                             sliderValue: item['progress'] as double,
                             index: index,
-                            onSliderChanged: _onSliderChange,
-                            onContinuePressed: () => _onContinue(index),
+                            onSliderChanged: onSliderChange,
+                            onContinuePressed: () => onContinue(index),
                           ),
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
 
@@ -349,14 +350,13 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                     padding: const EdgeInsets.all(16.0),
                     itemCount: historyItems.length,
                     itemBuilder: (context, index) {
-                      final item = historyItems[index];
                       return VideosBoxWidget(
                         context: context,
                         podcast: podcastData['podcast'],
                         sliderValue: podcastData['slider'],
                         index: index,
-                        onSliderChanged: _onSliderChange,
-                        onContinuePressed: () => _onContinue(index),
+                        onSliderChanged: onSliderChange,
+                        onContinuePressed: () => onContinue(index),
                       );
                     },
                   ),

@@ -36,6 +36,8 @@ class ImagePickerHandler {
                       child: Column(
                         children: [
                           GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+
                             onTap: () async {
                               // bool result = await requestStoragePermission(
                               //     isCamera: true);
@@ -75,6 +77,8 @@ class ImagePickerHandler {
                             thickness: 1,
                           ),
                           GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+
                             onTap: () async {
                               bool result = await requestStoragePermission(
                                 isCamera: false,
@@ -111,6 +115,8 @@ class ImagePickerHandler {
                   ),
                   const SizedBox(height: 10),
                   GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+
                     onTap: () {
                       Navigator.of(context).pop();
                     },

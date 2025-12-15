@@ -291,7 +291,6 @@ class AppPasswordField extends StatefulWidget {
 
 class _AppPasswordFieldState extends State<AppPasswordField> {
   bool isShow = true;
-  late bool _obscure;
 
   @override
   Widget build(BuildContext context) {
@@ -306,7 +305,8 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
         children: [
           if (widget.labelText != null) TextFieldLabel(name: widget.labelText!),
 
-          SizedBox(// height: 38,
+          SizedBox(
+            // height: 38,
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               cursorColor: AppColors.white,
@@ -330,13 +330,14 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 hintText: widget.hintText,
-                hintStyle: widget.hintStyle ??
+                hintStyle:
+                    widget.hintStyle ??
                     GoogleFonts.poppins(
                       color: AppColors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
-                    prefixIcon: widget.prefixIcon != null
+                prefixIcon: widget.prefixIcon != null
                     ? Center(child: widget.prefixIcon!)
                     : null,
                 prefixIconConstraints: const BoxConstraints(
@@ -351,6 +352,8 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                     : Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             setState(() => isShow = !isShow);
                           },
@@ -359,12 +362,14 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                                 ? Assets.images.hideicon.path
                                 : Assets.images.showicon.path,
                             color: Colors.white,
-                            width: 18, height: 18,
+                            width: 18,
+                            height: 18,
                           ),
                         ),
                       ),
                 suffixIconConstraints: BoxConstraints(
-                  minWidth: 32, minHeight: 32,
+                  minWidth: 32,
+                  minHeight: 32,
                 ),
               ),
             ),

@@ -66,6 +66,8 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
         _cancelAndRestartTimer();
       },
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+
         onTap: () => _cancelAndRestartTimer(),
         child: AbsorbPointer(
           absorbing: notifier!.hideStuff,
@@ -342,6 +344,8 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
 
   GestureDetector _buildMuteButton(VideoPlayerController controller) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () {
         _cancelAndRestartTimer();
 
@@ -450,6 +454,8 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
     final bool showPlayButton =
         widget.showPlayButton && !_dragging && !notifier!.hideStuff;
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () {
         if (_latestValue!.isPlaying) {
           if (chewieController.pauseOnBackgroundTap) {
@@ -589,6 +595,8 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
       return const SizedBox();
     }
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: _onSubtitleTap,
       child: Container(
         height: barHeight,

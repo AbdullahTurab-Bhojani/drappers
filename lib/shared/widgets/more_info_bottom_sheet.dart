@@ -12,7 +12,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Container(
-      padding: EdgeInsets.only(top: 24, left: 16, right: 16, bottom: 24),
+      padding: EdgeInsets.only(top: 24, left: 20, right: 20, bottom: 24),
       decoration: BoxDecoration(
         color: AppColors.dDark,
         borderRadius: BorderRadius.only(
@@ -36,6 +36,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
               ),
 
               GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.pop(context),
                 child: Icon(
                   Icons.close,
@@ -46,7 +47,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: 18),
 
           Container(
             decoration: BoxDecoration(
@@ -87,67 +88,66 @@ class MoreInfoBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 24,),
+              SizedBox(height: 24),
               PoppinsText(
                 '9:00 - 10:00',
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
               ),
-               SizedBox(height: 8,),
+              SizedBox(height: 16),
               PoppinsText(
                 'Meet the Drapers S1 E1',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
               ),
-               SizedBox(height: 20,),
-               Divider(),
-               SizedBox(height: 20,),
-                 PoppinsText(
+              SizedBox(height: 20),
+              Divider(),
+              SizedBox(height: 20),
+              PoppinsText(
                 '10:00 - 11:00',
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
               ),
-               SizedBox(height: 8,),
+              SizedBox(height: 16),
+
               PoppinsText(
                 'Meet the Drapers S1 E2',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
               ),
-               SizedBox(height: 20,),
-               Divider(),
-               SizedBox(height: 20,),
-                 PoppinsText(
+              SizedBox(height: 20),
+              Divider(),
+              SizedBox(height: 20),
+              PoppinsText(
                 '11:00 - 12:00',
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
               ),
-               SizedBox(height: 8,),
+              SizedBox(height: 16),
+
               PoppinsText(
                 'Meet the Drapers S1 E3',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
               ),
-               SizedBox(height: 20,),
-               Divider(),
-               SizedBox(height: 20,),
-                 PoppinsText(
+              SizedBox(height: 20),
+              Divider(),
+              SizedBox(height: 20),
+              PoppinsText(
                 '12:00 - 12:30',
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
               ),
-               SizedBox(height: 8,),
+              SizedBox(height: 16),
+
               PoppinsText(
                 'Meet the Drapers S1 E4',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
               ),
-               SizedBox(height: 20,),
-               Divider()
-
             ],
           ),
 
-          // SizedBox(height: 10),
         ],
       ),
     );

@@ -26,25 +26,23 @@ class CachedImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final placeholder =
-        (isProfile == true)
-            ? Assets.icons.userPlaceholder.image(
-              width: width ?? 40,
-              height: height ?? 40,
-              fit: fit ?? BoxFit.cover,
-              scale: 4,
-            )
-            : Assets.images.guestCourseCardImage.image(
-              width: width ?? 40,
-              height: height ?? 40,
-              fit: fit ?? BoxFit.cover,
-              scale: 4,
-            );
+    final placeholder = (isProfile == true)
+        ? Assets.icons.userPlaceholder.image(
+            width: width ?? 40,
+            height: height ?? 40,
+            fit: fit ?? BoxFit.cover,
+            scale: 4,
+          )
+        : Assets.images.guestCourseCardImage.image(
+            width: width ?? 40,
+            height: height ?? 40,
+            fit: fit ?? BoxFit.cover,
+            scale: 4,
+          );
 
-    final borderRadiusValue =
-        shape == BoxShape.circle
-            ? BorderRadius.circular(100)
-            : BorderRadius.circular(borderRadius ?? 0);
+    final borderRadiusValue = shape == BoxShape.circle
+        ? BorderRadius.circular(100)
+        : BorderRadius.circular(borderRadius ?? 0);
 
     if (url.isEmpty) {
       return ClipRRect(borderRadius: borderRadiusValue, child: placeholder);
@@ -57,39 +55,39 @@ class CachedImageWidget extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: borderRadiusValue,
-            child:
-                kIsWeb
-                    ? Image.network(
-                      url,
-                      width: width ?? 40,
-                      height: height ?? 40,
+            child: kIsWeb
+                ? Image.network(
+                    url,
+                    width: width ?? 40,
+                    height: height ?? 40,
+                    fit: fit ?? BoxFit.cover,
+                    webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
+                    color: iconColor,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return LoadingWidget();
+                    },
+                    errorBuilder: (context, error, stackTrace) => placeholder,
+                  )
+                : CachedNetworkImage(
+                    imageUrl: url,
+                    width: width ?? 40,
+                    height: height ?? 40,
+                    fit: fit ?? BoxFit.cover,
+                    color: iconColor,
+                    imageBuilder: (context, imageProvider) => Image(
+                      image: imageProvider,
                       fit: fit ?? BoxFit.cover,
-                      webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
                       color: iconColor,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return LoadingWidget();
-                      },
-                      errorBuilder: (context, error, stackTrace) => placeholder,
-                    )
-                    : CachedNetworkImage(
-                      imageUrl: url,
-                      width: width ?? 40,
-                      height: height ?? 40,
-                      fit: fit ?? BoxFit.cover,
-                      color: iconColor,
-                      imageBuilder:
-                          (context, imageProvider) => Image(
-                            image: imageProvider,
-                            fit: fit ?? BoxFit.cover,
-                            color: iconColor,
-                          ),
-                      placeholder: (context, url) => LoadingWidget(),
-                      errorWidget: (context, url, error) => placeholder,
                     ),
+                    placeholder: (context, url) => LoadingWidget(),
+                    errorWidget: (context, url, error) => placeholder,
+                  ),
           ),
           if (onTap != null)
-            InkWell(
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+
               onTap: () {
                 if (onTap != null) {
                   onTap?.call();

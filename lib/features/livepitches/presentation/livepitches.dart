@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +10,6 @@ import '../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
 import '../../../shared/widgets/podcardswidget/podcards_widget.dart';
-import '../../../shared/widgets/popupmenuitem/delete_popup_widget.dart';
 import '../../../shared/widgets/reelcard/reelcard_widget.dart';
 
 class LivepitchesScreen extends StatefulWidget {
@@ -53,13 +52,13 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
     List trendingimages = [
-      Assets.images.trendingshowimage1.path,
-      Assets.images.trendingshowimage2.path,
-      Assets.images.trendingshowimage3.path,
-      Assets.images.trendingshowimage4.path,
-      Assets.images.trendingshowimage5.path,
-      Assets.images.trendingshowimage6.path,
-      Assets.images.trendingshowimage7.path,
+      Assets.images.trendingimage1.path,
+      Assets.images.trendingimage2.path,
+      Assets.images.trendingimage3.path,
+      Assets.images.trendingimage4.path,
+      Assets.images.trendingimage5.path,
+      Assets.images.trendingimage6.path,
+      Assets.images.trendingimage7.path,
     ];
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
@@ -168,7 +167,9 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
                             ),
-                            InkWell(
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+
                               onTap: () {
                                 if (GuestHelper.isGuest) {
                                   GuestHelper.checkGuest(context);

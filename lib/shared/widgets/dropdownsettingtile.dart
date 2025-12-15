@@ -85,7 +85,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
           const SizedBox(height: 20),
 
           DropdownButtonFormField<String>(
-            value: _currentValue,
+            initialValue: _currentValue,
             dropdownColor: customColors.regular,
             style: TextStyle(
               color: customColors.textColor,
@@ -94,7 +94,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
             ),
             decoration: InputDecoration(
               filled: true,
-              fillColor: customColors.containergrey,
+              fillColor: AppColors.helpsupport,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 10.0,
                 vertical: 10.0,
@@ -125,8 +125,11 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
 
               return DropdownMenuItem<String>(
                 value: value,
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    // horizontal: 16, 
+                    // vertical: 8,
+                  ),
                   child: Row(
                     children: [
                       Icon(

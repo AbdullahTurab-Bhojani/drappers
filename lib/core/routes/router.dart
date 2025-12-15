@@ -165,8 +165,8 @@ final routerConfigProvider = Provider((ref) {
             builder: (context, state) => WatchlistScreen(),
           ),
           GoRoute(
-            path: AppRoutes.EditWatchlistScreen.path,
-            name: AppRoutes.EditWatchlistScreen.name,
+            path: AppRoutes.editWatchlistScreen.path,
+            name: AppRoutes.editWatchlistScreen.name,
             builder: (context, state) => EditWatchlistScreen(),
           ),
           GoRoute(
@@ -213,8 +213,8 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => ReportContent(),
       ),
       GoRoute(
-        path: AppRoutes.ReelsviewScreen.path,
-        name: AppRoutes.ReelsviewScreen.name,
+        path: AppRoutes.reelsviewScreen.path,
+        name: AppRoutes.reelsviewScreen.name,
         builder: (context, state) => ReelsviewScreen(),
       ),
       GoRoute(
@@ -223,8 +223,8 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => ReportContentSomehingElse(),
       ),
       GoRoute(
-        path: AppRoutes.Startupdetails.path,
-        name: AppRoutes.Startupdetails.name,
+        path: AppRoutes.startupdetails.path,
+        name: AppRoutes.startupdetails.name,
         builder: (context, state) => Startupdetails(),
       ),
       GoRoute(
@@ -233,8 +233,8 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => newliveScreen(),
       ),
       GoRoute(
-        path: AppRoutes.LivepitchesScreen.path,
-        name: AppRoutes.LivepitchesScreen.name,
+        path: AppRoutes.livepitchesScreen.path,
+        name: AppRoutes.livepitchesScreen.name,
         builder: (context, state) => LivepitchesScreen(),
       ),
       GoRoute(

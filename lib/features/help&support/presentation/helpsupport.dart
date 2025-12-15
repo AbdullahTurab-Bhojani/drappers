@@ -73,6 +73,8 @@ class _HelpsupportState extends State<Helpsupport> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.pop();
                 },

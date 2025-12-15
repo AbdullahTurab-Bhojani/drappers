@@ -273,7 +273,9 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                                 itemBuilder: (context, index) {
                                   final item = _filteredValues[index];
                                   final isSelected = _value == item;
-                                  return InkWell(
+                                  return GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+
                                     onTap: () => _selectItem(item),
                                     child: Container(
                                       height: widget.itemHeight,

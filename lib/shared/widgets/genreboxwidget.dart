@@ -25,12 +25,14 @@ class _GenreBoxWidgetState extends State<GenreBoxWidget> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: widget.onTap,
       child: Container(
-        height: 56,
+        height: 50,
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: customColors.regular,
+          color: AppColors.blackshadeboxbg,
           borderRadius: BorderRadius.circular(5),
           border: widget.showBorder
               ? Border(

@@ -91,6 +91,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -109,7 +110,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
             // SizedBox(height: 30),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: _podcasts.length,
@@ -234,7 +235,6 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                 ),
               ),
             ),
-          
           ],
         ),
       ),

@@ -49,13 +49,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
     List trendingimages = [
-      Assets.images.trendingshowimage1.path,
-      Assets.images.trendingshowimage2.path,
-      Assets.images.trendingshowimage3.path,
-      Assets.images.trendingshowimage4.path,
-      Assets.images.trendingshowimage5.path,
-      Assets.images.trendingshowimage6.path,
-      Assets.images.trendingshowimage7.path,
+      Assets.images.trendingimage1.path,
+      Assets.images.trendingimage2.path,
+      Assets.images.trendingimage3.path,
+      Assets.images.trendingimage4.path,
+      Assets.images.trendingimage5.path,
+      Assets.images.trendingimage6.path,
+      Assets.images.trendingimage7.path,
     ];
 
     List<String> podcardimages = [
@@ -91,223 +91,251 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     };
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
-          ),
+    bool canExit = false;
 
-          Column(
-            children: [
-              AppMainBar(
-                width: 133,
-                leadingText: "Discover",
-                title: "",
-                centerTitle: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                actions: [
-                  InkWell(
-                    onTap: () {
-                      context.pushNamed(AppRoutes.searchscreen.name);
-                    },
-                    child: Image.asset(
-                      Assets.images.searchicon.path,
-                      color: customColors.textColor,
-                    ),
-                  ),
-                  SizedBox(width: 15),
-                ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (!canExit) {
+          canExit = true;
+          return false;
+        }
+
+        return true;
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                Assets.images.screensbg.path,
+                fit: BoxFit.cover,
               ),
+            ),
 
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Genre',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
+            Column(
+              children: [
+                AppMainBar(
+                  width: 133,
+                  leadingText: "Discover",
+                  title: "",
+                  centerTitle: false,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  actions: [
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
+                      onTap: () {
+                        context.pushNamed(AppRoutes.searchscreen.name);
+                      },
+                      child: Image.asset(
+                        Assets.images.searchicon.path,
+                        color: customColors.textColor,
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                  ],
+                ),
+
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              PoppinsText(
+                                'Genre',
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: customColors.textColor,
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 20),
+
+                          SizedBox(
+                            height: 56,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(width: 15),
+                              itemCount: genretitle.length,
+                              itemBuilder: (context, index) {
+                                final title = genretitle[index];
+
+                                return GenreBoxWidget(
+                                  title: title,
+                                  showBorder: index == 0,
+                                  onTap: () {
+                                    final route = genreRoutes[title];
+                                    if (route != null) {
+                                      context.push(route);
+                                    }
+                                  },
+                                );
+                              },
                             ),
-                          ],
-                        ),
+                          ),
 
-                        SizedBox(height: 20),
+                          SizedBox(height: 30),
 
-                        SizedBox(
-                          height: 56,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
-                            itemCount: genretitle.length,
-                            itemBuilder: (context, index) {
-                              final title = genretitle[index];
-
-                              return GenreBoxWidget(
-                                title: title,
-                                showBorder: index == 0,
-                                onTap: () {
-                                  final route = genreRoutes[title];
-                                  if (route != null) {
-                                    context.push(route);
-                                  }
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              PoppinsText(
+                                'Trending Show',
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: customColors.textColor,
+                              ),
+                              AppButton(
+                                buttonSize: Size(90, 25),
+                                color: Colors.transparent,
+                                borderColor: customColors.textColor.withOpacity(
+                                  0.5,
+                                ),
+                                borderWidth: 1,
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                border: true,
+                                onPressed: () {
+                                  context.pushNamed(
+                                    AppRoutes.trendingshow.name,
+                                  );
                                 },
-                              );
-                            },
+                                title: "View More",
+                              ),
+                            ],
                           ),
-                        ),
 
-                        SizedBox(height: 30),
+                          SizedBox(height: 20),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Trending Show',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
-                            ),
-                            AppButton(
-                                  buttonSize: Size(90, 25),
-                              color: Colors.transparent,
-                              borderColor: customColors.textColor.withOpacity(0.5),
-                              borderWidth: 1,
-                              fontSize: PoppinsFontSizeVariant.size12,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              border: true,
-                              onPressed: () {
-                                context.pushNamed(AppRoutes.trendingshow.name);
+                          SizedBox(
+                            height: 180,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(width: 15),
+                              itemCount: trendingimages.length,
+                              itemBuilder: (context, index) {
+                                return CardWidget(
+                                  assetImage: trendingimages[index],
+                                  showSaveIcon: false,
+                                );
                               },
-                              title: "View More",
                             ),
-                          ],
-                        ),
-
-                        SizedBox(height: 20),
-
-                        SizedBox(
-                          height: 180,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
-                            itemCount: trendingimages.length,
-                            itemBuilder: (context, index) {
-                              return CardWidget(
-                                assetImage: trendingimages[index],
-                                showSaveIcon: false,
-                              );
-                            },
                           ),
-                        ),
-                        SizedBox(height: 30),
+                          SizedBox(height: 30),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Podcasts',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
-                            ),
-                            AppButton(
-                                 buttonSize: Size(90, 25),
-                              color: Colors.transparent,
-                              borderColor: customColors.textColor.withOpacity(0.5),
-                              borderWidth: 1,
-                              fontSize: PoppinsFontSizeVariant.size12,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              border: true,
-                              onPressed: () {
-                                context.pushNamed(AppRoutes.podcasts.name);
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              PoppinsText(
+                                'Podcasts',
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: customColors.textColor,
+                              ),
+                              AppButton(
+                                buttonSize: Size(90, 25),
+                                color: Colors.transparent,
+                                borderColor: customColors.textColor.withOpacity(
+                                  0.5,
+                                ),
+                                borderWidth: 1,
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                border: true,
+                                onPressed: () {
+                                  context.pushNamed(AppRoutes.podcasts.name);
+                                },
+                                title: "View More",
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+
+                          SizedBox(
+                            height: 180,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(width: 15),
+                              itemCount: podcardimages.length,
+                              itemBuilder: (context, index) {
+                                return PodcardsWidget(
+                                  assetImage: podcardimages[index],
+                                  title: '',
+                                  showSaveIcon: false,
+                                  fontSizeVariant:
+                                      PoppinsFontSizeVariant.size14,
+                                );
                               },
-                              title: "View More",
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-
-                        SizedBox(
-                          height: 180,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
-                            itemCount: podcardimages.length,
-                            itemBuilder: (context, index) {
-                              return PodcardsWidget(
-                                assetImage: podcardimages[index],
-                                title: '',
-                                showSaveIcon: false,
-                                fontSizeVariant: PoppinsFontSizeVariant.size14,
-                              );
-                            },
                           ),
-                        ),
-                        SizedBox(height: 30),
+                          SizedBox(height: 30),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PoppinsText(
-                              'Documentaries',
-                              fontSize: PoppinsFontSizeVariant.size16,
-                              fontWeight: PoppinsFontWeightVariant.medium,
-                              color: customColors.textColor,
-                            ),
-                            AppButton(
-                                 buttonSize: Size(90, 25),
-                              color: Colors.transparent,
-                              borderColor: customColors.textColor.withOpacity(0.5),
-                              borderWidth: 1,
-                              fontSize: PoppinsFontSizeVariant.size12,
-                              fontWeight: PoppinsFontWeightVariant.regular,
-                              border: true,
-                              onPressed: () {
-                                context.pushNamed(AppRoutes.documentries.name);
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              PoppinsText(
+                                'Documentaries',
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: customColors.textColor,
+                              ),
+                              AppButton(
+                                buttonSize: Size(90, 25),
+                                color: Colors.transparent,
+                                borderColor: customColors.textColor.withOpacity(
+                                  0.5,
+                                ),
+                                borderWidth: 1,
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                border: true,
+                                onPressed: () {
+                                  context.pushNamed(
+                                    AppRoutes.documentries.name,
+                                  );
+                                },
+                                title: "View More",
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          SizedBox(
+                            height: 180,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(width: 15),
+                              itemCount: documentriescard.length,
+                              itemBuilder: (context, index) {
+                                return DocumentriesCardWidget(
+                                  assetImage: documentriescard[index],
+                                  showSaveIcon: false,
+                                );
                               },
-                              title: "View More",
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        SizedBox(
-                          height: 180,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 15),
-                            itemCount: documentriescard.length,
-                            itemBuilder: (context, index) {
-                              return DocumentriesCardWidget(
-                                assetImage: documentriescard[index],
-                                showSaveIcon: false,
-                              );
-                            },
                           ),
-                        ),
 
-                        SizedBox(height: 50),
-                      ],
+                          SizedBox(height: 50),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

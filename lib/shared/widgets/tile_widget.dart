@@ -24,7 +24,7 @@ class _TileWidgetState extends State<TileWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      behavior: HitTestBehavior.translucent,
+      behavior: HitTestBehavior.opaque,
       onTap: ontaped,
       child: Container(
         color: Colors.transparent,

@@ -43,6 +43,8 @@ class _SavedreelState extends State<Savedreel> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   Navigator.of(context).pop();
                 },

@@ -1,48 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
-// Assuming PoppinsText, AppButton, AppColors, and Assets are defined elsewhere.
-// You'll need to replace these with your actual definitions or substitute them.
-
-// Placeholder for external dependencies for the code to compile
-// You should ensure these classes/variables exist in your project.
-// Example placeholders:
-// class PoppinsText extends StatelessWidget {
-//   final String data;
-//   final dynamic fontSize;
-//   final dynamic fontWeight;
-//   final TextOverflow? textOverflow;
-//   final Color? color;
-//   final int? maxLines;
-//   const PoppinsText(this.data, {super.key, required this.fontSize, required this.fontWeight, this.textOverflow, this.color, this.maxLines});
-//   @override Widget build(BuildContext context) => Text(data, overflow: textOverflow, maxLines: maxLines, style: TextStyle(fontSize: 16));
-// }
-// class AppButton extends StatelessWidget {
-//   final VoidCallback onPressed;
-//   final String title;
-//   final Size buttonSize;
-//   final Image prefixIcon;
-//   const AppButton({super.key, required this.onPressed, required this.title, required this.buttonSize, required this.prefixIcon});
-//   @override Widget build(BuildContext context) => ElevatedButton(onPressed: onPressed, child: Text(title));
-// }
-// class AppColors { static const wDark = Colors.black; }
-// class Assets { static final images = _AssetsImages(); }
-// class _AssetsImages { final playstrokeicon = _AssetPath('assets/images/play_stroke_icon.png'); final cancelicon = _AssetPath('assets/images/cancel_icon.png'); }
-// class _AssetPath { final String path; _AssetPath(this.path); }
-
-// You need a data model for 'podcast'
-// class Podcast {
-//   final String imagePath;
-//   final String title;
-//   final String description;
-//   Podcast(this.imagePath, this.title, this.description);
-// }
 
 class VideosBoxWidget extends StatelessWidget {
-  final dynamic
-  podcast; // Replace 'dynamic' with your actual Podcast model class
+  final dynamic podcast;
   final double sliderValue;
   final int index;
   final Function(double v, int index) onSliderChanged;
@@ -68,7 +30,8 @@ class VideosBoxWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              width: 120,
+              width: 122,
+              height: 173,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(podcast.imagePath),
@@ -87,6 +50,7 @@ class VideosBoxWidget extends StatelessWidget {
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
                     textOverflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
                   const SizedBox(height: 20),
                   PoppinsText(
@@ -150,7 +114,12 @@ class VideosBoxWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      Image.asset(Assets.images.cancelicon.path, height: 40),
+                      Image.asset(
+                        Assets.images.crossnewicon.path,
+                      //  scale: 1,
+                      width: 24,
+                      height: 24,
+                      ),
                     ],
                   ),
                 ],
