@@ -112,6 +112,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: AppColors.helpsupport,
+                                  border: Border.all(color: customColors.blackshade, width: 0.5)
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
