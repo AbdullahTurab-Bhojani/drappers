@@ -225,7 +225,7 @@ class _ContentDetailState extends State<ContentDetail>
                     ),
                     SizedBox(height: 10),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SizedBox(
                           width: 188,
@@ -244,7 +244,6 @@ class _ContentDetailState extends State<ContentDetail>
                               width: 15,
                               height: 15,
                             ),
-                            fontSize: PoppinsFontSizeVariant.size14,
                           ),
                         ),
                         SizedBox(width: 10),

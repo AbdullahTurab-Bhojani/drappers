@@ -211,7 +211,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                           title: 'Submit',
                         ),
                       ),
-                      SizedBox(height: 50),
+                      SizedBox(height: 30),
                     ],
                   ),
                 ),

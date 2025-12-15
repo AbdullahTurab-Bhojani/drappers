@@ -158,7 +158,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                       },
                     ),
 
-                    SizedBox(height: 50),
+                    SizedBox(height:20),
                   ],
                 ),
               ),

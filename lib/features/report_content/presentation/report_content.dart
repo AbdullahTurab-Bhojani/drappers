@@ -166,7 +166,7 @@ class _ReportContentState extends State<ReportContent> {
                         },
                         title: "Submit",
                       ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),

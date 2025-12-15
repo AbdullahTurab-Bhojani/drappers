@@ -215,7 +215,7 @@ class _StartupdetailsState extends State<Startupdetails> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                // physics: BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: .start,
                   children: [
@@ -602,6 +602,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                               // ),
                                             ],
                                           ),
+                                        SizedBox(height: 20),
                                         ],
                                       ),
                                     ),
