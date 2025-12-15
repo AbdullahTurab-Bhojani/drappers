@@ -9,7 +9,6 @@ import '../../shared/widgets/textfield_new.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
-  
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -19,8 +18,8 @@ class _ChangePasswordState extends State<ChangePassword> {
   bool isPhone = true;
   bool isShow = false;
 
- final TextEditingController _changePasswordController =
-  TextEditingController();
+  final TextEditingController _changePasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +43,8 @@ class _ChangePasswordState extends State<ChangePassword> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+
                   onTap: () {
                     context.pop();
                   },
@@ -63,71 +64,56 @@ class _ChangePasswordState extends State<ChangePassword> {
                     children: [
                       AppPasswordField(
                         keyboardType: TextInputType.numberWithOptions(),
-                          controller: _changePasswordController,
-                          labelText: "Old Password*",
-                          hintText: "123456789",
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Full name required";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        AppPasswordField(
-                          keyboardType: TextInputType.numberWithOptions(),
-                          controller: _changePasswordController,
-                          labelText: "Create Password*",
-                          hintText: "**********",
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Full name required";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        AppPasswordField(
-                          keyboardType: TextInputType.numberWithOptions(),
-                          controller: _changePasswordController,
-                          labelText: "Confirm Password*",
-                          hintText: "**********",
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Full name required";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 10),
-                        PoppinsText(
-                  "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
-                  fontSize: PoppinsFontSizeVariant.size11,
-                  fontWeight: PoppinsFontWeightVariant.regular,
-                  color: customColors.greyColor,
-                ),
-                        SizedBox(height: 32),
+                        controller: _changePasswordController,
+                        labelText: "Old Password*",
+                        hintText: "123456789",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Full name required";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      AppPasswordField(
+                        keyboardType: TextInputType.numberWithOptions(),
+                        controller: _changePasswordController,
+                        labelText: "Create Password*",
+                        hintText: "**********",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Full name required";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      AppPasswordField(
+                        keyboardType: TextInputType.numberWithOptions(),
+                        controller: _changePasswordController,
+                        labelText: "Confirm Password*",
+                        hintText: "**********",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Full name required";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 10),
+                      PoppinsText(
+                        "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
+                        fontSize: PoppinsFontSizeVariant.size11,
+                        fontWeight: PoppinsFontWeightVariant.regular,
+                        color: customColors.greyColor,
+                      ),
+                      SizedBox(height: 32),
                       AppButton(
                         onPressed: () {
                           context.pop();
                         },
                         title: "Continue",
                       ),
-                      SizedBox(height: 40),
-                GestureDetector(
-                              onTap: () {
-                                context.goNamed(
-                                  AppRoutes.forgetpasswordScreen.name,
-                                );
-                              },
-                              child: PoppinsText(
-                                'Forgot Password?',
-                                decoration: TextDecoration.underline,
-                                fontSize: PoppinsFontSizeVariant.size14,
-                                fontWeight: PoppinsFontWeightVariant.medium,
-                                color: Colors.white,
-                              ),
-                            ),
                     ],
                   ),
                 ),
@@ -139,4 +125,3 @@ class _ChangePasswordState extends State<ChangePassword> {
     );
   }
 }
-

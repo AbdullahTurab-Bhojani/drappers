@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class CountryCode {
@@ -67,7 +69,7 @@ class _PhoneNumberInputFieldState extends State<PhoneNumberInputField> {
     final selected = await showDialog<CountryCode>(
       context: context,
       builder: (context) {
-        final theme = Theme.of(context);
+        Theme.of(context);
         return AlertDialog(
           backgroundColor: Colors.grey.shade900,
           shape: RoundedRectangleBorder(
@@ -140,7 +142,9 @@ class _PhoneNumberInputFieldState extends State<PhoneNumberInputField> {
 
           Row(
             children: [
-              InkWell(
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: _openCountryPicker,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8.0),

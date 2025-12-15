@@ -37,6 +37,8 @@ class _DocumentriescardState extends State<Documentriescard> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   Navigator.of(context).pop();
                 },
@@ -57,7 +59,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                 Padding(
                   padding: EdgeInsets.only(right: 16),
                   child: Image.asset(
-                    "assets/images/Searchicon.png",
+                    Assets.images.searchstokeicon.path,
                     width: 20,
                     height: 20,
                   ),
@@ -85,6 +87,8 @@ class _DocumentriescardState extends State<Documentriescard> {
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
@@ -128,6 +132,8 @@ class _DocumentriescardState extends State<Documentriescard> {
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
@@ -152,7 +158,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                       },
                     ),
 
-                    SizedBox(height:20),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),

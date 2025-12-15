@@ -8,6 +8,8 @@ class MyApp extends ConsumerWidget {
     final goRouter = ref.watch(routerConfigProvider);
     final themeState = ref.watch(customThemeProvider);
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
@@ -15,7 +17,7 @@ class MyApp extends ConsumerWidget {
         themeMode: themeState.themeMode,
         theme: themeState.themeData,
         darkTheme: themeState.themeData,
-        title: 'Drappers',
+        title: 'Drapertv',
         debugShowCheckedModeBanner: false,
         routerConfig: goRouter,
         builder: (_, child) {

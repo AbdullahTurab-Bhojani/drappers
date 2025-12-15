@@ -4,6 +4,7 @@ import 'dart:async';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 
 // Assuming you have defined AppRoutes, AppButton, PoppinsText, AppColors,
 // and AppCustomColors in your project.
@@ -93,8 +94,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               top: 60,
               right: 20,
               child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
-                  context.pushNamed(AppRoutes.loginScreen.name);
+                  GuestHelper.isGuest = true;
+                  context.pushNamed(AppRoutes.home.name);
                 },
                 child: PoppinsText(
                   "Skip",
@@ -123,7 +127,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         decoration: BoxDecoration(
                           gradient: currentPage == index
                               ? LinearGradient(
-                                  colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
+                                  colors: [
+                                    Color(0xFF1FCFFF),
+                                    Color(0xFF0063FF),
+                                  ],
                                 )
                               : null,
                           color: currentPage != index ? AppColors.wDark : null,
@@ -158,12 +165,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ],
                     ),
                   ),
-      
+
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: AppButton(
                       onPressed: () {
-                        context.pushNamed(AppRoutes.loginScreen.name);
+                        GuestHelper.isGuest = true;
+                        context.pushNamed(AppRoutes.home.name);
                       },
                       title: currentPage == images.length - 1 ? 'Next' : 'Next',
                     ),

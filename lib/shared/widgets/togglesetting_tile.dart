@@ -19,8 +19,10 @@ class GradientSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final customColors = Theme.of(context).extension<AppCustomColors>()!;
+    final customColors = Theme.of(context).extension<AppCustomColors>()!;
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () => onChanged(!value),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 250),

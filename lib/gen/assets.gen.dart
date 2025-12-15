@@ -216,6 +216,10 @@ class $AssetsImagesGen {
   AssetGenImage get horizontalThumbnail4 =>
       const AssetGenImage('assets/images/Horizontal Thumbnail4.png');
 
+  /// File path: assets/images/IconLogo.png
+  AssetGenImage get iconLogo =>
+      const AssetGenImage('assets/images/IconLogo.png');
+
   /// File path: assets/images/Image.png
   AssetGenImage get image => const AssetGenImage('assets/images/Image.png');
 
@@ -253,6 +257,10 @@ class $AssetsImagesGen {
   AssetGenImage get searchicon =>
       const AssetGenImage('assets/images/Searchicon.png');
 
+  /// File path: assets/images/Settings&Preferencesicon.png
+  AssetGenImage get settingsPreferencesicon =>
+      const AssetGenImage('assets/images/Settings&Preferencesicon.png');
+
   /// File path: assets/images/Shareicon.png
   AssetGenImage get shareicon =>
       const AssetGenImage('assets/images/Shareicon.png');
@@ -264,6 +272,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/TGBT-aimation.json
   LottieGenImage get tGBTAimation =>
       const LottieGenImage('assets/images/TGBT-aimation.json');
+
+  /// File path: assets/images/TextLogo.png
+  AssetGenImage get textLogo =>
+      const AssetGenImage('assets/images/TextLogo.png');
 
   /// File path: assets/images/add.png
   AssetGenImage get add => const AssetGenImage('assets/images/add.png');
@@ -342,6 +354,10 @@ class $AssetsImagesGen {
   AssetGenImage get createpage =>
       const AssetGenImage('assets/images/createpage.png');
 
+  /// File path: assets/images/crossnewicon.png
+  AssetGenImage get crossnewicon =>
+      const AssetGenImage('assets/images/crossnewicon.png');
+
   /// File path: assets/images/cuticon.png
   AssetGenImage get cuticon => const AssetGenImage('assets/images/cuticon.png');
 
@@ -397,9 +413,37 @@ class $AssetsImagesGen {
   AssetGenImage get documentaries6 =>
       const AssetGenImage('assets/images/documentaries6.png');
 
+  /// File path: assets/images/documentriesimage1.png
+  AssetGenImage get documentriesimage1 =>
+      const AssetGenImage('assets/images/documentriesimage1.png');
+
+  /// File path: assets/images/documentriesimage2.png
+  AssetGenImage get documentriesimage2 =>
+      const AssetGenImage('assets/images/documentriesimage2.png');
+
+  /// File path: assets/images/documentriesimage3.png
+  AssetGenImage get documentriesimage3 =>
+      const AssetGenImage('assets/images/documentriesimage3.png');
+
+  /// File path: assets/images/documentriesimage4.png
+  AssetGenImage get documentriesimage4 =>
+      const AssetGenImage('assets/images/documentriesimage4.png');
+
+  /// File path: assets/images/documentriesimage5.png
+  AssetGenImage get documentriesimage5 =>
+      const AssetGenImage('assets/images/documentriesimage5.png');
+
+  /// File path: assets/images/documentriesimage6.png
+  AssetGenImage get documentriesimage6 =>
+      const AssetGenImage('assets/images/documentriesimage6.png');
+
   /// File path: assets/images/dots_icon.png
   AssetGenImage get dotsIcon =>
       const AssetGenImage('assets/images/dots_icon.png');
+
+  /// File path: assets/images/drapersplashvideo
+  String get drapersplashvideo =>
+      'packages/drappers/assets/images/drapersplashvideo';
 
   /// File path: assets/images/dropdownicon.png
   AssetGenImage get dropdownicon =>
@@ -419,6 +463,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/episode.png
   AssetGenImage get episode => const AssetGenImage('assets/images/episode.png');
+
+  /// File path: assets/images/faqsicon.png
+  AssetGenImage get faqsicon =>
+      const AssetGenImage('assets/images/faqsicon.png');
 
   /// File path: assets/images/flagicon.png
   AssetGenImage get flagicon =>
@@ -478,6 +526,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/hearticon.png
   AssetGenImage get hearticon =>
       const AssetGenImage('assets/images/hearticon.png');
+
+  /// File path: assets/images/helpsupportnewicon.png
+  AssetGenImage get helpsupportnewicon =>
+      const AssetGenImage('assets/images/helpsupportnewicon.png');
 
   /// File path: assets/images/icon_app.png
   AssetGenImage get iconApp =>
@@ -672,6 +724,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/preview.png
   AssetGenImage get preview => const AssetGenImage('assets/images/preview.png');
 
+  /// File path: assets/images/privacyolicyicon.png
+  AssetGenImage get privacyolicyicon =>
+      const AssetGenImage('assets/images/privacyolicyicon.png');
+
   /// File path: assets/images/profile card.png
   AssetGenImage get profileCard =>
       const AssetGenImage('assets/images/profile card.png');
@@ -679,6 +735,21 @@ class $AssetsImagesGen {
   /// File path: assets/images/progress_bg.png
   AssetGenImage get progressBg =>
       const AssetGenImage('assets/images/progress_bg.png');
+
+  /// File path: assets/images/reel1.png
+  AssetGenImage get reel1 => const AssetGenImage('assets/images/reel1.png');
+
+  /// File path: assets/images/reel2.png
+  AssetGenImage get reel2 => const AssetGenImage('assets/images/reel2.png');
+
+  /// File path: assets/images/reel3.png
+  AssetGenImage get reel3 => const AssetGenImage('assets/images/reel3.png');
+
+  /// File path: assets/images/reel4.png
+  AssetGenImage get reel4 => const AssetGenImage('assets/images/reel4.png');
+
+  /// File path: assets/images/reel5.png
+  AssetGenImage get reel5 => const AssetGenImage('assets/images/reel5.png');
 
   /// File path: assets/images/reporticon.png
   AssetGenImage get reporticon =>
@@ -696,6 +767,10 @@ class $AssetsImagesGen {
   AssetGenImage get savereelicon =>
       const AssetGenImage('assets/images/savereelicon.png');
 
+  /// File path: assets/images/savereelnewicon.png
+  AssetGenImage get savereelnewicon =>
+      const AssetGenImage('assets/images/savereelnewicon.png');
+
   /// File path: assets/images/screenrotationicon.png
   AssetGenImage get screenrotationicon =>
       const AssetGenImage('assets/images/screenrotationicon.png');
@@ -711,6 +786,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/searchicon3x.png
   AssetGenImage get searchicon3x =>
       const AssetGenImage('assets/images/searchicon3x.png');
+
+  /// File path: assets/images/searchstokeicon.png
+  AssetGenImage get searchstokeicon =>
+      const AssetGenImage('assets/images/searchstokeicon.png');
 
   /// File path: assets/images/sentence.png
   AssetGenImage get sentence =>
@@ -756,6 +835,10 @@ class $AssetsImagesGen {
   AssetGenImage get subscriptionBg =>
       const AssetGenImage('assets/images/subscription_bg.png');
 
+  /// File path: assets/images/termconditionicon.png
+  AssetGenImage get termconditionicon =>
+      const AssetGenImage('assets/images/termconditionicon.png');
+
   /// File path: assets/images/time3x.png
   AssetGenImage get time3x => const AssetGenImage('assets/images/time3x.png');
 
@@ -763,33 +846,41 @@ class $AssetsImagesGen {
   AssetGenImage get timericon =>
       const AssetGenImage('assets/images/timericon.png');
 
-  /// File path: assets/images/trendingshowimage1.png
-  AssetGenImage get trendingshowimage1 =>
-      const AssetGenImage('assets/images/trendingshowimage1.png');
+  /// File path: assets/images/trendingimage1.png
+  AssetGenImage get trendingimage1 =>
+      const AssetGenImage('assets/images/trendingimage1.png');
 
-  /// File path: assets/images/trendingshowimage2.png
-  AssetGenImage get trendingshowimage2 =>
-      const AssetGenImage('assets/images/trendingshowimage2.png');
+  /// File path: assets/images/trendingimage2.png
+  AssetGenImage get trendingimage2 =>
+      const AssetGenImage('assets/images/trendingimage2.png');
 
-  /// File path: assets/images/trendingshowimage3.png
-  AssetGenImage get trendingshowimage3 =>
-      const AssetGenImage('assets/images/trendingshowimage3.png');
+  /// File path: assets/images/trendingimage3.png
+  AssetGenImage get trendingimage3 =>
+      const AssetGenImage('assets/images/trendingimage3.png');
 
-  /// File path: assets/images/trendingshowimage4.png
-  AssetGenImage get trendingshowimage4 =>
-      const AssetGenImage('assets/images/trendingshowimage4.png');
+  /// File path: assets/images/trendingimage4.png
+  AssetGenImage get trendingimage4 =>
+      const AssetGenImage('assets/images/trendingimage4.png');
 
-  /// File path: assets/images/trendingshowimage5.png
-  AssetGenImage get trendingshowimage5 =>
-      const AssetGenImage('assets/images/trendingshowimage5.png');
+  /// File path: assets/images/trendingimage5.png
+  AssetGenImage get trendingimage5 =>
+      const AssetGenImage('assets/images/trendingimage5.png');
 
-  /// File path: assets/images/trendingshowimage6.png
-  AssetGenImage get trendingshowimage6 =>
-      const AssetGenImage('assets/images/trendingshowimage6.png');
+  /// File path: assets/images/trendingimage6.png
+  AssetGenImage get trendingimage6 =>
+      const AssetGenImage('assets/images/trendingimage6.png');
 
-  /// File path: assets/images/trendingshowimage7.png
-  AssetGenImage get trendingshowimage7 =>
-      const AssetGenImage('assets/images/trendingshowimage7.png');
+  /// File path: assets/images/trendingimage7.png
+  AssetGenImage get trendingimage7 =>
+      const AssetGenImage('assets/images/trendingimage7.png');
+
+  /// File path: assets/images/trendingimage8.png
+  AssetGenImage get trendingimage8 =>
+      const AssetGenImage('assets/images/trendingimage8.png');
+
+  /// File path: assets/images/trendingimage9.png
+  AssetGenImage get trendingimage9 =>
+      const AssetGenImage('assets/images/trendingimage9.png');
 
   /// File path: assets/images/videolock.png
   AssetGenImage get videolock =>
@@ -824,6 +915,7 @@ class $AssetsImagesGen {
     horizontalThumbnail2,
     horizontalThumbnail3,
     horizontalThumbnail4,
+    iconLogo,
     image,
     logoText,
     logo,
@@ -834,9 +926,11 @@ class $AssetsImagesGen {
     reelimage4,
     reelimage5,
     searchicon,
+    settingsPreferencesicon,
     shareicon,
     showicon,
     tGBTAimation,
+    textLogo,
     add,
     addicon,
     animation,
@@ -858,6 +952,7 @@ class $AssetsImagesGen {
     commenticon,
     courseComplete,
     createpage,
+    crossnewicon,
     cuticon,
     cuticon3x,
     delete123,
@@ -872,12 +967,20 @@ class $AssetsImagesGen {
     documentaries4,
     documentaries5,
     documentaries6,
+    documentriesimage1,
+    documentriesimage2,
+    documentriesimage3,
+    documentriesimage4,
+    documentriesimage5,
+    documentriesimage6,
     dotsIcon,
+    drapersplashvideo,
     dropdownicon,
     dtvlogogrey,
     dummyprofile,
     envelopeicon,
     episode,
+    faqsicon,
     flagicon,
     footericon1,
     footericon2,
@@ -893,6 +996,7 @@ class $AssetsImagesGen {
     guestProfile,
     guestSheet,
     hearticon,
+    helpsupportnewicon,
     iconApp,
     infoicon,
     interestedicon,
@@ -943,16 +1047,24 @@ class $AssetsImagesGen {
     podcastimage5,
     prayer,
     preview,
+    privacyolicyicon,
     profileCard,
     progressBg,
+    reel1,
+    reel2,
+    reel3,
+    reel4,
+    reel5,
     reporticon,
     reset123,
     saveIcon,
     savereelicon,
+    savereelnewicon,
     screenrotationicon,
     screensbg,
     screenshoticon,
     searchicon3x,
+    searchstokeicon,
     sentence,
     settingicon,
     settingsicon,
@@ -965,15 +1077,18 @@ class $AssetsImagesGen {
     speed,
     studio,
     subscriptionBg,
+    termconditionicon,
     time3x,
     timericon,
-    trendingshowimage1,
-    trendingshowimage2,
-    trendingshowimage3,
-    trendingshowimage4,
-    trendingshowimage5,
-    trendingshowimage6,
-    trendingshowimage7,
+    trendingimage1,
+    trendingimage2,
+    trendingimage3,
+    trendingimage4,
+    trendingimage5,
+    trendingimage6,
+    trendingimage7,
+    trendingimage8,
+    trendingimage9,
     videolock,
     watchlist786,
     watchlistgrey,

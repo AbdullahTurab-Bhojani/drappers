@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
@@ -17,25 +19,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
     {
       "title": "Semifinals 1 – Meet The Drapers Season 6 (2023)",
       "time": "1m ago",
-      "image": Assets.images.trendingshowimage1.path,
+      "image": Assets.images.trendingimage1.path,
       "showExtra": false,
     },
     {
       "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
       "time": "30m ago",
-      "image": Assets.images.trendingshowimage2.path,
+      "image": Assets.images.trendingimage9.path,
       "showExtra": false,
     },
     {
       "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
       "time": "13h ago",
-      "image": Assets.images.trendingshowimage3.path,
+      "image": Assets.images.trendingimage8.path,
       "showExtra": false,
     },
     {
       "title": "Semifinals 1 – Meet The Drapers Season 6 (2023) ",
       "time": "11h ago",
-      "image": Assets.images.trendingshowimage4.path,
+      "image": Assets.images.trendingimage7.path,
       "showExtra": false,
     },
   ];
@@ -43,25 +45,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
     {
       "title": "Semifinals 1 – Meet The Drapers Season 6 (2023)",
       "time": "13m",
-      "image": Assets.images.trendingshowimage1.path,
+      "image": Assets.images.trendingimage6.path,
       "showExtra": false,
     },
     {
       "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
       "time": "30m",
-      "image": Assets.images.trendingshowimage2.path,
+      "image": Assets.images.trendingimage5.path,
       "showExtra": false,
     },
     {
       "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
       "time": "13h",
-      "image": Assets.images.trendingshowimage3.path,
+      "image": Assets.images.trendingimage4.path,
       "showExtra": false,
     },
     {
       "title": "Semifinals 1 – Meet The Drapers Season 6 (2023) ",
       "time": "11h",
-      "image": Assets.images.trendingshowimage4.path,
+      "image": Assets.images.trendingimage3.path,
       "showExtra": false,
     },
   ];
@@ -70,13 +72,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
     {
       "title": "Semifinals 1 – Meet The Drapers Season 6 (2023)",
       "time": "1m ago",
-      "image": Assets.images.trendingshowimage1.path,
+      "image": Assets.images.trendingimage2.path,
       "showExtra": false,
     },
     {
       "title": "Semifinals 1 – Meet The Drapers Season 6 (2023) ",
       "time": "11h",
-      "image": Assets.images.trendingshowimage1.path,
+      "image": Assets.images.trendingimage1.path,
       "showExtra": false,
     },
   ];
@@ -99,6 +101,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10, right: 5),
@@ -117,6 +121,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 Padding(
                   padding: EdgeInsets.only(right: 25),
                   child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+
                     onTap: () {
                       context.pushNamed(AppRoutes.notificationSetting.name);
                     },
@@ -237,7 +243,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ),
                       ),
                     );
-                  }).toList(),
+                  }),
 
                   SizedBox(height: 20),
 
@@ -263,9 +269,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
                   ...yesterday.map((item) {
                     return GestureDetector(
-                      onTap: () {
-                        // Ab koi showExtra logic need nahi
-                      },
+                      behavior: HitTestBehavior.opaque,
+
+                      onTap: () {},
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -322,7 +328,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ),
                       ),
                     );
-                  }).toList(),
+                  }),
 
                   SizedBox(height: 20),
                   Center(
@@ -346,6 +352,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
                   ...wednesday.map((item) {
                     return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () {},
                       child: Container(
                         width: double.infinity,
@@ -403,7 +411,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ),
                       ),
                     );
-                  }).toList(),
+                  }),
 
                   SizedBox(height: 10),
                 ],

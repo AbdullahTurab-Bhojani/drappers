@@ -38,6 +38,8 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
             children: [
               AppMainBar(
                 leading: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+
                   onTap: () => Navigator.of(context).pop(),
                   child: Padding(
                     padding: EdgeInsets.only(left: 10),

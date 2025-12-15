@@ -40,7 +40,9 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppMainBar(
-             leading: GestureDetector(
+              leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -50,7 +52,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                     height: 20,
                   ),
                 ),
-                ),
+              ),
               title: "",
               centerTitle: false,
               backgroundColor: Colors.transparent,
@@ -58,7 +60,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                padding:  EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: horizontalPadding,
                   vertical: 10.0,
                 ),
@@ -71,15 +73,16 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                       fontWeight: PoppinsFontWeightVariant.semiBold,
                       color: customColors.textColor,
                     ),
+                    SizedBox(height: 20),
                     PoppinsText(
                       "Choose how you'd like to manage your account",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: customColors.textColor,
                     ),
-                     SizedBox(height: 30.0),
+                    SizedBox(height: 30.0),
                     Container(
-                      padding:  EdgeInsets.all(14.0),
+                      padding: EdgeInsets.all(14.0),
                       decoration: BoxDecoration(
                         color: customColors.boxyellow,
                         borderRadius: BorderRadius.circular(10.0),
@@ -99,7 +102,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                 }
                               });
                             },
-                            activeColor:  customColors.buttonColors.first,
+                            activeColor: customColors.buttonColors.first,
                           ),
                           Expanded(
                             child: Column(
@@ -111,7 +114,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                   fontWeight: PoppinsFontWeightVariant.regular,
                                   color: customColors.yellowlight,
                                 ),
-                                 SizedBox(height: 5.0),
+                                SizedBox(height: 5.0),
                                 PoppinsText(
                                   "Your profile, watchlist, history, preferences, and downloads will be saved. You can reactivate anytime by signing in again.",
                                   fontSize: PoppinsFontSizeVariant.size16,
@@ -125,9 +128,9 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                         ],
                       ),
                     ),
-                     SizedBox(height: 20.0),
+                    SizedBox(height: 20.0),
                     Container(
-                      padding:  EdgeInsets.all(14.0),
+                      padding: EdgeInsets.all(14.0),
                       decoration: BoxDecoration(
                         color: customColors.redbox,
                         borderRadius: BorderRadius.circular(10.0),
@@ -164,7 +167,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                           PoppinsFontWeightVariant.regular,
                                       color: customColors.redlight,
                                     ),
-                                     SizedBox(height: 8.0),
+                                    SizedBox(height: 8.0),
                                     PoppinsText(
                                       "All your data will be permanently removed, including watch history, preferences, profiles, downloads, payment data, and saved settings.",
                                       fontSize: PoppinsFontSizeVariant.size16,
@@ -234,13 +237,19 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                       ),
 
                     if (_selectedOption == AccountOption.deactivate)
-                      AppButton(onPressed: () {
-                      context.pushNamed(AppRoutes.deactivateAccountScreen.name);
-                      }, title: "Deactivate Account"),
+                      AppButton(
+                        onPressed: () {
+                          context.pushNamed(
+                            AppRoutes.deactivateAccountScreen.name,
+                          );
+                        },
+                        title: "Deactivate Account",
+                      ),
                   ],
                 ),
               ),
             ),
+          
           ],
         ),
       ),

@@ -32,7 +32,9 @@ class _SocialLoginButtonState extends State<SocialLoginButton> {
         borderRadius: BorderRadius.circular(10), // Reduced radius
         border: Border.all(color: Colors.white10),
       ),
-      child: InkWell(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+
         onTap: widget.onPressed,
         child: Center(
           child: Row(

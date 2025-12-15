@@ -73,6 +73,8 @@ class _HelpsupportState extends State<Helpsupport> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.pop();
                 },
@@ -170,7 +172,7 @@ class _HelpsupportState extends State<Helpsupport> {
 
                           Container(
                             width: double.infinity,
-                            height: 730,
+                            height: 630,
                             margin: EdgeInsets.symmetric(vertical: 20),
                             decoration: BoxDecoration(
                               color: AppColors.submitticket0E0E0E,

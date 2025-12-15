@@ -3,9 +3,7 @@ import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
-import '../../../shared/widgets/phonecountrytextfield.dart';
 import '../../../shared/widgets/phonefield_code.dart';
-import '../../../shared/widgets/sendcodefield.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class EditprofileScreen extends StatelessWidget {
@@ -46,6 +44,8 @@ class EditprofileScreen extends StatelessWidget {
             children: [
               AppMainBar(
                 leading: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+
                   onTap: () => Navigator.of(context).pop(),
                   child: Padding(
                     padding: EdgeInsets.only(left: 10),
@@ -67,7 +67,7 @@ class EditprofileScreen extends StatelessWidget {
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 114.82,
                         width: 114.82,
                         child: CircleAvatar(
@@ -206,9 +206,7 @@ class EditprofileScreen extends StatelessWidget {
                           otpController: otpController,
                           fieldbg: AppColors.tfield,
                           labelText: 'Phone Number*',
-                          onSendCode: () {
-                            print("OTP API CALL HERE");
-                          },
+                          onSendCode: () {},
                         ),
 
                         AppButton(

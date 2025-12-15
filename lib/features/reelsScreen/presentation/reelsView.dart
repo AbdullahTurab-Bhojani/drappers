@@ -1,4 +1,5 @@
-// reelsview_screen.dart
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
@@ -17,9 +18,9 @@ class ReelsviewScreen extends StatefulWidget {
 
 class _ReelsviewScreenState extends State<ReelsviewScreen> {
   final List<String> _videoPaths = [
-    "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
-    "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
-    "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
   ];
 
   late final PageController _pageController;
@@ -97,6 +98,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
     required AppCustomColors customColors,
   }) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () {
         Navigator.of(context).pop();
         context.pushNamed(routePath);
@@ -132,6 +135,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
               final controller = _videoControllers[index];
 
               return GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   if (!controller.value.isInitialized) return;
                   controller.value.isPlaying
@@ -225,6 +230,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                       textOverflow: TextOverflow.ellipsis,
                     ),
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () {
                         setState(() {
                           _expanded[_currentPage] = !_expanded[_currentPage];
@@ -257,6 +264,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () {
                         setState(() {
                           _isLiked[_currentPage] = !_isLiked[_currentPage];
@@ -291,6 +300,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                     const SizedBox(width: 22),
 
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () {},
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -342,6 +353,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+
                   onTap: () {
                     _videoControllers[_currentPage].pause();
                     Navigator.pop(context);
@@ -358,6 +371,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                 ),
 
                 GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+
                   onTap: () {
                     showDialog(
                       context: context,

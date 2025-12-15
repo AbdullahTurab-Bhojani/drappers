@@ -1,7 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 part of '../../drappers.dart';
 
 class CustomDropdown<T> extends ConsumerStatefulWidget {
-  const CustomDropdown({
+  CustomDropdown({
     super.key,
     required this.dynamicValues,
     this.onChanged,
@@ -22,6 +24,7 @@ class CustomDropdown<T> extends ConsumerStatefulWidget {
     this.itemHeight = 48,
     this.isSearchable = false,
     this.enabled = true,
+    this.isOpen = false,
   });
 
   final void Function(T?)? onChanged;
@@ -43,6 +46,7 @@ class CustomDropdown<T> extends ConsumerStatefulWidget {
   final double itemHeight;
   final bool isSearchable;
   final bool enabled;
+  bool? isOpen;
 
   @override
   ConsumerState<CustomDropdown<T>> createState() => _CustomDropdownState<T>();
@@ -50,7 +54,6 @@ class CustomDropdown<T> extends ConsumerStatefulWidget {
 
 class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
   T? _value;
-  bool _isOpen = false;
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
   final LayerLink _layerLink = LayerLink();
@@ -128,7 +131,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
 
   void _toggleDropdown() {
     if (!widget.enabled) return;
-    if (_isOpen) {
+    if (widget.isOpen!) {
       _closeDropdown();
     } else {
       _openDropdown();
@@ -137,7 +140,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
 
   void _openDropdown() {
     setState(() {
-      _isOpen = true;
+      widget.isOpen = true;
     });
     _overlayEntry = _createOverlayEntry();
     Overlay.of(context).insert(_overlayEntry!);
@@ -148,7 +151,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
 
   void _closeDropdown() {
     setState(() {
-      _isOpen = false;
+      widget.isOpen = false;
     });
     _searchController.clear();
     _onSearchChanged();
@@ -170,13 +173,14 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
   }
 
   OverlayEntry _createOverlayEntry() {
+    final theme = Theme.of(context);
+    final customColors = theme.extension<AppCustomColors>()!;
     return OverlayEntry(
       builder: (context) => Stack(
         children: [
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
-              // Close dropdown when tapping outside
               _closeDropdown();
             },
           ),
@@ -192,11 +196,9 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                 child: Container(
                   constraints: BoxConstraints(maxHeight: widget.maxHeight),
                   decoration: BoxDecoration(
-                    color: AppColors.white,
+                    color: AppColors.searchbarbg,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: widget.borderColor ?? AppColors.borderColor,
-                    ),
+                    border: Border.all(color: customColors.regular),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -208,19 +210,17 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                           child: TextField(
                             controller: _searchController,
                             focusNode: _searchFocusNode,
-                            style: TextStyle(
-                              fontFamily: 'SF-Pro-Text',
-                              color: AppColors.darkText,
+                            style: GoogleFonts.poppins(
+                              color: customColors.textColor,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
                             ),
                             decoration: InputDecoration(
                               hintText: widget.searchHint ?? 'Search...',
-                              hintStyle: TextStyle(
-                                fontFamily: 'SF-Pro-Text',
+                              hintStyle: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 16,
-                                color: AppColors.lightText,
+                                color: customColors.textColor,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(6),
@@ -230,9 +230,6 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(6),
-                                borderSide: BorderSide(
-                                  color: AppColors.primary,
-                                ),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 12,
@@ -244,81 +241,75 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                                 child: Icon(
                                   Icons.search,
                                   size: 20,
-                                  color: AppColors.lightText,
+                                  color: customColors.textColor,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        // Divider
                         const Divider(height: 1),
                       ],
                       SizedBox(height: 12),
-                      // Options list
-                      Flexible(
-                        child: _filteredValues.isEmpty
-                            ? Container(
-                                padding: const EdgeInsets.all(16),
-                                child: PlusJakartaText(
-                                  'No results found',
-                                  color: AppColors.lightText,
-                                  size: 14,
-                                ),
-                              )
-                            : ListView.separated(
-                                padding: EdgeInsets.zero,
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(height: 12),
-                                itemCount: _filteredValues.length,
-                                itemBuilder: (context, index) {
-                                  final item = _filteredValues[index];
-                                  final isSelected = _value == item;
-                                  return InkWell(
-                                    onTap: () => _selectItem(item),
-                                    child: Container(
-                                      height: widget.itemHeight,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: isSelected
-                                            ? AppColors.primary
-                                            : Colors.transparent,
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: PlusJakartaText(
-                                                widget.builder != null
-                                                    ? widget.builder!(item)
-                                                    : item.toString(),
-                                                color: isSelected
-                                                    ? AppColors.primary
-                                                    : AppColors.darkText,
-                                                fontWeight: isSelected
-                                                    ? FontWeight.w600
-                                                    : FontWeight.w400,
-                                                size: 16,
-                                              ),
+                      _filteredValues.isEmpty
+                          ? Container(
+                              padding: const EdgeInsets.all(16),
+                              child: PlusJakartaText(
+                                'No results found',
+                                color: customColors.textColor,
+                                size: 14,
+                              ),
+                            )
+                          : ListView.separated(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: 10),
+                              itemCount: _filteredValues.length,
+                              itemBuilder: (context, index) {
+                                final item = _filteredValues[index];
+                                final isSelected = _value == item;
+                                return GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+
+                                  onTap: () => _selectItem(item),
+                                  child: Container(
+                                    height: widget.itemHeight,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          if (isSelected)
+                                            Icon(
+                                              Icons.check,
+                                              size: 20,
+                                              color: customColors.textColor,
                                             ),
-                                            if (isSelected)
-                                              Icon(
-                                                Icons.check,
-                                                size: 20,
-                                                color: AppColors.primary,
-                                              ),
-                                          ],
-                                        ),
+                                          SizedBox(width: 10),
+                                          Expanded(
+                                            child: PoppinsText(
+                                              widget.builder != null
+                                                  ? widget.builder!(item)
+                                                  : item.toString(),
+                                              color: customColors.textColor,
+                                              fontWeight:
+                                                  PoppinsFontWeightVariant
+                                                      .regular,
+                                              fontSize:
+                                                  PoppinsFontSizeVariant.size16,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
-                      ),
+                                  ),
+                                );
+                              },
+                            ),
                     ],
                   ),
                 ),
@@ -337,6 +328,10 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    final customColors = theme.extension<AppCustomColors>()!;
+
     return Directionality(
       textDirection: TextDirection.ltr,
       child: CompositedTransformTarget(
@@ -344,17 +339,16 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
         child: Container(
           decoration: BoxDecoration(
             color: widget.enabled
-                ? (widget.filledColor ?? AppColors.colorFAFAFC)
-                : AppColors.fieldColor,
+                ? (widget.filledColor ?? AppColors.helpsupport)
+                : customColors.regular,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: widget.borderColor ?? AppColors.borderColor,
+              color: widget.borderColor ?? customColors.regular,
             ),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Main input field
               TextFormField(
                 enabled: widget.enabled,
                 onTap: widget.enabled
@@ -381,11 +375,8 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                     widget.onSaved!(_value);
                   }
                 },
-                style: TextStyle(
-                  fontFamily: 'SF-Pro-Text',
-                  color: widget.enabled
-                      ? AppColors.darkText
-                      : AppColors.lightText,
+                style: GoogleFonts.poppins(
+                  color: customColors.textColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
@@ -394,11 +385,10 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                   hintText: widget.hintText,
                   hintStyle:
                       widget.hintStyle ??
-                      TextStyle(
-                        fontFamily: 'SF-Pro-Text',
+                      GoogleFonts.poppins(
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
-                        color: AppColors.lightText,
+                        color: customColors.textColor,
                       ),
                   filled: true,
                   fillColor: Colors.transparent,
@@ -415,13 +405,13 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                     child: Opacity(
                       opacity: widget.enabled ? 1.0 : 0.5,
                       child: AnimatedRotation(
-                        turns: _isOpen ? 0.5 : 0,
+                        turns: widget.isOpen! ? 0.5 : 0,
                         duration: const Duration(milliseconds: 200),
-                        child: Assets.icons.arrowDown.image(
-                          fit: BoxFit.cover,
-                          scale: 4,
-                          height: 20,
-                          width: 20,
+                        child: Image.asset(
+                          Assets.images.dropdownicon.path,
+                          scale: 2,
+                          width: 18,
+                          height: 18,
                         ),
                       ),
                     ),

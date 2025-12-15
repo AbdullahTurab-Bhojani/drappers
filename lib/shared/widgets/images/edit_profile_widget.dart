@@ -28,6 +28,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
     return Center(
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+
         onTap: () async {
           if (kIsWeb) {
             imageBytes = await ImagePickerHandler.pickImageFromGalleryWeb(

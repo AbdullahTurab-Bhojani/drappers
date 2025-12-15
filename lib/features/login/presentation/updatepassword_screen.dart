@@ -38,12 +38,12 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.goNamed(AppRoutes.verfiicationcodeScreen.name);
                 },
-                child: Image.asset(
-                  Assets.images.backicon.path
-                )
+                child: Image.asset(Assets.images.backicon.path),
               ),
               SizedBox(height: 40),
               PoppinsText(
@@ -70,7 +70,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 keyboardType: TextInputType.numberWithOptions(),
                 controller: _confirmPasswordController,
                 labelText: "Confirm Password*",
-                hintText:"********", 
+                hintText: "********",
                 // validator: (value) {
                 //   if (value == null || value.trim().isEmpty) {
                 //     return "Full name required";

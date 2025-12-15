@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
+import '../guestloginwidget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class ReelcardWidget extends StatefulWidget {
@@ -28,9 +29,14 @@ class ReelcardWidget extends StatefulWidget {
 class _ReelcardWidgetState extends State<ReelcardWidget> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
-        context.pushNamed(AppRoutes.ReelsviewScreen.name);
+        if (GuestHelper.isGuest) {
+          GuestHelper.checkGuest(context);
+          return;
+        }
+        context.pushNamed(AppRoutes.reelsviewScreen.name);
       },
       child: Container(
         width: widget.reelCardWidth,
@@ -55,6 +61,7 @@ class _ReelcardWidgetState extends State<ReelcardWidget> {
                 widget.title,
                 fontSize: widget.fontSizeVariant,
                 fontWeight: PoppinsFontWeightVariant.medium,
+                maxLines: 2,
               ),
             ],
           ),

@@ -51,7 +51,9 @@ class WatchlistItemTile extends StatelessWidget {
             ),
           ),
           SizedBox(width: 10),
-          InkWell(
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+
             onTap: () {
               context.pushNamed(AppRoutes.contentDetail.name);
             },

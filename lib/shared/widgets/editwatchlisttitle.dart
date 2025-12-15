@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
@@ -28,7 +30,9 @@ class EditWatchlistItemTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          InkWell(
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+
             onTap: () => onToggle(!isChecked),
             child: Padding(
               padding: const EdgeInsets.only(right: 12.0),

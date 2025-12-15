@@ -62,7 +62,8 @@ class _LikecontentState extends State<Likecontent>
       {
         'image': 'Assets.images.podcastimage1.path',
         'title': 'Finale – Meet The Drapers Season 07 (2025)',
-        'subtitle': 'EP.5 - YAT SIU',
+        'subtitle':
+            'Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode, spotlighting visionary startups from across the world. Judges Nikki Farb, TikTok executive Tim Natividad, and legendary investor Bill Draper evaluate groundbreaking innovations in connectivity, accessibility, and education. From CleverFi’s seamless WiFi to Zeality’s immersive AR/VR tech, WeWALK’s smart cane, and Taleemabad’s educational revolution, this episode is a thrilling showcase of entrepreneurial brilliance',
         'remaining': '-12:34',
         'showSave': true,
         'progress': 75.0,
@@ -93,9 +94,9 @@ class _LikecontentState extends State<Likecontent>
       'slider': 75.0,
     };
 
-    void _onSliderChange(double v, int index) {}
+    void onSliderChange(double v, int index) {}
 
-    void _onContinue(int index) {}
+    void onContinue(int index) {}
 
     return Scaffold(
       body: Container(
@@ -112,6 +113,8 @@ class _LikecontentState extends State<Likecontent>
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 5),
@@ -134,19 +137,19 @@ class _LikecontentState extends State<Likecontent>
               //   SizedBox(width: 20),
               // ],
             ),
-            SizedBox(height: 20),
-
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 5, bottom: 20),
               child: TabBar(
-                tabAlignment: TabAlignment.start,
+                labelPadding: EdgeInsets.only(left: 15),
+                indicatorPadding: EdgeInsetsGeometry.all(0),
+                padding: EdgeInsets.all(0),
                 controller: _tabController,
                 isScrollable: true,
+                tabAlignment: TabAlignment.start,
                 dividerHeight: 0,
-                indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
                   color: customColors.textColor,
-
                   borderRadius: BorderRadius.circular(50),
                 ),
                 labelColor: customColors.blackshade,
@@ -155,52 +158,42 @@ class _LikecontentState extends State<Likecontent>
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
-                labelPadding: EdgeInsets.symmetric(horizontal: 7),
+                tabs: List.generate(3, (index) {
+                  String text = index == 0
+                      ? "All"
+                      : index == 1
+                      ? "Videos"
+                      : "Reels";
 
-                tabs: [
-                  Container(
+                  // Change width if selected
+                  double width = _tabController.index == index
+                      ? index == 0
+                            ? 80
+                            : 100
+                      : index == 0
+                      ? 80
+                      : 100;
+
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeInOut,
                     height: 40,
-                    padding: const EdgeInsets.symmetric(horizontal: 17),
+                    width: width,
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    margin: EdgeInsets.all(0),
                     decoration: BoxDecoration(
-                      border: _tabController.index == 0
-                          ? null
+                      border: _tabController.index == index
+                          ? Border.all(color: Colors.transparent, width: 0.5)
                           : Border.all(
                               color: customColors.labelColor,
                               width: 0.5,
                             ),
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    child: const Tab(text: "All"),
-                  ),
-                  Container(
-                    height: 40,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      border: _tabController.index == 1
-                          ? null
-                          : Border.all(
-                              color: customColors.labelColor,
-                              width: 0.5,
-                            ),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: const Tab(text: "Videos"),
-                  ),
-                  Container(
-                    height: 40,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      border: _tabController.index == 2
-                          ? null
-                          : Border.all(
-                              color: customColors.labelColor,
-                              width: 0.5,
-                            ),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: const Tab(text: "Reels"),
-                  ),
-                ],
+                    alignment: Alignment.center,
+                    child: Tab(text: text),
+                  );
+                }),
               ),
             ),
 
@@ -212,7 +205,7 @@ class _LikecontentState extends State<Likecontent>
                     padding: EdgeInsets.zero,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -245,7 +238,7 @@ class _LikecontentState extends State<Likecontent>
                       SizedBox(
                         height: 250,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: reelimages.length,
@@ -266,7 +259,7 @@ class _LikecontentState extends State<Likecontent>
                       ),
                       const SizedBox(height: 30),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -281,6 +274,7 @@ class _LikecontentState extends State<Likecontent>
                             AppButton(
                               buttonSize: Size(90, 25),
                               color: Colors.transparent,
+                              // ignore: deprecated_member_use
                               borderColor: customColors.textColor.withOpacity(
                                 0.5,
                               ),
@@ -303,7 +297,7 @@ class _LikecontentState extends State<Likecontent>
                         final item = entry.value;
                         return Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 15,
+                            horizontal: 20,
                             vertical: 8,
                           ),
                           child: VideosBoxWidget(
@@ -320,38 +314,34 @@ class _LikecontentState extends State<Likecontent>
                             ),
                             sliderValue: item['progress'] as double,
                             index: index,
-                            onSliderChanged: _onSliderChange,
-                            onContinuePressed: () => _onContinue(index),
+                            onSliderChanged: onSliderChange,
+                            onContinuePressed: () => onContinue(index),
                           ),
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
 
-                  /// ------------------------------------------------------------------
-                  /// TAB 2 — VIDEOS (Original Vertical List)
-                  /// ------------------------------------------------------------------
                   ListView.builder(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
                     itemCount: historyItems.length,
                     itemBuilder: (context, index) {
-                      final item = historyItems[index];
                       return VideosBoxWidget(
                         context: context,
                         podcast: podcastData['podcast'],
                         sliderValue: podcastData['slider'],
                         index: index,
-                        onSliderChanged: _onSliderChange,
-                        onContinuePressed: () => _onContinue(index),
+                        onSliderChanged: onSliderChange,
+                        onContinuePressed: () => onContinue(index),
                       );
                     },
                   ),
 
-                  /// ------------------------------------------------------------------
-                  /// TAB 3 — REELS (Original Grid View)
-                  /// ------------------------------------------------------------------
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
                     child: GridView.builder(
                       padding: EdgeInsets.zero,
                       itemCount: reelimages.length,

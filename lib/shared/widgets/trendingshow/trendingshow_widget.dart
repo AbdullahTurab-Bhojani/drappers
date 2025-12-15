@@ -16,13 +16,13 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
   @override
   Widget build(BuildContext context) {
     List<String> images = [
-      Assets.images.trendingshowimage1.path,
-      Assets.images.trendingshowimage2.path,
-      Assets.images.trendingshowimage3.path,
-      Assets.images.trendingshowimage4.path,
-      Assets.images.trendingshowimage5.path,
-      Assets.images.trendingshowimage6.path,
-      Assets.images.trendingshowimage7.path,
+      Assets.images.trendingimage1.path,
+      Assets.images.trendingimage2.path,
+      Assets.images.trendingimage3.path,
+      Assets.images.trendingimage4.path,
+      Assets.images.trendingimage5.path,
+      Assets.images.trendingimage6.path,
+      Assets.images.trendingimage7.path,
     ];
     return Scaffold(
       body: Container(
@@ -38,6 +38,8 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.pop();
                 },
@@ -56,16 +58,18 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
               elevation: 0,
               actions: [
                 GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+
                   onTap: () {
                     context.pushNamed(AppRoutes.searchscreen.name);
                   },
                   child: Image.asset(
-                    Assets.images.searchicon.path,
-                    width: 24,
-                    height: 24,
+                    Assets.images.searchstokeicon.path,
+                    width: 20,
+                    height: 20,
                   ),
                 ),
-                SizedBox(width: 20,)
+                SizedBox(width: 20),
               ],
             ),
             SizedBox(height: 30),
@@ -88,6 +92,8 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                       itemCount: images.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
@@ -132,6 +138,8 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                       itemCount: images.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
@@ -153,7 +161,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                       },
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),

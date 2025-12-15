@@ -97,6 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 14,
                             width: 14,
                             child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+
                               onTap: () => onRememberMeChanged(!rememberMe),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -153,6 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 52,
                         child: Center(
                           child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+
                             onTap: () {
                               context.pushNamed(
                                 AppRoutes.forgetpasswordScreen.name,
@@ -272,6 +276,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                             child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+
                               onTap: () {
                                 context.goNamed(AppRoutes.signupScreen.name);
                               },

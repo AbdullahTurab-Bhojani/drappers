@@ -109,7 +109,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       white0xffbdbdbe: white0xffbdbdbe ?? this.white0xffbdbdbe,
       popupdelete: popupdelete,
       mahroon: mahroon ?? this.mahroon,
-      containergrey: containergrey ?? this.containergrey,
+      containergrey: containergrey,
       redshade: redshade ?? this.redshade,
       buttonColors: buttonColors,
     );

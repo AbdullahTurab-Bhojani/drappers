@@ -92,13 +92,21 @@ class _HomeBannerState extends State<HomeBanner> {
         Positioned(
           top: 8,
           right: 8,
-          child: Image.asset(Assets.images.logoText.path),
+          child: Image.asset(
+            Assets.images.textLogo.path,
+            width: 100,
+            height: 36,
+          ),
         ),
 
         Positioned(
           bottom: 8,
           right: 8,
-          child: Image.asset(Assets.images.logo2.path, width: 36, height: 36),
+          child: Image.asset(
+            Assets.images.iconLogo.path,
+            width: 36,
+            height: 36,
+          ),
         ),
       ],
     );
