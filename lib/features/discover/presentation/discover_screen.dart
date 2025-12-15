@@ -299,7 +299,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           ),
                         ),
 
-                        SizedBox(height: 50),
+                        SizedBox(height: 20),
                       ],
                     ),
                   ),

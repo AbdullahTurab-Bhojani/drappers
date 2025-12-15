@@ -179,51 +179,55 @@ class _ContentDetailState extends State<ContentDetail>
                                                   color: customColors.textColor, ), ), ), ], ), ),
                       SizedBox(height: 10),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(
-                          width: 188,
-                          height: 45,
-                          child: AppButton(
-                            onPressed: () {
-                              context.pushNamed(AppRoutes.videoScreen.name);
-                            },
-                            title: 'Play',
-                            prefixIcon: Image.asset(
-                              Assets.images.playstrokeicon.path,
-                              width: 15,
-                              height: 15,
+                        Expanded(
+                          child: SizedBox(
+                            // width: 188,
+                            height: 45,
+                            child: AppButton(
+                              onPressed: () {
+                                context.pushNamed(AppRoutes.videoScreen.name);
+                              },
+                              title: 'Play',
+                              prefixIcon: Image.asset(
+                                Assets.images.playstrokeicon.path,
+                                width: 15,
+                                height: 15,
+                              ),
+                              fontSize: PoppinsFontSizeVariant.size14,
                             ),
-                            fontSize: PoppinsFontSizeVariant.size14,
                           ),
                         ),
                         SizedBox(width: 10),
-                        SizedBox(
-                          width: 188,
-                          height: 45,
-                          child: AppButton(
-                            onPressed: () {
-                              setState(() {
-                                isAdded = !isAdded;
-                              });
-                            },
-                            title: isAdded ? 'Added' : 'Add To Watch List',
-                            color: Colors.transparent,
-                            borderColor: customColors.greyColor,
-                            borderWidth: 1,
-                            border: true,
-                            prefixIcon: isAdded
-                                ? Icon(
-                                    Icons.check,
-                                    size: 17,
-                                    color: customColors.textColor,
-                                  )
-                                : Image.asset(
-                                    Assets.images.addicon.path,
-                                    width: 15,
-                                    height: 15,
-                                  ),
-                            fontSize: PoppinsFontSizeVariant.size14,
+                        Expanded(
+                          child: SizedBox(
+                            // width: 188,
+                            height: 45,
+                            child: AppButton(
+                              onPressed: () {
+                                setState(() {
+                                  isAdded = !isAdded;
+                                });
+                              },
+                              title: isAdded ? 'Added' : 'Add To Watch List',
+                              color: Colors.transparent,
+                              borderColor: customColors.greyColor,
+                              borderWidth: 1,
+                              border: true,
+                              prefixIcon: isAdded
+                                  ? Icon(
+                                      Icons.check,
+                                      size: 17,
+                                      color: customColors.textColor,
+                                    )
+                                  : Image.asset(
+                                      Assets.images.addicon.path,
+                                      width: 15,
+                                      height: 15,
+                                    ),
+                              fontSize: PoppinsFontSizeVariant.size14,
+                            ),
                           ),
                         ),
                       ],
@@ -454,7 +458,7 @@ class _ContentDetailState extends State<ContentDetail>
                         },
                       ),
       
-                      SizedBox(height: 50),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),

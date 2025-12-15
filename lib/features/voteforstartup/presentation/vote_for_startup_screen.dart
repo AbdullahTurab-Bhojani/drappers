@@ -388,7 +388,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: 10),
                     ],
                   ),
                 ),

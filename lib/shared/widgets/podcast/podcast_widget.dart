@@ -146,7 +146,7 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                       },
                     ),
 
-                    SizedBox(height: 50),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
