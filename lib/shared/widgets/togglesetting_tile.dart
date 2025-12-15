@@ -27,7 +27,12 @@ class GradientSwitch extends StatelessWidget {
         width: 52,
         height: 28,
         padding: EdgeInsets.all(3),
-       decoration: BoxDecoration(
+        // decoration: BoxDecoration(
+        //   borderRadius: BorderRadius.circular(100),
+        //   gradient: value ? LinearGradient(colors: gradientColors) : null,
+        //   color: value ? null : customColors.white0xffbdbdbe,
+        // ),
+        decoration: BoxDecoration(
   borderRadius: BorderRadius.circular(100),
   gradient: LinearGradient(
     colors: value
@@ -37,7 +42,6 @@ class GradientSwitch extends StatelessWidget {
             .toList(),
   ),
 ),
-
         child: AnimatedAlign(
           duration: Duration(milliseconds: 250),
           alignment: value ? Alignment.centerRight : Alignment.centerLeft,
