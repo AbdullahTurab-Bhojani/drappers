@@ -59,7 +59,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                 Padding(
                   padding: EdgeInsets.only(right: 16),
                   child: Image.asset(
-                    "assets/images/Searchicon.png",
+                    Assets.images.searchstokeicon.path,
                     width: 20,
                     height: 20,
                   ),
@@ -158,7 +158,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                       },
                     ),
 
-                    SizedBox(height:20),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),

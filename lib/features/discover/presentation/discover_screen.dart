@@ -114,7 +114,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         context.pushNamed(AppRoutes.searchscreen.name);
                       },
                       child: Image.asset(
-                        Assets.images.searchicon.path,
+                        Assets.images.searchstokeicon.path,
+                        width: 24,
+                        height: 24,
                         color: customColors.textColor,
                       ),
                     ),

@@ -62,7 +62,7 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                 Padding(
                   padding: EdgeInsets.only(right: 16),
                   child: Image.asset(
-                    "assets/images/Searchicon.png",
+                    Assets.images.searchstokeicon.path,
                     width: 20,
                     height: 20,
                   ),

@@ -64,9 +64,9 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                     context.pushNamed(AppRoutes.searchscreen.name);
                   },
                   child: Image.asset(
-                    Assets.images.searchicon.path,
-                    width: 24,
-                    height: 24,
+                    Assets.images.searchstokeicon.path,
+                    width: 20,
+                    height: 20,
                   ),
                 ),
                 SizedBox(width: 20),
