@@ -1134,7 +1134,11 @@ class Assets {
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const String splash = 'packages/drappers/assets/splash.mp4';
   static const $AssetsSvgGen svg = $AssetsSvgGen();
+
+  /// List of all assets
+  static List<String> get values => [splash];
 }
 
 class AssetGenImage {
