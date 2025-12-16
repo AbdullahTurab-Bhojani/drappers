@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../drappers.dart';
@@ -40,7 +42,7 @@ class WatchlistItemTile extends StatelessWidget {
           ),
           SizedBox(width: 12),
           SizedBox(
-            width: 160,
+            width: Platform.isIOS ? 140 : 160,
             child: PoppinsText(
               title,
               fontSize: PoppinsFontSizeVariant.size16,
