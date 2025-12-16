@@ -1,13 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'dart:async';
+
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
-
-// Assuming you have defined AppRoutes, AppButton, PoppinsText, AppColors,
-// and AppCustomColors in your project.
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -21,7 +19,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int currentPage = 0;
   late final Timer _timer;
 
-  final List<dynamic> images = [
+  final List<String> images = [
     Assets.images.onboarding1.path,
     Assets.images.onboarding2.path,
     Assets.images.onboarding3.path,
@@ -42,14 +40,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      int nextPage = currentPage + 1;
-      if (nextPage >= images.length) nextPage = 0;
-
+    _timer = Timer.periodic(const Duration(seconds: 3), (_) {
+      final nextPage = (currentPage + 1) % images.length;
       _pageController.animateToPage(
         nextPage,
-        duration: const Duration(milliseconds: 1000),
-        curve: Curves.linearToEaseOut,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeOut,
       );
     });
   }
@@ -66,122 +62,125 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return SafeArea(
-      top: false,
-      child: Scaffold(
-        body: Stack(
-          children: [
-            PageView.builder(
-              allowImplicitScrolling: false,
-              controller: _pageController,
-              itemCount: images.length,
-              reverse: false,
-              onPageChanged: (index) {
-                setState(() => currentPage = index);
-              },
-              itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(images[index]),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              },
-            ),
-            Positioned(
-              top: 60,
-              right: 20,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          /// 🔹 Background PageView
+          PageView.builder(
+            controller: _pageController,
+            itemCount: images.length,
+            onPageChanged: (index) => setState(() => currentPage = index),
+            itemBuilder: (_, index) {
+              return Image.asset(
+                images[index],
+                fit: BoxFit.cover,
+              );
+            },
+          ),
 
-                onTap: () {
-                  GuestHelper.isGuest = true;
-                  context.pushNamed(AppRoutes.home.name);
-                },
-                child: PoppinsText(
-                  "Skip",
-                  fontSize: PoppinsFontSizeVariant.size14,
-                  fontWeight: PoppinsFontWeightVariant.medium,
-                  color: customColors.textColor,
+          /// 🔹 Skip button (SafeArea handled)
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20, top: 8),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    GuestHelper.isGuest = true;
+                    context.pushNamed(AppRoutes.home.name);
+                  },
+                  child: PoppinsText(
+                    'Skip',
+                    fontSize: PoppinsFontSizeVariant.size14,
+                    fontWeight: PoppinsFontWeightVariant.medium,
+                    color: customColors.textColor,
+                  ),
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      images.length,
-                      (index) => AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        margin: EdgeInsets.symmetric(horizontal: 2),
-                        width: currentPage == index ? 26 : 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          gradient: currentPage == index
-                              ? LinearGradient(
-                                  colors: [
-                                    Color(0xFF1FCFFF),
-                                    Color(0xFF0063FF),
-                                  ],
-                                )
-                              : null,
-                          color: currentPage != index ? AppColors.wDark : null,
-                          borderRadius: BorderRadius.circular(4),
+          ),
+
+          /// 🔹 Bottom Content
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    /// Dots
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        images.length,
+                        (index) => AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
+                          width: currentPage == index ? 26 : 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            gradient: currentPage == index
+                                ? const LinearGradient(
+                                    colors: [
+                                      Color(0xFF1FCFFF),
+                                      Color(0xFF0063FF),
+                                    ],
+                                  )
+                                : null,
+                            color:
+                                currentPage != index ? AppColors.wDark : null,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 28),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 32),
-                        PoppinsText(
-                          titles[currentPage],
-                          textAlign: TextAlign.center,
-                          fontSize: PoppinsFontSizeVariant.size32,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: customColors.textColor,
-                          height: 1.3,
-                        ),
-                        SizedBox(height: 32),
-                        PoppinsText(
-                          subtitles[currentPage],
-                          textAlign: TextAlign.center,
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.light,
-                          color: customColors.textColor,
-                          height: 1.7,
-                        ),
-                        const SizedBox(height: 120),
-                      ],
-                    ),
-                  ),
 
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: AppButton(
+                    const SizedBox(height: 24),
+
+                    /// Title
+                    PoppinsText(
+                      titles[currentPage],
+                      textAlign: TextAlign.center,
+                      fontSize: PoppinsFontSizeVariant.size32,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
+                      height: 1.3,
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    /// Subtitle
+                    PoppinsText(
+                      subtitles[currentPage],
+                      textAlign: TextAlign.center,
+                      fontSize: PoppinsFontSizeVariant.size16,
+                      fontWeight: PoppinsFontWeightVariant.light,
+                      color: customColors.textColor,
+                      height: 1.7,
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    /// Button
+                    AppButton(
                       onPressed: () {
                         GuestHelper.isGuest = true;
                         context.pushNamed(AppRoutes.home.name);
                       },
-                      title: currentPage == images.length - 1 ? 'Next' : 'Next',
+                      title: 'Next',
                     ),
-                  ),
-                  const SizedBox(height: 80),
-                ],
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
