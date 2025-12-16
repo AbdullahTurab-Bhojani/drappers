@@ -20,7 +20,6 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -51,12 +50,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       Assets.images.podcastimage5.path,
     ];
     List<String> documentriescard = [
-      Assets.images.documentaries1.path,
-      Assets.images.documentaries2.path,
-      Assets.images.documentaries3.path,
-      Assets.images.documentaries4.path,
-      Assets.images.documentaries5.path,
-      Assets.images.documentaries6.path,
+      Assets.images.documentriesimage1.path,
+      Assets.images.documentriesimage2.path,
+      Assets.images.documentriesimage3.path,
+      Assets.images.documentriesimage4.path,
+      Assets.images.documentriesimage5.path,
+      Assets.images.documentriesimage6.path,
     ];
     List<String> genretitle = [
       'All',

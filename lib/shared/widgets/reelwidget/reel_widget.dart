@@ -66,7 +66,7 @@ class _ReelWidgetState extends State<ReelWidget> {
                 Padding(
                   padding: EdgeInsets.only(right: 16),
                   child: Image.asset(
-                    Assets.images.searchstokeicon.path,
+                    Assets.images.searchstokeicon.path, 
                     width: 20,
                     height: 20,
                   ),

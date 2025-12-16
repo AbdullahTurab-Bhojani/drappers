@@ -16,22 +16,22 @@ class WatchlistData {
 
 final List<WatchlistData> dummyWatchlist = [
   WatchlistData(
-    Assets.images.horizontalThumbnail.path,
+    Assets.images.watchlistcard1.path,
     'Finale – Meet The Drapers Season 07',
     '2025',
   ),
   WatchlistData(
-    Assets.images.horizontalThumbnail2.path,
+    Assets.images.watchlistcard2.path,
     'Semifinals 2 – Meet The Drapers Season 6',
     '2024',
   ),
   WatchlistData(
-    Assets.images.horizontalThumbnail3.path,
+    Assets.images.watchlistcard3.path,
     'Semifinals 1 – Meet The Drapers Season 6',
     '2023',
   ),
   WatchlistData(
-    Assets.images.horizontalThumbnail4.path,
+    Assets.images.watchlistcard4.path,
     'Sri Sri University – Meet The Drapers Season 6',
     '2023',
   ),
