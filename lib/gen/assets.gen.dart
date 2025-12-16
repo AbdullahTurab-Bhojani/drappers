@@ -890,6 +890,22 @@ class $AssetsImagesGen {
   AssetGenImage get watchlist786 =>
       const AssetGenImage('assets/images/watchlist786.png');
 
+  /// File path: assets/images/watchlistcard1.png
+  AssetGenImage get watchlistcard1 =>
+      const AssetGenImage('assets/images/watchlistcard1.png');
+
+  /// File path: assets/images/watchlistcard2.png
+  AssetGenImage get watchlistcard2 =>
+      const AssetGenImage('assets/images/watchlistcard2.png');
+
+  /// File path: assets/images/watchlistcard3.png
+  AssetGenImage get watchlistcard3 =>
+      const AssetGenImage('assets/images/watchlistcard3.png');
+
+  /// File path: assets/images/watchlistcard4.png
+  AssetGenImage get watchlistcard4 =>
+      const AssetGenImage('assets/images/watchlistcard4.png');
+
   /// File path: assets/images/watchlistgrey.png
   AssetGenImage get watchlistgrey =>
       const AssetGenImage('assets/images/watchlistgrey.png');
@@ -1091,6 +1107,10 @@ class $AssetsImagesGen {
     trendingimage9,
     videolock,
     watchlist786,
+    watchlistcard1,
+    watchlistcard2,
+    watchlistcard3,
+    watchlistcard4,
     watchlistgrey,
     watchlistnavbaricon,
     watchtimeicon,

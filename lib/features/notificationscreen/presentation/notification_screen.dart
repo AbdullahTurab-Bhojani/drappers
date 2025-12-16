@@ -105,7 +105,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10, right: 5),
+                  padding: EdgeInsets.only(left: 20, right: 5),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,

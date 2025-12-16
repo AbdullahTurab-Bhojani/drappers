@@ -24,7 +24,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    const double horizontalPadding = 15.0;
+    const double horizontalPadding = 20;
 
     return Scaffold(
       body: Container(
@@ -45,7 +45,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
 
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 20),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
@@ -81,153 +81,170 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                       color: customColors.textColor,
                     ),
                     SizedBox(height: 30.0),
-                    Container(
-                      padding: EdgeInsets.all(14.0),
-                      decoration: BoxDecoration(
-                        color: customColors.boxyellow,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Radio<AccountOption>(
-                            value: AccountOption.deactivate,
-                            groupValue: _selectedOption,
-                            onChanged: (value) {
-                              setState(() {
-                                if (_selectedOption == value) {
-                                  _selectedOption = null;
-                                } else {
-                                  _selectedOption = value;
-                                }
-                              });
-                            },
-                            activeColor: customColors.buttonColors.first,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PoppinsText(
-                                  "Deactivate Account",
-                                  fontSize: PoppinsFontSizeVariant.size16,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
-                                  color: customColors.yellowlight,
-                                ),
-                                SizedBox(height: 5.0),
-                                PoppinsText(
-                                  "Your profile, watchlist, history, preferences, and downloads will be saved. You can reactivate anytime by signing in again.",
-                                  fontSize: PoppinsFontSizeVariant.size16,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
-                                  color: customColors.textColor,
-                                  textOverflow: TextOverflow.visible,
-                                ),
-                              ],
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onTap: () {
+                        setState(() {
+                          if (_selectedOption == AccountOption.deactivate) {
+                            _selectedOption = null;
+                          } else {
+                            _selectedOption = AccountOption.deactivate;
+                          }
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(14.0),
+                        decoration: BoxDecoration(
+                          color: customColors.boxyellow,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Radio<AccountOption>(
+                              value: AccountOption.deactivate,
+                              groupValue: _selectedOption,
+
+                              onChanged: (value) {
+                                setState(() {
+                                  if (_selectedOption == value) {
+                                    _selectedOption = null;
+                                  } else {
+                                    _selectedOption = value;
+                                  }
+                                });
+                              },
+                              activeColor: customColors.buttonColors.first,
                             ),
-                          ),
-                        ],
+
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  PoppinsText(
+                                    "Deactivate Account",
+                                    fontSize: PoppinsFontSizeVariant.size16,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
+                                    color: customColors.yellowlight,
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  PoppinsText(
+                                    "Your profile, watchlist, history, preferences, and downloads will be saved. You can reactivate anytime by signing in again.",
+                                    fontSize: PoppinsFontSizeVariant.size16,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
+                                    color: customColors.textColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 20.0),
-                    Container(
-                      padding: EdgeInsets.all(14.0),
-                      decoration: BoxDecoration(
-                        color: customColors.redbox,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Radio<AccountOption>(
-                                value: AccountOption.delete,
-                                groupValue: _selectedOption,
-                                onChanged: (value) {
-                                  setState(() {
-                                    if (_selectedOption == value) {
-                                      _selectedOption = null;
-                                    } else {
-                                      _selectedOption = value;
-                                    }
-                                  });
-                                },
-                                activeColor: customColors.buttonColors.first,
-                              ),
-
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PoppinsText(
-                                      "Delete Account Permanently",
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.redlight,
+                    InkWell(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onTap: () {
+                        setState(() {
+                          if (_selectedOption == AccountOption.delete) {
+                            _selectedOption = null;
+                          } else {
+                            _selectedOption = AccountOption.delete;
+                          }
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: customColors.redbox,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 120,
+                                  child: Center(
+                                    child: Radio<AccountOption>(
+                                      value: AccountOption.delete,
+                                      groupValue: _selectedOption,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _selectedOption = value;
+                                        });
+                                      },
+                                      activeColor:
+                                          customColors.buttonColors.first,
                                     ),
-                                    SizedBox(height: 8.0),
-                                    PoppinsText(
-                                      "All your data will be permanently removed, including watch history, preferences, profiles, downloads, payment data, and saved settings.",
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.textColor,
-                                      textOverflow: TextOverflow.visible,
-                                    ),
-                                    SizedBox(height: 10),
-                                    Container(
-                                      padding: const EdgeInsets.all(10.0),
-                                      decoration: BoxDecoration(
-                                        color: customColors.rednormal,
-                                        borderRadius: BorderRadius.circular(
-                                          8.0,
-                                        ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.info_outline,
-                                            color: Colors.white,
-                                            size: 20,
-                                          ),
-                                          const SizedBox(width: 10.0),
-                                          Expanded(
-                                            child: PoppinsText(
-                                              "This action cannot be undone.",
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size14,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant
-                                                      .semiBold,
-                                              color: customColors.textColor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
 
-                                // AppButton(
-                                //   onPressed: () {},
-                                //   title: "Delete Account Permanently",
-                                // ),
-                                // AppButton(
-                                //   onPressed: () {},
-                                //   title: "Deactivate Account",
-                                // ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20.0),
-
-                          // Warning Box
-                        ],
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      PoppinsText(
+                                        "Delete Account Permanently",
+                                        fontSize: PoppinsFontSizeVariant.size16,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
+                                        color: customColors.redlight,
+                                      ),
+                                      SizedBox(height: 8.0),
+                                      PoppinsText(
+                                        "All your data will be permanently removed, including watch history, preferences, profiles, downloads, payment data, and saved settings.",
+                                        fontSize: PoppinsFontSizeVariant.size16,
+                                        fontWeight:
+                                            PoppinsFontWeightVariant.regular,
+                                        color: customColors.textColor,
+                                      ),
+                                      SizedBox(height: 10),
+                                      Container(
+                                        padding: EdgeInsets.all(10.0),
+                                        decoration: BoxDecoration(
+                                          color: customColors.rednormal,
+                                          borderRadius: BorderRadius.circular(
+                                            8.0,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.info_outline,
+                                              color: Colors.white,
+                                              size: 20,
+                                            ),
+                                            SizedBox(width: 10.0),
+                                            Expanded(
+                                              child: PoppinsText(
+                                                "This action cannot be undone.",
+                                                fontSize: PoppinsFontSizeVariant
+                                                    .size14,
+                                                fontWeight:
+                                                    PoppinsFontWeightVariant
+                                                        .semiBold,
+                                                color: customColors.textColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 40.0),
+                    SizedBox(height: 40.0),
                     if (_selectedOption == AccountOption.delete)
                       AppButton(
                         onPressed: () {
@@ -249,7 +266,6 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                 ),
               ),
             ),
-          
           ],
         ),
       ),

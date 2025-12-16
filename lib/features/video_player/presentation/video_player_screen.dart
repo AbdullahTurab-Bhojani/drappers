@@ -42,7 +42,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       "title": "Meet The Drapers Season 6 (2023)",
       "url":
           "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      "image": Assets.images.horizontalThumbnail.path,
+      "image": Assets.images.watchlistcard1.path,
     },
   );
 
@@ -881,7 +881,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 28),
                       child: Image.asset(
-                        Assets.images.cancelicon.path,
+                        Assets.images.crossnewicon.path,
                         width: 30,
                         color: AppColors.white,
                       ),

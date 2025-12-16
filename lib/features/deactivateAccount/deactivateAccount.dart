@@ -42,13 +42,10 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                   behavior: HitTestBehavior.opaque,
 
                   onTap: () => Navigator.of(context).pop(),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Image.asset(
-                      "assets/images/backicon.png",
-                      width: 20,
-                      height: 20,
-                    ),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: 20,
+                    height: 20,
                   ),
                 ),
                 title: "",
