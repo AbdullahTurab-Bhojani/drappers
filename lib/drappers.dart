@@ -63,6 +63,7 @@ import 'features/deactivateAccount/deactivateAccount.dart';
 import 'features/delete_detail/presentation/deleteDetail.dart';
 import 'features/discover/presentation/discover_screen.dart';
 import 'features/documentriescard/presentation/documentriescard.dart';
+import 'features/editprofile/presentation/edit_profile_popup.dart';
 import 'features/editprofile/presentation/editprofile_screen.dart';
 import 'features/editwatchlist/presentation/editwatchlist_screen.dart';
 import 'features/faqs/privacypolicy/presentation/views/faqs.dart';

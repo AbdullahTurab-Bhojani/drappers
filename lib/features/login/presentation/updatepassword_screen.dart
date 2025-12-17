@@ -41,7 +41,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 behavior: HitTestBehavior.opaque,
 
                 onTap: () {
-                  context.goNamed(AppRoutes.verfiicationcodeScreen.name);
+                  context.pushNamed(AppRoutes.verfiicationcodeScreen.name);
                 },
                 child: Image.asset(Assets.images.backicon.path),
               ),
@@ -88,7 +88,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
               SizedBox(height: 40),
               AppButton(
                 onPressed: () {
-                  context.goNamed(AppRoutes.loginScreen.name);
+                  context.pushNamed(AppRoutes.loginScreen.name);
                 },
                 title: "Continue",
               ),

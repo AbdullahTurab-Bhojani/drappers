@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, sized_box_for_whitespace
 
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -20,6 +20,8 @@ import '../../../../shared/widgets/watch_history.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  bool get showSaveIcon => false;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -278,6 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 500,
                                 child: Stack(
                                   children: [
+                                    // Video ya poster
                                     _controller!.value.isInitialized
                                         ? VideoPlayer(_controller!)
                                         : (File(posterPath).existsSync()
@@ -288,97 +291,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                               : Container(
                                                   color: Colors.grey[900],
                                                 )),
+
                                     Container(
                                       color: Colors.black.withOpacity(0.18),
                                     ),
-                                    Positioned(
-                                      top: 18,
-                                      left: 14,
-                                      right: 14,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: PoppinsText(
-                                              'Meet The Drapers - Live',
-                                              color: AppColors.white,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant
-                                                      .medium,
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size14,
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 10,
-                                              vertical: 6,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: Colors.white,
-                                                width: 0.5,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: GestureDetector(
-                                              behavior: HitTestBehavior.opaque,
 
-                                              onTap: () {
-                                                PopupmenuWidget(
-                                                  showSaveIcon: false,
-                                                );
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.circle,
-                                                    size: 8,
-                                                    color: Colors.red,
-                                                  ),
-                                                  SizedBox(width: 6),
-                                                  PoppinsText(
-                                                    'Live TV',
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        PoppinsFontWeightVariant
-                                                            .regular,
-                                                    fontSize:
-                                                        PoppinsFontSizeVariant
-                                                            .size12,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(width: 8),
-                                          GestureDetector(
-                                            behavior: HitTestBehavior.opaque,
-
-                                            onTap: () {},
-                                            child: Icon(
-                                              Icons.more_vert,
-                                              size: 24,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                    Positioned.fill(
-                                      child: GestureDetector(
+                                    if (_controller!.value.isInitialized)
+                                      GestureDetector(
+                                        // onDoubleTap: () {
+                                        //   if (GuestHelper.isGuest) {
+                                        //     GuestHelper.checkGuest(context);
+                                        //     return;
+                                        //   }
+                                        //   setState(
+                                        //     () =>
+                                        //         _showControls = !_showControls,
+                                        //   );
+                                        // },
                                         behavior: HitTestBehavior.opaque,
-
                                         onTap: () {
                                           if (GuestHelper.isGuest) {
                                             GuestHelper.checkGuest(context);
                                             return;
                                           }
-
                                           setState(
-                                            () =>
-                                                _showControls = !_showControls,
+                                            () => _showControls =
+                                                !_showControls,
                                           );
                                         },
                                         child: Center(
@@ -421,6 +359,61 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                       ),
+                                    Positioned(
+                                      top: 16,
+                                      left: 14,
+                                      right: 14,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: PoppinsText(
+                                              'Meet The Drapers - Live',
+                                              color: AppColors.white,
+                                              fontWeight:
+                                                  PoppinsFontWeightVariant
+                                                      .medium,
+                                              fontSize:
+                                                  PoppinsFontSizeVariant.size14,
+                                            ),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                              vertical: 6,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: AppColors.white,
+                                                width: 0.5,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.circle,
+                                                  size: 8,
+                                                  color: Colors.red,
+                                                ),
+                                                SizedBox(width: 6),
+                                                PoppinsText(
+                                                  'Live TV',
+                                                  color: AppColors.white,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .regular,
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size12,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(width: 8),
+                                          PopupmenuWidget(showSaveIcon: false),
+                                        ],
+                                      ),
                                     ),
 
                                     Positioned(
@@ -435,7 +428,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             alignment: Alignment.centerRight,
                                             child: GestureDetector(
                                               behavior: HitTestBehavior.opaque,
-
                                               onTap: () {
                                                 if (GuestHelper.isGuest) {
                                                   GuestHelper.checkGuest(
@@ -456,7 +448,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                               child: Container(
                                                 padding: EdgeInsets.symmetric(
                                                   horizontal: 24,
-                                                  // vertical: 10,
                                                 ),
                                                 height: 36,
                                                 decoration: BoxDecoration(
@@ -494,7 +485,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           SizedBox(height: 8),
                                           if (_controller!.value.isInitialized)
                                             Row(
-                                              mainAxisAlignment: .spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Expanded(
                                                   child: Slider(
@@ -540,14 +533,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ),
                                                     ),
                                                     SizedBox(width: 15),
-
                                                     GestureDetector(
                                                       behavior: HitTestBehavior
                                                           .opaque,
-
                                                       onTap: () {
                                                         _controller!.pause();
-
                                                         if (GuestHelper
                                                             .isGuest) {
                                                           GuestHelper.checkGuest(
@@ -595,7 +585,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: Size(90, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -661,7 +651,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 },
                                 title: "View More",
-                                buttonSize: Size(90, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -702,7 +692,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: Size(90, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -814,7 +804,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context.pushNamed(AppRoutes.reelWidget.name);
                                 },
                                 child: AppButton(
-                                  buttonSize: Size(90, 25),
+                                  buttonSize: Size(80, 25),
                                   color: Colors.transparent,
                                   borderColor: customColors.textColor
                                       .withOpacity(0.5),
@@ -872,7 +862,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: Size(90, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,

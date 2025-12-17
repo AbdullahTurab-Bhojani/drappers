@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -272,9 +274,8 @@ class _LikecontentState extends State<Likecontent>
                               ),
                             ),
                             AppButton(
-                              buttonSize: Size(90, 25),
+                              buttonSize: Size(80, 25),
                               color: Colors.transparent,
-                              // ignore: deprecated_member_use
                               borderColor: customColors.textColor.withOpacity(
                                 0.5,
                               ),
@@ -341,7 +342,7 @@ class _LikecontentState extends State<Likecontent>
                   ),
 
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: GridView.builder(
                       padding: EdgeInsets.zero,
                       itemCount: reelimages.length,
@@ -349,13 +350,13 @@ class _LikecontentState extends State<Likecontent>
                         crossAxisCount: 2,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 0.5,
+                        childAspectRatio: 195 / 350, 
                       ),
                       itemBuilder: (context, index) {
                         return ReelcardWidget(
                           assetImagePath: reelimages[index],
                           title: reelTitles[index],
-                          reelCardHeight: 358,
+                          reelCardHeight: 350, 
                           reelCardWidth: 195,
                           fontSizeVariant: PoppinsFontSizeVariant.size14,
                           showSaveIcon: true,

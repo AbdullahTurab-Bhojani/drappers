@@ -461,6 +461,14 @@ class $AssetsImagesGen {
   AssetGenImage get dummyprofile =>
       const AssetGenImage('assets/images/dummyprofile.png');
 
+  /// File path: assets/images/editprofilecameraicon.png
+  AssetGenImage get editprofilecameraicon =>
+      const AssetGenImage('assets/images/editprofilecameraicon.png');
+
+  /// File path: assets/images/editprofileimage.png
+  AssetGenImage get editprofileimage =>
+      const AssetGenImage('assets/images/editprofileimage.png');
+
   /// File path: assets/images/envelopeicon.png
   AssetGenImage get envelopeicon =>
       const AssetGenImage('assets/images/envelopeicon.png');
@@ -491,6 +499,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/forward10seconds.png
   AssetGenImage get forward10seconds =>
       const AssetGenImage('assets/images/forward10seconds.png');
+
+  /// File path: assets/images/fullscreenicon.png
+  AssetGenImage get fullscreenicon =>
+      const AssetGenImage('assets/images/fullscreenicon.png');
 
   /// File path: assets/images/gallery-favorite.png
   AssetGenImage get galleryFavorite =>
@@ -608,6 +620,10 @@ class $AssetsImagesGen {
   AssetGenImage get menuicon6 =>
       const AssetGenImage('assets/images/menuicon6.png');
 
+  /// File path: assets/images/moreinfocalender.png
+  AssetGenImage get moreinfocalender =>
+      const AssetGenImage('assets/images/moreinfocalender.png');
+
   /// File path: assets/images/muteicon.png
   AssetGenImage get muteicon =>
       const AssetGenImage('assets/images/muteicon.png');
@@ -623,6 +639,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/nextepisode.png
   AssetGenImage get nextepisode =>
       const AssetGenImage('assets/images/nextepisode.png');
+
+  /// File path: assets/images/nextmonth.png
+  AssetGenImage get nextmonth =>
+      const AssetGenImage('assets/images/nextmonth.png');
 
   /// File path: assets/images/notificationicon.png
   AssetGenImage get notificationicon =>
@@ -727,6 +747,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/preview.png
   AssetGenImage get preview => const AssetGenImage('assets/images/preview.png');
+
+  /// File path: assets/images/previousmonth.png
+  AssetGenImage get previousmonth =>
+      const AssetGenImage('assets/images/previousmonth.png');
 
   /// File path: assets/images/privacyolicyicon.png
   AssetGenImage get privacyolicyicon =>
@@ -999,6 +1023,8 @@ class $AssetsImagesGen {
     dropdownicon,
     dtvlogogrey,
     dummyprofile,
+    editprofilecameraicon,
+    editprofileimage,
     envelopeicon,
     episode,
     faqsicon,
@@ -1007,6 +1033,7 @@ class $AssetsImagesGen {
     footericon2,
     footericon3,
     forward10seconds,
+    fullscreenicon,
     galleryFavorite,
     gifticon,
     girl,
@@ -1037,10 +1064,12 @@ class $AssetsImagesGen {
     menuicon4,
     menuicon5,
     menuicon6,
+    moreinfocalender,
     muteicon,
     nativeSplash,
     newAppIcon,
     nextepisode,
+    nextmonth,
     notificationicon,
     notificationsfillicon,
     notificationsiconnew,
@@ -1068,6 +1097,7 @@ class $AssetsImagesGen {
     podcastimage5,
     prayer,
     preview,
+    previousmonth,
     privacyolicyicon,
     profileCard,
     progressBg,

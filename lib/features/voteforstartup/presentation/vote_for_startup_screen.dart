@@ -15,10 +15,13 @@ class VoteForStartupScreen extends StatefulWidget {
 }
 
 class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
+  bool isVoted = false;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+    const double horizontalPadding = 16.0;
 
     return Scaffold(
       body: Container(
@@ -82,7 +85,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         height: 85,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [Color(0xFF00C6FF), Color(0xFF0072FF)],
+                            colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -331,50 +334,57 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                             width: 14,
                                             height: 14,
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            context.pushNamed(
+                                              AppRoutes.videoScreen.name,
+                                            );
+                                          },
                                           title: 'Watch Episode',
                                           buttonSize: Size(175, 52),
                                           suffixIcon: SizedBox(),
                                         ),
-                                        SizedBox(width: 10),
-                                        Expanded(
-                                          child: Container(
-                                            width: 148,
-                                            height: 52,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
+                                        SizedBox(
+                                          width: 150,
+                                          child: OutlinedButton.icon(
+                                            onPressed: () {
+                                              setState(() {
+                                                isVoted = !isVoted;
+                                              });
+                                            },
+                                            style: OutlinedButton.styleFrom(
+                                              side: BorderSide(
                                                 color: customColors.greyColor,
                                                 width: 2,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                            ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment: .center,
-                                                children: [
-                                                  Image.asset(
-                                                    Assets
-                                                        .images
-                                                        .hearticon
-                                                        .path,
-                                                    width: 20,
-                                                    height: 20,
-                                                  ),
-                                                  SizedBox(width: 8),
-                                                  PoppinsText(
-                                                    'Vote',
-                                                    fontSize:
-                                                        PoppinsFontSizeVariant
-                                                            .size16,
-                                                    fontWeight:
-                                                        PoppinsFontWeightVariant
-                                                            .medium,
-                                                    color: customColors
-                                                        .subtextColor,
-                                                  ),
-                                                ],
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
                                               ),
+                                              padding: EdgeInsets.symmetric(
+                                                vertical: 12,
+                                              ),
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                            ),
+
+                                            icon: Icon(
+                                              isVoted
+                                                  ? Icons.favorite
+                                                  : Icons.favorite_border,
+                                              size: 24,
+                                              color: isVoted
+                                                  ? Colors.red
+                                                  : customColors.textColor,
+                                            ),
+
+                                            label: PoppinsText(
+                                              isVoted ? 'Voted' : 'Vote',
+                                              fontSize:
+                                                  PoppinsFontSizeVariant.size16,
+                                              fontWeight:
+                                                  PoppinsFontWeightVariant
+                                                      .medium,
+                                              color: AppColors.wDark,
                                             ),
                                           ),
                                         ),

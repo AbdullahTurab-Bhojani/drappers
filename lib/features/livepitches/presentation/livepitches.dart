@@ -113,7 +113,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                             color: customColors.textColor,
                           ),
                           AppButton(
-                            buttonSize: Size(90, 25),
+                            buttonSize: Size(80, 25),
                             color: Colors.transparent,
                             borderColor: customColors.textColor.withOpacity(
                               0.5,
@@ -164,7 +164,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                             color: customColors.textColor,
                           ),
                           AppButton(
-                            buttonSize: Size(90, 25),
+                            buttonSize: Size(80, 25),
                             color: Colors.transparent,
                             borderColor: customColors.textColor.withOpacity(
                               0.5,
@@ -223,10 +223,10 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                                 GuestHelper.checkGuest(context);
                                 return;
                               }
-                              context.goNamed(AppRoutes.reelWidget.name);
+                              context.pushNamed(AppRoutes.reelWidget.name);
                             },
                             child: AppButton(
-                              buttonSize: Size(90, 25),
+                              buttonSize: Size(80, 25),
                               color: Colors.transparent,
                               borderColor: customColors.textColor.withOpacity(
                                 0.5,
@@ -240,7 +240,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                                   GuestHelper.checkGuest(context);
                                   return;
                                 }
-                                context.goNamed(AppRoutes.reelWidget.name);
+                                context.pushNamed(AppRoutes.reelWidget.name);
                               },
                               title: "View More",
                             ),
@@ -282,7 +282,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                             color: customColors.textColor,
                           ),
                           AppButton(
-                            buttonSize: Size(90, 25),
+                            buttonSize: Size(80, 25),
                             color: Colors.transparent,
                             borderColor: customColors.textColor.withOpacity(
                               0.5,

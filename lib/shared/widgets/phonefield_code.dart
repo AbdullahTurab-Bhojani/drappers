@@ -46,14 +46,13 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
     _focusNodes = List.generate(6, (_) => FocusNode());
   }
 
-  /// -------------------- TIMER --------------------
   void _startTimer() {
     seconds = 30;
 
     setState(() {
       isTimerRunning = true;
       showResendButton = false;
-      showOtpField = true; // ✅ show otp on send & resend
+      showOtpField = true;
     });
 
     _timer?.cancel();
@@ -65,7 +64,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
         setState(() {
           isTimerRunning = false;
           showResendButton = true;
-          showOtpField = false; // ✅ OTP HIDE AFTER TIMER
+          showOtpField = false;
         });
       } else {
         setState(() => seconds--);
@@ -104,7 +103,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
             color: widget.fieldbg,
             borderRadius: BorderRadius.circular(5),
@@ -117,15 +116,13 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                 children: [
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
-
                     onTap: () {
                       showCountryPicker(
                         context: context,
                         showPhoneCode: true,
                         onSelect: (Country country) {
-                          if (mounted) {
+                          if (mounted)
                             setState(() => selectedCountry = country);
-                          }
                         },
                       );
                     },
@@ -134,13 +131,12 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                       child: Text(
                         "+${selectedCountry.phoneCode}",
                         style: GoogleFonts.poppins(
-                          fontSize: 15,
+                          fontSize: 14,
                           color: AppColors.white,
                         ),
                       ),
                     ),
                   ),
-
                   Expanded(
                     child: TextFormField(
                       controller: widget.phoneController,
@@ -154,6 +150,8 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                         counterText: "",
                         hintText: "Enter phone number",
                         border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 6),
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -162,41 +160,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                       },
                     ),
                   ),
-
-                  /// ✅ SEND BUTTON
-                  if (showSendButton && !isTimerRunning && !showResendButton)
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-
-                      onTap: () {
-                        widget.onSendCode();
-                        showSendButton = false;
-                        _startTimer();
-                      },
-                      child: _actionButton("Send"),
-                    ),
-
-                  /// ✅ TIMER
-                  if (isTimerRunning)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Text(
-                        "00:$seconds",
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                    ),
-
-                  /// ✅ RESEND BUTTON
-                  if (showResendButton)
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-
-                      onTap: () {
-                        widget.onSendCode();
-                        _startTimer();
-                      },
-                      child: _actionButton("Resend"),
-                    ),
                 ],
               ),
             ],
@@ -205,7 +168,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
         const SizedBox(height: 16),
 
-        /// ---------------- OTP FIELD ----------------
         if (showOtpField)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -236,7 +198,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
     );
   }
 
-  /// ---------------- BUTTON UI ----------------
   Widget _actionButton(String text) {
     return Container(
       height: 28,

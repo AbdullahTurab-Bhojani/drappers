@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 40),
                       AppButton(
                         onPressed: () {
-                          context.pushNamed(AppRoutes.home.name);
+                          context.goNamed(AppRoutes.home.name);
                         },
                         title: "Continue",
                       ),
@@ -279,7 +279,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               behavior: HitTestBehavior.opaque,
 
                               onTap: () {
-                                context.goNamed(AppRoutes.signupScreen.name);
+                                context.pushNamed(AppRoutes.signupScreen.name);
                               },
                               child: PoppinsText(
                                 "Sign Up",

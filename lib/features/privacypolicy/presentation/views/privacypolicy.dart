@@ -191,7 +191,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           fontSize: PoppinsFontSizeVariant.size12,
                           fontWeight: PoppinsFontWeightVariant.regular,
                         ),
-                        SizedBox(height: 50.0),
+                        SizedBox(height: 20.0),
                       ],
                     ),
                   ),

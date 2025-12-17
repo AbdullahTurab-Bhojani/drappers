@@ -415,7 +415,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     SizedBox(height: 10),
                     AppButton(
                       onPressed: () {
-                        context.goNamed(AppRoutes.home.name);
+                        context.pushNamed(AppRoutes.home.name);
                       },
                       title: 'Continue as Guest',
                       buttonGradient: [Color(0xff202020), Color(0xff202020)],
@@ -449,7 +449,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             behavior: HitTestBehavior.opaque,
 
                             onTap: () {
-                              context.goNamed(AppRoutes.loginScreen.name);
+                              context.pushNamed(AppRoutes.loginScreen.name);
                             },
                             child: PoppinsText(
                               "Sign in",

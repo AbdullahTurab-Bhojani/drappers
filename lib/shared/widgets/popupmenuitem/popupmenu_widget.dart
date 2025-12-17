@@ -15,8 +15,11 @@ class PopupmenuWidget extends StatefulWidget {
   State<PopupmenuWidget> createState() => _PopupmenuWidgetState();
 }
 
+
 class _PopupmenuWidgetState extends State<PopupmenuWidget> {
   final double _menuItemSpacing = 12;
+
+  final GlobalKey _iconKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -25,57 +28,64 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: widget.showSaveIcon == true
+      mainAxisAlignment: widget.showSaveIcon
           ? MainAxisAlignment.spaceBetween
           : MainAxisAlignment.end,
       children: [
         if (widget.showSaveIcon)
           Image.asset(Assets.images.saveIcon.path, width: 30, height: 30),
 
-        Align(
-          alignment: Alignment.centerRight, 
-          child: SizedBox(
-            width: 30, 
-            height: 20,
-            child: PopupMenuButton<String>(
-              // padding: EdgeInsets.zero,
-              padding: EdgeInsets.only(top: 5),
-              color: AppColors.dRegular,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              icon: Image.asset(
-                Assets.images.dotsIcon.path,
-                width: 17,
-                height: 17,
-              ),
-              offset: const Offset(-15, 40),
-              onSelected: (value) {
-                print('$value clicked');
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                _buildMenuItem(
-                  routePath: AppRoutes.reportContent.name,
-                  iconPath: Assets.images.reporticon.path,
-                  text: 'Report',
-                  customColors: customColors,
-                ),
-                _buildMenuItem(
-                  iconPath: Assets.images.interestedicon.path,
-                  text: 'Interested',
-                  customColors: customColors,
-                  routePath: AppRoutes.reportContent.name,
-                ),
-                _buildMenuItem(
-                  iconPath: Assets.images.notinterestedicon.path,
-                  text: 'Not Interested',
-                  customColors: customColors,
-                  routePath: AppRoutes.reportContent.name,
-                ),
-              ],
-            ),
+        GestureDetector(
+          key: _iconKey,
+          behavior: HitTestBehavior.translucent,
+          onTap: () => _showMenuBelowIcon(context, customColors),
+          child: Image.asset(
+            Assets.images.dotsIcon.path,
+            width: 17,
+            height: 17,
           ),
+        ),
+      ],
+    );
+  }
+
+  void _showMenuBelowIcon(BuildContext context, AppCustomColors customColors) {
+    final RenderBox iconBox =
+        _iconKey.currentContext!.findRenderObject() as RenderBox;
+
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
+
+    final Rect iconRect =
+        iconBox.localToGlobal(Offset.zero, ancestor: overlay) & iconBox.size;
+
+    showMenu<String>(
+      context: context,
+      color: AppColors.dRegular,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      position: RelativeRect.fromRect(
+        Rect.fromLTWH(iconRect.left - 70, iconRect.bottom + 6, 160, 0),
+        Offset.zero & overlay.size,
+      ),
+      items: [
+        _buildMenuItem(
+          routePath: AppRoutes.reportContent.name,
+          iconPath: Assets.images.reporticon.path,
+          text: 'Report',
+          customColors: customColors,
+        ),
+        _buildMenuItem(
+          routePath: AppRoutes.reportContent.name,
+          iconPath: Assets.images.interestedicon.path,
+          text: 'Interested',
+          customColors: customColors,
+        ),
+        _buildMenuItem(
+          routePath: AppRoutes.reportContent.name,
+          iconPath: Assets.images.notinterestedicon.path,
+          text: 'Not Interested',
+          customColors: customColors,
         ),
       ],
     );
@@ -88,16 +98,19 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
     required AppCustomColors customColors,
   }) {
     return PopupMenuItem<String>(
+      value: text,
       onTap: () {
         context.pushNamed(routePath);
       },
-      value: text,
       child: SizedBox(
-        width: 120,
+        width: 126,
+        height: 40,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(iconPath),
-            SizedBox(width: _menuItemSpacing),
+            Image.asset(iconPath, height: 18),
+            SizedBox(width: 12),
+            // SizedBox(width: _menuItemSpacing),
             PoppinsText(
               text,
               fontSize: PoppinsFontSizeVariant.size12,
@@ -109,4 +122,5 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
       ),
     );
   }
+
 }

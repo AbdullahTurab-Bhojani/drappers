@@ -32,7 +32,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
 
     final otp = _otpControllers.map((c) => c.text).join();
     if (otp.length == 6) {
-      context.goNamed(AppRoutes.home.name);
+      context.pushNamed(AppRoutes.home.name);
     }
   }
 

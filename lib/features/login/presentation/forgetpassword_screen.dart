@@ -94,7 +94,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                     SizedBox(height: 24),
                     AppButton(
                       onPressed: () {
-                        context.goNamed(AppRoutes.verfiicationcodeScreen.name);
+                        context.pushNamed(AppRoutes.verfiicationcodeScreen.name);
                       },
                       title: "Send Code",
                     ),
