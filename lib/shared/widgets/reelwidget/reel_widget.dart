@@ -66,7 +66,7 @@ class _ReelWidgetState extends State<ReelWidget> {
                 Padding(
                   padding: EdgeInsets.only(right: 16),
                   child: Image.asset(
-                    Assets.images.searchstokeicon.path, 
+                    Assets.images.searchstokeicon.path,
                     width: 20,
                     height: 20,
                   ),
@@ -75,7 +75,7 @@ class _ReelWidgetState extends State<ReelWidget> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
+                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: reelimages.length,
@@ -83,16 +83,16 @@ class _ReelWidgetState extends State<ReelWidget> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: 0.5,
+                    childAspectRatio: 195 / 380,
                   ),
                   itemBuilder: (context, index) {
                     return ReelcardWidget(
-                      reelCardHeight: 385,
-                      reelCardWidth: 180,
-                      fontSizeVariant: PoppinsFontSizeVariant.size14,
                       assetImagePath: reelimages[index],
                       title: reelTitles[index],
-                      showSaveIcon: false,
+                      reelCardHeight: 350,
+                      reelCardWidth: 195,
+                      fontSizeVariant: PoppinsFontSizeVariant.size14,
+                      showSaveIcon: true,
                     );
                   },
                 ),

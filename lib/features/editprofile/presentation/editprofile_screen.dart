@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../shared/widgets/phonefield_code.dart';
 import '../../../shared/widgets/textfield_new.dart';
+import 'edit_profile_popup.dart';
 
 class EditprofileScreen extends StatelessWidget {
   EditprofileScreen({super.key});
@@ -67,35 +69,48 @@ class EditprofileScreen extends StatelessWidget {
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      SizedBox(
-                        height: 114.82,
-                        width: 114.82,
-                        child: CircleAvatar(
-                          radius: 60,
-                          backgroundColor: Colors.transparent,
-                          backgroundImage: NetworkImage(
-                            'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (context) => Center(
+                              child: Dialog(
+                                backgroundColor: Colors.transparent,
+                                insetPadding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
+                                child: EditProfilePopup(),
+                              ),
+                            ),
+                          );
+                        },
+                        child: SizedBox(
+                          height: 114.82,
+                          width: 114.82,
+                          child: CircleAvatar(
+                            radius: 60,
+                            backgroundColor: Colors.transparent,
+                            backgroundImage: NetworkImage(
+                              'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                            ),
                           ),
                         ),
                       ),
                       Positioned(
-                        bottom: -14,
-                        right: 38,
+                        bottom: -10,
+                        right: 46,
                         child: Container(
-                          padding: EdgeInsets.all(8),
+                          width: 24,
+                          height: 24,
+                          padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             color: customColors.buttonColors.first,
                             shape: BoxShape.circle,
-                            // border: Border.all(
-                            //   color: customColors.textColor,
-                            //   width: 1,
-                            // ),
                           ),
                           child: Center(
                             child: Image.asset(
-                              Assets.images.screenshoticon.path,
-                              width: 24,
-                              height: 24,
+                              Assets.images.editprofilecameraicon.path,
                             ),
                           ),
                         ),

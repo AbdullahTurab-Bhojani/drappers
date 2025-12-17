@@ -16,6 +16,7 @@ class newliveScreen extends StatefulWidget {
 class _newliveScreenScreenState extends State<newliveScreen> {
   late BetterPlayerController _betterPlayerController;
   String _selectedSpeed = "1x";
+  bool _isLocked = false;
   String? _selectedSubtitle;
   String? _selectedAudio;
   bool _controlsVisible = true;
@@ -227,7 +228,19 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: BetterPlayer(controller: _betterPlayerController),
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                setState(() {
+                  _controlsVisible = !_controlsVisible; 
+                });
+
+                if (_controlsVisible) {
+                  _hideControlsAfterDelay(); 
+                }
+              },
+              child: BetterPlayer(controller: _betterPlayerController),
+            ),
           ),
 
           if (_controlsVisible) _buildControls(),
@@ -280,60 +293,72 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       color: Colors.black.withOpacity(0.3),
       child: Stack(
         children: [
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Image.asset(
-                    Assets.images.back10seconds.path,
-                    width: 64,
-                    height: 64,
+          if (_controlsVisible &&
+              !_isLocked) // only show if visible and not locked
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // // Back 10 seconds
+                  // IconButton(
+                  //   icon: Image.asset(
+                  //     Assets.images.back10seconds.path,
+                  //     width: 64,
+                  //     height: 64,
+                  //   ),
+                  //   onPressed: () {
+                  //     final pos = _betterPlayerController
+                  //         .videoPlayerController!
+                  //         .value
+                  //         .position;
+                  //     _betterPlayerController.seekTo(
+                  //       pos - const Duration(seconds: 10),
+                  //     );
+                  //   },
+                  // ),
+
+                  // const SizedBox(width: 40),
+
+                  // Play/Pause toggle
+                  IconButton(
+                    icon: Icon(
+                      _betterPlayerController.isPlaying()!
+                          ? Icons.pause_circle
+                          : Icons.play_circle,
+                      size: 90,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (_betterPlayerController.isPlaying()!) {
+                          _betterPlayerController.pause();
+                        } else {
+                          _betterPlayerController.play();
+                        }
+                      });
+                    },
                   ),
-                  onPressed: () {
-                    final pos = _betterPlayerController
-                        .videoPlayerController!
-                        .value
-                        .position;
-                    _betterPlayerController.seekTo(
-                      pos - const Duration(seconds: 10),
-                    );
-                  },
-                ),
-                const SizedBox(width: 40),
-                IconButton(
-                  icon: Icon(
-                    _betterPlayerController.isPlaying()!
-                        ? Icons.pause_circle
-                        : Icons.play_circle,
-                    size: 90,
-                  ),
-                  onPressed: () {
-                    _betterPlayerController.isPlaying()!
-                        ? _betterPlayerController.pause()
-                        : _betterPlayerController.play();
-                  },
-                ),
-                SizedBox(width: 40),
-                IconButton(
-                  icon: Image.asset(
-                    Assets.images.forward10seconds.path,
-                    width: 64,
-                    height: 64,
-                  ),
-                  onPressed: () {
-                    final pos = _betterPlayerController
-                        .videoPlayerController!
-                        .value
-                        .position;
-                    _betterPlayerController.seekTo(
-                      pos + const Duration(seconds: 10),
-                    );
-                  },
-                ),
-              ],
+
+                  // const SizedBox(width: 40),
+
+                  // IconButton(
+                  //   icon: Image.asset(
+                  //     Assets.images.forward10seconds.path,
+                  //     width: 64,
+                  //     height: 64,
+                  //   ),
+                  //   onPressed: () {
+                  //     final pos = _betterPlayerController
+                  //         .videoPlayerController!
+                  //         .value
+                  //         .position;
+                  //     _betterPlayerController.seekTo(
+                  //       pos + const Duration(seconds: 10),
+                  //     );
+                  //   },
+                  // ),
+                ],
+              ),
             ),
-          ),
 
           Positioned(
             bottom: 20,

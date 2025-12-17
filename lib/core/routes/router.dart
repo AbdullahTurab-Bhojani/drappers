@@ -242,10 +242,15 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.videoScreen.name,
         builder: (context, state) => CustomVideoPlayerScreen(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.searchView.path,
         name: AppRoutes.searchView.name,
         builder: (context, state) => Searchview(),
+      ),
+      GoRoute(
+        path: AppRoutes.editProfilePopup.path,
+        name: AppRoutes.editProfilePopup.name,
+        builder: (context, state) => EditProfilePopup(),
       ),
     ],
   );

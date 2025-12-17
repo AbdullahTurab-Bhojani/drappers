@@ -103,10 +103,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 6,
-          ), // 👈 reduce vertical padding
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
             color: widget.fieldbg,
             borderRadius: BorderRadius.circular(5),
@@ -134,7 +131,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                       child: Text(
                         "+${selectedCountry.phoneCode}",
                         style: GoogleFonts.poppins(
-                          fontSize: 14, 
+                          fontSize: 14,
                           color: AppColors.white,
                         ),
                       ),
@@ -153,10 +150,8 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                         counterText: "",
                         hintText: "Enter phone number",
                         border: InputBorder.none,
-                        isDense: true, 
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 6,
-                        ), 
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 6),
                       ),
                       onChanged: (value) {
                         setState(() {

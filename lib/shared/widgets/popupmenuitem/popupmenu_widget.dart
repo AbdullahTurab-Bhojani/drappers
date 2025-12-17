@@ -15,6 +15,7 @@ class PopupmenuWidget extends StatefulWidget {
   State<PopupmenuWidget> createState() => _PopupmenuWidgetState();
 }
 
+
 class _PopupmenuWidgetState extends State<PopupmenuWidget> {
   final double _menuItemSpacing = 12;
 
@@ -49,22 +50,23 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
   }
 
   void _showMenuBelowIcon(BuildContext context, AppCustomColors customColors) {
-    final RenderBox renderBox =
+    final RenderBox iconBox =
         _iconKey.currentContext!.findRenderObject() as RenderBox;
 
-    final Offset offset = renderBox.localToGlobal(Offset.zero);
-    final Size size = renderBox.size;
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
+
+    final Rect iconRect =
+        iconBox.localToGlobal(Offset.zero, ancestor: overlay) & iconBox.size;
 
     showMenu<String>(
       context: context,
       color: AppColors.dRegular,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      position: RelativeRect.fromLTRB(
-        offset.dx + (size.width / 2) - 90, 
-        offset.dy + size.height + 0, 
-        offset.dx,
-        offset.dy,
+      position: RelativeRect.fromRect(
+        Rect.fromLTWH(iconRect.left - 70, iconRect.bottom + 6, 160, 0),
+        Offset.zero & overlay.size,
       ),
       items: [
         _buildMenuItem(
@@ -101,11 +103,14 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
         context.pushNamed(routePath);
       },
       child: SizedBox(
-        width: 140,
+        width: 126,
+        height: 40,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(iconPath),
-            SizedBox(width: _menuItemSpacing),
+            Image.asset(iconPath, height: 18),
+            SizedBox(width: 12),
+            // SizedBox(width: _menuItemSpacing),
             PoppinsText(
               text,
               fontSize: PoppinsFontSizeVariant.size12,

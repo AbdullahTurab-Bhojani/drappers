@@ -70,4 +70,5 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
       ),
     );
   }
+
 }

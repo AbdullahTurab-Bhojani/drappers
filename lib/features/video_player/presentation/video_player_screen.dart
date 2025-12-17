@@ -95,8 +95,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: 336,
-            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+            width: 320,
+            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
@@ -108,22 +108,21 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PoppinsText(
-                      "Video Quality",
+                      "Quality",
                       fontSize: PoppinsFontSizeVariant.size12,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: AppColors.wDark,
                     ),
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
-
                       onTap: () => Navigator.pop(context),
                       child: Icon(Icons.close, color: Colors.white),
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
-                Divider(),
                 SizedBox(height: 12),
+                Divider(),
+                // SizedBox(height: 12),
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -280,8 +279,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: 336,
-            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+            width: 320,
+            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
@@ -306,10 +305,10 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
-                Divider(),
                 SizedBox(height: 12),
+                Divider(),
 
+                // SizedBox(height: 12),
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -373,8 +372,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: 336,
-            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+            width: 320,
+            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
@@ -398,9 +397,9 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
-                Divider(),
                 SizedBox(height: 12),
+                Divider(),
+                // SizedBox(height: 12),
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -837,13 +836,9 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           padding: EdgeInsets.only(right: 20),
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              _controller!.pause();
-
-                              context.pop();
-                            },
+                            onTap: () => Navigator.pop(context),
                             child: Image.asset(
-                              Assets.images.screenrotationicon.path,
+                              Assets.images.fullscreenicon.path,
                               width: 24,
                               height: 24,
                             ),

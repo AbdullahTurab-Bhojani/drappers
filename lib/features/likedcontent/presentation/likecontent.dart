@@ -342,7 +342,7 @@ class _LikecontentState extends State<Likecontent>
                   ),
 
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: GridView.builder(
                       padding: EdgeInsets.zero,
                       itemCount: reelimages.length,
@@ -350,13 +350,13 @@ class _LikecontentState extends State<Likecontent>
                         crossAxisCount: 2,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 0.5,
+                        childAspectRatio: 195 / 350, 
                       ),
                       itemBuilder: (context, index) {
                         return ReelcardWidget(
                           assetImagePath: reelimages[index],
                           title: reelTitles[index],
-                          reelCardHeight: 358,
+                          reelCardHeight: 350, 
                           reelCardWidth: 195,
                           fontSizeVariant: PoppinsFontSizeVariant.size14,
                           showSaveIcon: true,
