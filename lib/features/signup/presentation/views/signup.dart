@@ -17,7 +17,7 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  String? _receiveMethod = null;
+  String? _receiveMethod;
 
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -136,9 +136,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       otpController: otpController,
                       fieldbg: AppColors.tfield,
                       labelText: 'Phone Number*',
-                      onSendCode: () {
-                        print("OTP API CALL HERE");
-                      },
+                      onSendCode: () {},
                     ),
                     AppPasswordField(
                       keyboardType: TextInputType.numberWithOptions(),
@@ -214,7 +212,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     const SizedBox(height: 10),
-            
+
                     // Checkbox area
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -224,6 +222,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           height: 14,
                           width: 14,
                           child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+
                             onTap: () => onRememberMeChanged(!rememberMe),
                             child: Container(
                               decoration: BoxDecoration(
@@ -235,9 +235,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               child: rememberMe
                                   ? Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          4,
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                         gradient: const LinearGradient(
                                           colors: [
                                             Color(0xFF1FCFFF),
@@ -266,12 +264,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                   "I agree to the ",
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   color: customColors.textColor,
-                                  fontWeight:
-                                      PoppinsFontWeightVariant.regular,
+                                  fontWeight: PoppinsFontWeightVariant.regular,
                                 ),
                               ),
                               WidgetSpan(
                                 child: GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+
                                   onTap: () {},
                                   child: ShaderMask(
                                     shaderCallback: (bounds) =>
@@ -301,12 +300,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                   " and ",
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   color: customColors.textColor,
-                                  fontWeight:
-                                      PoppinsFontWeightVariant.regular,
+                                  fontWeight: PoppinsFontWeightVariant.regular,
                                 ),
                               ),
                               WidgetSpan(
                                 child: GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+
                                   onTap: () {},
                                   child: ShaderMask(
                                     shaderCallback: (bounds) =>
@@ -336,7 +336,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ],
                     ),
-            
+
                     const SizedBox(height: 20),
                     AppButton(
                       onPressed: () {
@@ -347,7 +347,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       title: "Create Account",
                     ),
                     const SizedBox(height: 25),
-            
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -374,7 +374,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ],
                     ),
-            
+
                     const SizedBox(height: 35),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -411,7 +411,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ],
                     ),
-            
+
                     SizedBox(height: 10),
                     AppButton(
                       onPressed: () {
@@ -421,7 +421,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       buttonGradient: [Color(0xff202020), Color(0xff202020)],
                       color: Color(0xff202020),
                     ),
-            
+
                     SizedBox(height: 28),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -436,10 +436,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ShaderMask(
                           shaderCallback: (bounds) =>
                               LinearGradient(
-                                colors: [
-                                  Color(0xFF1FCFFF),
-                                  Color(0xFF0063FF),
-                                ],
+                                colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
                               ).createShader(
                                 Rect.fromLTWH(
                                   0,
@@ -449,6 +446,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                           child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+
                             onTap: () {
                               context.goNamed(AppRoutes.loginScreen.name);
                             },

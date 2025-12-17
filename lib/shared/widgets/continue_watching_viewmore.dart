@@ -91,9 +91,10 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 20),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
@@ -106,10 +107,10 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            // SizedBox(height: 30),
+            SizedBox(height: 20),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: _podcasts.length,
@@ -118,7 +119,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                     double sliderValue = _podcasts[index]['slider'];
 
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 30),
+                      padding: EdgeInsets.only(bottom: 12),
                       child: IntrinsicHeight(
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -145,7 +146,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                     color: customColors.textColor,
                                     textOverflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(height: 10),
+                                  SizedBox(height: 20),
                                   PoppinsText(
                                     podcast.description,
                                     fontSize: PoppinsFontSizeVariant.size14,
@@ -155,7 +156,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                     maxLines: 2,
                                     textOverflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(height: 10),
+                                  SizedBox(height: 20),
                                   Row(
                                     children: [
                                       Expanded(
@@ -196,7 +197,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 10),
+                                  SizedBox(height: 20),
                                   Row(
                                     children: [
                                       Expanded(
@@ -234,7 +235,6 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                 ),
               ),
             ),
-          
           ],
         ),
       ),

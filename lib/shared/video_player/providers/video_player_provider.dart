@@ -1,11 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:chewie/chewie.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flutter/material.dart';
-
 import '../../../drappers.dart';
-
 part 'video_player_provider.g.dart';
 
 @riverpod

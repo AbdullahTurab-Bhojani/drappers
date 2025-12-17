@@ -37,6 +37,8 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.pop();
                 },
@@ -126,6 +128,8 @@ class RadioTileWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 8),

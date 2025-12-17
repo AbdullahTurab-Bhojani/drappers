@@ -33,9 +33,11 @@ class _TermsconditionState extends State<Termscondition> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding:  EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: 20),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,

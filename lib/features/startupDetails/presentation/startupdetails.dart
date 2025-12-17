@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
@@ -116,6 +118,7 @@ class _StartupdetailsState extends State<Startupdetails> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10),
@@ -132,6 +135,8 @@ class _StartupdetailsState extends State<Startupdetails> {
               elevation: 0,
               actions: [
                 GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+
                   onTap: () {
                     context.pushNamed(AppRoutes.searchscreen.name);
                   },
@@ -167,6 +172,8 @@ class _StartupdetailsState extends State<Startupdetails> {
                   children: [
                     Center(
                       child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+
                         onTap: () {
                           context.pushNamed(AppRoutes.videoScreen.name);
                         },
@@ -182,6 +189,8 @@ class _StartupdetailsState extends State<Startupdetails> {
                       top: 10,
                       right: 10,
                       child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+
                         onTap: () {
                           context.pop();
                         },
@@ -206,7 +215,7 @@ class _StartupdetailsState extends State<Startupdetails> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                // physics: BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: .start,
                   children: [
@@ -428,15 +437,13 @@ class _StartupdetailsState extends State<Startupdetails> {
                             color: customColors.textColor,
                           ),
                           const SizedBox(height: 10),
-                          ...companyInfo
-                              .map(
-                                (info) => _CompanyInfoRow(
-                                  label: info['label']!,
-                                  value: info['value']!,
-                                  customColors: customColors,
-                                ),
-                              )
-                              .toList(),
+                          ...companyInfo.map(
+                            (info) => _CompanyInfoRow(
+                              label: info['label']!,
+                              value: info['value']!,
+                              customColors: customColors,
+                            ),
+                          ),
                           const SizedBox(height: 25),
                           PoppinsText(
                             'About the Startup',
@@ -459,36 +466,41 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 15),
                           Padding(
-                            padding: EdgeInsets.only(bottom: 20),
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
                               onTap: () {
                                 context.pushNamed(AppRoutes.contentDetail.name);
                               },
-                              child: IntrinsicHeight(
-                                child: Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Container(
-                                      width: 120,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            Assets.images.documentaries4.path,
-                                          ),
-                                          fit: BoxFit.cover,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Image Container with fixed height
+                                  Container(
+                                    width: 122,
+                                    height: 200, // ← fixed height for image
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          Assets.images.documentaries4.path,
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
+                                        fit: BoxFit.cover,
                                       ),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
+                                  ),
+                                  const SizedBox(width: 12),
 
-                                    SizedBox(width: 12),
-                                    Expanded(
+                                  // Content Column
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      physics: const BouncingScrollPhysics(),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
                                           PoppinsText(
                                             "Finale – Meet The Drapers Season 07 (2025)",
@@ -499,7 +511,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                             textOverflow: TextOverflow.ellipsis,
                                             maxLines: 2,
                                           ),
-                                          SizedBox(height: 6),
+                                          const SizedBox(height: 20),
                                           PoppinsText(
                                             "Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode, spotlighting visionary startups from across the world. Judges Nikki Farb, TikTok executive Tim Natividad, and legendary investor Bill Draper evaluate groundbreaking innovations in connectivity, accessibility, and education. From CleverFi’s seamless WiFi to Zeality’s immersive AR/VR tech, WeWALK’s smart cane, and Taleemabad’s educational revolution, this episode is a thrilling showcase of entrepreneurial brilliance",
                                             fontSize:
@@ -510,24 +522,24 @@ class _StartupdetailsState extends State<Startupdetails> {
                                             maxLines: 2,
                                             textOverflow: TextOverflow.ellipsis,
                                           ),
-                                          SizedBox(height: 20),
+                                          const SizedBox(height: 20),
+
+                                          // Slider Row
                                           Row(
                                             children: [
                                               Expanded(
                                                 child: SliderTheme(
-                                                  data: SliderTheme.of(context)
-                                                      .copyWith(
-                                                        trackHeight: 3,
-                                                        thumbShape:
-                                                            RoundSliderThumbShape(
-                                                              enabledThumbRadius:
-                                                                  0,
-                                                            ),
-                                                        overlayShape:
-                                                            RoundSliderOverlayShape(
-                                                              overlayRadius: 0,
-                                                            ),
-                                                      ),
+                                                  data: SliderTheme.of(context).copyWith(
+                                                    trackHeight: 3,
+                                                    thumbShape:
+                                                        const RoundSliderThumbShape(
+                                                          enabledThumbRadius: 0,
+                                                        ),
+                                                    overlayShape:
+                                                        const RoundSliderOverlayShape(
+                                                          overlayRadius: 0,
+                                                        ),
+                                                  ),
                                                   child: Slider(
                                                     activeColor: const Color(
                                                       0xFF0072FF,
@@ -558,8 +570,9 @@ class _StartupdetailsState extends State<Startupdetails> {
                                               ),
                                             ],
                                           ),
+                                          const SizedBox(height: 20),
 
-                                          SizedBox(height: 20),
+                                          // Watch Button
                                           Row(
                                             children: [
                                               Expanded(
@@ -572,7 +585,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                                     );
                                                   },
                                                   title: 'Watch Episode',
-                                                  buttonSize: Size(
+                                                  buttonSize: const Size(
                                                     double.infinity,
                                                     40,
                                                   ),
@@ -586,18 +599,13 @@ class _StartupdetailsState extends State<Startupdetails> {
                                                   ),
                                                 ),
                                               ),
-                                              // SizedBox(width: 20),
-                                              // Image.asset(
-                                              //   Assets.images.cancelicon.path,
-                                              //   height: 40,
-                                              // ),
                                             ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),

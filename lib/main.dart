@@ -6,6 +6,14 @@ import 'drappers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  // SystemChrome.setSystemUIOverlayStyle(
+  //   const SystemUiOverlayStyle(
+  //     statusBarColor: Colors.transparent,
+  //     statusBarIconBrightness: Brightness.dark,
+  //     statusBarBrightness: Brightness.light,
+  //   ),
+  // );
+
+  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   runApp(const ProviderScope(child: MyApp()));
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field, deprecated_member_use
+
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,18 +23,11 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   bool _controlsVisible = true;
   bool _isLocked = false;
   bool _showEpisodes = false;
-  bool _isSpeedPopupVisible = false;
-  bool _isQualityPopupVisible = false;
+  final bool _isSpeedPopupVisible = false;
+  final bool _isQualityPopupVisible = false;
   String _selectedQuality = "720p";
 
   String _selectedSpeed = "1x";
-  void _toggleEpisodes() {
-    setState(() {
-      _showEpisodes = !_showEpisodes;
-      _isSpeedPopupVisible = false;
-      _isQualityPopupVisible = false;
-    });
-  }
 
   String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
@@ -47,7 +42,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       "title": "Meet The Drapers Season 6 (2023)",
       "url":
           "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      "image": Assets.images.horizontalThumbnail.path,
+      "image": Assets.images.watchlistcard1.path,
     },
   );
 
@@ -87,22 +82,19 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     showDialog(context: context, builder: (_) => _speedPopup());
   }
 
-  void _videoQuality() {
-    final List<String> qualityOptions = ["4K", "1440p", "1080p", "720p"];
+  Widget _videoQuality(Function(String) onSelected, String selectedQuality) {
+    List<String> videoQualities = ['4k', '1440p', '1080p', '480p'];
 
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
+      onTap: () => Navigator.canPop(context),
+      child: Dialog(
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
             width: 336,
-            padding: const EdgeInsets.only(
-              top: 32,
-              left: 24,
-              right: 24,
-              bottom: 24,
-            ),
+            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
@@ -114,37 +106,66 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PoppinsText(
-                      "Quality",
+                      "Video Quality",
                       fontSize: PoppinsFontSizeVariant.size12,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: AppColors.wDark,
                     ),
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () => Navigator.pop(context),
-                      child: const Icon(Icons.close, color: Colors.white),
+                      child: Icon(Icons.close, color: Colors.white),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                const Divider(),
-                const SizedBox(height: 12),
-                ...qualityOptions.map(
-                  (option) =>
-                      _optionItem(option, _selectedQuality == option, () {
-                        final resolutions = _betterPlayerController
-                            .betterPlayerDataSource
-                            ?.resolutions;
-                        if (resolutions != null &&
-                            resolutions.containsKey(option)) {
-                          setState(() {
-                            _selectedQuality = option;
-                            _betterPlayerController.setResolution(
-                              resolutions[option]!,
-                            );
-                          });
-                        }
+                SizedBox(height: 16),
+                Divider(),
+                SizedBox(height: 12),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: videoQualities.length,
+                  itemBuilder: (context, index) {
+                    final text = videoQualities[index];
+                    final bool isSelected = selectedQuality == text;
+
+                    return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
+                      onTap: () {
+                        onSelected(text);
                         Navigator.pop(context);
-                      }),
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 12,
+                        ),
+                        margin: EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? AppColors.popselectcolor19193F
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (isSelected)
+                              Icon(Icons.check, color: Colors.white, size: 18),
+                            if (isSelected) SizedBox(width: 10),
+                            PoppinsText(
+                              text,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              color: AppColors.wDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -216,36 +237,33 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     });
   }
 
-  void _changeQuality() {
-    showModalBottomSheet(
+  void _openVideoQualityPopup() {
+    showDialog(
       context: context,
-      builder: (_) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: ["360p", "480p", "720p"].map((q) {
-          return ListTile(
-            title: Text(q),
-            onTap: () {
-              _betterPlayerController.setResolution(
-                _betterPlayerController
-                    .betterPlayerDataSource!
-                    .resolutions![q]!,
-              );
-              Navigator.pop(context);
-            },
-          );
-        }).toList(),
-      ),
+      barrierDismissible: true,
+      builder: (context) {
+        return Center(
+          child: Material(
+            color: Colors.transparent,
+            child: _videoQuality((selected) {
+              setState(() {
+                _selectedQuality = selected;
+              });
+            }, _selectedQuality),
+          ),
+        );
+      },
     );
   }
 
-  void _openAudioSubtitlePopup() {
-    final List<String> subtitleOptions = ["Off", "English", "Urdu", "Arabic"];
+  Widget _audioSubtitle() {
+    List<String> audioSubtitles = ['Off', 'English', 'Urdu', 'Arabic'];
 
-    final List<String> audioOptions = ["English"];
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
 
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
+      onTap: () => Navigator.pop(context),
+      child: Dialog(
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
@@ -268,6 +286,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       color: AppColors.wDark,
                     ),
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () => Navigator.pop(context),
                       child: Icon(Icons.close, color: Colors.white),
                     ),
@@ -276,13 +296,54 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                 SizedBox(height: 16),
                 Divider(),
                 SizedBox(height: 12),
-                ...subtitleOptions
-                    .map(
-                      (option) =>
-                          _audioSubtitleOption(option, isSubtitle: true),
-                    )
-                    .toList(),
-                SizedBox(height: 12),
+
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: audioSubtitles.length,
+                  itemBuilder: (context, index) {
+                    final text = audioSubtitles[index];
+                    final bool isSelected = _selectedSubtitle == text;
+
+                    return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
+                      onTap: () {
+                        setState(() {
+                          _selectedSubtitle = text;
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 12,
+                        ),
+                        margin: EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? AppColors.popselectcolor19193F
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (isSelected)
+                              Icon(Icons.check, color: Colors.white, size: 18),
+                            if (isSelected) SizedBox(width: 10),
+                            PoppinsText(
+                              text,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              color: AppColors.wDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -292,62 +353,99 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   }
 
   Widget _speedPopup() {
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      child: Center(
-        child: Container(
-          width: 336,
-          padding: EdgeInsets.only(top: 32, left: 24, right: 24),
-          decoration: BoxDecoration(
-            color: AppColors.dRegular,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  PoppinsText(
-                    "Speed",
-                    fontSize: PoppinsFontSizeVariant.size12,
-                    fontWeight: PoppinsFontWeightVariant.regular,
-                    color: AppColors.wDark,
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(Icons.close, color: Colors.white),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Divider(),
-              SizedBox(height: 12),
-              _speedOption("0.5x"),
-              _speedOption("1x"),
-              _speedOption("1.5x"),
-              _speedOption("2x"),
-            ],
+    List<String> speedList = ['0.25x', '0.5x', '0.75x', 'Normal'];
+    return GestureDetector(
+      onTap: () => Navigator.pop(context),
+      child: Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: Container(
+            width: 336,
+            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+            decoration: BoxDecoration(
+              color: AppColors.dRegular,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PoppinsText(
+                      "Speed",
+                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontWeight: PoppinsFontWeightVariant.regular,
+                      color: AppColors.wDark,
+                    ),
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(Icons.close, color: Colors.white),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Divider(),
+                SizedBox(height: 12),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: speedList.length,
+                  itemBuilder: (context, index) {
+                    final text = speedList[index];
+                    final bool isSelected = _selectedSpeed == text;
+
+                    return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
+                      onTap: () {
+                        setState(() {
+                          _selectedSpeed = text;
+                          _betterPlayerController.setSpeed(
+                            double.parse(text.replaceAll('x', '')),
+                          );
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 12,
+                        ),
+                        margin: EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? AppColors.popselectcolor19193F
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (isSelected)
+                              Icon(Icons.check, color: Colors.white, size: 18),
+
+                            if (isSelected) SizedBox(width: 10),
+
+                            PoppinsText(
+                              text,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              color: AppColors.wDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
-  }
-
-  void _toggleSubtitles() async {
-    final list = _betterPlayerController.betterPlayerSubtitlesSourceList;
-
-    if (list.isEmpty) return;
-
-    final active = _betterPlayerController.betterPlayerSubtitlesSource;
-
-    if (active != null) {
-      await _betterPlayerController.setupSubtitleSource(
-        BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.none),
-      );
-    } else {
-      await _betterPlayerController.setupSubtitleSource(list.first);
-    }
   }
 
   void _playEpisode(int index) {
@@ -361,19 +459,20 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
 
   Widget _buildHorizontalEpisodeItem(Map<String, String> episode, int index) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () {
         _playEpisode(index);
         setState(() => _showEpisodes = false);
       },
       child: Container(
         width: 255,
-        // height: 144,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 144,
+              height: 132,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(8),
@@ -426,6 +525,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       child: Stack(
         children: [
           GestureDetector(
+            behavior: HitTestBehavior.opaque,
+
             onTap: () {
               setState(() {
                 _showEpisodes = false;
@@ -436,6 +537,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+
               onTap: () {},
               onVerticalDragUpdate: (details) {
                 if (details.delta.dy > 5) {
@@ -500,6 +603,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           if (!_isLocked)
             Positioned.fill(
               child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   setState(() => _controlsVisible = !_controlsVisible);
                   if (_controlsVisible) _hideControlsAfterDelay();
@@ -616,7 +721,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           if (!_isLocked)
             Positioned(
               bottom: 20,
-              child: Container(
+              child: SizedBox(
                 width: screenSize.width - 0,
                 child: Column(
                   children: [
@@ -688,12 +793,13 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           "Audio & Subtitles",
                           _openAudioSubtitlePopup,
                         ),
+
                         SizedBox(width: 40),
 
                         _btn(
                           Assets.images.quality.path,
-                          "Quality",
-                          _videoQuality,
+                          "Quality ($_selectedQuality)",
+                          _openVideoQualityPopup,
                         ),
 
                         SizedBox(width: 40),
@@ -713,29 +819,28 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
               top: 36,
               right: 32,
               child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () {
                   setState(() {
                     _isLocked = false;
                   });
                 },
-                child: Container(
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        Assets.images.videolock.path,
-                        width: 15,
-                        height: 15,
-                        fit: BoxFit.contain,
-                      ),
-                      SizedBox(width: 8),
-                      PoppinsText(
-                        "Locked",
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.semiBold,
-                        color: AppColors.wDark,
-                      ),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      Assets.images.videolock.path,
+                      width: 15,
+                      height: 15,
+                      fit: BoxFit.contain,
+                    ),
+                    SizedBox(width: 8),
+                    PoppinsText(
+                      "Locked",
+                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontWeight: PoppinsFontWeightVariant.semiBold,
+                      color: AppColors.wDark,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -771,11 +876,12 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   ),
 
                   GestureDetector(
+                    behavior: HitTestBehavior.opaque,
                     onTap: () => Navigator.pop(context),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 28),
                       child: Image.asset(
-                        Assets.images.cancelicon.path,
+                        Assets.images.crossnewicon.path,
                         width: 30,
                         color: AppColors.white,
                       ),
@@ -791,6 +897,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
 
   Widget _btn(String imagePath, String label, VoidCallback onTap) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Row(
         children: [
@@ -807,153 +914,15 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     );
   }
 
-  Widget _speedOption(String text) {
-    bool isSelected = _selectedSpeed == text;
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedSpeed = text;
-          _betterPlayerController.setSpeed(
-            double.parse(text.replaceAll('x', '')),
-          );
-        });
-        Navigator.pop(context);
+  void _openAudioSubtitlePopup() {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Center(
+          child: Material(color: Colors.transparent, child: _audioSubtitle()),
+        );
       },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        margin: EdgeInsets.only(bottom: 10),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.popselectcolor19193F
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 20,
-              alignment: Alignment.center,
-              child: isSelected
-                  ? Icon(Icons.check, color: Colors.white, size: 20)
-                  : SizedBox.shrink(),
-            ),
-            SizedBox(width: 12),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: PoppinsText(
-                  text,
-                  fontSize: PoppinsFontSizeVariant.size12,
-                  fontWeight: PoppinsFontWeightVariant.regular,
-                  color: AppColors.wDark,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _audioSubtitleOption(String text, {required bool isSubtitle}) {
-    bool isSelected = isSubtitle
-        ? _selectedSubtitle == text
-        : _selectedAudio == text;
-
-    return GestureDetector(
-      onTap: () async {
-        setState(() {
-          if (isSubtitle) {
-            _selectedSubtitle = text;
-          } else {
-            _selectedAudio = text;
-          }
-        });
-
-        if (isSubtitle) {
-          if (text == "Off") {
-            await _betterPlayerController.setupSubtitleSource(
-              BetterPlayerSubtitlesSource(
-                type: BetterPlayerSubtitlesSourceType.none,
-              ),
-            );
-          } else {
-            final subSource = BetterPlayerSubtitlesSource(
-              type: BetterPlayerSubtitlesSourceType.network,
-              name: text,
-              urls: ["https://example.com/${text.toLowerCase()}.vtt"],
-            );
-            await _betterPlayerController.setupSubtitleSource(subSource);
-          }
-        } else {}
-
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        margin: EdgeInsets.only(bottom: 10),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.popselectcolor19193F
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 20,
-              child: isSelected
-                  ? Icon(Icons.check, color: Colors.white, size: 20)
-                  : SizedBox.shrink(),
-            ),
-            SizedBox(width: 12),
-            Expanded(
-              child: PoppinsText(
-                text,
-                fontSize: PoppinsFontSizeVariant.size12,
-                fontWeight: PoppinsFontWeightVariant.regular,
-                color: AppColors.wDark,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _optionItem(String text, bool isSelected, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        margin: EdgeInsets.only(bottom: 10),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.popselectcolor19193F
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 20,
-              child: isSelected
-                  ? Icon(Icons.check, color: Colors.white, size: 20)
-                  : SizedBox.shrink(),
-            ),
-            SizedBox(width: 12),
-            Expanded(
-              child: PoppinsText(
-                text,
-                fontSize: PoppinsFontSizeVariant.size12,
-                fontWeight: PoppinsFontWeightVariant.regular,
-                color: AppColors.wDark,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

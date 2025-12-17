@@ -40,6 +40,8 @@ class _ApplyPitchState extends State<ApplyPitch> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 20),
@@ -199,7 +201,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                         ),
                       ),
                       SizedBox(height: 30),
-                      Container(
+                      SizedBox(
                         height: 45,
                         width: 390,
                         child: AppButton(
@@ -209,7 +211,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                           title: 'Submit',
                         ),
                       ),
-                      SizedBox(height: 50),
+                      SizedBox(height: 30),
                     ],
                   ),
                 ),

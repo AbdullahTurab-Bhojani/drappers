@@ -125,7 +125,9 @@ class _BottomNavigationBarShellState
               final bool isProfileTab = index == _navItems.length - 1;
 
               final isSelected = selectedIndex == index;
-              return InkWell(
+              return GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   _onTap(context, index);
                 },

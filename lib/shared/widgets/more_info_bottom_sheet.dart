@@ -12,7 +12,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Container(
-      padding: EdgeInsets.only(top: 24, left: 16, right: 16, bottom: 24),
+      padding: EdgeInsets.only(top: 24, left: 20, right: 20, bottom: 24),
       decoration: BoxDecoration(
         color: AppColors.dDark,
         borderRadius: BorderRadius.only(
@@ -91,7 +91,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 24,),
+              SizedBox(height: 24),
               PoppinsText(
                 '9:00 - 10:00',
                 fontSize: PoppinsFontSizeVariant.size14,
@@ -103,10 +103,10 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
               ),
-               SizedBox(height: 20,),
-               Divider(),
-               SizedBox(height: 20,),
-                 PoppinsText(
+              SizedBox(height: 20),
+              Divider(),
+              SizedBox(height: 20),
+              PoppinsText(
                 '10:00 - 11:00',
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -117,10 +117,10 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
               ),
-               SizedBox(height: 20,),
-               Divider(),
-               SizedBox(height: 20,),
-                 PoppinsText(
+              SizedBox(height: 20),
+              Divider(),
+              SizedBox(height: 20),
+              PoppinsText(
                 '11:00 - 12:00',
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -131,10 +131,10 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
               ),
-               SizedBox(height: 20,),
-               Divider(),
-               SizedBox(height: 20,),
-                 PoppinsText(
+              SizedBox(height: 20),
+              Divider(),
+              SizedBox(height: 20),
+              PoppinsText(
                 '12:00 - 12:30',
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,

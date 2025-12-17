@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
@@ -24,14 +26,15 @@ class EditWatchlistItemTile extends StatelessWidget {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          InkWell(
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
             onTap: () => onToggle(!isChecked),
             child: Padding(
-              padding: const EdgeInsets.only(right: 12.0),
+              padding: const EdgeInsets.only(right: 12),
               child: Container(
                 width: 20,
                 height: 20,
@@ -52,8 +55,8 @@ class EditWatchlistItemTile extends StatelessWidget {
                     ? const Center(
                         child: Icon(
                           Icons.check,
-                          color: Colors.white,
-                          size: 18.0,
+                          color: AppColors.wDark,
+                          size: 16,
                         ),
                       )
                     : null,
@@ -84,16 +87,16 @@ class EditWatchlistItemTile extends StatelessWidget {
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,
                   color: customColors.textColor,
-                  maxLines: 2,
+                  maxLines: 3,
                   textOverflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 4),
-                PoppinsText(
-                  'Season $year',
-                  fontSize: PoppinsFontSizeVariant.size14,
-                  fontWeight: PoppinsFontWeightVariant.regular,
-                  color: customColors.textColor.withOpacity(0.7),
-                ),
+                // const SizedBox(height: 4),
+                // PoppinsText(
+                //   'Season $year',
+                //   fontSize: PoppinsFontSizeVariant.size14,
+                //   fontWeight: PoppinsFontWeightVariant.regular,
+                //   color: customColors.textColor.withOpacity(0.7),
+                // ),
               ],
             ),
           ),

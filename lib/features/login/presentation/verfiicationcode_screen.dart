@@ -94,6 +94,8 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.go('/forgetpassword');
                 },
@@ -119,22 +121,24 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                 children: List.generate(6, (index) {
                   return SizedBox(
                     width: 56,
-                    child: 
-                    Container(
+                    child: Container(
                       height: 54,
                       alignment: Alignment.center,
                       child: ValueListenableBuilder<TextEditingValue>(
                         valueListenable: _otpControllers[index],
                         builder: (context, value, _) {
                           return TextField(
-                            
                             controller: _otpControllers[index],
                             focusNode: _focusNodes[index],
                             keyboardType: TextInputType.numberWithOptions(),
                             textAlign: TextAlign.center,
                             textAlignVertical: TextAlignVertical.center,
                             maxLength: 1,
-                            style: TextStyle(color: Colors.white, fontSize: 20, height: 1),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              height: 1,
+                            ),
                             decoration: InputDecoration(
                               counterText: '',
                               filled: true,
@@ -142,7 +146,10 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                                   ? AppColors.color101317
                                   : AppColors.color101317,
                               contentPadding: EdgeInsets.zero,
-                              constraints: BoxConstraints(maxHeight: 50, minHeight: 50),
+                              constraints: BoxConstraints(
+                                maxHeight: 50,
+                                minHeight: 50,
+                              ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),

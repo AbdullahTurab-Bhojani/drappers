@@ -5,7 +5,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>Drappers</string>
+		<string>Drapertv</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -26,6 +26,8 @@
 		<true/>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen</string>
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>

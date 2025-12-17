@@ -16,12 +16,12 @@ class _DocumentriescardState extends State<Documentriescard> {
   @override
   Widget build(BuildContext context) {
     List<String> documentries = [
-      Assets.images.documentaries1.path,
-      Assets.images.documentaries2.path,
-      Assets.images.documentaries3.path,
-      Assets.images.documentaries4.path,
-      Assets.images.documentaries5.path,
-      Assets.images.documentaries6.path,
+      Assets.images.documentriesimage1.path,
+      Assets.images.documentriesimage2.path,
+      Assets.images.documentriesimage3.path,
+      Assets.images.documentriesimage4.path,
+      Assets.images.documentriesimage5.path,
+      Assets.images.documentriesimage6.path,
     ];
     return Scaffold(
       body: Container(
@@ -37,6 +37,8 @@ class _DocumentriescardState extends State<Documentriescard> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   Navigator.of(context).pop();
                 },
@@ -57,7 +59,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                 Padding(
                   padding: EdgeInsets.only(right: 16),
                   child: Image.asset(
-                    "assets/images/Searchicon.png",
+                    Assets.images.searchstokeicon.path,
                     width: 20,
                     height: 20,
                   ),
@@ -85,6 +87,8 @@ class _DocumentriescardState extends State<Documentriescard> {
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
@@ -128,6 +132,8 @@ class _DocumentriescardState extends State<Documentriescard> {
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
@@ -152,7 +158,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                       },
                     ),
 
-                    SizedBox(height: 50),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),

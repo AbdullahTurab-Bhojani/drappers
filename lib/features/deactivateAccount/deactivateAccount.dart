@@ -39,15 +39,14 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
             children: [
               AppMainBar(
                 leading: GestureDetector(
-                onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  behavior: HitTestBehavior.opaque,
+
+                  onTap: () => Navigator.of(context).pop(),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
                     height: 20,
                   ),
-                ),
                 ),
                 title: "",
                 centerTitle: false,

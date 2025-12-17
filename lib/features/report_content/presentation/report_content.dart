@@ -77,6 +77,8 @@ class _ReportContentState extends State<ReportContent> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -107,7 +109,7 @@ class _ReportContentState extends State<ReportContent> {
                       fontWeight: PoppinsFontWeightVariant.semiBold,
                       color: customColors.textColor,
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 20),
                     PoppinsText(
                       "Help us improve your experience by sharing what's wrong.",
                       fontSize: PoppinsFontSizeVariant.size16,
@@ -131,6 +133,8 @@ class _ReportContentState extends State<ReportContent> {
                         final item = _reportcontenr[index];
 
                         return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
                           onTap: () {
                             setState(() {
                               for (var i = 0; i < _reportcontenr.length; i++) {
@@ -162,7 +166,7 @@ class _ReportContentState extends State<ReportContent> {
                         },
                         title: "Submit",
                       ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),

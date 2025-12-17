@@ -34,6 +34,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () {
                   Navigator.of(context).pop();
                 },
@@ -54,6 +55,8 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                 Padding(
                   padding: EdgeInsets.only(right: 16),
                   child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+
                     onTap: () {
                       context.pushNamed(AppRoutes.searchscreen.name);
                     },
@@ -99,7 +102,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
-                                          Assets.images.trendingshowimage1.path,
+                                          Assets.images.trendingimage1.path,
                                         ),
                                         fit: BoxFit.fill,
                                       ),
@@ -175,7 +178,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
-                                          Assets.images.trendingshowimage1.path,
+                                          Assets.images.trendingimage1.path,
                                         ),
                                         fit: BoxFit.fill,
                                       ),
@@ -237,10 +240,12 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            InkWell(
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+
                               onTap: () {
                                 context.pushNamed(
-                                  AppRoutes.Startupdetails.name,
+                                  AppRoutes.startupdetails.name,
                                 );
                               },
                               child: Container(
@@ -341,16 +346,18 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                                 color: customColors.greyColor,
                                                 width: 2,
                                               ),
-                                              borderRadius: BorderRadius.circular(
-                                                50,
-                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
                                             ),
                                             child: Center(
                                               child: Row(
                                                 mainAxisAlignment: .center,
                                                 children: [
                                                   Image.asset(
-                                                    Assets.images.hearticon.path,
+                                                    Assets
+                                                        .images
+                                                        .hearticon
+                                                        .path,
                                                     width: 20,
                                                     height: 20,
                                                   ),
@@ -363,8 +370,8 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                                     fontWeight:
                                                         PoppinsFontWeightVariant
                                                             .medium,
-                                                    color:
-                                                        customColors.subtextColor,
+                                                    color: customColors
+                                                        .subtextColor,
                                                   ),
                                                 ],
                                               ),
@@ -390,8 +397,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15),
+                      SizedBox(height: 10),
                     ],
                   ),
                 ),

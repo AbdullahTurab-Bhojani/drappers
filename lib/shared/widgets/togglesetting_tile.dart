@@ -19,19 +19,31 @@ class GradientSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final customColors = Theme.of(context).extension<AppCustomColors>()!;
+    final customColors = Theme.of(context).extension<AppCustomColors>()!;
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () => onChanged(!value),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 250),
         width: 52,
         height: 28,
         padding: EdgeInsets.all(3),
+        // decoration: BoxDecoration(
+        //   borderRadius: BorderRadius.circular(100),
+        //   gradient: value ? LinearGradient(colors: gradientColors) : null,
+        //   color: value ? null : customColors.white0xffbdbdbe,
+        // ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-          gradient: value ? LinearGradient(colors: gradientColors) : null,
-          color: value ? null : customColors.white0xffbdbdbe,
-        ),
+  borderRadius: BorderRadius.circular(100),
+  gradient: LinearGradient(
+    colors: value
+        ? gradientColors
+        : gradientColors
+            .map((c) => c.withOpacity(0.3))
+            .toList(),
+  ),
+),
         child: AnimatedAlign(
           duration: Duration(milliseconds: 250),
           alignment: value ? Alignment.centerRight : Alignment.centerLeft,

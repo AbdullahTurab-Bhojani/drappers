@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +21,7 @@ enum AccountOption { deactivate, delete }
 
 class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
   final TextEditingController _controller = TextEditingController();
-  int _charCount = 0;
+  final int _charCount = 0;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -41,6 +43,8 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),

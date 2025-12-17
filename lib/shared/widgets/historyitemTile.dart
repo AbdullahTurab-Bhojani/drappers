@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
@@ -21,10 +23,12 @@ class HistoryItemTile extends StatelessWidget {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return InkWell(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: onTapTile,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
+        padding: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -38,8 +42,8 @@ class HistoryItemTile extends StatelessWidget {
             Expanded(
               child: PoppinsText(
                 title,
-                fontSize: PoppinsFontSizeVariant.size16,
-                fontWeight: PoppinsFontWeightVariant.medium,
+                fontSize: PoppinsFontSizeVariant.size14,
+                fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
                 maxLines: 1,
                 textOverflow: TextOverflow.ellipsis,
@@ -58,7 +62,9 @@ class HistoryItemTile extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 15),
-            InkWell(
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+
               onTap: onTapRemove,
               child: Image.asset(
                 "assets/images/cuticon3x.png",

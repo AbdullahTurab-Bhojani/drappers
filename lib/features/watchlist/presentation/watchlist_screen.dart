@@ -16,22 +16,22 @@ class WatchlistData {
 
 final List<WatchlistData> dummyWatchlist = [
   WatchlistData(
-    Assets.images.horizontalThumbnail.path,
+    Assets.images.watchlistcard1.path,
     'Finale – Meet The Drapers Season 07',
     '2025',
   ),
   WatchlistData(
-    Assets.images.horizontalThumbnail2.path,
+    Assets.images.watchlistcard2.path,
     'Semifinals 2 – Meet The Drapers Season 6',
     '2024',
   ),
   WatchlistData(
-    Assets.images.horizontalThumbnail3.path,
+    Assets.images.watchlistcard3.path,
     'Semifinals 1 – Meet The Drapers Season 6',
     '2023',
   ),
   WatchlistData(
-    Assets.images.horizontalThumbnail4.path,
+    Assets.images.watchlistcard4.path,
     'Sri Sri University – Meet The Drapers Season 6',
     '2023',
   ),
@@ -44,61 +44,80 @@ class WatchlistScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
-          ),
+    bool canExit = false;
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        if (!canExit) {
+          canExit = true;
+          return false;
+        }
 
-          Column(
-            children: [
-              AppMainBar(
-                leadingText: "Watchlist",
-                width: 150,
-                title: "",
-                centerTitle: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                actions: [
-                  InkWell(
-                    onTap: () {
-                      context.pushNamed(AppRoutes.EditWatchlistScreen.name);
-                    },
-                    child: PoppinsText(
-                      "Edit",
-                      fontSize: PoppinsFontSizeVariant.size14,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                ],
+        return true;
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                Assets.images.screensbg.path,
+                fit: BoxFit.cover,
               ),
+            ),
 
-              Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: dummyWatchlist.length,
-                  itemBuilder: (context, index) {
-                    final item = dummyWatchlist[index];
-                    return GestureDetector(
+            Column(
+              children: [
+                AppMainBar(
+                  leadingText: "Watchlist",
+                  width: 150,
+                  title: "",
+                  centerTitle: false,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  actions: [
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       onTap: () {
-                        context.pushNamed(AppRoutes.contentDetail.name);
+                        context.pushNamed(AppRoutes.editWatchlistScreen.name);
                       },
-                      child: WatchlistItemTile(
-                        thumbnailPath: item.thumbnailPath,
-                        title: item.title,
-                        year: item.year,
-                        onTapPlay: () {},
+                      child: PoppinsText(
+                        "Edit",
+                        fontSize: PoppinsFontSizeVariant.size14,
+                        fontWeight: PoppinsFontWeightVariant.medium,
+                        color: customColors.textColor,
                       ),
-                    );
-                  },
+                    ),
+                    SizedBox(width: 20),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ],
+
+                Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: dummyWatchlist.length,
+                    itemBuilder: (context, index) {
+                      final item = dummyWatchlist[index];
+                      return GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+
+                        onTap: () {
+                          context.pushNamed(AppRoutes.contentDetail.name);
+                        },
+                        child: WatchlistItemTile(
+                          thumbnailPath: item.thumbnailPath,
+                          title: item.title,
+                          year: item.year,
+                          onTapPlay: () {},
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

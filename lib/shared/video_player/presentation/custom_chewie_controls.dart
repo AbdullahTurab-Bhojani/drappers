@@ -66,6 +66,8 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
         _cancelAndRestartTimer();
       },
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+
         onTap: () => _cancelAndRestartTimer(),
         child: AbsorbPointer(
           absorbing: notifier!.hideStuff,
@@ -143,33 +145,31 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
     return Positioned(
       top: 0,
       right: 0,
-      child: SafeArea(
-        child: AnimatedOpacity(
-          opacity: notifier!.hideStuff ? 0.0 : 1.0,
-          duration: const Duration(milliseconds: 250),
-          child: SizedBox(
-            height: 50,
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: chewieController.isFullScreen && !isPortrait ? 60 : 20,
-                ),
-                if (context.isMobile && chewieController.isFullScreen)
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Assets.icons.arrowLeft.image(
-                      scale: 4,
-                      color: Colors.white,
-                    ),
+      child: AnimatedOpacity(
+        opacity: notifier!.hideStuff ? 0.0 : 1.0,
+        duration: const Duration(milliseconds: 250),
+        child: SizedBox(
+          height: 50,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              SizedBox(
+                width: chewieController.isFullScreen && !isPortrait ? 60 : 20,
+              ),
+              if (context.isMobile && chewieController.isFullScreen)
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Assets.icons.arrowLeft.image(
+                    scale: 4,
+                    color: Colors.white,
                   ),
-                Spacer(),
-                _buildSubtitleToggle(),
-                if (chewieController.showOptions) _buildOptionsButton(),
-              ],
-            ),
+                ),
+              Spacer(),
+              _buildSubtitleToggle(),
+              if (chewieController.showOptions) _buildOptionsButton(),
+            ],
           ),
         ),
       ),
@@ -307,34 +307,29 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
           right: 20,
           bottom: !chewieController.isFullScreen ? 10.0 : 20,
         ),
-        child: SafeArea(
-          top: false,
-          bottom: chewieController.isFullScreen,
-          minimum: chewieController.controlsSafeAreaMinimum,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (!chewieController.isLive)
-                Expanded(child: Row(children: [_buildProgressBar()])),
-              SizedBox(height: chewieController.isFullScreen ? 15.0 : 5),
-              Flexible(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    if (chewieController.isLive)
-                      const Expanded(child: Text('LIVE'))
-                    else
-                      _buildPosition(iconColor),
-                    if (chewieController.allowMuting)
-                      _buildMuteButton(controller),
-                    const Spacer(),
-                    if (chewieController.allowFullScreen) _buildExpandButton(),
-                  ],
-                ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (!chewieController.isLive)
+              Expanded(child: Row(children: [_buildProgressBar()])),
+            SizedBox(height: chewieController.isFullScreen ? 15.0 : 5),
+            Flexible(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  if (chewieController.isLive)
+                    const Expanded(child: Text('LIVE'))
+                  else
+                    _buildPosition(iconColor),
+                  if (chewieController.allowMuting)
+                    _buildMuteButton(controller),
+                  const Spacer(),
+                  if (chewieController.allowFullScreen) _buildExpandButton(),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -342,6 +337,8 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
 
   GestureDetector _buildMuteButton(VideoPlayerController controller) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () {
         _cancelAndRestartTimer();
 
@@ -450,6 +447,8 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
     final bool showPlayButton =
         widget.showPlayButton && !_dragging && !notifier!.hideStuff;
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () {
         if (_latestValue!.isPlaying) {
           if (chewieController.pauseOnBackgroundTap) {
@@ -589,6 +588,8 @@ class _CustomChewieControlsState extends ConsumerState<CustomChewieControls>
       return const SizedBox();
     }
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: _onSubtitleTap,
       child: Container(
         height: barHeight,

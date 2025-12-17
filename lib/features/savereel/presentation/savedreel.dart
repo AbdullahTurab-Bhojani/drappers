@@ -43,6 +43,8 @@ class _SavedreelState extends State<Savedreel> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   Navigator.of(context).pop();
                 },
@@ -72,7 +74,7 @@ class _SavedreelState extends State<Savedreel> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
+                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: reelimages.length,

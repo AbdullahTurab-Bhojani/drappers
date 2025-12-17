@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
-import '../../../gen/assets.gen.dart';
+import '../guestloginwidget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class CardWidget extends StatefulWidget {
@@ -24,7 +24,13 @@ class _CardWidgetState extends State<CardWidget> {
     bool isNetworkImage = widget.assetImage.startsWith('http');
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
       onTap: () {
+        // if (GuestHelper.isGuest) {
+        //   GuestHelper.checkGuest(context);
+        //   return;
+        // }
         context.pushNamed(AppRoutes.contentDetail.name);
       },
       child: Container(

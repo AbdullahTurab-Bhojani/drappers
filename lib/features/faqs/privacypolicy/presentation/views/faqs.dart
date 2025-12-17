@@ -94,6 +94,8 @@ class _FaqsScreenState extends State<FaqsScreen> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 20),

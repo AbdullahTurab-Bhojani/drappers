@@ -32,9 +32,11 @@ class _NotificationSettingState extends State<NotificationSetting> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 20),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
@@ -49,7 +51,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
             ),
             SizedBox(height: 30),
             ToggleSettingTile(
-              image: AssetImage(Assets.images.notificationsfillicon.path,),
+              image: AssetImage(Assets.images.notificationsfillicon.path),
               titleText: "Push Notifications",
               subtitleText: "Receive notifications on your device",
               initialValue: _autoplayNextEpisode,
@@ -61,7 +63,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
             ),
             SizedBox(height: 10),
             ToggleSettingTile(
-              image: AssetImage(Assets.images.envelopeicon.path,),
+              image: AssetImage(Assets.images.envelopeicon.path),
               titleText: "Email Notifications",
               subtitleText: "Get updates via email",
               initialValue: _autoplayNextEpisode,
@@ -86,7 +88,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
             ),
             SizedBox(height: 20),
             ToggleSettingTile(
-              image: AssetImage(Assets.images.playnewicon.path,),
+              image: AssetImage(Assets.images.playnewicon.path),
               titleText: "New Episode",
               subtitleText: "When new episodes are available",
               initialValue: _autoplayNextEpisode,
@@ -98,7 +100,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
             ),
             SizedBox(height: 10),
             ToggleSettingTile(
-              image: AssetImage(Assets.images.bellringicon.path,),
+              image: AssetImage(Assets.images.bellringicon.path),
               titleText: "Watch Reminders",
               subtitleText: "Reminders for saved content",
               initialValue: _autoplayNextEpisode,
@@ -123,7 +125,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
             ),
             SizedBox(height: 20),
             ToggleSettingTile(
-              image: AssetImage(Assets.images.gifticon.path,),
+              image: AssetImage(Assets.images.gifticon.path),
               titleText: "Promotions & Offers",
               subtitleText: "Special deals and discounts",
               initialValue: _autoplayNextEpisode,

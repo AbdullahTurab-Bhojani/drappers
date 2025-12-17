@@ -16,11 +16,11 @@ class _ReelWidgetState extends State<ReelWidget> {
   @override
   Widget build(BuildContext context) {
     List<String> reelimages = [
-      Assets.images.reelimage1.path,
-      Assets.images.reelimage2.path,
-      Assets.images.reelimage3.path,
-      Assets.images.reelimage4.path,
-      Assets.images.reelimage5.path,
+      Assets.images.reel1.path,
+      Assets.images.reel2.path,
+      Assets.images.reel3.path,
+      Assets.images.reel4.path,
+      Assets.images.reel5.path,
     ];
     List<String> reelTitles = [
       'Rio De Janeiro - Meet The Drappers',
@@ -44,6 +44,8 @@ class _ReelWidgetState extends State<ReelWidget> {
           children: [
             AppMainBar(
               leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
                 onTap: () {
                   context.pop();
                 },
@@ -64,7 +66,7 @@ class _ReelWidgetState extends State<ReelWidget> {
                 Padding(
                   padding: EdgeInsets.only(right: 16),
                   child: Image.asset(
-                    "assets/images/Searchicon.png",
+                    Assets.images.searchstokeicon.path, 
                     width: 20,
                     height: 20,
                   ),

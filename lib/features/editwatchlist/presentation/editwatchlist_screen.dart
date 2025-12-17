@@ -63,25 +63,10 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
     });
   }
 
-  void _onDeleteSelected() {
-    if (selectedCount == 0) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${selectedCount} items removed from watchlist.')),
-    );
-
-    setState(() {
-      watchlistItems.removeWhere((item) => item.isSelected);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-
-    final isRemoveEnabled = selectedCount > 0;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -99,7 +84,9 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 actions: [
-                  InkWell(
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+
                     onTap: () => context.pop(),
                     child: PoppinsText(
                       "Cancel",
@@ -139,7 +126,9 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
             child: selectedCount > 0
                 ? Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: InkWell(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
                       child: AppButton(
                         buttonSize: Size(400, 40),
                         color: customColors.redshade,
@@ -161,7 +150,6 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
                     ),
                   )
                 : SizedBox.shrink(),
-
           ),
         ],
       ),

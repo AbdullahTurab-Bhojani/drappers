@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
-import '../presentation/report_content.dart';
 
 class ReportContentWidget extends StatefulWidget {
   final String title;
