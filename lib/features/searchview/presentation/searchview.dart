@@ -63,7 +63,7 @@ class SearchviewState extends State<Searchview> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomInset: true,
       body: Container(
         width: double.infinity,
         height: double.infinity,
