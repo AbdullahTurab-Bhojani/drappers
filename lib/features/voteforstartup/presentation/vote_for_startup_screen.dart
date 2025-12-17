@@ -158,7 +158,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: 17),
 
                       Container(
                         width: double.infinity,
@@ -233,7 +233,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: 17),
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -407,7 +407,6 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                           ],
                         ),
                       ),
-
                       SizedBox(height: 10),
                     ],
                   ),
