@@ -110,7 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: SafeArea(
               top: false,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
+                padding: const EdgeInsets.fromLTRB(20, 24, 20, 100),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
