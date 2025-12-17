@@ -155,7 +155,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: 17),
 
                       Container(
                         width: double.infinity,
@@ -230,7 +230,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: 17),
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -336,40 +336,45 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                           buttonSize: Size(175, 52),
                                           suffixIcon: SizedBox(),
                                         ),
-                                        Container(
-                                          width: 148,
-                                          height: 52,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: customColors.greyColor,
-                                              width: 2,
+                                        SizedBox(width: 10),
+                                        Expanded(
+                                          child: Container(
+                                            width: 148,
+                                            height: 52,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: customColors.greyColor,
+                                                width: 2,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
                                             ),
-                                            borderRadius: BorderRadius.circular(
-                                              50,
-                                            ),
-                                          ),
-                                          child: Center(
-                                            child: Row(
-                                              mainAxisAlignment: .center,
-                                              children: [
-                                                Image.asset(
-                                                  Assets.images.hearticon.path,
-                                                  width: 20,
-                                                  height: 20,
-                                                ),
-                                                SizedBox(width: 8),
-                                                PoppinsText(
-                                                  'Vote',
-                                                  fontSize:
-                                                      PoppinsFontSizeVariant
-                                                          .size16,
-                                                  fontWeight:
-                                                      PoppinsFontWeightVariant
-                                                          .medium,
-                                                  color:
-                                                      customColors.subtextColor,
-                                                ),
-                                              ],
+                                            child: Center(
+                                              child: Row(
+                                                mainAxisAlignment: .center,
+                                                children: [
+                                                  Image.asset(
+                                                    Assets
+                                                        .images
+                                                        .hearticon
+                                                        .path,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                  SizedBox(width: 8),
+                                                  PoppinsText(
+                                                    'Vote',
+                                                    fontSize:
+                                                        PoppinsFontSizeVariant
+                                                            .size16,
+                                                    fontWeight:
+                                                        PoppinsFontWeightVariant
+                                                            .medium,
+                                                    color: customColors
+                                                        .subtextColor,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -392,7 +397,6 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                           ],
                         ),
                       ),
-
                       SizedBox(height: 10),
                     ],
                   ),

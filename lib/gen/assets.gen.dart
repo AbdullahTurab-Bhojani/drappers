@@ -327,6 +327,10 @@ class $AssetsImagesGen {
   AssetGenImage get bellringicon =>
       const AssetGenImage('assets/images/bellringicon.png');
 
+  /// File path: assets/images/calendar786.png
+  AssetGenImage get calendar786 =>
+      const AssetGenImage('assets/images/calendar786.png');
+
   /// File path: assets/images/callicon.png
   AssetGenImage get callicon =>
       const AssetGenImage('assets/images/callicon.png');
@@ -961,6 +965,7 @@ class $AssetsImagesGen {
     banner1,
     banner2,
     bellringicon,
+    calendar786,
     callicon,
     cancelicon,
     cardimage,

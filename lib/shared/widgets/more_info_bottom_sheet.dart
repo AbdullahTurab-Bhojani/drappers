@@ -26,29 +26,32 @@ class MoreInfoBottomSheet extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 24),
-
-              PoppinsText(
-                "4 Nov 2025",
-                color: customColors.textColor,
-                fontSize: PoppinsFontSizeVariant.size16,
-                fontWeight: PoppinsFontWeightVariant.medium,
+              SizedBox(width: 20),
+              Row(
+                children: [
+                  Icon(Icons.arrow_back_ios, size: 20),
+                  PoppinsText(
+                    "4 Nov 2025",
+                    color: customColors.textColor,
+                    fontSize: PoppinsFontSizeVariant.size16,
+                    fontWeight: PoppinsFontWeightVariant.medium,
+                  ),
+                ],
               ),
-
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => Navigator.pop(context),
-                child: Icon(
-                  Icons.close,
-                  color: customColors.textColor,
-                  size: 20,
+              Container(
+                margin: EdgeInsets.only(right: 5),
+                child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Icon(
+                    Icons.close,
+                    color: customColors.textColor,
+                    size: 20,
+                  ),
                 ),
               ),
             ],
           ),
-
-          SizedBox(height: 18),
-
+          SizedBox(height: 17),
           Container(
             decoration: BoxDecoration(
               color: Color(0xff19193E),
@@ -72,14 +75,14 @@ class MoreInfoBottomSheet extends StatelessWidget {
               ),
             ),
           ),
-
-          SizedBox(height: 16),
+          SizedBox(height: 17),
           Column(
             crossAxisAlignment: .start,
             children: [
               Row(
                 children: [
-                  Image.asset(Assets.images.commenticon.path),
+                  Image.asset(Assets.images.calendar786.path,
+                  height: 16, width: 16),
                   SizedBox(width: 12),
                   PoppinsText(
                     'Coming up Next',
@@ -94,7 +97,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
               ),
-              SizedBox(height: 16),
+               SizedBox(height: 16),
               PoppinsText(
                 'Meet the Drapers S1 E1',
                 fontSize: PoppinsFontSizeVariant.size16,
@@ -108,8 +111,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
               ),
-              SizedBox(height: 16),
-
+               SizedBox(height: 16),
               PoppinsText(
                 'Meet the Drapers S1 E2',
                 fontSize: PoppinsFontSizeVariant.size16,
@@ -123,8 +125,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
               ),
-              SizedBox(height: 16),
-
+               SizedBox(height: 16),
               PoppinsText(
                 'Meet the Drapers S1 E3',
                 fontSize: PoppinsFontSizeVariant.size16,
@@ -138,8 +139,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,
               ),
-              SizedBox(height: 16),
-
+               SizedBox(height: 16),
               PoppinsText(
                 'Meet the Drapers S1 E4',
                 fontSize: PoppinsFontSizeVariant.size16,
@@ -147,7 +147,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
               ),
             ],
           ),
-
+          // SizedBox(height: 10),
         ],
       ),
     );
