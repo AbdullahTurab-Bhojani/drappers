@@ -29,7 +29,7 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
 
     final otp = _otpControllers.map((c) => c.text).join();
     if (otp.length == 6) {
-      context.goNamed(AppRoutes.updatepasswordScreen.name);
+      context.pushNamed(AppRoutes.updatepasswordScreen.name);
     }
   }
 

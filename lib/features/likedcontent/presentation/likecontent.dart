@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -272,9 +274,8 @@ class _LikecontentState extends State<Likecontent>
                               ),
                             ),
                             AppButton(
-                              buttonSize: Size(90, 25),
+                              buttonSize: Size(80, 25),
                               color: Colors.transparent,
-                              // ignore: deprecated_member_use
                               borderColor: customColors.textColor.withOpacity(
                                 0.5,
                               ),

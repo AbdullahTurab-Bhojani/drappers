@@ -235,7 +235,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                               ),
                             ),
                             AppButton(
-                              buttonSize: Size(90, 25),
+                              buttonSize: Size(80, 25),
                               color: Colors.transparent,
                               borderColor: customColors.textColor.withOpacity(
                                 0.5,
@@ -245,7 +245,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                               fontWeight: PoppinsFontWeightVariant.regular,
                               border: true,
                               onPressed: () {
-                                context.goNamed(AppRoutes.trendingshow.name);
+                                context.pushNamed(AppRoutes.trendingshow.name);
                               },
                               title: "View More",
                             ),
@@ -291,7 +291,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                               ),
                             ),
                             AppButton(
-                              buttonSize: Size(90, 25),
+                              buttonSize: Size(80, 25),
                               color: Colors.transparent,
                               borderColor: customColors.textColor.withOpacity(
                                 0.5,

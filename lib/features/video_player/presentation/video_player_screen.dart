@@ -3,9 +3,11 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 
 class CustomVideoPlayerScreen extends StatefulWidget {
   const CustomVideoPlayerScreen({super.key});
@@ -211,15 +213,26 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       betterPlayerDataSource: source,
     );
 
-    Future.delayed(const Duration(seconds: 1), () async {
-      if (_betterPlayerController.betterPlayerSubtitlesSourceList.isNotEmpty) {
-        await _betterPlayerController.setupSubtitleSource(
-          _betterPlayerController.betterPlayerSubtitlesSourceList.first,
-        );
+    // 👇 Add listener to hide controls when playing
+    _betterPlayerController.addEventsListener((event) {
+      if (!mounted) return;
+
+      if (event.betterPlayerEventType == BetterPlayerEventType.play) {
+        // Video started → hide controls after 3 sec
+        Future.delayed(const Duration(seconds: 3), () {
+          if (mounted && _betterPlayerController.isPlaying() == true) {
+            setState(() {
+              _controlsVisible = false;
+            });
+          }
+        });
+      } else if (event.betterPlayerEventType == BetterPlayerEventType.pause) {
+        // Video paused → show controls
+        setState(() {
+          _controlsVisible = true;
+        });
       }
     });
-
-    _hideControlsAfterDelay();
   }
 
   void _hideControlsAfterDelay() {
@@ -692,9 +705,12 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       size: 90,
                     ),
                     onPressed: () {
-                      _betterPlayerController.isPlaying()!
-                          ? _betterPlayerController.pause()
-                          : _betterPlayerController.play();
+                      if (_betterPlayerController.isPlaying() == true) {
+                        _betterPlayerController.pause();
+                      } else {
+                        _betterPlayerController.play();
+                      }
+                      setState(() {});
                     },
                   ),
                   SizedBox(width: 40),
@@ -770,43 +786,69 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       ),
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _btn(
-                          Assets.images.speed.path,
-                          "Speed ($_selectedSpeed)",
-                          _changeSpeed,
+                        Spacer(), // Left side space to push buttons to center
+
+                        Row(
+                          mainAxisSize: MainAxisSize
+                              .min, // Buttons ka row sirf jitni width chahiye utni hi le
+                          children: [
+                            _btn(
+                              Assets.images.speed.path,
+                              "Speed ($_selectedSpeed)",
+                              _changeSpeed,
+                            ),
+                            SizedBox(width: 40),
+                            _btn(
+                              Assets.images.videolock.path,
+                              "Lock",
+                              _toggleLock,
+                            ),
+                            SizedBox(width: 40),
+                            _btn(Assets.images.episode.path, "Episodes", () {
+                              setState(() => _showEpisodes = !_showEpisodes);
+                            }),
+                            SizedBox(width: 40),
+                            _btn(
+                              Assets.images.audioSubtitles.path,
+                              "Audio & Subtitles",
+                              _openAudioSubtitlePopup,
+                            ),
+                            SizedBox(width: 40),
+                            _btn(
+                              Assets.images.quality.path,
+                              "Quality ($_selectedQuality)",
+                              _openVideoQualityPopup,
+                            ),
+                            SizedBox(width: 40),
+                            _btn(
+                              Assets.images.nextepisode.path,
+                              "Next Ep.",
+                              () {
+                                if (episodesData.length > 1) _playEpisode(1);
+                              },
+                            ),
+                          ],
                         ),
 
-                        SizedBox(width: 40),
+                        Spacer(),
 
-                        _btn(Assets.images.videolock.path, "Lock", _toggleLock),
-                        SizedBox(width: 40),
+                        Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              _controller!.pause();
 
-                        _btn(Assets.images.episode.path, "Episodes", () {
-                          setState(() => _showEpisodes = !_showEpisodes);
-                        }),
-                        SizedBox(width: 40),
-
-                        _btn(
-                          Assets.images.audioSubtitles.path,
-                          "Audio & Subtitles",
-                          _openAudioSubtitlePopup,
+                              context.pop();
+                            },
+                            child: Image.asset(
+                              Assets.images.screenrotationicon.path,
+                              width: 24,
+                              height: 24,
+                            ),
+                          ),
                         ),
-
-                        SizedBox(width: 40),
-
-                        _btn(
-                          Assets.images.quality.path,
-                          "Quality ($_selectedQuality)",
-                          _openVideoQualityPopup,
-                        ),
-
-                        SizedBox(width: 40),
-
-                        _btn(Assets.images.nextepisode.path, "Next Ep.", () {
-                          if (episodesData.length > 1) _playEpisode(1);
-                        }),
                       ],
                     ),
                   ],

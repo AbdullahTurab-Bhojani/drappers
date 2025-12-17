@@ -89,10 +89,9 @@ class _BottomNavigationBarShellState
       GuestHelper.checkGuest(context);
       return;
     }
-
+    setState(() {
     selectedIndex = index;
-    setState(() {});
-
+    });
     final path = _navItems[index]['path'];
     if (path.isNotEmpty) {
       context.goNamed(path);
@@ -106,66 +105,69 @@ class _BottomNavigationBarShellState
       canPop: false,
       child: Scaffold(
         backgroundColor: customColors.dark,
-        body: Container(child: widget.child),
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(vertical: 15),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromRGBO(0, 12, 29, 1),
-                Color.fromRGBO(2, 37, 88, 1),
-              ],
-              begin: AlignmentGeometry.topCenter,
-              end: AlignmentGeometry.bottomCenter,
+        body: SafeArea(
+          top: true,
+          child: Container(child: widget.child)),
+        bottomNavigationBar: SafeArea(
+          bottom: true,
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromRGBO(0, 12, 29, 1),
+                  Color.fromRGBO(2, 37, 88, 1),
+                ],
+                begin: AlignmentGeometry.topCenter,
+                end: AlignmentGeometry.bottomCenter,
+              ),
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(_navItems.length, (index) {
-              final bool isProfileTab = index == _navItems.length - 1;
-
-              final isSelected = selectedIndex == index;
-              return GestureDetector(
-                behavior: HitTestBehavior.opaque,
-
-                onTap: () {
-                  _onTap(context, index);
-                },
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (isProfileTab)
-                      CircleAvatar(
-                        radius: isSelected ? 15 : 15,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(
-                          'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                        ),
-                      )
-                    else
-                      isSelected
-                          ? Image(
-                              image: AssetImage(_navItems[index]['icon']),
-                              height: 24,
-                            )
-                          : Image(
-                              image: AssetImage(_navItems[index]['icon2']),
-                              height: 24,
-                            ),
-
-                    const SizedBox(height: 4),
-
-                    PoppinsText(
-                      _navItems[index]['label'],
-                      fontSize: PoppinsFontSizeVariant.size14,
-                      color: isSelected
-                          ? customColors.textColor
-                          : customColors.greyColor,
-                    ),
-                  ],
-                ),
-              );
-            }),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(_navItems.length, (index) {
+                final bool isProfileTab = index == _navItems.length - 1;
+                final isSelected = selectedIndex == index;
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    _onTap(context, index);
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (isProfileTab)
+                        CircleAvatar(
+                          radius: isSelected ? 15 : 15,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: NetworkImage(
+                            'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                          ),
+                        )
+                      else
+                        isSelected
+                            ? Image(
+                                image: AssetImage(_navItems[index]['icon']),
+                                height: 24,
+                              )
+                            : Image(
+                                image: AssetImage(_navItems[index]['icon2']),
+                                height: 24,
+                              ),
+          
+                      const SizedBox(height: 4),
+          
+                      PoppinsText(
+                        _navItems[index]['label'],
+                        fontSize: PoppinsFontSizeVariant.size14,
+                        color: isSelected
+                            ? customColors.textColor
+                            : customColors.greyColor,
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ),
           ),
         ),
       ),

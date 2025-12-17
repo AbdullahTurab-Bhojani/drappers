@@ -48,7 +48,7 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
               Navigator.pop(context);
 
               Future.microtask(() {
-                context.goNamed(AppRoutes.loginScreen.name);
+                context.pushNamed(AppRoutes.loginScreen.name);
               });
             },
             title: "Sign Out",

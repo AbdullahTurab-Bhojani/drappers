@@ -9,7 +9,7 @@ class GuestHelper {
   static void checkGuest(BuildContext context) {
     if (isGuest) {
       isGuest = false;
-      context.goNamed(AppRoutes.loginScreen.name);
+      context.pushNamed(AppRoutes.loginScreen.name);
     }
   }
 }

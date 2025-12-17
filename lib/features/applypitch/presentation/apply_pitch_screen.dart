@@ -206,7 +206,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                         width: 390,
                         child: AppButton(
                           onPressed: () {
-                            context.goNamed(AppRoutes.home.name);
+                            context.pushNamed(AppRoutes.home.name);
                           },
                           title: 'Submit',
                         ),

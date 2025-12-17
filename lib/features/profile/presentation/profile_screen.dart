@@ -161,7 +161,7 @@ class ProfileScreen extends StatelessWidget {
                                     color: customColors.textColor,
                                   ),
                                   AppButton(
-                                    buttonSize: Size(90, 25),
+                                    buttonSize: Size(80, 25),
                                     color: Colors.transparent,
                                     borderColor: customColors.textColor
                                         .withOpacity(0.5),
@@ -220,7 +220,7 @@ class ProfileScreen extends StatelessWidget {
                                     color: customColors.textColor,
                                   ),
                                   AppButton(
-                                    buttonSize: Size(90, 25),
+                                    buttonSize: Size(80, 25),
                                     color: Colors.transparent,
                                     borderColor: customColors.textColor
                                         .withOpacity(0.5),

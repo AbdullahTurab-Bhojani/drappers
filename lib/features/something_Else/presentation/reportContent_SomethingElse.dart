@@ -156,7 +156,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                     SizedBox(height: 30),
                     AppButton(
                       onPressed: () {
-                        context.goNamed(AppRoutes.home.name);
+                        context.pushNamed(AppRoutes.home.name);
                       },
                       title: "Submit",
                     ),

@@ -29,15 +29,20 @@ class VideosBoxWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: 122,
-              height: 173,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(podcast.imagePath),
-                  fit: BoxFit.cover,
+            GestureDetector(
+              onTap: () {
+                context.pushNamed(AppRoutes.contentDetail.name);
+              },
+              child: Container(
+                width: 122,
+                height: 173,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(podcast.imagePath),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                borderRadius: BorderRadius.circular(8),
               ),
             ),
             const SizedBox(width: 12),
@@ -116,9 +121,9 @@ class VideosBoxWidget extends StatelessWidget {
                       const SizedBox(width: 20),
                       Image.asset(
                         Assets.images.crossnewicon.path,
-                      //  scale: 1,
-                      width: 24,
-                      height: 24,
+                        //  scale: 1,
+                        width: 24,
+                        height: 24,
                       ),
                     ],
                   ),
