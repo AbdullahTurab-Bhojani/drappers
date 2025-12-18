@@ -78,8 +78,9 @@ class _ReportContentState extends State<ReportContent> {
             AppMainBar(
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
-                onTap: () => Navigator.of(context).pop(),
+                onTap: () {
+                  context.pop();
+                },
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Image.asset(

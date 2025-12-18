@@ -1,8 +1,11 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -19,20 +22,23 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   bool _isLocked = false;
   String? _selectedSubtitle;
   String? _selectedAudio;
-  bool _controlsVisible = true;
+  bool _controlsVisible = false;
   bool _showEpisodes = false;
   bool _isSpeedPopupVisible = false;
+  File? videoFile;
+
+  bool showLoader = false;
   void _changeSpeed() {
     setState(() {
       _isSpeedPopupVisible = !_isSpeedPopupVisible;
     });
   }
 
-  final String videoUrl = 'https://stream.syritv.al/SyriTV/index.m3u8';
+  final String videoUrl = 'assets/images/livefullview.mp4';
 
   final List<String> episodes = List.generate(
     10,
-    (index) => 'https://stream.syritv.al/SyriTV/index.m3u8',
+    (index) => 'assets/images/livefullview.mp4',
   );
 
   @override
@@ -50,7 +56,27 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
-  void _initializePlayer() {
+  Future<File> assetToFile(String assetPath, {String? fileName}) async {
+    setState(() => showLoader = true);
+
+    final name = fileName ?? assetPath.split('/').last;
+    final tempDir = await getTemporaryDirectory();
+    final file = File('${tempDir.path}/$name');
+
+    if (!await file.exists()) {
+      final byteData = await rootBundle.load(assetPath);
+      await file.writeAsBytes(byteData.buffer.asUint8List());
+    }
+
+    setState(() {
+      videoFile = file;
+      showLoader = false;
+    });
+
+    return file;
+  }
+
+  void _initializePlayer() async {
     BetterPlayerConfiguration config = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.cover,
@@ -66,19 +92,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       ),
     );
 
+    await assetToFile(videoUrl);
+
     BetterPlayerDataSource source = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      videoUrl,
-      resolutions: {"360p": videoUrl, "480p": videoUrl, "720p": videoUrl},
-      subtitles: [
-        BetterPlayerSubtitlesSource(
-          type: BetterPlayerSubtitlesSourceType.network,
-          name: "English",
-          urls: [
-            "https://bitdash-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt",
-          ],
-        ),
-      ],
+      BetterPlayerDataSourceType.file,
+      videoFile!.path,
     );
 
     _betterPlayerController = BetterPlayerController(
@@ -86,27 +104,16 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       betterPlayerDataSource: source,
     );
 
-    // ✅ FORCE ENABLE SUBTITLES AFTER LOAD
-    Future.delayed(const Duration(seconds: 1), () async {
-      if (_betterPlayerController.betterPlayerSubtitlesSourceList.isNotEmpty) {
-        await _betterPlayerController.setupSubtitleSource(
-          _betterPlayerController.betterPlayerSubtitlesSourceList.first,
-        );
-      }
+    // ← ADD THIS LISTENER
+    _betterPlayerController.videoPlayerController!.addListener(() {
+      if (mounted) setState(() {}); // updates slider and time
     });
 
     _hideControlsAfterDelay();
   }
 
-  String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final minutes = twoDigits(duration.inMinutes.remainder(60));
-    final seconds = twoDigits(duration.inSeconds.remainder(60));
-    return "${twoDigits(duration.inHours)}:$minutes:$seconds";
-  }
-
   void _hideControlsAfterDelay() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 4), () {
       if (mounted && _betterPlayerController.isPlaying() == true) {
         setState(() => _controlsVisible = false);
       }
@@ -221,6 +228,14 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     _betterPlayerController.setupDataSource(source);
   }
 
+  String _format(Duration d) {
+    String two(int n) => n.toString().padLeft(2, '0');
+    final minutes = two(d.inMinutes.remainder(60));
+    final seconds = two(d.inSeconds.remainder(60));
+    final hours = d.inHours;
+    return hours > 0 ? '$hours:$minutes:$seconds' : '$minutes:$seconds';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -232,14 +247,16 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               behavior: HitTestBehavior.opaque,
               onTap: () {
                 setState(() {
-                  _controlsVisible = !_controlsVisible; 
+                  _controlsVisible = !_controlsVisible;
                 });
 
                 if (_controlsVisible) {
-                  _hideControlsAfterDelay(); 
+                  _hideControlsAfterDelay();
                 }
               },
-              child: BetterPlayer(controller: _betterPlayerController),
+              child: showLoader
+                  ? Center(child: CircularProgressIndicator())
+                  : BetterPlayer(controller: _betterPlayerController),
             ),
           ),
 
@@ -366,72 +383,62 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               width: screenSize.width - 0,
               child: Column(
                 children: [
-                  if (_betterPlayerController
-                      .videoPlayerController!
-                      .value
-                      .initialized)
-                    Row(
+                  if (_betterPlayerController != null &&
+                      _betterPlayerController!.videoPlayerController != null &&
+                      _betterPlayerController!
+                          .videoPlayerController!
+                          .value
+                          .isPlaying)
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Slider(
                             activeColor: Colors.white,
-                            inactiveColor: AppColors.sliderbar4C4C4C,
-                            value: _betterPlayerController
-                                .videoPlayerController!
-                                .value
-                                .position
-                                .inMilliseconds
-                                .toDouble(),
+                            inactiveColor: Colors.white.withOpacity(0.3),
+                            min: 0,
                             max: _betterPlayerController
                                 .videoPlayerController!
                                 .value
                                 .duration!
                                 .inMilliseconds
                                 .toDouble(),
-                            onChanged: (v) {
-                              _betterPlayerController.seekTo(
-                                Duration(milliseconds: v.round()),
-                              );
+                            value: _betterPlayerController
+                                .videoPlayerController!
+                                .value
+                                .position
+                                .inMilliseconds
+                                .clamp(
+                                  0,
+                                  _betterPlayerController
+                                      .videoPlayerController!
+                                      .value
+                                      .duration!
+                                      .inMilliseconds,
+                                )
+                                .toDouble(),
+                            onChanged: (value) {
+                              _betterPlayerController.videoPlayerController!
+                                  .seekTo(
+                                    Duration(milliseconds: value.toInt()),
+                                  );
                             },
                           ),
                         ),
-                        PoppinsText(
-                          _formatDuration(
-                            _betterPlayerController
-                                .videoPlayerController!
-                                .value
-                                .position,
+                        Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Text(
+                            _format(
+                              _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .position,
+                            ),
+                            style: TextStyle(color: Colors.white),
                           ),
-                          fontSize: PoppinsFontSizeVariant.size12,
-                          fontWeight: PoppinsFontWeightVariant.regular,
-                          color: AppColors.wDark,
                         ),
-                        SizedBox(width: 20),
                       ],
                     ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _btn(
-                        Assets.images.speed.path,
-                        "Speed (1x)",
-                        _changeSpeed,
-                      ),
-                      SizedBox(width: 20),
-                      _btn(
-                        Assets.images.audioSubtitles.path,
-                        "Audio & Subtitles",
-                        _openAudioSubtitlePopup,
-                      ),
-                      SizedBox(width: 20),
-                      _btn(
-                        Assets.images.audioSubtitles.path,
-                        "Picture In Picture",
-                        () {},
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),

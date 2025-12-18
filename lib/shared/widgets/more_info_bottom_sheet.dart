@@ -14,7 +14,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Container(
-        padding: EdgeInsets.only(top: 24, left: 20, right: 20, bottom: 24),
+        padding: EdgeInsets.only(top: 16, left: 20, right: 20, bottom: 10),
         decoration: BoxDecoration(
           color: AppColors.dRegular,
           borderRadius: BorderRadius.only(
@@ -67,27 +67,30 @@ class MoreInfoBottomSheet extends StatelessWidget {
             ),
 
             SizedBox(height: 18),
-
             Container(
+              height: 40,
               decoration: BoxDecoration(
                 color: Color(0xff19193E),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: TextField(
                 textAlign: TextAlign.left,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: AppColors.white),
+                textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
+                  isDense: true,
                   suffixIcon: Padding(
                     padding: EdgeInsets.only(right: 12),
-                    child: Image.asset(Assets.images.searchicon.path),
+                    child: Image.asset(
+                      Assets.images.searchicon.path,
+                      height: 20,
+                      width: 20,
+                    ),
                   ),
                   hintText: "Search",
                   hintStyle: TextStyle(color: Colors.white54),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
                 ),
               ),
             ),
@@ -111,7 +114,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 24),
+                SizedBox(height: 16),
                 PoppinsText(
                   '9:00 - 10:00',
                   fontSize: PoppinsFontSizeVariant.size14,

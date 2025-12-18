@@ -15,7 +15,6 @@ class PopupmenuWidget extends StatefulWidget {
   State<PopupmenuWidget> createState() => _PopupmenuWidgetState();
 }
 
-
 class _PopupmenuWidgetState extends State<PopupmenuWidget> {
   final double _menuItemSpacing = 12;
 
@@ -74,15 +73,14 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
           iconPath: Assets.images.reporticon.path,
           text: 'Report',
           customColors: customColors,
+          navigate: true, // Sirf ye item navigate karega
         ),
         _buildMenuItem(
-          routePath: AppRoutes.reportContent.name,
           iconPath: Assets.images.interestedicon.path,
           text: 'Interested',
           customColors: customColors,
         ),
         _buildMenuItem(
-          routePath: AppRoutes.reportContent.name,
           iconPath: Assets.images.notinterestedicon.path,
           text: 'Not Interested',
           customColors: customColors,
@@ -92,15 +90,18 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
   }
 
   PopupMenuItem<String> _buildMenuItem({
-    required String routePath,
+    String? routePath,
     required String iconPath,
     required String text,
     required AppCustomColors customColors,
+    bool navigate = false, // default false, sirf Report ke liye true
   }) {
     return PopupMenuItem<String>(
       value: text,
       onTap: () {
-        context.pushNamed(routePath);
+        if (navigate && routePath != null) {
+          context.pushNamed(routePath);
+        }
       },
       child: SizedBox(
         width: 126,
@@ -110,7 +111,6 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
           children: [
             Image.asset(iconPath, height: 18),
             SizedBox(width: 12),
-            // SizedBox(width: _menuItemSpacing),
             PoppinsText(
               text,
               fontSize: PoppinsFontSizeVariant.size12,
@@ -122,5 +122,4 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
       ),
     );
   }
-
 }

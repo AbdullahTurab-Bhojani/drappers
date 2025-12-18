@@ -25,7 +25,7 @@ class WatchlistItemTile extends StatelessWidget {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     return Padding(
-      padding: EdgeInsets.only(top: 10, bottom: 10.0, right: 20, left: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -41,8 +41,7 @@ class WatchlistItemTile extends StatelessWidget {
             ),
           ),
           SizedBox(width: 12),
-          SizedBox(
-            width: Platform.isIOS ? 140 : 160,
+          Expanded(
             child: PoppinsText(
               title,
               fontSize: PoppinsFontSizeVariant.size16,
@@ -55,14 +54,14 @@ class WatchlistItemTile extends StatelessWidget {
           SizedBox(width: 10),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-
-            onTap: () {
-              context.pushNamed(AppRoutes.contentDetail.name);
-            },
-            child: Image.asset(
-              Assets.images.playcircleicon.path,
-              height: 32,
-              width: 32,
+            onTap: onTapPlay,
+            child: Padding(
+              padding: EdgeInsets.only(right: 0),
+              child: Image.asset(
+                Assets.images.playcircleicon.path,
+                height: 32,
+                width: 32,
+              ),
             ),
           ),
         ],

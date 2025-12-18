@@ -34,12 +34,12 @@ class _HelpsupportState extends State<Helpsupport> {
   final TextEditingController _describeController = TextEditingController();
 
   final List<ChatItem> chatItems = [
-    ChatItem(
-      iconPath: Assets.images.commenticon.path,
-      title: "Chat with Us",
-      subtitle: "Start a live chat with our support team",
-      buttonText: "Start Live Chat",
-    ),
+    // ChatItem(
+    //   iconPath: Assets.images.commenticon.path,
+    //   title: "Chat with Us",
+    //   subtitle: "Start a live chat with our support team",
+    //   buttonText: "Start Live Chat",
+    // ),
     ChatItem(
       iconPath: Assets.images.mentionicon.path,
       title: "Email Support",
@@ -114,7 +114,10 @@ class _HelpsupportState extends State<Helpsupport> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: AppColors.helpsupport,
-                                  border: Border.all(color: customColors.blackshade, width: 0.5)
+                                  border: Border.all(
+                                    color: customColors.blackshade,
+                                    width: 0.5,
+                                  ),
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
@@ -133,22 +136,36 @@ class _HelpsupportState extends State<Helpsupport> {
                                           ),
                                           SizedBox(width: 20),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               PoppinsText(
                                                 item.title,
-                                                color: Theme.of(context).extension<AppCustomColors>()!
+                                                color: Theme.of(context)
+                                                    .extension<
+                                                      AppCustomColors
+                                                    >()!
                                                     .textColor,
-                                                fontSize: PoppinsFontSizeVariant.size16,
-                                                fontWeight:PoppinsFontWeightVariant.medium,
+                                                fontSize: PoppinsFontSizeVariant
+                                                    .size16,
+                                                fontWeight:
+                                                    PoppinsFontWeightVariant
+                                                        .medium,
                                               ),
                                               PoppinsText(
                                                 item.subtitle,
-                                                color: Theme.of(context).extension<AppCustomColors>()!
+                                                color: Theme.of(context)
+                                                    .extension<
+                                                      AppCustomColors
+                                                    >()!
                                                     .textColor,
-                                                fontSize: PoppinsFontSizeVariant.size12,
-                                                fontWeight:PoppinsFontWeightVariant.regular,
+                                                fontSize: PoppinsFontSizeVariant
+                                                    .size12,
+                                                fontWeight:
+                                                    PoppinsFontWeightVariant
+                                                        .regular,
                                               ),
                                             ],
                                           ),
@@ -193,7 +210,8 @@ class _HelpsupportState extends State<Helpsupport> {
                                 Padding(
                                   padding: EdgeInsets.only(left: 20, right: 20),
                                   child: Column(
-                                    crossAxisAlignment:CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(height: 10),
                                       NewTextField(
