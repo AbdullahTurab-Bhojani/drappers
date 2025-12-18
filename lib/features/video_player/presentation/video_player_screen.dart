@@ -214,9 +214,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   }
 
   Future<void> _initializePlayer() async {
-    setState(() {
-      showLoader = true;
-    });
+    setState(() => showLoader = true);
+
     BetterPlayerConfiguration config = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.cover,
@@ -237,14 +236,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     BetterPlayerDataSource source = BetterPlayerDataSource(
       BetterPlayerDataSourceType.file,
       videoFile!.path,
-      // resolutions: {"360p": videoUrl, "480p": videoUrl, "720p": videoUrl},
-      // subtitles: [
-      //   BetterPlayerSubtitlesSource(
-      //     type: BetterPlayerSubtitlesSourceType.memory,
-      //     name: "English",
-      //     urls: ["assets/images/livevideo.mp4"],
-      //   ),
-      // ],
     );
 
     _betterPlayerController = BetterPlayerController(
@@ -252,22 +243,18 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       betterPlayerDataSource: source,
     );
 
-    Future.delayed(const Duration(seconds: 1), () async {
-      if (_betterPlayerController.betterPlayerSubtitlesSourceList.isNotEmpty) {
-        await _betterPlayerController.setupSubtitleSource(
-          _betterPlayerController.betterPlayerSubtitlesSourceList.first,
-        );
-      }
+    // ← ADD THIS LISTENER
+    _betterPlayerController.videoPlayerController!.addListener(() {
+      if (mounted) setState(() {}); // this updates slider & timer
     });
 
     _hideControlsAfterDelay();
-    setState(() {
-      showLoader = false;
-    });
+
+    setState(() => showLoader = false);
   }
 
   void _hideControlsAfterDelay() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 4), () {
       if (mounted && _betterPlayerController.isPlaying() == true) {
         setState(() => _controlsVisible = false);
       }
@@ -775,29 +762,37 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     if (_betterPlayerController
                         .videoPlayerController!
                         .value
-                        .initialized)
+                        .isPlaying)
                       Row(
                         children: [
                           Expanded(
                             child: Slider(
                               activeColor: Colors.white,
                               inactiveColor: AppColors.sliderbar4C4C4C,
-                              value: _betterPlayerController
-                                  .videoPlayerController!
-                                  .value
-                                  .position
-                                  .inMilliseconds
-                                  .toDouble(),
+                              min: 0,
                               max: _betterPlayerController
                                   .videoPlayerController!
                                   .value
                                   .duration!
                                   .inMilliseconds
                                   .toDouble(),
+                              value: _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .position
+                                  .inMilliseconds
+                                  .clamp(
+                                    0,
+                                    _betterPlayerController
+                                        .videoPlayerController!
+                                        .value
+                                        .duration!
+                                        .inMilliseconds,
+                                  )
+                                  .toDouble(),
                               onChanged: (v) {
-                                _betterPlayerController.seekTo(
-                                  Duration(milliseconds: v.round()),
-                                );
+                                _betterPlayerController.videoPlayerController!
+                                    .seekTo(Duration(milliseconds: v.round()));
                               },
                             ),
                           ),
@@ -812,17 +807,27 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: AppColors.wDark,
                           ),
-                          SizedBox(width: 20),
+                          // SizedBox(width: 10),
+                          // PoppinsText(
+                          //   _formatDuration(
+                          //     _betterPlayerController
+                          //         .videoPlayerController!
+                          //         .value
+                          //         .duration!,
+                          //   ),
+                          //   fontSize: PoppinsFontSizeVariant.size12,
+                          //   fontWeight: PoppinsFontWeightVariant.regular,
+                          //   color: AppColors.wDark.withOpacity(0.7),
+                          // ),
                         ],
                       ),
 
                     Row(
                       children: [
-                        Spacer(), // Left side space to push buttons to center
+                        Spacer(),
 
                         Row(
-                          mainAxisSize: MainAxisSize
-                              .min, // Buttons ka row sirf jitni width chahiye utni hi le
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             _btn(
                               Assets.images.speed.path,

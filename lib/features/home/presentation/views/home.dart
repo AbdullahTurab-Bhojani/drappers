@@ -14,7 +14,9 @@ import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../../shared/widgets/guestloginwidget.dart';
 import '../../../../shared/widgets/home_banner.dart';
+import '../../../../shared/widgets/more_info_bottom_sheet.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
+import '../../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
 import '../../../../shared/widgets/watch_history.dart';
 import '../../../newlivescreen/presentation/newlivescreen.dart';
@@ -29,12 +31,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _showControls = true;
+  bool _showControls = false;
   final posterPath = '/mnt/data/Live Tv.png';
   bool _wasPlayingBeforeNavigation = false;
   late BetterPlayerController _betterPlayerController;
   File? videoFile;
-  bool _controlsVisible = true;
+  bool _controlsVisible = false;
 
   bool showLoader = false;
   final String videoUrl = 'assets/images/livefullview.mp4';
@@ -66,13 +68,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _hideControlsAfterDelay() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (mounted &&
           _betterPlayerController.videoPlayerController!.value.isPlaying) {
         setState(() => _controlsVisible = false);
       }
     });
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _initializePlayer();
+  // }
 
   Future<void> _initializePlayer() async {
     setState(() => showLoader = true);
@@ -98,11 +106,21 @@ class _HomeScreenState extends State<HomeScreen> {
       BetterPlayerDataSourceType.file,
       videoFile!.path,
     );
-
     _betterPlayerController = BetterPlayerController(
       config,
       betterPlayerDataSource: source,
     );
+
+    // Add this listener here
+    _betterPlayerController.videoPlayerController!.addListener(() {
+      if (mounted) {
+        setState(() {}); // this will rebuild slider & timer
+      }
+    });
+
+    _hideControlsAfterDelay();
+
+    setState(() => showLoader = false);
 
     _hideControlsAfterDelay();
 
@@ -152,6 +170,14 @@ class _HomeScreenState extends State<HomeScreen> {
       await _betterPlayerController.play();
       _wasPlayingBeforeNavigation = false;
     }
+  }
+
+  String _format(Duration d) {
+    String two(int n) => n.toString().padLeft(2, '0');
+    final minutes = two(d.inMinutes.remainder(60));
+    final seconds = two(d.inSeconds.remainder(60));
+    final hours = d.inHours;
+    return hours > 0 ? '$hours:$minutes:$seconds' : '$minutes:$seconds';
   }
 
   @override
@@ -353,7 +379,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(20),
                               child: SizedBox(
                                 width: 400,
-                                height: 440,
+                                height: 450,
                                 child: Stack(
                                   children: [
                                     _betterPlayerController
@@ -366,6 +392,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Container(
                                       color: Colors.black.withOpacity(0.18),
                                     ),
+
                                     if (_betterPlayerController
                                             .isVideoInitialized() !=
                                         null)
@@ -383,12 +410,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                         },
                                         child: Center(
                                           child: AnimatedOpacity(
-                                            duration: const Duration(
-                                              milliseconds: 200,
+                                            duration: Duration(
+                                              milliseconds: 50,
                                             ),
                                             opacity: _showControls ? 1 : 0,
                                             child: Container(
-                                              padding: const EdgeInsets.all(12),
+                                              padding: EdgeInsets.all(12),
                                               decoration: BoxDecoration(
                                                 color: Colors.black.withOpacity(
                                                   0.45,
@@ -427,6 +454,226 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                       ),
+                                    Positioned(
+                                      top: 16,
+                                      left: 14,
+                                      right: 14,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: PoppinsText(
+                                              'Meet The Drapers - Live',
+                                              color: AppColors.white,
+                                              fontWeight:
+                                                  PoppinsFontWeightVariant
+                                                      .medium,
+                                              fontSize:
+                                                  PoppinsFontSizeVariant.size14,
+                                            ),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                              vertical: 6,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: AppColors.white,
+                                                width: 0.5,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.circle,
+                                                  size: 8,
+                                                  color: Colors.red,
+                                                ),
+                                                SizedBox(width: 6),
+                                                PoppinsText(
+                                                  'Live TV',
+                                                  color: AppColors.white,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .regular,
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size12,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(width: 8),
+                                          PopupmenuWidget(showSaveIcon: false),
+                                        ],
+                                      ),
+                                    ),
+
+                                    Positioned(
+                                      bottom: 10,
+                                      left: 12,
+                                      right: 12,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.centerRight,
+                                            child: GestureDetector(
+                                              behavior: HitTestBehavior.opaque,
+                                              onTap: () {
+                                                if (GuestHelper.isGuest) {
+                                                  GuestHelper.checkGuest(
+                                                    context,
+                                                  );
+                                                  return;
+                                                }
+                                                showModalBottomSheet(
+                                                  context: context,
+                                                  useRootNavigator: true,
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  builder: (context) =>
+                                                      const MoreInfoBottomSheet(),
+                                                );
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 24,
+                                                ),
+                                                height: 36,
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.color121212
+                                                      .withOpacity(0.6),
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.info_outline,
+                                                      size: 18,
+                                                      color: Colors.white,
+                                                    ),
+                                                    SizedBox(width: 8),
+                                                    PoppinsText(
+                                                      'More Info',
+                                                      color: customColors
+                                                          .textColor,
+                                                      fontSize:
+                                                          PoppinsFontSizeVariant
+                                                              .size12,
+                                                      fontWeight:
+                                                          PoppinsFontWeightVariant
+                                                              .medium,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 8),
+                                          if (_betterPlayerController != null &&
+                                              _betterPlayerController!
+                                                      .videoPlayerController !=
+                                                  null &&
+                                              _betterPlayerController!
+                                                  .videoPlayerController!
+                                                  .value
+                                                  .isPlaying)
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Slider(
+                                                    activeColor: Colors.white,
+                                                    inactiveColor: Colors.white
+                                                        .withOpacity(0.3),
+                                                    min: 0,
+                                                    max: _betterPlayerController
+                                                        .videoPlayerController!
+                                                        .value
+                                                        .duration!
+                                                        .inMilliseconds
+                                                        .toDouble(),
+                                                    value: _betterPlayerController
+                                                        .videoPlayerController!
+                                                        .value
+                                                        .position
+                                                        .inMilliseconds
+                                                        .clamp(
+                                                          0,
+                                                          _betterPlayerController
+                                                              .videoPlayerController!
+                                                              .value
+                                                              .duration!
+                                                              .inMilliseconds,
+                                                        )
+                                                        .toDouble(),
+                                                    onChanged: (value) {
+                                                      _betterPlayerController
+                                                          .videoPlayerController!
+                                                          .seekTo(
+                                                            Duration(
+                                                              milliseconds:
+                                                                  value.toInt(),
+                                                            ),
+                                                          );
+                                                    },
+                                                  ),
+                                                ),
+                                                Text(
+                                                  _format(
+                                                    _betterPlayerController
+                                                        .videoPlayerController!
+                                                        .value
+                                                        .position,
+                                                  ),
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 15),
+                                                GestureDetector(
+                                                  behavior:
+                                                      HitTestBehavior.opaque,
+                                                  onTap: () {
+                                                    _betterPlayerController
+                                                        .videoPlayerController!
+                                                        .pause();
+                                                    if (GuestHelper.isGuest) {
+                                                      GuestHelper.checkGuest(
+                                                        context,
+                                                      );
+                                                      return;
+                                                    }
+                                                    context.pushNamed(
+                                                      AppRoutes
+                                                          .newliveScreen
+                                                          .name,
+                                                    );
+                                                  },
+                                                  child: Image.asset(
+                                                    Assets
+                                                        .images
+                                                        .screenrotationicon
+                                                        .path,
+                                                    width: 24,
+                                                    height: 24,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously, unused_element, prefer_final_fields
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'dart:io';
 
@@ -22,10 +22,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   bool _isLocked = false;
   String? _selectedSubtitle;
   String? _selectedAudio;
-  bool _controlsVisible = true;
+  bool _controlsVisible = false;
   bool _showEpisodes = false;
   bool _isSpeedPopupVisible = false;
   File? videoFile;
+
   bool showLoader = false;
   void _changeSpeed() {
     setState(() {
@@ -56,39 +57,26 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   }
 
   Future<File> assetToFile(String assetPath, {String? fileName}) async {
-    setState(() {
-      showLoader = true;
-    });
+    setState(() => showLoader = true);
 
     final name = fileName ?? assetPath.split('/').last;
-
     final tempDir = await getTemporaryDirectory();
     final file = File('${tempDir.path}/$name');
 
-    if (await file.exists()) {
-      setState(() {
-        videoFile = file;
-
-        showLoader = false;
-      });
-      return file;
+    if (!await file.exists()) {
+      final byteData = await rootBundle.load(assetPath);
+      await file.writeAsBytes(byteData.buffer.asUint8List());
     }
 
-    final byteData = await rootBundle.load(assetPath);
-    await file.writeAsBytes(byteData.buffer.asUint8List());
     setState(() {
       videoFile = file;
-
       showLoader = false;
     });
 
     return file;
   }
 
-  Future<void> _initializePlayer() async {
-    setState(() {
-      showLoader = true;
-    });
+  void _initializePlayer() async {
     BetterPlayerConfiguration config = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.cover,
@@ -109,14 +97,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     BetterPlayerDataSource source = BetterPlayerDataSource(
       BetterPlayerDataSourceType.file,
       videoFile!.path,
-      // resolutions: {"360p": videoUrl, "480p": videoUrl, "720p": videoUrl},
-      // subtitles: [
-      //   BetterPlayerSubtitlesSource(
-      //     type: BetterPlayerSubtitlesSourceType.memory,
-      //     name: "English",
-      //     urls: ["assets/images/livevideo.mp4"],
-      //   ),
-      // ],
     );
 
     _betterPlayerController = BetterPlayerController(
@@ -124,29 +104,16 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       betterPlayerDataSource: source,
     );
 
-    Future.delayed(const Duration(seconds: 1), () async {
-      if (_betterPlayerController.betterPlayerSubtitlesSourceList.isNotEmpty) {
-        await _betterPlayerController.setupSubtitleSource(
-          _betterPlayerController.betterPlayerSubtitlesSourceList.first,
-        );
-      }
+    // ← ADD THIS LISTENER
+    _betterPlayerController.videoPlayerController!.addListener(() {
+      if (mounted) setState(() {}); // updates slider and time
     });
 
     _hideControlsAfterDelay();
-    setState(() {
-      showLoader = false;
-    });
-  }
-
-  String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final minutes = twoDigits(duration.inMinutes.remainder(60));
-    final seconds = twoDigits(duration.inSeconds.remainder(60));
-    return "${twoDigits(duration.inHours)}:$minutes:$seconds";
   }
 
   void _hideControlsAfterDelay() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 4), () {
       if (mounted && _betterPlayerController.isPlaying() == true) {
         setState(() => _controlsVisible = false);
       }
@@ -154,14 +121,12 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   }
 
   Widget _speedPopup() {
-    List<String> speedList = ['0.25x', '0.5x', '0.75x', 'Normal'];
-
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Center(
         child: Container(
-          width: 320,
-          padding: EdgeInsets.only(top: 16, left: 24, right: 24),
+          width: 336,
+          padding: EdgeInsets.only(top: 32, left: 24, right: 24),
           decoration: BoxDecoration(
             color: AppColors.dRegular,
             borderRadius: BorderRadius.circular(16),
@@ -180,63 +145,23 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   ),
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(Icons.close, color: AppColors.white),
+
+                    onTap: () {
+                      setState(() {
+                        _isSpeedPopupVisible = false;
+                      });
+                    },
+                    child: Icon(Icons.close, color: Colors.white),
                   ),
                 ],
               ),
-              SizedBox(height: 12),
+              SizedBox(height: 16),
               Divider(),
-
-              ListView.builder(
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                itemCount: speedList.length,
-                itemBuilder: (context, index) {
-                  final text = speedList[index];
-                  final bool isSelected = _selectedSpeed == text;
-
-                  return GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () {
-                      setState(() {
-                        _selectedSpeed = text;
-                        _betterPlayerController.setSpeed(
-                          double.parse(text.replaceAll('x', '')),
-                        );
-                      });
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 12,
-                      ),
-                      margin: EdgeInsets.only(bottom: 10),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? AppColors.popselectcolor19193F
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          if (isSelected)
-                            Icon(Icons.check, color: AppColors.white, size: 18),
-                          if (isSelected) SizedBox(width: 10),
-                          PoppinsText(
-                            text,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: AppColors.wDark,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
+              SizedBox(height: 12),
+              _speedOption("0.5x"),
+              _speedOption("1x"),
+              _speedOption("1.5x"),
+              _speedOption("2x"),
             ],
           ),
         ),
@@ -249,98 +174,66 @@ class _newliveScreenScreenState extends State<newliveScreen> {
 
     showDialog(
       context: context,
-      builder: (_) => GestureDetector(
-        onTap: () => Navigator.pop(context),
-        child: Dialog(
-          backgroundColor: Colors.transparent,
-          child: Center(
-            child: Container(
-              width: 320,
-              padding: EdgeInsets.only(top: 16, left: 24, right: 24),
-              decoration: BoxDecoration(
-                color: AppColors.dRegular,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Title Row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      PoppinsText(
-                        "Audio & Subtitles",
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                        color: AppColors.wDark,
-                      ),
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () => Navigator.pop(context),
-                        child: Icon(Icons.close, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 12),
-                  Divider(),
+      builder: (_) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: Container(
+            width: 336,
+            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+            decoration: BoxDecoration(
+              color: AppColors.dRegular,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PoppinsText(
+                      "Audio & Subtitles",
+                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontWeight: PoppinsFontWeightVariant.regular,
+                      color: AppColors.wDark,
+                    ),
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
 
-                  // Options List
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: subtitleOptions.length,
-                    itemBuilder: (context, index) {
-                      final option = subtitleOptions[index];
-                      final bool isSelected = _selectedSubtitle == option;
-
-                      return GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {
-                          setState(() {
-                            _selectedSubtitle = option;
-                          });
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 12,
-                            horizontal: 12,
-                          ),
-                          margin: EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            color: isSelected
-                                ? AppColors.popselectcolor19193F
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            children: [
-                              if (isSelected)
-                                Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
-                              if (isSelected) SizedBox(width: 10),
-                              PoppinsText(
-                                option,
-                                fontSize: PoppinsFontSizeVariant.size12,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                color: AppColors.wDark,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(Icons.close, color: Colors.white),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Divider(),
+                SizedBox(height: 12),
+                ...subtitleOptions.map(
+                  (option) => _audioSubtitleOption(option, isSubtitle: true),
+                ),
+                SizedBox(height: 12),
+              ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _playEpisode(int index) {
+    final source = BetterPlayerDataSource(
+      BetterPlayerDataSourceType.network,
+      episodes[index],
+    );
+
+    _betterPlayerController.setupDataSource(source);
+  }
+
+  String _format(Duration d) {
+    String two(int n) => n.toString().padLeft(2, '0');
+    final minutes = two(d.inMinutes.remainder(60));
+    final seconds = two(d.inSeconds.remainder(60));
+    final hours = d.inHours;
+    return hours > 0 ? '$hours:$minutes:$seconds' : '$minutes:$seconds';
   }
 
   @override
@@ -349,26 +242,23 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          showLoader
-              ? Container(
-                  color: Colors.black,
-                  child: CircularProgressIndicator(color: AppColors.white),
-                )
-              : Positioned.fill(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () {
-                      setState(() {
-                        _controlsVisible = !_controlsVisible;
-                      });
+          Positioned.fill(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                setState(() {
+                  _controlsVisible = !_controlsVisible;
+                });
 
-                      if (_controlsVisible) {
-                        _hideControlsAfterDelay();
-                      }
-                    },
-                    child: BetterPlayer(controller: _betterPlayerController),
-                  ),
-                ),
+                if (_controlsVisible) {
+                  _hideControlsAfterDelay();
+                }
+              },
+              child: showLoader
+                  ? Center(child: CircularProgressIndicator())
+                  : BetterPlayer(controller: _betterPlayerController),
+            ),
+          ),
 
           if (_controlsVisible) _buildControls(),
 
@@ -387,8 +277,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       behavior: HitTestBehavior.opaque,
 
                       onTap: () {
-                        // _playEpisode(index);
-                        // setState(() => _showEpisodes = false);
+                        _playEpisode(index);
+                        setState(() => _showEpisodes = false);
                       },
                       child: Container(
                         margin: EdgeInsets.all(6),
@@ -420,11 +310,33 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       color: Colors.black.withOpacity(0.3),
       child: Stack(
         children: [
-          if (_controlsVisible && !_isLocked)
+          if (_controlsVisible &&
+              !_isLocked) // only show if visible and not locked
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // // Back 10 seconds
+                  // IconButton(
+                  //   icon: Image.asset(
+                  //     Assets.images.back10seconds.path,
+                  //     width: 64,
+                  //     height: 64,
+                  //   ),
+                  //   onPressed: () {
+                  //     final pos = _betterPlayerController
+                  //         .videoPlayerController!
+                  //         .value
+                  //         .position;
+                  //     _betterPlayerController.seekTo(
+                  //       pos - const Duration(seconds: 10),
+                  //     );
+                  //   },
+                  // ),
+
+                  // const SizedBox(width: 40),
+
+                  // Play/Pause toggle
                   IconButton(
                     icon: Icon(
                       _betterPlayerController.isPlaying()!
@@ -442,6 +354,25 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       });
                     },
                   ),
+
+                  // const SizedBox(width: 40),
+
+                  // IconButton(
+                  //   icon: Image.asset(
+                  //     Assets.images.forward10seconds.path,
+                  //     width: 64,
+                  //     height: 64,
+                  //   ),
+                  //   onPressed: () {
+                  //     final pos = _betterPlayerController
+                  //         .videoPlayerController!
+                  //         .value
+                  //         .position;
+                  //     _betterPlayerController.seekTo(
+                  //       pos + const Duration(seconds: 10),
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ),
@@ -452,72 +383,62 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               width: screenSize.width - 0,
               child: Column(
                 children: [
-                  if (_betterPlayerController
-                      .videoPlayerController!
-                      .value
-                      .initialized)
-                    Row(
+                  if (_betterPlayerController != null &&
+                      _betterPlayerController!.videoPlayerController != null &&
+                      _betterPlayerController!
+                          .videoPlayerController!
+                          .value
+                          .isPlaying)
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Slider(
                             activeColor: Colors.white,
-                            inactiveColor: AppColors.sliderbar4C4C4C,
-                            value: _betterPlayerController
-                                .videoPlayerController!
-                                .value
-                                .position
-                                .inMilliseconds
-                                .toDouble(),
+                            inactiveColor: Colors.white.withOpacity(0.3),
+                            min: 0,
                             max: _betterPlayerController
                                 .videoPlayerController!
                                 .value
                                 .duration!
                                 .inMilliseconds
                                 .toDouble(),
-                            onChanged: (v) {
-                              _betterPlayerController.seekTo(
-                                Duration(milliseconds: v.round()),
-                              );
+                            value: _betterPlayerController
+                                .videoPlayerController!
+                                .value
+                                .position
+                                .inMilliseconds
+                                .clamp(
+                                  0,
+                                  _betterPlayerController
+                                      .videoPlayerController!
+                                      .value
+                                      .duration!
+                                      .inMilliseconds,
+                                )
+                                .toDouble(),
+                            onChanged: (value) {
+                              _betterPlayerController.videoPlayerController!
+                                  .seekTo(
+                                    Duration(milliseconds: value.toInt()),
+                                  );
                             },
                           ),
                         ),
-                        PoppinsText(
-                          _formatDuration(
-                            _betterPlayerController
-                                .videoPlayerController!
-                                .value
-                                .position,
+                        Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Text(
+                            _format(
+                              _betterPlayerController
+                                  .videoPlayerController!
+                                  .value
+                                  .position,
+                            ),
+                            style: TextStyle(color: Colors.white),
                           ),
-                          fontSize: PoppinsFontSizeVariant.size12,
-                          fontWeight: PoppinsFontWeightVariant.regular,
-                          color: AppColors.wDark,
                         ),
-                        SizedBox(width: 20),
                       ],
                     ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _btn(
-                        Assets.images.speed.path,
-                        "Speed (1x)",
-                        _changeSpeed,
-                      ),
-                      SizedBox(width: 20),
-                      _btn(
-                        Assets.images.audioSubtitles.path,
-                        "Audio & Subtitles",
-                        _openAudioSubtitlePopup,
-                      ),
-                      SizedBox(width: 20),
-                      _btn(
-                        Assets.images.audioSubtitles.path,
-                        "Picture In Picture",
-                        () {},
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),

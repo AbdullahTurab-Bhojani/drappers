@@ -147,17 +147,19 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
         right: false,
         child: Stack(
           children: [
+            // PageView for videos
             PageView.builder(
               controller: _pageController,
               scrollDirection: Axis.vertical,
               itemCount: _videoControllers.length,
-              onPageChanged: _playOnlyAt,
+              onPageChanged: (index) {
+                _playOnlyAt(index); // Ensure only current video plays
+              },
               itemBuilder: (context, index) {
                 final controller = _videoControllers[index];
 
                 return GestureDetector(
                   behavior: HitTestBehavior.opaque,
-
                   onTap: () {
                     if (!controller.value.isInitialized) return;
                     controller.value.isPlaying
@@ -194,6 +196,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                           ),
                         ),
 
+                      // Bottom gradient overlay
                       Positioned.fill(
                         child: Align(
                           alignment: Alignment.bottomCenter,
@@ -213,257 +216,270 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                           ),
                         ),
                       ),
+
+                      // Video details: title, description, date
+                      Positioned(
+                        left: 20,
+                        right: 20,
+                        bottom: 95,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            PoppinsText(
+                              _titles[index],
+                              fontSize: PoppinsFontSizeVariant.size18,
+                              fontWeight: PoppinsFontWeightVariant.medium,
+                              color: customColors.textColor,
+                            ),
+                            const SizedBox(height: 4),
+                            PoppinsText(
+                              "${_dates[index]} • 2.2k views",
+                              fontSize: PoppinsFontSizeVariant.size14,
+                              color: Colors.white70,
+                            ),
+                            const SizedBox(height: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                PoppinsText(
+                                  _descriptions[index],
+                                  fontSize: PoppinsFontSizeVariant.size14,
+                                  color: customColors.textColor,
+                                  maxLines: _expanded[index] ? 20 : 3,
+                                  textOverflow: TextOverflow.ellipsis,
+                                ),
+                                GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () {
+                                    setState(() {
+                                      _expanded[index] = !_expanded[index];
+                                    });
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: PoppinsText(
+                                      _expanded[index]
+                                          ? "Read Less"
+                                          : "Read More",
+                                      color: customColors.textColor,
+                                      fontSize: PoppinsFontSizeVariant.size13,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.semiBold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Like, Share, Save buttons
+                      Positioned(
+                        left: 20,
+                        right: 20,
+                        bottom: 20,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                // Like
+                                GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () {
+                                    setState(() {
+                                      _isLiked[index] = !_isLiked[index];
+                                      _likeCounts[index] += _isLiked[index]
+                                          ? 1
+                                          : -1;
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        _isLiked[index]
+                                            ? Assets.images.like.path
+                                            : Assets.images.likeicon.path,
+                                        width: 26,
+                                        height: 26,
+                                        color: _isLiked[index]
+                                            ? customColors.buttonColors[0]
+                                            : null,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      PoppinsText(
+                                        "${_likeCounts[index]}",
+                                        fontSize: PoppinsFontSizeVariant.size14,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 22),
+
+                                // Share
+                                GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () {},
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/shareiconnew.png",
+                                        width: 24,
+                                        height: 24,
+                                        color: customColors.textColor,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      PoppinsText(
+                                        "Share",
+                                        fontSize: PoppinsFontSizeVariant.size14,
+                                        color: customColors.textColor,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            // Save
+                            AppButton(
+                              buttonSize: Size(0, 0),
+                              onPressed: () {
+                                setState(() {
+                                  _isSaved[index] = !_isSaved[index];
+                                });
+                              },
+                              title: _isSaved[index] ? " Saved" : " Save",
+                              color: Colors.transparent,
+                              prefixIcon: _isSaved[index]
+                                  ? Icon(
+                                      Icons.check,
+                                      size: 17,
+                                      color: customColors.textColor,
+                                    )
+                                  : Image.asset(
+                                      Assets.images.addicon.path,
+                                      width: 15,
+                                    ),
+                              fontSize: PoppinsFontSizeVariant.size14,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Top Back button + 3-dots menu
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 60,
+                          left: 20,
+                          right: 20,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                _videoControllers[index].pause();
+                                Navigator.pop(context);
+                              },
+                              child: const CircleAvatar(
+                                backgroundColor: Colors.black54,
+                                radius: 20,
+                                child: Icon(
+                                  Icons.arrow_back_ios_new,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  barrierColor: Colors.transparent,
+                                  builder: (context) {
+                                    return Align(
+                                      alignment: Alignment.topRight,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 30,
+                                          right: 10,
+                                        ),
+                                        child: Material(
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                          color: customColors.regular,
+                                          child: SizedBox(
+                                            width: 174,
+                                            height: 142,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 16,
+                                                  ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  _popupRow(
+                                                    routePath: AppRoutes
+                                                        .reportContent
+                                                        .name,
+                                                    imagePath: Assets
+                                                        .images
+                                                        .reporticon
+                                                        .path,
+                                                    title: "Report",
+                                                    customColors: customColors,
+                                                  ),
+                                                  _popupRow(
+                                                    imagePath: Assets
+                                                        .images
+                                                        .interestedicon
+                                                        .path,
+                                                    title: "Interested",
+                                                    customColors: customColors,
+                                                  ),
+                                                  _popupRow(
+                                                    imagePath: Assets
+                                                        .images
+                                                        .notinterestedicon
+                                                        .path,
+                                                    title: "Not Interested",
+                                                    customColors: customColors,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Image.asset(
+                                "assets/images/3dotsicon.png",
+                                width: 24,
+                                height: 24,
+                                color: customColors.textColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 );
               },
-            ),
-            Positioned(
-              left: 20,
-              right: 20,
-              bottom: 95,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  PoppinsText(
-                    _titles[_currentPage],
-                    fontSize: PoppinsFontSizeVariant.size18,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: customColors.textColor,
-                  ),
-                  const SizedBox(height: 4),
-
-                  PoppinsText(
-                    "${_dates[_currentPage]} • 2.2k views",
-                    fontSize: PoppinsFontSizeVariant.size14,
-                    color: Colors.white70,
-                  ),
-                  const SizedBox(height: 8),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PoppinsText(
-                        _descriptions[_currentPage],
-                        fontSize: PoppinsFontSizeVariant.size14,
-                        color: customColors.textColor,
-                        maxLines: _expanded[_currentPage] ? 20 : 3,
-                        textOverflow: TextOverflow.ellipsis,
-                      ),
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-
-                        onTap: () {
-                          setState(() {
-                            _expanded[_currentPage] = !_expanded[_currentPage];
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: PoppinsText(
-                            _expanded[_currentPage] ? "Read Less" : "Read More",
-                            color: customColors.textColor,
-                            fontSize: PoppinsFontSizeVariant.size13,
-                            fontWeight: PoppinsFontWeightVariant.semiBold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              left: 20,
-              right: 20,
-              bottom: 20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-
-                        onTap: () {
-                          setState(() {
-                            _isLiked[_currentPage] = !_isLiked[_currentPage];
-                            _likeCounts[_currentPage] += _isLiked[_currentPage]
-                                ? 1
-                                : -1;
-                          });
-                        },
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-
-                          children: [
-                            Image.asset(
-                              _isLiked[_currentPage]
-                                  ? Assets.images.like.path
-                                  : Assets.images.likeicon.path,
-                              width: 26,
-                              height: 26,
-                              color: _isLiked[_currentPage]
-                                  ? customColors.buttonColors[0]
-                                  : null,
-                            ),
-                            const SizedBox(width: 8),
-                            PoppinsText(
-                              "${_likeCounts[_currentPage]}",
-                              fontSize: PoppinsFontSizeVariant.size14,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 22),
-
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-
-                        onTap: () {},
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/images/shareiconnew.png",
-                              width: 24,
-                              height: 24,
-                              color: customColors.textColor,
-                            ),
-                            const SizedBox(width: 8),
-                            PoppinsText(
-                              "Share",
-                              fontSize: PoppinsFontSizeVariant.size14,
-                              color: customColors.textColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  AppButton(
-                    buttonSize: Size(0, 0),
-                    onPressed: () {
-                      setState(() {
-                        _isSaved[_currentPage] = !_isSaved[_currentPage];
-                      });
-                    },
-                    title: _isSaved[_currentPage] ? " Saved" : " Save",
-                    color: Colors.transparent,
-                    prefixIcon: _isSaved[_currentPage]
-                        ? Icon(
-                            Icons.check,
-                            size: 17,
-                            color: customColors.textColor,
-                          )
-                        : Image.asset(Assets.images.addicon.path, width: 15),
-                    fontSize: PoppinsFontSizeVariant.size14,
-                  ),
-                ],
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-
-                    onTap: () {
-                      _videoControllers[_currentPage].pause();
-                      Navigator.pop(context);
-                    },
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.black54,
-                      radius: 20,
-                      child: Icon(
-                        Icons.arrow_back_ios_new,
-                        size: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        barrierColor: Colors.transparent,
-                        builder: (context) {
-                          return Align(
-                            alignment: Alignment.topRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                top: 30,
-                                right: 10,
-                              ),
-                              child: Material(
-                                borderRadius: BorderRadius.circular(10),
-                                color: customColors.regular,
-                                child: SizedBox(
-                                  width: 174,
-                                  height: 142,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 16,
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        _popupRow(
-                                          routePath:
-                                              AppRoutes.reportContent.name,
-                                          imagePath:
-                                              Assets.images.reporticon.path,
-                                          title: "Report",
-                                          customColors: customColors,
-                                        ),
-                                        _popupRow(
-                                          imagePath:
-                                              Assets.images.interestedicon.path,
-                                          title: "Interested",
-                                          customColors: customColors,
-                                        ),
-                                        _popupRow(
-                                          imagePath: Assets
-                                              .images
-                                              .notinterestedicon
-                                              .path,
-                                          title: "Not Interested",
-                                          customColors: customColors,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: Image.asset(
-                      "assets/images/3dotsicon.png",
-                      width: 24,
-                      height: 24,
-                      color: customColors.textColor,
-                    ),
-                  ),
-                ],
-              ),
             ),
           ],
         ),
