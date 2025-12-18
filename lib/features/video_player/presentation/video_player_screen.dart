@@ -796,16 +796,20 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                               },
                             ),
                           ),
-                          PoppinsText(
-                            _formatDuration(
-                              _betterPlayerController
-                                  .videoPlayerController!
-                                  .value
-                                  .position,
+                          Padding(
+                            padding: EdgeInsets.only(right: 24),
+                            // padding: const EdgeInsets.all(8.0),
+                            child: PoppinsText(
+                              _formatDuration(
+                                _betterPlayerController
+                                    .videoPlayerController!
+                                    .value
+                                    .position,
+                              ),
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              color: AppColors.wDark,
                             ),
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: AppColors.wDark,
                           ),
                           // SizedBox(width: 10),
                           // PoppinsText(
