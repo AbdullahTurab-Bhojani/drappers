@@ -350,6 +350,10 @@ class $AssetsImagesGen {
   AssetGenImage get commenticon =>
       const AssetGenImage('assets/images/commenticon.png');
 
+  /// File path: assets/images/contentdetailvodep.mp4
+  String get contentdetailvodep =>
+      'packages/drappers/assets/images/contentdetailvodep.mp4';
+
   /// File path: assets/images/course_complete.png
   AssetGenImage get courseComplete =>
       const AssetGenImage('assets/images/course_complete.png');
@@ -569,6 +573,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/likeicon.png
   AssetGenImage get likeicon =>
       const AssetGenImage('assets/images/likeicon.png');
+
+  /// File path: assets/images/livefullview.mp4
+  String get livefullview => 'packages/drappers/assets/images/livefullview.mp4';
+
+  /// File path: assets/images/livevideo.mp4
+  String get livevideo => 'packages/drappers/assets/images/livevideo.mp4';
 
   /// File path: assets/images/lock786.png
   AssetGenImage get lock786 => const AssetGenImage('assets/images/lock786.png');
@@ -910,6 +920,30 @@ class $AssetsImagesGen {
   AssetGenImage get trendingimage9 =>
       const AssetGenImage('assets/images/trendingimage9.png');
 
+  /// File path: assets/images/video1.mp4
+  String get video1 => 'packages/drappers/assets/images/video1.mp4';
+
+  /// File path: assets/images/video10.mp4
+  String get video10 => 'packages/drappers/assets/images/video10.mp4';
+
+  /// File path: assets/images/video2.mp4
+  String get video2 => 'packages/drappers/assets/images/video2.mp4';
+
+  /// File path: assets/images/video3.mp4
+  String get video3 => 'packages/drappers/assets/images/video3.mp4';
+
+  /// File path: assets/images/video4.mp4
+  String get video4 => 'packages/drappers/assets/images/video4.mp4';
+
+  /// File path: assets/images/video5.mp4
+  String get video5 => 'packages/drappers/assets/images/video5.mp4';
+
+  /// File path: assets/images/video8.mp4
+  String get video8 => 'packages/drappers/assets/images/video8.mp4';
+
+  /// File path: assets/images/video9.mp4
+  String get video9 => 'packages/drappers/assets/images/video9.mp4';
+
   /// File path: assets/images/videolock.png
   AssetGenImage get videolock =>
       const AssetGenImage('assets/images/videolock.png');
@@ -995,6 +1029,7 @@ class $AssetsImagesGen {
     cardimage,
     casting,
     commenticon,
+    contentdetailvodep,
     courseComplete,
     createpage,
     crossnewicon,
@@ -1051,6 +1086,8 @@ class $AssetsImagesGen {
     lessonComplete,
     like,
     likeicon,
+    livefullview,
+    livevideo,
     lock786,
     logo2,
     logout009,
@@ -1140,6 +1177,14 @@ class $AssetsImagesGen {
     trendingimage7,
     trendingimage8,
     trendingimage9,
+    video1,
+    video10,
+    video2,
+    video3,
+    video4,
+    video5,
+    video8,
+    video9,
     videolock,
     watchlist786,
     watchlistcard1,

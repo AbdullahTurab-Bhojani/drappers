@@ -64,7 +64,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                       context.pushNamed(AppRoutes.searchscreen.name);
                     },
                     child: Image.asset(
-                      Assets.images.searchicon.path,
+                      Assets.images.searchstokeicon.path,
                       width: 20,
                       height: 20,
                     ),

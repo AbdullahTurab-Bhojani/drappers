@@ -1,13 +1,14 @@
 // ignore_for_file: unused_field, deprecated_member_use
 
+import 'dart:io';
+
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/guestloginwidget.dart';
 
 class CustomVideoPlayerScreen extends StatefulWidget {
   const CustomVideoPlayerScreen({super.key});
@@ -27,6 +28,9 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   bool _showEpisodes = false;
   final bool _isSpeedPopupVisible = false;
   final bool _isQualityPopupVisible = false;
+  bool showLoader = false;
+  File? videoFile;
+
   String _selectedQuality = "720p";
 
   String _selectedSpeed = "1x";
@@ -43,18 +47,21 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     (index) => {
       "title": "Meet The Drapers Season 6 (2023)",
       "url":
-          "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          // "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          "assets/images/contentdetailvodep.mp4",
       "image": Assets.images.watchlistcard1.path,
     },
   );
 
   final String videoUrl =
-      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      // "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      "assets/images/contentdetailvodep.mp4";
 
   final List<String> episodes = List.generate(
     10,
     (index) =>
-        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        // "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "assets/images/contentdetailvodep.mp4",
   );
 
   @override
@@ -78,6 +85,36 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       DeviceOrientation.landscapeRight,
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  Future<File> assetToFile(String assetPath, {String? fileName}) async {
+    setState(() {
+      showLoader = true;
+    });
+
+    final name = fileName ?? assetPath.split('/').last;
+
+    final tempDir = await getTemporaryDirectory();
+    final file = File('${tempDir.path}/$name');
+
+    if (await file.exists()) {
+      setState(() {
+        videoFile = file;
+
+        showLoader = false;
+      });
+      return file;
+    }
+
+    final byteData = await rootBundle.load(assetPath);
+    await file.writeAsBytes(byteData.buffer.asUint8List());
+    setState(() {
+      videoFile = file;
+
+      showLoader = false;
+    });
+
+    return file;
   }
 
   void _changeSpeed() {
@@ -176,7 +213,10 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     );
   }
 
-  void _initializePlayer() {
+  Future<void> _initializePlayer() async {
+    setState(() {
+      showLoader = true;
+    });
     BetterPlayerConfiguration config = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.cover,
@@ -192,19 +232,19 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       ),
     );
 
+    await assetToFile(videoUrl);
+
     BetterPlayerDataSource source = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      videoUrl,
-      resolutions: {"360p": videoUrl, "480p": videoUrl, "720p": videoUrl},
-      subtitles: [
-        BetterPlayerSubtitlesSource(
-          type: BetterPlayerSubtitlesSourceType.network,
-          name: "English",
-          urls: [
-            "https://bitdash-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt",
-          ],
-        ),
-      ],
+      BetterPlayerDataSourceType.file,
+      videoFile!.path,
+      // resolutions: {"360p": videoUrl, "480p": videoUrl, "720p": videoUrl},
+      // subtitles: [
+      //   BetterPlayerSubtitlesSource(
+      //     type: BetterPlayerSubtitlesSourceType.memory,
+      //     name: "English",
+      //     urls: ["assets/images/livevideo.mp4"],
+      //   ),
+      // ],
     );
 
     _betterPlayerController = BetterPlayerController(
@@ -212,30 +252,22 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       betterPlayerDataSource: source,
     );
 
-    // 👇 Add listener to hide controls when playing
-    _betterPlayerController.addEventsListener((event) {
-      if (!mounted) return;
-
-      if (event.betterPlayerEventType == BetterPlayerEventType.play) {
-        // Video started → hide controls after 3 sec
-        Future.delayed(const Duration(seconds: 3), () {
-          if (mounted && _betterPlayerController.isPlaying() == true) {
-            setState(() {
-              _controlsVisible = false;
-            });
-          }
-        });
-      } else if (event.betterPlayerEventType == BetterPlayerEventType.pause) {
-        // Video paused → show controls
-        setState(() {
-          _controlsVisible = true;
-        });
+    Future.delayed(const Duration(seconds: 1), () async {
+      if (_betterPlayerController.betterPlayerSubtitlesSourceList.isNotEmpty) {
+        await _betterPlayerController.setupSubtitleSource(
+          _betterPlayerController.betterPlayerSubtitlesSourceList.first,
+        );
       }
+    });
+
+    _hideControlsAfterDelay();
+    setState(() {
+      showLoader = false;
     });
   }
 
   void _hideControlsAfterDelay() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
       if (mounted && _betterPlayerController.isPlaying() == true) {
         setState(() => _controlsVisible = false);
       }

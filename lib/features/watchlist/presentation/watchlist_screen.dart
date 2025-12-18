@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
@@ -45,7 +47,6 @@ class WatchlistScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     bool canExit = false;
-    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         if (!canExit) {

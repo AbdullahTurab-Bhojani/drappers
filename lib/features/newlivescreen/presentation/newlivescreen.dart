@@ -1,8 +1,11 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously, unused_element, prefer_final_fields
+
+import 'dart:io';
 
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -22,17 +25,19 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   bool _controlsVisible = true;
   bool _showEpisodes = false;
   bool _isSpeedPopupVisible = false;
+  File? videoFile;
+  bool showLoader = false;
   void _changeSpeed() {
     setState(() {
       _isSpeedPopupVisible = !_isSpeedPopupVisible;
     });
   }
 
-  final String videoUrl = 'https://stream.syritv.al/SyriTV/index.m3u8';
+  final String videoUrl = 'assets/images/livefullview.mp4';
 
   final List<String> episodes = List.generate(
     10,
-    (index) => 'https://stream.syritv.al/SyriTV/index.m3u8',
+    (index) => 'assets/images/livefullview.mp4',
   );
 
   @override
@@ -50,7 +55,40 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
-  void _initializePlayer() {
+  Future<File> assetToFile(String assetPath, {String? fileName}) async {
+    setState(() {
+      showLoader = true;
+    });
+
+    final name = fileName ?? assetPath.split('/').last;
+
+    final tempDir = await getTemporaryDirectory();
+    final file = File('${tempDir.path}/$name');
+
+    if (await file.exists()) {
+      setState(() {
+        videoFile = file;
+
+        showLoader = false;
+      });
+      return file;
+    }
+
+    final byteData = await rootBundle.load(assetPath);
+    await file.writeAsBytes(byteData.buffer.asUint8List());
+    setState(() {
+      videoFile = file;
+
+      showLoader = false;
+    });
+
+    return file;
+  }
+
+  Future<void> _initializePlayer() async {
+    setState(() {
+      showLoader = true;
+    });
     BetterPlayerConfiguration config = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.cover,
@@ -66,19 +104,19 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       ),
     );
 
+    await assetToFile(videoUrl);
+
     BetterPlayerDataSource source = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      videoUrl,
-      resolutions: {"360p": videoUrl, "480p": videoUrl, "720p": videoUrl},
-      subtitles: [
-        BetterPlayerSubtitlesSource(
-          type: BetterPlayerSubtitlesSourceType.network,
-          name: "English",
-          urls: [
-            "https://bitdash-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt",
-          ],
-        ),
-      ],
+      BetterPlayerDataSourceType.file,
+      videoFile!.path,
+      // resolutions: {"360p": videoUrl, "480p": videoUrl, "720p": videoUrl},
+      // subtitles: [
+      //   BetterPlayerSubtitlesSource(
+      //     type: BetterPlayerSubtitlesSourceType.memory,
+      //     name: "English",
+      //     urls: ["assets/images/livevideo.mp4"],
+      //   ),
+      // ],
     );
 
     _betterPlayerController = BetterPlayerController(
@@ -86,7 +124,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       betterPlayerDataSource: source,
     );
 
-    // ✅ FORCE ENABLE SUBTITLES AFTER LOAD
     Future.delayed(const Duration(seconds: 1), () async {
       if (_betterPlayerController.betterPlayerSubtitlesSourceList.isNotEmpty) {
         await _betterPlayerController.setupSubtitleSource(
@@ -96,6 +133,9 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     });
 
     _hideControlsAfterDelay();
+    setState(() {
+      showLoader = false;
+    });
   }
 
   String _formatDuration(Duration duration) {
@@ -114,12 +154,14 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   }
 
   Widget _speedPopup() {
+    List<String> speedList = ['0.25x', '0.5x', '0.75x', 'Normal'];
+
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Center(
         child: Container(
-          width: 336,
-          padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+          width: 320,
+          padding: EdgeInsets.only(top: 16, left: 24, right: 24),
           decoration: BoxDecoration(
             color: AppColors.dRegular,
             borderRadius: BorderRadius.circular(16),
@@ -138,23 +180,63 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   ),
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
-
-                    onTap: () {
-                      setState(() {
-                        _isSpeedPopupVisible = false;
-                      });
-                    },
-                    child: Icon(Icons.close, color: Colors.white),
+                    onTap: () => Navigator.pop(context),
+                    child: Icon(Icons.close, color: AppColors.white),
                   ),
                 ],
               ),
-              SizedBox(height: 16),
-              Divider(),
               SizedBox(height: 12),
-              _speedOption("0.5x"),
-              _speedOption("1x"),
-              _speedOption("1.5x"),
-              _speedOption("2x"),
+              Divider(),
+
+              ListView.builder(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: speedList.length,
+                itemBuilder: (context, index) {
+                  final text = speedList[index];
+                  final bool isSelected = _selectedSpeed == text;
+
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      setState(() {
+                        _selectedSpeed = text;
+                        _betterPlayerController.setSpeed(
+                          double.parse(text.replaceAll('x', '')),
+                        );
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 12,
+                      ),
+                      margin: EdgeInsets.only(bottom: 10),
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? AppColors.popselectcolor19193F
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          if (isSelected)
+                            Icon(Icons.check, color: AppColors.white, size: 18),
+                          if (isSelected) SizedBox(width: 10),
+                          PoppinsText(
+                            text,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: AppColors.wDark,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -167,58 +249,98 @@ class _newliveScreenScreenState extends State<newliveScreen> {
 
     showDialog(
       context: context,
-      builder: (_) => Dialog(
-        backgroundColor: Colors.transparent,
-        child: Center(
-          child: Container(
-            width: 336,
-            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
-            decoration: BoxDecoration(
-              color: AppColors.dRegular,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    PoppinsText(
-                      "Audio & Subtitles",
-                      fontSize: PoppinsFontSizeVariant.size12,
-                      fontWeight: PoppinsFontWeightVariant.regular,
-                      color: AppColors.wDark,
-                    ),
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
+      builder: (_) => GestureDetector(
+        onTap: () => Navigator.pop(context),
+        child: Dialog(
+          backgroundColor: Colors.transparent,
+          child: Center(
+            child: Container(
+              width: 320,
+              padding: EdgeInsets.only(top: 16, left: 24, right: 24),
+              decoration: BoxDecoration(
+                color: AppColors.dRegular,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Title Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PoppinsText(
+                        "Audio & Subtitles",
+                        fontSize: PoppinsFontSizeVariant.size12,
+                        fontWeight: PoppinsFontWeightVariant.regular,
+                        color: AppColors.wDark,
+                      ),
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () => Navigator.pop(context),
+                        child: Icon(Icons.close, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 12),
+                  Divider(),
 
-                      onTap: () => Navigator.pop(context),
-                      child: Icon(Icons.close, color: Colors.white),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Divider(),
-                SizedBox(height: 12),
-                ...subtitleOptions.map(
-                  (option) => _audioSubtitleOption(option, isSubtitle: true),
-                ),
-                SizedBox(height: 12),
-              ],
+                  // Options List
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: subtitleOptions.length,
+                    itemBuilder: (context, index) {
+                      final option = subtitleOptions[index];
+                      final bool isSelected = _selectedSubtitle == option;
+
+                      return GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          setState(() {
+                            _selectedSubtitle = option;
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 12,
+                          ),
+                          margin: EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? AppColors.popselectcolor19193F
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              if (isSelected)
+                                Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                              if (isSelected) SizedBox(width: 10),
+                              PoppinsText(
+                                option,
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                color: AppColors.wDark,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
-  }
-
-  void _playEpisode(int index) {
-    final source = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      episodes[index],
-    );
-
-    _betterPlayerController.setupDataSource(source);
   }
 
   @override
@@ -227,21 +349,26 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          Positioned.fill(
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () {
-                setState(() {
-                  _controlsVisible = !_controlsVisible; 
-                });
+          showLoader
+              ? Container(
+                  color: Colors.black,
+                  child: CircularProgressIndicator(color: AppColors.white),
+                )
+              : Positioned.fill(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      setState(() {
+                        _controlsVisible = !_controlsVisible;
+                      });
 
-                if (_controlsVisible) {
-                  _hideControlsAfterDelay(); 
-                }
-              },
-              child: BetterPlayer(controller: _betterPlayerController),
-            ),
-          ),
+                      if (_controlsVisible) {
+                        _hideControlsAfterDelay();
+                      }
+                    },
+                    child: BetterPlayer(controller: _betterPlayerController),
+                  ),
+                ),
 
           if (_controlsVisible) _buildControls(),
 
@@ -260,8 +387,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       behavior: HitTestBehavior.opaque,
 
                       onTap: () {
-                        _playEpisode(index);
-                        setState(() => _showEpisodes = false);
+                        // _playEpisode(index);
+                        // setState(() => _showEpisodes = false);
                       },
                       child: Container(
                         margin: EdgeInsets.all(6),
@@ -293,33 +420,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       color: Colors.black.withOpacity(0.3),
       child: Stack(
         children: [
-          if (_controlsVisible &&
-              !_isLocked) // only show if visible and not locked
+          if (_controlsVisible && !_isLocked)
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // // Back 10 seconds
-                  // IconButton(
-                  //   icon: Image.asset(
-                  //     Assets.images.back10seconds.path,
-                  //     width: 64,
-                  //     height: 64,
-                  //   ),
-                  //   onPressed: () {
-                  //     final pos = _betterPlayerController
-                  //         .videoPlayerController!
-                  //         .value
-                  //         .position;
-                  //     _betterPlayerController.seekTo(
-                  //       pos - const Duration(seconds: 10),
-                  //     );
-                  //   },
-                  // ),
-
-                  // const SizedBox(width: 40),
-
-                  // Play/Pause toggle
                   IconButton(
                     icon: Icon(
                       _betterPlayerController.isPlaying()!
@@ -337,25 +442,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       });
                     },
                   ),
-
-                  // const SizedBox(width: 40),
-
-                  // IconButton(
-                  //   icon: Image.asset(
-                  //     Assets.images.forward10seconds.path,
-                  //     width: 64,
-                  //     height: 64,
-                  //   ),
-                  //   onPressed: () {
-                  //     final pos = _betterPlayerController
-                  //         .videoPlayerController!
-                  //         .value
-                  //         .position;
-                  //     _betterPlayerController.seekTo(
-                  //       pos + const Duration(seconds: 10),
-                  //     );
-                  //   },
-                  // ),
                 ],
               ),
             ),

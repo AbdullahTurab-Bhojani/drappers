@@ -205,6 +205,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           SizedBox(
                             height: 180,
                             child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                              clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
                               separatorBuilder: (context, index) =>
                                   SizedBox(width: 15),
@@ -250,6 +252,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           SizedBox(
                             height: 180,
                             child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                              clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
                               separatorBuilder: (context, index) =>
                                   SizedBox(width: 15),
@@ -299,6 +303,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           SizedBox(
                             height: 180,
                             child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                              clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
                               separatorBuilder: (context, index) =>
                                   SizedBox(width: 15),

@@ -270,6 +270,13 @@ class _StartupdetailsState extends State<Startupdetails> {
                           ),
                           SizedBox(height: 30),
                           AppButton(
+                            prefixIcon: Image(
+                              image: AssetImage(
+                                Assets.images.playstrokeicon.path,
+                              ),
+                              width: 20,
+                              height: 20,
+                            ),
                             onPressed: () {
                               context.pushNamed(AppRoutes.videoScreen.name);
                             },

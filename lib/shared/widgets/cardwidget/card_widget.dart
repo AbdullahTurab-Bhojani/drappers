@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
-import '../guestloginwidget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class CardWidget extends StatefulWidget {
