@@ -720,15 +720,28 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       _betterPlayerController.isPlaying()!
                           ? Icons.pause_circle
                           : Icons.play_circle,
-                      size: 90,
+                      size: 70,
                     ),
-                    onPressed: () {
-                      if (_betterPlayerController.isPlaying() == true) {
-                        _betterPlayerController.pause();
-                      } else {
-                        _betterPlayerController.play();
-                      }
-                      setState(() {});
+                    onPressed: () async {
+                      setState(() {
+                        final videoPosition = _betterPlayerController
+                            .videoPlayerController!
+                            .value
+                            .position;
+                        final videoDuration = _betterPlayerController
+                            .videoPlayerController!
+                            .value
+                            .duration;
+
+                        if (_betterPlayerController.isPlaying()!) {
+                          _betterPlayerController.pause();
+                        } else {
+                          if (videoPosition >= videoDuration!) {
+                            _betterPlayerController.seekTo(Duration.zero);
+                          }
+                          _betterPlayerController.play();
+                        }
+                      });
                     },
                   ),
                   SizedBox(width: 40),
@@ -865,7 +878,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                               Assets.images.nextepisode.path,
                               "Next Ep.",
                               () {
-                                if (episodesData.length > 1) _playEpisode(1);
+                                // if (episodesData.length > 1) _playEpisode(1);
                               },
                             ),
                           ],

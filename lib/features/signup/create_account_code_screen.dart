@@ -26,13 +26,19 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
     if (value.length == 1 && index < 5) {
       _focusNodes[index + 1].requestFocus();
     }
+
     if (value.isEmpty && index > 0) {
       _focusNodes[index - 1].requestFocus();
     }
 
     final otp = _otpControllers.map((c) => c.text).join();
+
     if (otp.length == 6) {
-      context.pushNamed(AppRoutes.home.name);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          context.goNamed(AppRoutes.home.name);
+        }
+      });
     }
   }
 

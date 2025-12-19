@@ -417,37 +417,48 @@ class _HomeScreenState extends State<HomeScreen> {
                                             child: Container(
                                               padding: EdgeInsets.all(12),
                                               decoration: BoxDecoration(
-                                                color: Colors.black.withOpacity(
-                                                  0.45,
-                                                ),
+                                                // color: Colors.black.withOpacity(
+                                                //   0.45,
+                                                // ),
                                                 shape: BoxShape.circle,
                                               ),
                                               child: IconButton(
-                                                iconSize: 36,
-                                                color: Colors.white,
                                                 icon: Icon(
                                                   _betterPlayerController
-                                                          .videoPlayerController!
-                                                          .value
-                                                          .isPlaying
-                                                      ? Icons.pause
-                                                      : Icons.play_arrow,
+                                                          .isPlaying()!
+                                                      ? Icons.pause_circle
+                                                      : Icons.play_circle,
+                                                  size: 70,
                                                 ),
-                                                onPressed: () {
-                                                  if (_betterPlayerController
-                                                          .isVideoInitialized() !=
-                                                      null) {
-                                                    setState(() {
+                                                onPressed: () async {
+                                                  setState(() {
+                                                    final videoPosition =
+                                                        _betterPlayerController
+                                                            .videoPlayerController!
+                                                            .value
+                                                            .position;
+                                                    final videoDuration =
+                                                        _betterPlayerController
+                                                            .videoPlayerController!
+                                                            .value
+                                                            .duration;
+
+                                                    if (_betterPlayerController
+                                                        .isPlaying()!) {
                                                       _betterPlayerController
-                                                              .videoPlayerController!
-                                                              .value
-                                                              .isPlaying
-                                                          ? _betterPlayerController
-                                                                .pause()
-                                                          : _betterPlayerController
-                                                                .play();
-                                                    });
-                                                  }
+                                                          .pause();
+                                                    } else {
+                                                      if (videoPosition >=
+                                                          videoDuration!) {
+                                                        _betterPlayerController
+                                                            .seekTo(
+                                                              Duration.zero,
+                                                            );
+                                                      }
+                                                      _betterPlayerController
+                                                          .play();
+                                                    }
+                                                  });
                                                 },
                                               ),
                                             ),
@@ -726,6 +737,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return CardWidget(
                                   assetImage: trendingimages[index],
                                   showSaveIcon: false,
+                                  fromEpisode: false,
+                                  allowGuestNavigation: true,
                                 );
                               },
                             ),
@@ -996,7 +1009,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ),

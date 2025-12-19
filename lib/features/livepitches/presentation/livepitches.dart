@@ -148,6 +148,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                             return CardWidget(
                               assetImage: trendingimages[index],
                               showSaveIcon: false,
+                              fromEpisode: true, allowGuestNavigation: false,
                             );
                           },
                         ),

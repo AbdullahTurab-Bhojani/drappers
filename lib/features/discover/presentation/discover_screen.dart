@@ -215,6 +215,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                 return CardWidget(
                                   assetImage: trendingimages[index],
                                   showSaveIcon: false,
+                                  fromEpisode: false,
+                                  allowGuestNavigation: false,
                                 );
                               },
                             ),

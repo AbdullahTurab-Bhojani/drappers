@@ -344,11 +344,23 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           : Icons.play_circle,
                       size: 90,
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       setState(() {
+                        final videoPosition = _betterPlayerController
+                            .videoPlayerController!
+                            .value
+                            .position;
+                        final videoDuration = _betterPlayerController
+                            .videoPlayerController!
+                            .value
+                            .duration;
+
                         if (_betterPlayerController.isPlaying()!) {
                           _betterPlayerController.pause();
                         } else {
+                          if (videoPosition >= videoDuration!) {
+                            _betterPlayerController.seekTo(Duration.zero);
+                          }
                           _betterPlayerController.play();
                         }
                       });
@@ -389,7 +401,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           .videoPlayerController!
                           .value
                           .isPlaying)
-                      Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(

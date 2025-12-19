@@ -255,6 +255,8 @@ class _SearchscreenState extends State<Searchscreen> {
                           return CardWidget(
                             assetImage: trendingimages[index],
                             showSaveIcon: false,
+                            fromEpisode: false,
+                            allowGuestNavigation: false,
                           );
                         },
                       ),
