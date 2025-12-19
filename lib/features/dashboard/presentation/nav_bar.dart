@@ -90,7 +90,7 @@ class _BottomNavigationBarShellState
       return;
     }
     setState(() {
-    selectedIndex = index;
+      selectedIndex = index;
     });
     final path = _navItems[index]['path'];
     if (path.isNotEmpty) {
@@ -105,9 +105,7 @@ class _BottomNavigationBarShellState
       canPop: false,
       child: Scaffold(
         backgroundColor: customColors.dark,
-        body: SafeArea(
-          top: true,
-          child: Container(child: widget.child)),
+        body: SafeArea(top: true, child: Container(child: widget.child)),
         bottomNavigationBar: SafeArea(
           bottom: true,
           child: Container(
@@ -136,13 +134,21 @@ class _BottomNavigationBarShellState
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (isProfileTab)
-                        CircleAvatar(
-                          radius: isSelected ? 15 : 15,
-                          backgroundColor: Colors.transparent,
-                          backgroundImage: NetworkImage(
-                            'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                          ),
-                        )
+                        GuestHelper.isGuest
+                            ? Icon(
+                                Icons.person_outline,
+                                size: 30,
+                                color: isSelected
+                                    ? customColors.textColor
+                                    : customColors.greyColor,
+                              )
+                            : CircleAvatar(
+                                radius: 15,
+                                backgroundColor: Colors.transparent,
+                                backgroundImage: NetworkImage(
+                                  'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                                ),
+                              )
                       else
                         isSelected
                             ? Image(
@@ -153,9 +159,9 @@ class _BottomNavigationBarShellState
                                 image: AssetImage(_navItems[index]['icon2']),
                                 height: 24,
                               ),
-          
+
                       const SizedBox(height: 4),
-          
+
                       PoppinsText(
                         _navItems[index]['label'],
                         fontSize: PoppinsFontSizeVariant.size14,

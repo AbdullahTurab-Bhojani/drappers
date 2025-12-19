@@ -18,11 +18,10 @@ class ReelsviewScreen extends StatefulWidget {
 
 class _ReelsviewScreenState extends State<ReelsviewScreen> {
   final List<String> _videoPaths = [
-    'assets/images/video10.mp4',
-    'assets/images/video9.mp4',
     'assets/images/video8.mp4',
-    'assets/images/video10.mp4',
-    'assets/images/video9.mp4',
+    'assets/images/video8.mp4',
+    'assets/images/video8.mp4',
+    'assets/images/video8.mp4',
     'assets/images/video8.mp4',
   ];
 

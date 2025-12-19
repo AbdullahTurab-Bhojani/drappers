@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
+import '../guestloginwidget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class CardWidget extends StatefulWidget {
   final bool showSaveIcon;
-
+  final bool fromEpisode;
   final String assetImage;
+  final bool allowGuestNavigation;
+
   const CardWidget({
     super.key,
     required this.assetImage,
     required this.showSaveIcon,
+    required this.fromEpisode,
+    required this.allowGuestNavigation,
   });
 
   @override
@@ -26,12 +31,22 @@ class _CardWidgetState extends State<CardWidget> {
       behavior: HitTestBehavior.opaque,
 
       onTap: () {
-        // if (GuestHelper.isGuest) {
-        //   GuestHelper.checkGuest(context);
-        //   return;
-        // }
-        context.pushNamed(AppRoutes.contentDetail.name);
+        if (GuestHelper.isGuest) {
+          if (widget.allowGuestNavigation) {
+            context.pushNamed(AppRoutes.contentDetail.name);
+          } else {
+            GuestHelper.checkGuest(context);
+          }
+          return;
+        }
+
+        if (widget.fromEpisode) {
+          context.pushNamed(AppRoutes.videoScreen.name);
+        } else {
+          context.pushNamed(AppRoutes.contentDetail.name);
+        }
       },
+
       child: Container(
         margin: EdgeInsets.zero,
         width: 125,

@@ -203,6 +203,8 @@ class ProfileScreen extends StatelessWidget {
                                       child: CardWidget(
                                         assetImage: images[index],
                                         showSaveIcon: false,
+                                        fromEpisode: false,
+                                        allowGuestNavigation: false,
                                       ),
                                     );
                                   },
@@ -262,6 +264,7 @@ class ProfileScreen extends StatelessWidget {
                                       child: CardWidget(
                                         assetImage: images[index],
                                         showSaveIcon: false,
+                                        fromEpisode: false, allowGuestNavigation: false,
                                       ),
                                     );
                                   },

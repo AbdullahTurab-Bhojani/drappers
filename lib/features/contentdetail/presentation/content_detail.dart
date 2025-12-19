@@ -424,7 +424,6 @@ class _ContentDetailState extends State<ContentDetail>
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    /// Season Dropdown
                                     Padding(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 4,
@@ -496,7 +495,6 @@ class _ContentDetailState extends State<ContentDetail>
                                     ),
                                     SizedBox(height: 12),
 
-                                    /// Episodes Grid
                                     GridView.builder(
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
@@ -513,13 +511,13 @@ class _ContentDetailState extends State<ContentDetail>
                                         return CardWidget(
                                           assetImage: trendingimages[index],
                                           showSaveIcon: false,
+                                          fromEpisode: true, allowGuestNavigation: false,
                                         );
                                       },
                                     ),
                                   ],
                                 )
                               else
-                                /// More Like This Grid
                                 GridView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
@@ -549,7 +547,7 @@ class _ContentDetailState extends State<ContentDetail>
                         },
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: 14),
                     ],
                   ),
                 ),
