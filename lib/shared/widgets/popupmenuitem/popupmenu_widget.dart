@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../guestloginwidget.dart';
 
 class PopupmenuWidget extends StatefulWidget {
   final bool showSaveIcon;
@@ -99,6 +100,10 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
     return PopupMenuItem<String>(
       value: text,
       onTap: () {
+        if (GuestHelper.isGuest) {
+          GuestHelper.checkGuest(context);
+          return;
+        }
         if (navigate && routePath != null) {
           context.pushNamed(routePath);
         }

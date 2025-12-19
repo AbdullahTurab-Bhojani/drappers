@@ -29,18 +29,8 @@ class _CardWidgetState extends State<CardWidget> {
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-
       onTap: () {
-        if (GuestHelper.isGuest) {
-          if (widget.allowGuestNavigation) {
-            context.pushNamed(AppRoutes.contentDetail.name);
-          } else {
-            GuestHelper.checkGuest(context);
-          }
-          return;
-        }
-
-        if (widget.fromEpisode) {
+        if (widget.fromEpisode == true) {
           context.pushNamed(AppRoutes.videoScreen.name);
         } else {
           context.pushNamed(AppRoutes.contentDetail.name);

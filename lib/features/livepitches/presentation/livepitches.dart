@@ -293,10 +293,10 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             border: true,
                             onPressed: () {
-                              if (GuestHelper.isGuest) {
-                                GuestHelper.checkGuest(context);
-                                return;
-                              }
+                              // if (GuestHelper.isGuest) {
+                              //   GuestHelper.checkGuest(context);
+                              //   return;
+                              // }
                               context.pushNamed(AppRoutes.documentries.name);
                             },
                             title: "View More",

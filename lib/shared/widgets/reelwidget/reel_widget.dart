@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../app_bar/main_app_bar.dart';
+import '../guestloginwidget.dart';
 import '../reelcard/reelcard_widget.dart';
 
 class ReelWidget extends StatefulWidget {
@@ -65,17 +66,28 @@ class _ReelWidgetState extends State<ReelWidget> {
               actions: [
                 Padding(
                   padding: EdgeInsets.only(right: 16),
-                  child: Image.asset(
-                    Assets.images.searchstokeicon.path,
-                    width: 20,
-                    height: 20,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+
+                    onTap: () {
+                      if (GuestHelper.isGuest) {
+                        GuestHelper.checkGuest(context);
+                        return;
+                      }
+                      context.pushNamed(AppRoutes.searchscreen.name);
+                    },
+                    child: Image.asset(
+                      Assets.images.searchstokeicon.path,
+                      width: 20,
+                      height: 20,
+                    ),
                   ),
                 ),
               ],
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: reelimages.length,

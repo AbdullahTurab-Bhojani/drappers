@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:video_player/video_player.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
