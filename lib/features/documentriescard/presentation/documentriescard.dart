@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
 class Documentriescard extends StatefulWidget {
@@ -58,10 +59,19 @@ class _DocumentriescardState extends State<Documentriescard> {
               actions: [
                 Padding(
                   padding: EdgeInsets.only(right: 16),
-                  child: Image.asset(
-                    Assets.images.searchstokeicon.path,
-                    width: 20,
-                    height: 20,
+                  child: GestureDetector(
+                    onTap: () {
+                        if (GuestHelper.isGuest) {
+                          GuestHelper.checkGuest(context);
+                          return;
+                        }
+                        context.pushNamed('searchscreen');
+                      },
+                    child: Image.asset(
+                      Assets.images.searchstokeicon.path,
+                      width: 20,
+                      height: 20,
+                    ),
                   ),
                 ),
               ],

@@ -399,10 +399,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       GestureDetector(
                                         behavior: HitTestBehavior.opaque,
                                         onTap: () {
-                                          if (GuestHelper.isGuest) {
-                                            GuestHelper.checkGuest(context);
-                                            return;
-                                          }
+                                          // if (GuestHelper.isGuest) {
+                                          //   GuestHelper.checkGuest(context);
+                                          //   return;
+                                          // }
                                           setState(
                                             () =>
                                                 _showControls = !_showControls,
@@ -659,12 +659,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     _betterPlayerController
                                                         .videoPlayerController!
                                                         .pause();
-                                                    if (GuestHelper.isGuest) {
-                                                      GuestHelper.checkGuest(
-                                                        context,
-                                                      );
-                                                      return;
-                                                    }
+                                                    // if (GuestHelper.isGuest) {
+                                                    //   GuestHelper.checkGuest(
+                                                    //     context,
+                                                    //   );
+                                                    //   return;
+                                                    // }
                                                     context.pushNamed(
                                                       AppRoutes
                                                           .newliveScreen
@@ -711,10 +711,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
                                 onPressed: () {
-                                  if (GuestHelper.isGuest) {
-                                    GuestHelper.checkGuest(context);
-                                    return;
-                                  }
+                                  // if (GuestHelper.isGuest) {
+                                  //   GuestHelper.checkGuest(context);
+                                  //   return;
+                                  // }
                                   context.pushNamed('trendingshow');
                                 },
                                 title: "View More",
@@ -815,10 +815,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
                                 onPressed: () {
-                                  if (GuestHelper.isGuest) {
-                                    GuestHelper.checkGuest(context);
-                                    return;
-                                  }
+                                  // if (GuestHelper.isGuest) {
+                                  //   GuestHelper.checkGuest(context);
+                                  //   return;
+                                  // }
                                   context.pushNamed('podcasts');
                                 },
 
@@ -883,10 +883,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                             onTap: () {
                               _betterPlayerController.pause();
-                              if (GuestHelper.isGuest) {
-                                GuestHelper.checkGuest(context);
-                                return;
-                              }
+                              // if (GuestHelper.isGuest) {
+                              //   GuestHelper.checkGuest(context);
+                              //   return;
+                              // }
                               context.pushNamed('voteForStartupScreen');
                             },
                           ),
@@ -921,10 +921,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontWeight: PoppinsFontWeightVariant.regular,
                                   border: true,
                                   onPressed: () {
-                                    if (GuestHelper.isGuest) {
-                                      GuestHelper.checkGuest(context);
-                                      return;
-                                    }
+                                    // if (GuestHelper.isGuest) {
+                                    //   GuestHelper.checkGuest(context);
+                                    //   return;
+                                    // }
                                     context.pushNamed('reelWidget');
                                   },
                                   title: "View More",
@@ -980,10 +980,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onPressed: () {
                                   _betterPlayerController.pause();
 
-                                  if (GuestHelper.isGuest) {
-                                    GuestHelper.checkGuest(context);
-                                    return;
-                                  }
+                                  // if (GuestHelper.isGuest) {
+                                  //   GuestHelper.checkGuest(context);
+                                  //   return;
+                                  // }
                                   context.pushNamed('documentries');
                                 },
                                 title: "View More",

@@ -233,10 +233,10 @@ class _ContentDetailState extends State<ContentDetail>
                             height: 45,
                             child: AppButton(
                               onPressed: () {
-                                if (GuestHelper.isGuest) {
-                                  GuestHelper.checkGuest(context);
-                                  return;
-                                }
+                                // if (GuestHelper.isGuest) {
+                                //   GuestHelper.checkGuest(context);
+                                //   return;
+                                // }
                                 context.pushNamed(AppRoutes.videoScreen.name);
                               },
                               title: 'Play',
@@ -348,21 +348,30 @@ class _ContentDetailState extends State<ContentDetail>
                               ],
                             ),
                             SizedBox(width: 30),
-                            Column(
-                              children: [
-                                Image.asset(
-                                  Assets.images.shareiconnew.path,
-                                  width: 18,
-                                  height: 18,
-                                ),
-                                SizedBox(height: 10),
-                                PoppinsText(
-                                  'Share',
-                                  fontSize: PoppinsFontSizeVariant.size12,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
-                                  color: customColors.textColor,
-                                ),
-                              ],
+                            GestureDetector(
+                               onTap: () {
+                                if (GuestHelper.isGuest) {
+                                  GuestHelper.checkGuest(context);
+                                  return;
+                                }
+                                // context.pushNamed(AppRoutes.reportContent.name);
+                              },
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    Assets.images.shareiconnew.path,
+                                    width: 18,
+                                    height: 18,
+                                  ),
+                                  SizedBox(height: 10),
+                                  PoppinsText(
+                                    'Share',
+                                    fontSize: PoppinsFontSizeVariant.size12,
+                                    fontWeight: PoppinsFontWeightVariant.regular,
+                                    color: customColors.textColor,
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(width: 30),
                             GestureDetector(
@@ -511,7 +520,7 @@ class _ContentDetailState extends State<ContentDetail>
                                         return CardWidget(
                                           assetImage: trendingimages[index],
                                           showSaveIcon: false,
-                                          fromEpisode: true, allowGuestNavigation: false,
+                                          fromEpisode: true, allowGuestNavigation: true,
                                         );
                                       },
                                     ),

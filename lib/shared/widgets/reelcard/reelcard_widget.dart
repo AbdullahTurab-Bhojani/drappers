@@ -32,10 +32,10 @@ class _ReelcardWidgetState extends State<ReelcardWidget> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        if (GuestHelper.isGuest) {
-          GuestHelper.checkGuest(context);
-          return;
-        }
+        // if (GuestHelper.isGuest) {
+        //   GuestHelper.checkGuest(context);
+        //   return;
+        // }
         context.pushNamed(AppRoutes.reelsviewScreen.name);
       },
       child: Container(

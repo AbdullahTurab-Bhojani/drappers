@@ -5,6 +5,7 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../app_bar/main_app_bar.dart';
+import '../guestloginwidget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class PodcastWidget extends StatefulWidget {
@@ -61,10 +62,19 @@ class _PodcastWidgetState extends State<PodcastWidget> {
               actions: [
                 Padding(
                   padding: EdgeInsets.only(right: 16),
-                  child: Image.asset(
-                    Assets.images.searchstokeicon.path,
-                    width: 20,
-                    height: 20,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (GuestHelper.isGuest) {
+                        GuestHelper.checkGuest(context);
+                        return;
+                      }
+                      context.pushNamed('searchscreen');
+                    },
+                    child: Image.asset(
+                      Assets.images.searchstokeicon.path,
+                      width: 20,
+                      height: 20,
+                    ),
                   ),
                 ),
               ],
@@ -90,13 +100,20 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                       itemBuilder: (context, index) {
                         return Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.asset(
-                                podcastimages[index],
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+
+                              onTap: () {
+                                context.pushNamed(AppRoutes.contentDetail.name);
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.asset(
+                                  podcastimages[index],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                ),
                               ),
                             ),
                             Positioned(

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../app_bar/main_app_bar.dart';
+import '../guestloginwidget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class TrendingshowWidget extends StatefulWidget {
@@ -61,6 +62,10 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                   behavior: HitTestBehavior.opaque,
 
                   onTap: () {
+                    if (GuestHelper.isGuest) {
+                      GuestHelper.checkGuest(context);
+                      return;
+                    }
                     context.pushNamed(AppRoutes.searchscreen.name);
                   },
                   child: Image.asset(

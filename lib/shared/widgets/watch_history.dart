@@ -32,10 +32,10 @@ class _WatchHistoryState extends State<WatchHistory> {
       behavior: HitTestBehavior.opaque,
 
       onTap: () {
-        if (GuestHelper.isGuest) {
-          GuestHelper.checkGuest(context);
-          return;
-        }
+        // if (GuestHelper.isGuest) {
+        //   GuestHelper.checkGuest(context);
+        //   return;
+        // }
         context.pushNamed(AppRoutes.videoScreen.name);
       },
       child: Container(

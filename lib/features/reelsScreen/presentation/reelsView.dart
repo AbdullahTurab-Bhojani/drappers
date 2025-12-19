@@ -7,6 +7,7 @@ import 'package:video_player/video_player.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 
 class ReelsviewScreen extends StatefulWidget {
   final bool showSaveIcon;
@@ -273,7 +274,6 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                         ),
                       ),
 
-                      // Like, Share, Save buttons
                       Positioned(
                         left: 20,
                         right: 20,
@@ -287,6 +287,10 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                 GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
+                                    if (GuestHelper.isGuest) {
+                                      GuestHelper.checkGuest(context);
+                                      return;
+                                    }
                                     setState(() {
                                       _isLiked[index] = !_isLiked[index];
                                       _likeCounts[index] += _isLiked[index]
@@ -317,10 +321,14 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                 ),
                                 const SizedBox(width: 22),
 
-                                // Share
                                 GestureDetector(
                                   behavior: HitTestBehavior.opaque,
-                                  onTap: () {},
+                                  onTap: () {
+                                    if (GuestHelper.isGuest) {
+                                      GuestHelper.checkGuest(context);
+                                      return;
+                                    }
+                                  },
                                   child: Row(
                                     children: [
                                       Image.asset(
@@ -341,10 +349,13 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                               ],
                             ),
 
-                            // Save
                             AppButton(
                               buttonSize: Size(0, 0),
                               onPressed: () {
+                                if (GuestHelper.isGuest) {
+                                  GuestHelper.checkGuest(context);
+                                  return;
+                                }
                                 setState(() {
                                   _isSaved[index] = !_isSaved[index];
                                 });
@@ -367,7 +378,6 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                         ),
                       ),
 
-                      // Top Back button + 3-dots menu
                       Padding(
                         padding: const EdgeInsets.only(
                           top: 60,

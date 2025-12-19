@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../drappers.dart';
-import '../guestloginwidget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class PodcardsWidget extends StatefulWidget {
@@ -30,11 +29,11 @@ class _PodcardsWidgetState extends State<PodcardsWidget> {
       behavior: HitTestBehavior.opaque,
 
       onTap: () {
-        if (GuestHelper.isGuest) {
-          GuestHelper.checkGuest(context);
-          return;
-        }
-        context.pushNamed(AppRoutes.podcasts.name);
+        // if (GuestHelper.isGuest) {
+        //   GuestHelper.checkGuest(context);
+        //   return;
+        // }
+        context.pushNamed(AppRoutes.contentDetail.name);
       },
       child: Container(
         width: 125,
