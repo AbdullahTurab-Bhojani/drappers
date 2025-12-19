@@ -215,7 +215,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             AppButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.goNamed(AppRoutes.home.name);
+                              },
                               title: '',
                               buttonSize: Size(180, 52),
                               color: AppColors.graylight,
@@ -230,7 +232,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                             AppButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.goNamed(AppRoutes.home.name);
+                              },
                               title: '',
                               buttonSize: Size(180, 52),
                               color: AppColors.graylight,

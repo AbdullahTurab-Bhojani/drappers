@@ -6,6 +6,7 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 
 class VoteForStartupScreen extends StatefulWidget {
   const VoteForStartupScreen({super.key});
@@ -347,6 +348,10 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                           width: 150,
                                           child: OutlinedButton.icon(
                                             onPressed: () {
+                                              if (GuestHelper.isGuest) {
+                                                GuestHelper.checkGuest(context);
+                                                return;
+                                              }
                                               setState(() {
                                                 isVoted = !isVoted;
                                               });

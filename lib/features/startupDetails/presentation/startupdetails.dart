@@ -6,6 +6,7 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 
 class Startupdetails extends StatefulWidget {
   const Startupdetails({super.key});
@@ -294,6 +295,10 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     2,
                                 child: OutlinedButton.icon(
                                   onPressed: () {
+                                    if (GuestHelper.isGuest) {
+                                      GuestHelper.checkGuest(context);
+                                      return;
+                                    }
                                     setState(() {
                                       isSaved = !isSaved;
                                     });
@@ -339,6 +344,10 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     2,
                                 child: OutlinedButton.icon(
                                   onPressed: () {
+                                    if (GuestHelper.isGuest) {
+                                      GuestHelper.checkGuest(context);
+                                      return;
+                                    }
                                     setState(() {
                                       isVoted = !isVoted;
                                     });
