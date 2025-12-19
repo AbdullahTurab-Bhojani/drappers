@@ -1,5 +1,6 @@
-// ignore_for_file: unused_field, deprecated_member_use
+// ignore_for_file: unused_field, deprecated_member_use, sized_box_for_whitespace
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:better_player_plus/better_player_plus.dart';
@@ -30,6 +31,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   final bool _isQualityPopupVisible = false;
   bool showLoader = false;
   File? videoFile;
+  bool _showLockIndicator = false;
 
   String _selectedQuality = "720p";
 
@@ -261,10 +263,36 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     });
   }
 
+  Timer? _lockTimer;
+
   void _toggleLock() {
     setState(() {
-      _isLocked = true;
-      _controlsVisible = true;
+      _isLocked = !_isLocked; // toggle lock state
+    });
+
+    if (_isLocked) {
+      _showLockIndicatorWithTimer();
+    } else {
+      _lockTimer?.cancel();
+      setState(() {
+        _showLockIndicator = false;
+      });
+    }
+  }
+
+  void _showLockIndicatorWithTimer() {
+    setState(() {
+      _showLockIndicator = true;
+    });
+
+    _lockTimer?.cancel(); // cancel previous timer if any
+
+    _lockTimer = Timer(const Duration(milliseconds: 10000), () {
+      if (mounted) {
+        setState(() {
+          _showLockIndicator = false;
+        });
+      }
     });
   }
 
@@ -631,17 +659,23 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
             child: BetterPlayer(controller: _betterPlayerController),
           ),
 
-          if (!_isLocked)
-            Positioned.fill(
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              if (!_isLocked) {
+                // _showLockIndicatorWithTimer();
 
-                onTap: () {
+                setState(() => _controlsVisible = !_controlsVisible);
+                if (_controlsVisible) _hideControlsAfterDelay();
+              } else {
+                if (_isLocked) {
                   setState(() => _controlsVisible = !_controlsVisible);
                   if (_controlsVisible) _hideControlsAfterDelay();
-                },
-              ),
-            ),
+                  _showLockIndicatorWithTimer();
+                }
+              }
+            },
+          ),
 
           if (_controlsVisible) _buildControls(),
 
@@ -693,7 +727,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       color: Colors.black.withOpacity(0.3),
       child: Stack(
         children: [
-          if (!_isLocked)
+          if (!_isLocked && _controlsVisible)
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -905,38 +939,44 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
               ),
             ),
 
-          if (_isLocked)
-            Positioned(
-              top: 36,
-              right: 32,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  setState(() {
-                    _isLocked = false;
-                  });
-                },
-                child: Row(
-                  children: [
-                    Image.asset(
-                      Assets.images.videolock.path,
-                      width: 15,
-                      height: 15,
-                      fit: BoxFit.contain,
+          _isLocked && _showLockIndicator && _controlsVisible
+              ? Positioned(
+                  top: 36,
+                  right: 32,
+                  child: GestureDetector(
+                    onTap: () {
+                      _toggleLock();
+                    },
+                    child: Container(
+                      width: 90,
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: .center,
+                        children: [
+                          Image.asset(
+                            Assets.images.videolock.path,
+                            width: 15,
+                            height: 15,
+                          ),
+                          const SizedBox(width: 8),
+                          PoppinsText(
+                            "Locked",
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.semiBold,
+                            color: AppColors.wDark,
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(width: 8),
-                    PoppinsText(
-                      "Locked",
-                      fontSize: PoppinsFontSizeVariant.size12,
-                      fontWeight: PoppinsFontWeightVariant.semiBold,
-                      color: AppColors.wDark,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
+                )
+              : SizedBox(),
 
-          if (!_isLocked)
+          // : Positioned(
+          //      top: 36,
+          //     right: 32,
+          //   child: Container(height: 40, width: 53, color: Colors.white)),
+          if (!_isLocked && _controlsVisible)
             Positioned(
               top: 34,
               left: 0,
