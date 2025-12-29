@@ -211,9 +211,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
 
-                    // Checkbox area
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -230,7 +229,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 borderRadius: BorderRadius.circular(4),
                                 border: rememberMe
                                     ? null
-                                    : Border.all(color: Colors.white),
+                                    : Border.all(color: AppColors.white),
                               ),
                               child: rememberMe
                                   ? Container(
@@ -248,7 +247,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       child: Icon(
                                         Icons.check,
                                         size: 12,
-                                        color: Colors.white,
+                                        color: AppColors.white,
                                       ),
                                     )
                                   : null,
@@ -287,7 +286,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     child: PoppinsText(
                                       "Terms & Conditions",
                                       fontSize: PoppinsFontSizeVariant.size12,
-                                      color: Colors.white,
+                                      color: AppColors.white,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
                                       decoration: TextDecoration.underline,
@@ -323,7 +322,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     child: PoppinsText(
                                       "Privacy Policy.",
                                       fontSize: PoppinsFontSizeVariant.size12,
-                                      color: Colors.white,
+                                      color: AppColors.white,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
                                       decoration: TextDecoration.underline,
@@ -337,7 +336,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20),
                     AppButton(
                       onPressed: () {
                         context.pushNamed(
@@ -346,7 +345,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                       title: "Create Account",
                     ),
-                    const SizedBox(height: 25),
+                    SizedBox(height: 25),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -375,13 +374,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    const SizedBox(height: 35),
+                    SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AppButton(
                           onPressed: () {},
-                          title: 'Google',
+                          title: 'Google Login',
                           buttonSize: Size(180, 52),
                           color: Color(0xff202020),
                           prefixIcon: Image.asset(
@@ -390,23 +389,25 @@ class _SignupScreenState extends State<SignupScreen> {
                             height: 26,
                           ),
                           buttonGradient: [
-                            Color(0xff202020),
-                            Color(0xff202020),
+                            AppColors.graylight,
+                            AppColors.graylight,
                           ],
                         ),
                         AppButton(
                           onPressed: () {},
-                          title: 'Apple',
+                          title: 'Apple Login',
                           buttonSize: Size(180, 52),
-                          color: Color(0xff202020),
+                          // color: Color(0xff202020),
+                          color: AppColors.graylight,
+
                           prefixIcon: Image.asset(
                             Assets.images.appleicon.path,
                             width: 26,
                             height: 26,
                           ),
                           buttonGradient: [
-                            Color(0xff202020),
-                            Color(0xff202020),
+                            AppColors.graylight,
+                            AppColors.graylight,
                           ],
                         ),
                       ],
@@ -418,7 +419,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         context.pushNamed(AppRoutes.home.name);
                       },
                       title: 'Continue as Guest',
-                      buttonGradient: [Color(0xff202020), Color(0xff202020)],
+                      buttonGradient: [
+                        AppColors.graylight,
+                        AppColors.graylight,
+                      ],
                       color: Color(0xff202020),
                     ),
 

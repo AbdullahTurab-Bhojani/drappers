@@ -28,14 +28,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   File? videoFile;
 
   bool showLoader = false;
-  void _changeSpeed() {
-    setState(() {
-      _isSpeedPopupVisible = !_isSpeedPopupVisible;
-    });
-  }
 
   final String videoUrl = 'assets/images/livefullview.mp4';
-
   final List<String> episodes = List.generate(
     10,
     (index) => 'assets/images/livefullview.mp4',
@@ -58,7 +52,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
 
   Future<File> assetToFile(String assetPath, {String? fileName}) async {
     setState(() => showLoader = true);
-
     final name = fileName ?? assetPath.split('/').last;
     final tempDir = await getTemporaryDirectory();
     final file = File('${tempDir.path}/$name');
@@ -84,8 +77,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       handleLifecycle: true,
       subtitlesConfiguration: const BetterPlayerSubtitlesConfiguration(
         fontSize: 16,
-        fontColor: Colors.white,
-        outlineColor: Colors.black,
+        fontColor: AppColors.white,
+        outlineColor: AppColors.black,
       ),
       controlsConfiguration: const BetterPlayerControlsConfiguration(
         showControls: false,
@@ -104,16 +97,15 @@ class _newliveScreenScreenState extends State<newliveScreen> {
       betterPlayerDataSource: source,
     );
 
-    // ← ADD THIS LISTENER
     _betterPlayerController.videoPlayerController!.addListener(() {
-      if (mounted) setState(() {}); // updates slider and time
+      if (mounted) setState(() {});
     });
 
     _hideControlsAfterDelay();
   }
 
   void _hideControlsAfterDelay() {
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(Duration(seconds: 4), () {
       if (mounted && _betterPlayerController.isPlaying() == true) {
         setState(() => _controlsVisible = false);
       }
@@ -145,13 +137,12 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   ),
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
-
                     onTap: () {
                       setState(() {
                         _isSpeedPopupVisible = false;
                       });
                     },
-                    child: Icon(Icons.close, color: Colors.white),
+                    child: Icon(Icons.close, color: AppColors.white),
                   ),
                 ],
               ),
@@ -198,9 +189,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                     ),
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
-
                       onTap: () => Navigator.pop(context),
-                      child: Icon(Icons.close, color: Colors.white),
+                      child: Icon(Icons.close, color: AppColors.white),
                     ),
                   ],
                 ),
@@ -239,7 +229,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.black,
       body: Stack(
         children: [
           Positioned.fill(
@@ -259,9 +249,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   : BetterPlayer(controller: _betterPlayerController),
             ),
           ),
-
           if (_controlsVisible) _buildControls(),
-
           if (_showEpisodes)
             Positioned(
               bottom: 70,
@@ -275,7 +263,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       behavior: HitTestBehavior.opaque,
-
                       onTap: () {
                         _playEpisode(index);
                         setState(() => _showEpisodes = false);
@@ -283,11 +270,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       child: Container(
                         margin: EdgeInsets.all(6),
                         padding: EdgeInsets.all(12),
-                        color: Colors.black54,
+                        color: AppColors.bRegular,
                         child: Center(
                           child: Text(
                             "EP ${index + 1}",
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: AppColors.white),
                           ),
                         ),
                       ),
@@ -296,7 +283,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                 ),
               ),
             ),
-
           if (_isSpeedPopupVisible) Center(child: _speedPopup()),
         ],
       ),
@@ -307,107 +293,57 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     final Size screenSize = MediaQuery.of(context).size;
 
     return Container(
-      color: Colors.black.withOpacity(0.3),
+      color: AppColors.black.withOpacity(0.3),
       child: Stack(
         children: [
-          if (_controlsVisible &&
-              !_isLocked) // only show if visible and not locked
+          if (_controlsVisible && !_isLocked)
             Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // // Back 10 seconds
-                  // IconButton(
-                  //   icon: Image.asset(
-                  //     Assets.images.back10seconds.path,
-                  //     width: 64,
-                  //     height: 64,
-                  //   ),
-                  //   onPressed: () {
-                  //     final pos = _betterPlayerController
-                  //         .videoPlayerController!
-                  //         .value
-                  //         .position;
-                  //     _betterPlayerController.seekTo(
-                  //       pos - const Duration(seconds: 10),
-                  //     );
-                  //   },
-                  // ),
+              child: IconButton(
+                icon: Icon(
+                  _betterPlayerController.isPlaying()!
+                      ? Icons.pause_circle
+                      : Icons.play_circle,
+                  size: 90,
+                ),
+                onPressed: () {
+                  setState(() {
+                    final videoPosition = _betterPlayerController
+                        .videoPlayerController!
+                        .value
+                        .position;
+                    final videoDuration = _betterPlayerController
+                        .videoPlayerController!
+                        .value
+                        .duration;
 
-                  // const SizedBox(width: 40),
-
-                  // Play/Pause toggle
-                  IconButton(
-                    icon: Icon(
-                      _betterPlayerController.isPlaying()!
-                          ? Icons.pause_circle
-                          : Icons.play_circle,
-                      size: 90,
-                    ),
-                    onPressed: () async {
-                      setState(() {
-                        final videoPosition = _betterPlayerController
-                            .videoPlayerController!
-                            .value
-                            .position;
-                        final videoDuration = _betterPlayerController
-                            .videoPlayerController!
-                            .value
-                            .duration;
-
-                        if (_betterPlayerController.isPlaying()!) {
-                          _betterPlayerController.pause();
-                        } else {
-                          if (videoPosition >= videoDuration!) {
-                            _betterPlayerController.seekTo(Duration.zero);
-                          }
-                          _betterPlayerController.play();
-                        }
-                      });
-                    },
-                  ),
-
-                  // const SizedBox(width: 40),
-
-                  // IconButton(
-                  //   icon: Image.asset(
-                  //     Assets.images.forward10seconds.path,
-                  //     width: 64,
-                  //     height: 64,
-                  //   ),
-                  //   onPressed: () {
-                  //     final pos = _betterPlayerController
-                  //         .videoPlayerController!
-                  //         .value
-                  //         .position;
-                  //     _betterPlayerController.seekTo(
-                  //       pos + const Duration(seconds: 10),
-                  //     );
-                  //   },
-                  // ),
-                ],
+                    if (_betterPlayerController.isPlaying()!) {
+                      _betterPlayerController.pause();
+                    } else {
+                      if (videoPosition >= videoDuration!) {
+                        _betterPlayerController.seekTo(Duration.zero);
+                      }
+                      _betterPlayerController.play();
+                    }
+                  });
+                },
               ),
             ),
 
           Positioned(
-            bottom: 20,
+            bottom: 10,
             child: SizedBox(
-              width: screenSize.width - 0,
+              width: screenSize.width,
               child: Column(
                 children: [
                   if (_betterPlayerController != null &&
-                      _betterPlayerController!.videoPlayerController != null &&
-                      _betterPlayerController!
-                          .videoPlayerController!
-                          .value
-                          .isPlaying)
+                      _betterPlayerController.videoPlayerController != null)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Slider(
-                            activeColor: Colors.white,
-                            inactiveColor: Colors.white.withOpacity(0.3),
+                            activeColor: AppColors.white,
+                            inactiveColor: AppColors.white.withOpacity(0.3),
                             min: 0,
                             max: _betterPlayerController
                                 .videoPlayerController!
@@ -446,11 +382,82 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                                   .value
                                   .position,
                             ),
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: AppColors.white),
                           ),
                         ),
                       ],
                     ),
+
+                  SizedBox(height: 4),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => _speedPopup(),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              Assets.images.speed.path,
+                              width: 16,
+                              height: 16,
+                            ),
+                            SizedBox(width: 10),
+                            PoppinsText(
+                              "Speed",
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                              color: AppColors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 32),
+
+                      GestureDetector(
+                        onTap: _openAudioSubtitlePopup,
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              Assets.images.audioSubtitles.path,
+                              width: 16,
+                              height: 16,
+                            ),
+                            SizedBox(width: 10),
+                            PoppinsText(
+                              "Audio & Subtitle",
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                              color: AppColors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 32),
+
+                      Row(
+                        children: [
+                          Image.asset(
+                            Assets.images.audioSubtitles.path,
+                            width: 16,
+                            height: 16,
+                          ),
+                          SizedBox(width: 10),
+                          PoppinsText(
+                            "Picture in Picture",
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.semiBold,
+                            color: AppColors.white,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -461,12 +468,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
             right: 28,
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
-
               onTap: () => Navigator.pop(context),
               child: Image.asset(
                 Assets.images.crossnewicon.path,
                 width: 30,
-                color: Colors.white,
+                color: AppColors.white,
               ),
             ),
           ),
@@ -480,15 +486,14 @@ class _newliveScreenScreenState extends State<newliveScreen> {
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-
       onTap: () {
         setState(() {
           _selectedSpeed = text;
           _betterPlayerController.setSpeed(
-            double.parse(text.replaceAll('x', '')),
+            text == "Normal" ? 1.0 : double.parse(text.replaceAll('x', '')),
           );
         });
-        Navigator.pop(context);
+        Navigator.pop(context); // Popup close
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
@@ -505,19 +510,16 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               width: 20,
               alignment: Alignment.center,
               child: isSelected
-                  ? Icon(Icons.check, color: Colors.white, size: 20)
+                  ? Icon(Icons.check, color: AppColors.white, size: 20)
                   : SizedBox.shrink(),
             ),
             SizedBox(width: 12),
             Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: PoppinsText(
-                  text,
-                  fontSize: PoppinsFontSizeVariant.size12,
-                  fontWeight: PoppinsFontWeightVariant.regular,
-                  color: AppColors.wDark,
-                ),
+              child: PoppinsText(
+                text,
+                fontSize: PoppinsFontSizeVariant.size12,
+                fontWeight: PoppinsFontWeightVariant.regular,
+                color: AppColors.wDark,
               ),
             ),
           ],
@@ -533,7 +535,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-
       onTap: () async {
         setState(() {
           if (isSubtitle) {
@@ -558,7 +559,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
             );
             await _betterPlayerController.setupSubtitleSource(subSource);
           }
-        } else {}
+        }
 
         Navigator.pop(context);
       },
@@ -576,7 +577,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
             SizedBox(
               width: 20,
               child: isSelected
-                  ? Icon(Icons.check, color: Colors.white, size: 20)
+                  ? Icon(Icons.check, color: AppColors.white, size: 20)
                   : SizedBox.shrink(),
             ),
             SizedBox(width: 12),
@@ -594,26 +595,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     );
   }
 
-  Widget _btn(String imagePath, String label, VoidCallback onTap) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-
-      onTap: onTap,
-      child: Row(
-        children: [
-          Image.asset(imagePath, width: 20, height: 20, fit: BoxFit.contain),
-          SizedBox(width: 8),
-          PoppinsText(
-            label,
-            fontSize: PoppinsFontSizeVariant.size12,
-            fontWeight: PoppinsFontWeightVariant.semiBold,
-            color: AppColors.wDark,
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   void dispose() {
     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
@@ -621,49 +602,3 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     super.dispose();
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:go_router/go_router.dart';
-// import '../../../core/extensions/theme_extension.dart';
-// import '../../../drappers.dart';
-// import '../../../gen/assets.gen.dart';
-// import '../../../shared/widgets/app_bar/main_app_bar.dart';
-
-// class newliveScreen extends StatefulWidget {
-//   const newliveScreen({super.key});
-
-//   @override
-//   State<newliveScreen> createState() => _newliveScreenState();
-// }
-
-// class _newliveScreenState extends State<newliveScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     final customColors = Theme.of(context).extension<AppCustomColors>()!;
-//     return Scaffold(
-//       body: Column(children: [
-        
-       
-//         ],
-//       ),
-//     );
-//   }
-// }

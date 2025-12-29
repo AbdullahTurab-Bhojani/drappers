@@ -228,7 +228,7 @@ class _SearchscreenState extends State<Searchscreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 30),
+                      SizedBox(height: 30),
 
                       PoppinsText(
                         'Trending',
@@ -237,26 +237,27 @@ class _SearchscreenState extends State<Searchscreen> {
                         color: customColors.textColor,
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
 
                       GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         padding: EdgeInsets.zero,
                         itemCount: trendingimages.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 15,
-                              crossAxisSpacing: 15,
-                              childAspectRatio: 0.6,
-                            ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 15,
+                          crossAxisSpacing: 15,
+                          childAspectRatio: 0.6,
+                        ),
                         itemBuilder: (context, index) {
                           return CardWidget(
                             assetImage: trendingimages[index],
                             showSaveIcon: false,
                             fromEpisode: false,
                             allowGuestNavigation: false,
+                            index: index,
+                            showMenuOnly: true, showLiveTvBadge: false,
                           );
                         },
                       ),

@@ -124,7 +124,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   }
 
   Widget _videoQuality(Function(String) onSelected, String selectedQuality) {
-    List<String> videoQualities = ['4k', '1440p', '1080p', '480p'];
+    List<String> videoQualities = ['Auto','4k', '1440p', '1080p', '480p'];
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -885,29 +885,29 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                               "Speed ($_selectedSpeed)",
                               _changeSpeed,
                             ),
-                            SizedBox(width: 40),
+                            SizedBox(width: 24),
                             _btn(
                               Assets.images.videolock.path,
                               "Lock",
                               _toggleLock,
                             ),
-                            SizedBox(width: 40),
+                            SizedBox(width: 24),
                             _btn(Assets.images.episode.path, "Episodes", () {
                               setState(() => _showEpisodes = !_showEpisodes);
                             }),
-                            SizedBox(width: 40),
+                            SizedBox(width: 24),
                             _btn(
                               Assets.images.audioSubtitles.path,
                               "Audio & Subtitles",
                               _openAudioSubtitlePopup,
                             ),
-                            SizedBox(width: 40),
+                            SizedBox(width: 24),
                             _btn(
                               Assets.images.quality.path,
                               "Quality ($_selectedQuality)",
                               _openVideoQualityPopup,
                             ),
-                            SizedBox(width: 40),
+                            SizedBox(width: 24),
                             _btn(
                               Assets.images.nextepisode.path,
                               "Next Ep.",
