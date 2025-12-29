@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, sized_box_for_whitespace, unused_element, unused_field, unused_local_variable
+// ignore_for_file: deprecated_member_use, sized_box_for_whitespace, unused_element, unused_field, unused_local_variable, unnecessary_null_comparison
 
 import 'dart:io';
 import 'package:better_player_plus/better_player_plus.dart';
@@ -19,7 +19,6 @@ import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
 import '../../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
 import '../../../../shared/widgets/watch_history.dart';
-import '../../../newlivescreen/presentation/newlivescreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -111,10 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
       betterPlayerDataSource: source,
     );
 
-    // Add this listener here
     _betterPlayerController.videoPlayerController!.addListener(() {
       if (mounted) {
-        setState(() {}); // this will rebuild slider & timer
+        setState(() {}); 
       }
     });
 
@@ -302,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Container(
                               width: 8,
                               height: 8,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Colors.red,
                                 shape: BoxShape.circle,
                               ),
@@ -311,17 +309,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 20),
+                    SizedBox(width: 20),
                   ],
                 ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
                           SizedBox(
                             height: 45,
                             child: ListView.separated(
@@ -329,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
                               separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 10),
+                                  SizedBox(width: 10),
                               shrinkWrap: true,
                               itemCount: hometab.length,
                               itemBuilder: (context, index) {
@@ -345,10 +343,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       GuestHelper.checkGuest(context);
                                       return;
                                     }
-                                    context.pushNamed('livepitchesScreen');
+                                    context.pushNamed(
+                                      AppRoutes.livepitchesScreen.name,
+                                    );
                                   },
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                       horizontal: 16,
                                       vertical: 8,
                                     ),
@@ -373,319 +373,242 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: 30),
                           Center(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: SizedBox(
-                                width: 400,
-                                height: 450,
-                                child: Stack(
-                                  children: [
-                                    _betterPlayerController
-                                                .isVideoInitialized() !=
-                                            null
-                                        ? BetterPlayer(
-                                            controller: _betterPlayerController,
-                                          )
-                                        : Container(),
-                                    Container(
-                                      color: Colors.black.withOpacity(0.18),
-                                    ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.35),
+                                    blurRadius: 30,
+                                    spreadRadius: 4,
+                                    offset: Offset(0, 6),
+                                  ),
+                                ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: SizedBox(
+                                  width: 400,
+                                  height: 450,
+                                  child: Stack(
+                                    children: [
+                                      _betterPlayerController
+                                                  .isVideoInitialized() !=
+                                              null
+                                          ? BetterPlayer(
+                                              controller:
+                                                  _betterPlayerController,
+                                            )
+                                          : Container(),
+                                      Container(
+                                        color: Colors.black.withOpacity(0.18),
+                                      ),
 
-                                    if (_betterPlayerController
-                                            .isVideoInitialized() !=
-                                        null)
-                                      GestureDetector(
-                                        behavior: HitTestBehavior.opaque,
-                                        onTap: () {
-                                          // if (GuestHelper.isGuest) {
-                                          //   GuestHelper.checkGuest(context);
-                                          //   return;
-                                          // }
-                                          setState(
-                                            () =>
-                                                _showControls = !_showControls,
-                                          );
-                                        },
-                                        child: Center(
-                                          child: AnimatedOpacity(
-                                            duration: Duration(
-                                              milliseconds: 50,
-                                            ),
-                                            opacity: _showControls ? 1 : 0,
-                                            child: Container(
-                                              padding: EdgeInsets.all(12),
-                                              decoration: BoxDecoration(
-                                                // color: Colors.black.withOpacity(
-                                                //   0.45,
-                                                // ),
-                                                shape: BoxShape.circle,
+                                      if (_betterPlayerController
+                                              .isVideoInitialized() !=
+                                          null)
+                                        GestureDetector(
+                                          behavior: HitTestBehavior.opaque,
+                                          onTap: () {
+                                            // if (GuestHelper.isGuest) {
+                                            //   GuestHelper.checkGuest(context);
+                                            //   return;
+                                            // }
+                                            setState(
+                                              () => _showControls =
+                                                  !_showControls,
+                                            );
+                                          },
+                                          child: Center(
+                                            child: AnimatedOpacity(
+                                              duration: Duration(
+                                                milliseconds: 50,
                                               ),
-                                              child: IconButton(
-                                                icon: Icon(
-                                                  _betterPlayerController
-                                                          .isPlaying()!
-                                                      ? Icons.pause_circle
-                                                      : Icons.play_circle,
-                                                  size: 70,
+                                              opacity: _showControls ? 1 : 0,
+                                              child: Container(
+                                                padding: EdgeInsets.all(12),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
                                                 ),
-                                                onPressed: () async {
-                                                  setState(() {
-                                                    final videoPosition =
-                                                        _betterPlayerController
-                                                            .videoPlayerController!
-                                                            .value
-                                                            .position;
-                                                    final videoDuration =
-                                                        _betterPlayerController
-                                                            .videoPlayerController!
-                                                            .value
-                                                            .duration;
+                                                child: IconButton(
+                                                  icon: Icon(
+                                                    _betterPlayerController
+                                                            .isPlaying()!
+                                                        ? Icons.pause_circle
+                                                        : Icons.play_circle,
+                                                    size: 70,
+                                                  ),
+                                                  onPressed: () async {
+                                                    setState(() {
+                                                      final videoPosition =
+                                                          _betterPlayerController
+                                                              .videoPlayerController!
+                                                              .value
+                                                              .position;
+                                                      final videoDuration =
+                                                          _betterPlayerController
+                                                              .videoPlayerController!
+                                                              .value
+                                                              .duration;
 
-                                                    if (_betterPlayerController
-                                                        .isPlaying()!) {
-                                                      _betterPlayerController
-                                                          .pause();
-                                                    } else {
-                                                      if (videoPosition >=
-                                                          videoDuration!) {
+                                                      if (_betterPlayerController
+                                                          .isPlaying()!) {
                                                         _betterPlayerController
-                                                            .seekTo(
-                                                              Duration.zero,
-                                                            );
+                                                            .pause();
+                                                      } else {
+                                                        if (videoPosition >=
+                                                            videoDuration!) {
+                                                          _betterPlayerController
+                                                              .seekTo(
+                                                                Duration.zero,
+                                                              );
+                                                        }
+                                                        _betterPlayerController
+                                                            .play();
                                                       }
-                                                      _betterPlayerController
-                                                          .play();
-                                                    }
-                                                  });
-                                                },
+                                                    });
+                                                  },
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    Positioned(
-                                      top: 16,
-                                      left: 14,
-                                      right: 14,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: PoppinsText(
-                                              'Meet The Drapers - Live',
-                                              color: AppColors.white,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant
-                                                      .medium,
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size14,
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 10,
-                                              vertical: 6,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
+                                      Positioned(
+                                        top: 16,
+                                        left: 14,
+                                        right: 14,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: PoppinsText(
+                                                'Meet The Drapers - Live',
                                                 color: AppColors.white,
-                                                width: 0.5,
+                                                fontWeight:
+                                                    PoppinsFontWeightVariant
+                                                        .medium,
+                                                fontSize: PoppinsFontSizeVariant
+                                                    .size14,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
                                             ),
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.circle,
-                                                  size: 8,
-                                                  color: Colors.red,
-                                                ),
-                                                SizedBox(width: 6),
-                                                PoppinsText(
-                                                  'Live TV',
-                                                  color: AppColors.white,
-                                                  fontWeight:
-                                                      PoppinsFontWeightVariant
-                                                          .regular,
-                                                  fontSize:
-                                                      PoppinsFontSizeVariant
-                                                          .size12,
-                                                ),
-                                              ],
+                                            PopupmenuWidget(
+                                              showSaveIcon: false,
                                             ),
-                                          ),
-                                          SizedBox(width: 8),
-                                          PopupmenuWidget(showSaveIcon: false),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
 
-                                    Positioned(
-                                      bottom: 10,
-                                      left: 12,
-                                      right: 12,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: GestureDetector(
-                                              behavior: HitTestBehavior.opaque,
-                                              onTap: () {
-                                                if (GuestHelper.isGuest) {
-                                                  GuestHelper.checkGuest(
-                                                    context,
-                                                  );
-                                                  return;
-                                                }
-                                                showModalBottomSheet(
-                                                  context: context,
-                                                  useRootNavigator: true,
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  builder: (context) =>
-                                                      const MoreInfoBottomSheet(),
-                                                );
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 24,
-                                                ),
-                                                height: 36,
-                                                decoration: BoxDecoration(
-                                                  color: AppColors.color121212
-                                                      .withOpacity(0.6),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.info_outline,
-                                                      size: 18,
-                                                      color: Colors.white,
+                                      Positioned(
+                                        bottom: 10,
+                                        left: 12,
+                                        right: 12,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(height: 8),
+                                            if (_betterPlayerController !=
+                                                    null &&
+                                                _betterPlayerController!
+                                                        .videoPlayerController !=
+                                                    null &&
+                                                _betterPlayerController!
+                                                    .videoPlayerController!
+                                                    .value
+                                                    .isPlaying)
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: Slider(
+                                                      activeColor:
+                                                          AppColors.white,
+                                                      inactiveColor: AppColors
+                                                          .white
+                                                          .withOpacity(0.3),
+                                                      min: 0,
+                                                      max: _betterPlayerController
+                                                          .videoPlayerController!
+                                                          .value
+                                                          .duration!
+                                                          .inMilliseconds
+                                                          .toDouble(),
+                                                      value: _betterPlayerController
+                                                          .videoPlayerController!
+                                                          .value
+                                                          .position
+                                                          .inMilliseconds
+                                                          .clamp(
+                                                            0,
+                                                            _betterPlayerController
+                                                                .videoPlayerController!
+                                                                .value
+                                                                .duration!
+                                                                .inMilliseconds,
+                                                          )
+                                                          .toDouble(),
+                                                      onChanged: (value) {
+                                                        _betterPlayerController
+                                                            .videoPlayerController!
+                                                            .seekTo(
+                                                              Duration(
+                                                                milliseconds:
+                                                                    value
+                                                                        .toInt(),
+                                                              ),
+                                                            );
+                                                      },
                                                     ),
-                                                    SizedBox(width: 8),
-                                                    PoppinsText(
-                                                      'More Info',
-                                                      color: customColors
-                                                          .textColor,
-                                                      fontSize:
-                                                          PoppinsFontSizeVariant
-                                                              .size12,
-                                                      fontWeight:
-                                                          PoppinsFontWeightVariant
-                                                              .medium,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(height: 8),
-                                          if (_betterPlayerController != null &&
-                                              _betterPlayerController!
-                                                      .videoPlayerController !=
-                                                  null &&
-                                              _betterPlayerController!
-                                                  .videoPlayerController!
-                                                  .value
-                                                  .isPlaying)
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  child: Slider(
-                                                    activeColor: Colors.white,
-                                                    inactiveColor: Colors.white
-                                                        .withOpacity(0.3),
-                                                    min: 0,
-                                                    max: _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .value
-                                                        .duration!
-                                                        .inMilliseconds
-                                                        .toDouble(),
-                                                    value: _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .value
-                                                        .position
-                                                        .inMilliseconds
-                                                        .clamp(
-                                                          0,
-                                                          _betterPlayerController
-                                                              .videoPlayerController!
-                                                              .value
-                                                              .duration!
-                                                              .inMilliseconds,
-                                                        )
-                                                        .toDouble(),
-                                                    onChanged: (value) {
+                                                  ),
+                                                  Text(
+                                                    _format(
                                                       _betterPlayerController
                                                           .videoPlayerController!
-                                                          .seekTo(
-                                                            Duration(
-                                                              milliseconds:
-                                                                  value.toInt(),
-                                                            ),
-                                                          );
+                                                          .value
+                                                          .position,
+                                                    ),
+                                                    style: TextStyle(
+                                                      color: AppColors.white,
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 15),
+                                                  GestureDetector(
+                                                    behavior:
+                                                        HitTestBehavior.opaque,
+                                                    onTap: () {
+                                                      _betterPlayerController
+                                                          .videoPlayerController!
+                                                          .pause();
+                                                      // if (GuestHelper.isGuest) {
+                                                      //   GuestHelper.checkGuest(
+                                                      //     context,
+                                                      //   );
+                                                      //   return;
+                                                      // }
+                                                      context.pushNamed(
+                                                        AppRoutes
+                                                            .videoScreen
+                                                            .name,
+                                                      );
                                                     },
+                                                    child: Image.asset(
+                                                      Assets
+                                                          .images
+                                                          .screenrotationicon
+                                                          .path,
+                                                      width: 24,
+                                                      height: 24,
+                                                    ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  _format(
-                                                    _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .value
-                                                        .position,
-                                                  ),
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                SizedBox(width: 15),
-                                                GestureDetector(
-                                                  behavior:
-                                                      HitTestBehavior.opaque,
-                                                  onTap: () {
-                                                    _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .pause();
-                                                    // if (GuestHelper.isGuest) {
-                                                    //   GuestHelper.checkGuest(
-                                                    //     context,
-                                                    //   );
-                                                    //   return;
-                                                    // }
-                                                    context.pushNamed(
-                                                      AppRoutes
-                                                          .newliveScreen
-                                                          .name,
-                                                    );
-                                                  },
-                                                  child: Image.asset(
-                                                    Assets
-                                                        .images
-                                                        .screenrotationicon
-                                                        .path,
-                                                    width: 24,
-                                                    height: 24,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                        ],
+                                                ],
+                                              ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -695,7 +618,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
-                                'Trending Show',
+                                'Trending Shows',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
                                 color: customColors.textColor,
@@ -722,7 +645,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
 
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           SizedBox(
                             height: 180,
@@ -731,19 +654,33 @@ class _HomeScreenState extends State<HomeScreen> {
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
                               separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                                  SizedBox(width: 15),
                               itemCount: trendingimages.length,
                               itemBuilder: (context, index) {
                                 return CardWidget(
                                   assetImage: trendingimages[index],
                                   showSaveIcon: false,
                                   fromEpisode: false,
-                                  allowGuestNavigation: true,
+                                  allowGuestNavigation: false,
+                                  index: index,
+                                  showMenuOnly: true,
+                                  showMoreInfo: index == 0,
+                                  onMoreInfoTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      useRootNavigator: true,
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (context) =>
+                                          MoreInfoBottomSheet(),
+                                    );
+                                  },
+                                  showLiveTvBadge: true,
                                 );
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: 30),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -262,25 +262,25 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                   ),
                                   image: DecorationImage(
                                     image: AssetImage(
-                                      Assets.images.podcastimage1.path,
+                                      Assets.images.studio.path,
                                     ),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 child: Stack(
                                   children: [
-                                    Center(
-                                      child: Image.asset(
-                                        Assets.images.playwithbgicon.path,
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      right: 10,
-                                      child: Image.asset(
-                                        Assets.images.muteicon.path,
-                                      ),
-                                    ),
+                                    // Center(
+                                    //   child: Image.asset(
+                                    //     Assets.images.playwithbgicon.path,
+                                    //   ),
+                                    // ),
+                                    // Positioned(
+                                    //   bottom: 10,
+                                    //   right: 10,
+                                    //   child: Image.asset(
+                                    //     Assets.images.muteicon.path,
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -341,7 +341,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                             );
                                           },
                                           title: 'Watch Episode',
-                                          buttonSize: Size(175, 52),
+                                          buttonSize: Size(150, 52),
                                           suffixIcon: SizedBox(),
                                         ),
                                         SizedBox(

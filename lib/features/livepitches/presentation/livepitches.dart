@@ -139,20 +139,25 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                       SizedBox(
                         height: 180,
                         child: ListView.separated(
+                          padding: EdgeInsets.zero,
                           clipBehavior: Clip.none,
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) =>
-                              SizedBox(width: 15),
+                              const SizedBox(width: 15),
                           itemCount: trendingimages.length,
                           itemBuilder: (context, index) {
                             return CardWidget(
                               assetImage: trendingimages[index],
                               showSaveIcon: false,
-                              fromEpisode: true, allowGuestNavigation: false,
+                              fromEpisode: false,
+                              allowGuestNavigation: true,
+                              index: index,
+                              showMenuOnly: true, showLiveTvBadge: false,
                             );
                           },
                         ),
                       ),
+
                       SizedBox(height: 30),
 
                       Row(

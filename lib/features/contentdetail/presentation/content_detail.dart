@@ -349,7 +349,7 @@ class _ContentDetailState extends State<ContentDetail>
                             ),
                             SizedBox(width: 30),
                             GestureDetector(
-                               onTap: () {
+                              onTap: () {
                                 if (GuestHelper.isGuest) {
                                   GuestHelper.checkGuest(context);
                                   return;
@@ -367,7 +367,8 @@ class _ContentDetailState extends State<ContentDetail>
                                   PoppinsText(
                                     'Share',
                                     fontSize: PoppinsFontSizeVariant.size12,
-                                    fontWeight: PoppinsFontWeightVariant.regular,
+                                    fontWeight:
+                                        PoppinsFontWeightVariant.regular,
                                     color: customColors.textColor,
                                   ),
                                 ],
@@ -520,7 +521,11 @@ class _ContentDetailState extends State<ContentDetail>
                                         return CardWidget(
                                           assetImage: trendingimages[index],
                                           showSaveIcon: false,
-                                          fromEpisode: true, allowGuestNavigation: true,
+                                          fromEpisode: true,
+                                          allowGuestNavigation: true,
+                                          index: index,
+                                          showMenuOnly: true,
+                                          showLiveTvBadge: false,
                                         );
                                       },
                                     ),
