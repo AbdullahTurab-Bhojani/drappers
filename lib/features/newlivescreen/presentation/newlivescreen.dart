@@ -132,17 +132,13 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   PoppinsText(
                     context,
                     "Speed",
-                    fontSize: PoppinsFontSizeVariant.size12,
+                    fontSize: PoppinsFontSizeVariant.size6,
                     fontWeight: PoppinsFontWeightVariant.regular,
                     color: AppColors.wDark,
                   ),
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
-                    onTap: () {
-                      setState(() {
-                        _isSpeedPopupVisible = false;
-                      });
-                    },
+                    onTap: () => Navigator.pop(context),
                     child: Icon(Icons.close, color: AppColors.white),
                   ),
                 ],
@@ -413,7 +409,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             PoppinsText(
                               context,
                               "Speed",
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size6,
                               fontWeight: PoppinsFontWeightVariant.semiBold,
                               color: AppColors.white,
                             ),
@@ -498,7 +494,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
             text == "Normal" ? 1.0 : double.parse(text.replaceAll('x', '')),
           );
         });
-        Navigator.pop(context); // Popup close
+        Navigator.pop(context);
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),

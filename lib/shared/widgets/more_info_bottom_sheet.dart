@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
 
@@ -12,9 +13,16 @@ class MoreInfoBottomSheet extends StatelessWidget {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppScaler.scaleSize(context, 20),
+      ),
       child: Container(
-        padding: EdgeInsets.only(top: 16, left: 20, right: 20, bottom: 10),
+        padding: EdgeInsets.only(
+          top: AppScaler.scaleHeight(context, 16),
+          left: AppScaler.scaleSize(context, 20),
+          right: AppScaler.scaleSize(context, 20),
+          bottom: AppScaler.scaleHeight(context, 10),
+        ),
         decoration: BoxDecoration(
           color: AppColors.dRegular,
           borderRadius: BorderRadius.only(

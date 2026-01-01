@@ -41,11 +41,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 3), (_) {
+    _timer = Timer.periodic(Duration(seconds: 3), (_) {
       final nextPage = (currentPage + 1) % images.length;
       _pageController.animateToPage(
         nextPage,
-        duration: const Duration(milliseconds: 800),
+        duration: Duration(milliseconds: 800),
         curve: Curves.easeOut,
       );
     });
@@ -67,7 +67,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          /// 🔹 Background PageView
           PageView.builder(
             controller: _pageController,
             itemCount: images.length,
@@ -77,7 +76,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
           ),
 
-          /// 🔹 Skip button (SafeArea handled)
           SafeArea(
             child: Align(
               alignment: Alignment.topRight,
@@ -104,7 +102,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
 
-          /// 🔹 Bottom Content
           Positioned(
             left: 0,
             right: 0,
@@ -112,23 +109,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: SafeArea(
               top: false,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 24, 20, 100),
+                padding: EdgeInsets.fromLTRB(20, 24, 20, 100),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    /// Dots
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
                         images.length,
                         (index) => AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          margin: const EdgeInsets.symmetric(horizontal: 2),
+                          duration: Duration(milliseconds: 300),
+                          margin: EdgeInsets.symmetric(horizontal: 2),
                           width: currentPage == index ? 26 : 8,
                           height: 8,
                           decoration: BoxDecoration(
                             gradient: currentPage == index
-                                ? const LinearGradient(
+                                ? LinearGradient(
                                     colors: [
                                       Color(0xFF1FCFFF),
                                       Color(0xFF0063FF),
@@ -144,9 +140,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
-                    /// Title
                     PoppinsText(
                       context,
                       titles[currentPage],
@@ -157,9 +152,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       height: 1.3,
                     ),
 
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
 
-                    /// Subtitle
                     PoppinsText(
                       context,
                       subtitles[currentPage],
@@ -170,9 +164,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       height: 1.7,
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
-                    /// Button
                     AppButton(
                       onPressed: () {
                         GuestHelper.isGuest = true;

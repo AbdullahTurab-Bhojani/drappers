@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -60,7 +61,7 @@ class _LikecontentState extends State<Likecontent>
       'The Frontier - Meet The Drappers',
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
-    final List<Map<String, dynamic>> historyItems = const [
+    final List<Map<String, dynamic>> historyItems = [
       {
         'image': 'Assets.images.podcastimage1.path',
         'title': 'Finale – Meet The Drapers Season 07 (2025)',
@@ -141,7 +142,7 @@ class _LikecontentState extends State<Likecontent>
             ),
             SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(left: 5, bottom: 20),
+              padding: EdgeInsets.only(left: 5, bottom: 20),
               child: TabBar(
                 labelPadding: EdgeInsets.only(left: 15),
                 indicatorPadding: EdgeInsetsGeometry.all(0),
@@ -177,7 +178,7 @@ class _LikecontentState extends State<Likecontent>
                       : 100;
 
                   return AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
+                    duration: Duration(milliseconds: 200),
                     curve: Curves.easeInOut,
                     height: 40,
                     width: width,
@@ -207,17 +208,21 @@ class _LikecontentState extends State<Likecontent>
                     padding: EdgeInsets.zero,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                        padding: EdgeInsets.fromLTRB(
+                          AppScaler.scaleSize(context, 20),
+                          AppScaler.scaleHeight(context, 10),
+                          AppScaler.scaleSize(context, 20),
+                          0,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            PoppinsText(
+                              context,
                               'Reels',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: customColors.textColor,
-                              ),
+                              fontSize: PoppinsFontSizeVariant.size18,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                              color: customColors.textColor,
                             ),
                             AppButton(
                               buttonSize: Size(80, 25),
@@ -235,23 +240,32 @@ class _LikecontentState extends State<Likecontent>
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
                       SizedBox(
-                        height: 250,
+                        height: AppScaler.scaleHeight(context, 250),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 20),
+                          ),
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: reelimages.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(width: 10),
+                            separatorBuilder: (context, index) => SizedBox(
+                              width: AppScaler.scaleSize(context, 10),
+                            ),
                             itemBuilder: (context, index) {
                               return ReelcardWidget(
                                 assetImagePath: reelimages[index],
                                 title: reelTitles[index],
-                                reelCardHeight: 273,
-                                reelCardWidth: 149,
+                                reelCardHeight: AppScaler.scaleSize(
+                                  context,
+                                  273,
+                                ),
+                                reelCardWidth: AppScaler.scaleSize(
+                                  context,
+                                  149,
+                                ),
                                 fontSizeVariant: PoppinsFontSizeVariant.size14,
                                 showSaveIcon: true,
                               );
@@ -259,19 +273,18 @@ class _LikecontentState extends State<Likecontent>
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: 30),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            PoppinsText(
+                              context,
                               'Videos',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
+                                fontSize: PoppinsFontSizeVariant.size18,
+                                fontWeight: PoppinsFontWeightVariant.semiBold,
                                 color: customColors.textColor,
-                              ),
                             ),
                             AppButton(
                               buttonSize: Size(80, 25),
@@ -291,13 +304,13 @@ class _LikecontentState extends State<Likecontent>
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
 
                       ...historyItems.asMap().entries.map((entry) {
                         final index = entry.key;
                         final item = entry.value;
                         return Padding(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 20,
                             vertical: 8,
                           ),
@@ -324,10 +337,7 @@ class _LikecontentState extends State<Likecontent>
                   ),
 
                   ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                     itemCount: historyItems.length,
                     itemBuilder: (context, index) {
                       return VideosBoxWidget(
@@ -350,13 +360,13 @@ class _LikecontentState extends State<Likecontent>
                         crossAxisCount: 2,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 195 / 350, 
+                        childAspectRatio: 195 / 350,
                       ),
                       itemBuilder: (context, index) {
                         return ReelcardWidget(
                           assetImagePath: reelimages[index],
                           title: reelTitles[index],
-                          reelCardHeight: 350, 
+                          reelCardHeight: 350,
                           reelCardWidth: 195,
                           fontSizeVariant: PoppinsFontSizeVariant.size14,
                           showSaveIcon: true,

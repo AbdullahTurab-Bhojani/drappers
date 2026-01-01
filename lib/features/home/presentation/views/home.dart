@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -249,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               children: [
                 AppMainBar(
-                  width: 285,
+                  width: AppScaler.scaleSize(context, 285),
                   leadingText: "Welcome Back John!",
                   title: "",
                   centerTitle: false,
@@ -267,12 +268,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: Image.asset(
                         Assets.images.searchstokeicon.path,
-                        width: 24,
-                        height: 24,
+                        width: AppScaler.scaleSize(context, 24),
+                        height: AppScaler.scaleHeight(context, 24),
                         color: customColors.textColor,
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: AppScaler.scaleSize(context, 16)),
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: () {
@@ -290,16 +291,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Image.asset(
                             Assets.images.notificationsiconnew.path,
-                            width: 24,
-                            height: 24,
+                            width: AppScaler.scaleSize(context, 24),
+                            height: AppScaler.scaleHeight(context, 24),
                             color: customColors.textColor,
                           ),
                           Positioned(
                             top: 0,
                             right: 2,
                             child: Container(
-                              width: 8,
-                              height: 8,
+                              width: AppScaler.scaleSize(context, 8),
+                              height: AppScaler.scaleHeight(context, 8),
                               decoration: BoxDecoration(
                                 color: Colors.red,
                                 shape: BoxShape.circle,
@@ -315,19 +316,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppScaler.scaleSize(context, 20),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
                           SizedBox(
-                            height: 45,
+                            height: AppScaler.scaleHeight(context, 45),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(width: 10),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 10),
+                              ),
                               shrinkWrap: true,
                               itemCount: hometab.length,
                               itemBuilder: (context, index) {
@@ -349,8 +353,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                      vertical: 8,
+                                      horizontal: AppScaler.scaleSize(
+                                        context,
+                                        16,
+                                      ),
+                                      vertical: AppScaler.scaleHeight(
+                                        context,
+                                        8,
+                                      ),
                                     ),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
@@ -374,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           Center(
                             child: Container(
                               decoration: BoxDecoration(
@@ -390,8 +400,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: SizedBox(
-                                  width: 400,
-                                  height: 450,
+                                  width: AppScaler.scaleSize(context, 400),
+                                  height: AppScaler.scaleHeight(context, 450),
                                   child: Stack(
                                     children: [
                                       _betterPlayerController
@@ -438,7 +448,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             .isPlaying()!
                                                         ? Icons.pause_circle
                                                         : Icons.play_circle,
-                                                    size: 70,
+                                                    size: AppScaler.scaleSize(
+                                                      context,
+                                                      70,
+                                                    ),
                                                   ),
                                                   onPressed: () async {
                                                     setState(() {
@@ -476,9 +489,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                       Positioned(
-                                        top: 16,
-                                        left: 14,
-                                        right: 14,
+                                        top: AppScaler.scaleHeight(context, 16),
+                                        left: AppScaler.scaleSize(context, 14),
+                                        right: AppScaler.scaleSize(context, 14),
                                         child: Row(
                                           children: [
                                             Expanded(
@@ -501,14 +514,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
 
                                       Positioned(
-                                        bottom: 10,
-                                        left: 12,
-                                        right: 12,
+                                        bottom: AppScaler.scaleHeight(
+                                          context,
+                                          10,
+                                        ),
+                                        left: AppScaler.scaleSize(context, 12),
+                                        right: AppScaler.scaleSize(context, 12),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            SizedBox(height: 8),
+                                            SizedBox(
+                                              height: AppScaler.scaleHeight(
+                                                context,
+                                                8,
+                                              ),
+                                            ),
                                             if (_betterPlayerController !=
                                                     null &&
                                                 _betterPlayerController!
@@ -575,7 +596,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       color: AppColors.white,
                                                     ),
                                                   ),
-                                                  SizedBox(width: 15),
+                                                  SizedBox(
+                                                    width: AppScaler.scaleSize(
+                                                      context,
+                                                      15,
+                                                    ),
+                                                  ),
                                                   GestureDetector(
                                                     behavior:
                                                         HitTestBehavior.opaque,
@@ -600,8 +626,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           .images
                                                           .screenrotationicon
                                                           .path,
-                                                      width: 24,
-                                                      height: 24,
+                                                      width:
+                                                          AppScaler.scaleSize(
+                                                            context,
+                                                            24,
+                                                          ),
+                                                      height:
+                                                          AppScaler.scaleHeight(
+                                                            context,
+                                                            24,
+                                                          ),
                                                     ),
                                                   ),
                                                 ],
@@ -612,6 +646,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                 ),
+                              
                               ),
                             ),
                           ),
@@ -627,7 +662,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: const Size(80, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -648,16 +683,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
 
-                          SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                           SizedBox(
-                            height: 180,
+                            height: AppScaler.scaleHeight(context, 180),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: trendingimages.length,
                               itemBuilder: (context, index) {
                                 return CardWidget(
@@ -683,7 +719,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -705,7 +741,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context.pushNamed('continueWatchingViewmore');
                                 },
                                 title: "View More",
-                                buttonSize: const Size(80, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -717,15 +753,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
                           SizedBox(
-                            height: 180,
+                            height: AppScaler.scaleHeight(context, 180),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: trendingimages.length,
                               itemBuilder: (context, index) {
                                 return WatchHistory(
@@ -735,7 +772,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -747,7 +784,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: const Size(80, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -768,16 +805,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                           SizedBox(
-                            height: 180,
+                            height: AppScaler.scaleHeight(context, 180),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: podcardimages.length,
                               itemBuilder: (context, index) {
                                 return PodcardsWidget(
@@ -790,7 +828,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           HomeBanner(
                             title: 'Ready to Pitch?',
                             subtitle:
@@ -810,16 +848,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               context.pushNamed('applyPitch');
                             },
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           HomeBanner(
                             title: "Vote for Startups!",
                             subtitle: "Cast your vote in the \ncompetition. ",
                             buttonText: "Vote Now",
-                            buttonColor: const Color(0xff582983),
-                            buttonBorderColor: const Color(0xff9333E9),
+                            buttonColor: Color(0xff582983),
+                            buttonBorderColor: Color(0xff9333E9),
                             backgroundImage: Assets.images.banner2.path,
                             buttonBorderWidth: 2,
-                            buttonGradient: const [
+                            buttonGradient: [
                               Color(0xff582983),
                               Color(0xff582983),
                             ],
@@ -833,7 +871,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
 
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -855,7 +893,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context.pushNamed('reelWidget');
                                 },
                                 child: AppButton(
-                                  buttonSize: const Size(80, 25),
+                                  buttonSize: Size(80, 25),
                                   color: Colors.transparent,
                                   borderColor: customColors.textColor
                                       .withOpacity(0.5),
@@ -875,21 +913,28 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                           SizedBox(
-                            height: 273,
+                            height: AppScaler.scaleHeight(context, 273),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: reelimages.length,
                               itemBuilder: (context, index) {
                                 return ReelcardWidget(
-                                  reelCardHeight: 273,
-                                  reelCardWidth: 149,
+                                  reelCardHeight: AppScaler.scaleHeight(
+                                    context,
+                                    273,
+                                  ),
+                                  reelCardWidth: AppScaler.scaleSize(
+                                    context,
+                                    149,
+                                  ),
                                   fontSizeVariant:
                                       PoppinsFontSizeVariant.size12,
                                   assetImagePath: reelimages[index],
@@ -899,7 +944,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -912,7 +957,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: const Size(80, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -934,15 +979,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
                           SizedBox(
-                            height: 180,
+                            height: AppScaler.scaleHeight(context, 180),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: documentriescard.length,
                               itemBuilder: (context, index) {
                                 return DocumentriesCardWidget(
@@ -953,7 +999,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 10),
+                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
                         ],
                       ),
                     ),

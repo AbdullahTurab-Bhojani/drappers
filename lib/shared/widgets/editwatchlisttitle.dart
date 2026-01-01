@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 
 class EditWatchlistItemTile extends StatelessWidget {
   const EditWatchlistItemTile({
@@ -26,7 +27,10 @@ class EditWatchlistItemTile extends StatelessWidget {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+      padding: EdgeInsets.symmetric(
+        vertical: AppScaler.scaleHeight(context, 8),
+        horizontal: AppScaler.scaleSize(context, 20),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -34,14 +38,14 @@ class EditWatchlistItemTile extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
             onTap: () => onToggle(!isChecked),
             child: Padding(
-              padding: const EdgeInsets.only(right: 12),
+              padding: EdgeInsets.only(right: AppScaler.scaleSize(context, 20)),
               child: Container(
-                width: 20,
-                height: 20,
+                width: AppScaler.scaleSize(context, 20),
+                height: AppScaler.scaleHeight(context, 20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.0),
                   gradient: isChecked
-                      ? const LinearGradient(
+                      ? LinearGradient(
                           colors: [Color(0xFF007bff), Color(0xFF00c4ff)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -49,10 +53,13 @@ class EditWatchlistItemTile extends StatelessWidget {
                       : null,
                   border: isChecked
                       ? null
-                      : Border.all(color: customColors.textColor, width: 1),
+                      : Border.all(
+                          color: customColors.textColor,
+                          width: AppScaler.scaleSize(context, 1),
+                        ),
                 ),
                 child: isChecked
-                    ? const Center(
+                    ? Center(
                         child: Icon(
                           Icons.check,
                           color: AppColors.wDark,
@@ -65,8 +72,8 @@ class EditWatchlistItemTile extends StatelessWidget {
           ),
 
           Container(
-            width: 130,
-            height: 75,
+            width: AppScaler.scaleSize(context, 130),
+            height: AppScaler.scaleHeight(context, 75),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
               image: DecorationImage(
@@ -75,8 +82,7 @@ class EditWatchlistItemTile extends StatelessWidget {
               ),
             ),
           ),
-
-          const SizedBox(width: 15),
+          SizedBox(width: AppScaler.scaleSize(context, 15)),
 
           Expanded(
             child: Column(
@@ -91,18 +97,9 @@ class EditWatchlistItemTile extends StatelessWidget {
                   maxLines: 3,
                   textOverflow: TextOverflow.ellipsis,
                 ),
-                // const SizedBox(height: 4),
-                // PoppinsText(
-                //   'Season $year',
-                //   fontSize: PoppinsFontSizeVariant.size14,
-                //   fontWeight: PoppinsFontWeightVariant.regular,
-                //   color: customColors.textColor.withOpacity(0.7),
-                // ),
               ],
             ),
           ),
-
-          const SizedBox(width: 10),
         ],
       ),
     );

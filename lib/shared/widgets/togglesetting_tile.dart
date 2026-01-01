@@ -1,7 +1,8 @@
-// ignore_for_file: deprecated_member_use, prefer_const_constructors_in_immutables
+// ignore_for_file: deprecated_member_use, prefer_const_constructors_in_immutables, unused_local_variable
 
 import 'package:flutter/material.dart';
 import '../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import 'settingitem.dart';
 
@@ -10,46 +11,43 @@ class GradientSwitch extends StatelessWidget {
   final ValueChanged<bool> onChanged;
   final List<Color> gradientColors;
 
+  final Color inactiveColor;
+
+  final Color thumbColor;
+
   const GradientSwitch({
     super.key,
     required this.value,
     required this.onChanged,
     required this.gradientColors,
+    this.inactiveColor = const Color(0xFFBDBDBD),
+    this.thumbColor = Colors.white,
   });
 
   @override
   Widget build(BuildContext context) {
-    final customColors = Theme.of(context).extension<AppCustomColors>()!;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-
       onTap: () => onChanged(!value),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 250),
-        width: 52,
-        height: 28,
+        width: AppScaler.scaleSize(context, 52),
+        height: AppScaler.scaleHeight(context, 28),
         padding: EdgeInsets.all(3),
-        // decoration: BoxDecoration(
-        //   borderRadius: BorderRadius.circular(100),
-        //   gradient: value ? LinearGradient(colors: gradientColors) : null,
-        //   color: value ? null : customColors.white0xffbdbdbe,
-        // ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          gradient: LinearGradient(
-            colors: value
-                ? gradientColors
-                : gradientColors.map((c) => c.withOpacity(0.3)).toList(),
-          ),
+
+          gradient: value ? LinearGradient(colors: gradientColors) : null,
+          color: value ? null : inactiveColor,
         ),
         child: AnimatedAlign(
           duration: Duration(milliseconds: 250),
           alignment: value ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
-            width: 24,
-            height: 24,
+            width: AppScaler.scaleSize(context, 24),
+            height: AppScaler.scaleHeight(context, 24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: thumbColor,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 4),
@@ -90,7 +88,7 @@ class ToggleSettingTile extends StatefulWidget {
 class _ToggleSettingTileState extends State<ToggleSettingTile> {
   late bool _currentValue;
 
-  final List<Color> _defaultGradientColors = [
+  final List<Color> _defaultGradientColors = const [
     Color(0xFF1FCFFF),
     Color(0xFF0063FF),
   ];
@@ -103,8 +101,7 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
+    final customColors = Theme.of(context).extension<AppCustomColors>()!;
 
     Widget leadingWidget;
     if (widget.icon != null) {
@@ -116,12 +113,12 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
     } else if (widget.image != null) {
       leadingWidget = Image(
         image: widget.image!,
-        width: 24,
-        height: 24,
+        width: AppScaler.scaleSize(context, 24),
+        height: AppScaler.scaleHeight(context, 24),
         fit: BoxFit.cover,
       );
     } else {
-      leadingWidget = SizedBox.shrink();
+      leadingWidget = const SizedBox.shrink();
     }
 
     return SettingItem(
@@ -129,7 +126,7 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           leadingWidget,
-          SizedBox(width: 20.0),
+          SizedBox(width: AppScaler.scaleSize(context, 20)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -141,7 +138,7 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
                 fontWeight: PoppinsFontWeightVariant.medium,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 2),
+              SizedBox(height: AppScaler.scaleHeight(context, 2)),
               PoppinsText(
                 context,
                 widget.subtitleText,
@@ -160,6 +157,8 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
           widget.onChanged(val);
         },
         gradientColors: _defaultGradientColors,
+        inactiveColor: Colors.grey.shade400,
+        thumbColor: Colors.white,
       ),
     );
   }

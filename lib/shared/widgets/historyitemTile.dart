@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 
 class HistoryItemTile extends StatelessWidget {
   const HistoryItemTile({
@@ -28,17 +29,17 @@ class HistoryItemTile extends StatelessWidget {
 
       onTap: onTapTile,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
+        padding: EdgeInsets.symmetric(vertical: AppScaler.scaleHeight(context, 8)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Image.asset(
               "assets/images/time3x.png",
-              width: 16,
-              height: 16,
+              width: AppScaler.scaleSize(context, 16),
+              height: AppScaler.scaleHeight(context, 16),
               color: customColors.textColor,
             ),
-            SizedBox(width: 15),
+            SizedBox(width: AppScaler.scaleSize(context, 15)),
             Expanded(
               child: PoppinsText(
                 context,
@@ -50,10 +51,10 @@ class HistoryItemTile extends StatelessWidget {
                 textOverflow: TextOverflow.ellipsis,
               ),
             ),
-            SizedBox(width: 15),
+            SizedBox(width: AppScaler.scaleSize(context, 15)),
             Container(
-              width: 70,
-              height: 40,
+              width: AppScaler.scaleSize(context, 70),
+              height: AppScaler.scaleHeight(context, 40),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4.0),
                 image: DecorationImage(
@@ -62,15 +63,15 @@ class HistoryItemTile extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 15),
+           SizedBox(width: AppScaler.scaleSize(context, 15)),
             GestureDetector(
               behavior: HitTestBehavior.opaque,
 
               onTap: onTapRemove,
               child: Image.asset(
                 "assets/images/cuticon3x.png",
-                width: 16,
-                height: 16,
+                width: AppScaler.scaleSize(context, 16),
+                height: AppScaler.scaleHeight(context, 16),
               ),
             ),
           ],

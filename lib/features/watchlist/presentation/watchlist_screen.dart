@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../shared/widgets/watchlistitemtile.dart';
 
@@ -70,7 +71,7 @@ class WatchlistScreen extends StatelessWidget {
               children: [
                 AppMainBar(
                   leadingText: "Watchlist",
-                  width: 150,
+                  width: AppScaler.scaleSize(context, 150),
                   title: "",
                   centerTitle: false,
                   backgroundColor: Colors.transparent,
@@ -90,7 +91,7 @@ class WatchlistScreen extends StatelessWidget {
                         color: customColors.textColor,
                       ),
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: AppScaler.scaleSize(context, 20)),
                   ],
                 ),
 

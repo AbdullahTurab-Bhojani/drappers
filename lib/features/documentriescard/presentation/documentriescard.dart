@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -24,6 +25,9 @@ class _DocumentriescardState extends State<Documentriescard> {
       Assets.images.documentriesimage5.path,
       Assets.images.documentriesimage6.path,
     ];
+
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -39,16 +43,17 @@ class _DocumentriescardState extends State<Documentriescard> {
             AppMainBar(
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
                 onTap: () {
                   Navigator.of(context).pop();
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 20),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -58,7 +63,9 @@ class _DocumentriescardState extends State<Documentriescard> {
               elevation: 0,
               actions: [
                 Padding(
-                  padding: EdgeInsets.only(right: 16),
+                  padding: EdgeInsets.only(
+                    right: AppScaler.scaleSize(context, 16),
+                  ),
                   child: GestureDetector(
                     onTap: () {
                       if (GuestHelper.isGuest) {
@@ -69,18 +76,20 @@ class _DocumentriescardState extends State<Documentriescard> {
                     },
                     child: Image.asset(
                       Assets.images.searchstokeicon.path,
-                      width: 20,
-                      height: 20,
+                      width: AppScaler.scaleSize(context, 20),
+                      height: AppScaler.scaleHeight(context, 20),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 12),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -90,20 +99,23 @@ class _DocumentriescardState extends State<Documentriescard> {
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.7,
+                        crossAxisSpacing: AppScaler.scaleSize(context, 10),
+                        mainAxisSpacing: AppScaler.scaleHeight(context, 10),
+                        childAspectRatio:
+                            (screenWidth / 3) /
+                            AppScaler.scaleHeight(context, 200),
                       ),
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           behavior: HitTestBehavior.opaque,
-
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(
+                              AppScaler.scaleSize(context, 12),
+                            ),
                             child: Stack(
                               fit: StackFit.expand,
                               children: [
@@ -112,8 +124,8 @@ class _DocumentriescardState extends State<Documentriescard> {
                                   fit: BoxFit.cover,
                                 ),
                                 Positioned(
-                                  top: 0,
-                                  right: 0,
+                                  top: AppScaler.scaleHeight(context, 4),
+                                  right: AppScaler.scaleSize(context, 4),
                                   child: PopupmenuWidget(showSaveIcon: false),
                                 ),
                               ],
@@ -122,34 +134,39 @@ class _DocumentriescardState extends State<Documentriescard> {
                         );
                       },
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                     PoppinsText(
                       context,
                       "More like this",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.medium,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                     GridView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.7,
+                        crossAxisSpacing: AppScaler.scaleSize(context, 10),
+                        mainAxisSpacing: AppScaler.scaleHeight(context, 10),
+                        childAspectRatio:
+                            (screenWidth / 3) /
+                            AppScaler.scaleHeight(context, 200),
                       ),
                       itemCount: documentries.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           behavior: HitTestBehavior.opaque,
-
                           onTap: () {
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(
+                              AppScaler.scaleSize(context, 12),
+                            ),
                             child: Stack(
                               fit: StackFit.expand,
                               children: [
@@ -158,8 +175,8 @@ class _DocumentriescardState extends State<Documentriescard> {
                                   fit: BoxFit.cover,
                                 ),
                                 Positioned(
-                                  top: 0,
-                                  right: 0,
+                                  top: AppScaler.scaleHeight(context, 4),
+                                  right: AppScaler.scaleSize(context, 4),
                                   child: PopupmenuWidget(showSaveIcon: false),
                                 ),
                               ],
@@ -169,7 +186,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                       },
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
                   ],
                 ),
               ),

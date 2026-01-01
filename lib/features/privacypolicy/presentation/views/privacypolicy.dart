@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -53,7 +54,10 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
 
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 10),
+                  vertical: AppScaler.scaleHeight(context, 20),
+                ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   decoration: BoxDecoration(
@@ -78,11 +82,13 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           fontWeight: PoppinsFontWeightVariant.medium,
                         ),
 
-                        SizedBox(height: 16),
+                        SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
-                        // --- 1. Information We Collect ---
                         Padding(
-                          padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 8),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
                             context,
                             "1. Information We Collect",
@@ -100,7 +106,10 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
                             context,
                             "2. Purpose of Collection",
@@ -118,7 +127,10 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
                             context,
                             "3. Cookies and Tracking Technologies",
@@ -136,7 +148,10 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
                             context,
                             "4. Sharing of Personal Information",
@@ -154,7 +169,10 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
                             context,
                             "5. Data Security",
@@ -172,7 +190,10 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
                             context,
                             "6. Data Retention",
@@ -190,7 +211,10 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
                             context,
                             "7. Opt-Out Option",
@@ -206,7 +230,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           fontSize: PoppinsFontSizeVariant.size12,
                           fontWeight: PoppinsFontWeightVariant.regular,
                         ),
-                        SizedBox(height: 20.0),
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       ],
                     ),
                   ),

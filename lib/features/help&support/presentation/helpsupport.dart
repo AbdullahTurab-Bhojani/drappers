@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -79,11 +80,13 @@ class _HelpsupportState extends State<Helpsupport> {
                   context.pop();
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 20),
+                  ),
                   child: Image.asset(
                     Assets.images.backicon.path,
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -92,7 +95,7 @@ class _HelpsupportState extends State<Helpsupport> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: AppScaler.scaleHeight(context, 10)),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -100,17 +103,19 @@ class _HelpsupportState extends State<Helpsupport> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 20,
+                        horizontal: AppScaler.scaleSize(context, 20),
                         vertical: 0,
                       ),
                       child: Column(
                         children: [
                           ...chatItems.map((item) {
                             return Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                vertical: AppScaler.scaleHeight(context, 8),
+                              ),
                               child: Container(
                                 width: double.infinity,
-                                height: 114,
+                                height: AppScaler.scaleHeight(context, 114),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: AppColors.helpsupport,
@@ -121,8 +126,11 @@ class _HelpsupportState extends State<Helpsupport> {
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
-                                    vertical: 7,
-                                    horizontal: 15,
+                                    vertical: AppScaler.scaleHeight(context, 7),
+                                    horizontal: AppScaler.scaleSize(
+                                      context,
+                                      15,
+                                    ),
                                   ),
                                   child: Column(
                                     children: [
@@ -130,11 +138,22 @@ class _HelpsupportState extends State<Helpsupport> {
                                         children: [
                                           Image.asset(
                                             item.iconPath,
-                                            height: 24,
-                                            width: 24,
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              24,
+                                            ),
+                                            width: AppScaler.scaleSize(
+                                              context,
+                                              24,
+                                            ),
                                             color: customColors.textColor,
                                           ),
-                                          SizedBox(width: 20),
+                                          SizedBox(
+                                            width: AppScaler.scaleSize(
+                                              context,
+                                              20,
+                                            ),
+                                          ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -173,10 +192,18 @@ class _HelpsupportState extends State<Helpsupport> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 13),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          13,
+                                        ),
+                                      ),
                                       SizedBox(
                                         width: double.infinity,
-                                        height: 40,
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          40,
+                                        ),
                                         child: AppButton(
                                           onPressed: () {},
                                           title: item.buttonText,
@@ -191,8 +218,10 @@ class _HelpsupportState extends State<Helpsupport> {
 
                           Container(
                             width: double.infinity,
-                            height: 630,
-                            margin: EdgeInsets.symmetric(vertical: 20),
+                            height: AppScaler.scaleHeight(context, 630),
+                            margin: EdgeInsets.symmetric(
+                              vertical: AppScaler.scaleHeight(context, 20),
+                            ),
                             decoration: BoxDecoration(
                               color: AppColors.submitticket0E0E0E,
                               borderRadius: BorderRadius.circular(20),
@@ -201,7 +230,10 @@ class _HelpsupportState extends State<Helpsupport> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(top: 20, left: 20),
+                                  margin: EdgeInsets.only(
+                                    top: AppScaler.scaleHeight(context, 20),
+                                    left: AppScaler.scaleSize(context, 20),
+                                  ),
                                   child: PoppinsText(
                                     context,
                                     "Submit a Ticket",
@@ -211,12 +243,20 @@ class _HelpsupportState extends State<Helpsupport> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 20, right: 20),
+                                  padding: EdgeInsets.only(
+                                    left: AppScaler.scaleSize(context, 20),
+                                    right: AppScaler.scaleSize(context, 20),
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(height: 10),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          10,
+                                        ),
+                                      ),
                                       NewTextField(
                                         fieldbg: AppColors.submitfield181818,
                                         controller: _fullNameController,
@@ -225,7 +265,12 @@ class _HelpsupportState extends State<Helpsupport> {
                                         filledColor:
                                             customColors.bgcontainerlight,
                                       ),
-                                      SizedBox(height: 15),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          15,
+                                        ),
+                                      ),
                                       NewTextField(
                                         fieldbg: AppColors.submitfield181818,
                                         controller: _emailController,
@@ -247,7 +292,12 @@ class _HelpsupportState extends State<Helpsupport> {
                                           return null;
                                         },
                                       ),
-                                      SizedBox(height: 15),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          15,
+                                        ),
+                                      ),
                                       NewTextField(
                                         fieldbg: AppColors.submitfield181818,
                                         controller: _subjectController,
@@ -256,7 +306,12 @@ class _HelpsupportState extends State<Helpsupport> {
                                         filledColor:
                                             customColors.bgcontainerlight,
                                       ),
-                                      SizedBox(height: 15),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          15,
+                                        ),
+                                      ),
                                       NewTextField(
                                         fieldbg: AppColors.submitfield181818,
                                         maxLines: 3,
@@ -267,7 +322,12 @@ class _HelpsupportState extends State<Helpsupport> {
                                         filledColor:
                                             customColors.bgcontainerlight,
                                       ),
-                                      SizedBox(height: 10),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          10,
+                                        ),
+                                      ),
                                       PoppinsText(
                                         context,
                                         "00/500 Characters",
@@ -276,7 +336,12 @@ class _HelpsupportState extends State<Helpsupport> {
                                             PoppinsFontWeightVariant.regular,
                                         color: customColors.greyColor,
                                       ),
-                                      SizedBox(height: 10),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          10,
+                                        ),
+                                      ),
                                       PoppinsText(
                                         context,
                                         "Upload Screenshot (Optional)",
@@ -285,12 +350,23 @@ class _HelpsupportState extends State<Helpsupport> {
                                             PoppinsFontWeightVariant.regular,
                                         color: customColors.textColor,
                                       ),
-                                      SizedBox(height: 15),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          15,
+                                        ),
+                                      ),
                                       Container(
                                         width: double.infinity,
-                                        height: 55,
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          55,
+                                        ),
                                         padding: EdgeInsets.symmetric(
-                                          horizontal: 12,
+                                          horizontal: AppScaler.scaleSize(
+                                            context,
+                                            12,
+                                          ),
                                         ),
                                         decoration: BoxDecoration(
                                           color: AppColors.submitfield181818,
@@ -304,10 +380,21 @@ class _HelpsupportState extends State<Helpsupport> {
                                           children: [
                                             Image.asset(
                                               Assets.images.screenshoticon.path,
-                                              height: 24,
-                                              width: 24,
+                                              height: AppScaler.scaleHeight(
+                                                context,
+                                                24,
+                                              ),
+                                              width: AppScaler.scaleSize(
+                                                context,
+                                                24,
+                                              ),
                                             ),
-                                            SizedBox(width: 14),
+                                            SizedBox(
+                                              width: AppScaler.scaleSize(
+                                                context,
+                                                24,
+                                              ),
+                                            ),
                                             PoppinsText(
                                               context,
                                               "Add Screenshot",
@@ -321,9 +408,17 @@ class _HelpsupportState extends State<Helpsupport> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 30),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          30,
+                                        ),
+                                      ),
                                       AppButton(
-                                        buttonSize: Size(double.infinity, 40),
+                                        buttonSize: Size(
+                                          double.infinity,
+                                          AppScaler.scaleHeight(context, 40),
+                                        ),
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },

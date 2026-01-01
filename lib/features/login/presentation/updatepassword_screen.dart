@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/textfield_new.dart';
@@ -33,7 +34,11 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 70),
+          padding: EdgeInsets.only(
+            left: AppScaler.scaleSize(context, 20),
+            right: AppScaler.scaleSize(context, 20),
+            top: AppScaler.scaleHeight(context, 118),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,11 +46,11 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 behavior: HitTestBehavior.opaque,
 
                 onTap: () {
-                  context.pushNamed(AppRoutes.verfiicationcodeScreen.name);
+                  context.pop();
                 },
                 child: Image.asset(Assets.images.backicon.path),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
               PoppinsText(
                 context,
                 "Update your password",
@@ -53,7 +58,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 fontWeight: PoppinsFontWeightVariant.semiBold,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 40),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
               AppPasswordField(
                 keyboardType: TextInputType.numberWithOptions(),
                 controller: _passwordController,
@@ -66,7 +71,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 //   return null;
                 // },
               ),
-              SizedBox(height: 15),
+              SizedBox(height: AppScaler.scaleHeight(context, 15)),
               AppPasswordField(
                 keyboardType: TextInputType.numberWithOptions(),
                 controller: _confirmPasswordController,
@@ -79,7 +84,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 //   return null;
                 // },
               ),
-              SizedBox(height: 15),
+              SizedBox(height: AppScaler.scaleHeight(context, 15)),
               PoppinsText(
                 context,
                 "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
@@ -87,7 +92,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.greyColor,
               ),
-              SizedBox(height: 40),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
               AppButton(
                 onPressed: () {
                   context.pushNamed(AppRoutes.loginScreen.name);

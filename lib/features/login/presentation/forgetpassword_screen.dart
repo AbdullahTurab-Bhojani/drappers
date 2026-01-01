@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -32,7 +33,11 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 70),
+          padding: EdgeInsets.only(
+            left: AppScaler.scaleSize(context, 20),
+            right: AppScaler.scaleSize(context, 20),
+            top: AppScaler.scaleHeight(context, 118),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,11 +45,11 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 behavior: HitTestBehavior.opaque,
 
                 onTap: () {
-                  context.pop();
+                  context.go('/login');
                 },
                 child: Image.asset(Assets.images.backicon.path),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
               PoppinsText(
                 context,
                 "Forget Password?",
@@ -52,7 +57,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 fontWeight: PoppinsFontWeightVariant.semiBold,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 4),
+              SizedBox(height: AppScaler.scaleHeight(context, 4)),
               PoppinsText(
                 context,
                 'Don’t worry, this happens.',
@@ -60,7 +65,8 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 36),
+              SizedBox(height: AppScaler.scaleHeight(context, 36)),
+
               PoppinsText(
                 context,
                 'Receive Code Via phone or email',
@@ -68,7 +74,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 24),
+              SizedBox(height: AppScaler.scaleHeight(context, 24)),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 40,
                 child: Column(
@@ -94,7 +100,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                         });
                       },
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: AppScaler.scaleHeight(context, 24)),
                     AppButton(
                       onPressed: () {
                         context.pushNamed(
@@ -137,8 +143,10 @@ class RadioTileWidget extends StatelessWidget {
 
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8),
-        margin: EdgeInsets.only(bottom: 14),
+        padding: EdgeInsets.symmetric(
+          vertical: AppScaler.scaleHeight(context, 8),
+        ),
+        margin: EdgeInsets.only(bottom: AppScaler.scaleHeight(context, 14)),
         decoration: BoxDecoration(
           color: Color(0xFF101317),
           borderRadius: BorderRadius.circular(12),
@@ -155,8 +163,12 @@ class RadioTileWidget extends StatelessWidget {
               ),
             ),
             // SizedBox(width: 8),
-            Container(width: 0.5, height: 24, color: Colors.white),
-            SizedBox(width: 12),
+            Container(
+              width: AppScaler.scaleSize(context, 0.5),
+              height: AppScaler.scaleHeight(context, 24),
+              color: AppColors.white,
+            ),
+            SizedBox(width: AppScaler.scaleSize(context, 12)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

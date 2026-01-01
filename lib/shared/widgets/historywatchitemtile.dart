@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
+import '../../core/theme/app_scalar.dart'; // make sure this import is correct
 
 class VideosBoxWidget extends StatelessWidget {
   final dynamic podcast;
@@ -24,7 +25,7 @@ class VideosBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.only(bottom: AppScaler.scaleHeight(context, 20)),
       child: IntrinsicHeight(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,8 +35,8 @@ class VideosBoxWidget extends StatelessWidget {
                 context.pushNamed(AppRoutes.contentDetail.name);
               },
               child: Container(
-                width: 122,
-                height: 173,
+                width: AppScaler.scaleSize(context, 122),
+                height: AppScaler.scaleHeight(context, 173),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(podcast.imagePath),
@@ -45,7 +46,7 @@ class VideosBoxWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: AppScaler.scaleSize(context, 12)),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +59,7 @@ class VideosBoxWidget extends StatelessWidget {
                     textOverflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 12)),
                   PoppinsText(
                     context,
                     podcast.description,
@@ -68,23 +69,23 @@ class VideosBoxWidget extends StatelessWidget {
                     maxLines: 2,
                     textOverflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 12)),
                   Row(
                     children: [
                       Expanded(
                         child: SliderTheme(
                           data: SliderTheme.of(context).copyWith(
                             trackHeight: 3,
-                            thumbShape: const RoundSliderThumbShape(
+                            thumbShape: RoundSliderThumbShape(
                               enabledThumbRadius: 0,
                             ),
-                            overlayShape: const RoundSliderOverlayShape(
+                            overlayShape: RoundSliderOverlayShape(
                               overlayRadius: 0,
                             ),
                           ),
                           child: Slider(
-                            activeColor: const Color(0xFF0072FF),
-                            inactiveColor: const Color(0xFF00002A),
+                            activeColor: Color(0xFF0072FF),
+                            inactiveColor: Color(0xFF00002A),
                             value: sliderValue,
                             min: 0,
                             max: 100,
@@ -94,7 +95,7 @@ class VideosBoxWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: AppScaler.scaleSize(context, 8)),
                       PoppinsText(
                         context,
                         '-12:34',
@@ -104,7 +105,7 @@ class VideosBoxWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 12)),
                   Row(
                     children: [
                       Expanded(
@@ -113,20 +114,22 @@ class VideosBoxWidget extends StatelessWidget {
                             context.pushNamed(AppRoutes.videoScreen.name);
                           },
                           title: 'Continue',
-                          buttonSize: const Size(double.infinity, 40),
+                          buttonSize: Size(
+                            double.infinity,
+                            AppScaler.scaleHeight(context, 40),
+                          ),
                           prefixIcon: Image.asset(
                             Assets.images.playstrokeicon.path,
-                            width: 14,
-                            height: 14,
+                            width: AppScaler.scaleSize(context, 14),
+                            height: AppScaler.scaleHeight(context, 14),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 20),
+                      SizedBox(width: AppScaler.scaleSize(context, 20)),
                       Image.asset(
                         Assets.images.crossnewicon.path,
-                        //  scale: 1,
-                        width: 24,
-                        height: 24,
+                        width: AppScaler.scaleSize(context, 24),
+                        height: AppScaler.scaleHeight(context, 24),
                       ),
                     ],
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
@@ -36,8 +37,8 @@ class _PodcardsWidgetState extends State<PodcardsWidget> {
         context.pushNamed(AppRoutes.contentDetail.name);
       },
       child: Container(
-        width: 125,
-        height: 180,
+        width: AppScaler.scaleSize(context, 125),
+        height: AppScaler.scaleHeight(context, 180),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -47,8 +48,13 @@ class _PodcardsWidgetState extends State<PodcardsWidget> {
         ),
         child: Padding(
           padding: widget.showSaveIcon
-              ? EdgeInsets.only(left: 8, top: 5, bottom: 5, right: 8)
-              : EdgeInsetsGeometry.only(top: 5),
+              ? EdgeInsets.only(
+                  left: AppScaler.scaleSize(context, 8),
+                  top: AppScaler.scaleHeight(context, 5),
+                  bottom: AppScaler.scaleHeight(context, 5),
+                  right: AppScaler.scaleSize(context, 5),
+                )
+              : EdgeInsets.only(top: AppScaler.scaleHeight(context, 5)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

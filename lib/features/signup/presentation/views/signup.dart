@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/buildradiotile.dart';
@@ -54,7 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
       } else if (phone.isNotEmpty && email.isEmpty) {
         _receiveMethod = "Phone";
       } else if (email.isNotEmpty && phone.isNotEmpty) {
-        _receiveMethod = null; // Both filled → user must choose manually
+        _receiveMethod = null;
       }
     });
   }
@@ -88,9 +89,9 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 30.0,
+              padding: EdgeInsets.symmetric(
+                horizontal: AppScaler.scaleSize(context, 20),
+                vertical: AppScaler.scaleHeight(context, 110),
               ),
               child: Form(
                 key: _formKey,
@@ -100,11 +101,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     Center(
                       child: Column(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 30),
-                            child: Image.asset(Assets.images.logo2.path),
+                          Image.asset(
+                            Assets.images.logo2.path,
+                            width: AppScaler.scaleSize(context, 180),
+                            height: AppScaler.scaleHeight(context, 110),
                           ),
-                          SizedBox(height: 15),
                           PoppinsText(
                             context,
                             "Get Started with Draper",
@@ -114,7 +115,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: AppScaler.scaleHeight(context, 28)),
                     NewTextField(
                       fieldbg: AppColors.tfield,
                       controller: _fullNameController,
@@ -122,7 +123,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       hintText: "John Mackson",
                       filledColor: AppColors.tfield,
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
                     NewTextField(
                       fieldbg: AppColors.tfield,
                       controller: _emailController,
@@ -131,7 +132,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       filledColor: AppColors.tfield,
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
+
                     PhoneOtpField(
                       phoneController: _phoneController,
                       otpController: otpController,
@@ -151,7 +153,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
+
                     AppPasswordField(
                       keyboardType: TextInputType.numberWithOptions(),
                       controller: _confirmPasswordController,
@@ -164,7 +167,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
+
                     Container(
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -181,7 +185,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.labelColor,
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
+
                           Row(
                             children: [
                               Expanded(
@@ -213,15 +218,15 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
 
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 14,
-                          width: 14,
+                          height: AppScaler.scaleHeight(context, 14),
+                          width: AppScaler.scaleSize(context, 14),
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
 
@@ -237,7 +242,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   ? Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(4),
-                                        gradient: const LinearGradient(
+                                        gradient: LinearGradient(
                                           colors: [
                                             Color(0xFF1FCFFF),
                                             Color(0xFF0063FF),
@@ -248,7 +253,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       ),
                                       child: Icon(
                                         Icons.check,
-                                        size: 12,
+                                        size: AppScaler.scaleSize(context, 12),
                                         color: AppColors.white,
                                       ),
                                     )
@@ -256,7 +261,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 5),
+                        SizedBox(width: AppScaler.scaleSize(context, 5)),
                         RichText(
                           text: TextSpan(
                             children: [
@@ -342,7 +347,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
                     AppButton(
                       onPressed: () {
                         context.pushNamed(
@@ -351,7 +356,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                       title: "Create Account",
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: AppScaler.scaleHeight(context, 25)),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -359,11 +364,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         Expanded(
                           child: Divider(
                             color: customColors.labelColor,
-                            thickness: 1,
+                            thickness: AppScaler.scaleHeight(context, 1),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 8),
+                          ),
                           child: PoppinsText(
                             context,
                             "or",
@@ -381,7 +388,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    SizedBox(height: 40),
+                    SizedBox(height: AppScaler.scaleHeight(context, 40)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -392,8 +399,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: Color(0xff202020),
                           prefixIcon: Image.asset(
                             Assets.images.googleicon.path,
-                            width: 26,
-                            height: 26,
+                            width: AppScaler.scaleSize(context, 26),
+                            height: AppScaler.scaleHeight(context, 26),
                           ),
                           buttonGradient: [
                             AppColors.graylight,
@@ -409,8 +416,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
                           prefixIcon: Image.asset(
                             Assets.images.appleicon.path,
-                            width: 26,
-                            height: 26,
+                            width: AppScaler.scaleSize(context, 26),
+                            height: AppScaler.scaleHeight(context, 26),
                           ),
                           buttonGradient: [
                             AppColors.graylight,
@@ -420,7 +427,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
 
-                    SizedBox(height: 10),
+                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
                     AppButton(
                       onPressed: () {
                         context.pushNamed(AppRoutes.home.name);
@@ -433,7 +440,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       color: Color(0xff202020),
                     ),
 
-                    SizedBox(height: 28),
+                    SizedBox(height: AppScaler.scaleHeight(context, 28)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -444,7 +451,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           fontWeight: PoppinsFontWeightVariant.medium,
                           color: customColors.textColor,
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: AppScaler.scaleSize(context, 10)),
                         ShaderMask(
                           shaderCallback: (bounds) =>
                               LinearGradient(
@@ -474,7 +481,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
                   ],
                 ),
               ),

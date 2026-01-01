@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/historyitemTile.dart';
@@ -86,20 +87,20 @@ class SearchviewState extends State<Searchview> {
                 children: [
                   Expanded(
                     child: Container(
-                      height: 40,
+                      height: AppScaler.scaleHeight(context, 40),
                       decoration: BoxDecoration(
                         color: AppColors.color202020.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
                         children: [
-                          SizedBox(width: 15),
+                          SizedBox(width: AppScaler.scaleSize(context, 15)),
                           Image.asset(
                             "assets/images/searchicon3x.png",
-                            width: 20,
-                            height: 20,
+                            width: AppScaler.scaleSize(context, 20),
+                            height: AppScaler.scaleHeight(context, 20),
                           ),
-                          SizedBox(width: 10),
+                          SizedBox(width: AppScaler.scaleSize(context, 10)),
                           Expanded(
                             child: TextField(
                               focusNode: _focusNode,
@@ -122,7 +123,7 @@ class SearchviewState extends State<Searchview> {
                     ),
                   ),
 
-                  SizedBox(width: 12),
+                  SizedBox(width: AppScaler.scaleSize(context, 12)),
 
                   GestureDetector(
                     onTap: () {
@@ -146,7 +147,10 @@ class SearchviewState extends State<Searchview> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 20),
+                    vertical: AppScaler.scaleHeight(context, 10),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -154,9 +158,9 @@ class SearchviewState extends State<Searchview> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 185,
+                            height: AppScaler.scaleHeight(context, 185),
                             child: ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
+                              physics: NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.zero,
                               itemCount: dummyHistory.length,
                               itemBuilder: (context, index) {
@@ -194,12 +198,12 @@ class SearchviewState extends State<Searchview> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                       SizedBox(
-                        height: 185,
+                        height: AppScaler.scaleHeight(context, 185),
                         child: ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
+                          physics: NeverScrollableScrollPhysics(),
                           padding: EdgeInsets.zero,
                           itemCount: dummyHistory.length,
                           itemBuilder: (context, index) {
@@ -214,7 +218,7 @@ class SearchviewState extends State<Searchview> {
                         ),
                       ),
 
-                      const SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                     ],
                   ),
                 ),

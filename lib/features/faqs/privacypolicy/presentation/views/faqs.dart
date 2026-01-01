@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/extensions/theme_extension.dart';
+import '../../../../../core/theme/app_scalar.dart';
 import '../../../../../drappers.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -98,11 +99,13 @@ class _FaqsScreenState extends State<FaqsScreen> {
 
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 20),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -120,13 +123,20 @@ class _FaqsScreenState extends State<FaqsScreen> {
                   ),
                 ),
                 child: ListView.builder(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(
+                    top: AppScaler.scaleHeight(context, 10),
+                  ),
                   itemCount: _faqs.length,
                   itemBuilder: (context, index) {
                     final item = _faqs[index];
                     final isExpanded = expandedIndices.contains(index);
                     return Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
+                      padding: EdgeInsets.fromLTRB(
+                        AppScaler.scaleSize(context, 20),
+                        0,
+                        AppScaler.scaleSize(context, 20),
+                        AppScaler.scaleHeight(context, 24),
+                      ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
                         child: Theme(
@@ -148,15 +158,15 @@ class _FaqsScreenState extends State<FaqsScreen> {
                             ),
 
                             trailing: isExpanded
-                                ? Icon(Icons.remove, color: Colors.white)
-                                : Icon(Icons.add, color: Colors.white),
+                                ? Icon(Icons.remove, color: AppColors.white)
+                                : Icon(Icons.add, color: AppColors.white),
 
                             children: <Widget>[
                               Padding(
                                 padding: EdgeInsets.only(
-                                  left: 20.0,
-                                  right: 20.0,
-                                  bottom: 16.0,
+                                  left: AppScaler.scaleSize(context, 20),
+                                  right: AppScaler.scaleSize(context, 20),
+                                  bottom: AppScaler.scaleHeight(context, 16),
                                   top: 0,
                                 ),
                                 child: PoppinsText(

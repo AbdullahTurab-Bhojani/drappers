@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../shared/widgets/editwatchlisttitle.dart';
 import '../../../shared/widgets/popupmenuitem/remove_popup.dart';
@@ -54,6 +55,14 @@ class EditWatchlistScreen extends StatefulWidget {
 class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
   final List<WatchlistData> watchlistItems = _dummyWatchlist;
 
+  @override
+  void initState() {
+    super.initState();
+    for (var item in watchlistItems) {
+      item.isSelected = false;
+    }
+  }
+
   int get selectedCount =>
       watchlistItems.where((item) => item.isSelected).length;
 
@@ -67,6 +76,7 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -78,7 +88,7 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
             children: [
               AppMainBar(
                 leadingText: "Edit Watchlist",
-                width: 200,
+                width: AppScaler.scaleSize(context, 200),
                 title: "",
                 centerTitle: false,
                 backgroundColor: Colors.transparent,
@@ -86,7 +96,6 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
                 actions: [
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
-
                     onTap: () => context.pop(),
                     child: PoppinsText(
                       context,
@@ -96,13 +105,15 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
                       color: customColors.textColor,
                     ),
                   ),
-                  SizedBox(width: 20),
+                  SizedBox(width: AppScaler.scaleSize(context, 20)),
                 ],
               ),
 
               Expanded(
                 child: ListView.builder(
-                  padding: const EdgeInsets.only(bottom: 100),
+                  padding: EdgeInsets.only(
+                    bottom: AppScaler.scaleHeight(context, 100),
+                  ),
                   itemCount: watchlistItems.length,
                   itemBuilder: (context, index) {
                     final item = watchlistItems[index];
@@ -120,38 +131,35 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
             ],
           ),
 
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: selectedCount > 0
-                ? Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-
-                      child: AppButton(
-                        buttonSize: Size(400, 40),
-                        color: customColors.redshade,
-                        buttonGradient: [
-                          customColors.redshade,
-                          customColors.redshade,
-                        ],
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => Dialog(
-                              backgroundColor: Colors.transparent,
-                              child: RemovePopup(),
-                            ),
-                          );
-                        },
-                        title: "Remove",
+          if (selectedCount > 0)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: AppScaler.scaleHeight(context, 20),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 20),
+                ),
+                child: AppButton(
+                  buttonSize: Size(double.infinity, 40),
+                  color: customColors.redshade,
+                  buttonGradient: [
+                    customColors.redshade,
+                    customColors.redshade,
+                  ],
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => Dialog(
+                        backgroundColor: Colors.transparent,
+                        child: RemovePopup(),
                       ),
-                    ),
-                  )
-                : SizedBox.shrink(),
-          ),
+                    );
+                  },
+                  title: "Remove",
+                ),
+              ),
+            ),
         ],
       ),
     );

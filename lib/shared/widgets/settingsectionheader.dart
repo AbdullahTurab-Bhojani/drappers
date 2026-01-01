@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 
 class SettingSectionHeader extends StatelessWidget {
@@ -15,7 +15,12 @@ class SettingSectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10),
+      padding: EdgeInsets.fromLTRB(
+        AppScaler.scaleSize(context, 20),
+        AppScaler.scaleHeight(context, 10),
+        AppScaler.scaleSize(context, 10),
+        AppScaler.scaleHeight(context, 10),
+      ),
       child: PoppinsText(
         context,
         title,

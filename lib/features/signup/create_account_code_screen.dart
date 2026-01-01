@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:async';
 import '../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
 
@@ -97,7 +98,11 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 70),
+          padding: EdgeInsets.only(
+            left: AppScaler.scaleSize(context, 20),
+            right: AppScaler.scaleSize(context, 20),
+            top: AppScaler.scaleHeight(context, 118),
+          ),
 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +115,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                 },
                 child: Image.asset(Assets.images.backicon.path),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
               PoppinsText(
                 context,
                 "Create an Account",
@@ -118,7 +123,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                 fontWeight: PoppinsFontWeightVariant.semiBold,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: AppScaler.scaleHeight(context, 20)),
               PoppinsText(
                 context,
                 'sent a 6-digit code to johnmackson@gmail.com Confirm it belongs to you to keep your account secure.',
@@ -126,14 +131,14 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 40),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(6, (index) {
                   return SizedBox(
-                    width: 56,
+                    width: AppScaler.scaleSize(context, 56),
                     child: Container(
-                      height: 54,
+                      height: AppScaler.scaleHeight(context, 54),
                       alignment: Alignment.center,
                       child: ValueListenableBuilder<TextEditingValue>(
                         valueListenable: _otpControllers[index],
@@ -145,7 +150,10 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                             textAlign: TextAlign.center,
                             textAlignVertical: TextAlignVertical.center,
                             maxLength: 1,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: AppScaler.scaleSize(context, 20),
+                            ),
                             decoration: InputDecoration(
                               counterText: '',
                               filled: true,
@@ -153,7 +161,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                                   ? AppColors.color101317
                                   : AppColors.color101317,
                               contentPadding: EdgeInsets.symmetric(
-                                vertical: 20,
+                                vertical: AppScaler.scaleHeight(context, 20),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -173,7 +181,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                   );
                 }),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: AppScaler.scaleHeight(context, 10)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -193,25 +201,6 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                   ),
                 ],
               ),
-              // SizedBox(
-              //   width: double.infinity,
-              //   child: ElevatedButton(
-              //     onPressed: _submitOtp,
-              //     style: ElevatedButton.styleFrom(
-              //       padding: EdgeInsets.symmetric(vertical: 14),
-              //       backgroundColor: Colors.blueAccent,
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(12),
-              //       ),
-              //     ),
-              //     child: PoppinsText(
-              //       "Continue",
-              //       fontSize: PoppinsFontSizeVariant.size16,
-              //       fontWeight: PoppinsFontWeightVariant.semiBold,
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

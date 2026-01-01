@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -88,7 +89,11 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 70),
+          padding: EdgeInsets.only(
+            left: AppScaler.scaleSize(context, 20),
+            right: AppScaler.scaleSize(context, 20),
+            top: AppScaler.scaleHeight(context, 118),
+          ),
 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,11 +102,11 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                 behavior: HitTestBehavior.opaque,
 
                 onTap: () {
-                  context.go('/forgetpassword');
+                  context.pop();
                 },
                 child: Image.asset(Assets.images.backicon.path),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
               PoppinsText(
                 context,
                 "Enter OTP",
@@ -109,7 +114,7 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                 fontWeight: PoppinsFontWeightVariant.semiBold,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: AppScaler.scaleHeight(context, 20)),
               PoppinsText(
                 context,
                 'Sent a 6-digit code to jo*******@gmail.com.\nPlease confirm it’s yours so you can update\nyour password.',
@@ -117,14 +122,14 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 40),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(6, (index) {
                   return SizedBox(
-                    width: 56,
+                    width: AppScaler.scaleSize(context, 56),
                     child: Container(
-                      height: 54,
+                      height: AppScaler.scaleHeight(context, 54),
                       alignment: Alignment.center,
                       child: ValueListenableBuilder<TextEditingValue>(
                         valueListenable: _otpControllers[index],
@@ -137,8 +142,8 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                             textAlignVertical: TextAlignVertical.center,
                             maxLength: 1,
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                              color: AppColors.white,
+                              fontSize: AppScaler.scaleSize(context, 20),
                               height: 1,
                             ),
                             decoration: InputDecoration(
@@ -149,17 +154,14 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                                   : AppColors.color101317,
                               contentPadding: EdgeInsets.zero,
                               constraints: BoxConstraints(
-                                maxHeight: 50,
-                                minHeight: 50,
+                                maxHeight: AppScaler.scaleHeight(context, 50),
+                                minHeight: AppScaler.scaleHeight(context, 50),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                // borderSide: BorderSide(
-                                //   color: Colors.blueAccent,
-                                // ),
                               ),
                             ),
                             onChanged: (val) => _onOtpChanged(index, val),
@@ -170,7 +172,7 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                   );
                 }),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: AppScaler.scaleHeight(context, 10)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -190,25 +192,6 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                   ),
                 ],
               ),
-              // SizedBox(
-              //   width: double.infinity,
-              //   child: ElevatedButton(
-              //     onPressed: _submitOtp,
-              //     style: ElevatedButton.styleFrom(
-              //       padding: EdgeInsets.symmetric(vertical: 14),
-              //       backgroundColor: Colors.blueAccent,
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(12),
-              //       ),
-              //     ),
-              //     child: PoppinsText(
-              //       "Continue",
-              //       fontSize: PoppinsFontSizeVariant.size16,
-              //       fontWeight: PoppinsFontWeightVariant.semiBold,
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

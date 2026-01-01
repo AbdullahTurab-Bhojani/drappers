@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
-import 'guestloginwidget.dart';
 import 'popupmenuitem/popupmenu_widget.dart';
 
 class WatchHistory extends StatefulWidget {
@@ -39,8 +39,8 @@ class _WatchHistoryState extends State<WatchHistory> {
         context.pushNamed(AppRoutes.videoScreen.name);
       },
       child: Container(
-        width: 125,
-        height: 180,
+        width: AppScaler.scaleSize(context, 125),
+        height: AppScaler.scaleHeight(context, 180),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -59,34 +59,37 @@ class _WatchHistoryState extends State<WatchHistory> {
               children: [
                 Padding(
                   padding: widget.showSaveIcon
-                      ? EdgeInsets.only(left: 8, top: 5, bottom: 5, right: 8)
-                      : EdgeInsetsGeometry.only(top: 5),
+                      ? EdgeInsets.only(
+                          left: AppScaler.scaleSize(context, 8),
+                          top: AppScaler.scaleHeight(context, 5),
+                          bottom: AppScaler.scaleHeight(context, 5),
+                          right: AppScaler.scaleSize(context, 5),
+                        )
+                      : EdgeInsets.only(top: AppScaler.scaleHeight(context, 5)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       PopupmenuWidget(showSaveIcon: widget.showSaveIcon),
-
-                      // PoppinsText(
-                      //   widget.title,
-                      //   fontSize: PoppinsFontSizeVariant.size14,
-                      //   fontWeight: PoppinsFontWeightVariant.medium,
-                      // ),
                     ],
                   ),
                 ),
                 Image.asset(Assets.images.playwithbgicon.path),
                 Padding(
-                  padding: EdgeInsets.only(left: 8, right: 8, bottom: 10),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 8),
+                    right: AppScaler.scaleSize(context, 8),
+                    bottom: AppScaler.scaleHeight(context, 10),
+                  ),
                   child: SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      trackHeight: 3,
+                      trackHeight: AppScaler.scaleHeight(context, 3),
                       thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0),
                       overlayShape: RoundSliderOverlayShape(overlayRadius: 0),
                     ),
                     child: Slider(
-                      activeColor: Colors.white,
-                      inactiveColor: Colors.white.withOpacity(0.5),
+                      activeColor: AppColors.white,
+                      inactiveColor: AppColors.white.withOpacity(0.5),
                       value: _sliderValue,
                       thumbColor: Colors.transparent,
                       min: 0,

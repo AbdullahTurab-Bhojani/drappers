@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/phonefield_code.dart';
 import '../../../shared/widgets/textfield_new.dart';
 import 'edit_profile_popup.dart';
@@ -49,13 +49,10 @@ class EditprofileScreen extends StatelessWidget {
                   behavior: HitTestBehavior.opaque,
 
                   onTap: () => Navigator.of(context).pop(),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Image.asset(
-                      "assets/images/backicon.png",
-                      width: 20,
-                      height: 20,
-                    ),
+                  child: Image.asset(
+                    "assets/images/backicon.png",
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
                 title: "Edit Profile",
@@ -63,7 +60,7 @@ class EditprofileScreen extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
-              SizedBox(height: 50),
+              SizedBox(height: AppScaler.scaleHeight(context, 50)),
               Column(
                 children: [
                   Stack(
@@ -78,7 +75,7 @@ class EditprofileScreen extends StatelessWidget {
                               child: Dialog(
                                 backgroundColor: Colors.transparent,
                                 insetPadding: EdgeInsets.symmetric(
-                                  horizontal: 20,
+                                  horizontal: AppScaler.scaleSize(context, 20),
                                 ),
                                 child: EditProfilePopup(),
                               ),
@@ -86,8 +83,8 @@ class EditprofileScreen extends StatelessWidget {
                           );
                         },
                         child: SizedBox(
-                          height: 114.82,
-                          width: 114.82,
+                          height: AppScaler.scaleHeight(context, 114.82),
+                          width: AppScaler.scaleSize(context, 114.82),
                           child: CircleAvatar(
                             radius: 60,
                             backgroundColor: Colors.transparent,
@@ -98,11 +95,11 @@ class EditprofileScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        bottom: -10,
-                        right: 46,
+                        bottom: AppScaler.scaleSize(context, -10),
+                        right: AppScaler.scaleSize(context, 46),
                         child: Container(
-                          width: 24,
-                          height: 24,
+                          width: AppScaler.scaleSize(context, 24),
+                          height: AppScaler.scaleHeight(context, 24),
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             color: customColors.buttonColors.first,
@@ -117,7 +114,7 @@ class EditprofileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
                   PoppinsText(
                     context,
                     'Jerry Mackson',
@@ -125,13 +122,16 @@ class EditprofileScreen extends StatelessWidget {
                     fontWeight: PoppinsFontWeightVariant.medium,
                     color: customColors.textColor,
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
                 ],
               ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20),
+                    padding: EdgeInsets.only(
+                      left: AppScaler.scaleSize(context, 20),
+                      right: AppScaler.scaleSize(context, 20),
+                    ),
                     child: Column(
                       children: [
                         NewTextField(
@@ -164,59 +164,8 @@ class EditprofileScreen extends StatelessWidget {
                           ),
                           filledColor: AppColors.tfield,
                           keyboardType: TextInputType.emailAddress,
-                          // sufixIcon: Container(
-                          //   height: 28,
-                          //   width: 84,
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(20),
-                          //     color: customColors.buttonColors.first,
-                          //   ),
-                          //   child: Center(
-                          //     child: PoppinsText(
-                          //       "Send Code",
-                          //       fontSize: PoppinsFontSizeVariant.size12,
-                          //       fontWeight: PoppinsFontWeightVariant.regular,
-                          //       color: customColors.textColor,
-                          //     ),
-                          //   ),
-                          // ),
                         ),
-
-                        // VerificationCodeField(
-                        //   length: 6,
-                        //   onCompleted: (code) {
-                        //     print('Entered code: $code');
-                        //   },
-                        // ),
-
-                        // PhoneNumberInputField(
-                        //   onChanged: (fullNumber) {
-                        //     print('Full Phone Number: $fullNumber');
-                        //   },
-                        // ),
-                        SizedBox(height: 15),
-
-                        // NewTextField(
-                        //   fieldbg: AppColors.tfield,
-                        //   controller: _phoneController,
-                        //   labelText: "Phone Number*",
-                        //   hintText: "03XXXXXXXXX",
-                        //   hintStyle: TextStyle(
-                        //     fontSize: 16,
-                        //     fontWeight: FontWeight.w400,
-                        //   ),
-                        //   filledColor: AppColors.tfield,
-                        //   keyboardType: TextInputType.phone,
-                        //   // validator: (value) {
-                        //   //   if (value == null || value.trim().isEmpty) {
-                        //   //     return "Phone number required";
-                        //   //   }
-                        //   //   if (value.length < 11) return "Enter valid phone";
-                        //   //   return null;
-                        //   // },
-                        // ),
-
-                        // SizedBox(height: 25),
+                        SizedBox(height: AppScaler.scaleHeight(context, 15)),
                         PhoneOtpField(
                           phoneController: phoneController,
                           otpController: otpController,
@@ -231,7 +180,7 @@ class EditprofileScreen extends StatelessWidget {
                           },
                           title: "Save Changes",
                         ),
-                        SizedBox(height: 12),
+                        SizedBox(height: AppScaler.scaleHeight(context, 12)),
                         AppButton(
                           color: Colors.transparent,
                           borderColor: customColors.textColor,

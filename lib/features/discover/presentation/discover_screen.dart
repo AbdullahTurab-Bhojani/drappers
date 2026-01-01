@@ -13,6 +13,7 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../shared/widgets/genreboxwidget.dart';
 import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
@@ -130,7 +131,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
           Column(
             children: [
               AppMainBar(
-                width: 133,
+                width: AppScaler.scaleSize(context, 133),
                 leadingText: "Discover",
                 title: "",
                 backgroundColor: Colors.transparent,
@@ -142,22 +143,24 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     },
                     child: Image.asset(
                       Assets.images.searchstokeicon.path,
-                      width: 24,
-                      height: 24,
+                      width: AppScaler.scaleSize(context, 24),
+                      height: AppScaler.scaleHeight(context, 24),
                       color: customColors.textColor,
                     ),
                   ),
-                  SizedBox(width: 15),
+                  SizedBox(width: AppScaler.scaleSize(context, 15)),
                 ],
               ),
 
               Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 20),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       Center(
                         child: Container(
                           decoration: BoxDecoration(
@@ -173,8 +176,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: SizedBox(
-                              width: 400,
-                              height: 450,
+                              width: AppScaler.scaleSize(context, 400),
+                              height: AppScaler.scaleHeight(context, 450),
                               child: Stack(
                                 children: [
                                   _betterPlayerController
@@ -187,12 +190,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                   Container(
                                     color: Colors.black.withOpacity(0.18),
                                   ),
+
                                   if (_betterPlayerController
                                           .isVideoInitialized() !=
                                       null)
                                     GestureDetector(
                                       behavior: HitTestBehavior.opaque,
                                       onTap: () {
+                                        // if (GuestHelper.isGuest) {
+                                        //   GuestHelper.checkGuest(context);
+                                        //   return;
+                                        // }
                                         setState(
                                           () => _showControls = !_showControls,
                                         );
@@ -201,46 +209,61 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                         child: AnimatedOpacity(
                                           duration: Duration(milliseconds: 50),
                                           opacity: _showControls ? 1 : 0,
-                                          child: IconButton(
-                                            iconSize: 70,
-                                            icon: Icon(
-                                              _betterPlayerController
-                                                      .isPlaying()!
-                                                  ? Icons.pause_circle
-                                                  : Icons.play_circle,
-                                              color: Colors.white,
+                                          child: Container(
+                                            padding: EdgeInsets.all(12),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
                                             ),
-                                            onPressed: () {
-                                              if (_betterPlayerController
-                                                  .isPlaying()!) {
-                                                _betterPlayerController.pause();
-                                              } else {
-                                                final pos =
+                                            child: IconButton(
+                                              icon: Icon(
+                                                _betterPlayerController
+                                                        .isPlaying()!
+                                                    ? Icons.pause_circle
+                                                    : Icons.play_circle,
+                                                size: AppScaler.scaleSize(
+                                                  context,
+                                                  70,
+                                                ),
+                                              ),
+                                              onPressed: () async {
+                                                setState(() {
+                                                  final videoPosition =
+                                                      _betterPlayerController
+                                                          .videoPlayerController!
+                                                          .value
+                                                          .position;
+                                                  final videoDuration =
+                                                      _betterPlayerController
+                                                          .videoPlayerController!
+                                                          .value
+                                                          .duration;
+
+                                                  if (_betterPlayerController
+                                                      .isPlaying()!) {
                                                     _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .value
-                                                        .position;
-                                                final dur =
+                                                        .pause();
+                                                  } else {
+                                                    if (videoPosition >=
+                                                        videoDuration!) {
+                                                      _betterPlayerController
+                                                          .seekTo(
+                                                            Duration.zero,
+                                                          );
+                                                    }
                                                     _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .value
-                                                        .duration;
-                                                if (pos >= dur!) {
-                                                  _betterPlayerController
-                                                      .seekTo(Duration.zero);
-                                                }
-                                                _betterPlayerController.play();
-                                              }
-                                              setState(() {});
-                                            },
+                                                        .play();
+                                                  }
+                                                });
+                                              },
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   Positioned(
-                                    top: 16,
-                                    left: 14,
-                                    right: 14,
+                                    top: AppScaler.scaleHeight(context, 16),
+                                    left: AppScaler.scaleSize(context, 14),
+                                    right: AppScaler.scaleSize(context, 14),
                                     child: Row(
                                       children: [
                                         Expanded(
@@ -258,135 +281,122 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                       ],
                                     ),
                                   ),
+
                                   Positioned(
-                                    bottom: 10,
-                                    left: 12,
-                                    right: 12,
+                                    bottom: AppScaler.scaleHeight(context, 10),
+                                    left: AppScaler.scaleSize(context, 12),
+                                    right: AppScaler.scaleSize(context, 12),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Builder(
-                                          builder: (context) {
-                                            final controller =
-                                                _betterPlayerController
-                                                    .videoPlayerController!;
-                                            final duration =
-                                                controller.value.duration ??
-                                                Duration.zero;
-                                            final position =
-                                                controller.value.position;
-                                            bool _isDragging = false;
-
-                                            // Add listener to update slider automatically
-                                            controller.addListener(() {
-                                              if (!_isDragging) setState(() {});
-                                            });
-
-                                            String format(Duration d) {
-                                              String two(int n) =>
-                                                  n.toString().padLeft(2, '0');
-                                              final minutes = two(
-                                                d.inMinutes.remainder(60),
-                                              );
-                                              final seconds = two(
-                                                d.inSeconds.remainder(60),
-                                              );
-                                              final hours = d.inHours;
-                                              return hours > 0
-                                                  ? '$hours:$minutes:$seconds'
-                                                  : '$minutes:$seconds';
-                                            }
-
-                                            return Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  child: Slider(
-                                                    activeColor:
-                                                        AppColors.white,
-                                                    inactiveColor: AppColors
-                                                        .white
-                                                        .withOpacity(0.3),
-                                                    min: 0,
-                                                    max: _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .value
-                                                        .duration!
-                                                        .inMilliseconds
-                                                        .toDouble(),
-                                                    value: _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .value
-                                                        .position
-                                                        .inMilliseconds
-                                                        .clamp(
-                                                          0,
-                                                          _betterPlayerController
-                                                              .videoPlayerController!
-                                                              .value
-                                                              .duration!
-                                                              .inMilliseconds,
-                                                        )
-                                                        .toDouble(),
-                                                    onChanged: (value) {
-                                                      _betterPlayerController
-                                                          .videoPlayerController!
-                                                          .seekTo(
-                                                            Duration(
-                                                              milliseconds:
-                                                                  value.toInt(),
-                                                            ),
-                                                          );
-                                                    },
-                                                  ),
-                                                ),
-                                                Text(
-                                                  _format(
-                                                    _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .value
-                                                        .position,
-                                                  ),
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                  ),
-                                                ),
-                                                SizedBox(width: 15),
-                                                GestureDetector(
-                                                  behavior:
-                                                      HitTestBehavior.opaque,
-                                                  onTap: () {
-                                                    _betterPlayerController
-                                                        .videoPlayerController!
-                                                        .pause();
-                                                    // if (GuestHelper.isGuest) {
-                                                    //   GuestHelper.checkGuest(
-                                                    //     context,
-                                                    //   );
-                                                    //   return;
-                                                    // }
-                                                    context.pushNamed(
-                                                      AppRoutes
-                                                          .videoScreen
-                                                          .name,
-                                                    );
-                                                  },
-                                                  child: Image.asset(
-                                                    Assets
-                                                        .images
-                                                        .screenrotationicon
-                                                        .path,
-                                                    width: 24,
-                                                    height: 24,
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
+                                        SizedBox(
+                                          height: AppScaler.scaleHeight(
+                                            context,
+                                            8,
+                                          ),
                                         ),
+                                        if (_betterPlayerController != null &&
+                                            _betterPlayerController!
+                                                    .videoPlayerController !=
+                                                null &&
+                                            _betterPlayerController!
+                                                .videoPlayerController!
+                                                .value
+                                                .isPlaying)
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: Slider(
+                                                  activeColor: AppColors.white,
+                                                  inactiveColor: AppColors.white
+                                                      .withOpacity(0.3),
+                                                  min: 0,
+                                                  max: _betterPlayerController
+                                                      .videoPlayerController!
+                                                      .value
+                                                      .duration!
+                                                      .inMilliseconds
+                                                      .toDouble(),
+                                                  value: _betterPlayerController
+                                                      .videoPlayerController!
+                                                      .value
+                                                      .position
+                                                      .inMilliseconds
+                                                      .clamp(
+                                                        0,
+                                                        _betterPlayerController
+                                                            .videoPlayerController!
+                                                            .value
+                                                            .duration!
+                                                            .inMilliseconds,
+                                                      )
+                                                      .toDouble(),
+                                                  onChanged: (value) {
+                                                    _betterPlayerController
+                                                        .videoPlayerController!
+                                                        .seekTo(
+                                                          Duration(
+                                                            milliseconds: value
+                                                                .toInt(),
+                                                          ),
+                                                        );
+                                                  },
+                                                ),
+                                              ),
+                                              Text(
+                                                _format(
+                                                  _betterPlayerController
+                                                      .videoPlayerController!
+                                                      .value
+                                                      .position,
+                                                ),
+                                                style: TextStyle(
+                                                  color: AppColors.white,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: AppScaler.scaleSize(
+                                                  context,
+                                                  15,
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                behavior:
+                                                    HitTestBehavior.opaque,
+                                                onTap: () {
+                                                  _betterPlayerController
+                                                      .videoPlayerController!
+                                                      .pause();
+                                                  // if (GuestHelper.isGuest) {
+                                                  //   GuestHelper.checkGuest(
+                                                  //     context,
+                                                  //   );
+                                                  //   return;
+                                                  // }
+                                                  context.pushNamed(
+                                                    AppRoutes.videoScreen.name,
+                                                  );
+                                                },
+                                                child: Image.asset(
+                                                  Assets
+                                                      .images
+                                                      .screenrotationicon
+                                                      .path,
+                                                  width: AppScaler.scaleSize(
+                                                    context,
+                                                    24,
+                                                  ),
+                                                  height: AppScaler.scaleHeight(
+                                                    context,
+                                                    24,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                       ],
                                     ),
                                   ),
@@ -397,7 +407,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                       PoppinsText(
                         context,
                         'Genre',
@@ -406,12 +416,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         color: customColors.textColor,
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                       SizedBox(
-                        height: 56,
+                        height: AppScaler.scaleHeight(context, 56),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          separatorBuilder: (_, __) => SizedBox(width: 15),
+                          separatorBuilder: (_, __) =>
+                              SizedBox(width: AppScaler.scaleSize(context, 15)),
                           itemCount: genretitle.length,
                           itemBuilder: (context, index) {
                             return GenreBoxWidget(
@@ -423,7 +435,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
                       PoppinsText(
                         context,
                         'Trending Show',
@@ -432,12 +445,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         color: customColors.textColor,
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                       SizedBox(
-                        height: 180,
+                        height: AppScaler.scaleHeight(context, 180),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          separatorBuilder: (_, __) => SizedBox(width: 15),
+                          separatorBuilder: (_, __) =>
+                              SizedBox(width: AppScaler.scaleSize(context, 15)),
                           itemCount: trendingimages.length,
                           itemBuilder: (context, index) {
                             return CardWidget(
@@ -453,7 +468,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
                       PoppinsText(
                         context,
                         'Podcasts',
@@ -462,13 +478,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         color: customColors.textColor,
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                       SizedBox(
-                        height: 180,
+                        height: AppScaler.scaleHeight(context, 180),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (_, __) =>
-                              const SizedBox(width: 15),
+                              SizedBox(width: AppScaler.scaleSize(context, 15)),
                           itemCount: podcardimages.length,
                           itemBuilder: (context, index) {
                             return PodcardsWidget(
@@ -481,7 +498,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
                       PoppinsText(
                         context,
                         'Documentaries',
@@ -490,13 +508,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         color: customColors.textColor,
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                       SizedBox(
-                        height: 180,
+                        height: AppScaler.scaleHeight(context, 180),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (_, __) =>
-                              const SizedBox(width: 15),
+                              SizedBox(width: AppScaler.scaleSize(context, 15)),
                           itemCount: documentriescard.length,
                           itemBuilder: (context, index) {
                             return DocumentriesCardWidget(
@@ -507,7 +526,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 10)),
                     ],
                   ),
                 ),

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
@@ -49,8 +50,8 @@ class _CardWidgetState extends State<CardWidget> {
       },
 
       child: Container(
-        width: 125,
-        height: 180,
+        width: AppScaler.scaleSize(context, 125),
+        height: AppScaler.scaleHeight(context, 180),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -62,47 +63,48 @@ class _CardWidgetState extends State<CardWidget> {
         ),
         child: Padding(
           padding: widget.showSaveIcon
-              ? EdgeInsets.only(left: 8, top: 5, bottom: 5, right: 8)
-              : EdgeInsets.only(top: 5),
+              ? EdgeInsets.only(
+                  left: AppScaler.scaleSize(context, 8),
+                  top: AppScaler.scaleHeight(context, 5),
+                  bottom: AppScaler.scaleHeight(context, 5),
+                  right: AppScaler.scaleSize(context, 5),
+                )
+              : EdgeInsets.only(top: AppScaler.scaleHeight(context, 5)),
           child: Stack(
             children: [
               if (widget.index == 0 && widget.showLiveTvBadge)
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
-                      borderRadius: BorderRadius.circular(4),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppScaler.scaleSize(context, 4),
+                      vertical: AppScaler.scaleHeight(context, 2),
                     ),
-                    child: Container(
-                      width: 50,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        color: AppColors.colorFF0000,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 6,
-                            height: 6,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors.wDark,
-                            ),
-                          ),
-                          SizedBox(width: 6),
-                          PoppinsText(
-                            context,
-                            'Live TV',
-                            fontSize: PoppinsFontSizeVariant.size8,
-                            fontWeight: PoppinsFontWeightVariant.bold,
+                    decoration: BoxDecoration(
+                      color: AppColors.colorFF0000,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: AppScaler.scaleSize(context, 6),
+                          height: AppScaler.scaleHeight(context, 6),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
                             color: AppColors.wDark,
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(width: AppScaler.scaleSize(context, 4)),
+                        PoppinsText(
+                          context,
+                          'Live TV',
+                          fontSize: PoppinsFontSizeVariant.size8,
+                          fontWeight: PoppinsFontWeightVariant.bold,
+                          color: AppColors.wDark,
+                        ),
+                      ],
                     ),
                   ),
                 )
@@ -118,9 +120,13 @@ class _CardWidgetState extends State<CardWidget> {
                   child: GestureDetector(
                     onTap: widget.onMoreInfoTap,
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 5),
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      height: 36,
+                      margin: EdgeInsets.only(
+                        bottom: AppScaler.scaleHeight(context, 5),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppScaler.scaleSize(context, 12),
+                      ),
+                      height: AppScaler.scaleHeight(context, 36),
                       decoration: BoxDecoration(
                         color: AppColors.color121212.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(20),
@@ -130,10 +136,10 @@ class _CardWidgetState extends State<CardWidget> {
                         children: [
                           Icon(
                             Icons.info_outline,
-                            size: 18,
+                            size: AppScaler.scaleSize(context, 12),
                             color: AppColors.white,
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: AppScaler.scaleSize(context, 8)),
                           PoppinsText(
                             context,
                             'More Info',

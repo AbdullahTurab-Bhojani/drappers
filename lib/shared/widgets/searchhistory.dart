@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 
 class Searchhistory extends StatelessWidget {
   const Searchhistory({
@@ -26,7 +27,9 @@ class Searchhistory extends StatelessWidget {
 
       onTap: onTapTile,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
+        padding: EdgeInsets.symmetric(
+          vertical: AppScaler.scaleHeight(context, 8),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -41,10 +44,10 @@ class Searchhistory extends StatelessWidget {
                 textOverflow: TextOverflow.ellipsis,
               ),
             ),
-            SizedBox(width: 15),
+            SizedBox(width: AppScaler.scaleSize(context, 15)),
             Container(
-              width: 70,
-              height: 40,
+              width: AppScaler.scaleSize(context, 75),
+              height: AppScaler.scaleHeight(context, 40),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4.0),
                 image: DecorationImage(
@@ -53,17 +56,6 @@ class Searchhistory extends StatelessWidget {
                 ),
               ),
             ),
-            // const SizedBox(width: 15),
-            // GestureDetector(
-            //   behavior: HitTestBehavior.opaque,
-
-            //   onTap: onTapRemove,
-            //   child: Image.asset(
-            //     "assets/images/cuticon3x.png",
-            //     width: 16,
-            //     height: 16,
-            //   ),
-            // ),
           ],
         ),
       ),
