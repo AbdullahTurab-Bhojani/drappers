@@ -140,6 +140,7 @@ class _FaqsScreenState extends State<FaqsScreen> {
                             collapsedBackgroundColor:
                                 AppColors.submitticket0E0E0E,
                             title: PoppinsText(
+                              context,
                               item.question,
                               fontSize: PoppinsFontSizeVariant.size16,
                               fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -159,6 +160,7 @@ class _FaqsScreenState extends State<FaqsScreen> {
                                   top: 0,
                                 ),
                                 child: PoppinsText(
+                                  context,
                                   item.answer,
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   fontWeight: PoppinsFontWeightVariant.regular,

@@ -95,6 +95,7 @@ class _CardWidgetState extends State<CardWidget> {
                           ),
                           SizedBox(width: 6),
                           PoppinsText(
+                            context,
                             'Live TV',
                             fontSize: PoppinsFontSizeVariant.size8,
                             fontWeight: PoppinsFontWeightVariant.bold,
@@ -134,6 +135,7 @@ class _CardWidgetState extends State<CardWidget> {
                           ),
                           SizedBox(width: 8),
                           PoppinsText(
+                            context,
                             'More Info',
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.medium,

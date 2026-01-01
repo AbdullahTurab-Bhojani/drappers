@@ -12,7 +12,7 @@ class DropdownSettingTile extends StatefulWidget {
     required this.options,
     required this.initialValue,
     required this.onChanged,
-  required this.isMenuOpen,
+    required this.isMenuOpen,
   });
 
   final ImageProvider image;
@@ -66,6 +66,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PoppinsText(
+                    context,
                     widget.titleText,
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -73,6 +74,7 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
                   ),
                   const SizedBox(height: 4),
                   PoppinsText(
+                    context,
                     widget.subtitleText,
                     fontSize: PoppinsFontSizeVariant.size12,
                     fontWeight: PoppinsFontWeightVariant.regular,
@@ -160,11 +162,11 @@ class _DropdownSettingTileState extends State<DropdownSettingTile> {
           //     }).toList();
           //   },
           // ),
-          CustomDropdown( 
+          CustomDropdown(
             hintText: _currentValue,
             dynamicValues: widget.options,
             isOpen: widget.isMenuOpen,
-          )
+          ),
         ],
       ),
     );

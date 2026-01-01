@@ -529,6 +529,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
 //                                 crossAxisAlignment: CrossAxisAlignment.start,
 //                                 children: [
 //                                   PoppinsText(
+//                                     ,
 //                                     podcast.title,
 //                                     fontSize: PoppinsFontSizeVariant.size16,
 //                                     fontWeight: PoppinsFontWeightVariant.medium,

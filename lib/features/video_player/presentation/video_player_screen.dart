@@ -124,7 +124,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   }
 
   Widget _videoQuality(Function(String) onSelected, String selectedQuality) {
-    List<String> videoQualities = ['Auto','4k', '1440p', '1080p', '480p'];
+    List<String> videoQualities = ['Auto', '4k', '1440p', '1080p', '480p'];
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -147,6 +147,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PoppinsText(
+                      context,
                       "Quality",
                       fontSize: PoppinsFontSizeVariant.size12,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -196,6 +197,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                               Icon(Icons.check, color: Colors.white, size: 18),
                             if (isSelected) SizedBox(width: 10),
                             PoppinsText(
+                              context,
                               text,
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
@@ -339,6 +341,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PoppinsText(
+                      context,
                       "Audio & Subtitles",
                       fontSize: PoppinsFontSizeVariant.size12,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -392,6 +395,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                               Icon(Icons.check, color: Colors.white, size: 18),
                             if (isSelected) SizedBox(width: 10),
                             PoppinsText(
+                              context,
                               text,
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
@@ -432,6 +436,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PoppinsText(
+                      context,
                       "Speed",
                       fontSize: PoppinsFontSizeVariant.size12,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -488,6 +493,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                             if (isSelected) SizedBox(width: 10),
 
                             PoppinsText(
+                              context,
                               text,
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
@@ -563,6 +569,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PoppinsText(
+                    context,
                     episode['title']!,
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -618,6 +625,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     ),
                     color: AppColors.color000032,
                     child: PoppinsText(
+                      context,
                       'E14 Finale',
                       fontSize: PoppinsFontSizeVariant.size24,
                       fontWeight: PoppinsFontWeightVariant.medium,
@@ -847,6 +855,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                             padding: EdgeInsets.only(right: 24),
                             // padding: const EdgeInsets.all(8.0),
                             child: PoppinsText(
+                              context,
                               _formatDuration(
                                 _betterPlayerController
                                     .videoPlayerController!
@@ -960,6 +969,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           ),
                           const SizedBox(width: 8),
                           PoppinsText(
+                            context,
                             "Locked",
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -995,6 +1005,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   Expanded(
                     child: Center(
                       child: PoppinsText(
+                        context,
                         'Finale – Meet The Drapers Seaso....',
                         fontSize: PoppinsFontSizeVariant.size22,
                         fontWeight: PoppinsFontWeightVariant.medium,
@@ -1035,6 +1046,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           Image.asset(imagePath, width: 20, height: 20, fit: BoxFit.contain),
           SizedBox(width: 6),
           PoppinsText(
+            context,
             label,
             fontSize: PoppinsFontSizeVariant.size12,
             fontWeight: PoppinsFontWeightVariant.semiBold,

@@ -61,6 +61,7 @@ class _ReportContentWidgetState extends State<ReportContentWidget> {
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: PoppinsText(
+                        context,
                         widget.subTitle,
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -71,6 +72,7 @@ class _ReportContentWidgetState extends State<ReportContentWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PoppinsText(
+                          context,
                           widget.title,
                           fontSize: PoppinsFontSizeVariant.size12,
                           fontWeight: PoppinsFontWeightVariant.regular,
@@ -78,6 +80,7 @@ class _ReportContentWidgetState extends State<ReportContentWidget> {
                         ),
                         SizedBox(height: 5.0),
                         PoppinsText(
+                          context,
                           widget.subTitle,
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.regular,

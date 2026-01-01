@@ -79,6 +79,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: PoppinsText(
+                  context,
                   'Content Notifications',
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,
@@ -116,6 +117,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: PoppinsText(
+                  context,
                   'Marketing',
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,

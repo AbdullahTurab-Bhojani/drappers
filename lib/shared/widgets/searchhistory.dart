@@ -32,6 +32,7 @@ class Searchhistory extends StatelessWidget {
           children: [
             Expanded(
               child: PoppinsText(
+                context,
                 title,
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,

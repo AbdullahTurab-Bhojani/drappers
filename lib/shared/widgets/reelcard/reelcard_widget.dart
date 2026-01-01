@@ -58,6 +58,7 @@ class _ReelcardWidgetState extends State<ReelcardWidget> {
             children: [
               PopupmenuWidget(showSaveIcon: widget.showSaveIcon),
               PoppinsText(
+                context,
                 widget.title,
                 fontSize: widget.fontSizeVariant,
                 fontWeight: PoppinsFontWeightVariant.medium,

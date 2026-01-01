@@ -103,6 +103,7 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
               ),
               SizedBox(height: 40),
               PoppinsText(
+                context,
                 "Enter OTP",
                 fontSize: PoppinsFontSizeVariant.size24,
                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -110,6 +111,7 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
               ),
               SizedBox(height: 20),
               PoppinsText(
+                context,
                 'Sent a 6-digit code to jo*******@gmail.com.\nPlease confirm it’s yours so you can update\nyour password.',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -173,12 +175,14 @@ class _EnterotpScreenState extends State<VerfiicationcodeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   PoppinsText(
+                    context,
                     "Resend",
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
                     color: customColors.greyColor,
                   ),
                   PoppinsText(
+                    context,
                     timerText,
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,

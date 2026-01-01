@@ -43,6 +43,7 @@ class WatchlistItemTile extends StatelessWidget {
           SizedBox(width: 12),
           Expanded(
             child: PoppinsText(
+              context,
               title,
               fontSize: PoppinsFontSizeVariant.size16,
               fontWeight: PoppinsFontWeightVariant.medium,

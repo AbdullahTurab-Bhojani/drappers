@@ -70,6 +70,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PoppinsText(
+                      context,
                       "Report Content",
                       fontSize: PoppinsFontSizeVariant.size24,
                       fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -77,6 +78,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                     ),
                     SizedBox(height: 20),
                     PoppinsText(
+                      context,
                       "Help us improve your experience by sharing what's wrong.",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -84,6 +86,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                     ),
                     SizedBox(height: 30),
                     PoppinsText(
+                      context,
                       "Provide Details",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -91,6 +94,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                     ),
                     SizedBox(height: 5),
                     PoppinsText(
+                      context,
                       "(Help us understand the specific issue.)",
                       fontSize: PoppinsFontSizeVariant.size12,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -113,6 +117,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: PoppinsText(
+                        context,
                         '$_charCount/500 characters',
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -122,6 +127,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
 
                     SizedBox(height: 30),
                     PoppinsText(
+                      context,
                       'Optional Attachments',
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -145,6 +151,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                           ),
                           SizedBox(width: 8),
                           PoppinsText(
+                            context,
                             'Add Screenshot',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.regular,

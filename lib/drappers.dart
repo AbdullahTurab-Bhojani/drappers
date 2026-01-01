@@ -52,6 +52,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'core/extensions/theme_extension.dart';
 import 'core/local/providers/shared_pref.dart';
+import 'core/theme/app_scalar.dart';
 import 'core/theme/app_theme.dart';
 import 'features/Setting&preferences/presentation/setting_preferences.dart';
 import 'features/applypitch/presentation/apply_pitch_screen.dart';

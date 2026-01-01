@@ -37,7 +37,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
             AppMainBar(
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-        
+
                 onTap: () => Navigator.of(context).pop(),
                 child: Image.asset(
                   Assets.images.backicon.path,
@@ -52,6 +52,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
             ),
             SizedBox(height: 30),
             PoppinsText(
+              context,
               'Before you delete your account',
               fontSize: PoppinsFontSizeVariant.size24,
               fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -59,6 +60,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
             ),
             SizedBox(height: 20),
             PoppinsText(
+              context,
               'Would you like to try one of these alternatives\ninstead?',
               fontSize: PoppinsFontSizeVariant.size16,
               fontWeight: PoppinsFontWeightVariant.regular,
@@ -85,6 +87,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PoppinsText(
+                        context,
                         "Remove devices instead?",
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -92,6 +95,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
                       ),
                       SizedBox(height: 6),
                       PoppinsText(
+                        context,
                         "Sign out from specific devices only",
                         fontSize: PoppinsFontSizeVariant.size16,
                         color: customColors.textColor,
@@ -123,6 +127,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PoppinsText(
+                        context,
                         "Clear watch history only?",
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -130,6 +135,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
                       ),
                       SizedBox(height: 6),
                       PoppinsText(
+                        context,
                         "Reset recommendations while keeping\naccount",
                         fontSize: PoppinsFontSizeVariant.size16,
                         color: customColors.textColor,
@@ -153,6 +159,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PoppinsText(
+                    context,
                     "Still want to delete your account?",
                     fontSize: PoppinsFontSizeVariant.size12,
                     fontWeight: PoppinsFontWeightVariant.regular,
@@ -160,6 +167,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
                   ),
                   SizedBox(height: 6),
                   PoppinsText(
+                    context,
                     "This will permanently remove all your data including "
                     "profiles, watch history, preferences, and any active subscriptions.",
                     fontSize: PoppinsFontSizeVariant.size16,
@@ -169,7 +177,7 @@ class _DeleteDetailScreenState extends State<DeleteDetailScreen> {
                 ],
               ),
             ),
-        
+
             SizedBox(height: 40),
             AppButton(
               onPressed: () {

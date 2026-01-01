@@ -48,6 +48,7 @@ class _GenreBoxWidgetState extends State<GenreBoxWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             PoppinsText(
+              context,
               widget.title,
               fontSize: PoppinsFontSizeVariant.size16,
               fontWeight: PoppinsFontWeightVariant.medium,

@@ -125,6 +125,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
           Image.asset(imagePath, width: 22, height: 22),
           const SizedBox(width: 20),
           PoppinsText(
+            context,
             title,
             fontSize: PoppinsFontSizeVariant.size12,
             color: customColors.textColor,
@@ -226,6 +227,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             PoppinsText(
+                              context,
                               _titles[index],
                               fontSize: PoppinsFontSizeVariant.size18,
                               fontWeight: PoppinsFontWeightVariant.medium,
@@ -233,6 +235,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                             ),
                             const SizedBox(height: 4),
                             PoppinsText(
+                              context,
                               "${_dates[index]} • 2.2k views",
                               fontSize: PoppinsFontSizeVariant.size14,
                               color: Colors.white70,
@@ -242,6 +245,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 PoppinsText(
+                                  context,
                                   _descriptions[index],
                                   fontSize: PoppinsFontSizeVariant.size14,
                                   color: customColors.textColor,
@@ -258,6 +262,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 4),
                                     child: PoppinsText(
+                                      context,
                                       _expanded[index]
                                           ? "Read Less"
                                           : "Read More",
@@ -312,6 +317,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                       ),
                                       const SizedBox(width: 8),
                                       PoppinsText(
+                                        context,
                                         "${_likeCounts[index]}",
                                         fontSize: PoppinsFontSizeVariant.size14,
                                         color: Colors.white,
@@ -339,6 +345,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                       ),
                                       const SizedBox(width: 8),
                                       PoppinsText(
+                                        context,
                                         "Share",
                                         fontSize: PoppinsFontSizeVariant.size14,
                                         color: customColors.textColor,

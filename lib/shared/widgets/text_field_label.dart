@@ -12,6 +12,7 @@ class TextFieldLabel extends ConsumerWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 2),
       child: PoppinsText(
+        context,
         name,
         color: customColors.labelColor,
         fontWeight: PoppinsFontWeightVariant.regular,

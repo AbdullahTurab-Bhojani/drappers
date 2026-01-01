@@ -106,6 +106,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           SizedBox(height: 15),
                           PoppinsText(
+                            context,
                             "Get Started with Draper",
                             fontSize: PoppinsFontSizeVariant.size24,
                             fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -174,6 +175,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           PoppinsText(
+                            context,
                             "Receive Code Via",
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.regular,
@@ -260,6 +262,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             children: [
                               WidgetSpan(
                                 child: PoppinsText(
+                                  context,
                                   "I agree to the ",
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   color: customColors.textColor,
@@ -284,6 +287,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           ),
                                         ),
                                     child: PoppinsText(
+                                      context,
                                       "Terms & Conditions",
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       color: AppColors.white,
@@ -296,6 +300,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                               WidgetSpan(
                                 child: PoppinsText(
+                                  context,
                                   " and ",
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   color: customColors.textColor,
@@ -320,6 +325,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           ),
                                         ),
                                     child: PoppinsText(
+                                      context,
                                       "Privacy Policy.",
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       color: AppColors.white,
@@ -359,6 +365,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           child: PoppinsText(
+                            context,
                             "or",
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.regular,
@@ -431,6 +438,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         PoppinsText(
+                          context,
                           "Already have an account?",
                           fontSize: PoppinsFontSizeVariant.size14,
                           fontWeight: PoppinsFontWeightVariant.medium,
@@ -456,6 +464,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               context.pushNamed(AppRoutes.loginScreen.name);
                             },
                             child: PoppinsText(
+                              context,
                               "Sign in",
                               fontSize: PoppinsFontSizeVariant.size14,
                               fontWeight: PoppinsFontWeightVariant.medium,

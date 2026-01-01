@@ -138,6 +138,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       "Meet the Drapers Competition",
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
@@ -146,6 +147,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     ),
                                     // SizedBox(height: 6),
                                     PoppinsText(
+                                      context,
                                       "Vote for your favourites startup from \nseason 5, Episode 12.",
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       fontWeight:
@@ -214,6 +216,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       "Voting Instructions",
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
@@ -221,6 +224,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     ),
                                     SizedBox(height: 6),
                                     PoppinsText(
+                                      context,
                                       "Lorem ipsum dolor sit amet consectetur. Lorem at elit eu facilisis. Sed cursus volutpat.",
                                       fontSize: PoppinsFontSizeVariant.size11,
                                       fontWeight:
@@ -294,6 +298,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                   crossAxisAlignment: .start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       'Echo Tech Solutions',
                                       fontSize: PoppinsFontSizeVariant.size22,
                                       fontWeight:
@@ -302,6 +307,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     SizedBox(height: 2),
 
                                     PoppinsText(
+                                      context,
                                       'Sustainable energy Revolution',
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
@@ -310,6 +316,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     ),
                                     SizedBox(height: 10),
                                     PoppinsText(
+                                      context,
                                       'simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.',
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       fontWeight:
@@ -318,6 +325,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     ),
                                     SizedBox(height: 15),
                                     PoppinsText(
+                                      context,
                                       'Meet the Drapers S512',
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
@@ -383,6 +391,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                             ),
 
                                             label: PoppinsText(
+                                              context,
                                               isVoted ? 'Voted' : 'Vote',
                                               fontSize:
                                                   PoppinsFontSizeVariant.size16,

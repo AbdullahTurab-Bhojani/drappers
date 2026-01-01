@@ -55,6 +55,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
               ),
               SizedBox(height: 30),
               PoppinsText(
+                context,
                 'Deactivate Account',
                 fontSize: PoppinsFontSizeVariant.size24,
                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -62,6 +63,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
               ),
               SizedBox(height: 5),
               PoppinsText(
+                context,
                 'Temporarily pause your account',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -69,6 +71,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
               ),
               SizedBox(height: 20),
               PoppinsText(
+                context,
                 'What happens when you deactivate:',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
@@ -76,6 +79,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
               ),
               SizedBox(height: 10),
               PoppinsText(
+                context,
                 '• All your data will be preserved',
                 fontSize: PoppinsFontSizeVariant.size12,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -83,6 +87,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
               ),
               SizedBox(height: 6),
               PoppinsText(
+                context,
                 '• You can reactivate anytime by signing in',
                 fontSize: PoppinsFontSizeVariant.size12,
                 fontWeight: PoppinsFontWeightVariant.regular,

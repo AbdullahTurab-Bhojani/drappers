@@ -46,6 +46,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
               ),
               SizedBox(height: 40),
               PoppinsText(
+                context,
                 "Forget Password?",
                 fontSize: PoppinsFontSizeVariant.size24,
                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -53,6 +54,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
               ),
               SizedBox(height: 4),
               PoppinsText(
+                context,
                 'Don’t worry, this happens.',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -60,6 +62,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
               ),
               SizedBox(height: 36),
               PoppinsText(
+                context,
                 'Receive Code Via phone or email',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -94,7 +97,9 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                     SizedBox(height: 24),
                     AppButton(
                       onPressed: () {
-                        context.pushNamed(AppRoutes.verfiicationcodeScreen.name);
+                        context.pushNamed(
+                          AppRoutes.verfiicationcodeScreen.name,
+                        );
                       },
                       title: "Send Code",
                     ),
@@ -156,12 +161,14 @@ class RadioTileWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PoppinsText(
+                  context,
                   title,
                   fontSize: PoppinsFontSizeVariant.size12,
                   color: AppColors.bGrey,
                   fontWeight: PoppinsFontWeightVariant.regular,
                 ),
                 PoppinsText(
+                  context,
                   subtitle,
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.regular,

@@ -105,6 +105,7 @@ class _ReportContentState extends State<ReportContent> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PoppinsText(
+                      context,
                       "Report Content",
                       fontSize: PoppinsFontSizeVariant.size24,
                       fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -112,6 +113,7 @@ class _ReportContentState extends State<ReportContent> {
                     ),
                     SizedBox(height: 20),
                     PoppinsText(
+                      context,
                       "Help us improve your experience by sharing what's wrong.",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -119,6 +121,7 @@ class _ReportContentState extends State<ReportContent> {
                     ),
                     SizedBox(height: 30.0),
                     PoppinsText(
+                      context,
                       "Select the Issue Category",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.regular,

@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 26),
                   PoppinsText(
+                    context,
                     "Get Started with Draper",
                     fontSize: PoppinsFontSizeVariant.size24,
                     fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -135,6 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: PoppinsText(
+                          context,
                           "or",
                           color: AppColors.color6B7280,
                           fontWeight: PoppinsFontWeightVariant.regular,
@@ -228,6 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             SizedBox(width: 6),
                             PoppinsText(
+                              context,
                               "Remember Me",
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.regular,
@@ -240,6 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             PoppinsText(
+                              context,
                               "Need to create an account?",
                               fontSize: PoppinsFontSizeVariant.size14,
                               fontWeight: PoppinsFontWeightVariant.medium,
@@ -270,6 +274,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 },
                                 child: PoppinsText(
+                                  context,
                                   "Sign Up",
                                   fontSize: PoppinsFontSizeVariant.size14,
                                   fontWeight: PoppinsFontWeightVariant.medium,
@@ -301,6 +306,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 );
                               },
                               child: PoppinsText(
+                                context,
                                 'Forgot Password?',
                                 decoration: TextDecoration.underline,
                                 fontSize: PoppinsFontSizeVariant.size14,

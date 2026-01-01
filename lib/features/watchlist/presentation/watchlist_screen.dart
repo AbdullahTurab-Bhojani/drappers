@@ -83,6 +83,7 @@ class WatchlistScreen extends StatelessWidget {
                         context.pushNamed(AppRoutes.editWatchlistScreen.name);
                       },
                       child: PoppinsText(
+                        context,
                         "Edit",
                         fontSize: PoppinsFontSizeVariant.size14,
                         fontWeight: PoppinsFontWeightVariant.medium,

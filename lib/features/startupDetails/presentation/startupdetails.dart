@@ -32,6 +32,7 @@ class _TagChip extends StatelessWidget {
         border: Border.all(color: customColors.greyColor, width: 1),
       ),
       child: PoppinsText(
+        context,
         label,
         fontSize: PoppinsFontSizeVariant.size12,
         fontWeight: PoppinsFontWeightVariant.regular,
@@ -62,6 +63,7 @@ class _CompanyInfoRow extends StatelessWidget {
         children: [
           // Label (e.g., Founded)
           PoppinsText(
+            context,
             '$label:',
             fontSize: PoppinsFontSizeVariant.size14,
             fontWeight: PoppinsFontWeightVariant.regular,
@@ -69,6 +71,7 @@ class _CompanyInfoRow extends StatelessWidget {
           ),
           // Value (e.g., 2021)
           PoppinsText(
+            context,
             value,
             fontSize: PoppinsFontSizeVariant.size14,
             fontWeight: PoppinsFontWeightVariant.medium,
@@ -229,6 +232,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           PoppinsText(
+                            context,
                             'Echo Tech Solutions',
                             fontSize: PoppinsFontSizeVariant.size22,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -236,6 +240,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                           ),
                           const SizedBox(height: 2),
                           PoppinsText(
+                            context,
                             'Sustainable energy Revolution',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.regular,
@@ -326,6 +331,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                   ),
 
                                   label: PoppinsText(
+                                    context,
                                     isSaved ? 'Saved' : 'Save',
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -375,6 +381,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                   ),
 
                                   label: PoppinsText(
+                                    context,
                                     isVoted ? 'Voted' : 'Vote',
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -411,6 +418,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       PoppinsText(
+                                        context,
                                         'Jerry Mackson',
                                         fontSize: PoppinsFontSizeVariant.size18,
                                         fontWeight:
@@ -419,6 +427,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                       ),
                                       const SizedBox(height: 2),
                                       PoppinsText(
+                                        context,
                                         'Former Tesla Engineer 8+ Years experience in Battery Technology',
                                         fontSize: PoppinsFontSizeVariant.size12,
                                         fontWeight:
@@ -434,12 +443,14 @@ class _StartupdetailsState extends State<Startupdetails> {
                           ),
                           const SizedBox(height: 16),
                           PoppinsText(
+                            context,
                             'Cast: Leonardo DiCaprio, Jonah Hill, Margot Robbie, Matthew... more',
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.labelColor,
                           ),
                           PoppinsText(
+                            context,
                             'Director: Denis Villeneuve',
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.regular,
@@ -447,6 +458,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                           ),
                           const SizedBox(height: 25),
                           PoppinsText(
+                            context,
                             'Company Information',
                             fontSize: PoppinsFontSizeVariant.size20,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -462,6 +474,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                           ),
                           const SizedBox(height: 25),
                           PoppinsText(
+                            context,
                             'About the Startup',
                             fontSize: PoppinsFontSizeVariant.size20,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -469,6 +482,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                           ),
                           const SizedBox(height: 10),
                           PoppinsText(
+                            context,
                             'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
                             fontSize: PoppinsFontSizeVariant.size14,
                             fontWeight: PoppinsFontWeightVariant.regular,
@@ -477,6 +491,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                           const SizedBox(height: 25),
 
                           PoppinsText(
+                            context,
                             'Featured Episode',
                             fontSize: PoppinsFontSizeVariant.size20,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -519,6 +534,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           PoppinsText(
+                                            context,
                                             "Finale – Meet The Drapers Season 07 (2025)",
                                             fontSize:
                                                 PoppinsFontSizeVariant.size16,
@@ -529,6 +545,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                           ),
                                           const SizedBox(height: 20),
                                           PoppinsText(
+                                            context,
                                             "Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode, spotlighting visionary startups from across the world. Judges Nikki Farb, TikTok executive Tim Natividad, and legendary investor Bill Draper evaluate groundbreaking innovations in connectivity, accessibility, and education. From CleverFi’s seamless WiFi to Zeality’s immersive AR/VR tech, WeWALK’s smart cane, and Taleemabad’s educational revolution, this episode is a thrilling showcase of entrepreneurial brilliance",
                                             fontSize:
                                                 PoppinsFontSizeVariant.size14,
@@ -576,6 +593,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                               ),
                                               const SizedBox(width: 8),
                                               PoppinsText(
+                                                context,
                                                 '-12:34',
                                                 fontSize: PoppinsFontSizeVariant
                                                     .size10,

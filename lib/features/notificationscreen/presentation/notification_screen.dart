@@ -152,6 +152,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                       child: Center(
                         child: PoppinsText(
+                          context,
                           'Today',
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
@@ -195,6 +196,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       item['title'],
                                       color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
@@ -203,6 +205,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     ),
                                     SizedBox(height: 4),
                                     PoppinsText(
+                                      context,
                                       item['time'],
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       fontWeight:
@@ -230,6 +233,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 Container(
                                   margin: EdgeInsets.only(top: 15),
                                   child: PoppinsText(
+                                    context,
                                     "New!",
                                     fontSize: PoppinsFontSizeVariant.size12,
                                     fontWeight:
@@ -257,6 +261,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                       child: Center(
                         child: PoppinsText(
+                          context,
                           'Yesterday',
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
@@ -293,6 +298,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       item['title'],
                                       color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
@@ -301,6 +307,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     ),
                                     SizedBox(height: 4),
                                     PoppinsText(
+                                      context,
                                       item['time'],
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       fontWeight:
@@ -341,6 +348,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                       child: Center(
                         child: PoppinsText(
+                          context,
                           'Wednesday',
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
@@ -376,6 +384,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       item['title'],
                                       color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
@@ -384,6 +393,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     ),
                                     SizedBox(height: 4),
                                     PoppinsText(
+                                      context,
                                       item['time'],
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,

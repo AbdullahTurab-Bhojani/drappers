@@ -55,6 +55,7 @@ class _PodcardsWidgetState extends State<PodcardsWidget> {
             children: [
               PopupmenuWidget(showSaveIcon: widget.showSaveIcon),
               PoppinsText(
+                context,
                 widget.title,
                 fontSize: widget.fontSizeVariant,
                 fontWeight: PoppinsFontWeightVariant.medium,

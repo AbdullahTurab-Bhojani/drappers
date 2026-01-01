@@ -117,6 +117,7 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
             Image.asset(iconPath, height: 18),
             SizedBox(width: 12),
             PoppinsText(
+              context,
               text,
               fontSize: PoppinsFontSizeVariant.size12,
               fontWeight: PoppinsFontWeightVariant.medium,

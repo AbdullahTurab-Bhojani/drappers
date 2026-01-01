@@ -142,6 +142,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               PoppinsText(
+                                                context,
                                                 item.title,
                                                 color: Theme.of(context)
                                                     .extension<
@@ -155,6 +156,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                                         .medium,
                                               ),
                                               PoppinsText(
+                                                context,
                                                 item.subtitle,
                                                 color: Theme.of(context)
                                                     .extension<
@@ -201,6 +203,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                 Container(
                                   margin: EdgeInsets.only(top: 20, left: 20),
                                   child: PoppinsText(
+                                    context,
                                     "Submit a Ticket",
                                     fontSize: PoppinsFontSizeVariant.size22,
                                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -266,6 +269,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                       ),
                                       SizedBox(height: 10),
                                       PoppinsText(
+                                        context,
                                         "00/500 Characters",
                                         fontSize: PoppinsFontSizeVariant.size12,
                                         fontWeight:
@@ -274,6 +278,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                       ),
                                       SizedBox(height: 10),
                                       PoppinsText(
+                                        context,
                                         "Upload Screenshot (Optional)",
                                         fontSize: PoppinsFontSizeVariant.size16,
                                         fontWeight:
@@ -304,6 +309,7 @@ class _HelpsupportState extends State<Helpsupport> {
                                             ),
                                             SizedBox(width: 14),
                                             PoppinsText(
+                                              context,
                                               "Add Screenshot",
                                               fontSize:
                                                   PoppinsFontSizeVariant.size16,

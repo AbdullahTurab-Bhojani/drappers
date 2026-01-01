@@ -89,6 +89,7 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
 
                     onTap: () => context.pop(),
                     child: PoppinsText(
+                      context,
                       "Cancel",
                       fontSize: PoppinsFontSizeVariant.size14,
                       fontWeight: PoppinsFontWeightVariant.medium,

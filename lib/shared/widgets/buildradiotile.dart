@@ -57,6 +57,7 @@ class CustomRadioTile extends StatelessWidget {
 
           Flexible(
             child: PoppinsText(
+              context,
               title,
               fontSize: PoppinsFontSizeVariant.size16,
               fontWeight: PoppinsFontWeightVariant.regular,

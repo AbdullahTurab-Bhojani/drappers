@@ -127,6 +127,7 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                     ),
                     SizedBox(height: 20),
                     PoppinsText(
+                      context,
                       "More like this",
                       fontSize: PoppinsFontSizeVariant.size15,
                       fontWeight: PoppinsFontWeightVariant.medium,

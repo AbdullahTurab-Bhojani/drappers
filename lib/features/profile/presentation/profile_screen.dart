@@ -112,6 +112,7 @@ class ProfileScreen extends StatelessWidget {
                         context.pushNamed(AppRoutes.editprofile.name);
                       },
                       child: PoppinsText(
+                        context,
                         "Edit",
                         fontSize: PoppinsFontSizeVariant.size14,
                         fontWeight: PoppinsFontWeightVariant.medium,
@@ -139,6 +140,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 20),
                         PoppinsText(
+                          context,
                           'Jerry Mackson',
                           fontSize: PoppinsFontSizeVariant.size22,
                           fontWeight: PoppinsFontWeightVariant.medium,
@@ -155,6 +157,7 @@ class ProfileScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   PoppinsText(
+                                    context,
                                     'Liked Content',
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -206,7 +209,8 @@ class ProfileScreen extends StatelessWidget {
                                         fromEpisode: false,
                                         allowGuestNavigation: false,
                                         index: index,
-                                        showMenuOnly: true, showLiveTvBadge: false,
+                                        showMenuOnly: true,
+                                        showLiveTvBadge: false,
                                       ),
                                     );
                                   },
@@ -218,6 +222,7 @@ class ProfileScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   PoppinsText(
+                                    context,
                                     'Watch History',
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -269,7 +274,8 @@ class ProfileScreen extends StatelessWidget {
                                         fromEpisode: false,
                                         allowGuestNavigation: false,
                                         index: index,
-                                        showMenuOnly: true, showLiveTvBadge: false,
+                                        showMenuOnly: true,
+                                        showLiveTvBadge: false,
                                       ),
                                     );
                                   },

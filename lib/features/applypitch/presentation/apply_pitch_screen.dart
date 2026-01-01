@@ -67,12 +67,14 @@ class _ApplyPitchState extends State<ApplyPitch> {
                     children: [
                       SizedBox(height: 30),
                       PoppinsText(
+                        context,
                         "Submit Your Pitch",
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
                       ),
                       SizedBox(height: 8),
                       PoppinsText(
+                        context,
                         "Apply to appeal on Meet the Drapers and pitch your startup to investors.",
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -128,6 +130,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                       ),
                       SizedBox(height: 16),
                       PoppinsText(
+                        context,
                         "Share a link to your pitch deck (Google Drive, DocSend, Dropbox, etc.)",
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -181,6 +184,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   PoppinsText(
+                                    context,
                                     "What happens next?",
                                     fontSize: PoppinsFontSizeVariant.size12,
                                     fontWeight:
@@ -188,6 +192,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                                   ),
                                   SizedBox(height: 6),
                                   PoppinsText(
+                                    context,
                                     "Our team will review your application and pitchdeck. If selected, you’ll be contacted within 2-3 weeks to schedule your appearance on Meet the Drapers.",
                                     fontSize: PoppinsFontSizeVariant.size12,
                                     fontWeight:

@@ -51,6 +51,7 @@ class VideosBoxWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PoppinsText(
+                    context,
                     podcast.title,
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -59,6 +60,7 @@ class VideosBoxWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   PoppinsText(
+                    context,
                     podcast.description,
                     fontSize: PoppinsFontSizeVariant.size14,
                     fontWeight: PoppinsFontWeightVariant.regular,
@@ -94,6 +96,7 @@ class VideosBoxWidget extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       PoppinsText(
+                        context,
                         '-12:34',
                         fontSize: PoppinsFontSizeVariant.size10,
                         fontWeight: PoppinsFontWeightVariant.regular,

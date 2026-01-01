@@ -245,6 +245,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                       children: [
                                         Expanded(
                                           child: PoppinsText(
+                                            context,
                                             'Meet The Drapers - Live',
                                             color: AppColors.white,
                                             fontWeight:
@@ -398,6 +399,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
                       SizedBox(height: 30),
                       PoppinsText(
+                        context,
                         'Genre',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
@@ -423,6 +425,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
                       SizedBox(height: 30),
                       PoppinsText(
+                        context,
                         'Trending Show',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
@@ -452,6 +455,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
                       SizedBox(height: 30),
                       PoppinsText(
+                        context,
                         'Podcasts',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
@@ -479,6 +483,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
                       const SizedBox(height: 30),
                       PoppinsText(
+                        context,
                         'Documentaries',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,

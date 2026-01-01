@@ -35,15 +35,13 @@ class GradientSwitch extends StatelessWidget {
         //   color: value ? null : customColors.white0xffbdbdbe,
         // ),
         decoration: BoxDecoration(
-  borderRadius: BorderRadius.circular(100),
-  gradient: LinearGradient(
-    colors: value
-        ? gradientColors
-        : gradientColors
-            .map((c) => c.withOpacity(0.3))
-            .toList(),
-  ),
-),
+          borderRadius: BorderRadius.circular(100),
+          gradient: LinearGradient(
+            colors: value
+                ? gradientColors
+                : gradientColors.map((c) => c.withOpacity(0.3)).toList(),
+          ),
+        ),
         child: AnimatedAlign(
           duration: Duration(milliseconds: 250),
           alignment: value ? Alignment.centerRight : Alignment.centerLeft,
@@ -137,6 +135,7 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
             mainAxisSize: MainAxisSize.min,
             children: [
               PoppinsText(
+                context,
                 widget.titleText,
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,
@@ -144,6 +143,7 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
               ),
               SizedBox(height: 2),
               PoppinsText(
+                context,
                 widget.subtitleText,
                 fontSize: PoppinsFontSizeVariant.size12,
                 fontWeight: PoppinsFontWeightVariant.regular,

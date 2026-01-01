@@ -119,6 +119,7 @@ class EditprofileScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   PoppinsText(
+                    context,
                     'Jerry Mackson',
                     fontSize: PoppinsFontSizeVariant.size22,
                     fontWeight: PoppinsFontWeightVariant.medium,

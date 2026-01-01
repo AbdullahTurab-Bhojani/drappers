@@ -46,7 +46,7 @@ class SearchviewState extends State<Searchview> {
     super.initState();
 
     Future.delayed(const Duration(milliseconds: 300), () {
-      _focusNode.requestFocus(); 
+      _focusNode.requestFocus();
     });
   }
 
@@ -129,6 +129,7 @@ class SearchviewState extends State<Searchview> {
                       context.pop();
                     },
                     child: PoppinsText(
+                      context,
                       "Cancel",
                       fontSize: PoppinsFontSizeVariant.size14,
                       fontWeight: PoppinsFontWeightVariant.medium,
@@ -177,12 +178,14 @@ class SearchviewState extends State<Searchview> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Recent Searches ',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
                           PoppinsText(
+                            context,
                             'Clear All ',
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.regular,

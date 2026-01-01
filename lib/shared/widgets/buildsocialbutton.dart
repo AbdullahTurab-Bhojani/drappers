@@ -52,6 +52,7 @@ class _SocialLoginButtonState extends State<SocialLoginButton> {
               const SizedBox(width: 6),
               // Label display (using PoppinsText)
               PoppinsText(
+                context,
                 widget.label,
                 fontSize: PoppinsFontSizeVariant.size15,
                 fontWeight: PoppinsFontWeightVariant.medium,

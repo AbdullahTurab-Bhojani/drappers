@@ -52,6 +52,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 ),
                 SizedBox(height: 40),
                 PoppinsText(
+                  context,
                   "Change Password?",
                   fontSize: PoppinsFontSizeVariant.size24,
                   fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -102,6 +103,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       SizedBox(height: 10),
                       PoppinsText(
+                        context,
                         "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
                         fontSize: PoppinsFontSizeVariant.size11,
                         fontWeight: PoppinsFontWeightVariant.regular,

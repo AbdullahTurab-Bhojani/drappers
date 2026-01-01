@@ -130,6 +130,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   PoppinsText(
+                    context,
                     "Speed",
                     fontSize: PoppinsFontSizeVariant.size12,
                     fontWeight: PoppinsFontWeightVariant.regular,
@@ -182,6 +183,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PoppinsText(
+                      context,
                       "Audio & Subtitles",
                       fontSize: PoppinsFontSizeVariant.size12,
                       fontWeight: PoppinsFontWeightVariant.regular,
@@ -409,6 +411,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             ),
                             SizedBox(width: 10),
                             PoppinsText(
+                              context,
                               "Speed",
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -430,6 +433,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             ),
                             SizedBox(width: 10),
                             PoppinsText(
+                              context,
                               "Audio & Subtitle",
                               fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -449,6 +453,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           ),
                           SizedBox(width: 10),
                           PoppinsText(
+                            context,
                             "Picture in Picture",
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -516,6 +521,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
             SizedBox(width: 12),
             Expanded(
               child: PoppinsText(
+                context,
                 text,
                 fontSize: PoppinsFontSizeVariant.size12,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -583,6 +589,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
             SizedBox(width: 12),
             Expanded(
               child: PoppinsText(
+                context,
                 text,
                 fontSize: PoppinsFontSizeVariant.size12,
                 fontWeight: PoppinsFontWeightVariant.regular,

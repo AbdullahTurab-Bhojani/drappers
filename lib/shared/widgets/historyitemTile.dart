@@ -41,6 +41,7 @@ class HistoryItemTile extends StatelessWidget {
             SizedBox(width: 15),
             Expanded(
               child: PoppinsText(
+                context,
                 title,
                 fontSize: PoppinsFontSizeVariant.size14,
                 fontWeight: PoppinsFontWeightVariant.regular,

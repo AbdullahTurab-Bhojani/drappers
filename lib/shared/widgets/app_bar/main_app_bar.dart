@@ -33,8 +33,9 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidget = leading;
     } else if (leadingText != null) {
       leadingWidget = Padding(
-        padding:  EdgeInsets.only(left: 20,top: 10),
+        padding: EdgeInsets.only(left: 20, top: 10),
         child: PoppinsText(
+          context,
           leadingText!,
           color: Colors.white,
           fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -61,6 +62,7 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,
       title: PoppinsText(
+        context,
         title,
         color: Colors.white,
         fontWeight: PoppinsFontWeightVariant.semiBold,

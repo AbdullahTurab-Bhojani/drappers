@@ -160,12 +160,14 @@ class _SearchscreenState extends State<Searchscreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Recent Searches ',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
                           PoppinsText(
+                            context,
                             'Clear All ',
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.regular,
@@ -197,6 +199,7 @@ class _SearchscreenState extends State<Searchscreen> {
                       const SizedBox(height: 30),
 
                       PoppinsText(
+                        context,
                         'Genre',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
@@ -231,6 +234,7 @@ class _SearchscreenState extends State<Searchscreen> {
                       SizedBox(height: 30),
 
                       PoppinsText(
+                        context,
                         'Trending',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
@@ -257,7 +261,8 @@ class _SearchscreenState extends State<Searchscreen> {
                             fromEpisode: false,
                             allowGuestNavigation: false,
                             index: index,
-                            showMenuOnly: true, showLiveTvBadge: false,
+                            showMenuOnly: true,
+                            showLiveTvBadge: false,
                           );
                         },
                       ),

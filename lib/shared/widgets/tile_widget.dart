@@ -38,6 +38,7 @@ class _TileWidgetState extends State<TileWidget> {
                   Image.asset(widget.iconImage, width: 24, height: 24),
                   SizedBox(width: 20),
                   PoppinsText(
+                    context,
                     widget.title,
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,

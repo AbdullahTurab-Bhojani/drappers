@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _betterPlayerController.videoPlayerController!.addListener(() {
       if (mounted) {
-        setState(() {}); 
+        setState(() {});
       }
     });
 
@@ -361,6 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     child: Center(
                                       child: PoppinsText(
+                                        context,
                                         hometab[index],
                                         fontSize: PoppinsFontSizeVariant.size16,
                                         fontWeight:
@@ -482,6 +483,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           children: [
                                             Expanded(
                                               child: PoppinsText(
+                                                context,
                                                 'Meet The Drapers - Live',
                                                 color: AppColors.white,
                                                 fontWeight:
@@ -618,6 +620,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Trending Shows',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
@@ -686,6 +689,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Continue Watching',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
@@ -736,6 +740,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Podcasts',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
@@ -834,6 +839,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Reels',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
@@ -899,6 +905,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Documentaries',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,

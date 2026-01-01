@@ -73,6 +73,7 @@ class AppButton extends StatelessWidget {
               children: [
                 if (prefixIcon != null) ...[prefixIcon!, SizedBox(width: 6)],
                 PoppinsText(
+                  context,
                   fontSize: fontSize,
                   title,
                   fontWeight: fontWeight,

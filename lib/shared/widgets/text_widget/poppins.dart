@@ -25,7 +25,6 @@ enum PoppinsFontSizeVariant {
   size32,
 }
 
-/// 🔹 Font Weights
 enum PoppinsFontWeightVariant {
   thin,
   extraLight,
@@ -40,6 +39,7 @@ enum PoppinsFontWeightVariant {
 
 class PoppinsText extends Text {
   PoppinsText(
+    BuildContext context,
     super.data, {
     super.key,
     super.textAlign,
@@ -55,8 +55,8 @@ class PoppinsText extends Text {
   }) : super(
          style: GoogleFonts.poppins(
            color: color,
-           fontSize: _mapFontSize(fontSize),
-           fontWeight: _mapFontWeight(fontWeight),
+           fontSize: AppScaler.scaleSize(context, _fontSize(fontSize)),
+           fontWeight: _fontWeight(fontWeight),
            height: height,
            fontStyle: fontStyle,
            decoration: decoration,
@@ -66,8 +66,7 @@ class PoppinsText extends Text {
          overflow: textOverflow,
        );
 
-  /// 🔹 Map Size Enum → Double
-  static double _mapFontSize(PoppinsFontSizeVariant size) {
+  static double _fontSize(PoppinsFontSizeVariant size) {
     switch (size) {
       case PoppinsFontSizeVariant.size6:
         return 6;
@@ -116,7 +115,7 @@ class PoppinsText extends Text {
     }
   }
 
-  static FontWeight _mapFontWeight(PoppinsFontWeightVariant weight) {
+  static FontWeight _fontWeight(PoppinsFontWeightVariant weight) {
     switch (weight) {
       case PoppinsFontWeightVariant.thin:
         return FontWeight.w100;

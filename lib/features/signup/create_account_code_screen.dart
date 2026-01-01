@@ -112,6 +112,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
               ),
               SizedBox(height: 40),
               PoppinsText(
+                context,
                 "Create an Account",
                 fontSize: PoppinsFontSizeVariant.size24,
                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -119,6 +120,7 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
               ),
               SizedBox(height: 20),
               PoppinsText(
+                context,
                 'sent a 6-digit code to johnmackson@gmail.com Confirm it belongs to you to keep your account secure.',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
@@ -176,12 +178,14 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   PoppinsText(
+                    context,
                     "Resend",
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
                     color: customColors.greyColor,
                   ),
                   PoppinsText(
+                    context,
                     timerText,
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,

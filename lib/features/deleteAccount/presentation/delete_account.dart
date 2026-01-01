@@ -67,6 +67,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PoppinsText(
+                        context,
                         "Delete or Deactivate Account",
                         fontSize: PoppinsFontSizeVariant.size24,
                         fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -74,6 +75,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                       ),
                       SizedBox(height: 20),
                       PoppinsText(
+                        context,
                         "Choose how you'd like to manage your account",
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -124,6 +126,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       "Deactivate Account",
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       fontWeight:
@@ -132,6 +135,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                     ),
                                     SizedBox(height: 5.0),
                                     PoppinsText(
+                                      context,
                                       "Your profile, watchlist, history, preferences, and downloads will be saved. You can reactivate anytime by signing in again.",
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
@@ -159,7 +163,11 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                         },
                         child: Container(
                           // padding: const EdgeInsets.all(10.0),
-                          padding: EdgeInsets.only(right: 8, top: 8, bottom: 14),
+                          padding: EdgeInsets.only(
+                            right: 8,
+                            top: 8,
+                            bottom: 14,
+                          ),
                           decoration: BoxDecoration(
                             color: customColors.redbox,
                             borderRadius: BorderRadius.circular(10.0),
@@ -193,6 +201,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         PoppinsText(
+                                          context,
                                           "Delete Account Permanently",
                                           fontSize:
                                               PoppinsFontSizeVariant.size12,
@@ -202,6 +211,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                         ),
                                         SizedBox(height: 8.0),
                                         PoppinsText(
+                                          context,
                                           "All your data will be permanently removed, including watch history, preferences, profiles, downloads, payment data, and saved settings.",
                                           fontSize:
                                               PoppinsFontSizeVariant.size16,
@@ -228,6 +238,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                               SizedBox(width: 10.0),
                                               Expanded(
                                                 child: PoppinsText(
+                                                  context,
                                                   "This action cannot be undone.",
                                                   fontSize:
                                                       PoppinsFontSizeVariant

@@ -12,7 +12,7 @@ class HomeBanner extends StatefulWidget {
   final Color buttonColor;
   final Color buttonBorderColor;
   final double buttonBorderWidth;
-  final List<Color>? buttonGradient; 
+  final List<Color>? buttonGradient;
   final VoidCallback? onTap;
 
   const HomeBanner({
@@ -24,7 +24,7 @@ class HomeBanner extends StatefulWidget {
     required this.buttonBorderColor,
     required this.backgroundImage,
     required this.buttonBorderWidth,
-    this.buttonGradient, 
+    this.buttonGradient,
     this.onTap,
   });
 
@@ -59,6 +59,7 @@ class _HomeBannerState extends State<HomeBanner> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PoppinsText(
+                  context,
                   widget.title,
                   color: customColors.textColor,
                   fontSize: PoppinsFontSizeVariant.size24,
@@ -66,6 +67,7 @@ class _HomeBannerState extends State<HomeBanner> {
                 ),
                 const SizedBox(height: 10),
                 PoppinsText(
+                  context,
                   widget.subtitle,
                   color: customColors.textColor,
                   fontSize: PoppinsFontSizeVariant.size16,
@@ -85,7 +87,7 @@ class _HomeBannerState extends State<HomeBanner> {
                   color: widget.buttonColor,
                   borderColor: widget.buttonBorderColor,
                   borderWidth: widget.buttonBorderWidth,
-                  buttonGradient: widget.buttonGradient, 
+                  buttonGradient: widget.buttonGradient,
                 ),
               ],
             ),

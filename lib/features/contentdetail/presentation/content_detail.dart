@@ -145,6 +145,7 @@ class _ContentDetailState extends State<ContentDetail>
                     ),
                     SizedBox(height: 15),
                     PoppinsText(
+                      context,
                       'Finale – Meet The Drapers Season 07 (2025)',
                       fontSize: PoppinsFontSizeVariant.size22,
                       fontWeight: PoppinsFontWeightVariant.medium,
@@ -183,6 +184,7 @@ class _ContentDetailState extends State<ContentDetail>
                               ),
                               alignment: Alignment.center,
                               child: PoppinsText(
+                                context,
                                 '16+',
                                 fontSize: PoppinsFontSizeVariant.size8,
                                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -213,6 +215,7 @@ class _ContentDetailState extends State<ContentDetail>
                               ),
                               alignment: Alignment.center,
                               child: PoppinsText(
+                                context,
                                 'HQ',
                                 fontSize: PoppinsFontSizeVariant.size8,
                                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -296,6 +299,7 @@ class _ContentDetailState extends State<ContentDetail>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PoppinsText(
+                        context,
                         '"The Wolf of Wall Street" is a captivating film about Jordan Belfort\'s rise and fall.',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -303,6 +307,7 @@ class _ContentDetailState extends State<ContentDetail>
                       ),
                       SizedBox(height: 5),
                       PoppinsText(
+                        context,
                         'Cast: Leonardo DiCaprio, Jonah Hill, Margot Robbie, Matthew.... more Director: Denis Villeneuve',
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -340,6 +345,7 @@ class _ContentDetailState extends State<ContentDetail>
 
                                 SizedBox(height: 10),
                                 PoppinsText(
+                                  context,
                                   'Like',
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   fontWeight: PoppinsFontWeightVariant.regular,
@@ -365,6 +371,7 @@ class _ContentDetailState extends State<ContentDetail>
                                   ),
                                   SizedBox(height: 10),
                                   PoppinsText(
+                                    context,
                                     'Share',
                                     fontSize: PoppinsFontSizeVariant.size12,
                                     fontWeight:
@@ -392,6 +399,7 @@ class _ContentDetailState extends State<ContentDetail>
                                   ),
                                   SizedBox(height: 10),
                                   PoppinsText(
+                                    context,
                                     'Report',
                                     fontSize: PoppinsFontSizeVariant.size12,
                                     fontWeight:
@@ -474,6 +482,7 @@ class _ContentDetailState extends State<ContentDetail>
                                                           ) => DropdownMenuItem(
                                                             value: season,
                                                             child: PoppinsText(
+                                                              context,
                                                               season,
                                                               color: customColors
                                                                   .textColor,

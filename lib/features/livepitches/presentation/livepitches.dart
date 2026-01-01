@@ -107,6 +107,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Trending Shows',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -152,7 +153,8 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                               fromEpisode: false,
                               allowGuestNavigation: true,
                               index: index,
-                              showMenuOnly: true, showLiveTvBadge: false,
+                              showMenuOnly: true,
+                              showLiveTvBadge: false,
                             );
                           },
                         ),
@@ -164,6 +166,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Podcasts',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -216,6 +219,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Reels',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -282,6 +286,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Documentaries',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,

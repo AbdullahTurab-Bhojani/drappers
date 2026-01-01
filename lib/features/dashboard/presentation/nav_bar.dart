@@ -163,6 +163,7 @@ class _BottomNavigationBarShellState
                       const SizedBox(height: 4),
 
                       PoppinsText(
+                        context,
                         _navItems[index]['label'],
                         fontSize: PoppinsFontSizeVariant.size14,
                         color: isSelected

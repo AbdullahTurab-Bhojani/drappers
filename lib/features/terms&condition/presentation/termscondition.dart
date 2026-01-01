@@ -66,6 +66,7 @@ class _TermsconditionState extends State<Termscondition> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PoppinsText(
+                          context,
                           "Welcome to Draper TV, an online platform owned by Draper Productions.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
@@ -153,6 +154,7 @@ class _TermsconditionState extends State<Termscondition> {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
       child: PoppinsText(
+        context,
         text,
         color: colors.textColor,
         fontSize: PoppinsFontSizeVariant.size16,
@@ -163,6 +165,7 @@ class _TermsconditionState extends State<Termscondition> {
 
   Widget _body(String text, AppCustomColors colors) {
     return PoppinsText(
+      context,
       text,
       color: colors.textColor,
       fontSize: PoppinsFontSizeVariant.size12,

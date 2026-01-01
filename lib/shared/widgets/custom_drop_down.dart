@@ -292,6 +292,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                                           SizedBox(width: 10),
                                           Expanded(
                                             child: PoppinsText(
+                                              context,
                                               widget.builder != null
                                                   ? widget.builder!(item)
                                                   : item.toString(),

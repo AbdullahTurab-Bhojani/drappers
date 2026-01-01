@@ -47,6 +47,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
               ),
               SizedBox(height: 40),
               PoppinsText(
+                context,
                 "Update your password",
                 fontSize: PoppinsFontSizeVariant.size24,
                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -80,6 +81,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
               ),
               SizedBox(height: 15),
               PoppinsText(
+                context,
                 "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
                 fontSize: PoppinsFontSizeVariant.size12,
                 fontWeight: PoppinsFontWeightVariant.regular,

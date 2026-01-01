@@ -83,6 +83,7 @@ class EditWatchlistItemTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PoppinsText(
+                  context,
                   title,
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,

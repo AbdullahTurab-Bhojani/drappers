@@ -61,12 +61,12 @@ class _DocumentriescardState extends State<Documentriescard> {
                   padding: EdgeInsets.only(right: 16),
                   child: GestureDetector(
                     onTap: () {
-                        if (GuestHelper.isGuest) {
-                          GuestHelper.checkGuest(context);
-                          return;
-                        }
-                        context.pushNamed('searchscreen');
-                      },
+                      if (GuestHelper.isGuest) {
+                        GuestHelper.checkGuest(context);
+                        return;
+                      }
+                      context.pushNamed('searchscreen');
+                    },
                     child: Image.asset(
                       Assets.images.searchstokeicon.path,
                       width: 20,
@@ -124,6 +124,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                     ),
                     SizedBox(height: 20),
                     PoppinsText(
+                      context,
                       "More like this",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.medium,

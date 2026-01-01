@@ -36,6 +36,7 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
           Image.asset(Assets.images.logout123.path, height: 54, width: 54),
           SizedBox(height: 40),
           PoppinsText(
+            context,
             "Are you sure you want to Sign Out?",
             fontSize: PoppinsFontSizeVariant.size16,
             fontWeight: PoppinsFontWeightVariant.medium,
@@ -70,5 +71,4 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
       ),
     );
   }
-
 }

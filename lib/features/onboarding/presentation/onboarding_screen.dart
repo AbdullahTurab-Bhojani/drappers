@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
@@ -72,10 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             itemCount: images.length,
             onPageChanged: (index) => setState(() => currentPage = index),
             itemBuilder: (_, index) {
-              return Image.asset(
-                images[index],
-                fit: BoxFit.cover,
-              );
+              return Image.asset(images[index], fit: BoxFit.cover);
             },
           ),
 
@@ -84,7 +82,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Align(
               alignment: Alignment.topRight,
               child: Padding(
-                padding: const EdgeInsets.only(right: 20, top: 8),
+                padding: EdgeInsets.only(
+                  right: AppScaler.scaleSize(context, 20),
+                  top: AppScaler.scaleHeight(context, 8),
+                ),
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
@@ -92,6 +93,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     context.pushNamed(AppRoutes.home.name);
                   },
                   child: PoppinsText(
+                    context,
                     'Skip',
                     fontSize: PoppinsFontSizeVariant.size14,
                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -133,8 +135,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     ],
                                   )
                                 : null,
-                            color:
-                                currentPage != index ? AppColors.wDark : null,
+                            color: currentPage != index
+                                ? AppColors.wDark
+                                : null,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -145,6 +148,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                     /// Title
                     PoppinsText(
+                      context,
                       titles[currentPage],
                       textAlign: TextAlign.center,
                       fontSize: PoppinsFontSizeVariant.size32,
@@ -157,6 +161,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                     /// Subtitle
                     PoppinsText(
+                      context,
                       subtitles[currentPage],
                       textAlign: TextAlign.center,
                       fontSize: PoppinsFontSizeVariant.size16,

@@ -125,6 +125,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
                     ),
                     SizedBox(height: 20),
                     PoppinsText(
+                      context,
                       "More like this",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.medium,

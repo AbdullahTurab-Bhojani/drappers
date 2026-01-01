@@ -17,6 +17,7 @@ class SettingSectionHeader extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10),
       child: PoppinsText(
+        context,
         title,
         fontSize: PoppinsFontSizeVariant.size16,
         fontWeight: PoppinsFontWeightVariant.medium,

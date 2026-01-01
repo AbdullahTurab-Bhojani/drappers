@@ -37,6 +37,7 @@ class _DeactivatePopupWidget extends State<DeactivatePopupWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               PoppinsText(
+                context,
                 "Are you sure you want to deactivate your account?",
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.medium,

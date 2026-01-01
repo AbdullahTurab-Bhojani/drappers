@@ -34,6 +34,7 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
           Image.asset(Assets.images.delete123.path, height: 54, width: 54),
           SizedBox(height: 40),
           PoppinsText(
+            context,
             "Are you sure you want to delete your account?",
             fontSize: PoppinsFontSizeVariant.size16,
             fontWeight: PoppinsFontWeightVariant.medium,
@@ -84,5 +85,4 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
       ),
     );
   }
-
 }

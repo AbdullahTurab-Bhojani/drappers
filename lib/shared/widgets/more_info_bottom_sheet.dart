@@ -39,6 +39,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                     ),
                     SizedBox(width: 10),
                     PoppinsText(
+                      context,
                       "4 Nov 2025",
                       color: customColors.textColor,
                       fontSize: PoppinsFontSizeVariant.size16,
@@ -108,6 +109,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                     ),
                     SizedBox(width: 12),
                     PoppinsText(
+                      context,
                       'Coming up Next',
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.medium,
@@ -116,12 +118,14 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 PoppinsText(
+                  context,
                   '9:00 - 10:00',
                   fontSize: PoppinsFontSizeVariant.size14,
                   fontWeight: PoppinsFontWeightVariant.regular,
                 ),
                 SizedBox(height: 10),
                 PoppinsText(
+                  context,
                   'Meet the Drapers S1 E1',
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,
@@ -130,6 +134,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 Divider(),
                 SizedBox(height: 12),
                 PoppinsText(
+                  context,
                   '10:00 - 11:00',
                   fontSize: PoppinsFontSizeVariant.size14,
                   fontWeight: PoppinsFontWeightVariant.regular,
@@ -137,6 +142,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 SizedBox(height: 10),
 
                 PoppinsText(
+                  context,
                   'Meet the Drapers S1 E2',
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,
@@ -145,6 +151,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 Divider(),
                 SizedBox(height: 12),
                 PoppinsText(
+                  context,
                   '11:00 - 12:00',
                   fontSize: PoppinsFontSizeVariant.size14,
                   fontWeight: PoppinsFontWeightVariant.regular,
@@ -152,6 +159,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 SizedBox(height: 10),
 
                 PoppinsText(
+                  context,
                   'Meet the Drapers S1 E3',
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,
@@ -160,6 +168,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 Divider(),
                 SizedBox(height: 12),
                 PoppinsText(
+                  context,
                   '12:00 - 12:30',
                   fontSize: PoppinsFontSizeVariant.size14,
                   fontWeight: PoppinsFontWeightVariant.regular,
@@ -167,6 +176,7 @@ class MoreInfoBottomSheet extends StatelessWidget {
                 SizedBox(height: 10),
 
                 PoppinsText(
+                  context,
                   'Meet the Drapers S1 E4',
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,

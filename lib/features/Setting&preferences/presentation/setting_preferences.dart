@@ -27,7 +27,6 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
   final List<String> _qualityOptions = ['Auto', '1440p', '1080p', '720p'];
   final List<String> _subtitleOptions = ['Off', 'English', 'Spanish', 'French'];
 
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -100,7 +99,9 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                     SizedBox(height: 20),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Divider(color: customColors.labelColor.withOpacity(0.2)),
+                      child: Divider(
+                        color: customColors.labelColor.withOpacity(0.2),
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,14 +121,17 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                             setState(() {
                               _streamingQuality = value;
                             });
-                          }, isMenuOpen: false,
+                          },
+                          isMenuOpen: false,
                         ),
                       ],
                     ),
                     SizedBox(height: 40),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Divider(color: customColors.labelColor.withOpacity(0.2)),
+                      child: Divider(
+                        color: customColors.labelColor.withOpacity(0.2),
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,6 +187,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                 ),
                                 SizedBox(width: 15.0),
                                 PoppinsText(
+                                  context,
                                   "Change Password",
                                   fontSize: PoppinsFontSizeVariant.size16,
                                   fontWeight: PoppinsFontWeightVariant.medium,
@@ -226,6 +231,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                                 ),
                                 SizedBox(width: 15.0),
                                 PoppinsText(
+                                  context,
                                   "Delete or Deactivate Account",
                                   fontSize: PoppinsFontSizeVariant.size16,
                                   fontWeight: PoppinsFontWeightVariant.medium,
