@@ -220,9 +220,6 @@ class $AssetsImagesGen {
   AssetGenImage get iconLogo =>
       const AssetGenImage('assets/images/IconLogo.png');
 
-  /// File path: assets/images/Image.png
-  AssetGenImage get image => const AssetGenImage('assets/images/Image.png');
-
   /// File path: assets/images/Logo Text.png
   AssetGenImage get logoText =>
       const AssetGenImage('assets/images/Logo Text.png');
@@ -306,16 +303,8 @@ class $AssetsImagesGen {
   /// File path: assets/images/ban123.png
   AssetGenImage get ban123 => const AssetGenImage('assets/images/ban123.png');
 
-  /// File path: assets/images/banner guest.png
-  AssetGenImage get bannerGuest =>
-      const AssetGenImage('assets/images/banner guest.png');
-
-  /// File path: assets/images/banner.png
-  AssetGenImage get bannerPng =>
-      const AssetGenImage('assets/images/banner.png');
-
   /// File path: assets/images/banner.svg
-  SvgGenImage get bannerSvg => const SvgGenImage('assets/images/banner.svg');
+  SvgGenImage get banner => const SvgGenImage('assets/images/banner.svg');
 
   /// File path: assets/images/banner1.png
   AssetGenImage get banner1 => const AssetGenImage('assets/images/banner1.png');
@@ -353,14 +342,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/contentdetailvodep.mp4
   String get contentdetailvodep =>
       'packages/drappers/assets/images/contentdetailvodep.mp4';
-
-  /// File path: assets/images/course_complete.png
-  AssetGenImage get courseComplete =>
-      const AssetGenImage('assets/images/course_complete.png');
-
-  /// File path: assets/images/createpage.png
-  AssetGenImage get createpage =>
-      const AssetGenImage('assets/images/createpage.png');
 
   /// File path: assets/images/crossnewicon.png
   AssetGenImage get crossnewicon =>
@@ -516,9 +497,6 @@ class $AssetsImagesGen {
   AssetGenImage get gifticon =>
       const AssetGenImage('assets/images/gifticon.png');
 
-  /// File path: assets/images/girl.png
-  AssetGenImage get girl => const AssetGenImage('assets/images/girl.png');
-
   /// File path: assets/images/googleicon.png
   AssetGenImage get googleicon =>
       const AssetGenImage('assets/images/googleicon.png');
@@ -530,18 +508,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/guest course card image.png
   AssetGenImage get guestCourseCardImage =>
       const AssetGenImage('assets/images/guest course card image.png');
-
-  /// File path: assets/images/guest_learning.png
-  AssetGenImage get guestLearning =>
-      const AssetGenImage('assets/images/guest_learning.png');
-
-  /// File path: assets/images/guest_profile.png
-  AssetGenImage get guestProfile =>
-      const AssetGenImage('assets/images/guest_profile.png');
-
-  /// File path: assets/images/guest_sheet.png
-  AssetGenImage get guestSheet =>
-      const AssetGenImage('assets/images/guest_sheet.png');
 
   /// File path: assets/images/hearticon.png
   AssetGenImage get hearticon =>
@@ -563,10 +529,6 @@ class $AssetsImagesGen {
   AssetGenImage get interestedicon =>
       const AssetGenImage('assets/images/interestedicon.png');
 
-  /// File path: assets/images/lesson_complete.png
-  AssetGenImage get lessonComplete =>
-      const AssetGenImage('assets/images/lesson_complete.png');
-
   /// File path: assets/images/like.png
   AssetGenImage get like => const AssetGenImage('assets/images/like.png');
 
@@ -577,8 +539,8 @@ class $AssetsImagesGen {
   /// File path: assets/images/livefullview.mp4
   String get livefullview => 'packages/drappers/assets/images/livefullview.mp4';
 
-  /// File path: assets/images/livevideo.mp4
-  String get livevideo => 'packages/drappers/assets/images/livevideo.mp4';
+  /// File path: assets/images/livetv.png
+  AssetGenImage get livetv => const AssetGenImage('assets/images/livetv.png');
 
   /// File path: assets/images/lock786.png
   AssetGenImage get lock786 => const AssetGenImage('assets/images/lock786.png');
@@ -848,10 +810,6 @@ class $AssetsImagesGen {
   AssetGenImage get shareiconnew =>
       const AssetGenImage('assets/images/shareiconnew.png');
 
-  /// File path: assets/images/signInoption.png
-  AssetGenImage get signInoption =>
-      const AssetGenImage('assets/images/signInoption.png');
-
   /// File path: assets/images/signout1234.png
   AssetGenImage get signout1234 =>
       const AssetGenImage('assets/images/signout1234.png');
@@ -920,29 +878,11 @@ class $AssetsImagesGen {
   AssetGenImage get trendingimage9 =>
       const AssetGenImage('assets/images/trendingimage9.png');
 
-  /// File path: assets/images/video1.mp4
-  String get video1 => 'packages/drappers/assets/images/video1.mp4';
-
-  /// File path: assets/images/video10.mp4
-  String get video10 => 'packages/drappers/assets/images/video10.mp4';
-
-  /// File path: assets/images/video2.mp4
-  String get video2 => 'packages/drappers/assets/images/video2.mp4';
-
-  /// File path: assets/images/video3.mp4
-  String get video3 => 'packages/drappers/assets/images/video3.mp4';
-
   /// File path: assets/images/video4.mp4
   String get video4 => 'packages/drappers/assets/images/video4.mp4';
 
-  /// File path: assets/images/video5.mp4
-  String get video5 => 'packages/drappers/assets/images/video5.mp4';
-
   /// File path: assets/images/video8.mp4
   String get video8 => 'packages/drappers/assets/images/video8.mp4';
-
-  /// File path: assets/images/video9.mp4
-  String get video9 => 'packages/drappers/assets/images/video9.mp4';
 
   /// File path: assets/images/videolock.png
   AssetGenImage get videolock =>
@@ -994,7 +934,6 @@ class $AssetsImagesGen {
     horizontalThumbnail3,
     horizontalThumbnail4,
     iconLogo,
-    image,
     logoText,
     logo,
     quality,
@@ -1017,9 +956,7 @@ class $AssetsImagesGen {
     back10seconds,
     backicon,
     ban123,
-    bannerGuest,
-    bannerPng,
-    bannerSvg,
+    banner,
     banner1,
     banner2,
     bellringicon,
@@ -1030,8 +967,6 @@ class $AssetsImagesGen {
     casting,
     commenticon,
     contentdetailvodep,
-    courseComplete,
-    createpage,
     crossnewicon,
     cuticon,
     cuticon3x,
@@ -1071,23 +1006,18 @@ class $AssetsImagesGen {
     fullscreenicon,
     galleryFavorite,
     gifticon,
-    girl,
     googleicon,
     googlelogo,
     guestCourseCardImage,
-    guestLearning,
-    guestProfile,
-    guestSheet,
     hearticon,
     helpsupportnewicon,
     iconApp,
     infoicon,
     interestedicon,
-    lessonComplete,
     like,
     likeicon,
     livefullview,
-    livevideo,
+    livetv,
     lock786,
     logo2,
     logout009,
@@ -1158,7 +1088,6 @@ class $AssetsImagesGen {
     settingsicon,
     share3x,
     shareiconnew,
-    signInoption,
     signout1234,
     signouticon,
     slider,
@@ -1177,14 +1106,8 @@ class $AssetsImagesGen {
     trendingimage7,
     trendingimage8,
     trendingimage9,
-    video1,
-    video10,
-    video2,
-    video3,
     video4,
-    video5,
     video8,
-    video9,
     videolock,
     watchlist786,
     watchlistcard1,

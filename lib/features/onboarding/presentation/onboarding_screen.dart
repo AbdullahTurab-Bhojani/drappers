@@ -109,7 +109,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: SafeArea(
               top: false,
               child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 24, 20, 100),
+                padding: EdgeInsets.fromLTRB(
+                  AppScaler.scaleSize(context, 20),
+                  AppScaler.scaleHeight(context, 24),
+                  AppScaler.scaleSize(context, 20),
+                  AppScaler.scaleHeight(context, 100),
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -140,19 +145,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
 
-                    SizedBox(height: 24),
+                    SizedBox(height: AppScaler.scaleHeight(context, 24)),
 
                     PoppinsText(
                       context,
                       titles[currentPage],
                       textAlign: TextAlign.center,
-                      fontSize: PoppinsFontSizeVariant.size32,
+                      fontSize: PoppinsFontSizeVariant.size30,
                       fontWeight: PoppinsFontWeightVariant.medium,
                       color: customColors.textColor,
                       height: 1.3,
                     ),
 
-                    SizedBox(height: 16),
+                    SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
                     PoppinsText(
                       context,
@@ -164,7 +169,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       height: 1.7,
                     ),
 
-                    SizedBox(height: 24),
+                    SizedBox(height: AppScaler.scaleHeight(context, 24)),
 
                     AppButton(
                       onPressed: () {

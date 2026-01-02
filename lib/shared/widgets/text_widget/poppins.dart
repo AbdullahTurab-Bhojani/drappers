@@ -22,6 +22,8 @@ enum PoppinsFontSizeVariant {
   size24,
   size25,
   size26,
+  size28,
+  size30,
   size32,
 }
 
@@ -111,6 +113,10 @@ class PoppinsText extends Text {
         return 25;
       case PoppinsFontSizeVariant.size26:
         return 26;
+      case PoppinsFontSizeVariant.size28:
+        return 28;
+      case PoppinsFontSizeVariant.size30:
+        return 30;
       case PoppinsFontSizeVariant.size32:
         return 32;
     }

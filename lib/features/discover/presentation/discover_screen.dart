@@ -15,6 +15,8 @@ import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/documentries_card/documentries_card_widget.dart';
+import '../../../shared/widgets/full_screen_imagescreen.dart';
+import '../../../shared/widgets/full_screen_videoscreen.dart';
 import '../../../shared/widgets/genreboxwidget.dart';
 import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
@@ -43,8 +45,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
   void _videoListener() {
     if (!mounted) return;
-    setState(() {
-    });
+    setState(() {});
   }
 
   Future<File> _assetToFile(String assetPath) async {
@@ -190,275 +191,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                      Center(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.35),
-                                blurRadius: 30,
-                                spreadRadius: 4,
-                                offset: Offset(0, 6),
-                              ),
-                            ],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: SizedBox(
-                              width: AppScaler.scaleSize(context, 400),
-                              height: AppScaler.scaleHeight(context, 450),
-                              child: Stack(
-                                children: [
-                                  if (_isLoading)
-                                    Center(child: CircularProgressIndicator())
-                                  else if (_betterPlayerController != null &&
-                                      _betterPlayerController!
-                                              .isVideoInitialized() !=
-                                          null)
-                                    BetterPlayer(
-                                      controller: _betterPlayerController!,
-                                    )
-                                  else
-                                    Container(
-                                      color: Colors.black,
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.error_outline,
-                                          color: Colors.white,
-                                          size: 50,
-                                        ),
-                                      ),
-                                    ),
-
-                                  Container(
-                                    color: Colors.black.withOpacity(0.18),
-                                  ),
-
-                                  if (_betterPlayerController != null &&
-                                      _betterPlayerController!
-                                              .isVideoInitialized() !=
-                                          null)
-                                    GestureDetector(
-                                      behavior: HitTestBehavior.opaque,
-                                      onTap: () {
-                                        setState(
-                                          () => _showControls = !_showControls,
-                                        );
-                                      },
-                                      child: Center(
-                                        child: AnimatedOpacity(
-                                          duration: Duration(milliseconds: 50),
-                                          opacity: _showControls ? 1 : 0,
-                                          child: Container(
-                                            padding: EdgeInsets.all(12),
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: IconButton(
-                                              icon: Icon(
-                                                _betterPlayerController!
-                                                        .isPlaying()!
-                                                    ? Icons.pause_circle
-                                                    : Icons.play_circle,
-                                                size: AppScaler.scaleSize(
-                                                  context,
-                                                  70,
-                                                ),
-                                              ),
-                                              onPressed: () async {
-                                                if (_betterPlayerController ==
-                                                    null)
-                                                  return;
-
-                                                setState(() {
-                                                  final videoPosition =
-                                                      _betterPlayerController!
-                                                          .videoPlayerController!
-                                                          .value
-                                                          .position;
-                                                  final videoDuration =
-                                                      _betterPlayerController!
-                                                          .videoPlayerController!
-                                                          .value
-                                                          .duration;
-
-                                                  if (_betterPlayerController!
-                                                      .isPlaying()!) {
-                                                    _betterPlayerController!
-                                                        .pause();
-                                                  } else {
-                                                    if (videoPosition >=
-                                                        videoDuration!) {
-                                                      _betterPlayerController!
-                                                          .seekTo(
-                                                            Duration.zero,
-                                                          );
-                                                    }
-                                                    _betterPlayerController!
-                                                        .play();
-                                                  }
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  Positioned(
-                                    top: AppScaler.scaleHeight(context, 16),
-                                    left: AppScaler.scaleSize(context, 14),
-                                    right: AppScaler.scaleSize(context, 14),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: PoppinsText(
-                                            context,
-                                            'Meet The Drapers - Live',
-                                            color: AppColors.white,
-                                            fontWeight:
-                                                PoppinsFontWeightVariant.medium,
-                                            fontSize:
-                                                PoppinsFontSizeVariant.size14,
-                                          ),
-                                        ),
-                                        PopupmenuWidget(showSaveIcon: false),
-                                      ],
-                                    ),
-                                  ),
-
-                                  Positioned(
-                                    bottom: AppScaler.scaleHeight(context, 10),
-                                    left: AppScaler.scaleSize(context, 12),
-                                    right: AppScaler.scaleSize(context, 12),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: AppScaler.scaleHeight(
-                                            context,
-                                            8,
-                                          ),
-                                        ),
-                                        if (_betterPlayerController != null &&
-                                            _betterPlayerController!
-                                                    .videoPlayerController !=
-                                                null &&
-                                            _betterPlayerController!
-                                                    .videoPlayerController!
-                                                    .value
-                                                    .duration !=
-                                                Duration.zero &&
-                                            _betterPlayerController!
-                                                .videoPlayerController!
-                                                .value
-                                                .isPlaying)
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                child: Slider(
-                                                  activeColor: AppColors.white,
-                                                  inactiveColor: AppColors.white
-                                                      .withOpacity(0.3),
-                                                  min: 0,
-                                                  max:
-                                                      controller!
-                                                          .videoPlayerController!
-                                                          .value
-                                                          .duration
-                                                          ?.inMilliseconds
-                                                          .toDouble() ??
-                                                      1,
-                                                  value: controller!
-                                                      .videoPlayerController!
-                                                      .value
-                                                      .position
-                                                      .inMilliseconds
-                                                      .clamp(
-                                                        0,
-                                                        controller!
-                                                                .videoPlayerController!
-                                                                .value
-                                                                .duration
-                                                                ?.inMilliseconds ??
-                                                            1,
-                                                      )
-                                                      .toDouble(),
-                                                  onChanged: (value) {
-                                                    controller!
-                                                        .videoPlayerController!
-                                                        .seekTo(
-                                                          Duration(
-                                                            milliseconds: value
-                                                                .toInt(),
-                                                          ),
-                                                        );
-                                                  },
-                                                ),
-                                              ),
-                                              Text(
-                                                _format(
-                                                  controller!
-                                                      .videoPlayerController!
-                                                      .value
-                                                      .position,
-                                                ),
-                                                style: TextStyle(
-                                                  color: AppColors.white,
-                                                ),
-                                              ),
-
-                                              SizedBox(
-                                                width: AppScaler.scaleSize(
-                                                  context,
-                                                  15,
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                behavior:
-                                                    HitTestBehavior.opaque,
-                                                onTap: () {
-                                                  if (_betterPlayerController !=
-                                                      null) {
-                                                    _betterPlayerController!
-                                                        .videoPlayerController!
-                                                        .pause();
-                                                  }
-                                                  context.pushNamed(
-                                                    AppRoutes.videoScreen.name,
-                                                  );
-                                                },
-                                                child: Image.asset(
-                                                  Assets
-                                                      .images
-                                                      .screenrotationicon
-                                                      .path,
-                                                  width: AppScaler.scaleSize(
-                                                    context,
-                                                    24,
-                                                  ),
-                                                  height: AppScaler.scaleHeight(
-                                                    context,
-                                                    24,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                      FullscreenImageScreen(
+                        imagePath: Assets.images.livetv.path,
+                        title: "We're Training Heroes of Future!",
                       ),
 
                       SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
                       PoppinsText(
                         context,
                         'Genre',

@@ -34,15 +34,12 @@ Future<void> appStartup(Ref ref) async {
       DeviceOrientation.portraitDown,
     ]);
 
-    // Set system UI styles
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: AppColors.screenBG,
+        statusBarColor: Colors.black12,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.black12,
         systemNavigationBarIconBrightness: Brightness.light,
-        systemStatusBarContrastEnforced: true,
-        // systemNavigationBarDividerColor: Colors.transparent,
       ),
     );
 
