@@ -7,6 +7,7 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class ReportContentSomehingElse extends StatefulWidget {
@@ -107,7 +108,7 @@ class _ReportContentSomehingElseState extends State<ReportContentSomehingElse> {
                       labelText: "Description",
                       hintText: "Add reason",
                       hintStyle: GoogleFonts.poppins(
-                        fontSize: 16,
+                        fontSize: AppScaler.scaleFont(context, 16),
                         color: customColors.textColor,
                         fontWeight: FontWeight.w400,
                       ),

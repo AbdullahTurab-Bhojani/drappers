@@ -157,7 +157,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                 labelColor: customColors.blackshade,
                 unselectedLabelColor: customColors.labelColor,
                 labelStyle: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: AppScaler.scaleFont(context, 14),
                   fontWeight: FontWeight.w500,
                 ),
                 labelPadding: EdgeInsets.symmetric(

@@ -3,6 +3,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 
 class PhoneOtpField extends ConsumerStatefulWidget {
@@ -131,7 +132,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                       child: Text(
                         "+${selectedCountry.phoneCode}",
                         style: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: AppScaler.scaleFont(context, 14),
                           color: AppColors.white,
                         ),
                       ),
@@ -143,7 +144,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
                       style: GoogleFonts.poppins(
-                        fontSize: 16,
+                        fontSize: AppScaler.scaleFont(context, 16),
                         color: AppColors.white,
                       ),
                       decoration: const InputDecoration(

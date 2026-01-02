@@ -165,7 +165,7 @@ class _ContentDetailState extends State<ContentDetail>
                           TextSpan(
                             text: '91% match',
                             style: GoogleFonts.poppins(
-                              fontSize: 16,
+                              fontSize: AppScaler.scaleFont(context, 16),
                               fontWeight: FontWeight.w400,
                               color: customColors.greyColor,
                             ),
@@ -178,7 +178,7 @@ class _ContentDetailState extends State<ContentDetail>
                           TextSpan(
                             text: '2017',
                             style: GoogleFonts.poppins(
-                              fontSize: 16,
+                              fontSize: AppScaler.scaleFont(context, 16),
                               fontWeight: FontWeight.w400,
                               color: customColors.textColor,
                             ),
@@ -214,7 +214,7 @@ class _ContentDetailState extends State<ContentDetail>
                           TextSpan(
                             text: '2h 43m',
                             style: GoogleFonts.poppins(
-                              fontSize: 16,
+                              fontSize: AppScaler.scaleFont(context, 16),
                               fontWeight: FontWeight.w400,
                               color: customColors.textColor,
                             ),
@@ -302,7 +302,10 @@ class _ContentDetailState extends State<ContentDetail>
                                   : Image.asset(
                                       Assets.images.addicon.path,
                                       width: AppScaler.scaleSize(context, 15),
-                                      height: AppScaler.scaleHeight(context, 15),
+                                      height: AppScaler.scaleHeight(
+                                        context,
+                                        15,
+                                      ),
                                     ),
                               fontSize: PoppinsFontSizeVariant.size14,
                             ),
@@ -316,7 +319,9 @@ class _ContentDetailState extends State<ContentDetail>
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: AppScaler.scaleSize(context, 12)),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 12),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -337,7 +342,9 @@ class _ContentDetailState extends State<ContentDetail>
                       ),
                       SizedBox(height: AppScaler.scaleHeight(context, 15)),
                       Padding(
-                        padding: EdgeInsets.only(left: AppScaler.scaleSize(context, 12)),
+                        padding: EdgeInsets.only(
+                          left: AppScaler.scaleSize(context, 12),
+                        ),
                         child: Row(
                           children: [
                             Column(
@@ -365,7 +372,9 @@ class _ContentDetailState extends State<ContentDetail>
                                   ),
                                 ),
 
-                                SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                                SizedBox(
+                                  height: AppScaler.scaleHeight(context, 10),
+                                ),
                                 PoppinsText(
                                   context,
                                   'Like',
@@ -391,7 +400,9 @@ class _ContentDetailState extends State<ContentDetail>
                                     width: AppScaler.scaleSize(context, 18),
                                     height: AppScaler.scaleHeight(context, 18),
                                   ),
-                                  SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 10),
+                                  ),
                                   PoppinsText(
                                     context,
                                     'Share',
@@ -451,7 +462,7 @@ class _ContentDetailState extends State<ContentDetail>
                         labelColor: customColors.textColor,
                         unselectedLabelColor: customColors.labelColor,
                         labelStyle: GoogleFonts.poppins(
-                          fontSize: 16,
+                          fontSize: AppScaler.scaleFont(context, 16),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -466,7 +477,10 @@ class _ContentDetailState extends State<ContentDetail>
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.symmetric(
-                                        horizontal: AppScaler.scaleSize(context, 4),
+                                        horizontal: AppScaler.scaleSize(
+                                          context,
+                                          4,
+                                        ),
                                       ),
                                       child: Row(
                                         mainAxisAlignment:
@@ -474,9 +488,15 @@ class _ContentDetailState extends State<ContentDetail>
                                         children: [
                                           Container(
                                             padding: EdgeInsets.symmetric(
-                                              horizontal: AppScaler.scaleSize(context, 10),
+                                              horizontal: AppScaler.scaleSize(
+                                                context,
+                                                10,
+                                              ),
                                             ),
-                                            height: AppScaler.scaleHeight(context, 30),
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              30,
+                                            ),
                                             decoration: BoxDecoration(
                                               color: customColors.containergrey,
                                               borderRadius:
@@ -528,13 +548,24 @@ class _ContentDetailState extends State<ContentDetail>
                                           ),
                                           Image.asset(
                                             Assets.images.infoicon.path,
-                                            height: AppScaler.scaleHeight(context, 18),
-                                            width: AppScaler.scaleSize(context, 18),
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              18,
+                                            ),
+                                            width: AppScaler.scaleSize(
+                                              context,
+                                              18,
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(
+                                        context,
+                                        20,
+                                      ),
+                                    ),
 
                                     GridView.builder(
                                       shrinkWrap: true,

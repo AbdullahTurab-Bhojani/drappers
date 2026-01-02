@@ -1006,7 +1006,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     child: Center(
                       child: PoppinsText(
                         context,
-                        'Finale – Meet The Drapers Seaso....',
+                        'Finale – Meet The Drapers Season',
                         fontSize: PoppinsFontSizeVariant.size22,
                         fontWeight: PoppinsFontWeightVariant.medium,
                         color: AppColors.white,

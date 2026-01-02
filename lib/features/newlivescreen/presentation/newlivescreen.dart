@@ -132,7 +132,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   PoppinsText(
                     context,
                     "Speed",
-                    fontSize: PoppinsFontSizeVariant.size6,
+                    fontSize: PoppinsFontSizeVariant.size12,
                     fontWeight: PoppinsFontWeightVariant.regular,
                     color: AppColors.wDark,
                   ),
@@ -409,7 +409,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             PoppinsText(
                               context,
                               "Speed",
-                              fontSize: PoppinsFontSizeVariant.size6,
+                              fontSize: PoppinsFontSizeVariant.size12,
                               fontWeight: PoppinsFontWeightVariant.semiBold,
                               color: AppColors.white,
                             ),

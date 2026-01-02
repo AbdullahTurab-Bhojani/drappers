@@ -158,7 +158,7 @@ class _LikecontentState extends State<Likecontent>
                 labelColor: customColors.blackshade,
                 unselectedLabelColor: customColors.labelColor,
                 labelStyle: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: AppScaler.scaleFont(context, 14),
                   fontWeight: FontWeight.w500,
                 ),
                 tabs: List.generate(3, (index) {
@@ -282,9 +282,9 @@ class _LikecontentState extends State<Likecontent>
                             PoppinsText(
                               context,
                               'Videos',
-                                fontSize: PoppinsFontSizeVariant.size18,
-                                fontWeight: PoppinsFontWeightVariant.semiBold,
-                                color: customColors.textColor,
+                              fontSize: PoppinsFontSizeVariant.size18,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                              color: customColors.textColor,
                             ),
                             AppButton(
                               buttonSize: Size(80, 25),

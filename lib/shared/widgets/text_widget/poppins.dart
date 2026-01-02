@@ -55,17 +55,18 @@ class PoppinsText extends Text {
   }) : super(
          style: GoogleFonts.poppins(
            color: color,
-           fontSize: AppScaler.scaleSize(context, _fontSize(fontSize)),
+           fontSize: AppScaler.scaleFont(context, _fontSize(fontSize)),
            fontWeight: _fontWeight(fontWeight),
            height: height,
+           letterSpacing: letterSpacing,
            fontStyle: fontStyle,
            decoration: decoration,
            decorationColor: color,
-           letterSpacing: letterSpacing,
          ),
          overflow: textOverflow,
        );
 
+  /// Base font sizes (NO scaling here)
   static double _fontSize(PoppinsFontSizeVariant size) {
     switch (size) {
       case PoppinsFontSizeVariant.size6:

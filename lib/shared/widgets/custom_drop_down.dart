@@ -212,14 +212,14 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                             focusNode: _searchFocusNode,
                             style: GoogleFonts.poppins(
                               color: customColors.textColor,
-                              fontSize: 16,
+                              fontSize: AppScaler.scaleFont(context, 16),
                               fontWeight: FontWeight.w400,
                             ),
                             decoration: InputDecoration(
                               hintText: widget.searchHint ?? 'Search...',
                               hintStyle: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w400,
-                                fontSize: 16,
+                                fontSize: AppScaler.scaleFont(context, 16),
                                 color: customColors.textColor,
                               ),
                               border: OutlineInputBorder(
@@ -378,7 +378,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                 },
                 style: GoogleFonts.poppins(
                   color: customColors.textColor,
-                  fontSize: 16,
+                  fontSize: AppScaler.scaleFont(context, 16),
                   fontWeight: FontWeight.w400,
                 ),
                 decoration: InputDecoration(
@@ -388,7 +388,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                       widget.hintStyle ??
                       GoogleFonts.poppins(
                         fontWeight: FontWeight.w400,
-                        fontSize: 16,
+                        fontSize: AppScaler.scaleFont(context, 16),
                         color: customColors.textColor,
                       ),
                   filled: true,
