@@ -165,8 +165,15 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                       padding: EdgeInsets.only(
                         top: AppScaler.scaleHeight(context, 40),
                       ),
-                      child: Divider(
-                        color: customColors.labelColor.withOpacity(0.2),
+                      child: Padding(
+                        // padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppScaler.scaleHeight(context, 20),
+                        ),
+
+                        child: Divider(
+                          color: customColors.labelColor.withOpacity(0.2),
+                        ),
                       ),
                     ),
                     Padding(
@@ -213,7 +220,15 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         ),
                       ),
                     ),
-                    Divider(color: customColors.labelColor.withOpacity(0.2)),
+                    Padding(
+                      // padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppScaler.scaleHeight(context, 20),
+                      ),
+                      child: Divider(
+                        color: customColors.labelColor.withOpacity(0.2),
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(
                         left: horizontalPadding + horizontalPadding,

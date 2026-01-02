@@ -116,15 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   SizedBox(height: AppScaler.scaleSize(context, 28)),
-                  AppButton(
-                    onPressed: () {
-                      GuestHelper.isGuest = true;
-                      context.goNamed(AppRoutes.home.name);
-                    },
-                    title: 'Continue as Guest',
-                    color: Colors.transparent,
-                  ),
-                  SizedBox(height: AppScaler.scaleHeight(context, 28)),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -246,7 +238,38 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 50)),
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                        SizedBox(
+                          width: double.infinity,
+                          height: AppScaler.scaleHeight(context, 52),
+                          child: Center(
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                context.pushNamed(
+                                  AppRoutes.forgetpasswordScreen.name,
+                                );
+                              },
+                              child: PoppinsText(
+                                context,
+                                'Forgot Password?',
+                                decoration: TextDecoration.underline,
+                                fontSize: PoppinsFontSizeVariant.size14,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
+                        AppButton(
+                          onPressed: () {
+                            context.goNamed(AppRoutes.home.name);
+                          },
+                          title: "Continue",
+                        ),
+                        SizedBox(height: AppScaler.scaleHeight(context, 40)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -291,37 +314,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 40)),
+                        SizedBox(height: AppScaler.scaleHeight(context, 60)),
                         AppButton(
                           onPressed: () {
+                            GuestHelper.isGuest = true;
                             context.goNamed(AppRoutes.home.name);
                           },
-                          title: "Continue",
+                          title: 'Continue as Guest',
+                          color: Colors.transparent,
                         ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 12)),
-                        SizedBox(
-                          width: double.infinity,
-                          height: AppScaler.scaleHeight(context, 52),
-                          child: Center(
-                            child: GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: () {
-                                context.pushNamed(
-                                  AppRoutes.forgetpasswordScreen.name,
-                                );
-                              },
-                              child: PoppinsText(
-                                context,
-                                'Forgot Password?',
-                                decoration: TextDecoration.underline,
-                                fontSize: PoppinsFontSizeVariant.size14,
-                                fontWeight: PoppinsFontWeightVariant.medium,
-                                color: AppColors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 40)),
+                        // SizedBox(height: AppScaler.scaleHeight(context, 28)),
                       ],
                     ),
                   ),

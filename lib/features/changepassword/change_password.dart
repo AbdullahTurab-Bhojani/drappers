@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../shared/widgets/textfield_new.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -38,7 +39,11 @@ class _ChangePasswordState extends State<ChangePassword> {
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 70),
+            padding: EdgeInsets.only(
+              left: AppScaler.scaleSize(context, 20),
+              right: AppScaler.scaleSize(context, 20),
+              top: AppScaler.scaleHeight(context, 118),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -50,7 +55,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   },
                   child: Image.asset(Assets.images.backicon.path),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: AppScaler.scaleHeight(context, 40)),
                 PoppinsText(
                   context,
                   "Change Password?",
@@ -58,7 +63,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   fontWeight: PoppinsFontWeightVariant.semiBold,
                   color: customColors.textColor,
                 ),
-                SizedBox(height: 24),
+                SizedBox(height: AppScaler.scaleHeight(context, 24)),
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 40,
                   child: Column(
@@ -75,7 +80,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
                       AppPasswordField(
                         keyboardType: TextInputType.numberWithOptions(),
                         controller: _changePasswordController,
@@ -88,7 +93,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
                       AppPasswordField(
                         keyboardType: TextInputType.numberWithOptions(),
                         controller: _changePasswordController,
@@ -101,7 +106,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: AppScaler.scaleHeight(context, 10)),
                       PoppinsText(
                         context,
                         "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
@@ -109,7 +114,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                         color: customColors.greyColor,
                       ),
-                      SizedBox(height: 32),
+                      SizedBox(height: AppScaler.scaleHeight(context, 32)),
                       AppButton(
                         onPressed: () {
                           context.pop();
