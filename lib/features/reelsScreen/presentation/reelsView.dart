@@ -1,10 +1,10 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
-
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
@@ -122,8 +122,12 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
       },
       child: Row(
         children: [
-          Image.asset(imagePath, width: 22, height: 22),
-          const SizedBox(width: 20),
+          Image.asset(
+            imagePath,
+            width: AppScaler.scaleSize(context, 22),
+            height: AppScaler.scaleHeight(context, 22),
+          ),
+          SizedBox(width: AppScaler.scaleSize(context, 20)),
           PoppinsText(
             context,
             title,
@@ -148,13 +152,12 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
         right: false,
         child: Stack(
           children: [
-            // PageView for videos
             PageView.builder(
               controller: _pageController,
               scrollDirection: Axis.vertical,
               itemCount: _videoControllers.length,
               onPageChanged: (index) {
-                _playOnlyAt(index); // Ensure only current video plays
+                _playOnlyAt(index);
               },
               itemBuilder: (context, index) {
                 final controller = _videoControllers[index];
@@ -180,7 +183,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                   child: VideoPlayer(controller),
                                 ),
                               )
-                            : const Center(
+                            : Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -189,7 +192,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
 
                       if (controller.value.isInitialized &&
                           !controller.value.isPlaying)
-                        const Center(
+                        Center(
                           child: Icon(
                             Icons.play_arrow,
                             size: 70,
@@ -197,13 +200,12 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                           ),
                         ),
 
-                      // Bottom gradient overlay
                       Positioned.fill(
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Container(
-                            height: 260,
-                            decoration: const BoxDecoration(
+                            height: AppScaler.scaleHeight(context, 260),
+                            decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
                                   Colors.transparent,
@@ -218,11 +220,10 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                         ),
                       ),
 
-                      // Video details: title, description, date
                       Positioned(
-                        left: 20,
-                        right: 20,
-                        bottom: 95,
+                        left: AppScaler.scaleSize(context, 20),
+                        right: AppScaler.scaleSize(context, 20),
+                        bottom: AppScaler.scaleHeight(context, 95),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -233,14 +234,14 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                               fontWeight: PoppinsFontWeightVariant.medium,
                               color: customColors.textColor,
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(height: AppScaler.scaleHeight(context, 4)),
                             PoppinsText(
                               context,
                               "${_dates[index]} • 2.2k views",
                               fontSize: PoppinsFontSizeVariant.size14,
                               color: Colors.white70,
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: AppScaler.scaleHeight(context, 8)),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -260,7 +261,9 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                     });
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(top: 4),
+                                    padding: EdgeInsets.only(
+                                      top: AppScaler.scaleHeight(context, 4),
+                                    ),
                                     child: PoppinsText(
                                       context,
                                       _expanded[index]
@@ -280,15 +283,14 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                       ),
 
                       Positioned(
-                        left: 20,
-                        right: 20,
-                        bottom: 20,
+                        left: AppScaler.scaleSize(context, 20),
+                        right: AppScaler.scaleSize(context, 20),
+                        bottom: AppScaler.scaleHeight(context, 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
-                                // Like
                                 GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
@@ -309,23 +311,26 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                         _isLiked[index]
                                             ? Assets.images.like.path
                                             : Assets.images.likeicon.path,
-                                        width: 26,
-                                        height: 26,
+                                        width: AppScaler.scaleSize(context, 26),
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          26,
+                                        ),
                                         color: _isLiked[index]
                                             ? customColors.buttonColors[0]
                                             : null,
                                       ),
-                                      const SizedBox(width: 8),
+                                      SizedBox(width: 8),
                                       PoppinsText(
                                         context,
                                         "${_likeCounts[index]}",
                                         fontSize: PoppinsFontSizeVariant.size14,
-                                        color: Colors.white,
+                                        color: AppColors.white,
                                       ),
                                     ],
                                   ),
                                 ),
-                                const SizedBox(width: 22),
+                                SizedBox(width: 22),
 
                                 GestureDetector(
                                   behavior: HitTestBehavior.opaque,
@@ -339,11 +344,16 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                     children: [
                                       Image.asset(
                                         "assets/images/shareiconnew.png",
-                                        width: 24,
-                                        height: 24,
+                                        width: AppScaler.scaleSize(context, 24),
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          24,
+                                        ),
                                         color: customColors.textColor,
                                       ),
-                                      const SizedBox(width: 8),
+                                      SizedBox(
+                                        width: AppScaler.scaleSize(context, 8),
+                                      ),
                                       PoppinsText(
                                         context,
                                         "Share",
@@ -377,7 +387,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                     )
                                   : Image.asset(
                                       Assets.images.addicon.path,
-                                      width: 15,
+                                      width: AppScaler.scaleSize(context, 15),
                                     ),
                               fontSize: PoppinsFontSizeVariant.size14,
                             ),
@@ -386,10 +396,10 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.only(
-                          top: 60,
-                          left: 20,
-                          right: 20,
+                        padding: EdgeInsets.only(
+                          top: AppScaler.scaleHeight(context, 60),
+                          left: AppScaler.scaleSize(context, 20),
+                          right: AppScaler.scaleSize(context, 20),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -400,7 +410,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                 _videoControllers[index].pause();
                                 Navigator.pop(context);
                               },
-                              child: const CircleAvatar(
+                              child: CircleAvatar(
                                 backgroundColor: Colors.black54,
                                 radius: 20,
                                 child: Icon(
@@ -420,9 +430,15 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                     return Align(
                                       alignment: Alignment.topRight,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 30,
-                                          right: 10,
+                                        padding: EdgeInsets.only(
+                                          top: AppScaler.scaleHeight(
+                                            context,
+                                            30,
+                                          ),
+                                          right: AppScaler.scaleSize(
+                                            context,
+                                            10,
+                                          ),
                                         ),
                                         child: Material(
                                           borderRadius: BorderRadius.circular(
@@ -430,14 +446,25 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                                           ),
                                           color: customColors.regular,
                                           child: SizedBox(
-                                            width: 174,
-                                            height: 142,
+                                            width: AppScaler.scaleSize(
+                                              context,
+                                              174,
+                                            ),
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              142,
+                                            ),
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                    horizontal: 12,
-                                                    vertical: 16,
-                                                  ),
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: AppScaler.scaleSize(
+                                                  context,
+                                                  12,
+                                                ),
+                                                vertical: AppScaler.scaleHeight(
+                                                  context,
+                                                  16,
+                                                ),
+                                              ),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -484,8 +511,8 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                               },
                               child: Image.asset(
                                 "assets/images/3dotsicon.png",
-                                width: 24,
-                                height: 24,
+                                width: AppScaler.scaleSize(context, 24),
+                                height: AppScaler.scaleHeight(context, 24),
                                 color: customColors.textColor,
                               ),
                             ),
