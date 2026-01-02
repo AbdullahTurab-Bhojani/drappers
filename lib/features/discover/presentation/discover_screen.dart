@@ -26,9 +26,12 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
-  late BetterPlayerController _betterPlayerController;
+  BetterPlayerController? _betterPlayerController;
+  BetterPlayerController? get controller => _betterPlayerController;
+
   File? videoFile;
   bool _showControls = false;
+  bool _isLoading = true;
 
   final String videoUrl = 'assets/images/livefullview.mp4';
 
@@ -36,6 +39,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   void initState() {
     super.initState();
     _initPlayer();
+  }
+
+  void _videoListener() {
+    if (!mounted) return;
+    setState(() {
+    });
   }
 
   Future<File> _assetToFile(String assetPath) async {
@@ -49,33 +58,53 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   }
 
   Future<void> _initPlayer() async {
-    videoFile = await _assetToFile(videoUrl);
+    try {
+      videoFile = await _assetToFile(videoUrl);
 
-    final config = BetterPlayerConfiguration(
-      aspectRatio: 16 / 9,
-      fit: BoxFit.cover,
-      autoPlay: true,
-      controlsConfiguration: const BetterPlayerControlsConfiguration(
-        showControls: false,
-      ),
-    );
+      final config = BetterPlayerConfiguration(
+        aspectRatio: 16 / 9,
+        fit: BoxFit.cover,
+        autoPlay: true,
+        controlsConfiguration: const BetterPlayerControlsConfiguration(
+          showControls: false,
+        ),
+      );
 
-    final source = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.file,
-      videoFile!.path,
-    );
+      final source = BetterPlayerDataSource(
+        BetterPlayerDataSourceType.file,
+        videoFile!.path,
+      );
 
-    _betterPlayerController = BetterPlayerController(
-      config,
-      betterPlayerDataSource: source,
-    );
+      _betterPlayerController = BetterPlayerController(
+        config,
+        betterPlayerDataSource: source,
+      );
 
-    setState(() {});
+      _betterPlayerController!.videoPlayerController!.addListener(
+        _videoListener,
+      );
+
+      setState(() {
+        _isLoading = false;
+      });
+
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error initializing player: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
   void dispose() {
-    _betterPlayerController.dispose();
+    _betterPlayerController?.videoPlayerController?.removeListener(
+      _videoListener,
+    );
+    _betterPlayerController?.dispose();
     super.dispose();
   }
 
@@ -180,27 +209,38 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               height: AppScaler.scaleHeight(context, 450),
                               child: Stack(
                                 children: [
-                                  _betterPlayerController
+                                  if (_isLoading)
+                                    Center(child: CircularProgressIndicator())
+                                  else if (_betterPlayerController != null &&
+                                      _betterPlayerController!
                                               .isVideoInitialized() !=
-                                          null
-                                      ? BetterPlayer(
-                                          controller: _betterPlayerController,
-                                        )
-                                      : Container(),
+                                          null)
+                                    BetterPlayer(
+                                      controller: _betterPlayerController!,
+                                    )
+                                  else
+                                    Container(
+                                      color: Colors.black,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.error_outline,
+                                          color: Colors.white,
+                                          size: 50,
+                                        ),
+                                      ),
+                                    ),
+
                                   Container(
                                     color: Colors.black.withOpacity(0.18),
                                   ),
 
-                                  if (_betterPlayerController
-                                          .isVideoInitialized() !=
-                                      null)
+                                  if (_betterPlayerController != null &&
+                                      _betterPlayerController!
+                                              .isVideoInitialized() !=
+                                          null)
                                     GestureDetector(
                                       behavior: HitTestBehavior.opaque,
                                       onTap: () {
-                                        // if (GuestHelper.isGuest) {
-                                        //   GuestHelper.checkGuest(context);
-                                        //   return;
-                                        // }
                                         setState(
                                           () => _showControls = !_showControls,
                                         );
@@ -216,7 +256,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                             ),
                                             child: IconButton(
                                               icon: Icon(
-                                                _betterPlayerController
+                                                _betterPlayerController!
                                                         .isPlaying()!
                                                     ? Icons.pause_circle
                                                     : Icons.play_circle,
@@ -226,31 +266,35 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                 ),
                                               ),
                                               onPressed: () async {
+                                                if (_betterPlayerController ==
+                                                    null)
+                                                  return;
+
                                                 setState(() {
                                                   final videoPosition =
-                                                      _betterPlayerController
+                                                      _betterPlayerController!
                                                           .videoPlayerController!
                                                           .value
                                                           .position;
                                                   final videoDuration =
-                                                      _betterPlayerController
+                                                      _betterPlayerController!
                                                           .videoPlayerController!
                                                           .value
                                                           .duration;
 
-                                                  if (_betterPlayerController
+                                                  if (_betterPlayerController!
                                                       .isPlaying()!) {
-                                                    _betterPlayerController
+                                                    _betterPlayerController!
                                                         .pause();
                                                   } else {
                                                     if (videoPosition >=
                                                         videoDuration!) {
-                                                      _betterPlayerController
+                                                      _betterPlayerController!
                                                           .seekTo(
                                                             Duration.zero,
                                                           );
                                                     }
-                                                    _betterPlayerController
+                                                    _betterPlayerController!
                                                         .play();
                                                   }
                                                 });
@@ -260,6 +304,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                         ),
                                       ),
                                     ),
+
                                   Positioned(
                                     top: AppScaler.scaleHeight(context, 16),
                                     left: AppScaler.scaleSize(context, 14),
@@ -301,6 +346,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                     .videoPlayerController !=
                                                 null &&
                                             _betterPlayerController!
+                                                    .videoPlayerController!
+                                                    .value
+                                                    .duration !=
+                                                Duration.zero &&
+                                            _betterPlayerController!
                                                 .videoPlayerController!
                                                 .value
                                                 .isPlaying)
@@ -314,28 +364,31 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                   inactiveColor: AppColors.white
                                                       .withOpacity(0.3),
                                                   min: 0,
-                                                  max: _betterPlayerController
-                                                      .videoPlayerController!
-                                                      .value
-                                                      .duration!
-                                                      .inMilliseconds
-                                                      .toDouble(),
-                                                  value: _betterPlayerController
+                                                  max:
+                                                      controller!
+                                                          .videoPlayerController!
+                                                          .value
+                                                          .duration
+                                                          ?.inMilliseconds
+                                                          .toDouble() ??
+                                                      1,
+                                                  value: controller!
                                                       .videoPlayerController!
                                                       .value
                                                       .position
                                                       .inMilliseconds
                                                       .clamp(
                                                         0,
-                                                        _betterPlayerController
-                                                            .videoPlayerController!
-                                                            .value
-                                                            .duration!
-                                                            .inMilliseconds,
+                                                        controller!
+                                                                .videoPlayerController!
+                                                                .value
+                                                                .duration
+                                                                ?.inMilliseconds ??
+                                                            1,
                                                       )
                                                       .toDouble(),
                                                   onChanged: (value) {
-                                                    _betterPlayerController
+                                                    controller!
                                                         .videoPlayerController!
                                                         .seekTo(
                                                           Duration(
@@ -348,7 +401,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                               ),
                                               Text(
                                                 _format(
-                                                  _betterPlayerController
+                                                  controller!
                                                       .videoPlayerController!
                                                       .value
                                                       .position,
@@ -357,6 +410,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                   color: AppColors.white,
                                                 ),
                                               ),
+
                                               SizedBox(
                                                 width: AppScaler.scaleSize(
                                                   context,
@@ -367,15 +421,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                 behavior:
                                                     HitTestBehavior.opaque,
                                                 onTap: () {
-                                                  _betterPlayerController
-                                                      .videoPlayerController!
-                                                      .pause();
-                                                  // if (GuestHelper.isGuest) {
-                                                  //   GuestHelper.checkGuest(
-                                                  //     context,
-                                                  //   );
-                                                  //   return;
-                                                  // }
+                                                  if (_betterPlayerController !=
+                                                      null) {
+                                                    _betterPlayerController!
+                                                        .videoPlayerController!
+                                                        .pause();
+                                                  }
                                                   context.pushNamed(
                                                     AppRoutes.videoScreen.name,
                                                   );

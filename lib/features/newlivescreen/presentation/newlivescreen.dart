@@ -1,11 +1,11 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously, unused_element
 
 import 'dart:io';
-
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -113,61 +113,130 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   }
 
   Widget _speedPopup() {
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      child: Center(
-        child: Container(
-          width: 336,
-          padding: EdgeInsets.only(top: 32, left: 24, right: 24),
-          decoration: BoxDecoration(
-            color: AppColors.dRegular,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  PoppinsText(
-                    context,
-                    "Speed",
-                    fontSize: PoppinsFontSizeVariant.size12,
-                    fontWeight: PoppinsFontWeightVariant.regular,
-                    color: AppColors.wDark,
-                  ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(Icons.close, color: AppColors.white),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Divider(),
-              SizedBox(height: 12),
-              _speedOption("0.5x"),
-              _speedOption("1x"),
-              _speedOption("1.5x"),
-              _speedOption("2x"),
-            ],
+    List<String> speedList = ['0.25x', '0.5x', '0.75x', 'Normal'];
+    return GestureDetector(
+      onTap: () => Navigator.pop(context),
+      child: Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: Container(
+            width: AppScaler.scaleSize(context, 320),
+            padding: EdgeInsets.only(
+              top: AppScaler.scaleHeight(context, 16),
+              left: AppScaler.scaleSize(context, 24),
+              right: AppScaler.scaleSize(context, 24),
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.dRegular,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PoppinsText(
+                      context,
+                      "Speed",
+                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontWeight: PoppinsFontWeightVariant.regular,
+                      color: AppColors.wDark,
+                    ),
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(Icons.close, color: AppColors.white),
+                    ),
+                  ],
+                ),
+                SizedBox(height: AppScaler.scaleHeight(context, 12)),
+                Divider(),
+                // SizedBox(height: 12),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: speedList.length,
+                  itemBuilder: (context, index) {
+                    final text = speedList[index];
+                    final bool isSelected = _selectedSpeed == text;
+
+                    return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+
+                      onTap: () {
+                        setState(() {
+                          _selectedSpeed = text;
+                          _betterPlayerController.setSpeed(
+                            double.parse(text.replaceAll('x', '')),
+                          );
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: AppScaler.scaleHeight(context, 12),
+                          horizontal: AppScaler.scaleSize(context, 12),
+                        ),
+                        margin: EdgeInsets.only(
+                          bottom: AppScaler.scaleHeight(context, 10),
+                        ),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? AppColors.popselectcolor19193F
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (isSelected)
+                              Icon(
+                                Icons.check,
+                                color: AppColors.white,
+                                size: 18,
+                              ),
+
+                            if (isSelected)
+                              SizedBox(width: AppScaler.scaleSize(context, 10)),
+
+                            PoppinsText(
+                              context,
+                              text,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              color: AppColors.wDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  void _openAudioSubtitlePopup() {
-    final List<String> subtitleOptions = ["Off", "English", "Urdu", "Arabic"];
+  Widget _audioSubtitlePopup() {
+    List<String> audioSubtitles = ['Off', 'English', 'Urdu', 'Arabic'];
 
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => Navigator.pop(context),
+      child: Dialog(
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: 336,
-            padding: EdgeInsets.only(top: 32, left: 24, right: 24),
+            width: AppScaler.scaleSize(context, 320),
+            padding: EdgeInsets.only(
+              top: AppScaler.scaleHeight(context, 16),
+              left: AppScaler.scaleSize(context, 16),
+              right: AppScaler.scaleSize(context, 24),
+            ),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
@@ -192,13 +261,82 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+
+                SizedBox(height: AppScaler.scaleHeight(context, 12)),
                 Divider(),
-                SizedBox(height: 12),
-                ...subtitleOptions.map(
-                  (option) => _audioSubtitleOption(option, isSubtitle: true),
+
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: audioSubtitles.length,
+                  itemBuilder: (context, index) {
+                    final text = audioSubtitles[index];
+                    final bool isSelected = _selectedSubtitle == text;
+
+                    return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () async {
+                        setState(() {
+                          _selectedSubtitle = text;
+                        });
+
+                        if (text == "Off") {
+                          await _betterPlayerController.setupSubtitleSource(
+                            BetterPlayerSubtitlesSource(
+                              type: BetterPlayerSubtitlesSourceType.none,
+                            ),
+                          );
+                        } else {
+                          await _betterPlayerController.setupSubtitleSource(
+                            BetterPlayerSubtitlesSource(
+                              type: BetterPlayerSubtitlesSourceType.network,
+                              name: text,
+                              urls: [
+                                "https://example.com/${text.toLowerCase()}.vtt",
+                              ],
+                            ),
+                          );
+                        }
+
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: AppScaler.scaleHeight(context, 12),
+                          horizontal: AppScaler.scaleSize(context, 12),
+                        ),
+                        margin: EdgeInsets.only(
+                          bottom: AppScaler.scaleHeight(context, 12),
+                        ),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? AppColors.popselectcolor19193F
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            if (isSelected)
+                              Icon(
+                                Icons.check,
+                                color: AppColors.white,
+                                size: 18,
+                              ),
+                            if (isSelected)
+                              SizedBox(width: AppScaler.scaleSize(context, 10)),
+                            PoppinsText(
+                              context,
+                              text,
+                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontWeight: PoppinsFontWeightVariant.regular,
+                              color: AppColors.wDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                SizedBox(height: 12),
               ],
             ),
           ),
@@ -250,11 +388,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
           if (_controlsVisible) _buildControls(),
           if (_showEpisodes)
             Positioned(
-              bottom: 70,
+              bottom: AppScaler.scaleHeight(context, 70),
               left: 0,
               right: 0,
               child: SizedBox(
-                height: 80,
+                height: AppScaler.scaleHeight(context, 80),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: episodes.length,
@@ -267,12 +405,15 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       },
                       child: Container(
                         margin: EdgeInsets.all(6),
-                        padding: EdgeInsets.all(12),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppScaler.scaleSize(context, 12),
+                          vertical: AppScaler.scaleHeight(context, 12),
+                        ),
                         color: AppColors.bRegular,
                         child: Center(
                           child: Text(
                             "EP ${index + 1}",
-                            style: const TextStyle(color: AppColors.white),
+                            style: TextStyle(color: AppColors.white),
                           ),
                         ),
                       ),
@@ -328,7 +469,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
             ),
 
           Positioned(
-            bottom: 10,
+            bottom: AppScaler.scaleHeight(context, 10),
             child: SizedBox(
               width: screenSize.width,
               child: Column(
@@ -372,7 +513,9 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(right: 20),
+                          padding: EdgeInsets.only(
+                            right: AppScaler.scaleSize(context, 20),
+                          ),
                           child: Text(
                             _format(
                               _betterPlayerController
@@ -386,7 +529,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       ],
                     ),
 
-                  SizedBox(height: 4),
+                  SizedBox(height: AppScaler.scaleHeight(context, 4)),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -402,10 +545,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           children: [
                             Image.asset(
                               Assets.images.speed.path,
-                              width: 16,
-                              height: 16,
+                              scale: 3,
+                              // width: AppScaler.scaleSize(context, 24),
+                              // height: AppScaler.scaleHeight(context, 16),
                             ),
-                            SizedBox(width: 10),
+                            SizedBox(width: AppScaler.scaleSize(context, 10)),
                             PoppinsText(
                               context,
                               "Speed",
@@ -416,7 +560,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(width: 32),
+                      SizedBox(width: AppScaler.scaleSize(context, 32)),
 
                       GestureDetector(
                         onTap: _openAudioSubtitlePopup,
@@ -424,10 +568,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           children: [
                             Image.asset(
                               Assets.images.audioSubtitles.path,
-                              width: 16,
-                              height: 16,
+                              // width: AppScaler.scaleSize(context, 16),
+                              // height: AppScaler.scaleHeight(context, 16),
+                              scale: 3,
                             ),
-                            SizedBox(width: 10),
+                            SizedBox(width: AppScaler.scaleSize(context, 10)),
                             PoppinsText(
                               context,
                               "Audio & Subtitle",
@@ -438,16 +583,18 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(width: 32),
+
+                      SizedBox(width: AppScaler.scaleSize(context, 32)),
 
                       Row(
                         children: [
                           Image.asset(
                             Assets.images.audioSubtitles.path,
-                            width: 16,
-                            height: 16,
+                            // width: AppScaler.scaleSize(context, 16),
+                            // height: AppScaler.scaleHeight(context, 16),
+                            scale: 3,
                           ),
-                          SizedBox(width: 10),
+                          SizedBox(width: AppScaler.scaleSize(context, 10)),
                           PoppinsText(
                             context,
                             "Picture in Picture",
@@ -465,14 +612,15 @@ class _newliveScreenScreenState extends State<newliveScreen> {
           ),
 
           Positioned(
-            top: 34,
-            right: 28,
+            top: AppScaler.scaleHeight(context, 28),
+            right: AppScaler.scaleSize(context, 28),
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () => Navigator.pop(context),
               child: Image.asset(
                 Assets.images.crossnewicon.path,
-                width: 30,
+                // width: AppScaler.scaleSize(context, 30),
+                scale: 3,
                 color: AppColors.white,
               ),
             ),
@@ -497,8 +645,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        margin: EdgeInsets.only(bottom: 10),
+        padding: EdgeInsets.symmetric(
+          vertical: AppScaler.scaleHeight(context, 12),
+          horizontal: AppScaler.scaleSize(context, 12),
+        ),
+        margin: EdgeInsets.only(bottom: AppScaler.scaleHeight(context, 10)),
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.popselectcolor19193F
@@ -508,13 +659,13 @@ class _newliveScreenScreenState extends State<newliveScreen> {
         child: Row(
           children: [
             Container(
-              width: 20,
+              width: AppScaler.scaleSize(context, 20),
               alignment: Alignment.center,
               child: isSelected
                   ? Icon(Icons.check, color: AppColors.white, size: 20)
                   : SizedBox.shrink(),
             ),
-            SizedBox(width: 12),
+            SizedBox(width: AppScaler.scaleSize(context, 12)),
             Expanded(
               child: PoppinsText(
                 context,
@@ -566,8 +717,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        margin: EdgeInsets.only(bottom: 10),
+        padding: EdgeInsets.symmetric(
+          vertical: AppScaler.scaleHeight(context, 12),
+          horizontal: AppScaler.scaleSize(context, 12),
+        ),
+        margin: EdgeInsets.only(bottom: AppScaler.scaleHeight(context, 10)),
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.popselectcolor19193F
@@ -577,12 +731,12 @@ class _newliveScreenScreenState extends State<newliveScreen> {
         child: Row(
           children: [
             SizedBox(
-              width: 20,
+              width: AppScaler.scaleSize(context, 20),
               child: isSelected
                   ? Icon(Icons.check, color: AppColors.white, size: 20)
                   : SizedBox.shrink(),
             ),
-            SizedBox(width: 12),
+            SizedBox(width: AppScaler.scaleSize(context, 12)),
             Expanded(
               child: PoppinsText(
                 context,
@@ -595,6 +749,21 @@ class _newliveScreenScreenState extends State<newliveScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _openAudioSubtitlePopup() {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Center(
+          child: Material(
+            color: Colors.transparent,
+            child: _audioSubtitlePopup(),
+          ),
+        );
+      },
     );
   }
 

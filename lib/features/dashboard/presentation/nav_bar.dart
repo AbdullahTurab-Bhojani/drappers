@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
@@ -143,7 +144,7 @@ class _BottomNavigationBarShellState
                                     : customColors.greyColor,
                               )
                             : CircleAvatar(
-                                radius: 15,
+                                radius: 12,
                                 backgroundColor: Colors.transparent,
                                 backgroundImage: NetworkImage(
                                   'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
@@ -153,14 +154,14 @@ class _BottomNavigationBarShellState
                         isSelected
                             ? Image(
                                 image: AssetImage(_navItems[index]['icon']),
-                                height: 24,
+                                height: AppScaler.scaleHeight(context, 24),
                               )
                             : Image(
                                 image: AssetImage(_navItems[index]['icon2']),
-                                height: 24,
+                                height: AppScaler.scaleHeight(context, 24),
                               ),
 
-                      const SizedBox(height: 4),
+                      SizedBox(height: AppScaler.scaleHeight(context, 4)),
 
                       PoppinsText(
                         context,

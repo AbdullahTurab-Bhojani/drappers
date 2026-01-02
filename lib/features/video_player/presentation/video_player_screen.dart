@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -134,8 +135,12 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: 320,
-            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
+            width: AppScaler.scaleSize(context, 320),
+            padding: EdgeInsets.only(
+              top: AppScaler.scaleHeight(context, 16),
+              left: AppScaler.scaleSize(context, 24),
+              right: AppScaler.scaleSize(context, 24),
+            ),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
@@ -160,7 +165,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: AppScaler.scaleHeight(context, 12)),
                 Divider(),
                 // SizedBox(height: 12),
                 ListView.builder(
@@ -180,8 +185,8 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 12,
+                          vertical: AppScaler.scaleHeight(context, 12),
+                          horizontal: AppScaler.scaleSize(context, 12),
                         ),
                         margin: EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
@@ -194,8 +199,13 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             if (isSelected)
-                              Icon(Icons.check, color: Colors.white, size: 18),
-                            if (isSelected) SizedBox(width: 10),
+                              Icon(
+                                Icons.check,
+                                color: AppColors.white,
+                                size: 18,
+                              ),
+                            if (isSelected)
+                              SizedBox(width: AppScaler.scaleSize(context, 10)),
                             PoppinsText(
                               context,
                               text,
@@ -269,7 +279,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
 
   void _toggleLock() {
     setState(() {
-      _isLocked = !_isLocked; // toggle lock state
+      _isLocked = !_isLocked;
     });
 
     if (_isLocked) {
@@ -287,7 +297,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
       _showLockIndicator = true;
     });
 
-    _lockTimer?.cancel(); // cancel previous timer if any
+    _lockTimer?.cancel();
 
     _lockTimer = Timer(const Duration(milliseconds: 10000), () {
       if (mounted) {
@@ -328,8 +338,12 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: 320,
-            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
+            width: AppScaler.scaleSize(context, 320),
+            padding: EdgeInsets.only(
+              top: AppScaler.scaleHeight(context, 16),
+              left: AppScaler.scaleSize(context, 16),
+              right: AppScaler.scaleSize(context, 24),
+            ),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
@@ -351,11 +365,11 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       behavior: HitTestBehavior.opaque,
 
                       onTap: () => Navigator.pop(context),
-                      child: Icon(Icons.close, color: Colors.white),
+                      child: Icon(Icons.close, color: AppColors.white),
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: AppScaler.scaleHeight(context, 12)),
                 Divider(),
 
                 // SizedBox(height: 12),
@@ -378,10 +392,12 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 12,
+                          vertical: AppScaler.scaleHeight(context, 12),
+                          horizontal: AppScaler.scaleSize(context, 12),
                         ),
-                        margin: EdgeInsets.only(bottom: 10),
+                        margin: EdgeInsets.only(
+                          bottom: AppScaler.scaleSize(context, 12),
+                        ),
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppColors.popselectcolor19193F
@@ -392,7 +408,11 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             if (isSelected)
-                              Icon(Icons.check, color: Colors.white, size: 18),
+                              Icon(
+                                Icons.check,
+                                color: AppColors.white,
+                                size: 18,
+                              ),
                             if (isSelected) SizedBox(width: 10),
                             PoppinsText(
                               context,

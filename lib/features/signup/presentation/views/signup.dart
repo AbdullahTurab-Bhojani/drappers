@@ -115,7 +115,78 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
                     ),
+
                     SizedBox(height: AppScaler.scaleHeight(context, 28)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppButton(
+                          onPressed: () {},
+                          title: 'Google Login',
+                          buttonSize: Size(180, 52),
+                          color: Color(0xff202020),
+                          prefixIcon: Image.asset(
+                            Assets.images.googleicon.path,
+                            width: AppScaler.scaleSize(context, 26),
+                            height: AppScaler.scaleHeight(context, 26),
+                          ),
+                          buttonGradient: [
+                            AppColors.graylight,
+                            AppColors.graylight,
+                          ],
+                        ),
+                        AppButton(
+                          onPressed: () {},
+                          title: 'Apple Login',
+                          buttonSize: Size(180, 52),
+                          // color: Color(0xff202020),
+                          color: AppColors.graylight,
+
+                          prefixIcon: Image.asset(
+                            Assets.images.appleicon.path,
+                            width: AppScaler.scaleSize(context, 26),
+                            height: AppScaler.scaleHeight(context, 26),
+                          ),
+                          buttonGradient: [
+                            AppColors.graylight,
+                            AppColors.graylight,
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppScaler.scaleHeight(context, 28)),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            color: customColors.labelColor,
+                            thickness: AppScaler.scaleHeight(context, 1),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 8),
+                          ),
+                          child: PoppinsText(
+                            context,
+                            "or",
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: customColors.labelColor,
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            color: customColors.labelColor,
+                            thickness: 1,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppScaler.scaleHeight(context, 28)),
+
                     NewTextField(
                       fieldbg: AppColors.tfield,
                       controller: _fullNameController,
@@ -356,88 +427,18 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                       title: "Create Account",
                     ),
-                    SizedBox(height: AppScaler.scaleHeight(context, 25)),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            color: customColors.labelColor,
-                            thickness: AppScaler.scaleHeight(context, 1),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppScaler.scaleSize(context, 8),
-                          ),
-                          child: PoppinsText(
-                            context,
-                            "or",
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.labelColor,
-                          ),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            color: customColors.labelColor,
-                            thickness: 1,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 40)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AppButton(
-                          onPressed: () {},
-                          title: 'Google Login',
-                          buttonSize: Size(180, 52),
-                          color: Color(0xff202020),
-                          prefixIcon: Image.asset(
-                            Assets.images.googleicon.path,
-                            width: AppScaler.scaleSize(context, 26),
-                            height: AppScaler.scaleHeight(context, 26),
-                          ),
-                          buttonGradient: [
-                            AppColors.graylight,
-                            AppColors.graylight,
-                          ],
-                        ),
-                        AppButton(
-                          onPressed: () {},
-                          title: 'Apple Login',
-                          buttonSize: Size(180, 52),
-                          // color: Color(0xff202020),
-                          color: AppColors.graylight,
-
-                          prefixIcon: Image.asset(
-                            Assets.images.appleicon.path,
-                            width: AppScaler.scaleSize(context, 26),
-                            height: AppScaler.scaleHeight(context, 26),
-                          ),
-                          buttonGradient: [
-                            AppColors.graylight,
-                            AppColors.graylight,
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                    SizedBox(height: AppScaler.scaleHeight(context, 26)),
                     AppButton(
                       onPressed: () {
                         context.pushNamed(AppRoutes.home.name);
                       },
                       title: 'Continue as Guest',
-                      buttonGradient: [
-                        AppColors.graylight,
-                        AppColors.graylight,
-                      ],
-                      color: Color(0xff202020),
+                      // buttonGradient: [
+                      //   AppColors.tr,
+                      //   AppColors.graylight,
+                      // ],
+                      color: Colors.transparent,
                     ),
 
                     SizedBox(height: AppScaler.scaleHeight(context, 28)),

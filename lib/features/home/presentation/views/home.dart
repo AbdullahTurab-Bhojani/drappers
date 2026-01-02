@@ -34,7 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _showControls = false;
   final posterPath = '/mnt/data/Live Tv.png';
   bool _wasPlayingBeforeNavigation = false;
-  late BetterPlayerController _betterPlayerController;
+  BetterPlayerController? _betterPlayerController;
+  BetterPlayerController? get controller => _betterPlayerController;
   File? videoFile;
   bool _controlsVisible = false;
 
@@ -70,17 +71,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void _hideControlsAfterDelay() {
     Future.delayed(const Duration(seconds: 1), () {
       if (mounted &&
-          _betterPlayerController.videoPlayerController!.value.isPlaying) {
+          _betterPlayerController != null &&
+          _betterPlayerController!.videoPlayerController!.value.isPlaying) {
         setState(() => _controlsVisible = false);
       }
     });
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _initializePlayer();
-  // }
 
   Future<void> _initializePlayer() async {
     setState(() => showLoader = true);
@@ -111,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
       betterPlayerDataSource: source,
     );
 
-    _betterPlayerController.videoPlayerController!.addListener(() {
+    _betterPlayerController!.videoPlayerController!.addListener(() {
       if (mounted) {
         setState(() {});
       }
@@ -120,15 +116,11 @@ class _HomeScreenState extends State<HomeScreen> {
     _hideControlsAfterDelay();
 
     setState(() => showLoader = false);
-
-    _hideControlsAfterDelay();
-
-    setState(() => showLoader = false);
   }
 
   @override
   void dispose() {
-    _betterPlayerController.dispose();
+    controller?.dispose();
     super.dispose();
   }
 
@@ -140,7 +132,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _navigateToFullscreenPlayer() async {
-    if (!_betterPlayerController.videoPlayerController!.value.isPlaying) return;
+    if (_betterPlayerController == null ||
+        !_betterPlayerController!.videoPlayerController!.value.isPlaying) {
+      return;
+    }
 
     if (GuestHelper.isGuest) {
       GuestHelper.checkGuest(context);
@@ -148,10 +143,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     _wasPlayingBeforeNavigation =
-        _betterPlayerController.videoPlayerController!.value.isPlaying;
+        _betterPlayerController!.videoPlayerController!.value.isPlaying;
 
     if (_wasPlayingBeforeNavigation) {
-      await _betterPlayerController.pause();
+      await _betterPlayerController!.pause();
     }
 
     // Navigate to fullscreen screen if needed
@@ -159,14 +154,14 @@ class _HomeScreenState extends State<HomeScreen> {
     //   context,
     //   MaterialPageRoute(
     //     builder: (context) => newliveScreen(
-    //       videoController: _betterPlayerController,
+    //       videoController: _betterPlayerController!,
     //       wasPlaying: _wasPlayingBeforeNavigation,
     //     ),
     //   ),
     // );
 
     if (_wasPlayingBeforeNavigation && mounted) {
-      await _betterPlayerController.play();
+      await _betterPlayerController!.play();
       _wasPlayingBeforeNavigation = false;
     }
   }
@@ -181,6 +176,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (showLoader) {
+      return Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     List<String> documentriescard = [
       Assets.images.documentriesimage1.path,
       Assets.images.documentriesimage2.path,
@@ -277,9 +276,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: () {
-                        if (_betterPlayerController.isVideoInitialized() !=
-                            null) {
-                          _betterPlayerController.pause();
+                        if (_betterPlayerController != null &&
+                            _betterPlayerController!.isVideoInitialized() !=
+                                null) {
+                          _betterPlayerController!.pause();
                         }
                         if (GuestHelper.isGuest) {
                           GuestHelper.checkGuest(context);
@@ -338,10 +338,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
-                                    if (_betterPlayerController
-                                            .isVideoInitialized() !=
-                                        null) {
-                                      _betterPlayerController.pause();
+                                    if (_betterPlayerController != null &&
+                                        _betterPlayerController!
+                                                .isVideoInitialized() !=
+                                            null) {
+                                      _betterPlayerController!.pause();
                                     }
                                     if (GuestHelper.isGuest) {
                                       GuestHelper.checkGuest(context);
@@ -404,28 +405,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: AppScaler.scaleHeight(context, 450),
                                   child: Stack(
                                     children: [
-                                      _betterPlayerController
-                                                  .isVideoInitialized() !=
-                                              null
+                                      controller != null &&
+                                              controller!
+                                                      .isVideoInitialized() !=
+                                                  null
                                           ? BetterPlayer(
-                                              controller:
-                                                  _betterPlayerController,
+                                              controller: controller!,
                                             )
-                                          : Container(),
+                                          : Container(color: Colors.black),
                                       Container(
                                         color: Colors.black.withOpacity(0.18),
                                       ),
 
-                                      if (_betterPlayerController
-                                              .isVideoInitialized() !=
-                                          null)
+                                      if (controller != null &&
+                                          controller!.isVideoInitialized() !=
+                                              null)
                                         GestureDetector(
                                           behavior: HitTestBehavior.opaque,
                                           onTap: () {
-                                            // if (GuestHelper.isGuest) {
-                                            //   GuestHelper.checkGuest(context);
-                                            //   return;
-                                            // }
                                             setState(
                                               () => _showControls =
                                                   !_showControls,
@@ -444,8 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ),
                                                 child: IconButton(
                                                   icon: Icon(
-                                                    _betterPlayerController
-                                                            .isPlaying()!
+                                                    controller!.isPlaying()!
                                                         ? Icons.pause_circle
                                                         : Icons.play_circle,
                                                     size: AppScaler.scaleSize(
@@ -454,32 +450,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                   ),
                                                   onPressed: () async {
+                                                    if (controller == null)
+                                                      return;
+
                                                     setState(() {
                                                       final videoPosition =
-                                                          _betterPlayerController
+                                                          controller!
                                                               .videoPlayerController!
                                                               .value
                                                               .position;
                                                       final videoDuration =
-                                                          _betterPlayerController
+                                                          controller!
                                                               .videoPlayerController!
                                                               .value
                                                               .duration;
 
-                                                      if (_betterPlayerController
+                                                      if (controller!
                                                           .isPlaying()!) {
-                                                        _betterPlayerController
-                                                            .pause();
+                                                        controller!.pause();
                                                       } else {
                                                         if (videoPosition >=
                                                             videoDuration!) {
-                                                          _betterPlayerController
-                                                              .seekTo(
-                                                                Duration.zero,
-                                                              );
+                                                          controller!.seekTo(
+                                                            Duration.zero,
+                                                          );
                                                         }
-                                                        _betterPlayerController
-                                                            .play();
+                                                        controller!.play();
                                                       }
                                                     });
                                                   },
@@ -530,12 +526,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 8,
                                               ),
                                             ),
-                                            if (_betterPlayerController !=
-                                                    null &&
-                                                _betterPlayerController!
+                                            if (controller != null &&
+                                                controller!
                                                         .videoPlayerController !=
                                                     null &&
-                                                _betterPlayerController!
+                                                controller!
+                                                        .videoPlayerController!
+                                                        .value
+                                                        .duration !=
+                                                    Duration.zero &&
+                                                controller!
                                                     .videoPlayerController!
                                                     .value
                                                     .isPlaying)
@@ -552,20 +552,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           .white
                                                           .withOpacity(0.3),
                                                       min: 0,
-                                                      max: _betterPlayerController
+                                                      max: controller!
                                                           .videoPlayerController!
                                                           .value
                                                           .duration!
                                                           .inMilliseconds
                                                           .toDouble(),
-                                                      value: _betterPlayerController
+                                                      value: controller!
                                                           .videoPlayerController!
                                                           .value
                                                           .position
                                                           .inMilliseconds
                                                           .clamp(
                                                             0,
-                                                            _betterPlayerController
+                                                            controller!
                                                                 .videoPlayerController!
                                                                 .value
                                                                 .duration!
@@ -573,7 +573,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           )
                                                           .toDouble(),
                                                       onChanged: (value) {
-                                                        _betterPlayerController
+                                                        controller!
                                                             .videoPlayerController!
                                                             .seekTo(
                                                               Duration(
@@ -587,7 +587,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   Text(
                                                     _format(
-                                                      _betterPlayerController
+                                                      controller!
                                                           .videoPlayerController!
                                                           .value
                                                           .position,
@@ -606,15 +606,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     behavior:
                                                         HitTestBehavior.opaque,
                                                     onTap: () {
-                                                      _betterPlayerController
-                                                          .videoPlayerController!
-                                                          .pause();
-                                                      // if (GuestHelper.isGuest) {
-                                                      //   GuestHelper.checkGuest(
-                                                      //     context,
-                                                      //   );
-                                                      //   return;
-                                                      // }
+                                                      if (controller != null) {
+                                                        controller!
+                                                            .videoPlayerController!
+                                                            .pause();
+                                                      }
                                                       context.pushNamed(
                                                         AppRoutes
                                                             .videoScreen
@@ -643,14 +639,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ],
                                         ),
                                       ),
+                                   
                                     ],
                                   ),
                                 ),
-                              
                               ),
                             ),
                           ),
 
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -672,10 +669,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
                                 onPressed: () {
-                                  // if (GuestHelper.isGuest) {
-                                  //   GuestHelper.checkGuest(context);
-                                  //   return;
-                                  // }
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   context.pushNamed('trendingshow');
                                 },
                                 title: "View More",
@@ -733,7 +729,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               AppButton(
                                 onPressed: () {
-                                  _betterPlayerController.pause();
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   if (GuestHelper.isGuest) {
                                     GuestHelper.checkGuest(context);
                                     return;
@@ -794,10 +792,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
                                 onPressed: () {
-                                  // if (GuestHelper.isGuest) {
-                                  //   GuestHelper.checkGuest(context);
-                                  //   return;
-                                  // }
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   context.pushNamed('podcasts');
                                 },
 
@@ -840,7 +837,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             buttonBorderWidth: 0,
                             buttonGradient: [],
                             onTap: () {
-                              _betterPlayerController.pause();
+                              if (_betterPlayerController != null) {
+                                _betterPlayerController!.pause();
+                              }
                               if (GuestHelper.isGuest) {
                                 GuestHelper.checkGuest(context);
                                 return;
@@ -862,11 +861,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               Color(0xff582983),
                             ],
                             onTap: () {
-                              _betterPlayerController.pause();
-                              // if (GuestHelper.isGuest) {
-                              //   GuestHelper.checkGuest(context);
-                              //   return;
-                              // }
+                              if (_betterPlayerController != null) {
+                                _betterPlayerController!.pause();
+                              }
                               context.pushNamed('voteForStartupScreen');
                             },
                           ),
@@ -886,6 +883,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               GestureDetector(
                                 behavior: HitTestBehavior.opaque,
                                 onTap: () {
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   if (GuestHelper.isGuest) {
                                     GuestHelper.checkGuest(context);
                                     return;
@@ -902,10 +902,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontWeight: PoppinsFontWeightVariant.regular,
                                   border: true,
                                   onPressed: () {
-                                    // if (GuestHelper.isGuest) {
-                                    //   GuestHelper.checkGuest(context);
-                                    //   return;
-                                    // }
+                                    if (_betterPlayerController != null) {
+                                      _betterPlayerController!.pause();
+                                    }
                                     context.pushNamed('reelWidget');
                                   },
                                   title: "View More",
@@ -967,12 +966,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
                                 onPressed: () {
-                                  _betterPlayerController.pause();
-
-                                  // if (GuestHelper.isGuest) {
-                                  //   GuestHelper.checkGuest(context);
-                                  //   return;
-                                  // }
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   context.pushNamed('documentries');
                                 },
                                 title: "View More",
