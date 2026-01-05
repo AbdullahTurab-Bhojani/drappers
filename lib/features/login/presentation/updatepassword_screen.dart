@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/popupmenuitem/changepassword_popup_widget.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class UpdatepasswordScreen extends StatefulWidget {
-  const UpdatepasswordScreen({super.key});
+  final bool openDialogOnContinue;
+
+  const UpdatepasswordScreen({super.key, this.openDialogOnContinue = true});
 
   @override
   State<UpdatepasswordScreen> createState() => _UpdatepasswordScreenState();
@@ -95,7 +97,17 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
               SizedBox(height: AppScaler.scaleHeight(context, 40)),
               AppButton(
                 onPressed: () {
-                  context.pushNamed(AppRoutes.loginScreen.name);
+                  if (widget.openDialogOnContinue) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => Dialog(
+                        backgroundColor: Colors.transparent,
+                        child: ChangepasswordPopupWidget(),
+                      ),
+                    );
+                  } else {
+                    context.pushNamed(AppRoutes.loginScreen.name);
+                  }
                 },
                 title: "Continue",
               ),
