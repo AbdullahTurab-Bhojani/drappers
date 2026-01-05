@@ -96,7 +96,7 @@ class _TrendingshowWidgetState extends State<TrendingshowWidget> {
               ],
             ),
 
-            SizedBox(height: AppScaler.scaleHeight(context, 30)),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
             Expanded(
               child: SingleChildScrollView(

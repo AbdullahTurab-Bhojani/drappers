@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -57,7 +58,9 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
               elevation: 0,
               actions: [
                 Padding(
-                  padding: EdgeInsets.only(right: 16),
+                  padding: EdgeInsets.only(
+                    right: AppScaler.scaleSize(context, 20),
+                  ),
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
 
@@ -77,7 +80,9 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 20),
+                  ),
                   child: Column(
                     children: [
                       SizedBox(height: 10),
@@ -93,7 +98,9 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 10),
+                          ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -101,8 +108,8 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                 alignment: Alignment.center,
                                 children: [
                                   Container(
-                                    width: 84,
-                                    height: 60,
+                                    width: AppScaler.scaleSize(context, 84),
+                                    height: AppScaler.scaleHeight(context, 60),
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
@@ -114,8 +121,8 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     ),
                                   ),
                                   Container(
-                                    width: 75,
-                                    height: 55,
+                                    width: AppScaler.scaleSize(context, 75),
+                                    height: AppScaler.scaleHeight(context, 55),
                                     decoration: BoxDecoration(
                                       color: Colors.black.withOpacity(0.4),
                                       borderRadius: BorderRadius.circular(8),
@@ -125,13 +132,13 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     child: Center(
                                       child: Image.asset(
                                         Assets.images.play.path,
-                                        width: 22,
+                                        width: AppScaler.scaleSize(context, 22),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 15),
+                              SizedBox(width: AppScaler.scaleSize(context, 15)),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,17 +168,19 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 17),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
                       Container(
                         width: double.infinity,
-                        height: 85,
+                        height: AppScaler.scaleHeight(context, 85),
                         decoration: BoxDecoration(
                           border: Border.all(color: AppColors.dGrey),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 8),
+                          ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -179,8 +188,8 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                 alignment: Alignment.center,
                                 children: [
                                   Container(
-                                    width: 84,
-                                    height: 60,
+                                    width: AppScaler.scaleSize(context, 84),
+                                    height: AppScaler.scaleHeight(context, 60),
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
@@ -192,8 +201,8 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     ),
                                   ),
                                   Container(
-                                    width: 75,
-                                    height: 55,
+                                    width: AppScaler.scaleSize(context, 75),
+                                    height: AppScaler.scaleHeight(context, 55),
                                     decoration: BoxDecoration(
                                       color: Colors.black.withOpacity(0.4),
                                       borderRadius: BorderRadius.circular(8),
@@ -203,13 +212,13 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                     child: Center(
                                       child: Image.asset(
                                         Assets.images.play.path,
-                                        width: 22,
+                                        width: AppScaler.scaleSize(context, 22),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: AppScaler.scaleSize(context, 20)),
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -222,7 +231,9 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                       fontWeight:
                                           PoppinsFontWeightVariant.medium,
                                     ),
-                                    SizedBox(height: 6),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(context, 6),
+                                    ),
                                     PoppinsText(
                                       context,
                                       "Lorem ipsum dolor sit amet consectetur. Lorem at elit eu facilisis. Sed cursus volutpat.",
@@ -238,7 +249,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 17),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -258,7 +269,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                               },
                               child: Container(
                                 width: double.infinity,
-                                height: 215,
+                                height: AppScaler.scaleHeight(context, 215),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(20),
@@ -266,13 +277,23 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                   ),
                                   image: DecorationImage(
                                     image: AssetImage(
-                                      Assets.images.studio.path,
+                                      Assets.images.studionew.path,
                                     ),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 child: Stack(
                                   children: [
+                                    Positioned(
+                                      bottom: AppScaler.scaleHeight(
+                                        context,
+                                        10,
+                                      ),
+                                      right: AppScaler.scaleSize(context, 10),
+                                      child: Image.asset(
+                                        Assets.images.muteicon.path,
+                                      ),
+                                    ),
                                     // Center(
                                     //   child: Image.asset(
                                     //     Assets.images.playwithbgicon.path,
@@ -304,7 +325,9 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                       fontWeight:
                                           PoppinsFontWeightVariant.medium,
                                     ),
-                                    SizedBox(height: 2),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(context, 2),
+                                    ),
 
                                     PoppinsText(
                                       context,
@@ -314,7 +337,12 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                           PoppinsFontWeightVariant.regular,
                                       color: customColors.subtextColor,
                                     ),
-                                    SizedBox(height: 10),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(
+                                        context,
+                                        10,
+                                      ),
+                                    ),
                                     PoppinsText(
                                       context,
                                       'simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.',
@@ -323,7 +351,12 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                           PoppinsFontWeightVariant.regular,
                                       color: customColors.subtextColor,
                                     ),
-                                    SizedBox(height: 15),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(
+                                        context,
+                                        15,
+                                      ),
+                                    ),
                                     PoppinsText(
                                       context,
                                       'Meet the Drapers S512',
@@ -332,7 +365,12 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                           PoppinsFontWeightVariant.regular,
                                       color: customColors.textColor,
                                     ),
-                                    SizedBox(height: 20),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(
+                                        context,
+                                        20,
+                                      ),
+                                    ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -340,8 +378,14 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                         AppButton(
                                           prefixIcon: Image.asset(
                                             Assets.images.playstrokeicon.path,
-                                            width: 14,
-                                            height: 14,
+                                            width: AppScaler.scaleSize(
+                                              context,
+                                              14,
+                                            ),
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              14,
+                                            ),
                                           ),
                                           onPressed: () {
                                             context.pushNamed(
@@ -349,11 +393,20 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                             );
                                           },
                                           title: 'Watch Episode',
-                                          buttonSize: Size(150, 52),
+                                          buttonSize: Size(170, 52),
                                           suffixIcon: SizedBox(),
                                         ),
                                         SizedBox(
-                                          width: 150,
+                                          width: AppScaler.scaleSize(
+                                            context,
+                                            10,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: AppScaler.scaleSize(
+                                            context,
+                                            150,
+                                          ),
                                           child: OutlinedButton.icon(
                                             onPressed: () {
                                               if (GuestHelper.isGuest) {
@@ -367,14 +420,20 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                                             style: OutlinedButton.styleFrom(
                                               side: BorderSide(
                                                 color: customColors.greyColor,
-                                                width: 2,
+                                                width: AppScaler.scaleSize(
+                                                  context,
+                                                  2,
+                                                ),
                                               ),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(50),
                                               ),
                                               padding: EdgeInsets.symmetric(
-                                                vertical: 12,
+                                                vertical: AppScaler.scaleHeight(
+                                                  context,
+                                                  12,
+                                                ),
                                               ),
                                               backgroundColor:
                                                   Colors.transparent,
@@ -421,7 +480,7 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: AppScaler.scaleHeight(context, 10)),
                     ],
                   ),
                 ),

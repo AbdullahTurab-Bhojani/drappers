@@ -24,7 +24,7 @@ class WatchlistItemTile extends StatelessWidget {
     final customColors = theme.extension<AppCustomColors>()!;
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: AppScaler.scaleHeight(context, 10),
+        // vertical: AppScaler.scaleHeight(context, 10),
         horizontal: AppScaler.scaleSize(context, 20),
       ),
       child: Row(

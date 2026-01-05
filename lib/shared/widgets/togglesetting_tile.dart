@@ -9,9 +9,9 @@ import 'settingitem.dart';
 class GradientSwitch extends StatelessWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
-  final List<Color> gradientColors;
 
-  final Color inactiveColor;
+  final List<Color> gradientColors;
+  final List<Color> inactiveGradientColors;
 
   final Color thumbColor;
 
@@ -20,7 +20,7 @@ class GradientSwitch extends StatelessWidget {
     required this.value,
     required this.onChanged,
     required this.gradientColors,
-    this.inactiveColor = const Color(0xFFBDBDBD),
+    required this.inactiveGradientColors,
     this.thumbColor = Colors.white,
   });
 
@@ -36,9 +36,9 @@ class GradientSwitch extends StatelessWidget {
         padding: EdgeInsets.all(3),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-
-          gradient: value ? LinearGradient(colors: gradientColors) : null,
-          color: value ? null : inactiveColor,
+          gradient: LinearGradient(
+            colors: value ? gradientColors : inactiveGradientColors,
+          ),
         ),
         child: AnimatedAlign(
           duration: Duration(milliseconds: 250),
@@ -157,8 +157,11 @@ class _ToggleSettingTileState extends State<ToggleSettingTile> {
           widget.onChanged(val);
         },
         gradientColors: _defaultGradientColors,
-        inactiveColor: Colors.grey.shade400,
-        thumbColor: Colors.white,
+        inactiveGradientColors: [
+          Color(0xFF1FCFFF).withOpacity(0.3),
+          Color(0xFF0063FF).withOpacity(0.3),
+        ],
+        thumbColor: AppColors.white,
       ),
     );
   }

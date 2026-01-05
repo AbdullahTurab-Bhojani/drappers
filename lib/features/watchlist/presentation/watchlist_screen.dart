@@ -96,14 +96,17 @@ class WatchlistScreen extends StatelessWidget {
                 ),
 
                 Expanded(
-                  child: ListView.builder(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 15,);
+                    },
                     padding: EdgeInsets.zero,
                     itemCount: dummyWatchlist.length,
                     itemBuilder: (context, index) {
                       final item = dummyWatchlist[index];
                       return GestureDetector(
                         behavior: HitTestBehavior.opaque,
-
+                  
                         onTap: () {
                           context.pushNamed(AppRoutes.contentDetail.name);
                         },

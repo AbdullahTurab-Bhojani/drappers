@@ -54,7 +54,9 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                 title: "Settings & Preferences",
                 leading: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    context.go(AppRoutes.profile.path);
+                  },
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: AppScaler.scaleSize(context, 20),
@@ -63,6 +65,7 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                 ),
               ),
             ),
+
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

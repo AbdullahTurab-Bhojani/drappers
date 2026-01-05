@@ -220,6 +220,10 @@ class $AssetsImagesGen {
   AssetGenImage get iconLogo =>
       const AssetGenImage('assets/images/IconLogo.png');
 
+  /// File path: assets/images/Livetvnew.png
+  AssetGenImage get livetvnew =>
+      const AssetGenImage('assets/images/Livetvnew.png');
+
   /// File path: assets/images/Logo Text.png
   AssetGenImage get logoText =>
       const AssetGenImage('assets/images/Logo Text.png');
@@ -334,6 +338,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/casting.png
   AssetGenImage get casting => const AssetGenImage('assets/images/casting.png');
+
+  /// File path: assets/images/check.png
+  AssetGenImage get check => const AssetGenImage('assets/images/check.png');
 
   /// File path: assets/images/commenticon.png
   AssetGenImage get commenticon =>
@@ -827,6 +834,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/studio.png
   AssetGenImage get studio => const AssetGenImage('assets/images/studio.png');
 
+  /// File path: assets/images/studionew.png
+  AssetGenImage get studionew =>
+      const AssetGenImage('assets/images/studionew.png');
+
   /// File path: assets/images/subscription_bg.png
   AssetGenImage get subscriptionBg =>
       const AssetGenImage('assets/images/subscription_bg.png');
@@ -934,6 +945,7 @@ class $AssetsImagesGen {
     horizontalThumbnail3,
     horizontalThumbnail4,
     iconLogo,
+    livetvnew,
     logoText,
     logo,
     quality,
@@ -965,6 +977,7 @@ class $AssetsImagesGen {
     cancelicon,
     cardimage,
     casting,
+    check,
     commenticon,
     contentdetailvodep,
     crossnewicon,
@@ -1093,6 +1106,7 @@ class $AssetsImagesGen {
     slider,
     speed,
     studio,
+    studionew,
     subscriptionBg,
     termconditionicon,
     time3x,

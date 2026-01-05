@@ -18,7 +18,7 @@ class PopupmenuWidget extends StatefulWidget {
 }
 
 class _PopupmenuWidgetState extends State<PopupmenuWidget> {
-  final double _menuItemSpacing = 12;
+  final double _menuItemSpacing = 20;
 
   final GlobalKey _iconKey = GlobalKey();
 
@@ -70,9 +70,10 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       position: RelativeRect.fromRect(
-        Rect.fromLTWH(iconRect.left - 70, iconRect.bottom + 6, 160, 0),
+        Rect.fromLTWH(iconRect.right - 140 - 8, iconRect.bottom + 8, 160, 0),
         Offset.zero & overlay.size,
       ),
+
       items: [
         _buildMenuItem(
           routePath: AppRoutes.reportContent.name,

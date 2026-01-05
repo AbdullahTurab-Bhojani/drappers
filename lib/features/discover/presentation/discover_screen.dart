@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, avoid_print, unused_element
 
 import 'dart:io';
 import 'package:better_player_plus/better_player_plus.dart';
@@ -16,9 +16,7 @@ import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../shared/widgets/full_screen_imagescreen.dart';
-import '../../../shared/widgets/full_screen_videoscreen.dart';
 import '../../../shared/widgets/genreboxwidget.dart';
-import '../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
@@ -178,10 +176,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       color: customColors.textColor,
                     ),
                   ),
-                  SizedBox(width: AppScaler.scaleSize(context, 15)),
+                  SizedBox(width: AppScaler.scaleSize(context, 22)),
                 ],
               ),
-
+              // SizedBox(height: 30),
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(
@@ -190,9 +188,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                      // SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       FullscreenImageScreen(
-                        imagePath: Assets.images.livetv.path,
+                        imagePath: Assets.images.livetvnew.path,
                         title: "We're Training Heroes of Future!",
                       ),
 
@@ -219,7 +217,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             return GenreBoxWidget(
                               title: genretitle[index],
                               showBorder: index == 0,
-                              onTap: () {},
+                              onTap: () {
+                                if (index == 1) {
+                                  context.pushNamed(
+                                    AppRoutes.livepitchesScreen.name,
+                                  );
+                                }
+                              },
                             );
                           },
                         ),
@@ -227,12 +231,35 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
                       SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
-                      PoppinsText(
-                        context,
-                        'Trending Show',
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                        color: customColors.textColor,
+                      Row(
+                        mainAxisAlignment: .spaceBetween,
+                        children: [
+                          PoppinsText(
+                            context,
+                            'Trending Show',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          AppButton(
+                            buttonSize: Size(80, 25),
+                            color: Colors.transparent,
+                            borderColor: customColors.textColor.withOpacity(
+                              0.5,
+                            ),
+                            borderWidth: 1,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            border: true,
+                            onPressed: () {
+                              if (_betterPlayerController != null) {
+                                _betterPlayerController!.pause();
+                              }
+                              context.pushNamed('trendingshow');
+                            },
+                            title: "View More",
+                          ),
+                        ],
                       ),
 
                       SizedBox(height: AppScaler.scaleHeight(context, 20)),
@@ -260,12 +287,36 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
                       SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
-                      PoppinsText(
-                        context,
-                        'Podcasts',
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                        color: customColors.textColor,
+                      Row(
+                        mainAxisAlignment: .spaceBetween,
+                        children: [
+                          PoppinsText(
+                            context,
+                            'Podcasts',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          AppButton(
+                            buttonSize: Size(80, 25),
+                            color: Colors.transparent,
+                            borderColor: customColors.textColor.withOpacity(
+                              0.5,
+                            ),
+                            borderWidth: 1,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            border: true,
+                            onPressed: () {
+                              if (_betterPlayerController != null) {
+                                _betterPlayerController!.pause();
+                              }
+                              context.pushNamed('podcasts');
+                            },
+
+                            title: "View More",
+                          ),
+                        ],
                       ),
 
                       SizedBox(height: AppScaler.scaleHeight(context, 20)),
@@ -290,14 +341,36 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
                       SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
-                      PoppinsText(
-                        context,
-                        'Documentaries',
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                        color: customColors.textColor,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PoppinsText(
+                            context,
+                            'Documentaries',
+                            fontSize: PoppinsFontSizeVariant.size16,
+                            fontWeight: PoppinsFontWeightVariant.medium,
+                            color: customColors.textColor,
+                          ),
+                          AppButton(
+                            buttonSize: Size(80, 25),
+                            color: Colors.transparent,
+                            borderColor: customColors.textColor.withOpacity(
+                              0.5,
+                            ),
+                            borderWidth: 1,
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            border: true,
+                            onPressed: () {
+                              if (_betterPlayerController != null) {
+                                _betterPlayerController!.pause();
+                              }
+                              context.pushNamed('documentries');
+                            },
+                            title: "View More",
+                          ),
+                        ],
                       ),
-
                       SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                       SizedBox(

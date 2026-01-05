@@ -45,7 +45,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 behavior: HitTestBehavior.opaque,
 
                 onTap: () {
-                  context.go('/login');
+                  context.pop();
                 },
                 child: Image.asset(Assets.images.backicon.path),
               ),

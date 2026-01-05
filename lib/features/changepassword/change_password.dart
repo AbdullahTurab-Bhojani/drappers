@@ -6,6 +6,7 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../core/theme/app_scalar.dart';
+import '../../shared/widgets/popupmenuitem/changepassword_popup_widget.dart';
 import '../../shared/widgets/textfield_new.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -114,12 +115,36 @@ class _ChangePasswordState extends State<ChangePassword> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                         color: customColors.greyColor,
                       ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 32)),
+                      SizedBox(height: AppScaler.scaleHeight(context, 24)),
                       AppButton(
                         onPressed: () {
-                          context.pop();
+                          showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                              backgroundColor: Colors.transparent,
+                              child: ChangepasswordPopupWidget(),
+                            ),
+                          );
                         },
-                        title: "Continue",
+                        title: "Change Password",
+                      ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 45)),
+
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          context.pushNamed(
+                            AppRoutes.forgetpasswordScreen.name,
+                          );
+                        },
+                        child: PoppinsText(
+                          context,
+                          'Forgot Password?',
+                          decoration: TextDecoration.underline,
+                          fontSize: PoppinsFontSizeVariant.size14,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: AppColors.white,
+                        ),
                       ),
                     ],
                   ),

@@ -37,7 +37,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
                   padding: EdgeInsets.only(
-                    left: AppScaler.scaleSize(context, 20),
+                    left: AppScaler.scaleSize(context, 10),
                   ),
                   child: Image.asset(
                     "assets/images/backicon.png",

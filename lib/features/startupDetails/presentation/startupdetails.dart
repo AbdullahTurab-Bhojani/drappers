@@ -3,13 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
 
 class Startupdetails extends StatefulWidget {
-  const Startupdetails({super.key});
+  Startupdetails({super.key});
 
   @override
   State<Startupdetails> createState() => _StartupdetailsState();
@@ -19,13 +20,13 @@ class _TagChip extends StatelessWidget {
   final String label;
   final AppCustomColors customColors;
 
-  const _TagChip({required this.label, required this.customColors});
+  _TagChip({required this.label, required this.customColors});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      margin: const EdgeInsets.only(right: 8),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      margin: EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
@@ -56,12 +57,13 @@ class _CompanyInfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: EdgeInsets.symmetric(
+        vertical: AppScaler.scaleHeight(context, 6),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Label (e.g., Founded)
           PoppinsText(
             context,
             '$label:',
@@ -69,7 +71,6 @@ class _CompanyInfoRow extends StatelessWidget {
             fontWeight: PoppinsFontWeightVariant.regular,
             color: customColors.labelColor,
           ),
-          // Value (e.g., 2021)
           PoppinsText(
             context,
             value,
@@ -92,7 +93,7 @@ class _StartupdetailsState extends State<Startupdetails> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    const double horizontalPadding = 16.0;
+    double horizontalPadding = 16.0;
     final List<String> tags = [
       'Clean Tech',
       'Energy Storage',
@@ -125,7 +126,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 10),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
@@ -153,37 +154,27 @@ class _StartupdetailsState extends State<Startupdetails> {
                 SizedBox(width: 15),
               ],
               // trailing: Padding(
-              //   padding: const EdgeInsets.only(right: 16.0),
+              //   padding:  EdgeInsets.only(right: 16.0),
               //   // Using the share icon from the previous design suggestion
               //   child: Icon(Icons.send, color: customColors.textColor, size: 24),
               // ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: horizontalPadding,
-              ),
+            GestureDetector(
+              onTap: () {
+                AppRoutes.videoScreen.name;
+              },
               child: Container(
                 width: double.infinity,
                 height: 215,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: AssetImage(Assets.images.podcastimage1.path),
+                    image: AssetImage(Assets.images.studionew.path),
                     fit: BoxFit.cover,
                   ),
                 ),
                 child: Stack(
                   children: [
-                    Center(
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-
-                        onTap: () {
-                          context.pushNamed(AppRoutes.videoScreen.name);
-                        },
-                        child: Image.asset(Assets.images.playwithbgicon.path),
-                      ),
-                    ),
                     Positioned(
                       bottom: 10,
                       right: 10,
@@ -224,7 +215,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                   crossAxisAlignment: .start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: horizontalPadding,
                         vertical: 16,
                       ),
@@ -238,7 +229,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          const SizedBox(height: 2),
+                          SizedBox(height: 2),
                           PoppinsText(
                             context,
                             'Sustainable energy Revolution',
@@ -246,7 +237,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.textColor,
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           SizedBox(
                             height: 35,
                             child: ListView.builder(
@@ -316,9 +307,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50),
                                     ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 12,
-                                    ),
+                                    padding: EdgeInsets.symmetric(vertical: 12),
                                     backgroundColor: Colors.transparent,
                                   ),
 
@@ -392,9 +381,9 @@ class _StartupdetailsState extends State<Startupdetails> {
                             ],
                           ),
 
-                          const SizedBox(height: 30),
+                          SizedBox(height: 30),
                           Container(
-                            padding: const EdgeInsets.all(12),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
@@ -411,7 +400,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     Assets.images.dummyprofile.path,
                                   ),
                                 ),
-                                const SizedBox(width: 15),
+                                SizedBox(width: 15),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -425,7 +414,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                             PoppinsFontWeightVariant.medium,
                                         color: customColors.textColor,
                                       ),
-                                      const SizedBox(height: 2),
+                                      SizedBox(height: 2),
                                       PoppinsText(
                                         context,
                                         'Former Tesla Engineer 8+ Years experience in Battery Technology',
@@ -441,7 +430,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           PoppinsText(
                             context,
                             'Cast: Leonardo DiCaprio, Jonah Hill, Margot Robbie, Matthew... more',
@@ -456,7 +445,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.labelColor,
                           ),
-                          const SizedBox(height: 25),
+                          SizedBox(height: 25),
                           PoppinsText(
                             context,
                             'Company Information',
@@ -464,7 +453,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           ...companyInfo.map(
                             (info) => _CompanyInfoRow(
                               label: info['label']!,
@@ -472,7 +461,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                               customColors: customColors,
                             ),
                           ),
-                          const SizedBox(height: 25),
+                          SizedBox(height: 25),
                           PoppinsText(
                             context,
                             'About the Startup',
@@ -480,7 +469,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           PoppinsText(
                             context,
                             'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -488,7 +477,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.labelColor,
                           ),
-                          const SizedBox(height: 25),
+                          SizedBox(height: 25),
 
                           PoppinsText(
                             context,
@@ -497,9 +486,9 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          const SizedBox(height: 15),
+                          SizedBox(height: 15),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.only(bottom: 10),
                             child: GestureDetector(
                               behavior: HitTestBehavior.opaque,
                               onTap: () {
@@ -522,12 +511,12 @@ class _StartupdetailsState extends State<Startupdetails> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
-                                  const SizedBox(width: 12),
+                                  SizedBox(width: 12),
 
                                   // Content Column
                                   Expanded(
                                     child: SingleChildScrollView(
-                                      physics: const BouncingScrollPhysics(),
+                                      physics: BouncingScrollPhysics(),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -543,7 +532,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                             textOverflow: TextOverflow.ellipsis,
                                             maxLines: 2,
                                           ),
-                                          const SizedBox(height: 20),
+                                          SizedBox(height: 20),
                                           PoppinsText(
                                             context,
                                             "Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode, spotlighting visionary startups from across the world. Judges Nikki Farb, TikTok executive Tim Natividad, and legendary investor Bill Draper evaluate groundbreaking innovations in connectivity, accessibility, and education. From CleverFi’s seamless WiFi to Zeality’s immersive AR/VR tech, WeWALK’s smart cane, and Taleemabad’s educational revolution, this episode is a thrilling showcase of entrepreneurial brilliance",
@@ -555,29 +544,31 @@ class _StartupdetailsState extends State<Startupdetails> {
                                             maxLines: 2,
                                             textOverflow: TextOverflow.ellipsis,
                                           ),
-                                          const SizedBox(height: 20),
+                                          SizedBox(height: 20),
 
                                           // Slider Row
                                           Row(
                                             children: [
                                               Expanded(
                                                 child: SliderTheme(
-                                                  data: SliderTheme.of(context).copyWith(
-                                                    trackHeight: 3,
-                                                    thumbShape:
-                                                        const RoundSliderThumbShape(
-                                                          enabledThumbRadius: 0,
-                                                        ),
-                                                    overlayShape:
-                                                        const RoundSliderOverlayShape(
-                                                          overlayRadius: 0,
-                                                        ),
-                                                  ),
+                                                  data: SliderTheme.of(context)
+                                                      .copyWith(
+                                                        trackHeight: 3,
+                                                        thumbShape:
+                                                            RoundSliderThumbShape(
+                                                              enabledThumbRadius:
+                                                                  0,
+                                                            ),
+                                                        overlayShape:
+                                                            RoundSliderOverlayShape(
+                                                              overlayRadius: 0,
+                                                            ),
+                                                      ),
                                                   child: Slider(
-                                                    activeColor: const Color(
+                                                    activeColor: Color(
                                                       0xFF0072FF,
                                                     ),
-                                                    inactiveColor: const Color(
+                                                    inactiveColor: Color(
                                                       0xFF00002A,
                                                     ),
                                                     value: sliderValue,
@@ -591,7 +582,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                                   ),
                                                 ),
                                               ),
-                                              const SizedBox(width: 8),
+                                              SizedBox(width: 8),
                                               PoppinsText(
                                                 context,
                                                 '-12:34',
@@ -604,7 +595,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(height: 20),
+                                          SizedBox(height: 20),
 
                                           // Watch Button
                                           Row(
@@ -619,7 +610,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                                     );
                                                   },
                                                   title: 'Watch Episode',
-                                                  buttonSize: const Size(
+                                                  buttonSize: Size(
                                                     double.infinity,
                                                     40,
                                                   ),

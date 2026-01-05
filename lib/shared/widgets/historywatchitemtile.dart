@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
-import '../../core/theme/app_scalar.dart'; // make sure this import is correct
+import '../../core/theme/app_scalar.dart';
 
 class VideosBoxWidget extends StatelessWidget {
   final dynamic podcast;
@@ -39,7 +39,7 @@ class VideosBoxWidget extends StatelessWidget {
                 height: AppScaler.scaleHeight(context, 173),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(podcast.imagePath),
+                    image: NetworkImage(podcast.imagePath),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(8),

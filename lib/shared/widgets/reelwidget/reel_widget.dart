@@ -103,7 +103,7 @@ class _ReelWidgetState extends State<ReelWidget> {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AppScaler.scaleSize(context, 20),
-                  vertical: AppScaler.scaleHeight(context, 20),
+                  vertical: AppScaler.scaleHeight(context, 10),
                 ),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,

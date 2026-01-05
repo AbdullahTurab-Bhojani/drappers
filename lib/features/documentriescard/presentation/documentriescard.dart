@@ -83,7 +83,7 @@ class _DocumentriescardState extends State<Documentriescard> {
                 ),
               ],
             ),
-            SizedBox(height: AppScaler.scaleHeight(context, 30)),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
             Expanded(
               child: SingleChildScrollView(

@@ -65,7 +65,8 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
     ];
     final List<Map<String, dynamic>> historyItems = const [
       {
-        'image': 'Assets.images.podcastimage1.path',
+        'image':
+            'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
         'title': 'Finale – Meet The Drapers Season 07 (2025)',
         'subtitle': 'EP.5 - YAT SIU',
         'remaining': '-12:34',
@@ -73,7 +74,8 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
         'progress': 75.0,
       },
       {
-        'image': 'Assets.images.podcastimage2.path',
+        'image':
+            'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
         'title': 'Episode 2 – Startup Stories',
         'subtitle': 'Dive into inspiring stories of new entrepreneurs...',
         'remaining': '-12:34',
@@ -81,7 +83,8 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
         'progress': 40.0,
       },
       {
-        'image': 'Assets.images.podcastimage3.path',
+        'image':
+            'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
         'title': 'Episode 3 – Tech Innovation',
         'subtitle': 'Latest updates on tech, AI, and innovative startups.',
         'remaining': '-12:34',
@@ -91,7 +94,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
     ];
     final Map<String, dynamic> podcastData = {
       'podcast': Podcast(
-        imagePath: Assets.images.podcastimage3.path,
+        imagePath:  'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
         title: 'Podcast Title Placeholder',
         description: 'This is a description placeholder for the podcast item.',
       ),

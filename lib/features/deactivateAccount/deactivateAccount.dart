@@ -6,6 +6,7 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../shared/widgets/popupmenuitem/deactivate_popup_widget.dart';
 
 class DeactivateAccountScreen extends StatefulWidget {
@@ -33,19 +34,21 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppScaler.scaleSize(context, 12),
+            vertical: 0,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppMainBar(
                 leading: GestureDetector(
                   behavior: HitTestBehavior.opaque,
-
                   onTap: () => Navigator.of(context).pop(),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
                 title: "",
@@ -53,7 +56,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
-              SizedBox(height: 30),
+              SizedBox(height: AppScaler.scaleHeight(context, 30)),
               PoppinsText(
                 context,
                 'Deactivate Account',
@@ -61,7 +64,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 fontWeight: PoppinsFontWeightVariant.semiBold,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 5),
+              SizedBox(height: AppScaler.scaleHeight(context, 5)),
               PoppinsText(
                 context,
                 'Temporarily pause your account',
@@ -69,7 +72,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: AppScaler.scaleHeight(context, 20)),
               PoppinsText(
                 context,
                 'What happens when you deactivate:',
@@ -77,7 +80,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 fontWeight: PoppinsFontWeightVariant.medium,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 10),
+              SizedBox(height: AppScaler.scaleHeight(context, 10)),
               PoppinsText(
                 context,
                 '• All your data will be preserved',
@@ -85,7 +88,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 6),
+              SizedBox(height: AppScaler.scaleHeight(context, 6)),
               PoppinsText(
                 context,
                 '• You can reactivate anytime by signing in',
@@ -93,7 +96,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
               ),
-              SizedBox(height: 30),
+              SizedBox(height: AppScaler.scaleHeight(context, 30)),
               AppButton(
                 onPressed: () {
                   showDialog(
@@ -106,7 +109,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 },
                 title: "Deactivate Account",
               ),
-              SizedBox(height: 20),
+              SizedBox(height: AppScaler.scaleHeight(context, 20)),
               AppButton(
                 color: Colors.transparent,
                 borderColor: customColors.greyColor,
@@ -117,7 +120,6 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 },
                 title: "Cancel",
               ),
-              SizedBox(height: 15),
             ],
           ),
         ),

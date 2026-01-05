@@ -136,6 +136,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(podcast.imagePath),
+                                  //  AssetImage(),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
@@ -244,10 +245,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: AppScaler.scaleSize(
-                                          context,
-                                          20,
-                                        ),
+                                        width: AppScaler.scaleSize(context, 20),
                                       ),
                                       // SizedBox(width: 20),
                                       Image.asset(
@@ -259,6 +257,9 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                         ),
                                       ),
                                     ],
+                                  ),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 20),
                                   ),
                                 ],
                               ),

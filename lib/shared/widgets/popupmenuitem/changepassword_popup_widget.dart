@@ -5,16 +5,15 @@ import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
-class DeletePopupWidget extends StatefulWidget {
-  final bool showSaveIcon;
-
-  const DeletePopupWidget({super.key, this.showSaveIcon = true});
+class ChangepasswordPopupWidget extends StatefulWidget {
+  const ChangepasswordPopupWidget({super.key});
 
   @override
-  State<DeletePopupWidget> createState() => _DeletePopupWidget();
+  State<ChangepasswordPopupWidget> createState() =>
+      _ChangepasswordPopupWidgetState();
 }
 
-class _DeletePopupWidget extends State<DeletePopupWidget> {
+class _ChangepasswordPopupWidgetState extends State<ChangepasswordPopupWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -33,44 +32,37 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            Assets.images.delete123.path,
+            Assets.images.check.path,
             height: AppScaler.scaleHeight(context, 54),
             width: AppScaler.scaleSize(context, 54),
           ),
+
           SizedBox(height: AppScaler.scaleHeight(context, 40)),
+
           PoppinsText(
             context,
-            "Are you sure you want to delete your account?",
+            'Your password is changed',
             fontSize: PoppinsFontSizeVariant.size16,
             fontWeight: PoppinsFontWeightVariant.medium,
             color: customColors.textColor,
             textAlign: TextAlign.center,
           ),
 
-          SizedBox(height: AppScaler.scaleHeight(context, 24)),
-          AppButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
+          SizedBox(height: AppScaler.scaleHeight(context, 40)),
 
-              context.pushNamed(AppRoutes.loginScreen.name);
-            },
-            title: "Yes, delete",
-          ),
-
-          SizedBox(height: AppScaler.scaleHeight(context, 11)),
           AppButton(
-            color: Colors.transparent,
+            buttonSize: Size(316, 45),
             borderColor: customColors.greyColor,
             borderWidth: 1,
             border: true,
             onPressed: () {
-              context.pop();
+              context.pushNamed(AppRoutes.settingpreferencesScreen.name);
             },
-            title: "Cancel",
+            title: "Close",
           ),
         ],
       ),

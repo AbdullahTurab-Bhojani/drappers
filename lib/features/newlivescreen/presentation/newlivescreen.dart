@@ -120,12 +120,8 @@ class _newliveScreenScreenState extends State<newliveScreen> {
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: AppScaler.scaleSize(context, 320),
-            padding: EdgeInsets.only(
-              top: AppScaler.scaleHeight(context, 16),
-              left: AppScaler.scaleSize(context, 24),
-              right: AppScaler.scaleSize(context, 24),
-            ),
+            width: 320,
+            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
@@ -146,11 +142,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: () => Navigator.pop(context),
-                      child: Icon(Icons.close, color: AppColors.white),
+                      child: Icon(Icons.close, color: Colors.white),
                     ),
                   ],
                 ),
-                SizedBox(height: AppScaler.scaleHeight(context, 12)),
+                SizedBox(height: 12),
                 Divider(),
                 // SizedBox(height: 12),
                 ListView.builder(
@@ -175,12 +171,10 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: AppScaler.scaleHeight(context, 12),
-                          horizontal: AppScaler.scaleSize(context, 12),
+                          vertical: 12,
+                          horizontal: 12,
                         ),
-                        margin: EdgeInsets.only(
-                          bottom: AppScaler.scaleHeight(context, 10),
-                        ),
+                        margin: EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppColors.popselectcolor19193F
@@ -191,14 +185,9 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             if (isSelected)
-                              Icon(
-                                Icons.check,
-                                color: AppColors.white,
-                                size: 18,
-                              ),
+                              Icon(Icons.check, color: Colors.white, size: 18),
 
-                            if (isSelected)
-                              SizedBox(width: AppScaler.scaleSize(context, 10)),
+                            if (isSelected) SizedBox(width: 10),
 
                             PoppinsText(
                               context,
@@ -225,25 +214,21 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     List<String> audioSubtitles = ['Off', 'English', 'Urdu', 'Arabic'];
 
     return GestureDetector(
-      behavior: HitTestBehavior.opaque,
       onTap: () => Navigator.pop(context),
       child: Dialog(
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: AppScaler.scaleSize(context, 320),
-            padding: EdgeInsets.only(
-              top: AppScaler.scaleHeight(context, 16),
-              left: AppScaler.scaleSize(context, 16),
-              right: AppScaler.scaleSize(context, 24),
-            ),
+            width: 320,
+            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min, // ✅ SAME AS SPEED POPUP
               children: [
+                /// HEADER
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -262,9 +247,10 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   ],
                 ),
 
-                SizedBox(height: AppScaler.scaleHeight(context, 12)),
+                SizedBox(height: 12),
                 Divider(),
 
+                /// LIST
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -275,39 +261,18 @@ class _newliveScreenScreenState extends State<newliveScreen> {
 
                     return GestureDetector(
                       behavior: HitTestBehavior.opaque,
-                      onTap: () async {
+                      onTap: () {
                         setState(() {
                           _selectedSubtitle = text;
                         });
-
-                        if (text == "Off") {
-                          await _betterPlayerController.setupSubtitleSource(
-                            BetterPlayerSubtitlesSource(
-                              type: BetterPlayerSubtitlesSourceType.none,
-                            ),
-                          );
-                        } else {
-                          await _betterPlayerController.setupSubtitleSource(
-                            BetterPlayerSubtitlesSource(
-                              type: BetterPlayerSubtitlesSourceType.network,
-                              name: text,
-                              urls: [
-                                "https://example.com/${text.toLowerCase()}.vtt",
-                              ],
-                            ),
-                          );
-                        }
-
                         Navigator.pop(context);
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: AppScaler.scaleHeight(context, 12),
-                          horizontal: AppScaler.scaleSize(context, 12),
+                          vertical: 12,
+                          horizontal: 12,
                         ),
-                        margin: EdgeInsets.only(
-                          bottom: AppScaler.scaleHeight(context, 12),
-                        ),
+                        margin: EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppColors.popselectcolor19193F
@@ -322,8 +287,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                                 color: AppColors.white,
                                 size: 18,
                               ),
-                            if (isSelected)
-                              SizedBox(width: AppScaler.scaleSize(context, 10)),
+                            if (isSelected) SizedBox(width: 10),
                             PoppinsText(
                               context,
                               text,
@@ -477,12 +441,11 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                   if (_betterPlayerController != null &&
                       _betterPlayerController.videoPlayerController != null)
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Slider(
-                            activeColor: AppColors.white,
-                            inactiveColor: AppColors.white.withOpacity(0.3),
+                            activeColor: Colors.white,
+                            inactiveColor: AppColors.sliderbar4C4C4C,
                             min: 0,
                             max: _betterPlayerController
                                 .videoPlayerController!
@@ -504,28 +467,40 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                                       .inMilliseconds,
                                 )
                                 .toDouble(),
-                            onChanged: (value) {
+                            onChanged: (v) {
                               _betterPlayerController.videoPlayerController!
-                                  .seekTo(
-                                    Duration(milliseconds: value.toInt()),
-                                  );
+                                  .seekTo(Duration(milliseconds: v.round()));
                             },
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                            right: AppScaler.scaleSize(context, 20),
-                          ),
-                          child: Text(
+                          padding: EdgeInsets.only(right: 24),
+                          // padding: const EdgeInsets.all(8.0),
+                          child: PoppinsText(
+                            context,
                             _format(
                               _betterPlayerController
                                   .videoPlayerController!
                                   .value
                                   .position,
                             ),
-                            style: TextStyle(color: AppColors.white),
+                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
+                            color: AppColors.wDark,
                           ),
                         ),
+                        // SizedBox(width: 10),
+                        // PoppinsText(
+                        //   _formatDuration(
+                        //     _betterPlayerController
+                        //         .videoPlayerController!
+                        //         .value
+                        //         .duration!,
+                        //   ),
+                        //   fontSize: PoppinsFontSizeVariant.size12,
+                        //   fontWeight: PoppinsFontWeightVariant.regular,
+                        //   color: AppColors.wDark.withOpacity(0.7),
+                        // ),
                       ],
                     ),
 
@@ -549,7 +524,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                               // width: AppScaler.scaleSize(context, 24),
                               // height: AppScaler.scaleHeight(context, 16),
                             ),
-                            SizedBox(width: AppScaler.scaleSize(context, 10)),
+                            SizedBox(width: AppScaler.scaleSize(context, 12)),
                             PoppinsText(
                               context,
                               "Speed",
@@ -572,7 +547,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                               // height: AppScaler.scaleHeight(context, 16),
                               scale: 3,
                             ),
-                            SizedBox(width: AppScaler.scaleSize(context, 10)),
+                            SizedBox(width: AppScaler.scaleSize(context, 12)),
                             PoppinsText(
                               context,
                               "Audio & Subtitle",
@@ -594,7 +569,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             // height: AppScaler.scaleHeight(context, 16),
                             scale: 3,
                           ),
-                          SizedBox(width: AppScaler.scaleSize(context, 10)),
+                          SizedBox(width: AppScaler.scaleSize(context, 12)),
                           PoppinsText(
                             context,
                             "Picture in Picture",
@@ -612,16 +587,18 @@ class _newliveScreenScreenState extends State<newliveScreen> {
           ),
 
           Positioned(
-            top: AppScaler.scaleHeight(context, 28),
+            top: AppScaler.scaleHeight(context, 14),
             right: AppScaler.scaleSize(context, 28),
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () => Navigator.pop(context),
-              child: Image.asset(
-                Assets.images.crossnewicon.path,
-                // width: AppScaler.scaleSize(context, 30),
-                scale: 3,
-                color: AppColors.white,
+              child: Padding(
+                padding: EdgeInsets.only(right: 28),
+                child: Image.asset(
+                  Assets.images.crossnewicon.path,
+                  width: 30,
+                  color: AppColors.white,
+                ),
               ),
             ),
           ),

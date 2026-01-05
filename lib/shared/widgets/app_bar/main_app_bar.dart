@@ -68,7 +68,7 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
       title: PoppinsText(
         context,
         title,
-        color: Colors.white,
+        color: AppColors.white,
         fontWeight: PoppinsFontWeightVariant.semiBold,
         fontSize: PoppinsFontSizeVariant.size24,
       ),
@@ -81,5 +81,5 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

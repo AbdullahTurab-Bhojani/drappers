@@ -14,12 +14,10 @@ import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../../shared/widgets/full_screen_imagescreen.dart';
-import '../../../../shared/widgets/full_screen_videoscreen.dart';
 import '../../../../shared/widgets/guestloginwidget.dart';
 import '../../../../shared/widgets/home_banner.dart';
 import '../../../../shared/widgets/more_info_bottom_sheet.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
-import '../../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
 import '../../../../shared/widgets/watch_history.dart';
 
@@ -324,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                          // SizedBox(height: AppScaler.scaleHeight(context, 20)),
                           SizedBox(
                             height: AppScaler.scaleHeight(context, 45),
                             child: ListView.separated(
@@ -389,7 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           FullscreenImageScreen(
-                            imagePath: Assets.images.livetv.path,
+                            imagePath: Assets.images.livetvnew.path,
                             title: "We're Training Heroes of Future!",
                           ),
                           SizedBox(height: AppScaler.scaleHeight(context, 30)),

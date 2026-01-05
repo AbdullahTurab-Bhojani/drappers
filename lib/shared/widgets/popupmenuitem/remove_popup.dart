@@ -20,13 +20,13 @@ class _RemovePopupState extends State<RemovePopup> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Container(
-      height: AppScaler.scaleHeight(context, 350),
+      // height: AppScaler.scaleHeight(context, 310),
       width: double.infinity,
       padding: EdgeInsets.only(
         top: AppScaler.scaleHeight(context, 24),
         bottom: AppScaler.scaleHeight(context, 24),
-        left: AppScaler.scaleSize(context, 20),
-        right: AppScaler.scaleSize(context, 20),
+        left: AppScaler.scaleSize(context, 18),
+        right: AppScaler.scaleSize(context, 18),
       ),
       decoration: BoxDecoration(
         color: customColors.regular,
@@ -97,4 +97,5 @@ class _RemovePopupState extends State<RemovePopup> {
       ),
     );
   }
+
 }

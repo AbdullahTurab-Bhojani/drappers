@@ -81,13 +81,10 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: AppScaler.scaleSize(context, 20)),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
-                  ),
+                child: Image.asset(
+                  "assets/images/backicon.png",
+                  width: 20,
+                  height: 20,
                 ),
               ),
               title: "Live Pitches",

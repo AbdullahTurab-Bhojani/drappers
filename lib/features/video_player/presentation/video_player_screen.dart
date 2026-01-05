@@ -125,29 +125,25 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
   }
 
   Widget _videoQuality(Function(String) onSelected, String selectedQuality) {
-    List<String> videoQualities = ['Auto', '4k', '1440p', '1080p', '480p'];
+    List<String> videoQualities = ['Auto', '4k', '1440p', '1080p'];
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-
-      onTap: () => Navigator.canPop(context),
+      onTap: () => Navigator.pop(context),
       child: Dialog(
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: AppScaler.scaleSize(context, 320),
-            padding: EdgeInsets.only(
-              top: AppScaler.scaleHeight(context, 16),
-              left: AppScaler.scaleSize(context, 24),
-              right: AppScaler.scaleSize(context, 24),
-            ),
+            width: 320,
+            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min, // ✅ SAME AS SPEED POPUP
               children: [
+                /// HEADER
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -165,9 +161,11 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: AppScaler.scaleHeight(context, 12)),
+
+                SizedBox(height: 12), // ✅ SAME
                 Divider(),
-                // SizedBox(height: 12),
+
+                /// LIST
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -178,15 +176,14 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
 
                     return GestureDetector(
                       behavior: HitTestBehavior.opaque,
-
                       onTap: () {
                         onSelected(text);
                         Navigator.pop(context);
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: AppScaler.scaleHeight(context, 12),
-                          horizontal: AppScaler.scaleSize(context, 12),
+                          vertical: 12, // ✅ SAME
+                          horizontal: 12,
                         ),
                         margin: EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
@@ -196,7 +193,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             if (isSelected)
                               Icon(
@@ -204,8 +200,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                                 color: AppColors.white,
                                 size: 18,
                               ),
-                            if (isSelected)
-                              SizedBox(width: AppScaler.scaleSize(context, 10)),
+                            if (isSelected) SizedBox(width: 10),
                             PoppinsText(
                               context,
                               text,
@@ -331,26 +326,21 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
     List<String> audioSubtitles = ['Off', 'English', 'Urdu', 'Arabic'];
 
     return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-
       onTap: () => Navigator.pop(context),
       child: Dialog(
         backgroundColor: Colors.transparent,
         child: Center(
           child: Container(
-            width: AppScaler.scaleSize(context, 320),
-            padding: EdgeInsets.only(
-              top: AppScaler.scaleHeight(context, 16),
-              left: AppScaler.scaleSize(context, 16),
-              right: AppScaler.scaleSize(context, 24),
-            ),
+            width: 320,
+            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
             decoration: BoxDecoration(
               color: AppColors.dRegular,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min, // ✅ SAME AS SPEED POPUP
               children: [
+                /// HEADER
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -363,16 +353,16 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     ),
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
-
                       onTap: () => Navigator.pop(context),
                       child: Icon(Icons.close, color: AppColors.white),
                     ),
                   ],
                 ),
-                SizedBox(height: AppScaler.scaleHeight(context, 12)),
+
+                SizedBox(height: 12),
                 Divider(),
 
-                // SizedBox(height: 12),
+                /// LIST
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -383,7 +373,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
 
                     return GestureDetector(
                       behavior: HitTestBehavior.opaque,
-
                       onTap: () {
                         setState(() {
                           _selectedSubtitle = text;
@@ -392,12 +381,10 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: AppScaler.scaleHeight(context, 12),
-                          horizontal: AppScaler.scaleSize(context, 12),
+                          vertical: 12,
+                          horizontal: 12,
                         ),
-                        margin: EdgeInsets.only(
-                          bottom: AppScaler.scaleSize(context, 12),
-                        ),
+                        margin: EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppColors.popselectcolor19193F
@@ -405,7 +392,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             if (isSelected)
                               Icon(
@@ -819,7 +805,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                           .value
                           .position;
                       _betterPlayerController.seekTo(
-                        pos + const Duration(seconds: 10),
+                        pos + Duration(seconds: 10),
                       );
                     },
                   ),
@@ -950,7 +936,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                         Spacer(),
 
                         Padding(
-                          padding: EdgeInsets.only(right: 20),
+                          padding: EdgeInsets.only(right: 30),
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () => Navigator.pop(context),
@@ -1041,7 +1027,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     behavior: HitTestBehavior.opaque,
                     onTap: () => Navigator.pop(context),
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 28),
+                      padding: EdgeInsets.only(right: 28),
                       child: Image.asset(
                         Assets.images.crossnewicon.path,
                         width: 30,
