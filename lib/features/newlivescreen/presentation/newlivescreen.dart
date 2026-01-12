@@ -19,12 +19,12 @@ class newliveScreen extends StatefulWidget {
 class _newliveScreenScreenState extends State<newliveScreen> {
   late BetterPlayerController _betterPlayerController;
   String _selectedSpeed = "1x";
-  bool _isLocked = false;
+  final bool _isLocked = false;
   String? _selectedSubtitle;
   String? _selectedAudio;
   bool _controlsVisible = false;
   bool _showEpisodes = false;
-  bool _isSpeedPopupVisible = false;
+  final bool _isSpeedPopupVisible = false;
   File? videoFile;
 
   bool showLoader = false;
@@ -438,8 +438,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               width: screenSize.width,
               child: Column(
                 children: [
-                  if (_betterPlayerController != null &&
-                      _betterPlayerController.videoPlayerController != null)
+                  if (_betterPlayerController.videoPlayerController != null)
                     Row(
                       children: [
                         Expanded(

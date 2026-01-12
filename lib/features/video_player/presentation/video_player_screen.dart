@@ -2,13 +2,11 @@
 
 import 'dart:async';
 import 'dart:io';
-
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
-import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -1012,7 +1010,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     child: Center(
                       child: PoppinsText(
                         context,
-                        'Finale – Meet The Drapers Season',
+                        "Finale – Meet The Drapers Season",
                         fontSize: PoppinsFontSizeVariant.size22,
                         fontWeight: PoppinsFontWeightVariant.medium,
                         color: AppColors.white,

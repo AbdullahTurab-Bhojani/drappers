@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, avoid_print, unused_element
+// ignore_for_file: deprecated_member_use, avoid_print, unused_element, unnecessary_underscores
 
 import 'dart:io';
 import 'package:better_player_plus/better_player_plus.dart';
@@ -28,11 +28,7 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> {
   BetterPlayerController? _betterPlayerController;
   BetterPlayerController? get controller => _betterPlayerController;
-
   File? videoFile;
-  bool _showControls = false;
-  bool _isLoading = true;
-
   final String videoUrl = 'assets/images/livefullview.mp4';
 
   @override
@@ -83,18 +79,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         _videoListener,
       );
 
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() {});
 
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() {});
     } catch (e) {
       print('Error initializing player: $e');
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() {});
     }
   }
 
@@ -268,7 +258,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         height: AppScaler.scaleHeight(context, 180),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          separatorBuilder: (_, __) =>
+                          separatorBuilder: (_, _) =>
                               SizedBox(width: AppScaler.scaleSize(context, 15)),
                           itemCount: trendingimages.length,
                           itemBuilder: (context, index) {

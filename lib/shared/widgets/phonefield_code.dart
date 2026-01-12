@@ -47,32 +47,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
     _focusNodes = List.generate(6, (_) => FocusNode());
   }
 
-  void _startTimer() {
-    seconds = 30;
-
-    setState(() {
-      isTimerRunning = true;
-      showResendButton = false;
-      showOtpField = true;
-    });
-
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!mounted) return;
-
-      if (seconds == 0) {
-        timer.cancel();
-        setState(() {
-          isTimerRunning = false;
-          showResendButton = true;
-          showOtpField = false;
-        });
-      } else {
-        setState(() => seconds--);
-      }
-    });
-  }
-
   void _onOtpChanged(int index, String value) {
     if (value.isNotEmpty && index < 5) {
       _focusNodes[index + 1].requestFocus();
@@ -122,8 +96,9 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                         context: context,
                         showPhoneCode: true,
                         onSelect: (Country country) {
-                          if (mounted)
+                          if (mounted) {
                             setState(() => selectedCountry = country);
+                          }
                         },
                       );
                     },
@@ -196,22 +171,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
             }),
           ),
       ],
-    );
-  }
-
-  Widget _actionButton(String text) {
-    return Container(
-      height: 28,
-      width: 84,
-      margin: const EdgeInsets.only(left: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-      decoration: BoxDecoration(
-        color: AppColors.buttoncolor.first,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Center(
-        child: Text(text, style: const TextStyle(color: Colors.white)),
-      ),
     );
   }
 }
