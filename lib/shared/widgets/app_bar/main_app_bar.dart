@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 
 class AppMainBar extends StatelessWidget implements PreferredSizeWidget {

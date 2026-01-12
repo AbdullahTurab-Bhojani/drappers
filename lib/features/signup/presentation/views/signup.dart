@@ -4,7 +4,6 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../../shared/widgets/guestloginwidget.dart';
 import '../../../../shared/widgets/phonefield_code.dart';
 import '../../../../shared/widgets/textfield_new.dart';
 
@@ -16,7 +15,6 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();

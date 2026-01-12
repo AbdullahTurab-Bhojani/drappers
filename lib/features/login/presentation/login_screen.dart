@@ -7,7 +7,6 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/guestloginwidget.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,7 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final _formKey = GlobalKey<FormState>();
   bool rememberMe = false;
 
   void onRememberMeChanged(bool? value) {
