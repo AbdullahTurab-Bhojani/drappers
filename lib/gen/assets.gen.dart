@@ -296,6 +296,9 @@ class $AssetsImagesGen {
   AssetGenImage get appleicon =>
       const AssetGenImage('assets/images/appleicon.png');
 
+  /// File path: assets/images/at.png
+  AssetGenImage get at => const AssetGenImage('assets/images/at.png');
+
   /// File path: assets/images/back10seconds.png
   AssetGenImage get back10seconds =>
       const AssetGenImage('assets/images/back10seconds.png');
@@ -889,6 +892,10 @@ class $AssetsImagesGen {
   AssetGenImage get trendingimage9 =>
       const AssetGenImage('assets/images/trendingimage9.png');
 
+  /// File path: assets/images/usericonnew.png
+  AssetGenImage get usericonnew =>
+      const AssetGenImage('assets/images/usericonnew.png');
+
   /// File path: assets/images/video4.mp4
   String get video4 => 'packages/drappers/assets/images/video4.mp4';
 
@@ -965,6 +972,7 @@ class $AssetsImagesGen {
     animation,
     appIcon,
     appleicon,
+    at,
     back10seconds,
     backicon,
     ban123,
@@ -1120,6 +1128,7 @@ class $AssetsImagesGen {
     trendingimage7,
     trendingimage8,
     trendingimage9,
+    usericonnew,
     video4,
     video8,
     videolock,

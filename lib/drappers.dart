@@ -74,6 +74,7 @@ import 'features/likedcontent/presentation/likecontent.dart';
 import 'features/livepitches/presentation/livepitches.dart';
 import 'features/login/presentation/forgetpassword_screen.dart';
 import 'features/login/presentation/login_screen.dart';
+import 'features/login/presentation/social_login_screen.dart';
 import 'features/login/presentation/updatepassword_screen.dart';
 import 'features/login/presentation/verfiicationcode_screen.dart';
 import 'features/newlivescreen/presentation/newlivescreen.dart';
