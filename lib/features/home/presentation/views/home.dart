@@ -31,7 +31,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _showControls = false;
+  final bool _showControls = false;
   final posterPath = '/mnt/data/Live Tv.png';
   bool _wasPlayingBeforeNavigation = false;
   BetterPlayerController? _betterPlayerController;

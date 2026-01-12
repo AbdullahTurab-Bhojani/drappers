@@ -4,7 +4,6 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../../shared/widgets/buildradiotile.dart';
 import '../../../../shared/widgets/guestloginwidget.dart';
 import '../../../../shared/widgets/phonefield_code.dart';
 import '../../../../shared/widgets/textfield_new.dart';
@@ -18,9 +17,6 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
-
-  String? _receiveMethod;
-
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -52,12 +48,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
     setState(() {
       if (email.isNotEmpty && phone.isEmpty) {
-        _receiveMethod = "Email";
       } else if (phone.isNotEmpty && email.isEmpty) {
-        _receiveMethod = "Phone";
-      } else if (email.isNotEmpty && phone.isNotEmpty) {
-        _receiveMethod = null;
-      }
+      } else if (email.isNotEmpty && phone.isNotEmpty) {}
     });
   }
 
@@ -457,7 +449,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       ),
                                     ),
                                   ),
-                                ], 
+                                ],
                               ),
                             ),
                           ],
@@ -466,7 +458,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         SizedBox(height: AppScaler.scaleHeight(context, 40)),
                         AppButton(
                           onPressed: () {
-                            context.goNamed(AppRoutes.createAccountCodeScreen.name);
+                            context.goNamed(
+                              AppRoutes.createAccountCodeScreen.name,
+                            );
                           },
                           title: "Create Account",
                         ),

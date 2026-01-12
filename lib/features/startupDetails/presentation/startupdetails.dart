@@ -10,7 +10,7 @@ import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
 
 class Startupdetails extends StatefulWidget {
-  Startupdetails({super.key});
+  const Startupdetails({super.key});
 
   @override
   State<Startupdetails> createState() => _StartupdetailsState();
@@ -20,7 +20,7 @@ class _TagChip extends StatelessWidget {
   final String label;
   final AppCustomColors customColors;
 
-  _TagChip({required this.label, required this.customColors});
+  const _TagChip({required this.label, required this.customColors});
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import '../../../core/local/providers/shared_pref.dart';
-import '../../../drappers.dart';
-
 part 'app_start.g.dart';
 
 @Riverpod(keepAlive: true)

@@ -23,8 +23,6 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    const double horizontalPadding = 16.0;
-
     return Scaffold(
       body: Container(
         width: double.infinity,
