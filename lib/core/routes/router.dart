@@ -22,6 +22,11 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.onboardingScreen.name,
         builder: (context, state) => OnboardingScreen(),
       ),
+       GoRoute(
+        path: AppRoutes.socialLoginScreen.path,
+        name: AppRoutes.socialLoginScreen.name,
+        builder: (context, state) => SocialLoginScreen(),
+      ),
       GoRoute(
         path: AppRoutes.loginScreen.path,
         name: AppRoutes.loginScreen.name,

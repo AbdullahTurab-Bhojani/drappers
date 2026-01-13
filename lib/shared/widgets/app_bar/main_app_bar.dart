@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 
 class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
@@ -33,17 +32,13 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
     if (leading != null) {
       leadingWidget = leading;
     } else if (leadingText != null) {
-      leadingWidget = Padding(
-        padding: EdgeInsets.only(
-          left: AppScaler.scaleSize(context, 20),
-          top: AppScaler.scaleHeight(context, 10),
-        ),
+      leadingWidget = Center(
         child: PoppinsText(
           context,
           leadingText!,
           color: AppColors.white,
           fontWeight: PoppinsFontWeightVariant.semiBold,
-          fontSize: PoppinsFontSizeVariant.size24,
+          fontSize: PoppinsFontSizeVariant.size22,
         ),
       );
     } else if (leadingIcon != null) {

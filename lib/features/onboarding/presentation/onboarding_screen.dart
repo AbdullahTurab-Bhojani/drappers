@@ -108,78 +108,86 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             bottom: 0,
             child: SafeArea(
               top: false,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                  AppScaler.scaleSize(context, 20),
-                  AppScaler.scaleHeight(context, 24),
-                  AppScaler.scaleSize(context, 20),
-                  AppScaler.scaleHeight(context, 100),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        images.length,
-                        (index) => AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          margin: EdgeInsets.symmetric(horizontal: 2),
-                          width: currentPage == index ? 26 : 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            gradient: currentPage == index
-                                ? LinearGradient(
-                                    colors: [
-                                      Color(0xFF1FCFFF),
-                                      Color(0xFF0063FF),
-                                    ],
-                                  )
-                                : null,
-                            color: currentPage != index
-                                ? AppColors.wDark
-                                : null,
-                            borderRadius: BorderRadius.circular(4),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: AppScaler.scaleSize(context, 50),
+                      right: AppScaler.scaleSize(context, 50),
+                    ),
+                    child: Column(
+                      // mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            images.length,
+                            (index) => AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              margin: EdgeInsets.symmetric(horizontal: 2),
+                              width: currentPage == index ? 26 : 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                gradient: currentPage == index
+                                    ? LinearGradient(
+                                        colors: [
+                                          Color(0xFF1FCFFF),
+                                          Color(0xFF0063FF),
+                                        ],
+                                      )
+                                    : null,
+                                color: currentPage != index
+                                    ? AppColors.wDark
+                                    : null,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 24)),
+
+                        PoppinsText(
+                          context,
+                          titles[currentPage],
+                          textAlign: TextAlign.center,
+                          fontSize: PoppinsFontSizeVariant.size30,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                          // height: 1.3,
+                        ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
+                        PoppinsText(
+                          context,
+                          subtitles[currentPage],
+                          textAlign: TextAlign.center,
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                          // height: 1.7,
+                        ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 80)),
+                      ],
                     ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 24)),
-
-                    PoppinsText(
-                      context,
-                      titles[currentPage],
-                      textAlign: TextAlign.center,
-                      fontSize: PoppinsFontSizeVariant.size30,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                      height: 1.3,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: AppScaler.scaleSize(context, 20),
+                      right: AppScaler.scaleSize(context, 20),
+                      bottom: AppScaler.scaleHeight(context, 80),
                     ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 16)),
-
-                    PoppinsText(
-                      context,
-                      subtitles[currentPage],
-                      textAlign: TextAlign.center,
-                      fontSize: PoppinsFontSizeVariant.size16,
-                      fontWeight: PoppinsFontWeightVariant.light,
-                      color: customColors.textColor,
-                      height: 1.7,
-                    ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 24)),
-
-                    AppButton(
+                    child: AppButton(
                       onPressed: () {
                         GuestHelper.isGuest = true;
                         context.pushNamed(AppRoutes.home.name);
                       },
                       title: 'Next',
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
