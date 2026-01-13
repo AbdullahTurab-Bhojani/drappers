@@ -504,7 +504,12 @@ class _ContentDetailState extends State<ContentDetail>
                                             ),
                                             child: DropdownButtonHideUnderline(
                                               child: DropdownButton<String>(
-                                                value: selectedSeason,
+                                                itemHeight: 50,
+                                                menuMaxHeight: 150,padding: EdgeInsets.all(0),
+
+                                                // menuWidth: 150,
+                                                value: selectedSeason,isDense: false,
+
                                                 icon: Icon(
                                                   Icons.keyboard_arrow_down,
                                                   color: customColors.textColor,

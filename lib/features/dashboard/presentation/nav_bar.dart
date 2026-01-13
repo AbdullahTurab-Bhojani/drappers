@@ -137,7 +137,7 @@ class _BottomNavigationBarShellState
                       if (isProfileTab)
                         GuestHelper.isGuest
                             ? Image.asset(
-                                Assets.images.usericonnew.path,
+                                Assets.images.user.path,
                                 width: 20,
                                 height: 20,
                                 color: isSelected

@@ -892,9 +892,8 @@ class $AssetsImagesGen {
   AssetGenImage get trendingimage9 =>
       const AssetGenImage('assets/images/trendingimage9.png');
 
-  /// File path: assets/images/usericonnew.png
-  AssetGenImage get usericonnew =>
-      const AssetGenImage('assets/images/usericonnew.png');
+  /// File path: assets/images/user.png
+  AssetGenImage get user => const AssetGenImage('assets/images/user.png');
 
   /// File path: assets/images/video4.mp4
   String get video4 => 'packages/drappers/assets/images/video4.mp4';
@@ -1128,7 +1127,7 @@ class $AssetsImagesGen {
     trendingimage7,
     trendingimage8,
     trendingimage9,
-    usericonnew,
+    user,
     video4,
     video8,
     videolock,

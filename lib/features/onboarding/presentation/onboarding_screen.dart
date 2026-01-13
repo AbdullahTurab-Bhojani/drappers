@@ -112,8 +112,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                      left: AppScaler.scaleSize(context, 50),
-                      right: AppScaler.scaleSize(context, 50),
+                      left: AppScaler.scaleSize(context, 36),
+                      right: AppScaler.scaleSize(context, 36),
                     ),
                     child: Column(
                       // mainAxisSize: MainAxisSize.min,

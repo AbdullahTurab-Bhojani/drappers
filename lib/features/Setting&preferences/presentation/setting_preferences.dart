@@ -25,8 +25,24 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
   String _streamingQuality = 'Auto';
   String _subtitlesLanguage = 'Off';
 
-  final List<String> _qualityOptions = ['Auto', '1440p', '1080p', '720p'];
-  final List<String> _subtitleOptions = ['Off', 'English', 'Spanish', 'French'];
+  final List<String> _qualityOptions = [
+    'Auto',
+    '1440p',
+    '1080p',
+    '720p',
+    '480p',
+    '360p',
+    '240p',
+    '144p',
+  ];
+  final List<String> _subtitleOptions = [
+    'Off',
+    'English',
+    'Urdu',
+    'Bangali',
+    'Chinese',
+    'Arabic',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,21 +63,18 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-              child: AppMainBar(
-                backgroundColor: Colors.transparent,
-                title: "Settings & Preferences",
-                leading: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    context.go(AppRoutes.profile.path);
-                  },
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: AppScaler.scaleSize(context, 20),
-                    height: AppScaler.scaleHeight(context, 20),
-                  ),
+            AppMainBar(
+              backgroundColor: Colors.transparent,
+              title: "Settings & Preferences",
+              leading: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  context.go(AppRoutes.profile.path);
+                },
+                child: Image.asset(
+                  "assets/images/backicon.png",
+                  width: AppScaler.scaleSize(context, 20),
+                  height: AppScaler.scaleHeight(context, 20),
                 ),
               ),
             ),
@@ -169,7 +182,6 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
                         top: AppScaler.scaleHeight(context, 40),
                       ),
                       child: Padding(
-                        // padding: const EdgeInsets.all(8.0),
                         padding: EdgeInsets.symmetric(
                           horizontal: AppScaler.scaleHeight(context, 20),
                         ),

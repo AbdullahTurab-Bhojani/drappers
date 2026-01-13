@@ -20,7 +20,7 @@ class CustomDropdown<T> extends ConsumerStatefulWidget {
     this.onSaved,
     this.borderColor,
     this.searchHint,
-    this.maxHeight = 300,
+    this.maxHeight = 170,
     this.itemHeight = 48,
     this.isSearchable = false,
     this.enabled = true,
@@ -61,9 +61,9 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
   List<T> _filteredValues = [];
 
   OutlineInputBorder get border => OutlineInputBorder(
-    borderSide: BorderSide(color: widget.borderColor ?? AppColors.borderColor),
-    borderRadius: BorderRadius.circular(8),
-  );
+        borderSide: BorderSide(color: widget.borderColor ?? AppColors.borderColor),
+        borderRadius: BorderRadius.circular(8),
+      );
 
   @override
   void initState() {
@@ -83,11 +83,8 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
     }
     if (widget.dynamicValues != oldWidget.dynamicValues) {
       _filteredValues = List.from(widget.dynamicValues);
-      if (widget.isSearchable) {
-        _onSearchChanged();
-      }
+      if (widget.isSearchable) _onSearchChanged();
     }
-    // Handle searchable state changes
     if (widget.isSearchable != oldWidget.isSearchable) {
       if (widget.isSearchable) {
         _searchController.addListener(_onSearchChanged);
@@ -115,7 +112,6 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
       });
       return;
     }
-
     final query = _searchController.text.toLowerCase();
     final newFilteredValues = widget.dynamicValues.where((item) {
       final itemText = widget.builder != null
@@ -180,9 +176,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
         children: [
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () {
-              _closeDropdown();
-            },
+            onTap: _closeDropdown,
           ),
           Positioned(
             width: _getDropdownWidth(),
@@ -203,7 +197,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Search field (only show if searchable)
+                      // Search field
                       if (widget.isSearchable) ...[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -224,9 +218,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(6),
-                                borderSide: BorderSide(
-                                  color: AppColors.borderColor,
-                                ),
+                                borderSide: BorderSide(color: AppColors.borderColor),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(6),
@@ -236,20 +228,14 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                                 vertical: 8,
                               ),
                               isDense: true,
-                              prefixIcon: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  Icons.search,
-                                  size: 20,
-                                  color: customColors.textColor,
-                                ),
-                              ),
+                              prefixIcon: Icon(Icons.search, size: 20, color: customColors.textColor),
                             ),
                           ),
                         ),
                         const Divider(height: 1),
                       ],
-                      SizedBox(height: 12),
+
+                      // Scrollable List
                       _filteredValues.isEmpty
                           ? Container(
                               padding: const EdgeInsets.all(16),
@@ -259,57 +245,45 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                                 size: 14,
                               ),
                             )
-                          : ListView.separated(
-                              shrinkWrap: true,
-                              padding: EdgeInsets.zero,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 10),
-                              itemCount: _filteredValues.length,
-                              itemBuilder: (context, index) {
-                                final item = _filteredValues[index];
-                                final isSelected = _value == item;
-                                return GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-
-                                  onTap: () => _selectItem(item),
-                                  child: Container(
-                                    height: widget.itemHeight,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          if (isSelected)
-                                            Icon(
-                                              Icons.check,
-                                              size: 20,
-                                              color: customColors.textColor,
+                          : Flexible(
+                              child: ListView.separated(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                separatorBuilder: (context, index) => const SizedBox(height: 10),
+                                itemCount: _filteredValues.length,
+                                itemBuilder: (context, index) {
+                                  final item = _filteredValues[index];
+                                  final isSelected = _value == item;
+                                  return GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+                                    onTap: () => _selectItem(item),
+                                    child: Container(
+                                      height: widget.itemHeight,
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          children: [
+                                            if (isSelected)
+                                              Icon(Icons.check, size: 20, color: customColors.textColor),
+                                            if (isSelected) const SizedBox(width: 10),
+                                            Expanded(
+                                              child: PoppinsText(
+                                                context,
+                                                widget.builder != null ? widget.builder!(item) : item.toString(),
+                                                color: customColors.textColor,
+                                                fontWeight: PoppinsFontWeightVariant.regular,
+                                                fontSize: PoppinsFontSizeVariant.size16,
+                                              ),
                                             ),
-                                          SizedBox(width: 10),
-                                          Expanded(
-                                            child: PoppinsText(
-                                              context,
-                                              widget.builder != null
-                                                  ? widget.builder!(item)
-                                                  : item.toString(),
-                                              color: customColors.textColor,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant
-                                                      .regular,
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size16,
-                                            ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
                     ],
                   ),
@@ -323,14 +297,13 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
   }
 
   double _getDropdownWidth() {
-    final RenderBox? renderBox = context.findRenderObject() as RenderBox?;
+    final renderBox = context.findRenderObject() as RenderBox?;
     return renderBox?.size.width ?? 200;
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Directionality(
@@ -339,43 +312,21 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
         link: _layerLink,
         child: Container(
           decoration: BoxDecoration(
-            color: widget.enabled
-                ? (widget.filledColor ?? AppColors.helpsupport)
-                : customColors.regular,
+            color: widget.enabled ? (widget.filledColor ?? AppColors.helpsupport) : customColors.regular,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: widget.borderColor ?? customColors.regular,
-            ),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
                 enabled: widget.enabled,
-                onTap: widget.enabled
-                    ? () {
-                        _toggleDropdown();
-                      }
-                    : null,
+                onTap: widget.enabled ? _toggleDropdown : null,
                 readOnly: true,
                 controller: TextEditingController(
-                  text: _value != null
-                      ? (widget.builder != null
-                            ? widget.builder!(_value as T)
-                            : _value.toString())
-                      : '',
+                  text: _value != null ? (widget.builder != null ? widget.builder!(_value as T) : _value.toString()) : '',
                 ),
-                validator: (value) {
-                  if (widget.validator != null) {
-                    return widget.validator!(_value);
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  if (widget.onSaved != null) {
-                    widget.onSaved!(_value);
-                  }
-                },
+                validator: (value) => widget.validator != null ? widget.validator!(_value) : null,
+                onSaved: (value) => widget.onSaved?.call(_value),
                 style: GoogleFonts.poppins(
                   color: customColors.textColor,
                   fontSize: AppScaler.scaleFont(context, 16),
@@ -384,8 +335,7 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                 decoration: InputDecoration(
                   errorStyle: widget.errorStyle,
                   hintText: widget.hintText,
-                  hintStyle:
-                      widget.hintStyle ??
+                  hintStyle: widget.hintStyle ??
                       GoogleFonts.poppins(
                         fontWeight: FontWeight.w400,
                         fontSize: AppScaler.scaleFont(context, 16),
@@ -398,11 +348,9 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                   focusedBorder: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                   suffixIcon: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 12,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                     child: Opacity(
                       opacity: widget.enabled ? 1.0 : 0.5,
                       child: AnimatedRotation(
@@ -416,10 +364,6 @@ class _CustomDropdownState<T> extends ConsumerState<CustomDropdown<T>> {
                         ),
                       ),
                     ),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 12,
                   ),
                 ),
               ),

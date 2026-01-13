@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 part of 'drappers.dart';
 
 class MyApp extends ConsumerWidget {
@@ -21,14 +23,19 @@ class MyApp extends ConsumerWidget {
         debugShowCheckedModeBanner: false,
         routerConfig: goRouter,
         builder: (_, child) {
-          return AppStartupWidget(
-            onLoaded: (_) => MediaQuery(
-              data: MediaQuery.of(
-                context,
-              ).copyWith(textScaler: const TextScaler.linear(1.0)),
-              child: child!,
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaleFactor: 1.0,
+              viewInsets: MediaQuery.of(context).viewInsets,
+              viewPadding: MediaQuery.of(context).viewPadding,
+              padding: MediaQuery.of(context).padding,
+              // textScaler: 1.0,
             ),
+            child: child!,
           );
+          //  AppStartupWidget(
+          //   onLoaded: (_) =>
+          // );
         },
       ),
     );

@@ -126,11 +126,13 @@ class _StartupdetailsState extends State<Startupdetails> {
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 10),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -147,11 +149,11 @@ class _StartupdetailsState extends State<Startupdetails> {
                   },
                   child: Image.asset(
                     Assets.images.shareicon.path,
-                    height: 18,
-                    width: 18,
+                    height: AppScaler.scaleHeight(context, 18),
+                    width: AppScaler.scaleSize(context, 18),
                   ),
                 ),
-                SizedBox(width: 15),
+                SizedBox(width: AppScaler.scaleSize(context, 15)),
               ],
               // trailing: Padding(
               //   padding:  EdgeInsets.only(right: 16.0),
@@ -165,7 +167,7 @@ class _StartupdetailsState extends State<Startupdetails> {
               },
               child: Container(
                 width: double.infinity,
-                height: 215,
+                height: AppScaler.scaleHeight(context, 215),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
@@ -176,13 +178,13 @@ class _StartupdetailsState extends State<Startupdetails> {
                 child: Stack(
                   children: [
                     Positioned(
-                      bottom: 10,
-                      right: 10,
+                      bottom: AppScaler.scaleHeight(context, 10),
+                      right: AppScaler.scaleSize(context, 10),
                       child: Image.asset(Assets.images.muteicon.path),
                     ),
                     Positioned(
-                      top: 10,
-                      right: 10,
+                      top: AppScaler.scaleHeight(context, 10),
+                      right: AppScaler.scaleSize(context, 10),
                       child: GestureDetector(
                         behavior: HitTestBehavior.opaque,
 
@@ -190,16 +192,16 @@ class _StartupdetailsState extends State<Startupdetails> {
                           context.pop();
                         },
                         child: Container(
-                          width: 30,
-                          height: 30,
+                          width: AppScaler.scaleSize(context, 30),
+                          height: AppScaler.scaleHeight(context, 30),
                           decoration: BoxDecoration(
                             color: AppColors.color000011,
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
                             Icons.close,
-                            color: Colors.white,
-                            size: 16,
+                            color: AppColors.white,
+                            size: AppScaler.scaleFont(context, 16),
                           ),
                         ),
                       ),
@@ -217,7 +219,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: horizontalPadding,
-                        vertical: 16,
+                        vertical: AppScaler.scaleHeight(context, 16),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +231,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          SizedBox(height: 2),
+                          SizedBox(height: AppScaler.scaleHeight(context, 2)),
                           PoppinsText(
                             context,
                             'Sustainable energy Revolution',
@@ -237,9 +239,9 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.textColor,
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: AppScaler.scaleHeight(context, 16)),
                           SizedBox(
-                            height: 35,
+                            height: AppScaler.scaleHeight(context, 35),
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: tags.length,
@@ -251,9 +253,9 @@ class _StartupdetailsState extends State<Startupdetails> {
                               },
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
                           SizedBox(
-                            height: 35,
+                            height: AppScaler.scaleHeight(context, 35),
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: twotags.length,
@@ -265,21 +267,21 @@ class _StartupdetailsState extends State<Startupdetails> {
                               },
                             ),
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           AppButton(
                             prefixIcon: Image(
                               image: AssetImage(
                                 Assets.images.playstrokeicon.path,
                               ),
-                              width: 20,
-                              height: 20,
+                              width: AppScaler.scaleSize(context, 20),
+                              height: AppScaler.scaleHeight(context, 20),
                             ),
                             onPressed: () {
                               context.pushNamed(AppRoutes.videoScreen.name);
                             },
                             title: "Watch Episode",
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -302,7 +304,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                   style: OutlinedButton.styleFrom(
                                     side: BorderSide(
                                       color: customColors.greyColor,
-                                      width: 2,
+                                      width: AppScaler.scaleSize(context, 2),
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50),
@@ -315,7 +317,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     isSaved
                                         ? Icons.bookmark
                                         : Icons.bookmark_border,
-                                    size: 24,
+                                    size: AppScaler.scaleFont(context, 24),
                                     color: AppColors.wDark,
                                   ),
 
@@ -329,7 +331,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                 ),
                               ),
 
-                              SizedBox(width: 10),
+                              SizedBox(width: AppScaler.scaleSize(context, 10)),
 
                               SizedBox(
                                 width:
@@ -350,7 +352,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                                   style: OutlinedButton.styleFrom(
                                     side: BorderSide(
                                       color: customColors.greyColor,
-                                      width: 2,
+                                      width: AppScaler.scaleSize(context, 2),
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50),
@@ -381,14 +383,14 @@ class _StartupdetailsState extends State<Startupdetails> {
                             ],
                           ),
 
-                          SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           Container(
                             padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
                                 color: customColors.greyColor.withOpacity(0.3),
-                                width: 1,
+                                width: AppScaler.scaleSize(context, 1),
                               ),
                             ),
                             child: Row(
@@ -400,7 +402,9 @@ class _StartupdetailsState extends State<Startupdetails> {
                                     Assets.images.dummyprofile.path,
                                   ),
                                 ),
-                                SizedBox(width: 15),
+                                SizedBox(
+                                  height: AppScaler.scaleSize(context, 15),
+                                ),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -414,7 +418,12 @@ class _StartupdetailsState extends State<Startupdetails> {
                                             PoppinsFontWeightVariant.medium,
                                         color: customColors.textColor,
                                       ),
-                                      SizedBox(height: 2),
+                                      SizedBox(
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          2,
+                                        ),
+                                      ),
                                       PoppinsText(
                                         context,
                                         'Former Tesla Engineer 8+ Years experience in Battery Technology',
@@ -430,7 +439,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: AppScaler.scaleHeight(context, 16)),
                           PoppinsText(
                             context,
                             'Cast: Leonardo DiCaprio, Jonah Hill, Margot Robbie, Matthew... more',
@@ -445,7 +454,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.labelColor,
                           ),
-                          SizedBox(height: 25),
+                          SizedBox(height: AppScaler.scaleHeight(context, 25)),
                           PoppinsText(
                             context,
                             'Company Information',
@@ -453,7 +462,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
                           ...companyInfo.map(
                             (info) => _CompanyInfoRow(
                               label: info['label']!,
@@ -461,7 +470,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                               customColors: customColors,
                             ),
                           ),
-                          SizedBox(height: 25),
+                          SizedBox(height: AppScaler.scaleHeight(context, 25)),
                           PoppinsText(
                             context,
                             'About the Startup',
@@ -469,7 +478,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
                           PoppinsText(
                             context,
                             'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -477,7 +486,7 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.labelColor,
                           ),
-                          SizedBox(height: 25),
+                          SizedBox(height: AppScaler.scaleHeight(context, 25)),
 
                           PoppinsText(
                             context,
@@ -486,9 +495,12 @@ class _StartupdetailsState extends State<Startupdetails> {
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: AppScaler.scaleHeight(context, 15)),
+
                           Padding(
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.only(
+                              bottom: AppScaler.scaleHeight(context, 10),
+                            ),
                             child: GestureDetector(
                               behavior: HitTestBehavior.opaque,
                               onTap: () {
@@ -497,10 +509,9 @@ class _StartupdetailsState extends State<Startupdetails> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Image Container with fixed height
                                   Container(
-                                    width: 122,
-                                    height: 200, // ← fixed height for image
+                                    width: AppScaler.scaleSize(context, 122),
+                                    height: AppScaler.scaleHeight(context, 200),
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
@@ -511,7 +522,9 @@ class _StartupdetailsState extends State<Startupdetails> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
-                                  SizedBox(width: 12),
+                                  SizedBox(
+                                    width: AppScaler.scaleSize(context, 12),
+                                  ),
 
                                   // Content Column
                                   Expanded(
@@ -532,7 +545,13 @@ class _StartupdetailsState extends State<Startupdetails> {
                                             textOverflow: TextOverflow.ellipsis,
                                             maxLines: 2,
                                           ),
-                                          SizedBox(height: 20),
+                                          SizedBox(
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              20,
+                                            ),
+                                          ),
+
                                           PoppinsText(
                                             context,
                                             "Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode, spotlighting visionary startups from across the world. Judges Nikki Farb, TikTok executive Tim Natividad, and legendary investor Bill Draper evaluate groundbreaking innovations in connectivity, accessibility, and education. From CleverFi’s seamless WiFi to Zeality’s immersive AR/VR tech, WeWALK’s smart cane, and Taleemabad’s educational revolution, this episode is a thrilling showcase of entrepreneurial brilliance",
@@ -544,9 +563,12 @@ class _StartupdetailsState extends State<Startupdetails> {
                                             maxLines: 2,
                                             textOverflow: TextOverflow.ellipsis,
                                           ),
-                                          SizedBox(height: 20),
-
-                                          // Slider Row
+                                          SizedBox(
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              20,
+                                            ),
+                                          ),
                                           Row(
                                             children: [
                                               Expanded(
@@ -582,7 +604,13 @@ class _StartupdetailsState extends State<Startupdetails> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(width: 8),
+                                              SizedBox(
+                                                height: AppScaler.scaleSize(
+                                                  context,
+                                                  8,
+                                                ),
+                                              ),
+
                                               PoppinsText(
                                                 context,
                                                 '-12:34',
@@ -595,9 +623,12 @@ class _StartupdetailsState extends State<Startupdetails> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 20),
-
-                                          // Watch Button
+                                          SizedBox(
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              20,
+                                            ),
+                                          ),
                                           Row(
                                             children: [
                                               Expanded(
@@ -612,15 +643,25 @@ class _StartupdetailsState extends State<Startupdetails> {
                                                   title: 'Watch Episode',
                                                   buttonSize: Size(
                                                     double.infinity,
-                                                    40,
+                                                    AppScaler.scaleHeight(
+                                                      context,
+                                                      40,
+                                                    ),
                                                   ),
                                                   prefixIcon: Image.asset(
                                                     Assets
                                                         .images
                                                         .playstrokeicon
                                                         .path,
-                                                    width: 14,
-                                                    height: 14,
+                                                    width: AppScaler.scaleSize(
+                                                      context,
+                                                      14,
+                                                    ),
+                                                    height:
+                                                        AppScaler.scaleHeight(
+                                                          context,
+                                                          14,
+                                                        ),
                                                   ),
                                                 ),
                                               ),

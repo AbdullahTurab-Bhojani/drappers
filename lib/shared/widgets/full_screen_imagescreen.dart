@@ -7,6 +7,7 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 import '../../drappers.dart';
+import 'guestloginwidget.dart';
 
 class FullscreenImageScreen extends StatefulWidget {
   final String imagePath;
@@ -105,6 +106,10 @@ class _FullscreenImageScreenState extends State<FullscreenImageScreen> {
                           height: AppScaler.scaleHeight(context, 45),
                           child: AppButton(
                             onPressed: () {
+                              if (GuestHelper.isGuest) {
+                                GuestHelper.checkGuest(context);
+                                return;
+                              }
                               setState(() {
                                 if (!isAdded) {
                                   isAdded = true;
