@@ -965,11 +965,11 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                             width: 15,
                             height: 15,
                           ),
-                          const SizedBox(width: 8),
+                         SizedBox(width: 8),
                           PoppinsText(
                             context,
                             "Locked",
-                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontSize: PoppinsFontSizeVariant.size28,
                             fontWeight: PoppinsFontWeightVariant.semiBold,
                             color: AppColors.wDark,
                           ),
