@@ -135,7 +135,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                     PoppinsText(
                       context,
                       "Speed",
-                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontSize: PoppinsFontSizeVariant.size28,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: AppColors.wDark,
                     ),
@@ -192,7 +192,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             PoppinsText(
                               context,
                               text,
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size28,
                               fontWeight: PoppinsFontWeightVariant.regular,
                               color: AppColors.wDark,
                             ),
@@ -226,16 +226,15 @@ class _newliveScreenScreenState extends State<newliveScreen> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.min, // ✅ SAME AS SPEED POPUP
+              mainAxisSize: MainAxisSize.min,
               children: [
-                /// HEADER
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PoppinsText(
                       context,
                       "Audio & Subtitles",
-                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontSize: PoppinsFontSizeVariant.size28,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: AppColors.wDark,
                     ),
@@ -250,7 +249,6 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                 SizedBox(height: 12),
                 Divider(),
 
-                /// LIST
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -291,7 +289,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             PoppinsText(
                               context,
                               text,
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size28,
                               fontWeight: PoppinsFontWeightVariant.regular,
                               color: AppColors.wDark,
                             ),
@@ -483,7 +481,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                                   .value
                                   .position,
                             ),
-                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontSize: PoppinsFontSizeVariant.size28,
                             fontWeight: PoppinsFontWeightVariant.regular,
                             color: AppColors.wDark,
                           ),
@@ -527,7 +525,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             PoppinsText(
                               context,
                               "Speed",
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size28,
                               fontWeight: PoppinsFontWeightVariant.semiBold,
                               color: AppColors.white,
                             ),
@@ -550,7 +548,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                             PoppinsText(
                               context,
                               "Audio & Subtitle",
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size28,
                               fontWeight: PoppinsFontWeightVariant.semiBold,
                               color: AppColors.white,
                             ),
@@ -572,7 +570,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                           PoppinsText(
                             context,
                             "Picture in Picture",
-                            fontSize: PoppinsFontSizeVariant.size12,
+                            fontSize: PoppinsFontSizeVariant.size28,
                             fontWeight: PoppinsFontWeightVariant.semiBold,
                             color: AppColors.white,
                           ),

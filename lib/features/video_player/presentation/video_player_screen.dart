@@ -139,16 +139,15 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.min, // ✅ SAME AS SPEED POPUP
+              mainAxisSize: MainAxisSize.min,
               children: [
-                /// HEADER
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PoppinsText(
                       context,
                       "Quality",
-                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontSize: PoppinsFontSizeVariant.size28,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: AppColors.wDark,
                     ),
@@ -160,10 +159,9 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   ],
                 ),
 
-                SizedBox(height: 12), // ✅ SAME
+                SizedBox(height: 12),
                 Divider(),
 
-                /// LIST
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -180,7 +178,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                          vertical: 12, // ✅ SAME
+                          vertical: 12,
                           horizontal: 12,
                         ),
                         margin: EdgeInsets.only(bottom: 10),
@@ -202,7 +200,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                             PoppinsText(
                               context,
                               text,
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size28,
                               fontWeight: PoppinsFontWeightVariant.regular,
                               color: AppColors.wDark,
                             ),
@@ -345,7 +343,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     PoppinsText(
                       context,
                       "Audio & Subtitles",
-                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontSize: PoppinsFontSizeVariant.size28,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: AppColors.wDark,
                     ),
@@ -360,7 +358,6 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                 SizedBox(height: 12),
                 Divider(),
 
-                /// LIST
                 ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
@@ -401,7 +398,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                             PoppinsText(
                               context,
                               text,
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size28,
                               fontWeight: PoppinsFontWeightVariant.regular,
                               color: AppColors.wDark,
                             ),
@@ -442,7 +439,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                     PoppinsText(
                       context,
                       "Speed",
-                      fontSize: PoppinsFontSizeVariant.size12,
+                      fontSize: PoppinsFontSizeVariant.size28,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: AppColors.wDark,
                     ),
@@ -499,7 +496,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                             PoppinsText(
                               context,
                               text,
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size28,
                               fontWeight: PoppinsFontWeightVariant.regular,
                               color: AppColors.wDark,
                             ),
@@ -575,7 +572,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                   PoppinsText(
                     context,
                     episode['title']!,
-                    fontSize: PoppinsFontSizeVariant.size16,
+                    fontSize: PoppinsFontSizeVariant.size32,
                     fontWeight: PoppinsFontWeightVariant.medium,
                     color: AppColors.wDark,
                   ),
@@ -623,15 +620,12 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     color: AppColors.color000032,
                     child: PoppinsText(
                       context,
                       'E14 Finale',
-                      fontSize: PoppinsFontSizeVariant.size24,
+                      fontSize: PoppinsFontSizeVariant.size40,
                       fontWeight: PoppinsFontWeightVariant.medium,
                       color: AppColors.wDark,
                     ),
@@ -866,7 +860,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                                     .value
                                     .position,
                               ),
-                              fontSize: PoppinsFontSizeVariant.size12,
+                              fontSize: PoppinsFontSizeVariant.size28,
                               fontWeight: PoppinsFontWeightVariant.regular,
                               color: AppColors.wDark,
                             ),
@@ -1011,7 +1005,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
                       child: PoppinsText(
                         context,
                         "Finale – Meet The Drapers Season",
-                        fontSize: PoppinsFontSizeVariant.size22,
+                        fontSize: PoppinsFontSizeVariant.size40,
                         fontWeight: PoppinsFontWeightVariant.medium,
                         color: AppColors.white,
                         maxLines: 1,
@@ -1052,7 +1046,7 @@ class _CustomVideoPlayerScreenState extends State<CustomVideoPlayerScreen> {
           PoppinsText(
             context,
             label,
-            fontSize: PoppinsFontSizeVariant.size12,
+            fontSize: PoppinsFontSizeVariant.size28,
             fontWeight: PoppinsFontWeightVariant.semiBold,
             color: AppColors.wDark,
           ),

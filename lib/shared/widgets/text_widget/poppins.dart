@@ -1,3 +1,5 @@
+// ignore_for_file: unreachable_switch_case
+
 part of '../../../drappers.dart';
 
 enum PoppinsFontSizeVariant {
@@ -25,6 +27,7 @@ enum PoppinsFontSizeVariant {
   size28,
   size30,
   size32,
+  size40,
 }
 
 enum PoppinsFontWeightVariant {
@@ -119,6 +122,8 @@ class PoppinsText extends Text {
         return 30;
       case PoppinsFontSizeVariant.size32:
         return 32;
+      case PoppinsFontSizeVariant.size40:
+        return 40;
     }
   }
 
