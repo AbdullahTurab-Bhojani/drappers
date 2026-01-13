@@ -97,17 +97,17 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
               SizedBox(height: AppScaler.scaleHeight(context, 40)),
               AppButton(
                 onPressed: () {
-                  if (widget.openDialogOnContinue) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => Dialog(
-                        backgroundColor: Colors.transparent,
-                        child: ChangepasswordPopupWidget(),
-                      ),
-                    );
-                  } else {
+                  // if (widget.openDialogOnContinue) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (context) => Dialog(
+                  //       backgroundColor: Colors.transparent,
+                  //       child: ChangepasswordPopupWidget(),
+                  //     ),
+                  //   );
+                  // } else {
                     context.pushNamed(AppRoutes.loginScreen.name);
-                  }
+                  // }
                 },
                 title: "Continue",
               ),

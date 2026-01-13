@@ -193,16 +193,28 @@ class _SearchscreenState extends State<Searchscreen> {
                       SizedBox(
                         height: AppScaler.scaleHeight(context, 185),
                         child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           padding: EdgeInsets.zero,
                           itemCount: dummyHistory.length,
                           itemBuilder: (context, index) {
                             final item = dummyHistory[index];
+
                             return HistoryItemTile(
                               title: item.title,
                               thumbnailPath: item.thumbnailPath,
-                              onTapRemove: () {},
-                              onTapTile: () {},
+
+                              onTapRemove: () {
+                                setState(() {
+                                  dummyHistory.removeAt(index);
+                                });
+                              },
+
+                              onTapTile: () {
+                                context.pushNamed(
+                                  AppRoutes.contentDetail.name,
+                                  extra: item,
+                                );
+                              },
                             );
                           },
                         ),
