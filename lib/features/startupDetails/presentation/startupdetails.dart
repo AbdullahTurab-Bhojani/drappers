@@ -125,15 +125,10 @@ class _StartupdetailsState extends State<Startupdetails> {
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: AppScaler.scaleSize(context, 10),
-                  ),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: AppScaler.scaleSize(context, 20),
-                    height: AppScaler.scaleHeight(context, 20),
-                  ),
+                child: Image.asset(
+                  "assets/images/backicon.png",
+                  width: AppScaler.scaleSize(context, 20),
+                  height: AppScaler.scaleHeight(context, 20),
                 ),
               ),
               title: "Startup Details",

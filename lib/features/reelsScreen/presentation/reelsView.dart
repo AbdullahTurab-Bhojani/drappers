@@ -185,7 +185,7 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                               )
                             : Center(
                                 child: CircularProgressIndicator(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                 ),
                               ),
                       ),
@@ -412,10 +412,10 @@ class _ReelsviewScreenState extends State<ReelsviewScreen> {
                               },
                               child: CircleAvatar(
                                 backgroundColor: Colors.black54,
-                                radius: 20,
+                                radius: AppScaler.scaleFont(context, 20),
                                 child: Icon(
                                   Icons.arrow_back_ios_new,
-                                  size: 20,
+                                  size: AppScaler.scaleFont(context, 20),
                                   color: Colors.white,
                                 ),
                               ),

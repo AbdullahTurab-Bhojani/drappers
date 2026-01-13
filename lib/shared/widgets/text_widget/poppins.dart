@@ -57,7 +57,7 @@ class PoppinsText extends Text {
   }) : super(
          style: GoogleFonts.poppins(
            color: color,
-           fontSize: AppScaler.scaleFont(context, _fontSize(fontSize)),
+           fontSize: AppScaler.scaleSize(context, _fontSize(fontSize)),
            fontWeight: _fontWeight(fontWeight),
            height: height,
            letterSpacing: letterSpacing,

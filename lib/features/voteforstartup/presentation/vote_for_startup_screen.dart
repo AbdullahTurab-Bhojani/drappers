@@ -41,13 +41,10 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
-                  ),
+                child: Image.asset(
+                  "assets/images/backicon.png",
+                  width:  AppScaler.scaleSize(context, 20),
+                  height:  AppScaler.scaleHeight(context, 20),
                 ),
               ),
               title: "Vote for Startup",
