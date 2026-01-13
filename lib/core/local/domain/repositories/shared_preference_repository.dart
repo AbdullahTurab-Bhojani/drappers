@@ -1,4 +1,9 @@
-part of '../../../../drappers.dart';
+// ignore_for_file: annotate_overrides
+
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../shared/models/user_model.dart';
+import 'local_storage_repository.dart';
 
 class SharedPreferencesService implements SharedPrefService {
   SharedPreferencesService(this.sharedPreferences);
@@ -7,118 +12,196 @@ class SharedPreferencesService implements SharedPrefService {
 
   final _tokenKey = 'access-token';
   final _isFirstTimeKey = 'is-first-time';
-  final idKey = 'id-user';
-  final transcribeBaseUrlKey = 'transcribeBaseUrl';
-  final isGuestKey = 'is-guest-user';
-
-  final login = 'login';
-  final profileComplete = 'profile-complete';
-  final languageCodeKey = 'language-code';
-  final countryCodeKey = 'country-code';
+  final _idKey = 'id-user';
+  final _loginKey = 'login';
+  final _userKey = 'user';
+  final _userNameKey = 'user-name';
+  final _marketAccessToken = 'metaAccessToken';
+  final _marketAccessTokenNew = 'metaAccessTokenNew';
+  final _marketRefreshToken = 'metaRefreshToken';
+  final _marketRefreshTokenNew = 'metaRefreshTokenNew';
+  final _emailKey = 'setEmail';
+  final _rememberMeKey = 'rememberMe';
+  final _passwordKey = 'password';
   final themeKey = 'selected_theme';
 
+  static const _deviceIdKey = 'device_id';
+  static const _fcmTokenKey = 'fcm_token';
+
+  // ---------------- AUTH ----------------
+
   @override
-  Future<String?> get accessToken async {
-    // final currentUser = FirebaseAuth.instance.currentUser;
-    // if (currentUser == null) return null;
-
-    // final result = await currentUser.getIdTokenResult();
-    // final expiry = result.expirationTime?.subtract(Duration(minutes: 10));
-    // final now = DateTime.now();
-
-    // String? token = sharedPreferences.getString(_tokenKey);
-
-    // // 10 minutes before expiry
-
-    // final shouldRefresh =
-    //     token == null || expiry == null || now.isAfter(expiry);
-
-    // if (shouldRefresh) {
-    //   token = await currentUser.getIdToken(true); // Force refresh
-    //   await sharedPreferences.setString(_tokenKey, token ?? "");
-    // }
-
-    return null;
-  }
+  String? get accessToken => sharedPreferences.getString(_tokenKey);
 
   @override
   Future<bool> setAccessToken(String token) async {
-    debugPrint("setAccessToken $token");
-
-    await sharedPreferences.setBool(isGuestKey, false);
-    return await sharedPreferences.setString(_tokenKey, token);
+    return sharedPreferences.setString(_tokenKey, token);
   }
 
   @override
-  Future<bool> setCompleteProfile() async {
-    return await sharedPreferences.setBool(profileComplete, true);
+  Future<bool> setLogout() async {
+    await sharedPreferences.setBool(_loginKey, false);
+    await setAccessToken('');
+    return true;
   }
 
   @override
-  Future<bool> setIsGuest() async {
-    return await sharedPreferences.setBool(isGuestKey, true);
+  Future<bool> setIsLogin() async {
+    return sharedPreferences.setBool(_loginKey, true);
   }
 
   @override
-  bool get isCompleteProfile =>
-      sharedPreferences.getBool(profileComplete) ?? false;
+  bool get isLogin => sharedPreferences.getBool(_loginKey) ?? false;
+
+  // ---------------- MARKET ----------------
 
   @override
-  bool get isLoginTutor => getUserId.isNotEmpty && isCompleteProfile;
+  String? get marketAccessToken =>
+      sharedPreferences.getString(_marketAccessToken);
+
   @override
-  bool get isLoginLearner => getUserId.isNotEmpty && isCompleteProfile;
-  @override
-  bool getIsFirstTime() {
-    return sharedPreferences.getBool(_isFirstTimeKey) ?? true;
+  Future<bool> setAccessTokenMarket(String token) async {
+    return sharedPreferences.setString(_marketAccessToken, token);
   }
+
+  @override
+  String? get marketAccessTokenNew =>
+      sharedPreferences.getString(_marketAccessTokenNew);
+
+  @override
+  Future<bool> setAccessTokenMarketNew(String token) async {
+    return sharedPreferences.setString(_marketAccessTokenNew, token);
+  }
+
+  @override
+  String? get marketRefreshToken =>
+      sharedPreferences.getString(_marketRefreshToken);
+
+  @override
+  Future<bool> setRefreshTokenMarket(String token) async {
+    return sharedPreferences.setString(_marketRefreshToken, token);
+  }
+
+  @override
+  String? get marketRefreshTokenNew =>
+      sharedPreferences.getString(_marketRefreshTokenNew);
+
+  @override
+  Future<bool> setRefreshTokenMarketNew(String token) async {
+    return sharedPreferences.setString(_marketRefreshTokenNew, token);
+  }
+
+  // ---------------- USER PREFS ----------------
+
+  @override
+  String? get getUserName => sharedPreferences.getString(_userNameKey);
+
+  @override
+  Future<void> saveUserName(String userName) async {
+    await sharedPreferences.setString(_userNameKey, userName);
+  }
+
+  @override
+  String get getUserId => sharedPreferences.getString(_idKey) ?? '';
+
+  @override
+  Future<void> saveUserId(String userId) async {
+    await sharedPreferences.setString(_idKey, userId);
+  }
+
+  @override
+  Future<void> removeUserId(String userId) async {
+    await sharedPreferences.remove(_idKey);
+  }
+
+  @override
+  String? get getEmail => sharedPreferences.getString(_emailKey);
+
+  @override
+  Future<bool> setEmail(String email) async {
+    return sharedPreferences.setString(_emailKey, email);
+  }
+
+  @override
+  String? get getRemamberMe => sharedPreferences.getString(_rememberMeKey);
+
+  @override
+  Future<bool> setRememberMe(String rememberMe) async {
+    return sharedPreferences.setString(_rememberMeKey, rememberMe);
+  }
+
+  @override
+  String? get getPassword1 => sharedPreferences.getString(_passwordKey);
+
+  @override
+  Future<bool> setPassword(String password) async {
+    return sharedPreferences.setString(_passwordKey, password);
+  }
+
+  // ---------------- FIRST TIME ----------------
+
+  @override
+  bool getIsFirstTime() => sharedPreferences.getBool(_isFirstTimeKey) ?? true;
 
   @override
   Future<void> setIsFirstTime(bool value) async {
     await sharedPreferences.setBool(_isFirstTimeKey, value);
   }
 
+  // ---------------- USER OBJECT ----------------
+
+  @override
+  Future<void> saveUser(UserData user) async {
+    await sharedPreferences.setString(_userKey, jsonEncode(user.toJson()));
+  }
+
+  @override
+  Future<UserData?> getUser() async {
+    final userJson = sharedPreferences.getString(_userKey);
+    if (userJson == null) return null;
+    return UserData.fromJson(jsonDecode(userJson));
+  }
+
+  // ---------------- DEVICE & FCM ----------------
+
+  @override
+  String? get getdeviceId => sharedPreferences.getString(_deviceIdKey);
+
+  @override
+  Future<void> saveDeviceId(String deviceId) async {
+    await sharedPreferences.setString(_deviceIdKey, deviceId);
+  }
+
+  @override
+  String? get getfcmToken => sharedPreferences.getString(_fcmTokenKey);
+
+  @override
+  Future<void> saveFcmToken(String fcmToken) async {
+    await sharedPreferences.setString(_fcmTokenKey, fcmToken);
+  }
+
+  // ---------------- CLEAR ----------------
+
   @override
   Future<bool> clearAllData() async {
-    return await sharedPreferences.clear();
+    return sharedPreferences.clear();
   }
 
-  @override
-  String get getUserId => sharedPreferences.getString(idKey) ?? "";
-
-  @override
-  bool get isGuest => sharedPreferences.getBool(isGuestKey) ?? false;
-
-  @override
-  Future<void> saveUserId(String userId) {
-    return sharedPreferences.setString(idKey, userId);
+  // ---------------- LOCATION ----------------
+  Future<void> saveLatitude(double value) async {
+    await sharedPreferences.setDouble('latitude', value);
   }
 
-  @override
-  Future<void> removeUserId(String userId) {
-    return sharedPreferences.remove(idKey);
+  Future<void> saveLongitude(double value) async {
+    await sharedPreferences.setDouble('longitude', value);
   }
 
-  @override
-  String get transcribeBaseUrl =>
-      sharedPreferences.getString(transcribeBaseUrlKey) ?? '';
-  @override
-  Future<void> setTranscribeBaseUrl(String baseUrl) async {
-    await sharedPreferences.setString(transcribeBaseUrlKey, baseUrl);
+  double? getLatitude() {
+    return sharedPreferences.getDouble('latitude');
   }
 
-  @override
-  String get languageCode =>
-      sharedPreferences.getString(languageCodeKey) ?? 'en';
-  @override
-  String get countryCode => sharedPreferences.getString(countryCodeKey) ?? 'en';
-  @override
-  Future<void> setLanguageCode(String languageCode) async {
-    await sharedPreferences.setString(languageCodeKey, languageCode);
-  }
-
-  @override
-  Future<void> setCountryCode(String countryCode) async {
-    await sharedPreferences.setString(countryCodeKey, countryCode);
+  double? getLongitude() {
+    return sharedPreferences.getDouble('longitude');
   }
 
   @override

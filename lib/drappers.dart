@@ -51,7 +51,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'core/extensions/theme_extension.dart';
-import 'core/local/providers/shared_pref.dart';
 import 'core/theme/app_scalar.dart';
 import 'core/theme/app_theme.dart';
 import 'features/Setting&preferences/presentation/setting_preferences.dart';
@@ -157,5 +156,6 @@ part 'shared/widgets/error_widget.dart';
 part 'shared/widgets/loading_widget.dart';
 part 'shared/widgets/searchable_custom_dropdown.dart';
 part 'shared/widgets/text_field_label.dart';
-part 'core/local/domain/repositories/shared_preference_repository.dart';
-part 'core/local/domain/repositories/local_storage_repository.dart';
+
+// part 'core/local/domain/repositories/shared_preference_repository.dart';
+// part 'core/local/domain/repositories/local_storage_repository.dart';
