@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../app_bar/main_app_bar.dart';
@@ -31,6 +32,17 @@ class _ReelWidgetState extends State<ReelWidget> {
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
 
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    final crossAxisCount = 2;
+    final crossAxisSpacing = AppScaler.scaleSize(context, 10);
+    final mainAxisSpacing = AppScaler.scaleHeight(context, 10);
+    final horizontalPadding = AppScaler.scaleSize(context, 20) * 2;
+    final cardWidth =
+        (screenWidth - horizontalPadding - crossAxisSpacing) / crossAxisCount;
+    final cardHeight = AppScaler.scaleHeight(context, 350);
+    final childAspectRatio = cardWidth / cardHeight;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -46,16 +58,17 @@ class _ReelWidgetState extends State<ReelWidget> {
             AppMainBar(
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
                 onTap: () {
                   context.pop();
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 10),
+                  ),
                   child: Image.asset(
                     Assets.images.backicon.path,
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -65,10 +78,11 @@ class _ReelWidgetState extends State<ReelWidget> {
               elevation: 0,
               actions: [
                 Padding(
-                  padding: EdgeInsets.only(right: 16),
+                  padding: EdgeInsets.only(
+                    right: AppScaler.scaleSize(context, 16),
+                  ),
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
-
                     onTap: () {
                       if (GuestHelper.isGuest) {
                         GuestHelper.checkGuest(context);
@@ -78,8 +92,8 @@ class _ReelWidgetState extends State<ReelWidget> {
                     },
                     child: Image.asset(
                       Assets.images.searchstokeicon.path,
-                      width: 20,
-                      height: 20,
+                      width: AppScaler.scaleSize(context, 20),
+                      height: AppScaler.scaleHeight(context, 20),
                     ),
                   ),
                 ),
@@ -87,22 +101,25 @@ class _ReelWidgetState extends State<ReelWidget> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 20),
+                  vertical: AppScaler.scaleHeight(context, 10),
+                ),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: reelimages.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 195 / 380,
+                    crossAxisCount: crossAxisCount,
+                    mainAxisSpacing: mainAxisSpacing,
+                    crossAxisSpacing: crossAxisSpacing,
+                    childAspectRatio: childAspectRatio,
                   ),
                   itemBuilder: (context, index) {
                     return ReelcardWidget(
                       assetImagePath: reelimages[index],
                       title: reelTitles[index],
-                      reelCardHeight: 350,
-                      reelCardWidth: 195,
+                      reelCardHeight: cardHeight,
+                      reelCardWidth: cardWidth,
                       fontSizeVariant: PoppinsFontSizeVariant.size14,
                       showSaveIcon: true,
                     );

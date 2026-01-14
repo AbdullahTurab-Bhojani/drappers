@@ -3,6 +3,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 
 class PhoneOtpField extends ConsumerStatefulWidget {
@@ -44,32 +45,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
     super.initState();
     _otpControllers = List.generate(6, (_) => TextEditingController());
     _focusNodes = List.generate(6, (_) => FocusNode());
-  }
-
-  void _startTimer() {
-    seconds = 30;
-
-    setState(() {
-      isTimerRunning = true;
-      showResendButton = false;
-      showOtpField = true;
-    });
-
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!mounted) return;
-
-      if (seconds == 0) {
-        timer.cancel();
-        setState(() {
-          isTimerRunning = false;
-          showResendButton = true;
-          showOtpField = false;
-        });
-      } else {
-        setState(() => seconds--);
-      }
-    });
   }
 
   void _onOtpChanged(int index, String value) {
@@ -121,8 +96,9 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                         context: context,
                         showPhoneCode: true,
                         onSelect: (Country country) {
-                          if (mounted)
+                          if (mounted) {
                             setState(() => selectedCountry = country);
+                          }
                         },
                       );
                     },
@@ -131,7 +107,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                       child: Text(
                         "+${selectedCountry.phoneCode}",
                         style: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: AppScaler.scaleFont(context, 14),
                           color: AppColors.white,
                         ),
                       ),
@@ -143,7 +119,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
                       style: GoogleFonts.poppins(
-                        fontSize: 16,
+                        fontSize: AppScaler.scaleFont(context, 16),
                         color: AppColors.white,
                       ),
                       decoration: const InputDecoration(
@@ -195,22 +171,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
             }),
           ),
       ],
-    );
-  }
-
-  Widget _actionButton(String text) {
-    return Container(
-      height: 28,
-      width: 84,
-      margin: const EdgeInsets.only(left: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-      decoration: BoxDecoration(
-        color: AppColors.buttoncolor.first,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Center(
-        child: Text(text, style: const TextStyle(color: Colors.white)),
-      ),
     );
   }
 }

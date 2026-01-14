@@ -6,6 +6,7 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../shared/widgets/documentries_card/documentries_card_widget.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
@@ -80,13 +81,10 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
-                  ),
+                child: Image.asset(
+                  "assets/images/backicon.png",
+                  width: 20,
+                  height: 20,
                 ),
               ),
               title: "Live Pitches",
@@ -98,15 +96,16 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: AppScaler.scaleSize(context, 20)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Trending Shows',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -134,16 +133,16 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                         ],
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                       SizedBox(
-                        height: 180,
+                        height: AppScaler.scaleHeight(context, 180),
                         child: ListView.separated(
                           padding: EdgeInsets.zero,
                           clipBehavior: Clip.none,
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) =>
-                              const SizedBox(width: 15),
+                              SizedBox(width: AppScaler.scaleSize(context, 15)),
                           itemCount: trendingimages.length,
                           itemBuilder: (context, index) {
                             return CardWidget(
@@ -152,18 +151,20 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                               fromEpisode: false,
                               allowGuestNavigation: true,
                               index: index,
-                              showMenuOnly: true, showLiveTvBadge: false,
+                              showMenuOnly: true,
+                              showLiveTvBadge: false,
                             );
                           },
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Podcasts',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -191,15 +192,15 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                       SizedBox(
-                        height: 180,
+                        height: AppScaler.scaleHeight(context, 180),
                         child: ListView.separated(
                           clipBehavior: Clip.none,
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) =>
-                              SizedBox(width: 15),
+                              SizedBox(width: AppScaler.scaleSize(context, 15)),
                           itemCount: podcardimages.length,
                           itemBuilder: (context, index) {
                             return PodcardsWidget(
@@ -211,11 +212,12 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                           },
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Reels',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -253,21 +255,25 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                       SizedBox(
-                        height: 273,
+                        height: AppScaler.scaleHeight(context, 273),
                         child: ListView.separated(
                           padding: EdgeInsets.zero,
                           clipBehavior: Clip.none,
                           scrollDirection: Axis.horizontal,
-                          separatorBuilder: (context, index) =>
-                              SizedBox(width: 15),
+                          separatorBuilder: (context, index) => SizedBox(
+                            width: AppScaler.scaleHeight(context, 15),
+                          ),
                           itemCount: reelimages.length,
                           itemBuilder: (context, index) {
                             return ReelcardWidget(
-                              reelCardHeight: 273,
-                              reelCardWidth: 149,
+                              reelCardHeight: AppScaler.scaleHeight(
+                                context,
+                                273,
+                              ),
+                              reelCardWidth: AppScaler.scaleSize(context, 149),
                               fontSizeVariant: PoppinsFontSizeVariant.size12,
                               assetImagePath: reelimages[index],
                               title: reelTitles[index],
@@ -276,12 +282,13 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                           },
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Documentaries',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
@@ -308,9 +315,9 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       SizedBox(
-                        height: 180,
+                        height: AppScaler.scaleHeight(context, 180),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) =>
@@ -325,7 +332,7 @@ class _LivepitchesScreenState extends State<LivepitchesScreen> {
                         ),
                       ),
 
-                      SizedBox(height: 10),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
                     ],
                   ),
                 ),

@@ -4,6 +4,7 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../widgets/report_content_widget.dart';
 
 class ReportItem {
@@ -82,11 +83,13 @@ class _ReportContentState extends State<ReportContent> {
                   context.pop();
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 10),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -99,32 +102,35 @@ class _ReportContentState extends State<ReportContent> {
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(
                   horizontal: horizontalPadding,
-                  vertical: 10.0,
+                  vertical: AppScaler.scaleHeight(context, 10),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PoppinsText(
+                      context,
                       "Report Content",
                       fontSize: PoppinsFontSizeVariant.size24,
                       fontWeight: PoppinsFontWeightVariant.semiBold,
                       color: customColors.textColor,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
                     PoppinsText(
+                      context,
                       "Help us improve your experience by sharing what's wrong.",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: customColors.textColor,
                     ),
-                    SizedBox(height: 30.0),
+                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
                     PoppinsText(
+                      context,
                       "Select the Issue Category",
                       fontSize: PoppinsFontSizeVariant.size16,
                       fontWeight: PoppinsFontWeightVariant.regular,
                       color: customColors.textColor,
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
                     ListView.separated(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -154,10 +160,13 @@ class _ReportContentState extends State<ReportContent> {
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 10);
+                        return SizedBox(
+                          height: AppScaler.scaleHeight(context, 10),
+                        );
                       },
                     ),
-                    SizedBox(height: 30.0),
+                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
                     if (isSelected)
                       AppButton(
                         onPressed: () {
@@ -167,7 +176,7 @@ class _ReportContentState extends State<ReportContent> {
                         },
                         title: "Submit",
                       ),
-                    SizedBox(height: 10),
+                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
                   ],
                 ),
               ),

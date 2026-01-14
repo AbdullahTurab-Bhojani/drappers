@@ -62,6 +62,7 @@ class ImagePickerHandler {
                               ),
                               child: Center(
                                 child: PoppinsText(
+                                  context,
                                   'Take photo',
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   fontWeight: PoppinsFontWeightVariant.regular,
@@ -101,6 +102,7 @@ class ImagePickerHandler {
                               ),
                               child: Center(
                                 child: PoppinsText(
+                                  context,
                                   'Gallery photo',
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   fontWeight: PoppinsFontWeightVariant.regular,
@@ -128,6 +130,7 @@ class ImagePickerHandler {
                       ),
                       child: Center(
                         child: PoppinsText(
+                          context,
                           'Cancel',
                           fontSize: PoppinsFontSizeVariant.size12,
                           fontWeight: PoppinsFontWeightVariant.regular,

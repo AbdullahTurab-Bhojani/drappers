@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
 import 'app_bar/main_app_bar.dart';
@@ -64,7 +65,8 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
     ];
     final List<Map<String, dynamic>> historyItems = const [
       {
-        'image': 'Assets.images.podcastimage1.path',
+        'image':
+            'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
         'title': 'Finale – Meet The Drapers Season 07 (2025)',
         'subtitle': 'EP.5 - YAT SIU',
         'remaining': '-12:34',
@@ -72,7 +74,8 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
         'progress': 75.0,
       },
       {
-        'image': 'Assets.images.podcastimage2.path',
+        'image':
+            'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
         'title': 'Episode 2 – Startup Stories',
         'subtitle': 'Dive into inspiring stories of new entrepreneurs...',
         'remaining': '-12:34',
@@ -80,7 +83,8 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
         'progress': 40.0,
       },
       {
-        'image': 'Assets.images.podcastimage3.path',
+        'image':
+            'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
         'title': 'Episode 3 – Tech Innovation',
         'subtitle': 'Latest updates on tech, AI, and innovative startups.',
         'remaining': '-12:34',
@@ -90,7 +94,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
     ];
     final Map<String, dynamic> podcastData = {
       'podcast': Podcast(
-        imagePath: Assets.images.podcastimage3.path,
+        imagePath:  'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
         title: 'Podcast Title Placeholder',
         description: 'This is a description placeholder for the podcast item.',
       ),
@@ -118,13 +122,10 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 5),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
-                  ),
+                child: Image.asset(
+                  "assets/images/backicon.png",
+                  width: AppScaler.scaleSize(context, 20),
+                  height: AppScaler.scaleHeight(context, 20),
                 ),
               ),
               title: "Watch History",
@@ -139,10 +140,12 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
               //   SizedBox(width: 20),
               // ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppScaler.scaleSize(context, 10),
+              ),
               child: TabBar(
                 tabAlignment: TabAlignment.start,
                 controller: _tabController,
@@ -157,15 +160,19 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                 labelColor: customColors.blackshade,
                 unselectedLabelColor: customColors.labelColor,
                 labelStyle: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: AppScaler.scaleFont(context, 14),
                   fontWeight: FontWeight.w500,
                 ),
-                labelPadding: EdgeInsets.symmetric(horizontal: 7),
+                labelPadding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 7),
+                ),
 
                 tabs: [
                   Container(
-                    height: 40,
-                    padding: const EdgeInsets.symmetric(horizontal: 17),
+                    height: AppScaler.scaleHeight(context, 40),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppScaler.scaleSize(context, 20),
+                    ),
                     decoration: BoxDecoration(
                       border: _tabController.index == 0
                           ? null
@@ -175,11 +182,13 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                             ),
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    child: const Tab(text: "All"),
+                    child: Tab(text: "All"),
                   ),
                   Container(
-                    height: 40,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    height: AppScaler.scaleHeight(context, 40),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppScaler.scaleSize(context, 20),
+                    ),
                     decoration: BoxDecoration(
                       border: _tabController.index == 1
                           ? null
@@ -189,11 +198,13 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                             ),
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    child: const Tab(text: "Videos"),
+                    child: Tab(text: "Videos"),
                   ),
                   Container(
-                    height: 40,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    height: AppScaler.scaleHeight(context, 40),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppScaler.scaleSize(context, 20),
+                    ),
                     decoration: BoxDecoration(
                       border: _tabController.index == 2
                           ? null
@@ -203,36 +214,37 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                             ),
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    child: const Tab(text: "Reels"),
+                    child: Tab(text: "Reels"),
                   ),
                 ],
               ),
             ),
 
-            SizedBox(height: 10),
+            SizedBox(height: AppScaler.scaleHeight(context, 10)),
 
             Expanded(
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  /// ------------------------------------------------------------------
-                  /// TAB 1 — ALL (Combined Reels + Videos)
-                  /// ------------------------------------------------------------------
                   ListView(
                     padding: EdgeInsets.zero,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                        padding: EdgeInsets.fromLTRB(
+                          AppScaler.scaleSize(context, 15),
+                          AppScaler.scaleHeight(context, 15),
+                          AppScaler.scaleSize(context, 15),
+                          0,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            PoppinsText(
+                              context,
                               'Reels',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: customColors.textColor,
-                              ),
+                              fontSize: PoppinsFontSizeVariant.size18,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                              color: customColors.textColor,
                             ),
                             AppButton(
                               buttonSize: Size(80, 25),
@@ -252,23 +264,32 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
                       SizedBox(
-                        height: 250,
+                        height: AppScaler.scaleHeight(context, 250),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 15),
+                          ),
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: reelimages.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(width: 10),
+                            separatorBuilder: (context, index) => SizedBox(
+                              width: AppScaler.scaleSize(context, 10),
+                            ),
                             itemBuilder: (context, index) {
                               return ReelcardWidget(
                                 assetImagePath: reelimages[index],
                                 title: reelTitles[index],
-                                reelCardHeight: 273,
-                                reelCardWidth: 149,
+                                reelCardHeight: AppScaler.scaleHeight(
+                                  context,
+                                  273,
+                                ),
+                                reelCardWidth: AppScaler.scaleSize(
+                                  context,
+                                  149,
+                                ),
                                 fontSizeVariant: PoppinsFontSizeVariant.size14,
                                 showSaveIcon: true,
                               );
@@ -276,19 +297,20 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppScaler.scaleSize(context, 15),
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            PoppinsText(
+                              context,
                               'Videos',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: customColors.textColor,
-                              ),
+                              fontSize: PoppinsFontSizeVariant.size18,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                              color: customColors.textColor,
                             ),
                             AppButton(
                               buttonSize: Size(80, 25),
@@ -308,15 +330,15 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
                       ...historyItems.asMap().entries.map((entry) {
                         final index = entry.key;
                         final item = entry.value;
                         return Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 8,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 15),
+                            vertical: AppScaler.scaleHeight(context, 8),
                           ),
                           child: VideosBoxWidget(
                             context: context,
@@ -325,10 +347,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                                   item['image'].toString().contains(
                                     'Assets.images',
                                   )
-                                  ? Assets
-                                        .images
-                                        .podcastimage1
-                                        .path // Placeholder for asset lookup logic
+                                  ? Assets.images.podcastimage1.path
                                   : item['image'] as String,
                               title: item['title'] as String,
                               description: item['subtitle'] as String,
@@ -343,11 +362,8 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                     ],
                   ),
 
-                  /// ------------------------------------------------------------------
-                  /// TAB 2 — VIDEOS (Original Vertical List)
-                  /// ------------------------------------------------------------------
                   ListView.builder(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(16.0),
                     itemCount: historyItems.length,
                     itemBuilder: (context, index) {
                       return VideosBoxWidget(
@@ -361,26 +377,26 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                     },
                   ),
 
-                  /// ------------------------------------------------------------------
-                  /// TAB 3 — REELS (Original Grid View)
-                  /// ------------------------------------------------------------------
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 24),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppScaler.scaleSize(context, 15),
+                      vertical: AppScaler.scaleHeight(context, 24),
+                    ),
                     child: GridView.builder(
                       padding: EdgeInsets.zero,
                       itemCount: reelimages.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
+                        mainAxisSpacing: AppScaler.scaleHeight(context, 10),
+                        crossAxisSpacing: AppScaler.scaleSize(context, 10),
                         childAspectRatio: 0.5,
                       ),
                       itemBuilder: (context, index) {
                         return ReelcardWidget(
                           assetImagePath: reelimages[index],
                           title: reelTitles[index],
-                          reelCardHeight: 358,
-                          reelCardWidth: 195,
+                          reelCardHeight: AppScaler.scaleHeight(context, 358),
+                          reelCardWidth: AppScaler.scaleSize(context, 195),
                           fontSizeVariant: PoppinsFontSizeVariant.size14,
                           showSaveIcon: true,
                         );
@@ -396,232 +412,3 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
     );
   }
 }
-
-
-// class watch_History {
-//   final String title;
-//   final String description;
-//   final String imagePath;
-
-//   watch_History({
-//     required this.title,
-//     required this.description,
-//     required this.imagePath,
-//   });
-// }
-
-// class WatchHistoryViewmore extends StatefulWidget {
-//   const WatchHistoryViewmore({super.key});
-
-//   @override
-//   State<WatchHistoryViewmore> createState() => _WatchHistoryViewmoreState();
-// }
-
-// class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore> {
-//   final List<Map<String, dynamic>> _podcasts = [
-//     {
-//       'data': watch_History(
-//         title: 'Finale – Meet The Drapers \nSeason 07 (2025)',
-//         description:
-//             'Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode,',
-//         imagePath: Assets.images.podcastimage1.path,
-//       ),
-//       'slider': 60.0,
-//     },
-//     {
-//       'data': watch_History(
-//         title: 'Episode 2 – Startup Stories',
-//         description:
-//             'Dive into inspiring stories of new entrepreneurs and their journey.',
-//         imagePath: Assets.images.podcastimage2.path,
-//       ),
-//       'slider': 20.0,
-//     },
-//     {
-//       'data': watch_History(
-//         title: 'Episode 3 – Tech Innovations',
-//         description: 'Latest updates on tech, AI, and innovative startups.',
-//         imagePath: Assets.images.podcastimage3.path,
-//       ),
-//       'slider': 40.0,
-//     },
-//     {
-//       'data': watch_History(
-//         title: 'Episode 2 – Startup Stories',
-//         description:
-//             'Dive into inspiring stories of new entrepreneurs and their journey.',
-//         imagePath: Assets.images.podcastimage2.path,
-//       ),
-//       'slider': 20.0,
-//     },
-//     {
-//       'data': watch_History(
-//         title: 'Episode 3 – Tech Innovations',
-//         description: 'Latest updates on tech, AI, and innovative startups.',
-//         imagePath: Assets.images.podcastimage3.path,
-//       ),
-//       'slider': 40.0,
-//     },
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         width: double.infinity,
-//         height: double.infinity,
-//         decoration: BoxDecoration(
-//           image: DecorationImage(
-//             image: AssetImage(Assets.images.screensbg.path),
-//             fit: BoxFit.cover,
-//           ),
-//         ),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-
-//             AppMainBar(
-//               leading: GestureDetector(
-//                 onTap: () => Navigator.of(context).pop(),
-//                 child: Padding(
-//                   padding: EdgeInsets.only(left: 10),
-//                   child: Image.asset(
-//                     "assets/images/backicon.png",
-//                     width: 20,
-//                     height: 20,
-//                   ),
-//                 ),
-//               ),
-//               title: "Watch History",
-//               centerTitle: false,
-//               backgroundColor: Colors.transparent,
-//               elevation: 0,
-//             ),
-//             SizedBox(height: 30),
-//             Expanded(
-//               child: Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 20),
-//                 child: ListView.builder(
-//                   padding: EdgeInsets.zero,
-//                   itemCount: _podcasts.length,
-//                   itemBuilder: (context, index) {
-//                     final podcast = _podcasts[index]['data'] as watch_History;
-//                     double sliderValue = _podcasts[index]['slider'];
-//                     return Padding(
-//                       padding: EdgeInsets.only(bottom: 20),
-//                       child: IntrinsicHeight(
-//                         child: Row(
-//                           crossAxisAlignment: CrossAxisAlignment.stretch,
-//                           children: [
-//                             Container(
-//                               width: 120,
-//                               decoration: BoxDecoration(
-//                                 image: DecorationImage(
-//                                   image: AssetImage(podcast.imagePath),
-//                                   fit: BoxFit.cover,
-//                                 ),
-//                                 borderRadius: BorderRadius.circular(8),
-//                               ),
-//                             ),
-//                             SizedBox(width: 12),
-//                             Expanded(
-//                               child: Column(
-//                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                 children: [
-//                                   PoppinsText(
-//                                     podcast.title,
-//                                     fontSize: PoppinsFontSizeVariant.size16,
-//                                     fontWeight: PoppinsFontWeightVariant.medium,
-//                                     textOverflow: TextOverflow.ellipsis,
-//                                   ),
-//                                   SizedBox(height: 20),
-//                                   PoppinsText(
-//                                     podcast.description,
-//                                     fontSize: PoppinsFontSizeVariant.size14,
-//                                     fontWeight:
-//                                         PoppinsFontWeightVariant.regular,
-//                                     color: Colors.grey,
-//                                     maxLines: 2,
-//                                     textOverflow: TextOverflow.ellipsis,
-//                                   ),
-//                                   SizedBox(height: 20),
-//                                   Row(
-//                                     children: [
-//                                       Expanded(
-//                                         child: SliderTheme(
-//                                           data: SliderTheme.of(context)
-//                                               .copyWith(
-//                                                 trackHeight: 3,
-//                                                 thumbShape:
-//                                                     RoundSliderThumbShape(
-//                                                       enabledThumbRadius: 0,
-//                                                     ),
-//                                                 overlayShape:
-//                                                     RoundSliderOverlayShape(
-//                                                       overlayRadius: 0,
-//                                                     ),
-//                                               ),
-//                                           child: Slider(
-//                                             activeColor: Color(0xFF0072FF),
-//                                             inactiveColor: Color(0xFF00002A),
-//                                             value: sliderValue,
-//                                             min: 0,
-//                                             max: 100,
-//                                             onChanged: (v) {
-//                                               setState(() {
-//                                                 _podcasts[index]['slider'] = v;
-//                                               });
-//                                             },
-//                                           ),
-//                                         ),
-//                                       ),
-//                                       SizedBox(width: 8),
-//                                       PoppinsText(
-//                                         '-12:34',
-//                                         fontSize: PoppinsFontSizeVariant.size10,
-//                                         fontWeight:
-//                                             PoppinsFontWeightVariant.regular,
-//                                         color: AppColors.wDark,
-//                                       ),
-//                                     ],
-//                                   ),
-//                                   SizedBox(height: 20),
-//                                   Row(
-//                                     children: [
-//                                       Expanded(
-//                                         child: AppButton(
-//                                           onPressed: () {},
-//                                           title: 'Continue',
-//                                           buttonSize: Size(double.infinity, 40),
-//                                           prefixIcon: Image.asset(
-//                                             Assets.images.playstrokeicon.path,
-//                                             width: 14,
-//                                             height: 14,
-//                                           ),
-//                                         ),
-//                                       ),
-//                                       SizedBox(width: 20),
-//                                       Image.asset(
-//                                         Assets.images.cancelicon.path,
-//                                         height: 40,
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     );
-                 
-//                   },
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

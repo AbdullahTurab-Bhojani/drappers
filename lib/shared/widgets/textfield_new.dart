@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
 
@@ -92,7 +93,7 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
   );
   TextStyle get textStryle => GoogleFonts.poppins(
     fontWeight: FontWeight.w400,
-    fontSize: 16,
+    fontSize: AppScaler.scaleFont(context, 16),
     color: AppColors.white,
   );
   bool obSecure = false;
@@ -319,7 +320,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
               textInputAction: widget.textInputAction,
               style: GoogleFonts.poppins(
                 color: AppColors.white,
-                fontSize: 16,
+                fontSize: AppScaler.scaleFont(context, 16),
                 fontWeight: FontWeight.w400,
                 // height: 1.1,
               ),
@@ -334,7 +335,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                     widget.hintStyle ??
                     GoogleFonts.poppins(
                       color: AppColors.white,
-                      fontSize: 16,
+                      fontSize: AppScaler.scaleFont(context, 16),
                       fontWeight: FontWeight.w400,
                     ),
                 prefixIcon: widget.prefixIcon != null
@@ -414,7 +415,7 @@ class _DropDownFieldFieldState extends State<DropDownField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 14, right: 14, top: 12, bottom: 0),
+      padding: EdgeInsets.only(left: 14, right: 14, top: 12, bottom: 0),
       decoration: BoxDecoration(
         color: AppColors.tfield,
         borderRadius: BorderRadius.circular(5),
@@ -438,7 +439,7 @@ class _DropDownFieldFieldState extends State<DropDownField> {
 
               style: GoogleFonts.poppins(
                 color: AppColors.white,
-                fontSize: 16,
+                fontSize: AppScaler.scaleFont(context, 16),
                 fontWeight: FontWeight.w400,
                 // height: 1.1,
               ),
@@ -456,7 +457,7 @@ class _DropDownFieldFieldState extends State<DropDownField> {
                     widget.hintStyle ??
                     GoogleFonts.poppins(
                       color: AppColors.white,
-                      fontSize: 16,
+                      fontSize: AppScaler.scaleFont(context, 16),
                       fontWeight: FontWeight.w400,
                     ),
 

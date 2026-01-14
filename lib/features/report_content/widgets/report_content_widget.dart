@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 
 class ReportContentWidget extends StatefulWidget {
@@ -27,7 +28,10 @@ class _ReportContentWidgetState extends State<ReportContentWidget> {
 
     return InkWell(
       child: Container(
-        padding: EdgeInsets.all(14.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppScaler.scaleSize(context, 14),
+          vertical: AppScaler.scaleHeight(context, 14),
+        ),
         decoration: BoxDecoration(
           color: customColors.blackshade,
           borderRadius: BorderRadius.circular(10.0),
@@ -39,7 +43,7 @@ class _ReportContentWidgetState extends State<ReportContentWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             !(widget.isVisible ?? false)
-                ? const Icon(Icons.circle_outlined)
+                ? Icon(Icons.circle_outlined)
                 : Stack(
                     alignment: Alignment.center,
                     children: [
@@ -55,12 +59,16 @@ class _ReportContentWidgetState extends State<ReportContentWidget> {
                       ),
                     ],
                   ),
-            SizedBox(width: 10),
+            SizedBox(width: AppScaler.scaleSize(context, 10)),
             Expanded(
               child: isSomethingElse
                   ? Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppScaler.scaleSize(context, 8),
+                        vertical: AppScaler.scaleHeight(context, 8),
+                      ),
                       child: PoppinsText(
+                        context,
                         widget.subTitle,
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.regular,
@@ -71,13 +79,15 @@ class _ReportContentWidgetState extends State<ReportContentWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PoppinsText(
+                          context,
                           widget.title,
                           fontSize: PoppinsFontSizeVariant.size12,
                           fontWeight: PoppinsFontWeightVariant.regular,
                           color: customColors.labelColor,
                         ),
-                        SizedBox(height: 5.0),
+                        SizedBox(height: AppScaler.scaleHeight(context, 5)),
                         PoppinsText(
+                          context,
                           widget.subTitle,
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.regular,

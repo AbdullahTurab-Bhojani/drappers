@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
@@ -87,6 +88,7 @@ class _SearchscreenState extends State<Searchscreen> {
             AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
+              scrolledUnderElevation: 0,
               automaticallyImplyLeading: false,
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
@@ -95,31 +97,35 @@ class _SearchscreenState extends State<Searchscreen> {
                   context.pop();
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 10),
+                  ),
                   child: Image.asset(
                     Assets.images.backicon.path,
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
               title: Padding(
-                padding: EdgeInsets.only(right: 15.0),
+                padding: EdgeInsets.only(
+                  right: AppScaler.scaleSize(context, 15),
+                ),
                 child: Container(
-                  height: 40,
+                  height: AppScaler.scaleHeight(context, 40),
                   decoration: BoxDecoration(
                     color: AppColors.color202020.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
                     children: [
-                      SizedBox(width: 15),
+                      SizedBox(width: AppScaler.scaleSize(context, 15)),
                       Image.asset(
                         "assets/images/searchicon3x.png",
-                        width: 20,
-                        height: 20,
+                        width: AppScaler.scaleSize(context, 20),
+                        height: AppScaler.scaleHeight(context, 20),
                       ),
-                      SizedBox(width: 10),
+                      SizedBox(width: AppScaler.scaleSize(context, 10)),
                       Expanded(
                         child: TextField(
                           onTap: () {
@@ -137,7 +143,10 @@ class _SearchscreenState extends State<Searchscreen> {
                             isDense: true,
                             contentPadding: EdgeInsets.zero,
                           ),
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 16,
+                          ),
                           cursorColor: Colors.blue,
                         ),
                       ),
@@ -152,7 +161,10 @@ class _SearchscreenState extends State<Searchscreen> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 20),
+                    vertical: AppScaler.scaleHeight(context, 24),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -160,12 +172,14 @@ class _SearchscreenState extends State<Searchscreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           PoppinsText(
+                            context,
                             'Recent Searches ',
                             fontSize: PoppinsFontSizeVariant.size16,
                             fontWeight: PoppinsFontWeightVariant.medium,
                             color: customColors.textColor,
                           ),
                           PoppinsText(
+                            context,
                             'Clear All ',
                             fontSize: PoppinsFontSizeVariant.size12,
                             fontWeight: PoppinsFontWeightVariant.regular,
@@ -174,42 +188,55 @@ class _SearchscreenState extends State<Searchscreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                       SizedBox(
-                        height: 185,
+                        height: AppScaler.scaleHeight(context, 185),
                         child: ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           padding: EdgeInsets.zero,
                           itemCount: dummyHistory.length,
                           itemBuilder: (context, index) {
                             final item = dummyHistory[index];
+
                             return HistoryItemTile(
                               title: item.title,
                               thumbnailPath: item.thumbnailPath,
-                              onTapRemove: () {},
-                              onTapTile: () {},
+
+                              onTapRemove: () {
+                                setState(() {
+                                  dummyHistory.removeAt(index);
+                                });
+                              },
+
+                              onTapTile: () {
+                                context.pushNamed(
+                                  AppRoutes.contentDetail.name,
+                                  extra: item,
+                                );
+                              },
                             );
                           },
                         ),
                       ),
 
-                      const SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                       PoppinsText(
+                        context,
                         'Genre',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
                         color: customColors.textColor,
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                       SizedBox(
-                        height: 56,
+                        height: AppScaler.scaleHeight(context, 56),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) =>
-                              SizedBox(width: 15),
+                              SizedBox(width: AppScaler.scaleSize(context, 15)),
                           itemCount: genretitle.length,
                           itemBuilder: (context, index) {
                             final title = genretitle[index];
@@ -228,41 +255,52 @@ class _SearchscreenState extends State<Searchscreen> {
                         ),
                       ),
 
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                       PoppinsText(
+                        context,
                         'Trending',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
                         color: customColors.textColor,
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
-                      GridView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        itemCount: trendingimages.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 15,
-                          crossAxisSpacing: 15,
-                          childAspectRatio: 0.6,
-                        ),
-                        itemBuilder: (context, index) {
-                          return CardWidget(
-                            assetImage: trendingimages[index],
-                            showSaveIcon: false,
-                            fromEpisode: false,
-                            allowGuestNavigation: false,
-                            index: index,
-                            showMenuOnly: true, showLiveTvBadge: false,
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          final double itemWidth =
+                              (constraints.maxWidth - (15 * 2)) / 3;
+                          final double itemHeight = itemWidth / 0.6;
+
+                          return GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            itemCount: trendingimages.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 15,
+                                  crossAxisSpacing: 15,
+                                  childAspectRatio: itemWidth / itemHeight,
+                                ),
+                            itemBuilder: (context, index) {
+                              return CardWidget(
+                                assetImage: trendingimages[index],
+                                showSaveIcon: false,
+                                fromEpisode: false,
+                                allowGuestNavigation: false,
+                                index: index,
+                                showMenuOnly: true,
+                                showLiveTvBadge: false,
+                              );
+                            },
                           );
                         },
                       ),
 
-                      const SizedBox(height: 10),
+                      SizedBox(height: AppScaler.scaleHeight(context, 10)),
                     ],
                   ),
                 ),

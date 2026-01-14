@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 
 class GenreBoxWidget extends StatefulWidget {
@@ -29,8 +30,8 @@ class _GenreBoxWidgetState extends State<GenreBoxWidget> {
 
       onTap: widget.onTap,
       child: Container(
-        height: 50,
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        height: AppScaler.scaleHeight(context, 50),
+        padding: EdgeInsets.symmetric(horizontal: AppScaler.scaleSize(context, 15)),
         decoration: BoxDecoration(
           color: AppColors.color000032,
           borderRadius: BorderRadius.circular(5),
@@ -48,12 +49,13 @@ class _GenreBoxWidgetState extends State<GenreBoxWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             PoppinsText(
+              context,
               widget.title,
               fontSize: PoppinsFontSizeVariant.size16,
               fontWeight: PoppinsFontWeightVariant.medium,
               color: customColors.textColor,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: AppScaler.scaleSize(context, 10)),
             Icon(Icons.arrow_forward_ios_rounded, size: 12),
           ],
         ),

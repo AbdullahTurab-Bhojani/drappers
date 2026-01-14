@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -33,14 +34,15 @@ class _NotificationSettingState extends State<NotificationSetting> {
             AppMainBar(
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 10),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -49,7 +51,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            SizedBox(height: 30),
+            SizedBox(height: AppScaler.scaleHeight(context, 30)),
             ToggleSettingTile(
               image: AssetImage(Assets.images.notificationsfillicon.path),
               titleText: "Push Notifications",
@@ -61,7 +63,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 });
               },
             ),
-            SizedBox(height: 10),
+            SizedBox(height: AppScaler.scaleHeight(context, 10)),
             ToggleSettingTile(
               image: AssetImage(Assets.images.envelopeicon.path),
               titleText: "Email Notifications",
@@ -73,12 +75,15 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 });
               },
             ),
-            SizedBox(height: 26),
+            SizedBox(height: AppScaler.scaleHeight(context, 26)),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppScaler.scaleSize(context, 20),
+              ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: PoppinsText(
+                  context,
                   'Content Notifications',
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,
@@ -86,7 +91,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
             ToggleSettingTile(
               image: AssetImage(Assets.images.playnewicon.path),
               titleText: "New Episode",
@@ -98,7 +103,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 });
               },
             ),
-            SizedBox(height: 10),
+            SizedBox(height: AppScaler.scaleHeight(context, 10)),
             ToggleSettingTile(
               image: AssetImage(Assets.images.bellringicon.path),
               titleText: "Watch Reminders",
@@ -110,12 +115,15 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 });
               },
             ),
-            SizedBox(height: 26),
+            SizedBox(height: AppScaler.scaleHeight(context, 26)),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppScaler.scaleSize(context, 26),
+              ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: PoppinsText(
+                  context,
                   'Marketing',
                   fontSize: PoppinsFontSizeVariant.size16,
                   fontWeight: PoppinsFontWeightVariant.medium,
@@ -123,7 +131,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
             ToggleSettingTile(
               image: AssetImage(Assets.images.gifticon.path),
               titleText: "Promotions & Offers",

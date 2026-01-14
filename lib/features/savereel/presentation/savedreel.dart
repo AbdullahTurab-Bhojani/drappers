@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -49,11 +50,13 @@ class _SavedreelState extends State<Savedreel> {
                   Navigator.of(context).pop();
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 10),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -74,22 +77,25 @@ class _SavedreelState extends State<Savedreel> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 20),
+                  vertical: AppScaler.scaleHeight(context, 10),
+                ),
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: reelimages.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
+                    mainAxisSpacing: AppScaler.scaleHeight(context, 10),
+                    crossAxisSpacing: AppScaler.scaleSize(context, 10),
                     childAspectRatio: 0.5,
                   ),
                   itemBuilder: (context, index) {
                     return ReelcardWidget(
                       assetImagePath: reelimages[index],
                       title: reelTitles[index],
-                      reelCardHeight: 358,
-                      reelCardWidth: 195,
+                      reelCardHeight: AppScaler.scaleHeight(context, 358),
+                      reelCardWidth: AppScaler.scaleSize(context, 195),
                       fontSizeVariant: PoppinsFontSizeVariant.size14,
                       showSaveIcon: true,
                     );

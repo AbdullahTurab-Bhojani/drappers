@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +6,7 @@ import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../core/theme/app_scalar.dart';
 
 class DeleteAccount extends StatefulWidget {
   const DeleteAccount({super.key});
@@ -46,8 +47,8 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                 onTap: () => Navigator.of(context).pop(),
                 child: Image.asset(
                   "assets/images/backicon.png",
-                  width: 20,
-                  height: 20,
+                  width: AppScaler.scaleSize(context, 20),
+                  height: AppScaler.scaleHeight(context, 20),
                 ),
               ),
               title: "",
@@ -59,27 +60,31 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(
                   // horizontal: horizontalPadding,
-                  vertical: 10.0,
+                  vertical: AppScaler.scaleHeight(context, 10),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 8),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PoppinsText(
+                        context,
                         "Delete or Deactivate Account",
                         fontSize: PoppinsFontSizeVariant.size24,
                         fontWeight: PoppinsFontWeightVariant.semiBold,
                         color: customColors.textColor,
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       PoppinsText(
+                        context,
                         "Choose how you'd like to manage your account",
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.regular,
                         color: customColors.textColor,
                       ),
-                      SizedBox(height: 30.0),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                       InkWell(
                         borderRadius: BorderRadius.circular(10.0),
                         onTap: () {
@@ -94,7 +99,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                         child: Container(
                           padding: EdgeInsets.symmetric(
                             // horizontal: 8,
-                            vertical: 8,
+                            vertical: AppScaler.scaleHeight(context, 8),
                           ),
                           decoration: BoxDecoration(
                             color: customColors.boxyellow,
@@ -124,14 +129,18 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       "Deactivate Account",
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
                                       color: customColors.yellowlight,
                                     ),
-                                    SizedBox(height: 5.0),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(context, 5),
+                                    ),
                                     PoppinsText(
+                                      context,
                                       "Your profile, watchlist, history, preferences, and downloads will be saved. You can reactivate anytime by signing in again.",
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
@@ -145,7 +154,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       InkWell(
                         borderRadius: BorderRadius.circular(10.0),
                         onTap: () {
@@ -159,7 +168,11 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                         },
                         child: Container(
                           // padding: const EdgeInsets.all(10.0),
-                          padding: EdgeInsets.only(right: 8, top: 8, bottom: 14),
+                          padding: EdgeInsets.only(
+                            right: AppScaler.scaleSize(context, 8),
+                            top: AppScaler.scaleHeight(context, 8),
+                            bottom: AppScaler.scaleHeight(context, 14),
+                          ),
                           decoration: BoxDecoration(
                             color: customColors.redbox,
                             borderRadius: BorderRadius.circular(10.0),
@@ -171,7 +184,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    height: 120,
+                                    height: AppScaler.scaleHeight(context, 120),
                                     child: Center(
                                       child: Radio<AccountOption>(
                                         value: AccountOption.delete,
@@ -193,6 +206,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         PoppinsText(
+                                          context,
                                           "Delete Account Permanently",
                                           fontSize:
                                               PoppinsFontSizeVariant.size12,
@@ -200,8 +214,14 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                               PoppinsFontWeightVariant.regular,
                                           color: customColors.redlight,
                                         ),
-                                        SizedBox(height: 8.0),
+                                        SizedBox(
+                                          height: AppScaler.scaleHeight(
+                                            context,
+                                            8,
+                                          ),
+                                        ),
                                         PoppinsText(
+                                          context,
                                           "All your data will be permanently removed, including watch history, preferences, profiles, downloads, payment data, and saved settings.",
                                           fontSize:
                                               PoppinsFontSizeVariant.size16,
@@ -209,7 +229,12 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                               PoppinsFontWeightVariant.regular,
                                           color: customColors.textColor,
                                         ),
-                                        SizedBox(height: 10),
+                                        SizedBox(
+                                          height: AppScaler.scaleHeight(
+                                            context,
+                                            10,
+                                          ),
+                                        ),
                                         Container(
                                           padding: EdgeInsets.all(10.0),
                                           decoration: BoxDecoration(
@@ -225,9 +250,15 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                                                 color: AppColors.white,
                                                 size: 20,
                                               ),
-                                              SizedBox(width: 10.0),
+                                              SizedBox(
+                                                width: AppScaler.scaleSize(
+                                                  context,
+                                                  10,
+                                                ),
+                                              ),
                                               Expanded(
                                                 child: PoppinsText(
+                                                  context,
                                                   "This action cannot be undone.",
                                                   fontSize:
                                                       PoppinsFontSizeVariant
@@ -250,7 +281,7 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 40.0),
+                      SizedBox(height: AppScaler.scaleHeight(context, 40)),
                       if (_selectedOption == AccountOption.delete)
                         AppButton(
                           onPressed: () {

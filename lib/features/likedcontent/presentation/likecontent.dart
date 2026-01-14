@@ -1,9 +1,10 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, equal_keys_in_map
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -60,9 +61,10 @@ class _LikecontentState extends State<Likecontent>
       'The Frontier - Meet The Drappers',
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
-    final List<Map<String, dynamic>> historyItems = const [
+    final List<Map<String, dynamic>> historyItems = [
       {
-        'image': 'Assets.images.podcastimage1.path',
+        'image':
+            'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
         'title': 'Finale – Meet The Drapers Season 07 (2025)',
         'subtitle':
             'Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode, spotlighting visionary startups from across the world. Judges Nikki Farb, TikTok executive Tim Natividad, and legendary investor Bill Draper evaluate groundbreaking innovations in connectivity, accessibility, and education. From CleverFi’s seamless WiFi to Zeality’s immersive AR/VR tech, WeWALK’s smart cane, and Taleemabad’s educational revolution, this episode is a thrilling showcase of entrepreneurial brilliance',
@@ -71,7 +73,8 @@ class _LikecontentState extends State<Likecontent>
         'progress': 75.0,
       },
       {
-        'image': 'Assets.images.podcastimage2.path',
+        'image':
+            'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
         'title': 'Episode 2 – Startup Stories',
         'subtitle': 'Dive into inspiring stories of new entrepreneurs...',
         'remaining': '-12:34',
@@ -79,7 +82,8 @@ class _LikecontentState extends State<Likecontent>
         'progress': 40.0,
       },
       {
-        'image': 'Assets.images.podcastimage3.path',
+        'image':
+            'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
         'title': 'Episode 3 – Tech Innovation',
         'subtitle': 'Latest updates on tech, AI, and innovative startups.',
         'remaining': '-12:34',
@@ -87,14 +91,38 @@ class _LikecontentState extends State<Likecontent>
         'progress': 60.0,
       },
     ];
-    final Map<String, dynamic> podcastData = {
-      'podcast': Podcast(
-        imagePath: Assets.images.podcastimage3.path,
-        title: 'Podcast Title Placeholder',
-        description: 'This is a description placeholder for the podcast item.',
-      ),
-      'slider': 75.0,
-    };
+    final List<Map<String, dynamic>> podcastList = [
+      {
+        'podcast': Podcast(
+          imagePath:
+              'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
+          title: 'Finale – Meet The Drapers Season 07 (2025)',
+          description:
+              'This is a description placeholder for the podcast item.',
+        ),
+        'slider': 75.0,
+      },
+      {
+        'podcast': Podcast(
+          imagePath:
+              'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
+          title: 'São Paulo – Meet The Drapers Season 6 (2023)',
+          description:
+              'This is a description placeholder for the podcast item.',
+        ),
+        'slider': 50.0,
+      },
+      {
+        'podcast': Podcast(
+          imagePath:
+              'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
+          title: 'Sri Sri University – Meet The Drapers Season 6 (2023)',
+          description:
+              'This is a description placeholder for the podcast item.',
+        ),
+        'slider': 30.0,
+      },
+    ];
 
     void onSliderChange(double v, int index) {}
 
@@ -119,7 +147,7 @@ class _LikecontentState extends State<Likecontent>
 
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 5),
+                  padding: EdgeInsets.only(left: 1),
                   child: Image.asset(
                     "assets/images/backicon.png",
                     width: 20,
@@ -141,7 +169,7 @@ class _LikecontentState extends State<Likecontent>
             ),
             SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(left: 5, bottom: 20),
+              padding: EdgeInsets.only(left: 5, bottom: 20),
               child: TabBar(
                 labelPadding: EdgeInsets.only(left: 15),
                 indicatorPadding: EdgeInsetsGeometry.all(0),
@@ -157,7 +185,7 @@ class _LikecontentState extends State<Likecontent>
                 labelColor: customColors.blackshade,
                 unselectedLabelColor: customColors.labelColor,
                 labelStyle: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: AppScaler.scaleFont(context, 14),
                   fontWeight: FontWeight.w500,
                 ),
                 tabs: List.generate(3, (index) {
@@ -166,8 +194,6 @@ class _LikecontentState extends State<Likecontent>
                       : index == 1
                       ? "Videos"
                       : "Reels";
-
-                  // Change width if selected
                   double width = _tabController.index == index
                       ? index == 0
                             ? 80
@@ -177,7 +203,7 @@ class _LikecontentState extends State<Likecontent>
                       : 100;
 
                   return AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
+                    duration: Duration(milliseconds: 200),
                     curve: Curves.easeInOut,
                     height: 40,
                     width: width,
@@ -207,17 +233,21 @@ class _LikecontentState extends State<Likecontent>
                     padding: EdgeInsets.zero,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                        padding: EdgeInsets.fromLTRB(
+                          AppScaler.scaleSize(context, 20),
+                          AppScaler.scaleHeight(context, 10),
+                          AppScaler.scaleSize(context, 20),
+                          0,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            PoppinsText(
+                              context,
                               'Reels',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: customColors.textColor,
-                              ),
+                              fontSize: PoppinsFontSizeVariant.size18,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                              color: customColors.textColor,
                             ),
                             AppButton(
                               buttonSize: Size(80, 25),
@@ -235,23 +265,32 @@ class _LikecontentState extends State<Likecontent>
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
                       SizedBox(
-                        height: 250,
+                        height: AppScaler.scaleHeight(context, 250),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 20),
+                          ),
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: reelimages.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(width: 10),
+                            separatorBuilder: (context, index) => SizedBox(
+                              width: AppScaler.scaleSize(context, 10),
+                            ),
                             itemBuilder: (context, index) {
                               return ReelcardWidget(
                                 assetImagePath: reelimages[index],
                                 title: reelTitles[index],
-                                reelCardHeight: 273,
-                                reelCardWidth: 149,
+                                reelCardHeight: AppScaler.scaleSize(
+                                  context,
+                                  273,
+                                ),
+                                reelCardWidth: AppScaler.scaleSize(
+                                  context,
+                                  149,
+                                ),
                                 fontSizeVariant: PoppinsFontSizeVariant.size14,
                                 showSaveIcon: true,
                               );
@@ -259,19 +298,18 @@ class _LikecontentState extends State<Likecontent>
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: 30),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            PoppinsText(
+                              context,
                               'Videos',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: customColors.textColor,
-                              ),
+                              fontSize: PoppinsFontSizeVariant.size18,
+                              fontWeight: PoppinsFontWeightVariant.semiBold,
+                              color: customColors.textColor,
                             ),
                             AppButton(
                               buttonSize: Size(80, 25),
@@ -291,13 +329,13 @@ class _LikecontentState extends State<Likecontent>
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
 
                       ...historyItems.asMap().entries.map((entry) {
                         final index = entry.key;
                         final item = entry.value;
                         return Padding(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 20,
                             vertical: 8,
                           ),
@@ -308,7 +346,7 @@ class _LikecontentState extends State<Likecontent>
                                   item['image'].toString().contains(
                                     'Assets.images',
                                   )
-                                  ? Assets.images.podcastimage1.path
+                                  ? item['image'].toString()
                                   : item['image'] as String,
                               title: item['title'] as String,
                               description: item['subtitle'] as String,
@@ -322,18 +360,14 @@ class _LikecontentState extends State<Likecontent>
                       }),
                     ],
                   ),
-
                   ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                    itemCount: historyItems.length,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    itemCount: podcastList.length,
                     itemBuilder: (context, index) {
                       return VideosBoxWidget(
                         context: context,
-                        podcast: podcastData['podcast'],
-                        sliderValue: podcastData['slider'],
+                        podcast: podcastList[index]['podcast'],
+                        sliderValue: podcastList[index]['slider'],
                         index: index,
                         onSliderChanged: onSliderChange,
                         onContinuePressed: () => onContinue(index),
@@ -350,13 +384,13 @@ class _LikecontentState extends State<Likecontent>
                         crossAxisCount: 2,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 195 / 350, 
+                        childAspectRatio: 195 / 350,
                       ),
                       itemBuilder: (context, index) {
                         return ReelcardWidget(
                           assetImagePath: reelimages[index],
                           title: reelTitles[index],
-                          reelCardHeight: 350, 
+                          reelCardHeight: 350,
                           reelCardWidth: 195,
                           fontSizeVariant: PoppinsFontSizeVariant.size14,
                           showSaveIcon: true,

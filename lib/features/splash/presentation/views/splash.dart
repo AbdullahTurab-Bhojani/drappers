@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../drappers.dart';
@@ -19,13 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent, // ✅ always transparent
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.dark,
-      ),
-    );
     _controller = VideoPlayerController.asset("assets/splash.mp4")
       ..initialize().then((_) {
         setState(() {});
@@ -48,8 +40,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox(
-        width: double.infinity, 
-        height: double.infinity, 
+        width: double.infinity,
+        height: double.infinity,
         child: FittedBox(
           fit: BoxFit.cover,
           child: SizedBox(

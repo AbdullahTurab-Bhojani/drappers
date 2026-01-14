@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import '../../../core/local/providers/shared_pref.dart';
-import '../../../drappers.dart';
-
 part 'app_start.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -34,15 +31,12 @@ Future<void> appStartup(Ref ref) async {
       DeviceOrientation.portraitDown,
     ]);
 
-    // Set system UI styles
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: AppColors.screenBG,
+        statusBarColor: Colors.black12,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.black12,
         systemNavigationBarIconBrightness: Brightness.light,
-        systemStatusBarContrastEnforced: true,
-        // systemNavigationBarDividerColor: Colors.transparent,
       ),
     );
 

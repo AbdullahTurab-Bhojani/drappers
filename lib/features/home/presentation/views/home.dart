@@ -7,16 +7,17 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../../shared/widgets/documentries_card/documentries_card_widget.dart';
+import '../../../../shared/widgets/full_screen_imagescreen.dart';
 import '../../../../shared/widgets/guestloginwidget.dart';
 import '../../../../shared/widgets/home_banner.dart';
 import '../../../../shared/widgets/more_info_bottom_sheet.dart';
 import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
-import '../../../../shared/widgets/popupmenuitem/popupmenu_widget.dart';
 import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
 import '../../../../shared/widgets/watch_history.dart';
 
@@ -30,10 +31,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _showControls = false;
+  final bool _showControls = false;
   final posterPath = '/mnt/data/Live Tv.png';
   bool _wasPlayingBeforeNavigation = false;
-  late BetterPlayerController _betterPlayerController;
+  BetterPlayerController? _betterPlayerController;
+  BetterPlayerController? get controller => _betterPlayerController;
   File? videoFile;
   bool _controlsVisible = false;
 
@@ -69,17 +71,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void _hideControlsAfterDelay() {
     Future.delayed(const Duration(seconds: 1), () {
       if (mounted &&
-          _betterPlayerController.videoPlayerController!.value.isPlaying) {
+          _betterPlayerController != null &&
+          _betterPlayerController!.videoPlayerController!.value.isPlaying) {
         setState(() => _controlsVisible = false);
       }
     });
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _initializePlayer();
-  // }
 
   Future<void> _initializePlayer() async {
     setState(() => showLoader = true);
@@ -110,15 +107,11 @@ class _HomeScreenState extends State<HomeScreen> {
       betterPlayerDataSource: source,
     );
 
-    _betterPlayerController.videoPlayerController!.addListener(() {
+    _betterPlayerController!.videoPlayerController!.addListener(() {
       if (mounted) {
-        setState(() {}); 
+        setState(() {});
       }
     });
-
-    _hideControlsAfterDelay();
-
-    setState(() => showLoader = false);
 
     _hideControlsAfterDelay();
 
@@ -127,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _betterPlayerController.dispose();
+    controller?.dispose();
     super.dispose();
   }
 
@@ -139,7 +132,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _navigateToFullscreenPlayer() async {
-    if (!_betterPlayerController.videoPlayerController!.value.isPlaying) return;
+    if (_betterPlayerController == null ||
+        !_betterPlayerController!.videoPlayerController!.value.isPlaying) {
+      return;
+    }
 
     if (GuestHelper.isGuest) {
       GuestHelper.checkGuest(context);
@@ -147,10 +143,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     _wasPlayingBeforeNavigation =
-        _betterPlayerController.videoPlayerController!.value.isPlaying;
+        _betterPlayerController!.videoPlayerController!.value.isPlaying;
 
     if (_wasPlayingBeforeNavigation) {
-      await _betterPlayerController.pause();
+      await _betterPlayerController!.pause();
     }
 
     // Navigate to fullscreen screen if needed
@@ -158,14 +154,14 @@ class _HomeScreenState extends State<HomeScreen> {
     //   context,
     //   MaterialPageRoute(
     //     builder: (context) => newliveScreen(
-    //       videoController: _betterPlayerController,
+    //       videoController: _betterPlayerController!,
     //       wasPlaying: _wasPlayingBeforeNavigation,
     //     ),
     //   ),
     // );
 
     if (_wasPlayingBeforeNavigation && mounted) {
-      await _betterPlayerController.play();
+      await _betterPlayerController!.play();
       _wasPlayingBeforeNavigation = false;
     }
   }
@@ -180,6 +176,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (showLoader) {
+      return Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     List<String> documentriescard = [
       Assets.images.documentriesimage1.path,
       Assets.images.documentriesimage2.path,
@@ -249,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               children: [
                 AppMainBar(
-                  width: 285,
+                  width: AppScaler.scaleSize(context, 285),
                   leadingText: "Welcome Back John!",
                   title: "",
                   centerTitle: false,
@@ -267,18 +267,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: Image.asset(
                         Assets.images.searchstokeicon.path,
-                        width: 24,
-                        height: 24,
+                        width: AppScaler.scaleSize(context, 24),
+                        height: AppScaler.scaleHeight(context, 24),
                         color: customColors.textColor,
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: AppScaler.scaleSize(context, 16)),
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: () {
-                        if (_betterPlayerController.isVideoInitialized() !=
-                            null) {
-                          _betterPlayerController.pause();
+                        if (_betterPlayerController != null &&
+                            _betterPlayerController!.isVideoInitialized() !=
+                                null) {
+                          _betterPlayerController!.pause();
                         }
                         if (GuestHelper.isGuest) {
                           GuestHelper.checkGuest(context);
@@ -290,16 +291,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Image.asset(
                             Assets.images.notificationsiconnew.path,
-                            width: 24,
-                            height: 24,
+                            width: AppScaler.scaleSize(context, 24),
+                            height: AppScaler.scaleHeight(context, 24),
                             color: customColors.textColor,
                           ),
                           Positioned(
                             top: 0,
                             right: 2,
                             child: Container(
-                              width: 8,
-                              height: 8,
+                              width: AppScaler.scaleSize(context, 8),
+                              height: AppScaler.scaleHeight(context, 8),
                               decoration: BoxDecoration(
                                 color: Colors.red,
                                 shape: BoxShape.circle,
@@ -315,29 +316,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppScaler.scaleSize(context, 20),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 20),
+                          // SizedBox(height: AppScaler.scaleHeight(context, 20)),
                           SizedBox(
-                            height: 45,
+                            height: AppScaler.scaleHeight(context, 45),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(width: 10),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 10),
+                              ),
                               shrinkWrap: true,
                               itemCount: hometab.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
-                                    if (_betterPlayerController
-                                            .isVideoInitialized() !=
-                                        null) {
-                                      _betterPlayerController.pause();
+                                    if (_betterPlayerController != null &&
+                                        _betterPlayerController!
+                                                .isVideoInitialized() !=
+                                            null) {
+                                      _betterPlayerController!.pause();
                                     }
                                     if (GuestHelper.isGuest) {
                                       GuestHelper.checkGuest(context);
@@ -349,8 +354,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                      vertical: 8,
+                                      horizontal: AppScaler.scaleSize(
+                                        context,
+                                        16,
+                                      ),
+                                      vertical: AppScaler.scaleHeight(
+                                        context,
+                                        8,
+                                      ),
                                     ),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
@@ -361,6 +372,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     child: Center(
                                       child: PoppinsText(
+                                        context,
                                         hometab[index],
                                         fontSize: PoppinsFontSizeVariant.size16,
                                         fontWeight:
@@ -373,258 +385,25 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          SizedBox(height: 30),
-                          Center(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.35),
-                                    blurRadius: 30,
-                                    spreadRadius: 4,
-                                    offset: Offset(0, 6),
-                                  ),
-                                ],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: SizedBox(
-                                  width: 400,
-                                  height: 450,
-                                  child: Stack(
-                                    children: [
-                                      _betterPlayerController
-                                                  .isVideoInitialized() !=
-                                              null
-                                          ? BetterPlayer(
-                                              controller:
-                                                  _betterPlayerController,
-                                            )
-                                          : Container(),
-                                      Container(
-                                        color: Colors.black.withOpacity(0.18),
-                                      ),
-
-                                      if (_betterPlayerController
-                                              .isVideoInitialized() !=
-                                          null)
-                                        GestureDetector(
-                                          behavior: HitTestBehavior.opaque,
-                                          onTap: () {
-                                            // if (GuestHelper.isGuest) {
-                                            //   GuestHelper.checkGuest(context);
-                                            //   return;
-                                            // }
-                                            setState(
-                                              () => _showControls =
-                                                  !_showControls,
-                                            );
-                                          },
-                                          child: Center(
-                                            child: AnimatedOpacity(
-                                              duration: Duration(
-                                                milliseconds: 50,
-                                              ),
-                                              opacity: _showControls ? 1 : 0,
-                                              child: Container(
-                                                padding: EdgeInsets.all(12),
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: IconButton(
-                                                  icon: Icon(
-                                                    _betterPlayerController
-                                                            .isPlaying()!
-                                                        ? Icons.pause_circle
-                                                        : Icons.play_circle,
-                                                    size: 70,
-                                                  ),
-                                                  onPressed: () async {
-                                                    setState(() {
-                                                      final videoPosition =
-                                                          _betterPlayerController
-                                                              .videoPlayerController!
-                                                              .value
-                                                              .position;
-                                                      final videoDuration =
-                                                          _betterPlayerController
-                                                              .videoPlayerController!
-                                                              .value
-                                                              .duration;
-
-                                                      if (_betterPlayerController
-                                                          .isPlaying()!) {
-                                                        _betterPlayerController
-                                                            .pause();
-                                                      } else {
-                                                        if (videoPosition >=
-                                                            videoDuration!) {
-                                                          _betterPlayerController
-                                                              .seekTo(
-                                                                Duration.zero,
-                                                              );
-                                                        }
-                                                        _betterPlayerController
-                                                            .play();
-                                                      }
-                                                    });
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      Positioned(
-                                        top: 16,
-                                        left: 14,
-                                        right: 14,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: PoppinsText(
-                                                'Meet The Drapers - Live',
-                                                color: AppColors.white,
-                                                fontWeight:
-                                                    PoppinsFontWeightVariant
-                                                        .medium,
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size14,
-                                              ),
-                                            ),
-                                            PopupmenuWidget(
-                                              showSaveIcon: false,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-
-                                      Positioned(
-                                        bottom: 10,
-                                        left: 12,
-                                        right: 12,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(height: 8),
-                                            if (_betterPlayerController !=
-                                                    null &&
-                                                _betterPlayerController!
-                                                        .videoPlayerController !=
-                                                    null &&
-                                                _betterPlayerController!
-                                                    .videoPlayerController!
-                                                    .value
-                                                    .isPlaying)
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Expanded(
-                                                    child: Slider(
-                                                      activeColor:
-                                                          AppColors.white,
-                                                      inactiveColor: AppColors
-                                                          .white
-                                                          .withOpacity(0.3),
-                                                      min: 0,
-                                                      max: _betterPlayerController
-                                                          .videoPlayerController!
-                                                          .value
-                                                          .duration!
-                                                          .inMilliseconds
-                                                          .toDouble(),
-                                                      value: _betterPlayerController
-                                                          .videoPlayerController!
-                                                          .value
-                                                          .position
-                                                          .inMilliseconds
-                                                          .clamp(
-                                                            0,
-                                                            _betterPlayerController
-                                                                .videoPlayerController!
-                                                                .value
-                                                                .duration!
-                                                                .inMilliseconds,
-                                                          )
-                                                          .toDouble(),
-                                                      onChanged: (value) {
-                                                        _betterPlayerController
-                                                            .videoPlayerController!
-                                                            .seekTo(
-                                                              Duration(
-                                                                milliseconds:
-                                                                    value
-                                                                        .toInt(),
-                                                              ),
-                                                            );
-                                                      },
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    _format(
-                                                      _betterPlayerController
-                                                          .videoPlayerController!
-                                                          .value
-                                                          .position,
-                                                    ),
-                                                    style: TextStyle(
-                                                      color: AppColors.white,
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 15),
-                                                  GestureDetector(
-                                                    behavior:
-                                                        HitTestBehavior.opaque,
-                                                    onTap: () {
-                                                      _betterPlayerController
-                                                          .videoPlayerController!
-                                                          .pause();
-                                                      // if (GuestHelper.isGuest) {
-                                                      //   GuestHelper.checkGuest(
-                                                      //     context,
-                                                      //   );
-                                                      //   return;
-                                                      // }
-                                                      context.pushNamed(
-                                                        AppRoutes
-                                                            .videoScreen
-                                                            .name,
-                                                      );
-                                                    },
-                                                    child: Image.asset(
-                                                      Assets
-                                                          .images
-                                                          .screenrotationicon
-                                                          .path,
-                                                      width: 24,
-                                                      height: 24,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                          FullscreenImageScreen(
+                            imagePath: Assets.images.livetvnew.path,
+                            title: "We're Training Heroes of Future!",
                           ),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Trending Shows',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: const Size(80, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -634,10 +413,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
                                 onPressed: () {
-                                  // if (GuestHelper.isGuest) {
-                                  //   GuestHelper.checkGuest(context);
-                                  //   return;
-                                  // }
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   context.pushNamed('trendingshow');
                                 },
                                 title: "View More",
@@ -645,16 +423,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
 
-                          SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                           SizedBox(
-                            height: 180,
+                            height: AppScaler.scaleHeight(context, 180),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: trendingimages.length,
                               itemBuilder: (context, index) {
                                 return CardWidget(
@@ -680,12 +459,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Continue Watching',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
@@ -693,7 +473,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               AppButton(
                                 onPressed: () {
-                                  _betterPlayerController.pause();
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   if (GuestHelper.isGuest) {
                                     GuestHelper.checkGuest(context);
                                     return;
@@ -701,7 +483,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context.pushNamed('continueWatchingViewmore');
                                 },
                                 title: "View More",
-                                buttonSize: const Size(80, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -713,15 +495,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
                           SizedBox(
-                            height: 180,
+                            height: AppScaler.scaleHeight(context, 180),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: trendingimages.length,
                               itemBuilder: (context, index) {
                                 return WatchHistory(
@@ -731,18 +514,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Podcasts',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: const Size(80, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -752,10 +536,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
                                 onPressed: () {
-                                  // if (GuestHelper.isGuest) {
-                                  //   GuestHelper.checkGuest(context);
-                                  //   return;
-                                  // }
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   context.pushNamed('podcasts');
                                 },
 
@@ -763,16 +546,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                           SizedBox(
-                            height: 180,
+                            height: AppScaler.scaleHeight(context, 180),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: podcardimages.length,
                               itemBuilder: (context, index) {
                                 return PodcardsWidget(
@@ -785,7 +569,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           HomeBanner(
                             title: 'Ready to Pitch?',
                             subtitle:
@@ -797,7 +581,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             buttonBorderWidth: 0,
                             buttonGradient: [],
                             onTap: () {
-                              _betterPlayerController.pause();
+                              if (_betterPlayerController != null) {
+                                _betterPlayerController!.pause();
+                              }
                               if (GuestHelper.isGuest) {
                                 GuestHelper.checkGuest(context);
                                 return;
@@ -805,35 +591,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               context.pushNamed('applyPitch');
                             },
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           HomeBanner(
                             title: "Vote for Startups!",
                             subtitle: "Cast your vote in the \ncompetition. ",
                             buttonText: "Vote Now",
-                            buttonColor: const Color(0xff582983),
-                            buttonBorderColor: const Color(0xff9333E9),
+                            buttonColor: Color(0xff582983),
+                            buttonBorderColor: Color(0xff9333E9),
                             backgroundImage: Assets.images.banner2.path,
                             buttonBorderWidth: 2,
-                            buttonGradient: const [
+                            buttonGradient: [
                               Color(0xff582983),
                               Color(0xff582983),
                             ],
                             onTap: () {
-                              _betterPlayerController.pause();
-                              // if (GuestHelper.isGuest) {
-                              //   GuestHelper.checkGuest(context);
-                              //   return;
-                              // }
+                              if (_betterPlayerController != null) {
+                                _betterPlayerController!.pause();
+                              }
                               context.pushNamed('voteForStartupScreen');
                             },
                           ),
 
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Reels',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
@@ -842,6 +627,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               GestureDetector(
                                 behavior: HitTestBehavior.opaque,
                                 onTap: () {
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   if (GuestHelper.isGuest) {
                                     GuestHelper.checkGuest(context);
                                     return;
@@ -849,7 +637,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context.pushNamed('reelWidget');
                                 },
                                 child: AppButton(
-                                  buttonSize: const Size(80, 25),
+                                  buttonSize: Size(80, 25),
                                   color: Colors.transparent,
                                   borderColor: customColors.textColor
                                       .withOpacity(0.5),
@@ -858,10 +646,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontWeight: PoppinsFontWeightVariant.regular,
                                   border: true,
                                   onPressed: () {
-                                    // if (GuestHelper.isGuest) {
-                                    //   GuestHelper.checkGuest(context);
-                                    //   return;
-                                    // }
+                                    if (_betterPlayerController != null) {
+                                      _betterPlayerController!.pause();
+                                    }
                                     context.pushNamed('reelWidget');
                                   },
                                   title: "View More",
@@ -869,21 +656,28 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                           SizedBox(
-                            height: 273,
+                            height: AppScaler.scaleHeight(context, 273),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: reelimages.length,
                               itemBuilder: (context, index) {
                                 return ReelcardWidget(
-                                  reelCardHeight: 273,
-                                  reelCardWidth: 149,
+                                  reelCardHeight: AppScaler.scaleHeight(
+                                    context,
+                                    273,
+                                  ),
+                                  reelCardWidth: AppScaler.scaleSize(
+                                    context,
+                                    149,
+                                  ),
                                   fontSizeVariant:
                                       PoppinsFontSizeVariant.size12,
                                   assetImagePath: reelimages[index],
@@ -893,19 +687,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               PoppinsText(
+                                context,
                                 'Documentaries',
                                 fontSize: PoppinsFontSizeVariant.size16,
                                 fontWeight: PoppinsFontWeightVariant.medium,
                                 color: customColors.textColor,
                               ),
                               AppButton(
-                                buttonSize: const Size(80, 25),
+                                buttonSize: Size(80, 25),
                                 color: Colors.transparent,
                                 borderColor: customColors.textColor.withOpacity(
                                   0.5,
@@ -915,27 +710,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: PoppinsFontWeightVariant.regular,
                                 border: true,
                                 onPressed: () {
-                                  _betterPlayerController.pause();
-
-                                  // if (GuestHelper.isGuest) {
-                                  //   GuestHelper.checkGuest(context);
-                                  //   return;
-                                  // }
+                                  if (_betterPlayerController != null) {
+                                    _betterPlayerController!.pause();
+                                  }
                                   context.pushNamed('documentries');
                                 },
                                 title: "View More",
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
                           SizedBox(
-                            height: 180,
+                            height: AppScaler.scaleHeight(context, 180),
                             child: ListView.separated(
                               padding: EdgeInsets.zero,
                               clipBehavior: Clip.none,
                               scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 15),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: AppScaler.scaleSize(context, 15),
+                              ),
                               itemCount: documentriescard.length,
                               itemBuilder: (context, index) {
                                 return DocumentriesCardWidget(
@@ -946,7 +739,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 10),
+                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
                         ],
                       ),
                     ),

@@ -1,10 +1,11 @@
-// ignore_for_file: deprecated_member_use, unused_element, prefer_final_fields
+// ignore_for_file: deprecated_member_use, unused_element, prefer_final_fields, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
@@ -63,6 +64,7 @@ class _ContentDetailState extends State<ContentDetail>
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
@@ -75,12 +77,16 @@ class _ContentDetailState extends State<ContentDetail>
           Column(
             children: [
               Container(
-                padding: EdgeInsets.only(top: 54, left: 12, right: 12),
+                padding: EdgeInsets.only(
+                  top: AppScaler.scaleHeight(context, 54),
+                  left: AppScaler.scaleSize(context, 12),
+                  right: AppScaler.scaleSize(context, 12),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 258,
+                      height: AppScaler.scaleHeight(context, 258),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
@@ -116,41 +122,42 @@ class _ContentDetailState extends State<ContentDetail>
                               },
                               child: Image.asset(
                                 Assets.images.playwithbgicon.path,
-                                width: 60,
-                                height: 60,
+                                width: AppScaler.scaleSize(context, 60),
+                                height: AppScaler.scaleHeight(context, 60),
                               ),
                             ),
                           ),
                           Positioned(
-                            top: 12,
-                            right: 19,
+                            top: AppScaler.scaleHeight(context, 12),
+                            right: AppScaler.scaleSize(context, 19),
                             child: GestureDetector(
                               behavior: HitTestBehavior.opaque,
 
                               onTap: () => Navigator.of(context).pop(),
                               child: Image.asset(
                                 Assets.images.crossnewicon.path,
-                                width: 24,
-                                height: 24,
+                                width: AppScaler.scaleSize(context, 24),
+                                height: AppScaler.scaleHeight(context, 24),
                               ),
                             ),
                           ),
                           Positioned(
-                            bottom: 12,
-                            right: 19,
+                            bottom: AppScaler.scaleHeight(context, 12),
+                            right: AppScaler.scaleSize(context, 19),
                             child: Image.asset(Assets.images.muteicon.path),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
                     PoppinsText(
+                      context,
                       'Finale – Meet The Drapers Season 07 (2025)',
                       fontSize: PoppinsFontSizeVariant.size22,
                       fontWeight: PoppinsFontWeightVariant.medium,
                       color: customColors.textColor,
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
                     RichText(
                       text: TextSpan(
                         style: GoogleFonts.poppins(),
@@ -158,31 +165,40 @@ class _ContentDetailState extends State<ContentDetail>
                           TextSpan(
                             text: '91% match',
                             style: GoogleFonts.poppins(
-                              fontSize: 16,
+                              fontSize: AppScaler.scaleFont(context, 16),
                               fontWeight: FontWeight.w400,
                               color: customColors.greyColor,
                             ),
                           ),
-                          WidgetSpan(child: SizedBox(width: 8)),
+                          WidgetSpan(
+                            child: SizedBox(
+                              width: AppScaler.scaleSize(context, 8),
+                            ),
+                          ),
                           TextSpan(
                             text: '2017',
                             style: GoogleFonts.poppins(
-                              fontSize: 16,
+                              fontSize: AppScaler.scaleFont(context, 16),
                               fontWeight: FontWeight.w400,
                               color: customColors.textColor,
                             ),
                           ),
-                          WidgetSpan(child: SizedBox(width: 8)),
+                          WidgetSpan(
+                            child: SizedBox(
+                              width: AppScaler.scaleSize(context, 8),
+                            ),
+                          ),
                           WidgetSpan(
                             child: Container(
-                              width: 22,
-                              height: 15,
+                              width: AppScaler.scaleSize(context, 22),
+                              height: AppScaler.scaleHeight(context, 15),
                               decoration: BoxDecoration(
                                 color: AppColors.shadegreycolor6B6B6B,
                                 borderRadius: BorderRadius.circular(2),
                               ),
                               alignment: Alignment.center,
                               child: PoppinsText(
+                                context,
                                 '16+',
                                 fontSize: PoppinsFontSizeVariant.size8,
                                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -190,20 +206,28 @@ class _ContentDetailState extends State<ContentDetail>
                               ),
                             ),
                           ),
-                          WidgetSpan(child: SizedBox(width: 8)),
+                          WidgetSpan(
+                            child: SizedBox(
+                              width: AppScaler.scaleSize(context, 8),
+                            ),
+                          ),
                           TextSpan(
                             text: '2h 43m',
                             style: GoogleFonts.poppins(
-                              fontSize: 16,
+                              fontSize: AppScaler.scaleFont(context, 16),
                               fontWeight: FontWeight.w400,
                               color: customColors.textColor,
                             ),
                           ),
-                          WidgetSpan(child: SizedBox(width: 8)),
+                          WidgetSpan(
+                            child: SizedBox(
+                              width: AppScaler.scaleSize(context, 8),
+                            ),
+                          ),
                           WidgetSpan(
                             child: Container(
-                              width: 22,
-                              height: 15,
+                              width: AppScaler.scaleSize(context, 22),
+                              height: AppScaler.scaleHeight(context, 15),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: AppColors.shadegreycolor6B6B6B,
@@ -213,6 +237,7 @@ class _ContentDetailState extends State<ContentDetail>
                               ),
                               alignment: Alignment.center,
                               child: PoppinsText(
+                                context,
                                 'HQ',
                                 fontSize: PoppinsFontSizeVariant.size8,
                                 fontWeight: PoppinsFontWeightVariant.semiBold,
@@ -223,14 +248,14 @@ class _ContentDetailState extends State<ContentDetail>
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
                     Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
                           child: SizedBox(
                             // width: 188,
-                            height: 45,
+                            height: AppScaler.scaleHeight(context, 45),
                             child: AppButton(
                               onPressed: () {
                                 // if (GuestHelper.isGuest) {
@@ -242,17 +267,17 @@ class _ContentDetailState extends State<ContentDetail>
                               title: 'Play',
                               prefixIcon: Image.asset(
                                 Assets.images.playstrokeicon.path,
-                                width: 15,
-                                height: 15,
+                                width: AppScaler.scaleSize(context, 15),
+                                height: AppScaler.scaleHeight(context, 15),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: AppScaler.scaleSize(context, 10)),
                         Expanded(
                           child: SizedBox(
                             // width: 188,
-                            height: 45,
+                            height: AppScaler.scaleHeight(context, 45),
                             child: AppButton(
                               onPressed: () {
                                 if (GuestHelper.isGuest) {
@@ -276,8 +301,11 @@ class _ContentDetailState extends State<ContentDetail>
                                     )
                                   : Image.asset(
                                       Assets.images.addicon.path,
-                                      width: 15,
-                                      height: 15,
+                                      width: AppScaler.scaleSize(context, 15),
+                                      height: AppScaler.scaleHeight(
+                                        context,
+                                        15,
+                                      ),
                                     ),
                               fontSize: PoppinsFontSizeVariant.size14,
                             ),
@@ -285,32 +313,38 @@ class _ContentDetailState extends State<ContentDetail>
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
                   ],
                 ),
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 12),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PoppinsText(
+                        context,
                         '"The Wolf of Wall Street" is a captivating film about Jordan Belfort\'s rise and fall.',
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.regular,
                         color: customColors.textColor,
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(height: AppScaler.scaleHeight(context, 5)),
                       PoppinsText(
+                        context,
                         'Cast: Leonardo DiCaprio, Jonah Hill, Margot Robbie, Matthew.... more Director: Denis Villeneuve',
                         fontSize: PoppinsFontSizeVariant.size12,
                         fontWeight: PoppinsFontWeightVariant.regular,
                         color: customColors.greyColor,
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
                       Padding(
-                        padding: EdgeInsets.only(left: 12),
+                        padding: EdgeInsets.only(
+                          left: AppScaler.scaleSize(context, 12),
+                        ),
                         child: Row(
                           children: [
                             Column(
@@ -330,16 +364,19 @@ class _ContentDetailState extends State<ContentDetail>
                                     _isLiked
                                         ? Assets.images.like.path
                                         : Assets.images.likeicon.path,
-                                    width: 18,
-                                    height: 18,
+                                    width: AppScaler.scaleSize(context, 18),
+                                    height: AppScaler.scaleHeight(context, 18),
                                     color: _isLiked
                                         ? customColors.buttonColors[0]
                                         : null,
                                   ),
                                 ),
 
-                                SizedBox(height: 10),
+                                SizedBox(
+                                  height: AppScaler.scaleHeight(context, 10),
+                                ),
                                 PoppinsText(
+                                  context,
                                   'Like',
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   fontWeight: PoppinsFontWeightVariant.regular,
@@ -347,7 +384,7 @@ class _ContentDetailState extends State<ContentDetail>
                                 ),
                               ],
                             ),
-                            SizedBox(width: 30),
+                            SizedBox(width: AppScaler.scaleSize(context, 30)),
                             GestureDetector(
                               onTap: () {
                                 if (GuestHelper.isGuest) {
@@ -360,11 +397,14 @@ class _ContentDetailState extends State<ContentDetail>
                                 children: [
                                   Image.asset(
                                     Assets.images.shareiconnew.path,
-                                    width: 18,
-                                    height: 18,
+                                    width: AppScaler.scaleSize(context, 18),
+                                    height: AppScaler.scaleHeight(context, 18),
                                   ),
-                                  SizedBox(height: 10),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 10),
+                                  ),
                                   PoppinsText(
+                                    context,
                                     'Share',
                                     fontSize: PoppinsFontSizeVariant.size12,
                                     fontWeight:
@@ -374,7 +414,7 @@ class _ContentDetailState extends State<ContentDetail>
                                 ],
                               ),
                             ),
-                            SizedBox(width: 30),
+                            SizedBox(width: AppScaler.scaleSize(context, 30)),
                             GestureDetector(
                               onTap: () {
                                 if (GuestHelper.isGuest) {
@@ -387,11 +427,12 @@ class _ContentDetailState extends State<ContentDetail>
                                 children: [
                                   Image.asset(
                                     Assets.images.flagicon.path,
-                                    width: 18,
-                                    height: 18,
+                                    width: AppScaler.scaleSize(context, 18),
+                                    height: AppScaler.scaleHeight(context, 18),
                                   ),
                                   SizedBox(height: 10),
                                   PoppinsText(
+                                    context,
                                     'Report',
                                     fontSize: PoppinsFontSizeVariant.size12,
                                     fontWeight:
@@ -404,7 +445,7 @@ class _ContentDetailState extends State<ContentDetail>
                           ],
                         ),
                       ),
-                      SizedBox(height: 7),
+                      SizedBox(height: AppScaler.scaleHeight(context, 7)),
                       TabBar(
                         controller: _tabController,
                         tabs: [
@@ -413,7 +454,7 @@ class _ContentDetailState extends State<ContentDetail>
                         ],
                         indicator: UnderlineTabIndicator(
                           borderSide: BorderSide(
-                            width: 4,
+                            width: AppScaler.scaleSize(context, 4),
                             color: customColors.textColor,
                           ),
                         ),
@@ -421,11 +462,11 @@ class _ContentDetailState extends State<ContentDetail>
                         labelColor: customColors.textColor,
                         unselectedLabelColor: customColors.labelColor,
                         labelStyle: GoogleFonts.poppins(
-                          fontSize: 16,
+                          fontSize: AppScaler.scaleFont(context, 16),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       Builder(
                         builder: (context) {
                           return Column(
@@ -436,7 +477,10 @@ class _ContentDetailState extends State<ContentDetail>
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.symmetric(
-                                        horizontal: 4,
+                                        horizontal: AppScaler.scaleSize(
+                                          context,
+                                          4,
+                                        ),
                                       ),
                                       child: Row(
                                         mainAxisAlignment:
@@ -444,9 +488,15 @@ class _ContentDetailState extends State<ContentDetail>
                                         children: [
                                           Container(
                                             padding: EdgeInsets.symmetric(
-                                              horizontal: 10,
+                                              horizontal: AppScaler.scaleSize(
+                                                context,
+                                                10,
+                                              ),
                                             ),
-                                            height: 30,
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              30,
+                                            ),
                                             decoration: BoxDecoration(
                                               color: customColors.containergrey,
                                               borderRadius:
@@ -454,7 +504,12 @@ class _ContentDetailState extends State<ContentDetail>
                                             ),
                                             child: DropdownButtonHideUnderline(
                                               child: DropdownButton<String>(
-                                                value: selectedSeason,
+                                                itemHeight: 50,
+                                                menuMaxHeight: 150,padding: EdgeInsets.all(0),
+
+                                                // menuWidth: 150,
+                                                value: selectedSeason,isDense: false,
+
                                                 icon: Icon(
                                                   Icons.keyboard_arrow_down,
                                                   color: customColors.textColor,
@@ -474,6 +529,7 @@ class _ContentDetailState extends State<ContentDetail>
                                                           ) => DropdownMenuItem(
                                                             value: season,
                                                             child: PoppinsText(
+                                                              context,
                                                               season,
                                                               color: customColors
                                                                   .textColor,
@@ -497,13 +553,24 @@ class _ContentDetailState extends State<ContentDetail>
                                           ),
                                           Image.asset(
                                             Assets.images.infoicon.path,
-                                            height: 18,
-                                            width: 18,
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              18,
+                                            ),
+                                            width: AppScaler.scaleSize(
+                                              context,
+                                              18,
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 12),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(
+                                        context,
+                                        20,
+                                      ),
+                                    ),
 
                                     GridView.builder(
                                       shrinkWrap: true,
@@ -515,9 +582,22 @@ class _ContentDetailState extends State<ContentDetail>
                                             crossAxisCount: 3,
                                             mainAxisSpacing: 10,
                                             crossAxisSpacing: 10,
-                                            childAspectRatio: 0.6,
+                                            childAspectRatio:
+                                                ((MediaQuery.of(
+                                                          context,
+                                                        ).size.width /
+                                                        3) -
+                                                    20) /
+                                                200,
                                           ),
                                       itemBuilder: (context, index) {
+                                        double cardWidth =
+                                            (MediaQuery.of(context).size.width /
+                                                3) -
+                                            10;
+                                        double cardHeight =
+                                            cardWidth * 200 / 150;
+
                                         return CardWidget(
                                           assetImage: trendingimages[index],
                                           showSaveIcon: false,
@@ -539,17 +619,34 @@ class _ContentDetailState extends State<ContentDetail>
                                   itemCount: reelimages.length,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
+                                        crossAxisCount: 3,
                                         mainAxisSpacing: 10,
-                                        crossAxisSpacing: 15,
-                                        childAspectRatio: 0.5,
+                                        crossAxisSpacing: 10,
+                                        childAspectRatio:
+                                            ((MediaQuery.of(
+                                                      context,
+                                                    ).size.width /
+                                                    3) -
+                                                20) /
+                                            (((MediaQuery.of(
+                                                          context,
+                                                        ).size.width /
+                                                        3) -
+                                                    20) *
+                                                (358 / 195)),
                                       ),
                                   itemBuilder: (context, index) {
+                                    double cardWidth =
+                                        (MediaQuery.of(context).size.width /
+                                            3) -
+                                        10;
+                                    double cardHeight = cardWidth * 358 / 195;
+
                                     return ReelcardWidget(
                                       assetImagePath: reelimages[index],
                                       title: reelTitles[index],
-                                      reelCardHeight: 100,
-                                      reelCardWidth: 100,
+                                      reelCardHeight: cardHeight,
+                                      reelCardWidth: cardWidth,
                                       fontSizeVariant:
                                           PoppinsFontSizeVariant.size14,
                                       showSaveIcon: false,
@@ -561,7 +658,7 @@ class _ContentDetailState extends State<ContentDetail>
                         },
                       ),
 
-                      SizedBox(height: 14),
+                      SizedBox(height: AppScaler.scaleHeight(context, 14)),
                     ],
                   ),
                 ),

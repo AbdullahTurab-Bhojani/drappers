@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
@@ -40,11 +41,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 3), (_) {
+    _timer = Timer.periodic(Duration(seconds: 3), (_) {
       final nextPage = (currentPage + 1) % images.length;
       _pageController.animateToPage(
         nextPage,
-        duration: const Duration(milliseconds: 800),
+        duration: Duration(milliseconds: 800),
         curve: Curves.easeOut,
       );
     });
@@ -66,25 +67,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          /// 🔹 Background PageView
           PageView.builder(
             controller: _pageController,
             itemCount: images.length,
             onPageChanged: (index) => setState(() => currentPage = index),
             itemBuilder: (_, index) {
-              return Image.asset(
-                images[index],
-                fit: BoxFit.cover,
-              );
+              return Image.asset(images[index], fit: BoxFit.cover);
             },
           ),
 
-          /// 🔹 Skip button (SafeArea handled)
           SafeArea(
             child: Align(
               alignment: Alignment.topRight,
               child: Padding(
-                padding: const EdgeInsets.only(right: 20, top: 8),
+                padding: EdgeInsets.only(
+                  right: AppScaler.scaleSize(context, 20),
+                  top: AppScaler.scaleHeight(context, 8),
+                ),
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
@@ -92,6 +91,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     context.pushNamed(AppRoutes.home.name);
                   },
                   child: PoppinsText(
+                    context,
                     'Skip',
                     fontSize: PoppinsFontSizeVariant.size14,
                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -102,81 +102,92 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
 
-          /// 🔹 Bottom Content
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
             child: SafeArea(
               top: false,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 24, 20, 100),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    /// Dots
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        images.length,
-                        (index) => AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          margin: const EdgeInsets.symmetric(horizontal: 2),
-                          width: currentPage == index ? 26 : 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            gradient: currentPage == index
-                                ? const LinearGradient(
-                                    colors: [
-                                      Color(0xFF1FCFFF),
-                                      Color(0xFF0063FF),
-                                    ],
-                                  )
-                                : null,
-                            color:
-                                currentPage != index ? AppColors.wDark : null,
-                            borderRadius: BorderRadius.circular(4),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: AppScaler.scaleSize(context, 36),
+                      right: AppScaler.scaleSize(context, 36),
+                    ),
+                    child: Column(
+                      // mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            images.length,
+                            (index) => AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              margin: EdgeInsets.symmetric(horizontal: 2),
+                              width: currentPage == index ? 26 : 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                gradient: currentPage == index
+                                    ? LinearGradient(
+                                        colors: [
+                                          Color(0xFF1FCFFF),
+                                          Color(0xFF0063FF),
+                                        ],
+                                      )
+                                    : null,
+                                color: currentPage != index
+                                    ? AppColors.wDark
+                                    : null,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 24)),
+
+                        PoppinsText(
+                          context,
+                          titles[currentPage],
+                          textAlign: TextAlign.center,
+                          fontSize: PoppinsFontSizeVariant.size30,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                          // height: 1.3,
+                        ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
+                        PoppinsText(
+                          context,
+                          subtitles[currentPage],
+                          textAlign: TextAlign.center,
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                          // height: 1.7,
+                        ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 80)),
+                      ],
                     ),
-
-                    const SizedBox(height: 24),
-
-                    /// Title
-                    PoppinsText(
-                      titles[currentPage],
-                      textAlign: TextAlign.center,
-                      fontSize: PoppinsFontSizeVariant.size32,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                      height: 1.3,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: AppScaler.scaleSize(context, 20),
+                      right: AppScaler.scaleSize(context, 20),
+                      bottom: AppScaler.scaleHeight(context, 80),
                     ),
-
-                    const SizedBox(height: 16),
-
-                    /// Subtitle
-                    PoppinsText(
-                      subtitles[currentPage],
-                      textAlign: TextAlign.center,
-                      fontSize: PoppinsFontSizeVariant.size16,
-                      fontWeight: PoppinsFontWeightVariant.light,
-                      color: customColors.textColor,
-                      height: 1.7,
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    /// Button
-                    AppButton(
+                    child: AppButton(
                       onPressed: () {
                         GuestHelper.isGuest = true;
                         context.pushNamed(AppRoutes.home.name);
                       },
                       title: 'Next',
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

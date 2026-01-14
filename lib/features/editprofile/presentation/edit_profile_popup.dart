@@ -35,6 +35,7 @@ class _EditProfilePopupState extends State<EditProfilePopup> {
                 MainAxisAlignment.spaceBetween, // fix the dot error
             children: [
               PoppinsText(
+                context,
                 'Customise picture',
                 fontSize: PoppinsFontSizeVariant.size18,
                 fontWeight: PoppinsFontWeightVariant.semiBold,

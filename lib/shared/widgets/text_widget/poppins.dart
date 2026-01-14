@@ -1,3 +1,5 @@
+// ignore_for_file: unreachable_switch_case
+
 part of '../../../drappers.dart';
 
 enum PoppinsFontSizeVariant {
@@ -22,10 +24,12 @@ enum PoppinsFontSizeVariant {
   size24,
   size25,
   size26,
+  size28,
+  size30,
   size32,
+  size40,
 }
 
-/// 🔹 Font Weights
 enum PoppinsFontWeightVariant {
   thin,
   extraLight,
@@ -40,6 +44,7 @@ enum PoppinsFontWeightVariant {
 
 class PoppinsText extends Text {
   PoppinsText(
+    BuildContext context,
     super.data, {
     super.key,
     super.textAlign,
@@ -55,19 +60,19 @@ class PoppinsText extends Text {
   }) : super(
          style: GoogleFonts.poppins(
            color: color,
-           fontSize: _mapFontSize(fontSize),
-           fontWeight: _mapFontWeight(fontWeight),
+           fontSize: AppScaler.scaleSize(context, _fontSize(fontSize)),
+           fontWeight: _fontWeight(fontWeight),
            height: height,
+           letterSpacing: letterSpacing,
            fontStyle: fontStyle,
            decoration: decoration,
            decorationColor: color,
-           letterSpacing: letterSpacing,
          ),
          overflow: textOverflow,
        );
 
-  /// 🔹 Map Size Enum → Double
-  static double _mapFontSize(PoppinsFontSizeVariant size) {
+  /// Base font sizes (NO scaling here)
+  static double _fontSize(PoppinsFontSizeVariant size) {
     switch (size) {
       case PoppinsFontSizeVariant.size6:
         return 6;
@@ -111,12 +116,18 @@ class PoppinsText extends Text {
         return 25;
       case PoppinsFontSizeVariant.size26:
         return 26;
+      case PoppinsFontSizeVariant.size28:
+        return 28;
+      case PoppinsFontSizeVariant.size30:
+        return 30;
       case PoppinsFontSizeVariant.size32:
         return 32;
+      case PoppinsFontSizeVariant.size40:
+        return 40;
     }
   }
 
-  static FontWeight _mapFontWeight(PoppinsFontWeightVariant weight) {
+  static FontWeight _fontWeight(PoppinsFontWeightVariant weight) {
     switch (weight) {
       case PoppinsFontWeightVariant.thin:
         return FontWeight.w100;

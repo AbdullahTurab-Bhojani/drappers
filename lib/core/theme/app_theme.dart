@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../drappers.dart';
 import '../extensions/theme_extension.dart';
+import '../local/domain/repositories/local_storage_repository.dart';
 import '../local/providers/shared_pref.dart';
 part 'app_theme.freezed.dart';
 part 'app_theme.g.dart';

@@ -1,8 +1,9 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../guestloginwidget.dart';
@@ -17,7 +18,7 @@ class PopupmenuWidget extends StatefulWidget {
 }
 
 class _PopupmenuWidgetState extends State<PopupmenuWidget> {
-  final double _menuItemSpacing = 12;
+  final double _menuItemSpacing = 20;
 
   final GlobalKey _iconKey = GlobalKey();
 
@@ -33,7 +34,11 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
           : MainAxisAlignment.end,
       children: [
         if (widget.showSaveIcon)
-          Image.asset(Assets.images.saveIcon.path, width: 30, height: 30),
+          Image.asset(
+            Assets.images.saveIcon.path,
+            width: AppScaler.scaleSize(context, 30),
+            height: AppScaler.scaleHeight(context, 30),
+          ),
 
         GestureDetector(
           key: _iconKey,
@@ -41,8 +46,8 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
           onTap: () => _showMenuBelowIcon(context, customColors),
           child: Image.asset(
             Assets.images.dotsIcon.path,
-            width: 17,
-            height: 17,
+            width: AppScaler.scaleSize(context, 17),
+            height: AppScaler.scaleHeight(context, 17),
           ),
         ),
       ],
@@ -65,16 +70,17 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       position: RelativeRect.fromRect(
-        Rect.fromLTWH(iconRect.left - 70, iconRect.bottom + 6, 160, 0),
+        Rect.fromLTWH(iconRect.right - 140 - 8, iconRect.bottom + 8, 160, 0),
         Offset.zero & overlay.size,
       ),
+
       items: [
         _buildMenuItem(
           routePath: AppRoutes.reportContent.name,
           iconPath: Assets.images.reporticon.path,
           text: 'Report',
           customColors: customColors,
-          navigate: true, // Sirf ye item navigate karega
+          navigate: true,
         ),
         _buildMenuItem(
           iconPath: Assets.images.interestedicon.path,
@@ -95,7 +101,7 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
     required String iconPath,
     required String text,
     required AppCustomColors customColors,
-    bool navigate = false, // default false, sirf Report ke liye true
+    bool navigate = false,
   }) {
     return PopupMenuItem<String>(
       value: text,
@@ -109,14 +115,15 @@ class _PopupmenuWidgetState extends State<PopupmenuWidget> {
         }
       },
       child: SizedBox(
-        width: 126,
-        height: 40,
+        width: AppScaler.scaleSize(context, 126),
+        height: AppScaler.scaleHeight(context, 40),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(iconPath, height: 18),
-            SizedBox(width: 12),
+            Image.asset(iconPath, height: AppScaler.scaleHeight(context, 18)),
+            SizedBox(width: AppScaler.scaleSize(context, 12)),
             PoppinsText(
+              context,
               text,
               fontSize: PoppinsFontSizeVariant.size12,
               fontWeight: PoppinsFontWeightVariant.medium,

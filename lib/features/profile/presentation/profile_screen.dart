@@ -6,6 +6,7 @@ import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../shared/widgets/popupmenuitem/signup_popup_widget.dart';
 import '../../../shared/widgets/tile_widget.dart';
@@ -99,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 AppMainBar(
                   leadingText: "Profile",
-                  width: 120,
+                  width: AppScaler.scaleSize(context, 120),
                   title: "",
                   centerTitle: false,
                   backgroundColor: Colors.transparent,
@@ -112,22 +113,24 @@ class ProfileScreen extends StatelessWidget {
                         context.pushNamed(AppRoutes.editprofile.name);
                       },
                       child: PoppinsText(
+                        context,
                         "Edit",
                         fontSize: PoppinsFontSizeVariant.size14,
                         fontWeight: PoppinsFontWeightVariant.medium,
                       ),
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: AppScaler.scaleSize(context, 20)),
                   ],
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: AppScaler.scaleHeight(context, 40)),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 114.82,
-                          width: 114.82,
+                          height: AppScaler.scaleHeight(context, 114.82),
+                          width: AppScaler.scaleHeight(context, 114.82),
+
                           child: CircleAvatar(
                             radius: 60,
                             // radius: isSelected ? 15 : 15,
@@ -137,17 +140,19 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
                         PoppinsText(
+                          context,
                           'Jerry Mackson',
                           fontSize: PoppinsFontSizeVariant.size22,
                           fontWeight: PoppinsFontWeightVariant.medium,
                           color: customColors.textColor,
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
                         Padding(
-                          // padding: EdgeInsets.only(left: 20, right: 20),
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 20),
+                          ),
                           child: Column(
                             children: [
                               Row(
@@ -155,6 +160,7 @@ class ProfileScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   PoppinsText(
+                                    context,
                                     'Liked Content',
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -179,14 +185,18 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
                               SizedBox(
-                                height: 180,
+                                height: AppScaler.scaleHeight(context, 20),
+                              ),
+                              SizedBox(
+                                height: AppScaler.scaleHeight(context, 180),
                                 child: ListView.separated(
                                   padding: EdgeInsets.zero,
                                   clipBehavior: Clip.none,
                                   separatorBuilder: (context, index) {
-                                    return SizedBox(width: 15);
+                                    return SizedBox(
+                                      width: AppScaler.scaleSize(context, 15),
+                                    );
                                   },
                                   shrinkWrap: true,
                                   itemCount: images.length,
@@ -206,18 +216,22 @@ class ProfileScreen extends StatelessWidget {
                                         fromEpisode: false,
                                         allowGuestNavigation: false,
                                         index: index,
-                                        showMenuOnly: true, showLiveTvBadge: false,
+                                        showMenuOnly: true,
+                                        showLiveTvBadge: false,
                                       ),
                                     );
                                   },
                                 ),
                               ),
-                              SizedBox(height: 30),
+                              SizedBox(
+                                height: AppScaler.scaleHeight(context, 30),
+                              ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   PoppinsText(
+                                    context,
                                     'Watch History',
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
@@ -242,14 +256,18 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
                               SizedBox(
-                                height: 180,
+                                height: AppScaler.scaleHeight(context, 20),
+                              ),
+                              SizedBox(
+                                height: AppScaler.scaleHeight(context, 180),
                                 child: ListView.separated(
                                   padding: EdgeInsets.zero,
                                   clipBehavior: Clip.none,
                                   separatorBuilder: (context, index) {
-                                    return SizedBox(width: 15);
+                                    return SizedBox(
+                                      width: AppScaler.scaleSize(context, 15),
+                                    );
                                   },
                                   shrinkWrap: true,
                                   itemCount: images.length,
@@ -269,13 +287,16 @@ class ProfileScreen extends StatelessWidget {
                                         fromEpisode: false,
                                         allowGuestNavigation: false,
                                         index: index,
-                                        showMenuOnly: true, showLiveTvBadge: false,
+                                        showMenuOnly: true,
+                                        showLiveTvBadge: false,
                                       ),
                                     );
                                   },
                                 ),
                               ),
-                              SizedBox(height: 30),
+                              SizedBox(
+                                height: AppScaler.scaleHeight(context, 30),
+                              ),
                               ListView.separated(
                                 physics: NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.all(0),
@@ -317,7 +338,9 @@ class ProfileScreen extends StatelessWidget {
                                 itemCount: menuList.length,
                               ),
 
-                              SizedBox(height: 10),
+                              SizedBox(
+                                height: AppScaler.scaleHeight(context, 10),
+                              ),
                             ],
                           ),
                         ),

@@ -9,6 +9,7 @@ class CustomErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: PoppinsText(
+        context,
         message,
         color: AppColors.colorEF4444,
         fontWeight: PoppinsFontWeightVariant.medium,

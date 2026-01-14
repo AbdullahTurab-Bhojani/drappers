@@ -103,7 +103,11 @@ class ExpandableTextState extends ConsumerState<ExpandableText> {
             overflow: TextOverflow.clip,
           );
         } else {
-          return PoppinsText(widget.text, textOverflow: TextOverflow.clip);
+          return PoppinsText(
+            context,
+            widget.text,
+            textOverflow: TextOverflow.clip,
+          );
         }
       },
     );

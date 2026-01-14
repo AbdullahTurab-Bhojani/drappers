@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -37,11 +38,13 @@ class _TermsconditionState extends State<Termscondition> {
 
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 20),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -53,9 +56,15 @@ class _TermsconditionState extends State<Termscondition> {
 
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 20),
+                  vertical: AppScaler.scaleHeight(context, 16),
+                ),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 20),
+                    vertical: AppScaler.scaleHeight(context, 20),
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.submitticket0E0E0E,
                     borderRadius: BorderRadius.circular(20),
@@ -66,13 +75,14 @@ class _TermsconditionState extends State<Termscondition> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PoppinsText(
+                          context,
                           "Welcome to Draper TV, an online platform owned by Draper Productions.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
                         ),
 
-                        SizedBox(height: 16),
+                        SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
                         _title("1. Acceptance of Terms", customColors),
                         _body(
@@ -136,7 +146,7 @@ class _TermsconditionState extends State<Termscondition> {
                           customColors,
                         ),
 
-                        SizedBox(height: 20),
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       ],
                     ),
                   ),
@@ -151,8 +161,12 @@ class _TermsconditionState extends State<Termscondition> {
 
   Widget _title(String text, AppCustomColors colors) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
+      padding: EdgeInsets.only(
+        top: AppScaler.scaleHeight(context, 20),
+        bottom: AppScaler.scaleHeight(context, 8),
+      ),
       child: PoppinsText(
+        context,
         text,
         color: colors.textColor,
         fontSize: PoppinsFontSizeVariant.size16,
@@ -163,6 +177,7 @@ class _TermsconditionState extends State<Termscondition> {
 
   Widget _body(String text, AppCustomColors colors) {
     return PoppinsText(
+      context,
       text,
       color: colors.textColor,
       fontSize: PoppinsFontSizeVariant.size12,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../../shared/widgets/buildradiotile.dart';
 import '../../../../shared/widgets/phonefield_code.dart';
 import '../../../../shared/widgets/textfield_new.dart';
 
@@ -15,10 +15,6 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  String? _receiveMethod;
-
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -50,12 +46,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
     setState(() {
       if (email.isNotEmpty && phone.isEmpty) {
-        _receiveMethod = "Email";
       } else if (phone.isNotEmpty && email.isEmpty) {
-        _receiveMethod = "Phone";
-      } else if (email.isNotEmpty && phone.isNotEmpty) {
-        _receiveMethod = null; // Both filled → user must choose manually
-      }
+      } else if (email.isNotEmpty && phone.isNotEmpty) {}
     });
   }
 
@@ -76,44 +68,147 @@ class _SignupScreenState extends State<SignupScreen> {
 
     return Scaffold(
       backgroundColor: customColors.dark,
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(Assets.images.screensbg.path),
-                fit: BoxFit.cover,
-              ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Assets.images.screensbg.path),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: AppScaler.scaleHeight(context, 110),
+                  ),
+                  child: Image.asset(
+                    Assets.images.logo2.path,
+                    width: AppScaler.scaleSize(context, 180),
+                    height: AppScaler.scaleHeight(context, 110),
+                  ),
+                ),
+                SizedBox(height: AppScaler.scaleHeight(context, 26)),
+                PoppinsText(
+                  context,
+                  "Get Started with Draper",
+                  fontSize: PoppinsFontSizeVariant.size24,
+                  fontWeight: PoppinsFontWeightVariant.semiBold,
+                  color: customColors.textColor,
+                ),
+              ],
             ),
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 30.0,
-              ),
-              child: Form(
-                key: _formKey,
+
+            Expanded(
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 15),
+                ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Center(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 30),
-                            child: Image.asset(Assets.images.logo2.path),
-                          ),
-                          SizedBox(height: 15),
-                          PoppinsText(
-                            "Get Started with Draper",
-                            fontSize: PoppinsFontSizeVariant.size24,
-                            fontWeight: PoppinsFontWeightVariant.semiBold,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 25),
+                    SizedBox(height: AppScaler.scaleHeight(context, 36)),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Expanded(
+                    //       child: AppButton(
+                    //         buttonSize: Size(
+                    //           double.infinity,
+                    //           AppScaler.scaleHeight(context, 52),
+                    //         ),
+                    //         onPressed: () {
+                    //           context.goNamed(AppRoutes.home.name);
+                    //         },
+                    //         title: 'Google Login',
+                    //         color: AppColors.graylight,
+                    //         prefixIcon: Image.asset(
+                    //           Assets.images.googleicon.path,
+                    //           width: AppScaler.scaleSize(context, 26),
+                    //           height: AppScaler.scaleHeight(context, 26),
+                    //         ),
+                    //         buttonGradient: [
+                    //           AppColors.graylight,
+                    //           AppColors.graylight,
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     SizedBox(width: AppScaler.scaleSize(context, 10)),
+                    //     Expanded(
+                    //       child: AppButton(
+                    //         buttonSize: Size(
+                    //           double.infinity,
+                    //           AppScaler.scaleHeight(context, 52),
+                    //         ),
+                    //         onPressed: () {
+                    //           context.goNamed(AppRoutes.home.name);
+                    //         },
+                    //         title: 'Apple Login',
+                    //         color: AppColors.graylight,
+                    //         prefixIcon: Image.asset(
+                    //           Assets.images.appleicon.path,
+                    //           width: AppScaler.scaleSize(context, 26),
+                    //           height: AppScaler.scaleHeight(context, 26),
+                    //         ),
+                    //         buttonGradient: [
+                    //           AppColors.graylight,
+                    //           AppColors.graylight,
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                    // AppButton(
+                    //   buttonSize: Size(
+                    //     double.infinity,
+                    //     AppScaler.scaleHeight(context, 52),
+                    //   ),
+                    //   onPressed: () {
+                    //     GuestHelper.isGuest = true;
+                    //     context.goNamed(AppRoutes.home.name);
+                    //   },
+                    //   buttonGradient: [
+                    //     AppColors.graylight,
+                    //     AppColors.graylight,
+                    //   ],
+                    //   title: 'Continue as Guest',
+                    // ),
+                    // SizedBox(height: AppScaler.scaleHeight(context, 36)),
+                            
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Expanded(
+                    //       child: Divider(
+                    //         color: AppColors.color6B7280,
+                    //         thickness: AppScaler.scaleSize(context, 1),
+                    //       ),
+                    //     ),
+                    //     Padding(
+                    //       padding: EdgeInsets.symmetric(
+                    //         horizontal: AppScaler.scaleSize(context, 8),
+                    //       ),
+                    //       child: PoppinsText(
+                    //         context,
+                    //         "or",
+                    //         color: AppColors.color6B7280,
+                    //         fontWeight: PoppinsFontWeightVariant.regular,
+                    //         fontSize: PoppinsFontSizeVariant.size12,
+                    //       ),
+                    //     ),
+                    //     Expanded(
+                    //       child: Divider(
+                    //         color: AppColors.color6B7280,
+                    //         thickness: AppScaler.scaleSize(context, 1),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // SizedBox(height: AppScaler.scaleHeight(context, 36)),
+                            
                     NewTextField(
                       fieldbg: AppColors.tfield,
                       controller: _fullNameController,
@@ -121,7 +216,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       hintText: "John Mackson",
                       filledColor: AppColors.tfield,
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
                     NewTextField(
                       fieldbg: AppColors.tfield,
                       controller: _emailController,
@@ -130,7 +225,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       filledColor: AppColors.tfield,
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                            
                     PhoneOtpField(
                       phoneController: _phoneController,
                       otpController: otpController,
@@ -150,7 +246,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                            
                     AppPasswordField(
                       keyboardType: TextInputType.numberWithOptions(),
                       controller: _confirmPasswordController,
@@ -163,66 +260,70 @@ class _SignupScreenState extends State<SignupScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 8),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: AppColors.tfield,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          PoppinsText(
-                            "Receive Code Via",
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.labelColor,
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CustomRadioTile(
-                                  title: 'Email Address',
-                                  value: 'Email',
-                                  groupValue: _receiveMethod,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _receiveMethod = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Expanded(
-                                child: CustomRadioTile(
-                                  title: 'Phone Number',
-                                  value: 'Phone',
-                                  groupValue: _receiveMethod,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _receiveMethod = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-
+                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                            
+                    // Container(
+                    //   padding: EdgeInsets.all(10),
+                    //   decoration: BoxDecoration(
+                    //     color: AppColors.tfield,
+                    //     borderRadius: BorderRadius.circular(5),
+                    //   ),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       PoppinsText(
+                    //         context,
+                    //         "Receive Code Via",
+                    //         fontSize: PoppinsFontSizeVariant.size12,
+                    //         fontWeight: PoppinsFontWeightVariant.regular,
+                    //         color: customColors.labelColor,
+                    //       ),
+                    //       SizedBox(
+                    //         height: AppScaler.scaleHeight(context, 10),
+                    //       ),
+                            
+                    //       Row(
+                    //         children: [
+                    //           Expanded(
+                    //             child: CustomRadioTile(
+                    //               title: 'Email Address',
+                    //               value: 'Email',
+                    //               groupValue: _receiveMethod,
+                    //               onChanged: (value) {
+                    //                 setState(() {
+                    //                   _receiveMethod = value;
+                    //                 });
+                    //               },
+                    //             ),
+                    //           ),
+                    //           Expanded(
+                    //             child: CustomRadioTile(
+                    //               title: 'Phone Number',
+                    //               value: 'Phone',
+                    //               groupValue: _receiveMethod,
+                    //               onChanged: (value) {
+                    //                 setState(() {
+                    //                   _receiveMethod = value;
+                    //                 });
+                    //               },
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(height: AppScaler.scaleHeight(context, 15)),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 14,
-                          width: 14,
+                          height: AppScaler.scaleHeight(context, 14),
+                          width: AppScaler.scaleSize(context, 14),
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
-
+                            
                             onTap: () => onRememberMeChanged(!rememberMe),
                             child: Container(
                               decoration: BoxDecoration(
@@ -234,8 +335,10 @@ class _SignupScreenState extends State<SignupScreen> {
                               child: rememberMe
                                   ? Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
-                                        gradient: const LinearGradient(
+                                        borderRadius: BorderRadius.circular(
+                                          4,
+                                        ),
+                                        gradient: LinearGradient(
                                           colors: [
                                             Color(0xFF1FCFFF),
                                             Color(0xFF0063FF),
@@ -246,7 +349,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                       ),
                                       child: Icon(
                                         Icons.check,
-                                        size: 12,
+                                        size: AppScaler.scaleSize(
+                                          context,
+                                          12,
+                                        ),
                                         color: AppColors.white,
                                       ),
                                     )
@@ -254,22 +360,24 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 5),
+                        SizedBox(width: AppScaler.scaleSize(context, 5)),
                         RichText(
                           text: TextSpan(
                             children: [
                               WidgetSpan(
                                 child: PoppinsText(
+                                  context,
                                   "I agree to the ",
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   color: customColors.textColor,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
+                                  fontWeight:
+                                      PoppinsFontWeightVariant.regular,
                                 ),
                               ),
                               WidgetSpan(
                                 child: GestureDetector(
                                   behavior: HitTestBehavior.opaque,
-
+                            
                                   onTap: () {},
                                   child: ShaderMask(
                                     shaderCallback: (bounds) =>
@@ -284,8 +392,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                           ),
                                         ),
                                     child: PoppinsText(
+                                      context,
                                       "Terms & Conditions",
-                                      fontSize: PoppinsFontSizeVariant.size12,
+                                      fontSize:
+                                          PoppinsFontSizeVariant.size12,
                                       color: AppColors.white,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
@@ -296,16 +406,18 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                               WidgetSpan(
                                 child: PoppinsText(
+                                  context,
                                   " and ",
                                   fontSize: PoppinsFontSizeVariant.size12,
                                   color: customColors.textColor,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
+                                  fontWeight:
+                                      PoppinsFontWeightVariant.regular,
                                 ),
                               ),
                               WidgetSpan(
                                 child: GestureDetector(
                                   behavior: HitTestBehavior.opaque,
-
+                            
                                   onTap: () {},
                                   child: ShaderMask(
                                     shaderCallback: (bounds) =>
@@ -320,8 +432,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                           ),
                                         ),
                                     child: PoppinsText(
+                                      context,
                                       "Privacy Policy.",
-                                      fontSize: PoppinsFontSizeVariant.size12,
+                                      fontSize:
+                                          PoppinsFontSizeVariant.size12,
                                       color: AppColors.white,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
@@ -330,117 +444,38 @@ class _SignupScreenState extends State<SignupScreen> {
                                   ),
                                 ),
                               ),
-                            ],
+                            ], 
                           ),
                         ),
                       ],
                     ),
-
-                    SizedBox(height: 20),
+                            
+                    SizedBox(height: AppScaler.scaleHeight(context, 40)),
                     AppButton(
                       onPressed: () {
-                        context.pushNamed(
-                          AppRoutes.createAccountCodeScreen.name,
-                        );
+                        context.goNamed(AppRoutes.createAccountCodeScreen.name);
                       },
                       title: "Create Account",
                     ),
-                    SizedBox(height: 25),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            color: customColors.labelColor,
-                            thickness: 1,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: PoppinsText(
-                            "or",
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.labelColor,
-                          ),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            color: customColors.labelColor,
-                            thickness: 1,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 40),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AppButton(
-                          onPressed: () {},
-                          title: 'Google Login',
-                          buttonSize: Size(180, 52),
-                          color: Color(0xff202020),
-                          prefixIcon: Image.asset(
-                            Assets.images.googleicon.path,
-                            width: 26,
-                            height: 26,
-                          ),
-                          buttonGradient: [
-                            AppColors.graylight,
-                            AppColors.graylight,
-                          ],
-                        ),
-                        AppButton(
-                          onPressed: () {},
-                          title: 'Apple Login',
-                          buttonSize: Size(180, 52),
-                          // color: Color(0xff202020),
-                          color: AppColors.graylight,
-
-                          prefixIcon: Image.asset(
-                            Assets.images.appleicon.path,
-                            width: 26,
-                            height: 26,
-                          ),
-                          buttonGradient: [
-                            AppColors.graylight,
-                            AppColors.graylight,
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 10),
-                    AppButton(
-                      onPressed: () {
-                        context.pushNamed(AppRoutes.home.name);
-                      },
-                      title: 'Continue as Guest',
-                      buttonGradient: [
-                        AppColors.graylight,
-                        AppColors.graylight,
-                      ],
-                      color: Color(0xff202020),
-                    ),
-
-                    SizedBox(height: 28),
+                    SizedBox(height: AppScaler.scaleHeight(context, 40)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         PoppinsText(
+                          context,
                           "Already have an account?",
                           fontSize: PoppinsFontSizeVariant.size14,
                           fontWeight: PoppinsFontWeightVariant.medium,
                           color: customColors.textColor,
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: AppScaler.scaleSize(context, 10)),
                         ShaderMask(
                           shaderCallback: (bounds) =>
                               LinearGradient(
-                                colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
+                                colors: [
+                                  Color(0xFF1FCFFF),
+                                  Color(0xFF0063FF),
+                                ],
                               ).createShader(
                                 Rect.fromLTWH(
                                   0,
@@ -451,11 +486,12 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
-
+                            
                             onTap: () {
                               context.pushNamed(AppRoutes.loginScreen.name);
                             },
                             child: PoppinsText(
+                              context,
                               "Sign in",
                               fontSize: PoppinsFontSizeVariant.size14,
                               fontWeight: PoppinsFontWeightVariant.medium,
@@ -465,13 +501,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: AppScaler.scaleHeight(context, 50)),
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -19,9 +20,14 @@ class _RemovePopupState extends State<RemovePopup> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Container(
-      height: 350,
+      // height: AppScaler.scaleHeight(context, 310),
       width: double.infinity,
-      padding: EdgeInsets.only(top: 24, bottom: 24, left: 20, right: 20),
+      padding: EdgeInsets.only(
+        top: AppScaler.scaleHeight(context, 24),
+        bottom: AppScaler.scaleHeight(context, 24),
+        left: AppScaler.scaleSize(context, 18),
+        right: AppScaler.scaleSize(context, 18),
+      ),
       decoration: BoxDecoration(
         color: customColors.regular,
         borderRadius: BorderRadius.circular(20),
@@ -30,9 +36,14 @@ class _RemovePopupState extends State<RemovePopup> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(Assets.images.delete123.path, height: 54, width: 54),
-          SizedBox(height: 40),
+          Image.asset(
+            Assets.images.delete123.path,
+            height: AppScaler.scaleHeight(context, 54),
+            width: AppScaler.scaleSize(context, 54),
+          ),
+          SizedBox(height: AppScaler.scaleHeight(context, 40)),
           PoppinsText(
+            context,
             "Are you sure you want to remove this?",
             fontSize: PoppinsFontSizeVariant.size16,
             fontWeight: PoppinsFontWeightVariant.medium,
@@ -86,4 +97,5 @@ class _RemovePopupState extends State<RemovePopup> {
       ),
     );
   }
+
 }

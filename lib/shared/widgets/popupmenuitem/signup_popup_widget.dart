@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 
@@ -21,54 +22,66 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return Container(
-      height: 350,
-      width: double.infinity,
-      padding: EdgeInsets.only(top: 24, bottom: 24, left: 32, right: 32),
-      decoration: BoxDecoration(
-        color: customColors.regular,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(Assets.images.logout123.path, height: 54, width: 54),
-          SizedBox(height: 40),
-          PoppinsText(
-            "Are you sure you want to Sign Out?",
-            fontSize: PoppinsFontSizeVariant.size16,
-            fontWeight: PoppinsFontWeightVariant.medium,
-            color: customColors.textColor,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 40),
-          AppButton(
-            onPressed: () {
-              Navigator.pop(context);
+    return IntrinsicWidth(
+      child: Container(
+        padding: EdgeInsets.only(
+          top: AppScaler.scaleHeight(context, 24),
+          bottom: AppScaler.scaleHeight(context, 24),
+          left: AppScaler.scaleSize(context, 20),
+          right: AppScaler.scaleSize(context, 20),
+        ),
+        decoration: BoxDecoration(
+          color: customColors.regular,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              Assets.images.logout123.path,
+              height: AppScaler.scaleHeight(context, 54),
+              width: AppScaler.scaleSize(context, 54),
+            ),
 
-              Future.microtask(() {
-                context.pushNamed(AppRoutes.loginScreen.name);
-              });
-            },
-            title: "Sign Out",
-          ),
+            SizedBox(height: AppScaler.scaleHeight(context, 40)),
 
-          SizedBox(height: 14),
+            PoppinsText(
+              context,
+              "Are you sure you want to Sign Out?",
+              fontSize: PoppinsFontSizeVariant.size16,
+              fontWeight: PoppinsFontWeightVariant.medium,
+              color: customColors.textColor,
+              textAlign: TextAlign.center,
+            ),
 
-          AppButton(
-            color: Colors.transparent,
-            borderColor: customColors.greyColor,
-            borderWidth: 1,
-            border: true,
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
-            title: "Cancel",
-          ),
-        ],
+            SizedBox(height: AppScaler.scaleHeight(context, 40)),
+
+            AppButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Future.microtask(() {
+                  context.pushNamed(AppRoutes.socialLoginScreen.name);
+                });
+              },
+              title: "Sign Out",
+            ),
+
+            SizedBox(height: AppScaler.scaleHeight(context, 14)),
+
+            AppButton(
+              color: Colors.transparent,
+              borderColor: customColors.greyColor,
+              borderWidth: 1,
+              border: true,
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              title: "Cancel",
+            ),
+          ],
+        ),
       ),
     );
   }
-
 }

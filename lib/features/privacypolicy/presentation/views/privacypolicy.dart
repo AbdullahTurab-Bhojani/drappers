@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -53,7 +54,10 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
 
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 10),
+                  vertical: AppScaler.scaleHeight(context, 20),
+                ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   decoration: BoxDecoration(
@@ -71,18 +75,22 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PoppinsText(
+                          context,
                           "Last updated: 10/30/2023",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
                         ),
 
-                        SizedBox(height: 16),
+                        SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
-                        // --- 1. Information We Collect ---
                         Padding(
-                          padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 8),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
+                            context,
                             "1. Information We Collect",
                             color: customColors.textColor,
                             fontSize: PoppinsFontSizeVariant.size16,
@@ -90,6 +98,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           ),
                         ),
                         PoppinsText(
+                          context,
                           "We collect email addresses and names from contact forms and newsletter sign-ups.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size12,
@@ -97,8 +106,12 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
+                            context,
                             "2. Purpose of Collection",
                             color: customColors.textColor,
                             fontSize: PoppinsFontSizeVariant.size16,
@@ -106,6 +119,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           ),
                         ),
                         PoppinsText(
+                          context,
                           "We collect this information for the purpose of sending newsletters to our subscribers.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size12,
@@ -113,8 +127,12 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
+                            context,
                             "3. Cookies and Tracking Technologies",
                             color: customColors.textColor,
                             fontSize: PoppinsFontSizeVariant.size16,
@@ -122,6 +140,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           ),
                         ),
                         PoppinsText(
+                          context,
                           "We use Google Analytics to track website traffic and gather information about how visitors use our site. This information is used for internal purposes only and helps us improve our website.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size12,
@@ -129,8 +148,12 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
+                            context,
                             "4. Sharing of Personal Information",
                             color: customColors.textColor,
                             fontSize: PoppinsFontSizeVariant.size16,
@@ -138,6 +161,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           ),
                         ),
                         PoppinsText(
+                          context,
                           "We do not share the personal information we collect with any third parties.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size12,
@@ -145,8 +169,12 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
+                            context,
                             "5. Data Security",
                             color: customColors.textColor,
                             fontSize: PoppinsFontSizeVariant.size16,
@@ -154,6 +182,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           ),
                         ),
                         PoppinsText(
+                          context,
                           "We take appropriate measures to protect the personal information we collect. This includes using secure servers and encryption methods.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size12,
@@ -161,8 +190,12 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
+                            context,
                             "6. Data Retention",
                             color: customColors.textColor,
                             fontSize: PoppinsFontSizeVariant.size16,
@@ -170,6 +203,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           ),
                         ),
                         PoppinsText(
+                          context,
                           "We retain the personal information you provide for an indefinite period, unless you request its deletion.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size12,
@@ -177,8 +211,12 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
+                          padding: EdgeInsets.only(
+                            top: AppScaler.scaleHeight(context, 24),
+                            bottom: AppScaler.scaleHeight(context, 8),
+                          ),
                           child: PoppinsText(
+                            context,
                             "7. Opt-Out Option",
                             color: customColors.textColor,
                             fontSize: PoppinsFontSizeVariant.size16,
@@ -186,12 +224,13 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                           ),
                         ),
                         PoppinsText(
+                          context,
                           "If you no longer wish to receive our newsletters, you can opt-out by following the unsubscribe instructions provided in the email or by contacting us directly.",
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size12,
                           fontWeight: PoppinsFontWeightVariant.regular,
                         ),
-                        SizedBox(height: 20.0),
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       ],
                     ),
                   ),

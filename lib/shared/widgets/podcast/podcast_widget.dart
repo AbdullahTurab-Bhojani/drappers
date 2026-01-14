@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../app_bar/main_app_bar.dart';
@@ -25,8 +26,23 @@ class _PodcastWidgetState extends State<PodcastWidget> {
       Assets.images.podcastimage4.path,
       Assets.images.podcastimage5.path,
     ];
+
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    final crossAxisCount = 3;
+    final horizontalPadding = AppScaler.scaleSize(context, 12) * 2;
+    final crossAxisSpacing = AppScaler.scaleSize(context, 10);
+    final mainAxisSpacing = AppScaler.scaleHeight(context, 10);
+    final cardWidth =
+        (screenWidth -
+            horizontalPadding -
+            crossAxisSpacing * (crossAxisCount - 1)) /
+        crossAxisCount;
+    final cardHeight = AppScaler.scaleHeight(context, 200);
+    final childAspectRatio = cardWidth / cardHeight;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -42,16 +58,17 @@ class _PodcastWidgetState extends State<PodcastWidget> {
             AppMainBar(
               leading: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
                 onTap: () {
                   context.pop();
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 10),
+                  ),
                   child: Image.asset(
                     Assets.images.backicon.path,
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -61,7 +78,9 @@ class _PodcastWidgetState extends State<PodcastWidget> {
               elevation: 0,
               actions: [
                 Padding(
-                  padding: EdgeInsets.only(right: 16),
+                  padding: EdgeInsets.only(
+                    right: AppScaler.scaleSize(context, 16),
+                  ),
                   child: GestureDetector(
                     onTap: () {
                       if (GuestHelper.isGuest) {
@@ -72,17 +91,20 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                     },
                     child: Image.asset(
                       Assets.images.searchstokeicon.path,
-                      width: 20,
-                      height: 20,
+                      width: AppScaler.scaleSize(context, 20),
+                      height: AppScaler.scaleHeight(context, 20),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            SizedBox(height: AppScaler.scaleHeight(context, 12)),
+
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 12),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -90,24 +112,25 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.65,
-                      ),
                       itemCount: podcastimages.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: crossAxisSpacing,
+                        mainAxisSpacing: mainAxisSpacing,
+                        childAspectRatio: childAspectRatio,
+                      ),
                       itemBuilder: (context, index) {
                         return Stack(
                           children: [
                             GestureDetector(
                               behavior: HitTestBehavior.opaque,
-
                               onTap: () {
                                 context.pushNamed(AppRoutes.contentDetail.name);
                               },
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(
+                                  AppScaler.scaleSize(context, 12),
+                                ),
                                 child: Image.asset(
                                   podcastimages[index],
                                   fit: BoxFit.cover,
@@ -117,36 +140,41 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                               ),
                             ),
                             Positioned(
-                              top: 0,
-                              right: 0,
+                              top: AppScaler.scaleHeight(context, 4),
+                              right: AppScaler.scaleSize(context, 4),
                               child: PopupmenuWidget(showSaveIcon: false),
                             ),
                           ],
                         );
                       },
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                     PoppinsText(
+                      context,
                       "More like this",
                       fontSize: PoppinsFontSizeVariant.size15,
                       fontWeight: PoppinsFontWeightVariant.medium,
                       color: customColors.textColor,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                     GridView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.7,
-                      ),
                       itemCount: podcastimages.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: crossAxisSpacing,
+                        mainAxisSpacing: mainAxisSpacing,
+                        childAspectRatio: childAspectRatio,
+                      ),
                       itemBuilder: (context, index) {
                         return ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(
+                            AppScaler.scaleSize(context, 12),
+                          ),
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
@@ -155,8 +183,8 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                                 fit: BoxFit.cover,
                               ),
                               Positioned(
-                                top: 0,
-                                right: 0,
+                                top: AppScaler.scaleHeight(context, 4),
+                                right: AppScaler.scaleSize(context, 4),
                                 child: PopupmenuWidget(showSaveIcon: false),
                               ),
                             ],
@@ -165,7 +193,7 @@ class _PodcastWidgetState extends State<PodcastWidget> {
                       },
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
                   ],
                 ),
               ),

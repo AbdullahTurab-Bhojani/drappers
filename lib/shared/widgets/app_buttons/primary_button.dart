@@ -41,7 +41,12 @@ class AppButton extends StatelessWidget {
 
     return TextButton(
       style: TextButton.styleFrom(
-        minimumSize: buttonSize ?? Size(MediaQuery.of(context).size.width, 52),
+        minimumSize:
+            buttonSize ??
+            Size(
+              MediaQuery.of(context).size.width,
+              AppScaler.scaleSize(context, 52),
+            ),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         alignment: Alignment.center,
         overlayColor: WidgetStateColor.resolveWith((states) => AppColors.white),
@@ -66,19 +71,30 @@ class AppButton extends StatelessWidget {
       ),
       onPressed: isLoading ? () {} : onPressed,
       child: isLoading
-          ? LoadingWidget(height: 20, width: 20, color: color)
+          ? LoadingWidget(
+              height: AppScaler.scaleHeight(context, 20),
+              width: AppScaler.scaleSize(context, 20),
+              color: color,
+            )
           : Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (prefixIcon != null) ...[prefixIcon!, SizedBox(width: 6)],
+                if (prefixIcon != null) ...[
+                  prefixIcon!,
+                  SizedBox(width: AppScaler.scaleSize(context, 10)),
+                ],
                 PoppinsText(
+                  context,
                   fontSize: fontSize,
                   title,
                   fontWeight: fontWeight,
                   color: customColors.textColor,
                 ),
-                if (suffixIcon != null) ...[SizedBox(width: 6), suffixIcon!],
+                if (suffixIcon != null) ...[
+                  SizedBox(width: AppScaler.scaleSize(context, 6)),
+                  suffixIcon!,
+                ],
               ],
             ),
     );

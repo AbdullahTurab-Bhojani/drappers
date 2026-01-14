@@ -32,23 +32,23 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
     if (leading != null) {
       leadingWidget = leading;
     } else if (leadingText != null) {
-      leadingWidget = Padding(
-        padding:  EdgeInsets.only(left: 20,top: 10),
+      leadingWidget = Center(
         child: PoppinsText(
+          context,
           leadingText!,
-          color: Colors.white,
+          color: AppColors.white,
           fontWeight: PoppinsFontWeightVariant.semiBold,
-          fontSize: PoppinsFontSizeVariant.size24,
+          fontSize: PoppinsFontSizeVariant.size22,
         ),
       );
     } else if (leadingIcon != null) {
       leadingWidget = IconButton(
-        icon: Icon(leadingIcon, color: Colors.white),
+        icon: Icon(leadingIcon, color: AppColors.white),
         onPressed: () => Navigator.pop(context),
       );
     } else {
       leadingWidget = IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.white),
+        icon: Icon(Icons.arrow_back, color: AppColors.white),
         onPressed: () => Navigator.pop(context),
       );
     }
@@ -61,8 +61,9 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,
       title: PoppinsText(
+        context,
         title,
-        color: Colors.white,
+        color: AppColors.white,
         fontWeight: PoppinsFontWeightVariant.semiBold,
         fontSize: PoppinsFontSizeVariant.size24,
       ),
@@ -75,5 +76,5 @@ class AppMainBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

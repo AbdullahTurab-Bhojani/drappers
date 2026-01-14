@@ -1,9 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../gen/assets.gen.dart';
 
 class WatchlistItemTile extends StatelessWidget {
@@ -25,13 +23,16 @@ class WatchlistItemTile extends StatelessWidget {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: EdgeInsets.symmetric(
+        // vertical: AppScaler.scaleHeight(context, 10),
+        horizontal: AppScaler.scaleSize(context, 20),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 157,
-            height: 89,
+            width: AppScaler.scaleSize(context, 157),
+            height: AppScaler.scaleHeight(context, 89),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.0),
               image: DecorationImage(
@@ -40,9 +41,10 @@ class WatchlistItemTile extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 12),
+          SizedBox(width: AppScaler.scaleSize(context, 12)),
           Expanded(
             child: PoppinsText(
+              context,
               title,
               fontSize: PoppinsFontSizeVariant.size16,
               fontWeight: PoppinsFontWeightVariant.medium,
@@ -51,17 +53,14 @@ class WatchlistItemTile extends StatelessWidget {
               textOverflow: TextOverflow.ellipsis,
             ),
           ),
-          SizedBox(width: 10),
+          SizedBox(width: AppScaler.scaleSize(context, 12)),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: onTapPlay,
-            child: Padding(
-              padding: EdgeInsets.only(right: 0),
-              child: Image.asset(
-                Assets.images.playcircleicon.path,
-                height: 32,
-                width: 32,
-              ),
+            child: Image.asset(
+              Assets.images.playcircleicon.path,
+              height: AppScaler.scaleHeight(context, 32),
+              width: AppScaler.scaleSize(context, 32),
             ),
           ),
         ],

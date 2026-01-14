@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 
 class TileWidget extends StatefulWidget {
@@ -29,15 +30,23 @@ class _TileWidgetState extends State<TileWidget> {
       child: Container(
         color: Colors.transparent,
         child: Padding(
-          padding: EdgeInsets.only(top: 12, bottom: 12),
+          padding: EdgeInsets.only(
+            top: AppScaler.scaleHeight(context, 12),
+            bottom: AppScaler.scaleHeight(context, 12),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Image.asset(widget.iconImage, width: 24, height: 24),
-                  SizedBox(width: 20),
+                  Image.asset(
+                    widget.iconImage,
+                    width: AppScaler.scaleSize(context, 24),
+                    height: AppScaler.scaleHeight(context, 24),
+                  ),
+                  SizedBox(width: AppScaler.scaleSize(context, 20),),
                   PoppinsText(
+                    context,
                     widget.title,
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,

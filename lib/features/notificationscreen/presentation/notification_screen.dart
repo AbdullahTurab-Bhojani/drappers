@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -105,11 +106,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20, right: 5),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 20),
+                    right: AppScaler.scaleSize(context, 5),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -119,7 +123,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
               elevation: 0,
               actions: [
                 Padding(
-                  padding: EdgeInsets.only(right: 25),
+                  padding: EdgeInsets.only(
+                    right: AppScaler.scaleSize(context, 25),
+                  ),
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
 
@@ -128,8 +134,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     },
                     child: Image.asset(
                       Assets.images.settingicon.path,
-                      width: 25,
-                      height: 25,
+                      width: AppScaler.scaleSize(context, 25),
+                      height: AppScaler.scaleHeight(context, 25),
                     ),
                   ),
                 ),
@@ -140,18 +146,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  SizedBox(height: 5),
+                  SizedBox(height: AppScaler.scaleHeight(context, 5)),
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      width: 73,
-                      height: 31,
+                      width: AppScaler.scaleSize(context, 73),
+                      height: AppScaler.scaleHeight(context, 30),
                       decoration: BoxDecoration(
                         color: AppColors.color1A1E24,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Center(
                         child: PoppinsText(
+                          context,
                           'Today',
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
@@ -160,7 +167,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 11),
+                  SizedBox(height: AppScaler.scaleHeight(context, 12)),
 
                   ...notifications.map((item) {
                     return GestureDetector(
@@ -182,10 +189,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.only(
-                            top: 20,
-                            bottom: 10,
-                            left: 20,
-                            right: 20,
+                            top: AppScaler.scaleHeight(context, 20),
+                            bottom: AppScaler.scaleHeight(context, 10),
+                            left: AppScaler.scaleSize(context, 20),
+                            right: AppScaler.scaleSize(context, 20),
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,14 +202,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       item['title'],
                                       color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
                                     ),
-                                    SizedBox(height: 4),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(context, 4),
+                                    ),
                                     PoppinsText(
+                                      context,
                                       item['time'],
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       fontWeight:
@@ -212,11 +223,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   ],
                                 ),
                               ),
-                              SizedBox(width: 12),
+                              SizedBox(width: AppScaler.scaleSize(context, 12)),
                               Container(
-                                margin: EdgeInsets.only(top: 6),
-                                width: 78,
-                                height: 44,
+                                margin: EdgeInsets.only(
+                                  top: AppScaler.scaleHeight(context, 5),
+                                ),
+                                width: AppScaler.scaleSize(context, 74),
+                                height: AppScaler.scaleHeight(context, 44),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
@@ -226,10 +239,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 ),
                               ),
                               if (item['showExtra']) ...[
-                                SizedBox(width: 12),
+                                SizedBox(
+                                  width: AppScaler.scaleSize(context, 12),
+                                ),
                                 Container(
-                                  margin: EdgeInsets.only(top: 15),
+                                  margin: EdgeInsets.only(
+                                    top: AppScaler.scaleHeight(context, 15),
+                                  ),
                                   child: PoppinsText(
+                                    context,
                                     "New!",
                                     fontSize: PoppinsFontSizeVariant.size12,
                                     fontWeight:
@@ -245,18 +263,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     );
                   }),
 
-                  SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                   Center(
                     child: Container(
-                      width: 102,
-                      height: 31,
+                      width: AppScaler.scaleSize(context, 102),
+                      height: AppScaler.scaleHeight(context, 31),
                       decoration: BoxDecoration(
                         color: AppColors.color1A1E24,
                         borderRadius: BorderRadius.circular(40),
                       ),
                       child: Center(
                         child: PoppinsText(
+                          context,
                           'Yesterday',
                           color: customColors.textColor,
                           fontSize: PoppinsFontSizeVariant.size16,
@@ -265,7 +284,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                   ...yesterday.map((item) {
                     return GestureDetector(
@@ -280,10 +299,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.only(
-                            top: 20,
-                            bottom: 10,
-                            left: 20,
-                            right: 20,
+                            top: AppScaler.scaleHeight(context, 20),
+                            bottom: AppScaler.scaleHeight(context, 10),
+                            left: AppScaler.scaleSize(context, 20),
+                            right: AppScaler.scaleSize(context, 20),
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,14 +312,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       item['title'],
                                       color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
                                     ),
-                                    SizedBox(height: 4),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(context, 4),
+                                    ),
                                     PoppinsText(
+                                      context,
                                       item['time'],
                                       fontSize: PoppinsFontSizeVariant.size12,
                                       fontWeight:
@@ -310,11 +333,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   ],
                                 ),
                               ),
-                              SizedBox(width: 12),
+                              SizedBox(width: AppScaler.scaleSize(context, 12)),
                               Container(
-                                margin: EdgeInsets.only(top: 6),
-                                width: 78,
-                                height: 44,
+                                margin: EdgeInsets.only(
+                                  top: AppScaler.scaleHeight(context, 5),
+                                ),
+                                width: AppScaler.scaleSize(context, 78),
+                                height: AppScaler.scaleHeight(context, 44),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
@@ -330,17 +355,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     );
                   }),
 
-                  SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
                   Center(
                     child: Container(
-                      width: 117,
-                      height: 31,
+                      width: AppScaler.scaleSize(context, 117),
+                      height: AppScaler.scaleHeight(context, 31),
                       decoration: BoxDecoration(
                         color: AppColors.color1A1E24,
                         borderRadius: BorderRadius.circular(40),
                       ),
                       child: Center(
                         child: PoppinsText(
+                          context,
                           'Wednesday',
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
@@ -348,7 +374,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                   ...wednesday.map((item) {
                     return GestureDetector(
@@ -363,10 +389,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.only(
-                            top: 20,
-                            bottom: 10,
-                            left: 20,
-                            right: 20,
+                            top: AppScaler.scaleHeight(context, 20),
+                            bottom: AppScaler.scaleHeight(context, 10),
+                            left: AppScaler.scaleSize(context, 20),
+                            right: AppScaler.scaleSize(context, 20),
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -376,14 +402,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PoppinsText(
+                                      context,
                                       item['title'],
                                       color: customColors.textColor,
                                       fontSize: PoppinsFontSizeVariant.size16,
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
                                     ),
-                                    SizedBox(height: 4),
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(context, 4),
+                                    ),
                                     PoppinsText(
+                                      context,
                                       item['time'],
                                       fontWeight:
                                           PoppinsFontWeightVariant.regular,
@@ -393,11 +423,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   ],
                                 ),
                               ),
-                              SizedBox(width: 12),
+                              SizedBox(
+                                width: AppScaler.scaleHeight(context, 12),
+                              ),
                               Container(
-                                margin: EdgeInsets.only(top: 6),
-                                width: 78,
-                                height: 44,
+                                margin: EdgeInsets.only(
+                                  top: AppScaler.scaleHeight(context, 6),
+                                ),
+                                width: AppScaler.scaleSize(context, 78),
+                                height: AppScaler.scaleHeight(context, 44),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
@@ -413,7 +447,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     );
                   }),
 
-                  SizedBox(height: 10),
+                  SizedBox(height: AppScaler.scaleHeight(context, 15)),
                 ],
               ),
             ),

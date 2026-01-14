@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
@@ -135,15 +136,16 @@ class _BottomNavigationBarShellState
                     children: [
                       if (isProfileTab)
                         GuestHelper.isGuest
-                            ? Icon(
-                                Icons.person_outline,
-                                size: 30,
+                            ? Image.asset(
+                                Assets.images.user.path,
+                                width: 20,
+                                height: 20,
                                 color: isSelected
                                     ? customColors.textColor
                                     : customColors.greyColor,
                               )
                             : CircleAvatar(
-                                radius: 15,
+                                radius: 9,
                                 backgroundColor: Colors.transparent,
                                 backgroundImage: NetworkImage(
                                   'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
@@ -153,16 +155,17 @@ class _BottomNavigationBarShellState
                         isSelected
                             ? Image(
                                 image: AssetImage(_navItems[index]['icon']),
-                                height: 24,
+                                height: AppScaler.scaleHeight(context, 20),
                               )
                             : Image(
                                 image: AssetImage(_navItems[index]['icon2']),
-                                height: 24,
+                                height: AppScaler.scaleHeight(context, 20),
                               ),
 
-                      const SizedBox(height: 4),
+                      SizedBox(height: AppScaler.scaleHeight(context, 4)),
 
                       PoppinsText(
+                        context,
                         _navItems[index]['label'],
                         fontSize: PoppinsFontSizeVariant.size14,
                         color: isSelected

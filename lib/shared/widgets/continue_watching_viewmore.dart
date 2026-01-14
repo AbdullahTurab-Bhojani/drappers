@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/extensions/theme_extension.dart';
+import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
 import 'app_bar/main_app_bar.dart';
@@ -94,11 +95,13 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(context).pop(),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(
+                    left: AppScaler.scaleSize(context, 20),
+                  ),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
+                    width: AppScaler.scaleSize(context, 20),
+                    height: AppScaler.scaleHeight(context, 20),
                   ),
                 ),
               ),
@@ -107,10 +110,12 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 20),
+                ),
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: _podcasts.length,
@@ -119,35 +124,42 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                     double sliderValue = _podcasts[index]['slider'];
 
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 12),
+                      padding: EdgeInsets.only(
+                        bottom: AppScaler.scaleHeight(context, 12),
+                      ),
                       child: IntrinsicHeight(
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Container(
-                              width: 120,
+                              width: AppScaler.scaleSize(context, 120),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(podcast.imagePath),
+                                  //  AssetImage(),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            SizedBox(width: 12),
+                            SizedBox(width: AppScaler.scaleSize(context, 12)),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   PoppinsText(
+                                    context,
                                     podcast.title,
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
                                     color: customColors.textColor,
                                     textOverflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 12),
+                                  ),
                                   PoppinsText(
+                                    context,
                                     podcast.description,
                                     fontSize: PoppinsFontSizeVariant.size14,
                                     fontWeight:
@@ -156,7 +168,10 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                     maxLines: 2,
                                     textOverflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 12),
+                                  ),
+                                  // SizedBox(height: 20),
                                   Row(
                                     children: [
                                       Expanded(
@@ -187,8 +202,12 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 8),
+                                      SizedBox(
+                                        height: AppScaler.scaleSize(context, 8),
+                                      ),
+                                      // SizedBox(width: 8),
                                       PoppinsText(
+                                        context,
                                         '-12:34',
                                         fontSize: PoppinsFontSizeVariant.size10,
                                         fontWeight:
@@ -197,7 +216,10 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 16),
+                                  ),
+                                  // SizedBox(height: 20),
                                   Row(
                                     children: [
                                       Expanded(
@@ -211,18 +233,33 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                           buttonSize: Size(double.infinity, 0),
                                           prefixIcon: Image.asset(
                                             Assets.images.playstrokeicon.path,
-                                            width: 14,
-                                            height: 14,
+                                            width: AppScaler.scaleSize(
+                                              context,
+                                              14,
+                                            ),
+                                            height: AppScaler.scaleHeight(
+                                              context,
+                                              14,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 20),
+                                      SizedBox(
+                                        width: AppScaler.scaleSize(context, 20),
+                                      ),
+                                      // SizedBox(width: 20),
                                       Image.asset(
                                         Assets.images.cancelicon.path,
-                                        height: 24,
-                                        width: 24,
+                                        width: AppScaler.scaleSize(context, 24),
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          24,
+                                        ),
                                       ),
                                     ],
+                                  ),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 20),
                                   ),
                                 ],
                               ),
