@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unused_local_variable, unnecessary_underscores
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,34 +17,33 @@ class WatchlistData {
   WatchlistData(this.thumbnailPath, this.title, this.year);
 }
 
-final List<WatchlistData> dummyWatchlist = [
-  WatchlistData(
-    Assets.images.watchlistcard1.path,
-    'Finale – Meet The Drapers Season 07',
-    '2025',
-  ),
-  WatchlistData(
-    Assets.images.watchlistcard2.path,
-    'Semifinals 2 – Meet The Drapers Season 6',
-    '2024',
-  ),
-  WatchlistData(
-    Assets.images.watchlistcard3.path,
-    'Semifinals 1 – Meet The Drapers Season 6',
-    '2023',
-  ),
-  WatchlistData(
-    Assets.images.watchlistcard4.path,
-    'Sri Sri University – Meet The Drapers Season 6',
-    '2023',
-  ),
-];
-
 class WatchlistScreen extends StatelessWidget {
   const WatchlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List menuList = [
+      {
+        'image': Assets.images.watchlistcard1.path,
+        'title': 'Finale – Meet The Drapers Season 07',
+        'year': '2025',
+      },
+      {
+        'image': Assets.images.watchlistcard2.path,
+        'title': 'Semifinals 2 – Meet The Drapers Season 6',
+        'year': '2024',
+      },
+      {
+        'image': Assets.images.watchlistcard3.path,
+        'title': 'Semifinals 1 – Meet The Drapers Season 6',
+        'year': '2023',
+      },
+      {
+        'image': Assets.images.watchlistcard4.path,
+        'title': 'Sri Sri University – Meet The Drapers Season 6',
+        'year': '2023',
+      },
+    ];
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     bool canExit = false;
@@ -57,63 +56,58 @@ class WatchlistScreen extends StatelessWidget {
 
         return true;
       },
-      child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(Assets.images.screensbg.path),
-              fit: BoxFit.cover,
-            ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          image: DecorationImage(
+            image: AssetImage(Assets.images.screensbg.path),
+            fit: BoxFit.cover,
           ),
-          child: Column(
-            children: [
-              AppMainBar(
-                leadingText: "Watchlist",
-                width: AppScaler.scaleSize(context, 150),
-                title: "",
-                centerTitle: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                actions: [
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppMainBar(
+            leadingText: "Watchlist",
+            width: AppScaler.scaleSize(context, 150),
+            title: "",
+            centerTitle: false,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            actions: [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
 
-                    onTap: () {
-                      context.pushNamed(AppRoutes.editWatchlistScreen.name);
-                    },
-                    child: PoppinsText(
-                      context,
-                      "Edit",
-                      fontSize: PoppinsFontSizeVariant.size14,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                    ),
-                  ),
-                  SizedBox(width: AppScaler.scaleSize(context, 20)),
-                ],
+                onTap: () {
+                  context.pushNamed(AppRoutes.editWatchlistScreen.name);
+                },
+                child: PoppinsText(
+                  context,
+                  "Edit",
+                  fontSize: PoppinsFontSizeVariant.size14,
+                  fontWeight: PoppinsFontWeightVariant.medium,
+                  color: customColors.textColor,
+                ),
               ),
-
+              SizedBox(width: AppScaler.scaleSize(context, 20)),
+            ],
+          ),
+          body: Column(
+            children: [
               Expanded(
                 child: ListView.separated(
-                  separatorBuilder: (context, index) {
-                    return SizedBox(height: 15);
-                  },
+                  separatorBuilder: (_, __) => SizedBox(height: 15),
                   padding: EdgeInsets.zero,
-                  itemCount: dummyWatchlist.length,
+                  itemCount: menuList.length,
                   itemBuilder: (context, index) {
-                    final item = dummyWatchlist[index];
-                    return GestureDetector(
-                      behavior: HitTestBehavior.opaque,
+                    final item = menuList[index];
 
-                      onTap: () {
+                    return WatchlistItemTile(
+                      thumbnailPath: item['image'],
+                      title: item['title'],
+                      year: item['year'],
+                      onTapPlay: () {
                         context.pushNamed(AppRoutes.contentDetail.name);
                       },
-                      child: WatchlistItemTile(
-                        thumbnailPath: item.thumbnailPath,
-                        title: item.title,
-                        year: item.year,
-                        onTapPlay: () {},
-                      ),
                     );
                   },
                 ),

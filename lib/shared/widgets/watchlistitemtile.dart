@@ -22,9 +22,9 @@ class WatchlistItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+
     return Padding(
       padding: EdgeInsets.symmetric(
-        // vertical: AppScaler.scaleHeight(context, 10),
         horizontal: AppScaler.scaleSize(context, 20),
       ),
       child: Row(
@@ -41,7 +41,9 @@ class WatchlistItemTile extends StatelessWidget {
               ),
             ),
           ),
+
           SizedBox(width: AppScaler.scaleSize(context, 12)),
+
           Expanded(
             child: PoppinsText(
               context,
@@ -53,7 +55,9 @@ class WatchlistItemTile extends StatelessWidget {
               textOverflow: TextOverflow.ellipsis,
             ),
           ),
+
           SizedBox(width: AppScaler.scaleSize(context, 12)),
+
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: onTapPlay,

@@ -30,51 +30,39 @@ class _SavedreelState extends State<Savedreel> {
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
 
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
-        child: Column(
-          children: [
-            AppMainBar(
-              leading: GestureDetector(
-                behavior: HitTestBehavior.opaque,
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
 
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: AppScaler.scaleSize(context, 10),
-                  ),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: AppScaler.scaleSize(context, 20),
-                    height: AppScaler.scaleHeight(context, 20),
-                  ),
-                ),
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: AppScaler.scaleSize(context, 20)),
+              child: Image.asset(
+                "assets/images/backicon.png",
+                width: AppScaler.scaleSize(context, 20),
+                height: AppScaler.scaleHeight(context, 20),
               ),
-              title: "Saved Reels",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              actions: [
-                // Padding(
-                //   padding: EdgeInsets.only(right: 16),
-                //   child: Image.asset(
-                //     "assets/images/Searchicon.png",
-                //     width: 20,
-                //     height: 20,
-                //   ),
-                // ),
-              ],
             ),
+          ),
+          title: "Saved Reels",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [],
+        ),
+        body: Column(
+          children: [
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(
