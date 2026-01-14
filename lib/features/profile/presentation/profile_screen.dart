@@ -88,39 +88,42 @@ class ProfileScreen extends StatelessWidget {
         return true;
       },
 
-      child: Scaffold(
-        appBar: AppMainBar(
-          leadingText: "Profile",
-          width: AppScaler.scaleSize(context, 120),
-          title: "",
-          centerTitle: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          actions: [
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-
-              onTap: () {
-                context.pushNamed(AppRoutes.editprofile.name);
-              },
-              child: PoppinsText(
-                context,
-                "Edit",
-                fontSize: PoppinsFontSizeVariant.size14,
-                fontWeight: PoppinsFontWeightVariant.medium,
-              ),
-            ),
-            SizedBox(width: AppScaler.scaleSize(context, 20)),
-          ],
+      child: Container(
+        padding: EdgeInsets.all(0),
+        decoration: BoxDecoration(
+          color: Colors.amber,
+          // image: DecorationImage(
+          //   image: AssetImage(Assets.images.screensbg.path),
+          //   fit: BoxFit.cover,
+          // ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(Assets.images.screensbg.path),
-                fit: BoxFit.cover,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppMainBar(
+            leadingText: "Profile",
+            width: AppScaler.scaleSize(context, 120),
+            title: "",
+            centerTitle: false,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            actions: [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+
+                onTap: () {
+                  context.pushNamed(AppRoutes.editprofile.name);
+                },
+                child: PoppinsText(
+                  context,
+                  "Edit",
+                  fontSize: PoppinsFontSizeVariant.size14,
+                  fontWeight: PoppinsFontWeightVariant.medium,
+                ),
               ),
-            ),
+              SizedBox(width: AppScaler.scaleSize(context, 20)),
+            ],
+          ),
+          body: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: AppScaler.scaleHeight(context, 40)),
