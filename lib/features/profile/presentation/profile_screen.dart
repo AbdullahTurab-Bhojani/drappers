@@ -87,270 +87,250 @@ class ProfileScreen extends StatelessWidget {
 
         return true;
       },
+
       child: Scaffold(
-        body: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                Assets.images.screensbg.path,
+        appBar: AppMainBar(
+          leadingText: "Profile",
+          width: AppScaler.scaleSize(context, 120),
+          title: "",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+
+              onTap: () {
+                context.pushNamed(AppRoutes.editprofile.name);
+              },
+              child: PoppinsText(
+                context,
+                "Edit",
+                fontSize: PoppinsFontSizeVariant.size14,
+                fontWeight: PoppinsFontWeightVariant.medium,
+              ),
+            ),
+            SizedBox(width: AppScaler.scaleSize(context, 20)),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(Assets.images.screensbg.path),
                 fit: BoxFit.cover,
               ),
             ),
-            Column(
+            child: Column(
               children: [
-                AppMainBar(
-                  leadingText: "Profile",
-                  width: AppScaler.scaleSize(context, 120),
-                  title: "",
-                  centerTitle: false,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  actions: [
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
+                SizedBox(height: AppScaler.scaleHeight(context, 40)),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: AppScaler.scaleHeight(context, 114.82),
+                      width: AppScaler.scaleHeight(context, 114.82),
 
-                      onTap: () {
-                        context.pushNamed(AppRoutes.editprofile.name);
-                      },
-                      child: PoppinsText(
-                        context,
-                        "Edit",
-                        fontSize: PoppinsFontSizeVariant.size14,
-                        fontWeight: PoppinsFontWeightVariant.medium,
+                      child: CircleAvatar(
+                        radius: 60,
+                        // radius: isSelected ? 15 : 15,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(
+                          'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                        ),
                       ),
                     ),
-                    SizedBox(width: AppScaler.scaleSize(context, 20)),
-                  ],
-                ),
-                SizedBox(height: AppScaler.scaleHeight(context, 40)),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: AppScaler.scaleHeight(context, 114.82),
-                          width: AppScaler.scaleHeight(context, 114.82),
-
-                          child: CircleAvatar(
-                            radius: 60,
-                            // radius: isSelected ? 15 : 15,
-                            backgroundColor: Colors.transparent,
-                            backgroundImage: NetworkImage(
-                              'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                        PoppinsText(
-                          context,
-                          'Jerry Mackson',
-                          fontSize: PoppinsFontSizeVariant.size22,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: customColors.textColor,
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppScaler.scaleSize(context, 20),
-                          ),
-                          child: Column(
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                    PoppinsText(
+                      context,
+                      'Jerry Mackson',
+                      fontSize: PoppinsFontSizeVariant.size22,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
+                    ),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppScaler.scaleSize(context, 20),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  PoppinsText(
-                                    context,
-                                    'Liked Content',
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                    color: customColors.textColor,
-                                  ),
-                                  AppButton(
-                                    buttonSize: Size(80, 25),
-                                    color: Colors.transparent,
-                                    borderColor: customColors.textColor
-                                        .withOpacity(0.5),
-                                    borderWidth: 1,
-                                    fontSize: PoppinsFontSizeVariant.size12,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    border: true,
-                                    onPressed: () {
-                                      context.pushNamed(
-                                        AppRoutes.likecontent.name,
-                                      );
-                                    },
-                                    title: "View More",
-                                  ),
-                                ],
+                              PoppinsText(
+                                context,
+                                'Liked Content',
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: customColors.textColor,
                               ),
-                              SizedBox(
-                                height: AppScaler.scaleHeight(context, 20),
-                              ),
-                              SizedBox(
-                                height: AppScaler.scaleHeight(context, 180),
-                                child: ListView.separated(
-                                  padding: EdgeInsets.zero,
-                                  clipBehavior: Clip.none,
-                                  separatorBuilder: (context, index) {
-                                    return SizedBox(
-                                      width: AppScaler.scaleSize(context, 15),
-                                    );
-                                  },
-                                  shrinkWrap: true,
-                                  itemCount: images.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      behavior: HitTestBehavior.opaque,
-
-                                      onTap: () {
-                                        context.pushNamed(
-                                          AppRoutes.contentDetail.name,
-                                        );
-                                      },
-                                      child: CardWidget(
-                                        assetImage: images[index],
-                                        showSaveIcon: false,
-                                        fromEpisode: false,
-                                        allowGuestNavigation: false,
-                                        index: index,
-                                        showMenuOnly: true,
-                                        showLiveTvBadge: false,
-                                      ),
-                                    );
-                                  },
+                              AppButton(
+                                buttonSize: Size(80, 25),
+                                color: Colors.transparent,
+                                borderColor: customColors.textColor.withOpacity(
+                                  0.5,
                                 ),
-                              ),
-                              SizedBox(
-                                height: AppScaler.scaleHeight(context, 30),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  PoppinsText(
-                                    context,
-                                    'Watch History',
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                    color: customColors.textColor,
-                                  ),
-                                  AppButton(
-                                    buttonSize: Size(80, 25),
-                                    color: Colors.transparent,
-                                    borderColor: customColors.textColor
-                                        .withOpacity(0.5),
-                                    borderWidth: 1,
-                                    fontSize: PoppinsFontSizeVariant.size12,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    border: true,
-                                    onPressed: () {
-                                      context.pushNamed(
-                                        AppRoutes.watchHistoryViewmore.name,
-                                      );
-                                    },
-                                    title: "View More",
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: AppScaler.scaleHeight(context, 20),
-                              ),
-                              SizedBox(
-                                height: AppScaler.scaleHeight(context, 180),
-                                child: ListView.separated(
-                                  padding: EdgeInsets.zero,
-                                  clipBehavior: Clip.none,
-                                  separatorBuilder: (context, index) {
-                                    return SizedBox(
-                                      width: AppScaler.scaleSize(context, 15),
-                                    );
-                                  },
-                                  shrinkWrap: true,
-                                  itemCount: images.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      behavior: HitTestBehavior.opaque,
-
-                                      onTap: () {
-                                        context.pushNamed(
-                                          AppRoutes.contentDetail.name,
-                                        );
-                                      },
-                                      child: CardWidget(
-                                        assetImage: images[index],
-                                        showSaveIcon: false,
-                                        fromEpisode: false,
-                                        allowGuestNavigation: false,
-                                        index: index,
-                                        showMenuOnly: true,
-                                        showLiveTvBadge: false,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: AppScaler.scaleHeight(context, 30),
-                              ),
-                              ListView.separated(
-                                physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.all(0),
-                                shrinkWrap: true,
-
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    behavior: HitTestBehavior.opaque,
-
-                                    onTap: () {
-                                      if (menuList[index]['title'] ==
-                                          'Sign Out') {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) => const Dialog(
-                                            backgroundColor: Colors.transparent,
-                                            child: SignupPopupWidget(),
-                                          ),
-                                        );
-                                      } else {
-                                        context.push(menuList[index]['route']);
-                                      }
-                                    },
-                                    child: TileWidget(
-                                      iconImage: menuList[index]['image'],
-                                      title: menuList[index]['title'],
-                                      textColor: menuList[index]['color'],
-                                      ontaped: menuList[index]['isTap'],
-                                    ),
-                                  );
+                                borderWidth: 1,
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                border: true,
+                                onPressed: () {
+                                  context.pushNamed(AppRoutes.likecontent.name);
                                 },
-                                separatorBuilder: (context, index) {
-                                  return Divider(
-                                    color: customColors.textColor.withOpacity(
-                                      0.1,
-                                    ),
-                                  );
-                                },
-                                itemCount: menuList.length,
-                              ),
-
-                              SizedBox(
-                                height: AppScaler.scaleHeight(context, 10),
+                                title: "View More",
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                          SizedBox(
+                            height: AppScaler.scaleHeight(context, 180),
+                            child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                              clipBehavior: Clip.none,
+                              separatorBuilder: (context, index) {
+                                return SizedBox(
+                                  width: AppScaler.scaleSize(context, 15),
+                                );
+                              },
+                              shrinkWrap: true,
+                              itemCount: images.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+
+                                  onTap: () {
+                                    context.pushNamed(
+                                      AppRoutes.contentDetail.name,
+                                    );
+                                  },
+                                  child: CardWidget(
+                                    assetImage: images[index],
+                                    showSaveIcon: false,
+                                    fromEpisode: false,
+                                    allowGuestNavigation: false,
+                                    index: index,
+                                    showMenuOnly: true,
+                                    showLiveTvBadge: false,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              PoppinsText(
+                                context,
+                                'Watch History',
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: customColors.textColor,
+                              ),
+                              AppButton(
+                                buttonSize: Size(80, 25),
+                                color: Colors.transparent,
+                                borderColor: customColors.textColor.withOpacity(
+                                  0.5,
+                                ),
+                                borderWidth: 1,
+                                fontSize: PoppinsFontSizeVariant.size12,
+                                fontWeight: PoppinsFontWeightVariant.regular,
+                                border: true,
+                                onPressed: () {
+                                  context.pushNamed(
+                                    AppRoutes.watchHistoryViewmore.name,
+                                  );
+                                },
+                                title: "View More",
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                          SizedBox(
+                            height: AppScaler.scaleHeight(context, 180),
+                            child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                              clipBehavior: Clip.none,
+                              separatorBuilder: (context, index) {
+                                return SizedBox(
+                                  width: AppScaler.scaleSize(context, 15),
+                                );
+                              },
+                              shrinkWrap: true,
+                              itemCount: images.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+
+                                  onTap: () {
+                                    context.pushNamed(
+                                      AppRoutes.contentDetail.name,
+                                    );
+                                  },
+                                  child: CardWidget(
+                                    assetImage: images[index],
+                                    showSaveIcon: false,
+                                    fromEpisode: false,
+                                    allowGuestNavigation: false,
+                                    index: index,
+                                    showMenuOnly: true,
+                                    showLiveTvBadge: false,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                          ListView.separated(
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.all(0),
+                            shrinkWrap: true,
+
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+
+                                onTap: () {
+                                  if (menuList[index]['title'] == 'Sign Out') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => const Dialog(
+                                        backgroundColor: Colors.transparent,
+                                        child: SignupPopupWidget(),
+                                      ),
+                                    );
+                                  } else {
+                                    context.push(menuList[index]['route']);
+                                  }
+                                },
+                                child: TileWidget(
+                                  iconImage: menuList[index]['image'],
+                                  title: menuList[index]['title'],
+                                  textColor: menuList[index]['color'],
+                                  ontaped: menuList[index]['isTap'],
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return Divider(
+                                color: customColors.textColor.withOpacity(0.1),
+                              );
+                            },
+                            itemCount: menuList.length,
+                          ),
+
+                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

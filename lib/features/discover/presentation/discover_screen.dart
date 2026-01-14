@@ -141,252 +141,247 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     ];
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
+      appBar: AppMainBar(
+        width: AppScaler.scaleSize(context, 133),
+        leadingText: "Discover",
+        title: "",
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              context.pushNamed(AppRoutes.searchscreen.name);
+            },
+            child: Image.asset(
+              Assets.images.searchstokeicon.path,
+              width: AppScaler.scaleSize(context, 24),
+              height: AppScaler.scaleHeight(context, 24),
+              color: customColors.textColor,
+            ),
           ),
-          Column(
-            children: [
-              AppMainBar(
-                width: AppScaler.scaleSize(context, 133),
-                leadingText: "Discover",
-                title: "",
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      context.pushNamed(AppRoutes.searchscreen.name);
-                    },
-                    child: Image.asset(
-                      Assets.images.searchstokeicon.path,
-                      width: AppScaler.scaleSize(context, 24),
-                      height: AppScaler.scaleHeight(context, 24),
+          SizedBox(width: AppScaler.scaleSize(context, 22)),
+        ],
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Assets.images.screensbg.path),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            // SizedBox(height: 30),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 20),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                    FullscreenImageScreen(
+                      imagePath: Assets.images.livetvnew.path,
+                      title: "We're Training Heroes of Future!",
+                    ),
+
+                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
+                    PoppinsText(
+                      context,
+                      'Genre',
+                      fontSize: PoppinsFontSizeVariant.size16,
+                      fontWeight: PoppinsFontWeightVariant.medium,
                       color: customColors.textColor,
                     ),
-                  ),
-                  SizedBox(width: AppScaler.scaleSize(context, 22)),
-                ],
-              ),
-              // SizedBox(height: 30),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppScaler.scaleSize(context, 20),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                      FullscreenImageScreen(
-                        imagePath: Assets.images.livetvnew.path,
-                        title: "We're Training Heroes of Future!",
-                      ),
 
-                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
-                      PoppinsText(
-                        context,
-                        'Genre',
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                        color: customColors.textColor,
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                      SizedBox(
-                        height: AppScaler.scaleHeight(context, 56),
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          separatorBuilder: (_, __) =>
-                              SizedBox(width: AppScaler.scaleSize(context, 15)),
-                          itemCount: genretitle.length,
-                          itemBuilder: (context, index) {
-                            return GenreBoxWidget(
-                              title: genretitle[index],
-                              showBorder: index == 0,
-                              onTap: () {
-                                if (index == 1) {
-                                  context.pushNamed(
-                                    AppRoutes.livepitchesScreen.name,
-                                  );
-                                }
-                              },
-                            );
-                          },
-                        ),
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
-
-                      Row(
-                        mainAxisAlignment: .spaceBetween,
-                        children: [
-                          PoppinsText(
-                            context,
-                            'Trending Show',
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
-                          ),
-                          AppButton(
-                            buttonSize: Size(80, 25),
-                            color: Colors.transparent,
-                            borderColor: customColors.textColor.withOpacity(
-                              0.5,
-                            ),
-                            borderWidth: 1,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            border: true,
-                            onPressed: () {
-                              if (_betterPlayerController != null) {
-                                _betterPlayerController!.pause();
+                    SizedBox(
+                      height: AppScaler.scaleHeight(context, 56),
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        separatorBuilder: (_, __) =>
+                            SizedBox(width: AppScaler.scaleSize(context, 15)),
+                        itemCount: genretitle.length,
+                        itemBuilder: (context, index) {
+                          return GenreBoxWidget(
+                            title: genretitle[index],
+                            showBorder: index == 0,
+                            onTap: () {
+                              if (index == 1) {
+                                context.pushNamed(
+                                  AppRoutes.livepitchesScreen.name,
+                                );
                               }
-                              context.pushNamed('trendingshow');
                             },
-                            title: "View More",
-                          ),
-                        ],
+                          );
+                        },
                       ),
+                    ),
 
-                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
-                      SizedBox(
-                        height: AppScaler.scaleHeight(context, 180),
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          separatorBuilder: (_, _) =>
-                              SizedBox(width: AppScaler.scaleSize(context, 15)),
-                          itemCount: trendingimages.length,
-                          itemBuilder: (context, index) {
-                            return CardWidget(
-                              assetImage: trendingimages[index],
-                              showSaveIcon: false,
-                              fromEpisode: false,
-                              allowGuestNavigation: false,
-                              index: index,
-                              showMenuOnly: true,
-                              showLiveTvBadge: false,
-                            );
-                          },
+                    Row(
+                      mainAxisAlignment: .spaceBetween,
+                      children: [
+                        PoppinsText(
+                          context,
+                          'Trending Show',
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
                         ),
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
-
-                      Row(
-                        mainAxisAlignment: .spaceBetween,
-                        children: [
-                          PoppinsText(
-                            context,
-                            'Podcasts',
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
-                          ),
-                          AppButton(
-                            buttonSize: Size(80, 25),
-                            color: Colors.transparent,
-                            borderColor: customColors.textColor.withOpacity(
-                              0.5,
-                            ),
-                            borderWidth: 1,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            border: true,
-                            onPressed: () {
-                              if (_betterPlayerController != null) {
-                                _betterPlayerController!.pause();
-                              }
-                              context.pushNamed('podcasts');
-                            },
-
-                            title: "View More",
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                      SizedBox(
-                        height: AppScaler.scaleHeight(context, 180),
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          separatorBuilder: (_, __) =>
-                              SizedBox(width: AppScaler.scaleSize(context, 15)),
-                          itemCount: podcardimages.length,
-                          itemBuilder: (context, index) {
-                            return PodcardsWidget(
-                              assetImage: podcardimages[index],
-                              title: '',
-                              showSaveIcon: false,
-                              fontSizeVariant: PoppinsFontSizeVariant.size14,
-                            );
+                        AppButton(
+                          buttonSize: Size(80, 25),
+                          color: Colors.transparent,
+                          borderColor: customColors.textColor.withOpacity(0.5),
+                          borderWidth: 1,
+                          fontSize: PoppinsFontSizeVariant.size12,
+                          fontWeight: PoppinsFontWeightVariant.regular,
+                          border: true,
+                          onPressed: () {
+                            if (_betterPlayerController != null) {
+                              _betterPlayerController!.pause();
+                            }
+                            context.pushNamed('trendingshow');
                           },
+                          title: "View More",
                         ),
+                      ],
+                    ),
+
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
+                    SizedBox(
+                      height: AppScaler.scaleHeight(context, 180),
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        separatorBuilder: (_, _) =>
+                            SizedBox(width: AppScaler.scaleSize(context, 15)),
+                        itemCount: trendingimages.length,
+                        itemBuilder: (context, index) {
+                          return CardWidget(
+                            assetImage: trendingimages[index],
+                            showSaveIcon: false,
+                            fromEpisode: false,
+                            allowGuestNavigation: false,
+                            index: index,
+                            showMenuOnly: true,
+                            showLiveTvBadge: false,
+                          );
+                        },
                       ),
+                    ),
 
-                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          PoppinsText(
-                            context,
-                            'Documentaries',
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
-                          ),
-                          AppButton(
-                            buttonSize: Size(80, 25),
-                            color: Colors.transparent,
-                            borderColor: customColors.textColor.withOpacity(
-                              0.5,
-                            ),
-                            borderWidth: 1,
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            border: true,
-                            onPressed: () {
-                              if (_betterPlayerController != null) {
-                                _betterPlayerController!.pause();
-                              }
-                              context.pushNamed('documentries');
-                            },
-                            title: "View More",
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                      SizedBox(
-                        height: AppScaler.scaleHeight(context, 180),
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          separatorBuilder: (_, __) =>
-                              SizedBox(width: AppScaler.scaleSize(context, 15)),
-                          itemCount: documentriescard.length,
-                          itemBuilder: (context, index) {
-                            return DocumentriesCardWidget(
-                              assetImage: documentriescard[index],
-                              showSaveIcon: false,
-                            );
+                    Row(
+                      mainAxisAlignment: .spaceBetween,
+                      children: [
+                        PoppinsText(
+                          context,
+                          'Podcasts',
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                        ),
+                        AppButton(
+                          buttonSize: Size(80, 25),
+                          color: Colors.transparent,
+                          borderColor: customColors.textColor.withOpacity(0.5),
+                          borderWidth: 1,
+                          fontSize: PoppinsFontSizeVariant.size12,
+                          fontWeight: PoppinsFontWeightVariant.regular,
+                          border: true,
+                          onPressed: () {
+                            if (_betterPlayerController != null) {
+                              _betterPlayerController!.pause();
+                            }
+                            context.pushNamed('podcasts');
                           },
-                        ),
-                      ),
 
-                      SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                    ],
-                  ),
+                          title: "View More",
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
+                    SizedBox(
+                      height: AppScaler.scaleHeight(context, 180),
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        separatorBuilder: (_, __) =>
+                            SizedBox(width: AppScaler.scaleSize(context, 15)),
+                        itemCount: podcardimages.length,
+                        itemBuilder: (context, index) {
+                          return PodcardsWidget(
+                            assetImage: podcardimages[index],
+                            title: '',
+                            showSaveIcon: false,
+                            fontSizeVariant: PoppinsFontSizeVariant.size14,
+                          );
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        PoppinsText(
+                          context,
+                          'Documentaries',
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: customColors.textColor,
+                        ),
+                        AppButton(
+                          buttonSize: Size(80, 25),
+                          color: Colors.transparent,
+                          borderColor: customColors.textColor.withOpacity(0.5),
+                          borderWidth: 1,
+                          fontSize: PoppinsFontSizeVariant.size12,
+                          fontWeight: PoppinsFontWeightVariant.regular,
+                          border: true,
+                          onPressed: () {
+                            if (_betterPlayerController != null) {
+                              _betterPlayerController!.pause();
+                            }
+                            context.pushNamed('documentries');
+                          },
+                          title: "View More",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
+                    SizedBox(
+                      height: AppScaler.scaleHeight(context, 180),
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        separatorBuilder: (_, __) =>
+                            SizedBox(width: AppScaler.scaleSize(context, 15)),
+                        itemCount: documentriescard.length,
+                        itemBuilder: (context, index) {
+                          return DocumentriesCardWidget(
+                            assetImage: documentriescard[index],
+                            showSaveIcon: false,
+                          );
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

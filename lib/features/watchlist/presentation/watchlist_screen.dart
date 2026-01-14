@@ -58,71 +58,68 @@ class WatchlistScreen extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        body: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                Assets.images.screensbg.path,
-                fit: BoxFit.cover,
-              ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(Assets.images.screensbg.path),
+              fit: BoxFit.cover,
             ),
+          ),
+          child: Column(
+            children: [
+              AppMainBar(
+                leadingText: "Watchlist",
+                width: AppScaler.scaleSize(context, 150),
+                title: "",
+                centerTitle: false,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                actions: [
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
 
-            Column(
-              children: [
-                AppMainBar(
-                  leadingText: "Watchlist",
-                  width: AppScaler.scaleSize(context, 150),
-                  title: "",
-                  centerTitle: false,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  actions: [
-                    GestureDetector(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.editWatchlistScreen.name);
+                    },
+                    child: PoppinsText(
+                      context,
+                      "Edit",
+                      fontSize: PoppinsFontSizeVariant.size14,
+                      fontWeight: PoppinsFontWeightVariant.medium,
+                      color: customColors.textColor,
+                    ),
+                  ),
+                  SizedBox(width: AppScaler.scaleSize(context, 20)),
+                ],
+              ),
+
+              Expanded(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 15);
+                  },
+                  padding: EdgeInsets.zero,
+                  itemCount: dummyWatchlist.length,
+                  itemBuilder: (context, index) {
+                    final item = dummyWatchlist[index];
+                    return GestureDetector(
                       behavior: HitTestBehavior.opaque,
 
                       onTap: () {
-                        context.pushNamed(AppRoutes.editWatchlistScreen.name);
+                        context.pushNamed(AppRoutes.contentDetail.name);
                       },
-                      child: PoppinsText(
-                        context,
-                        "Edit",
-                        fontSize: PoppinsFontSizeVariant.size14,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                        color: customColors.textColor,
+                      child: WatchlistItemTile(
+                        thumbnailPath: item.thumbnailPath,
+                        title: item.title,
+                        year: item.year,
+                        onTapPlay: () {},
                       ),
-                    ),
-                    SizedBox(width: AppScaler.scaleSize(context, 20)),
-                  ],
+                    );
+                  },
                 ),
-
-                Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: 15,);
-                    },
-                    padding: EdgeInsets.zero,
-                    itemCount: dummyWatchlist.length,
-                    itemBuilder: (context, index) {
-                      final item = dummyWatchlist[index];
-                      return GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                  
-                        onTap: () {
-                          context.pushNamed(AppRoutes.contentDetail.name);
-                        },
-                        child: WatchlistItemTile(
-                          thumbnailPath: item.thumbnailPath,
-                          title: item.title,
-                          year: item.year,
-                          onTapPlay: () {},
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
