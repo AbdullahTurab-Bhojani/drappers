@@ -6,9 +6,7 @@ import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../shared/widgets/todaynotification_widget.dart';
-import '../../../shared/widgets/wednesdaynotification_widget.dart';
-import '../../../shared/widgets/yesterdaynotification_widget.dart';
+import '../../../shared/widgets/notification_section_widget.dart'; // <- new combined widget
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -18,6 +16,75 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  final List<Map<String, dynamic>> todayNotifications = [
+    {
+      "title": "Semifinals 1 – Meet The Drapers Season 6 (2023)",
+      "time": "1m ago",
+      "image": Assets.images.trendingimage1.path,
+      "showExtra": false,
+    },
+    {
+      "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
+      "time": "30m ago",
+      "image": Assets.images.trendingimage9.path,
+      "showExtra": false,
+    },
+    {
+      "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
+      "time": "13h ago",
+      "image": Assets.images.trendingimage8.path,
+      "showExtra": false,
+    },
+    {
+      "title": "Semifinals 1 – Meet The Drapers Season 6 (2023) ",
+      "time": "11h ago",
+      "image": Assets.images.trendingimage7.path,
+      "showExtra": false,
+    },
+  ];
+
+  final List<Map<String, dynamic>> yesterdayNotifications = [
+    {
+      "title": "Semifinals 1 – Meet The Drapers Season 6 (2023)",
+      "time": "1m ago",
+      "image": Assets.images.trendingimage2.path,
+      "showExtra": false,
+    },
+    {
+      "title": "Semifinals 1 – Meet The Drapers Season 6 (2023) ",
+      "time": "11h",
+      "image": Assets.images.trendingimage1.path,
+      "showExtra": false,
+    },
+  ];
+
+  final List<Map<String, dynamic>> wednesdayNotifications = [
+    {
+      "title": "Semifinals 1 – Meet The Drapers Season 6 (2023)",
+      "time": "13m",
+      "image": Assets.images.trendingimage6.path,
+      "showExtra": false,
+    },
+    {
+      "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
+      "time": "30m",
+      "image": Assets.images.trendingimage5.path,
+      "showExtra": false,
+    },
+    {
+      "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
+      "time": "13h",
+      "image": Assets.images.trendingimage4.path,
+      "showExtra": false,
+    },
+    {
+      "title": "Semifinals 1 – Meet The Drapers Season 6 (2023) ",
+      "time": "11h",
+      "image": Assets.images.trendingimage3.path,
+      "showExtra": false,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,7 +121,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
               padding: EdgeInsets.only(right: AppScaler.scaleSize(context, 25)),
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
                 onTap: () {
                   context.pushNamed(AppRoutes.notificationSetting.name);
                 },
@@ -70,12 +136,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
         body: ListView(
           padding: EdgeInsets.zero,
           children: [
-            SizedBox(height: AppScaler.scaleHeight(context, 5)),
-            TodaynotificationWidget(),
+            SizedBox(height: AppScaler.scaleHeight(context, 10)),
+            NotificationSectionWidget(
+              title: 'Today',
+              notifications: todayNotifications,
+            ),
             SizedBox(height: AppScaler.scaleHeight(context, 20)),
-            YesterdaynotificationWidget(),
+            NotificationSectionWidget(
+              title: 'Yesterday',
+              notifications: yesterdayNotifications,
+            ),
             SizedBox(height: AppScaler.scaleHeight(context, 20)),
-            WednesdaynotificationWidget(),
+            NotificationSectionWidget(
+              title: 'Wednesday',
+              notifications: wednesdayNotifications,
+            ),
             SizedBox(height: AppScaler.scaleHeight(context, 15)),
           ],
         ),

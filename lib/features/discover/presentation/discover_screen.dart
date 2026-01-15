@@ -150,71 +150,67 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
           ],
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppScaler.scaleSize(context, 16),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppScaler.scaleSize(context, 16),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FullscreenImageScreen(
+                  imagePath: Assets.images.livetvnew.path,
+                  title: "We're Training Heroes of Future!",
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FullscreenImageScreen(
-                      imagePath: Assets.images.livetvnew.path,
-                      title: "We're Training Heroes of Future!",
-                    ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
-
-                    PoppinsText(
-                      context,
-                      'Genre',
-                      fontSize: PoppinsFontSizeVariant.size16,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                    ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                    SizedBox(
-                      height: AppScaler.scaleHeight(context, 56),
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        separatorBuilder: (_, __) =>
-                            SizedBox(width: AppScaler.scaleSize(context, 15)),
-                        itemCount: genretitle.length,
-                        itemBuilder: (context, index) {
-                          return GenreBoxWidget(
-                            title: genretitle[index],
-                            showBorder: index == 0,
-                            onTap: () {
-                              if (index == 1) {
-                                context.pushNamed(
-                                  AppRoutes.livepitchesScreen.name,
-                                );
-                              }
-                            },
-                          );
+          
+                SizedBox(height: AppScaler.scaleHeight(context, 30)),
+          
+                PoppinsText(
+                  context,
+                  'Genre',
+                  fontSize: PoppinsFontSizeVariant.size16,
+                  fontWeight: PoppinsFontWeightVariant.medium,
+                  color: customColors.textColor,
+                ),
+          
+                SizedBox(height: AppScaler.scaleHeight(context, 20)),
+          
+                SizedBox(
+                  height: AppScaler.scaleHeight(context, 56),
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (_, __) =>
+                        SizedBox(width: AppScaler.scaleSize(context, 15)),
+                    itemCount: genretitle.length,
+                    itemBuilder: (context, index) {
+                      return GenreBoxWidget(
+                        title: genretitle[index],
+                        showBorder: index == 0,
+                        onTap: () {
+                          if (index == 1) {
+                            context.pushNamed(
+                              AppRoutes.livepitchesScreen.name,
+                            );
+                          }
                         },
-                      ),
-                    ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
-
-                    TrendingshowsHeader(
-                      showLiveTvBadge: false,
-                      showMoreInfo: false,
-                    ),
-
-                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
-                    PodcastHeader(),
-                    SizedBox(height: AppScaler.scaleHeight(context, 30)),
-                    DocumentriesHeader(),
-                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                  ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+          
+                SizedBox(height: AppScaler.scaleHeight(context, 30)),
+          
+                TrendingshowsHeader(
+                  showLiveTvBadge: false,
+                  showMoreInfo: false,
+                ),
+          
+                SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                PodcastHeader(),
+                SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                DocumentriesHeader(),
+                SizedBox(height: AppScaler.scaleHeight(context, 10)),
+              ],
+            ),
           ),
         ),
       ),

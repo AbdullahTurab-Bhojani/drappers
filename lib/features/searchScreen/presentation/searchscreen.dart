@@ -6,9 +6,9 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../shared/widgets/genreboxwidget.dart';
 import '../../../shared/widgets/recentsearch_widget_header.dart';
+import '../../../shared/widgets/trending_grid.dart';
 
 class Searchscreen extends StatefulWidget {
   const Searchscreen({super.key});
@@ -40,7 +40,7 @@ class _SearchscreenState extends State<Searchscreen> {
       'Reels': '/LivepitchesScreen',
     };
 
-    List trendingimages = [
+    List<String> trendingimages = [
       Assets.images.trendingimage1.path,
       Assets.images.trendingimage2.path,
       Assets.images.trendingimage3.path,
@@ -172,49 +172,7 @@ class _SearchscreenState extends State<Searchscreen> {
                 ),
 
                 SizedBox(height: AppScaler.scaleHeight(context, 30)),
-
-                PoppinsText(
-                  context,
-                  'Trending',
-                  fontSize: PoppinsFontSizeVariant.size16,
-                  fontWeight: PoppinsFontWeightVariant.medium,
-                  color: customColors.textColor,
-                ),
-
-                SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    final double itemWidth =
-                        (constraints.maxWidth - (15 * 2)) / 3;
-                    final double itemHeight = itemWidth / 0.6;
-
-                    return GridView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      itemCount: trendingimages.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 15,
-                        childAspectRatio: itemWidth / itemHeight,
-                      ),
-                      itemBuilder: (context, index) {
-                        return CardWidget(
-                          assetImage: trendingimages[index],
-                          showSaveIcon: false,
-                          fromEpisode: false,
-                          allowGuestNavigation: false,
-                          index: index,
-                          showMenuOnly: true,
-                          showLiveTvBadge: false,
-                        );
-                      },
-                    );
-                  },
-                ),
-
+                TrendingGrid(title: "Trending", images: trendingimages),
                 SizedBox(height: AppScaler.scaleHeight(context, 10)),
               ],
             ),

@@ -6,6 +6,7 @@ import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
 import 'cardwidget/card_widget.dart';
 import 'reelcard/reelcard_widget.dart';
+import 'trending_grid.dart';
 
 class ContentDetailBody extends StatefulWidget {
   final TabController tabController;
@@ -253,30 +254,7 @@ class _ContentDetailBodyState extends State<ContentDetailBody> {
           ),
         ),
         SizedBox(height: AppScaler.scaleHeight(context, 20)),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.zero,
-          itemCount: trendingimages.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            childAspectRatio:
-                ((MediaQuery.of(context).size.width / 3) - 20) / 200,
-          ),
-          itemBuilder: (context, index) {
-            return CardWidget(
-              assetImage: trendingimages[index],
-              showSaveIcon: false,
-              fromEpisode: true,
-              allowGuestNavigation: true,
-              index: index,
-              showMenuOnly: true,
-              showLiveTvBadge: false,
-            );
-          },
-        ),
+        TrendingGrid(title: "", images: trendingimages),
       ],
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../core/extensions/theme_extension.dart';
 import '../../../../../core/theme/app_scalar.dart';
 import '../../../../../drappers.dart';
@@ -14,7 +13,7 @@ class FaqsScreen extends StatefulWidget {
 }
 
 class _FaqsScreenState extends State<FaqsScreen> {
-  final List<Map<String, String>> _faqs = [
+  final List<Map<String, String>> faqs = [
     {
       'question': "What is Draper TV?",
       'answer':
@@ -111,27 +110,28 @@ class _FaqsScreenState extends State<FaqsScreen> {
                 padding: EdgeInsets.only(
                   top: AppScaler.scaleHeight(context, 10),
                 ),
-                itemCount: _faqs.length,
+                itemCount: faqs.length,
                 itemBuilder: (context, index) {
-                  final faq = _faqs[index];
+                  final faq = faqs[index];
                   final isExpanded = expandedIndices.contains(index);
                   return Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      AppScaler.scaleSize(context, 20),
-                      0,
-                      AppScaler.scaleSize(context, 20),
-                      AppScaler.scaleHeight(context, 24),
+                    padding: EdgeInsets.only(
+                      left: AppScaler.scaleSize(context, 20),
+                      right: AppScaler.scaleSize(context, 20),
+                      bottom: AppScaler.scaleHeight(context, 24),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: Theme(
-                        data: theme.copyWith(dividerColor: Colors.transparent),
+                    child: Theme(
+                      data: theme.copyWith(dividerColor: Colors.transparent),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.submitticket0E0E0E,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: ExpansionTile(
                           key: ValueKey(index),
                           initiallyExpanded: isExpanded,
-                          backgroundColor: AppColors.submitticket0E0E0E,
-                          collapsedBackgroundColor:
-                              AppColors.submitticket0E0E0E,
+                          backgroundColor: Colors.transparent,
+                          collapsedBackgroundColor: Colors.transparent,
                           title: PoppinsText(
                             context,
                             faq["question"]!,
@@ -139,11 +139,9 @@ class _FaqsScreenState extends State<FaqsScreen> {
                             fontWeight: PoppinsFontWeightVariant.semiBold,
                             color: customColors.textColor,
                           ),
-
                           trailing: isExpanded
                               ? Icon(Icons.remove, color: AppColors.white)
                               : Icon(Icons.add, color: AppColors.white),
-
                           children: <Widget>[
                             Padding(
                               padding: EdgeInsets.only(
@@ -160,7 +158,6 @@ class _FaqsScreenState extends State<FaqsScreen> {
                               ),
                             ),
                           ],
-
                           onExpansionChanged: (expanded) {
                             setState(() {
                               if (expanded) {

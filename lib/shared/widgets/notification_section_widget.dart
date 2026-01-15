@@ -2,76 +2,67 @@ import 'package:flutter/material.dart';
 import '../../core/extensions/theme_extension.dart';
 import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
-import '../../gen/assets.gen.dart';
 
-class WednesdaynotificationWidget extends StatefulWidget {
-  const WednesdaynotificationWidget({super.key});
+class NotificationSectionWidget extends StatefulWidget {
+  final String title;
+  final List<Map<String, dynamic>> notifications;
+
+  const NotificationSectionWidget({
+    super.key,
+    required this.title,
+    required this.notifications,
+  });
 
   @override
-  State<WednesdaynotificationWidget> createState() =>
-      _WednesdaynotificationWidgetState();
+  State<NotificationSectionWidget> createState() =>
+      _NotificationSectionWidgetState();
 }
 
-class _WednesdaynotificationWidgetState
-    extends State<WednesdaynotificationWidget> {
-  final List<Map<String, dynamic>> wednesday = [
-    {
-      "title": "Semifinals 1 – Meet The Drapers Season 6 (2023)",
-      "time": "13m",
-      "image": Assets.images.trendingimage6.path,
-      "showExtra": false,
-    },
-    {
-      "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
-      "time": "30m",
-      "image": Assets.images.trendingimage5.path,
-      "showExtra": false,
-    },
-    {
-      "title": "Rio de Janeiro – Meet the Drapers Season 6 (2023)",
-      "time": "13h",
-      "image": Assets.images.trendingimage4.path,
-      "showExtra": false,
-    },
-    {
-      "title": "Semifinals 1 – Meet The Drapers Season 6 (2023) ",
-      "time": "11h",
-      "image": Assets.images.trendingimage3.path,
-      "showExtra": false,
-    },
-  ];
+class _NotificationSectionWidgetState extends State<NotificationSectionWidget> {
   @override
   Widget build(BuildContext context) {
     final customColors = Theme.of(context).extension<AppCustomColors>()!;
     return Column(
-      mainAxisAlignment: .center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: AppScaler.scaleSize(context, 117),
-          height: AppScaler.scaleHeight(context, 31),
-          decoration: BoxDecoration(
-            color: AppColors.color1A1E24,
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: Center(
+        Center(
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppScaler.scaleSize(context, 16),
+              vertical: AppScaler.scaleHeight(context, 8),
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.color1A1E24,
+              borderRadius: BorderRadius.circular(40),
+            ),
             child: PoppinsText(
               context,
-              'Wednesday',
+              widget.title,
               fontSize: PoppinsFontSizeVariant.size16,
               fontWeight: PoppinsFontWeightVariant.medium,
+              color: customColors.textColor,
             ),
           ),
         ),
+
         SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
-        ...wednesday.map((item) {
+        ...widget.notifications.map((item) {
           return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                for (var i = 0; i < widget.notifications.length; i++) {
+                  widget.notifications[i]['showExtra'] = false;
+                }
+                item['showExtra'] = true;
+              });
+            },
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.transparent,
+                color: item['showExtra'] != null && item['showExtra']
+                    ? AppColors.color202020.withOpacity(0.5)
+                    : Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Padding(
@@ -99,17 +90,17 @@ class _WednesdaynotificationWidgetState
                           PoppinsText(
                             context,
                             item['time'],
-                            fontWeight: PoppinsFontWeightVariant.regular,
                             fontSize: PoppinsFontSizeVariant.size12,
+                            fontWeight: PoppinsFontWeightVariant.regular,
                             color: customColors.textColor,
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(width: AppScaler.scaleHeight(context, 12)),
+                    SizedBox(width: AppScaler.scaleSize(context, 12)),
                     Container(
                       margin: EdgeInsets.only(
-                        top: AppScaler.scaleHeight(context, 6),
+                        top: AppScaler.scaleHeight(context, 5),
                       ),
                       width: AppScaler.scaleSize(context, 78),
                       height: AppScaler.scaleHeight(context, 44),
@@ -121,6 +112,21 @@ class _WednesdaynotificationWidgetState
                         ),
                       ),
                     ),
+                    if (item['showExtra'] != null && item['showExtra']) ...[
+                      SizedBox(width: AppScaler.scaleSize(context, 12)),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: AppScaler.scaleHeight(context, 15),
+                        ),
+                        child: PoppinsText(
+                          context,
+                          "New!",
+                          fontSize: PoppinsFontSizeVariant.size12,
+                          fontWeight: PoppinsFontWeightVariant.semiBold,
+                          color: customColors.textColor,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),

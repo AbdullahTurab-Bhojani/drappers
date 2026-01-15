@@ -52,13 +52,10 @@ class EditprofileScreen extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
 
             onTap: () => Navigator.of(context).pop(),
-            child: Padding(
-              padding: EdgeInsets.only(left: AppScaler.scaleSize(context, 20)),
-              child: Image.asset(
-                "assets/images/backicon.png",
-                width: AppScaler.scaleSize(context, 20),
-                height: AppScaler.scaleHeight(context, 20),
-              ),
+            child: Image.asset(
+              "assets/images/backicon.png",
+              width: AppScaler.scaleSize(context, 20),
+              height: AppScaler.scaleHeight(context, 20),
             ),
           ),
           title: "Edit Profile",
@@ -69,139 +66,130 @@ class EditprofileScreen extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(height: AppScaler.scaleHeight(context, 50)),
-            Column(
+            Stack(
+              clipBehavior: Clip.none,
               children: [
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: true,
-                          builder: (context) => Center(
-                            child: Dialog(
-                              backgroundColor: Colors.transparent,
-                              insetPadding: EdgeInsets.symmetric(
-                                horizontal: AppScaler.scaleSize(context, 20),
-                              ),
-                              child: EditProfilePopup(),
-                            ),
-                          ),
-                        );
-                      },
-                      child: SizedBox(
-                        height: AppScaler.scaleHeight(context, 114.82),
-                        width: AppScaler.scaleSize(context, 114.82),
-                        child: CircleAvatar(
-                          radius: 60,
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (context) => Center(
+                        child: Dialog(
                           backgroundColor: Colors.transparent,
-                          backgroundImage: NetworkImage(
-                            'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
+                          insetPadding: EdgeInsets.symmetric(
+                            horizontal: AppScaler.scaleSize(context, 20),
                           ),
+                          child: EditProfilePopup(),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      bottom: AppScaler.scaleSize(context, -10),
-                      right: AppScaler.scaleSize(context, 46),
-                      child: Container(
-                        width: AppScaler.scaleSize(context, 24),
-                        height: AppScaler.scaleHeight(context, 24),
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: customColors.buttonColors.first,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Image.asset(
-                            Assets.images.editprofilecameraicon.path,
-                          ),
-                        ),
+                    );
+                  },
+                  child: SizedBox(
+                    height: AppScaler.scaleHeight(context, 114.82),
+                    width: AppScaler.scaleSize(context, 114.82),
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: AssetImage(
+                        Assets.images.editprofileimage.path,
                       ),
                     ),
-                  ],
+                  ),
                 ),
-                SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                PoppinsText(
-                  context,
-                  'Jerry Mackson',
-                  fontSize: PoppinsFontSizeVariant.size22,
-                  fontWeight: PoppinsFontWeightVariant.medium,
-                  color: customColors.textColor,
+                Positioned(
+                  bottom: AppScaler.scaleSize(context, -10),
+                  right: AppScaler.scaleSize(context, 46),
+                  child: Container(
+                    width: AppScaler.scaleSize(context, 24),
+                    height: AppScaler.scaleHeight(context, 24),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: customColors.buttonColors.first,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        Assets.images.editprofilecameraicon.path,
+                      ),
+                    ),
+                  ),
                 ),
-                SizedBox(height: AppScaler.scaleHeight(context, 20)),
               ],
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: AppScaler.scaleSize(context, 20),
-                    right: AppScaler.scaleSize(context, 20),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
+            PoppinsText(
+              context,
+              'Jerry Mackson',
+              fontSize: PoppinsFontSizeVariant.size22,
+              fontWeight: PoppinsFontWeightVariant.medium,
+              color: customColors.textColor,
+            ),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppScaler.scaleSize(context, 10),
+              ),
+              child: Column(
+                children: [
+                  NewTextField(
+                    fieldbg: AppColors.tfield,
+                    controller: _fullNameController,
+                    labelText: "Full Name*",
+                    hintText: "Enter your full name",
+                    hintStyle: TextStyle(
+                      fontSize: AppScaler.scaleFont(context, 16),
+                      fontWeight: FontWeight.w400,
+                    ),
+                    filledColor: customColors.textColor,
+                    // validator: (value) {
+                    //   if (value == null || value.trim().isEmpty) {
+                    //     return "Full name required";
+                    //   }
+                    //   return null;
+                    // },
                   ),
-                  child: Column(
-                    children: [
-                      NewTextField(
-                        fieldbg: AppColors.tfield,
-                        controller: _fullNameController,
-                        labelText: "Full Name*",
-                        hintText: "Enter your full name",
-                        hintStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        filledColor: customColors.textColor,
-                        // validator: (value) {
-                        //   if (value == null || value.trim().isEmpty) {
-                        //     return "Full name required";
-                        //   }
-                        //   return null;
-                        // },
-                      ),
-                      SizedBox(height: 15),
+                  SizedBox(height: AppScaler.scaleHeight(context, 15)),
 
-                      NewTextField(
-                        fieldbg: AppColors.tfield,
-                        controller: _emailController,
-                        labelText: "Email Address*",
-                        hintText: "Enter your email",
-                        hintStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        filledColor: AppColors.tfield,
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
-                      PhoneOtpField(
-                        phoneController: phoneController,
-                        otpController: otpController,
-                        fieldbg: AppColors.tfield,
-                        labelText: 'Phone Number*',
-                        onSendCode: () {},
-                      ),
-
-                      AppButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        title: "Save Changes",
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 12)),
-                      AppButton(
-                        color: Colors.transparent,
-                        borderColor: customColors.textColor,
-                        borderWidth: 1,
-                        border: true,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        title: "Discard Changes",
-                      ),
-                    ],
+                  NewTextField(
+                    fieldbg: AppColors.tfield,
+                    controller: _emailController,
+                    labelText: "Email Address*",
+                    hintText: "Enter your email",
+                    hintStyle: TextStyle(
+                      fontSize: AppScaler.scaleFont(context, 16),
+                      fontWeight: FontWeight.w400,
+                    ),
+                    filledColor: AppColors.tfield,
+                    keyboardType: TextInputType.emailAddress,
                   ),
-                ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                  PhoneOtpField(
+                    phoneController: phoneController,
+                    otpController: otpController,
+                    fieldbg: AppColors.tfield,
+                    labelText: 'Phone Number*',
+                    onSendCode: () {},
+                  ),
+
+                  AppButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    title: "Save Changes",
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 12)),
+                  AppButton(
+                    color: Colors.transparent,
+                    borderColor: customColors.textColor,
+                    borderWidth: 1,
+                    border: true,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    title: "Discard Changes",
+                  ),
+                ],
               ),
             ),
           ],

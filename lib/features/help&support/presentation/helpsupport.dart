@@ -53,7 +53,6 @@ class _HelpsupportState extends State<Helpsupport> {
         appBar: AppMainBar(
           leading: GestureDetector(
             behavior: HitTestBehavior.opaque,
-
             onTap: () {
               context.pop();
             },
@@ -76,140 +75,113 @@ class _HelpsupportState extends State<Helpsupport> {
             SizedBox(height: AppScaler.scaleHeight(context, 10)),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppScaler.scaleSize(context, 20),
-                        vertical: 0,
-                      ),
-                      child: Column(
-                        children: [
-                          ..._chatitem.map((item) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: AppScaler.scaleHeight(context, 8),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 20),
+                  ),
+                  child: Column(
+                    children: [
+                      ..._chatitem.map((item) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: AppScaler.scaleHeight(context, 8),
+                          ),
+                          child: Container(
+                            width: double.infinity,
+                            height: AppScaler.scaleHeight(context, 114),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColors.helpsupport,
+                              border: Border.all(
+                                color: customColors.blackshade,
+                                width: 0.5,
                               ),
-                              child: Container(
-                                width: double.infinity,
-                                height: AppScaler.scaleHeight(context, 114),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColors.helpsupport,
-                                  border: Border.all(
-                                    color: customColors.blackshade,
-                                    width: 0.5,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: AppScaler.scaleHeight(context, 7),
-                                    horizontal: AppScaler.scaleSize(
-                                      context,
-                                      15,
-                                    ),
-                                  ),
-                                  child: Column(
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: AppScaler.scaleHeight(context, 7),
+                                horizontal: AppScaler.scaleSize(context, 15),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
                                     children: [
-                                      Row(
+                                      Image.asset(
+                                        item['iconPath']!,
+                                        height: AppScaler.scaleHeight(
+                                          context,
+                                          24,
+                                        ),
+                                        width: AppScaler.scaleSize(context, 24),
+                                        color: customColors.textColor,
+                                      ),
+                                      SizedBox(
+                                        width: AppScaler.scaleSize(context, 20),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Image.asset(
-                                            item['iconPath']!,
-                                            height: AppScaler.scaleHeight(
-                                              context,
-                                              24,
-                                            ),
-                                            width: AppScaler.scaleSize(
-                                              context,
-                                              24,
-                                            ),
-                                            color: customColors.textColor,
+                                          PoppinsText(
+                                            context,
+                                            item['title']!,
+                                            color: Theme.of(context)
+                                                .extension<AppCustomColors>()!
+                                                .textColor,
+                                            fontSize:
+                                                PoppinsFontSizeVariant.size16,
+                                            fontWeight:
+                                                PoppinsFontWeightVariant.medium,
                                           ),
-                                          SizedBox(
-                                            width: AppScaler.scaleSize(
-                                              context,
-                                              20,
-                                            ),
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              PoppinsText(
-                                                context,
-                                                item['title']!,
-                                                color: Theme.of(context)
-                                                    .extension<
-                                                      AppCustomColors
-                                                    >()!
-                                                    .textColor,
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size16,
-                                                fontWeight:
-                                                    PoppinsFontWeightVariant
-                                                        .medium,
-                                              ),
-                                              PoppinsText(
-                                                context,
-                                                item['subtitle']!,
-                                                color: Theme.of(context)
-                                                    .extension<
-                                                      AppCustomColors
-                                                    >()!
-                                                    .textColor,
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size12,
-                                                fontWeight:
-                                                    PoppinsFontWeightVariant
-                                                        .regular,
-                                              ),
-                                            ],
+                                          PoppinsText(
+                                            context,
+                                            item['subtitle']!,
+                                            color: Theme.of(context)
+                                                .extension<AppCustomColors>()!
+                                                .textColor,
+                                            fontSize:
+                                                PoppinsFontSizeVariant.size12,
+                                            fontWeight: PoppinsFontWeightVariant
+                                                .regular,
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: AppScaler.scaleHeight(
-                                          context,
-                                          13,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: double.infinity,
-                                        height: AppScaler.scaleHeight(
-                                          context,
-                                          40,
-                                        ),
-                                        child: AppButton(
-                                          onPressed: () {},
-                                          title: item['buttonText']!,
-                                        ),
-                                      ),
                                     ],
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 13),
+                                  ),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: AppScaler.scaleHeight(context, 40),
+                                    child: AppButton(
+                                      onPressed: () {},
+                                      title: item['buttonText']!,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            );
-                          }),
-
-                          Container(
-                            width: double.infinity,
-                            margin: EdgeInsets.symmetric(
-                              vertical: AppScaler.scaleHeight(context, 20),
                             ),
-                            decoration: BoxDecoration(
-                              color: AppColors.submitticket0E0E0E,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: HelpsupportSubmitWidget(),
                           ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                        ],
+                        );
+                      }),
+
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.symmetric(
+                          vertical: AppScaler.scaleHeight(context, 20),
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.submitticket0E0E0E,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: HelpsupportSubmitWidget(),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                    ],
+                  ),
                 ),
               ),
             ),

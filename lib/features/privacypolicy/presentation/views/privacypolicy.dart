@@ -4,6 +4,7 @@ import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
+import '../../../../shared/widgets/title_subtitle_widget.dart';
 
 class PrivacypolicyScreen extends StatefulWidget {
   const PrivacypolicyScreen({super.key});
@@ -13,41 +14,40 @@ class PrivacypolicyScreen extends StatefulWidget {
 }
 
 class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
-  // Privacy sections structured as a list
-  final List<Map<String, String>> _sections = [
+  final List<Map<String, String>> sections = [
     {
       "title": "1. Information We Collect",
-      "body":
+      "subtitle":
           "We collect email addresses and names from contact forms and newsletter sign-ups.",
     },
     {
       "title": "2. Purpose of Collection",
-      "body":
+      "subtitle":
           "We collect this information for the purpose of sending newsletters to our subscribers.",
     },
     {
       "title": "3. Cookies and Tracking Technologies",
-      "body":
+      "subtitle":
           "We use Google Analytics to track website traffic and gather information about how visitors use our site. This information is used for internal purposes only and helps us improve our website.",
     },
     {
       "title": "4. Sharing of Personal Information",
-      "body":
+      "subtitle":
           "We do not share the personal information we collect with any third parties.",
     },
     {
       "title": "5. Data Security",
-      "body":
+      "subtitle":
           "We take appropriate measures to protect the personal information we collect. This includes using secure servers and encryption methods.",
     },
     {
       "title": "6. Data Retention",
-      "body":
+      "subtitle":
           "We retain the personal information you provide for an indefinite period, unless you request its deletion.",
     },
     {
       "title": "7. Opt-Out Option",
-      "body":
+      "subtitle":
           "If you no longer wish to receive our newsletters, you can opt-out by following the unsubscribe instructions provided in the email or by contacting us directly.",
     },
   ];
@@ -72,7 +72,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
             behavior: HitTestBehavior.opaque,
             onTap: () => Navigator.of(context).pop(),
             child: Padding(
-              padding: const EdgeInsets.only(left: 10),
+              padding: EdgeInsets.only(left: 10),
               child: Image.asset(
                 "assets/images/backicon.png",
                 width: 20,
@@ -109,13 +109,11 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
                   ),
                   SizedBox(height: AppScaler.scaleHeight(context, 16)),
 
-                  ..._sections.map(
-                    (section) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _title(section["title"]!, customColors),
-                        _body(section["body"]!, customColors),
-                      ],
+                  ...sections.map(
+                    (section) => TitleSubtitleWidget(
+                      title: section["title"]!,
+                      subtitle: section["subtitle"]!,
+                      colors: customColors,
                     ),
                   ),
 
@@ -126,32 +124,6 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _title(String text, AppCustomColors colors) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: AppScaler.scaleHeight(context, 24),
-        bottom: AppScaler.scaleHeight(context, 8),
-      ),
-      child: PoppinsText(
-        context,
-        text,
-        color: colors.textColor,
-        fontSize: PoppinsFontSizeVariant.size16,
-        fontWeight: PoppinsFontWeightVariant.medium,
-      ),
-    );
-  }
-
-  Widget _body(String text, AppCustomColors colors) {
-    return PoppinsText(
-      context,
-      text,
-      color: colors.textColor,
-      fontSize: PoppinsFontSizeVariant.size12,
-      fontWeight: PoppinsFontWeightVariant.regular,
     );
   }
 }

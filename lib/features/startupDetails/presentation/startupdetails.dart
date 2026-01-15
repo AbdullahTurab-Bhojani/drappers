@@ -8,7 +8,6 @@ import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/featured_episode_card.dart';
-import '../../../shared/widgets/guestloginwidget.dart';
 
 class Startupdetails extends StatefulWidget {
   const Startupdetails({super.key});

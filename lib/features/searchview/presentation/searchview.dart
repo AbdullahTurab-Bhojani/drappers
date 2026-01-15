@@ -16,26 +16,19 @@ class Searchview extends StatefulWidget {
   State<Searchview> createState() => SearchviewState();
 }
 
-class HistoryData {
-  final String title;
-  final String thumbnailPath;
-
-  HistoryData(this.title, this.thumbnailPath);
-}
-
-final List<HistoryData> dummyHistory = [
-  HistoryData(
-    'Semifinals 1 – Meet The Drapers Season...',
-    Assets.images.trendingimage1.path,
-  ),
-  HistoryData(
-    'Rio de Janeiro – Meet the Drapers Season...',
-    Assets.images.trendingimage2.path,
-  ),
-  HistoryData(
-    'Paris – Meet The Drapers Season 6 (2...',
-    Assets.images.trendingimage3.path,
-  ),
+final List<Map<String, String>> _sections = [
+  {
+    "title": 'Semifinals 1 – Meet The Drapers Season...',
+    "imagePath": Assets.images.trendingimage1.path,
+  },
+  {
+    "title": 'Rio de Janeiro – Meet the Drapers Season...',
+    "imagePath": Assets.images.trendingimage2.path,
+  },
+  {
+    "title": 'Paris – Meet The Drapers Season 6 (2...',
+    "imagePath": Assets.images.trendingimage3.path,
+  },
 ];
 
 class SearchviewState extends State<Searchview> {
@@ -72,7 +65,6 @@ class SearchviewState extends State<Searchview> {
         ),
       ),
       child: Scaffold(
-        // resizeToAvoidBottomInset: true,
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -151,12 +143,12 @@ class SearchviewState extends State<Searchview> {
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
-                    itemCount: dummyHistory.length,
+                    itemCount: _sections.length,
                     itemBuilder: (context, index) {
-                      final item = dummyHistory[index];
+                      final item = _sections[index];
                       return Searchhistory(
-                        title: item.title,
-                        thumbnailPath: item.thumbnailPath,
+                        title: item['title']!,
+                        thumbnailPath: item['imagePath']!,
                         onTapRemove: () {},
                         onTapTile: () {},
                       );

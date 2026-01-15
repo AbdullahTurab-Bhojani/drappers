@@ -22,7 +22,7 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.onboardingScreen.name,
         builder: (context, state) => OnboardingScreen(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.socialLoginScreen.path,
         name: AppRoutes.socialLoginScreen.name,
         builder: (context, state) => SocialLoginScreen(),
@@ -245,7 +245,7 @@ final routerConfigProvider = Provider((ref) {
       GoRoute(
         path: AppRoutes.videoScreen.path,
         name: AppRoutes.videoScreen.name,
-        builder: (context, state) => CustomVideoPlayerScreen(),
+        builder: (context, state) => VideoPlayerScreen(),
       ),
       GoRoute(
         path: AppRoutes.searchView.path,
