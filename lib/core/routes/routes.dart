@@ -65,8 +65,8 @@ enum AppRoutes {
   videoScreen('videoScreen', '/videoScreen'),
   searchView('searchView', '/searchView'),
   editProfilePopup('editProfilePopup', '/editProfilePopup'),
-  socialLoginScreen ('socialLoginScreen', '/socialLoginScreen');
-
+  socialLoginScreen('socialLoginScreen', '/socialLoginScreen'),
+  signupVerification('signupVerification', '/signupVerification');
 
   final String name;
   final String path;
