@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field, deprecated_member_use, sized_box_for_whitespace, unnecessary_string_interpolations, curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously, unused_field, sized_box_for_whitespace, curly_braces_in_flow_control_structures
 
 import 'dart:async';
 import 'dart:io';
@@ -10,56 +10,73 @@ import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/bottom_controls_widget.dart';
 import '../../../shared/widgets/episode_horizontal_bar.dart';
-import '../../../shared/widgets/popupmenuitem/audio_subtitle_popup.dart';
-import '../../../shared/widgets/popupmenuitem/quality_popup.dart';
-import '../../../shared/widgets/popupmenuitem/speed_popup.dart';
 import '../../../shared/widgets/top_bar_widget.dart';
 
-class VideoPlayerScreen extends StatefulWidget {
-  const VideoPlayerScreen({super.key});
+enum PlayerMode { live, vod }
+
+class UnifiedVideoPlayerScreen extends StatefulWidget {
+  final PlayerMode mode;
+  const UnifiedVideoPlayerScreen({super.key, required this.mode});
 
   @override
-  State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
+  State<UnifiedVideoPlayerScreen> createState() =>
+      _UnifiedVideoPlayerScreenState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+class _UnifiedVideoPlayerScreenState extends State<UnifiedVideoPlayerScreen> {
   late BetterPlayerController _betterPlayerController;
-
-  String? _selectedSubtitle;
-  String _selectedQuality = "720p";
-  String _selectedSpeed = "1x";
-
   bool _controlsVisible = true;
   bool _isLocked = false;
   bool _showEpisodes = false;
-  bool _showLockIndicator = false;
-  bool showLoader = false;
+  bool _isLoading = true;
   File? videoFile;
-
   Timer? _lockTimer;
 
-  final String videoUrl = "assets/images/contentdetailvodep.mp4";
-
-  final List<Map<String, String>> episodesData = List.generate(
-    10,
-    (index) => {
-      "title": "Meet The Drapers Season 6 (2023)",
-      "url": "assets/images/contentdetailvodep.mp4",
-      "image": Assets.images.watchlistcard1.path,
-    },
-  );
+  late String videoUrl;
+  late List<Map<String, String>> episodesData;
+  String _selectedSpeed = "1x";
+  String _selectedQuality = "720p";
+  String? _selectedSubtitle;
 
   @override
   void initState() {
     super.initState();
     _setLandscapeAndFullscreen();
-    _initializePlayer();
+    _setVideoData();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _initializePlayer());
+  }
+
+  void _setVideoData() {
+    if (widget.mode == PlayerMode.live) {
+      videoUrl = 'assets/images/livefullview.mp4';
+      episodesData = List.generate(
+        10,
+        (index) => {
+          "title": "Live Stream $index",
+          "url": 'assets/images/livefullview.mp4',
+          "image": Assets.images.watchlistcard1.path,
+        },
+      );
+      _controlsVisible = false;
+    } else {
+      videoUrl = 'assets/images/contentdetailvodep.mp4';
+      episodesData = List.generate(
+        10,
+        (index) => {
+          "title": "Episode $index",
+          "url": 'assets/images/contentdetailvodep.mp4',
+          "image": Assets.images.watchlistcard1.path,
+        },
+      );
+      _controlsVisible = true;
+    }
   }
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
     _betterPlayerController.dispose();
+    _lockTimer?.cancel();
+    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
     super.dispose();
   }
 
@@ -71,36 +88,24 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
-  Future<File> assetToFile(String assetPath, {String? fileName}) async {
-    setState(() => showLoader = true);
-
-    final name = fileName ?? assetPath.split('/').last;
+  Future<File> _assetToFile(String assetPath) async {
+    setState(() => _isLoading = true);
     final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/$name');
-
-    if (await file.exists()) {
-      setState(() {
-        videoFile = file;
-        showLoader = false;
-      });
-      return file;
+    final file = File('${tempDir.path}/${assetPath.split('/').last}');
+    if (!await file.exists()) {
+      final byteData = await rootBundle.load(assetPath);
+      await file.writeAsBytes(byteData.buffer.asUint8List());
     }
-
-    final byteData = await rootBundle.load(assetPath);
-    await file.writeAsBytes(byteData.buffer.asUint8List());
-
     setState(() {
       videoFile = file;
-      showLoader = false;
+      _isLoading = false;
     });
-
     return file;
   }
 
   Future<void> _initializePlayer() async {
-    setState(() => showLoader = true);
-
-    BetterPlayerConfiguration config = BetterPlayerConfiguration(
+    await _assetToFile(videoUrl);
+    final config = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.cover,
       autoPlay: true,
@@ -114,103 +119,31 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         showControls: false,
       ),
     );
-
-    await assetToFile(videoUrl);
-
-    BetterPlayerDataSource source = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.file,
-      videoFile!.path,
-    );
-
     _betterPlayerController = BetterPlayerController(
       config,
-      betterPlayerDataSource: source,
+      betterPlayerDataSource: BetterPlayerDataSource(
+        BetterPlayerDataSourceType.file,
+        videoFile!.path,
+      ),
     );
-
     _betterPlayerController.videoPlayerController!.addListener(() {
       if (mounted) setState(() {});
-    });
-
-    _hideControlsAfterDelay();
-    setState(() => showLoader = false);
-  }
-
-  void _hideControlsAfterDelay() {
-    Future.delayed(Duration(seconds: 4), () {
-      if (mounted &&
-          !_isLocked &&
-          _betterPlayerController.isPlaying() == true) {
-        setState(() => _controlsVisible = false);
-      }
     });
   }
 
   void _toggleLock() {
-    setState(() {
-      _isLocked = !_isLocked;
-      _controlsVisible = !_isLocked;
-    });
-
+    setState(() => _isLocked = !_isLocked);
     if (_isLocked) {
-      _showLockIndicatorWithTimer();
-    } else {
       _lockTimer?.cancel();
-      setState(() => _showLockIndicator = false);
+      _lockTimer = Timer(Duration(seconds: 2), () {
+        if (mounted) setState(() => _controlsVisible = false);
+      });
     }
-  }
-
-  void _showLockIndicatorWithTimer() {
-    setState(() => _showLockIndicator = true);
-
-    _lockTimer?.cancel();
-    _lockTimer = Timer(Duration(seconds: 2), () {
-      if (mounted) setState(() => _showLockIndicator = false);
-    });
-  }
-
-  void _changeSpeed() {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (_) => SpeedPopup(
-        selectedSpeed: _selectedSpeed,
-        onSelected: (value) {
-          setState(() {
-            _selectedSpeed = value;
-            _betterPlayerController.setSpeed(
-              double.parse(value.replaceAll('x', '')),
-            );
-          });
-        },
-      ),
-    );
-  }
-
-  void _openVideoQualityPopup() {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (_) => QualityPopup(
-        selectedQuality: _selectedQuality,
-        onSelected: (value) => setState(() => _selectedQuality = value),
-      ),
-    );
-  }
-
-  void _openAudioSubtitlePopup() {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (_) => AudioSubtitlePopup(
-        selectedValue: _selectedSubtitle,
-        onSelected: (value) => setState(() => _selectedSubtitle = value),
-      ),
-    );
   }
 
   void _playEpisode(int index) {
     final source = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
+      BetterPlayerDataSourceType.file,
       episodesData[index]['url']!,
     );
     _betterPlayerController.setupDataSource(source);
@@ -218,23 +151,25 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(color: Colors.black.withOpacity(0.35)),
-        child: Column(
-          children: [
-            Expanded(
-              child: GestureDetector(
+    Theme.of(context);
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: _isLoading
+            ? Center(child: CircularProgressIndicator())
+            : GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  if (!_isLocked) {
+                  if (!_isLocked && widget.mode == PlayerMode.vod) {
                     setState(() => _controlsVisible = !_controlsVisible);
-                    if (_controlsVisible) _hideControlsAfterDelay();
-                  } else {
-                    _showLockIndicatorWithTimer();
+                  } else if (_isLocked) {
+                    _toggleLock();
                   }
                 },
                 child: Stack(
@@ -242,8 +177,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     Positioned.fill(
                       child: BetterPlayer(controller: _betterPlayerController),
                     ),
-
-                    if (_controlsVisible && !_isLocked)
+                    // Top Bar
+                    if (_controlsVisible &&
+                        !_isLocked &&
+                        widget.mode == PlayerMode.vod)
                       Positioned(
                         top: 40,
                         left: 10,
@@ -254,8 +191,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           onClose: () => Navigator.pop(context),
                         ),
                       ),
-
-                    if (_controlsVisible && !_isLocked)
+                    // Center Controls
+                    // Center Controls (play/pause/back/forward)
+                    if (_controlsVisible &&
+                        !_isLocked &&
+                        widget.mode == PlayerMode.vod &&
+                        !_showEpisodes)
                       Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -292,15 +233,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               onPressed: () {
                                 final controller = _betterPlayerController
                                     .videoPlayerController!;
-                                final pos = controller.value.position;
-                                final dur =
-                                    controller.value.duration ?? Duration.zero;
-
                                 if (controller.value.isPlaying) {
                                   controller.pause();
                                 } else {
-                                  if (pos >= dur)
-                                    controller.seekTo(Duration.zero);
                                   controller.play();
                                 }
                               },
@@ -318,7 +253,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                 final pos = controller.value.position;
                                 final dur =
                                     controller.value.duration ?? Duration.zero;
-
                                 controller.seekTo(
                                   pos + Duration(seconds: 10) <= dur
                                       ? pos + Duration(seconds: 10)
@@ -330,39 +264,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         ),
                       ),
 
-                    if (_isLocked || _showLockIndicator)
-                      Positioned(
-                        top: 24,
-                        right: 24,
-                        child: GestureDetector(
-                          onTap: () {
-                            _toggleLock();
-                            setState(() => _controlsVisible = true);
-                            _hideControlsAfterDelay();
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                Assets.images.videolock.path,
-                                color: AppColors.white,
-                                width: 20,
-                                height: 20,
-                              ),
-                              SizedBox(width: 8),
-                              PoppinsText(
-                                context,
-                                "Locked",
-                                fontSize: PoppinsFontSizeVariant.size28,
-                                fontWeight: PoppinsFontWeightVariant.semiBold,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                    if (_controlsVisible && !_isLocked)
+                    if (_controlsVisible &&
+                        !_isLocked &&
+                        widget.mode == PlayerMode.vod)
                       Positioned(
                         bottom: 20,
                         left: 0,
@@ -373,31 +277,28 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           showEpisodes: _showEpisodes,
                           selectedSpeed: _selectedSpeed,
                           selectedQuality: _selectedQuality,
-                          changeSpeed: _changeSpeed,
+                          changeSpeed: () {},
                           toggleLock: _toggleLock,
-                          openAudioSubtitlePopup: _openAudioSubtitlePopup,
-                          openVideoQualityPopup: _openVideoQualityPopup,
+                          openAudioSubtitlePopup: () {},
+                          openVideoQualityPopup: () {},
                           onEpisodesToggle: (val) =>
                               setState(() => _showEpisodes = val),
                         ),
                       ),
+                    if (_controlsVisible && !_isLocked && !_showEpisodes)
+                      EpisodesHorizontalBar(
+                        show: _showEpisodes,
+                        title: 'E14 Finale',
+                        episodesData: episodesData,
+                        onClose: () => setState(() => _showEpisodes = false),
+                        onEpisodeTap: (index) {
+                          _playEpisode(index);
+                          setState(() => _showEpisodes = false);
+                        },
+                      ),
                   ],
                 ),
               ),
-            ),
-
-            EpisodesHorizontalBar(
-              show: _showEpisodes,
-              title: 'E14 Finale',
-              episodesData: episodesData,
-              onClose: () => setState(() => _showEpisodes = false),
-              onEpisodeTap: (index) {
-                _playEpisode(index);
-                setState(() => _showEpisodes = false);
-              },
-            ),
-          ],
-        ),
       ),
     );
   }

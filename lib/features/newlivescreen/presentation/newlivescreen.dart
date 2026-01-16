@@ -13,14 +13,14 @@ import '../../../shared/widgets/player_action_button.dart';
 import '../../../shared/widgets/popupmenuitem/audio_subtitle_popup.dart';
 import '../../../shared/widgets/popupmenuitem/speed_popup.dart';
 
-class newliveScreen extends StatefulWidget {
-  const newliveScreen({super.key});
+class Newlivescreen extends StatefulWidget {
+  const Newlivescreen({super.key});
 
   @override
-  State<newliveScreen> createState() => _newliveScreenScreenState();
+  State<Newlivescreen> createState() => _NewlivescreenState();
 }
 
-class _newliveScreenScreenState extends State<newliveScreen> {
+class _NewlivescreenState extends State<Newlivescreen> {
   late BetterPlayerController _betterPlayerController;
 
   String _selectedSpeed = "1x";
@@ -75,7 +75,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
     final config = BetterPlayerConfiguration(
       autoPlay: true,
       fit: BoxFit.cover,
-      controlsConfiguration: const BetterPlayerControlsConfiguration(
+      controlsConfiguration: BetterPlayerControlsConfiguration(
         showControls: false,
       ),
     );
@@ -98,7 +98,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
   }
 
   void _hideControlsAfterDelay() {
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(Duration(seconds: 4), () {
       if (mounted && _betterPlayerController.isPlaying() == true) {
         setState(() => _controlsVisible = false);
       }
@@ -160,37 +160,35 @@ class _newliveScreenScreenState extends State<newliveScreen> {
 
     return Container(
       color: Colors.black.withOpacity(0.35),
-      child: Stack(
+      child: Column(
+        mainAxisAlignment: .spaceBetween,
         children: [
+          SizedBox(height: AppScaler.scaleHeight(context, 56)),
           if (!_isLocked)
-            Center(
-              child: IconButton(
-                iconSize: 90,
-                icon: Icon(
-                  controller.value.isPlaying
-                      ? Icons.pause_circle
-                      : Icons.play_circle,
-                  color: AppColors.white,
-                ),
-                onPressed: () {
-                  if (controller.value.isPlaying) {
-                    controller.pause();
-                  } else {
-                    if (controller.value.position >=
-                        controller.value.duration!) {
-                      controller.seekTo(Duration.zero);
-                    }
-                    controller.play();
-                  }
-                },
+            IconButton(
+              iconSize: 90,
+              icon: Icon(
+                controller.value.isPlaying
+                    ? Icons.pause_circle
+                    : Icons.play_circle,
+                color: AppColors.white,
               ),
+              onPressed: () {
+                if (controller.value.isPlaying) {
+                  controller.pause();
+                } else {
+                  if (controller.value.position >= controller.value.duration!) {
+                    controller.seekTo(Duration.zero);
+                  }
+                  controller.play();
+                }
+              },
             ),
 
-          Positioned(
-            bottom: 60,
-            left: 16,
-            right: 16,
+          Padding(
+            padding: EdgeInsets.only(bottom: 20, left: 16, right: 16),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
                   children: [
@@ -208,7 +206,7 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                         inactiveColor: AppColors.sliderbar4C4C4C,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    // SizedBox(width: 8),
                     PoppinsText(
                       context,
                       _format(pos),
@@ -218,36 +216,46 @@ class _newliveScreenScreenState extends State<newliveScreen> {
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
 
-          Positioned(
-            bottom: 12,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                PlayerActionButton(
-                  imagePath: Assets.images.speed.path,
-                  label: "Speed ($_selectedSpeed)",
-                  onTap: _changeSpeed,
-                ),
+                // SizedBox(height: 10),
 
-                SizedBox(width: AppScaler.scaleSize(context, 32)),
-
-                PlayerActionButton(
-                  imagePath: Assets.images.audioSubtitles.path,
-                  label: "Audio & Subtitles",
-                  onTap: _openAudioSubtitlePopup,
-                ),
-
-                SizedBox(width: AppScaler.scaleSize(context, 32)),
-                PlayerActionButton(
-                  onTap: () {},
-                  label: "Picture in Picture",
-                  imagePath: Assets.images.picture.path,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(width: 24),
+                      Row(
+                        children: [
+                          PlayerActionButton(
+                            imagePath: Assets.images.speed.path,
+                            label: "Speed ($_selectedSpeed)",
+                            onTap: _changeSpeed,
+                          ),
+                          SizedBox(width: 16),
+                          PlayerActionButton(
+                            imagePath: Assets.images.audioSubtitles.path,
+                            label: "Audio & Subtitles",
+                            onTap: _openAudioSubtitlePopup,
+                          ),
+                          SizedBox(width: 16),
+                          PlayerActionButton(
+                            imagePath: Assets.images.picture.path,
+                            label: "Picture in Picture",
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Image.asset(
+                          Assets.images.fullscreenicon.path,
+                          width: 24,
+                          height: 24,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
