@@ -22,7 +22,7 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.onboardingScreen.name,
         builder: (context, state) => OnboardingScreen(),
       ),
-       GoRoute(
+      GoRoute(
         path: AppRoutes.socialLoginScreen.path,
         name: AppRoutes.socialLoginScreen.name,
         builder: (context, state) => SocialLoginScreen(),
@@ -47,6 +47,7 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.verfiicationcodeScreen.name,
         builder: (context, state) => VerfiicationcodeScreen(),
       ),
+
       GoRoute(
         path: AppRoutes.updatepasswordScreen.path,
         name: AppRoutes.updatepasswordScreen.name,
@@ -111,6 +112,11 @@ final routerConfigProvider = Provider((ref) {
         path: AppRoutes.applyPitch.path,
         name: AppRoutes.applyPitch.name,
         builder: (context, state) => ApplyPitch(),
+      ),
+      GoRoute(
+        path: AppRoutes.signupVerification.path,
+        name: AppRoutes.signupVerification.name,
+        builder: (context, state) => SignupVerification(),
       ),
       GoRoute(
         path: AppRoutes.voteForStartupScreen.path,

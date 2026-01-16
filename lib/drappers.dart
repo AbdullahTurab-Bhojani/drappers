@@ -89,6 +89,7 @@ import 'features/searchScreen/presentation/searchScreen.dart';
 import 'features/searchview/presentation/searchview.dart';
 import 'features/signup/create_account_code_screen.dart';
 import 'features/signup/presentation/views/signup.dart';
+import 'features/signup/presentation/views/signup_verification.dart';
 import 'features/something_Else/presentation/reportContent_SomethingElse.dart';
 import 'features/splash/presentation/views/splash.dart';
 import 'features/startupDetails/presentation/startupdetails.dart';
