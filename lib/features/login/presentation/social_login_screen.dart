@@ -1,26 +1,26 @@
 // ignore_for_file: deprecated_member_use, sized_box_for_whitespace
 
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
+import '../../authentication/data/dto/social_dto/social_dto.dart';
+import '../providers/social_auth_provider.dart';
 
-class SocialLoginScreen extends StatefulWidget {
+class SocialLoginScreen extends ConsumerStatefulWidget {
   const SocialLoginScreen({super.key});
 
   @override
-  State<SocialLoginScreen> createState() => _SocialLoginScreenState();
+  ConsumerState<SocialLoginScreen> createState() => _SocialLoginScreenState();
 }
 
-class _SocialLoginScreenState extends State<SocialLoginScreen> {
+class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
       onWillPop: () async {
         exit(0);
@@ -60,8 +60,25 @@ class _SocialLoginScreenState extends State<SocialLoginScreen> {
                 SizedBox(height: AppScaler.scaleHeight(context, 28)),
 
                 AppButton(
-                  onPressed: () {
-                    context.goNamed(AppRoutes.home.name);
+                  onPressed: () async {
+                    final authService = ref.read(socialAuthServiceProvider);
+                    final result = await authService.googleSignIn();
+
+                    if (result != null) {
+                      final socialDto = SocialDTO(
+                        subjectToken: result['subject_token'] ?? '',
+                        subjectIssuer: result['subject_issuer'] ?? 'google',
+                        email: result['subject_email'] ?? '',
+                      );
+                      final success = await authService.onSocialAuthApi(
+                        socialDto,
+                      );
+                      if (success && context.mounted) {
+                        context.goNamed(AppRoutes.home.name);
+                      }
+                    } else {
+                      debugPrint("Google Login Cancelled or Failed");
+                    }
                   },
                   title: 'Login with Google',
                   color: AppColors.graylight,

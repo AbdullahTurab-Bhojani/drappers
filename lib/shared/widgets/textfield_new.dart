@@ -177,10 +177,6 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
               counter: widget.maxLength != null && !widget.maxLengthOutSide
                   ? Offstage()
                   : null,
-              // errorStyle:
-              //     widget.errorStyle ??
-              //     textStryle.copyWith(color: AppColors.colorEF4444),
-              // errorMaxLines: 10,
               hintText: widget.hintText,
               hintTextDirection: TextDirection.ltr,
               contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
@@ -190,8 +186,6 @@ class _NewTextFieldState extends ConsumerState<NewTextField> {
               filled: false,
               fillColor: widget.filledColor ?? customColors.textColor,
               errorBorder: InputBorder.none,
-              errorStyle: const TextStyle(height: 0, fontSize: 0),
-
               prefixIconConstraints: widget.prefixIconConstraints,
               prefixIcon: widget.prefixIcon,
               suffixIcon: widget.sufixIcon != null
@@ -296,7 +290,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 14, right: 14, top: 12, bottom: 0),
+      padding: const EdgeInsets.only(left: 14, right: 14, top: 12, bottom: 5),
       decoration: BoxDecoration(
         color: AppColors.tfield,
         borderRadius: BorderRadius.circular(10),
@@ -324,6 +318,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                 fontWeight: FontWeight.w400,
                 // height: 1.1,
               ),
+
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
@@ -331,6 +326,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 hintText: widget.hintText,
+
                 hintStyle:
                     widget.hintStyle ??
                     GoogleFonts.poppins(

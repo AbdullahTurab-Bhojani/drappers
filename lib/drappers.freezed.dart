@@ -55,12 +55,13 @@ extension AppLoadingStatePatterns on AppLoadingState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _initialized value)?  $default,{TResult Function( LoadingState value)?  loading,TResult Function( ErrorState value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _InitialState value)?  initial,TResult Function( _LoadingState value)?  loading,TResult Function( _SuccessState value)?  success,TResult Function( _ErrorState value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _initialized() when $default != null:
-return $default(_that);case LoadingState() when loading != null:
-return loading(_that);case ErrorState() when error != null:
+case _InitialState() when initial != null:
+return initial(_that);case _LoadingState() when loading != null:
+return loading(_that);case _SuccessState() when success != null:
+return success(_that);case _ErrorState() when error != null:
 return error(_that);case _:
   return orElse();
 
@@ -79,12 +80,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _initialized value)  $default,{required TResult Function( LoadingState value)  loading,required TResult Function( ErrorState value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _InitialState value)  initial,required TResult Function( _LoadingState value)  loading,required TResult Function( _SuccessState value)  success,required TResult Function( _ErrorState value)  error,}){
 final _that = this;
 switch (_that) {
-case _initialized():
-return $default(_that);case LoadingState():
-return loading(_that);case ErrorState():
+case _InitialState():
+return initial(_that);case _LoadingState():
+return loading(_that);case _SuccessState():
+return success(_that);case _ErrorState():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -102,12 +104,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _initialized value)?  $default,{TResult? Function( LoadingState value)?  loading,TResult? Function( ErrorState value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _InitialState value)?  initial,TResult? Function( _LoadingState value)?  loading,TResult? Function( _SuccessState value)?  success,TResult? Function( _ErrorState value)?  error,}){
 final _that = this;
 switch (_that) {
-case _initialized() when $default != null:
-return $default(_that);case LoadingState() when loading != null:
-return loading(_that);case ErrorState() when error != null:
+case _InitialState() when initial != null:
+return initial(_that);case _LoadingState() when loading != null:
+return loading(_that);case _SuccessState() when success != null:
+return success(_that);case _ErrorState() when error != null:
 return error(_that);case _:
   return null;
 
@@ -125,12 +128,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function()?  $default,{TResult Function()?  loading,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( dynamic data)?  success,TResult Function( String? message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _initialized() when $default != null:
-return $default();case LoadingState() when loading != null:
-return loading();case ErrorState() when error != null:
-return error();case _:
+case _InitialState() when initial != null:
+return initial();case _LoadingState() when loading != null:
+return loading();case _SuccessState() when success != null:
+return success(_that.data);case _ErrorState() when error != null:
+return error(_that.message);case _:
   return orElse();
 
 }
@@ -148,12 +152,13 @@ return error();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function()  $default,{required TResult Function()  loading,required TResult Function()  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( dynamic data)  success,required TResult Function( String? message)  error,}) {final _that = this;
 switch (_that) {
-case _initialized():
-return $default();case LoadingState():
-return loading();case ErrorState():
-return error();case _:
+case _InitialState():
+return initial();case _LoadingState():
+return loading();case _SuccessState():
+return success(_that.data);case _ErrorState():
+return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +175,13 @@ return error();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function()?  $default,{TResult? Function()?  loading,TResult? Function()?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( dynamic data)?  success,TResult? Function( String? message)?  error,}) {final _that = this;
 switch (_that) {
-case _initialized() when $default != null:
-return $default();case LoadingState() when loading != null:
-return loading();case ErrorState() when error != null:
-return error();case _:
+case _InitialState() when initial != null:
+return initial();case _LoadingState() when loading != null:
+return loading();case _SuccessState() when success != null:
+return success(_that.data);case _ErrorState() when error != null:
+return error(_that.message);case _:
   return null;
 
 }
@@ -186,8 +192,8 @@ return error();case _:
 /// @nodoc
 
 
-class _initialized implements AppLoadingState {
-  const _initialized();
+class _InitialState implements AppLoadingState {
+  const _InitialState();
   
 
 
@@ -197,7 +203,7 @@ class _initialized implements AppLoadingState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _initialized);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InitialState);
 }
 
 
@@ -206,7 +212,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AppLoadingState()';
+  return 'AppLoadingState.initial()';
 }
 
 
@@ -218,8 +224,8 @@ String toString() {
 /// @nodoc
 
 
-class LoadingState implements AppLoadingState {
-  const LoadingState();
+class _LoadingState implements AppLoadingState {
+  const _LoadingState();
   
 
 
@@ -229,7 +235,7 @@ class LoadingState implements AppLoadingState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadingState);
 }
 
 
@@ -250,33 +256,133 @@ String toString() {
 /// @nodoc
 
 
-class ErrorState implements AppLoadingState {
-  const ErrorState();
+class _SuccessState implements AppLoadingState {
+  const _SuccessState(this.data);
   
 
+ final  dynamic data;
 
-
+/// Create a copy of AppLoadingState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SuccessStateCopyWith<_SuccessState> get copyWith => __$SuccessStateCopyWithImpl<_SuccessState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SuccessState&&const DeepCollectionEquality().equals(other.data, data));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data));
 
 @override
 String toString() {
-  return 'AppLoadingState.error()';
+  return 'AppLoadingState.success(data: $data)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$SuccessStateCopyWith<$Res> implements $AppLoadingStateCopyWith<$Res> {
+  factory _$SuccessStateCopyWith(_SuccessState value, $Res Function(_SuccessState) _then) = __$SuccessStateCopyWithImpl;
+@useResult
+$Res call({
+ dynamic data
+});
 
 
+
+
+}
+/// @nodoc
+class __$SuccessStateCopyWithImpl<$Res>
+    implements _$SuccessStateCopyWith<$Res> {
+  __$SuccessStateCopyWithImpl(this._self, this._then);
+
+  final _SuccessState _self;
+  final $Res Function(_SuccessState) _then;
+
+/// Create a copy of AppLoadingState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? data = freezed,}) {
+  return _then(_SuccessState(
+freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _ErrorState implements AppLoadingState {
+  const _ErrorState([this.message]);
+  
+
+ final  String? message;
+
+/// Create a copy of AppLoadingState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ErrorStateCopyWith<_ErrorState> get copyWith => __$ErrorStateCopyWithImpl<_ErrorState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ErrorState&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'AppLoadingState.error(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ErrorStateCopyWith<$Res> implements $AppLoadingStateCopyWith<$Res> {
+  factory _$ErrorStateCopyWith(_ErrorState value, $Res Function(_ErrorState) _then) = __$ErrorStateCopyWithImpl;
+@useResult
+$Res call({
+ String? message
+});
+
+
+
+
+}
+/// @nodoc
+class __$ErrorStateCopyWithImpl<$Res>
+    implements _$ErrorStateCopyWith<$Res> {
+  __$ErrorStateCopyWithImpl(this._self, this._then);
+
+  final _ErrorState _self;
+  final $Res Function(_ErrorState) _then;
+
+/// Create a copy of AppLoadingState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+  return _then(_ErrorState(
+freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
 
 // dart format on

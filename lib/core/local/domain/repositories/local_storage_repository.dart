@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../shared/models/user_model.dart';
+import '../../../../features/user/domain/models/user_model.dart';
 import '../../providers/shared_pref.dart';
 import 'shared_preference_repository.dart';
 
@@ -14,17 +14,8 @@ abstract interface class SharedPrefService {
   Future<bool> setAccessToken(String token);
   String? get accessToken;
 
-  Future<bool> setAccessTokenMarket(String token);
-  String? get marketAccessToken;
-
-  Future<bool> setRefreshTokenMarket(String token);
-  String? get marketRefreshToken;
-
-  Future<bool> setAccessTokenMarketNew(String token);
-  String? get marketAccessTokenNew;
-
-  Future<bool> setRefreshTokenMarketNew(String token);
-  String? get marketRefreshTokenNew;
+  Future<bool> setRefreshToken(String token);
+  String? get refreshToken;
 
   Future<bool> setRememberMe(String rememberMe);
   String? get getRemamberMe;
@@ -67,8 +58,6 @@ abstract interface class SharedPrefService {
   Future<void> saveTheme(String themeName);
   String getTheme();
 }
-
-/// ================= PROVIDER =================
 
 final localDataProvider = Provider<SharedPrefService>(
   (ref) => SharedPreferencesService(

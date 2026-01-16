@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../shared/models/user_model.dart';
+import '../../../../features/user/domain/models/user_model.dart';
 import 'local_storage_repository.dart';
 
 class SharedPreferencesService implements SharedPrefService {
@@ -11,15 +11,13 @@ class SharedPreferencesService implements SharedPrefService {
   final SharedPreferences sharedPreferences;
 
   final _tokenKey = 'access-token';
+  final _refreshTokenKey = 'refresh-token';
   final _isFirstTimeKey = 'is-first-time';
   final _idKey = 'id-user';
   final _loginKey = 'login';
   final _userKey = 'user';
   final _userNameKey = 'user-name';
-  final _marketAccessToken = 'metaAccessToken';
-  final _marketAccessTokenNew = 'metaAccessTokenNew';
-  final _marketRefreshToken = 'metaRefreshToken';
-  final _marketRefreshTokenNew = 'metaRefreshTokenNew';
+
   final _emailKey = 'setEmail';
   final _rememberMeKey = 'rememberMe';
   final _passwordKey = 'password';
@@ -34,7 +32,15 @@ class SharedPreferencesService implements SharedPrefService {
   String? get accessToken => sharedPreferences.getString(_tokenKey);
 
   @override
+  String? get refreshToken => sharedPreferences.getString(_refreshTokenKey);
+
+  @override
   Future<bool> setAccessToken(String token) async {
+    return sharedPreferences.setString(_tokenKey, token);
+  }
+
+  @override
+  Future<bool> setRefreshToken(String token) async {
     return sharedPreferences.setString(_tokenKey, token);
   }
 
@@ -52,44 +58,6 @@ class SharedPreferencesService implements SharedPrefService {
 
   @override
   bool get isLogin => sharedPreferences.getBool(_loginKey) ?? false;
-
-  // ---------------- MARKET ----------------
-
-  @override
-  String? get marketAccessToken =>
-      sharedPreferences.getString(_marketAccessToken);
-
-  @override
-  Future<bool> setAccessTokenMarket(String token) async {
-    return sharedPreferences.setString(_marketAccessToken, token);
-  }
-
-  @override
-  String? get marketAccessTokenNew =>
-      sharedPreferences.getString(_marketAccessTokenNew);
-
-  @override
-  Future<bool> setAccessTokenMarketNew(String token) async {
-    return sharedPreferences.setString(_marketAccessTokenNew, token);
-  }
-
-  @override
-  String? get marketRefreshToken =>
-      sharedPreferences.getString(_marketRefreshToken);
-
-  @override
-  Future<bool> setRefreshTokenMarket(String token) async {
-    return sharedPreferences.setString(_marketRefreshToken, token);
-  }
-
-  @override
-  String? get marketRefreshTokenNew =>
-      sharedPreferences.getString(_marketRefreshTokenNew);
-
-  @override
-  Future<bool> setRefreshTokenMarketNew(String token) async {
-    return sharedPreferences.setString(_marketRefreshTokenNew, token);
-  }
 
   // ---------------- USER PREFS ----------------
 
