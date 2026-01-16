@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/episode_horizontal_bar.dart';
+import '../../../shared/widgets/player_action_button.dart';
 import '../../../shared/widgets/popupmenuitem/audio_subtitle_popup.dart';
 import '../../../shared/widgets/popupmenuitem/quality_popup.dart';
 import '../../../shared/widgets/popupmenuitem/speed_popup.dart';
@@ -316,8 +318,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
           if (_isLocked)
             Positioned(
-              top: 16,
-              right: 16,
+              top: 24,
+              right: 24,
               child: GestureDetector(
                 onTap: () {
                   _toggleLock();
@@ -326,8 +328,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 },
                 child: Row(
                   children: [
-                    Icon(Icons.lock, color: AppColors.white, size: 24),
-                    SizedBox(width: 4),
+                    Image.asset(
+                      Assets.images.videolock.path,
+                      color: AppColors.white,
+                      width: 20,
+                      height: 20,
+                    ),
+                    SizedBox(width: 6),
                     PoppinsText(
                       context,
                       "Locked",
@@ -343,7 +350,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           if (_controlsVisible)
             _buildBottomControls(screenSize, _betterPlayerController),
 
-          if (_showEpisodes) _buildEpisodesHorizontalBar(),
+          EpisodesHorizontalBar(
+            show: _showEpisodes,
+            title: 'E14 Finale',
+            episodesData: episodesData,
+            onClose: () => setState(() => _showEpisodes = false),
+            onEpisodeTap: (index) {
+              _playEpisode(index);
+              setState(() => _showEpisodes = false);
+            },
+          ),
         ],
       ),
     );
@@ -450,56 +466,52 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _btn(
-                        Assets.images.speed.path,
-                        "Speed ($_selectedSpeed)",
-                        _changeSpeed,
+                      PlayerActionButton(
+                        imagePath: Assets.images.speed.path,
+                        label: "Speed ($_selectedSpeed)",
+                        onTap: _changeSpeed,
                       ),
+
                       SizedBox(width: 16),
 
-                      GestureDetector(
+                      PlayerActionButton(
+                        imagePath: Assets.images.videolock.path,
+                        label: _isLocked ? "Locked" : "Lock",
                         onTap: _toggleLock,
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              Assets.images.videolock.path,
-                              width: 20,
-                              height: 20,
-                              fit: BoxFit.contain,
-                            ),
-
-                            SizedBox(width: 4),
-                            PoppinsText(
-                              context,
-                              "Locked",
-                              fontSize: PoppinsFontSizeVariant.size28,
-                              fontWeight: PoppinsFontWeightVariant.semiBold,
-                              color: AppColors.white,
-                            ),
-                          ],
-                        ),
+                        color: AppColors.white,
                       ),
 
                       SizedBox(width: 16),
-                      _btn(
-                        Assets.images.episode.path,
-                        "Episodes",
-                        () => setState(() => _showEpisodes = !_showEpisodes),
+
+                      PlayerActionButton(
+                        imagePath: Assets.images.episode.path,
+                        label: "Episodes",
+                        onTap: () =>
+                            setState(() => _showEpisodes = !_showEpisodes),
+                      ),
+
+                      SizedBox(width: 16),
+
+                      PlayerActionButton(
+                        imagePath: Assets.images.audioSubtitles.path,
+                        label: "Audio & Subtitles",
+                        onTap: _openAudioSubtitlePopup,
+                      ),
+
+                      SizedBox(width: 16),
+
+                      PlayerActionButton(
+                        imagePath: Assets.images.quality.path,
+                        label: "Quality ($_selectedQuality)",
+                        onTap: _openVideoQualityPopup,
                       ),
                       SizedBox(width: 16),
-                      _btn(
-                        Assets.images.audioSubtitles.path,
-                        "Audio & Subtitles",
-                        _openAudioSubtitlePopup,
+
+                      PlayerActionButton(
+                        onTap: () {},
+                        label: "Next Ep.",
+                        imagePath: Assets.images.nextepisode.path,
                       ),
-                      SizedBox(width: 16),
-                      _btn(
-                        Assets.images.quality.path,
-                        "Quality ($_selectedQuality)",
-                        _openVideoQualityPopup,
-                      ),
-                      SizedBox(width: 16),
-                      _btn(Assets.images.nextepisode.path, "Next Ep.", () {}),
                     ],
                   ),
                   GestureDetector(
@@ -511,120 +523,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     ),
                   ),
                 ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _btn(String imagePath, String label, VoidCallback onTap) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: Row(
-        children: [
-          Image.asset(imagePath, width: 20, height: 20, fit: BoxFit.contain),
-          SizedBox(width: 6),
-          PoppinsText(
-            context,
-            label,
-            fontSize: PoppinsFontSizeVariant.size28,
-            fontWeight: PoppinsFontWeightVariant.semiBold,
-            color: AppColors.wDark,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEpisodesHorizontalBar() {
-    if (!_showEpisodes) return SizedBox.shrink();
-    return Positioned.fill(
-      child: Stack(
-        children: [
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () => setState(() => _showEpisodes = false),
-            child: Container(color: Colors.transparent),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onVerticalDragUpdate: (details) {
-                if (details.delta.dy > 5) setState(() => _showEpisodes = false);
-              },
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    color: AppColors.color000032,
-                    child: PoppinsText(
-                      context,
-                      'E14 Finale',
-                      fontSize: PoppinsFontSizeVariant.size40,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: AppColors.wDark,
-                    ),
-                  ),
-                  Container(
-                    height: 190,
-                    color: AppColors.color040412,
-                    child: ListView.separated(
-                      separatorBuilder: (_, __) => SizedBox(width: 20),
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.only(left: 20),
-                      itemCount: episodesData.length,
-                      itemBuilder: (_, index) => _buildHorizontalEpisodeItem(
-                        episodesData[index],
-                        index,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHorizontalEpisodeItem(Map<String, String> episode, int index) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        _playEpisode(index);
-        setState(() => _showEpisodes = false);
-      },
-      child: Container(
-        width: 255,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 132,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-                image: DecorationImage(
-                  image: AssetImage(episode['image']!),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(4.0),
-              child: PoppinsText(
-                context,
-                episode['title']!,
-                fontSize: PoppinsFontSizeVariant.size32,
-                fontWeight: PoppinsFontWeightVariant.medium,
-                color: AppColors.wDark,
               ),
             ),
           ],

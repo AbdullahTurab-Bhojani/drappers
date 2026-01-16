@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../drappers.dart'; // PoppinsText, AppColors
+import '../../../drappers.dart';
 
 class AudioSubtitlePopup extends StatelessWidget {
   final String? selectedValue;
