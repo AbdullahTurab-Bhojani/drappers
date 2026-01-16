@@ -43,10 +43,7 @@ class EpisodesHorizontalBar extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     color: AppColors.color000032,
                     child: PoppinsText(
                       context,

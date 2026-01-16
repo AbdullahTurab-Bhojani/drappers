@@ -220,29 +220,30 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(color: Colors.black.withOpacity(0.35)),
-        child: Column(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  if (!_isLocked) {
-                    setState(() => _controlsVisible = !_controlsVisible);
-                    if (_controlsVisible) _hideControlsAfterDelay();
-                  } else {
-                    _showLockIndicatorWithTimer();
-                  }
-                },
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: BetterPlayer(controller: _betterPlayerController),
-                    ),
+      body: Column(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                if (_showEpisodes) {
+                  setState(() => _showEpisodes = false);
+                  return;
+                }
 
+                if (!_isLocked) {
+                  setState(() => _controlsVisible = !_controlsVisible);
+                  if (_controlsVisible) _hideControlsAfterDelay();
+                } else {
+                  _showLockIndicatorWithTimer();
+                }
+              },
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: BetterPlayer(controller: _betterPlayerController),
+                  ),
+                  if (!_showEpisodes)
                     if (_controlsVisible && !_isLocked)
                       Positioned(
                         top: 40,
@@ -254,7 +255,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           onClose: () => Navigator.pop(context),
                         ),
                       ),
-
+                  if (!_showEpisodes)
                     if (_controlsVisible && !_isLocked)
                       Center(
                         child: Row(
@@ -329,7 +330,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           ],
                         ),
                       ),
-
+                  if (!_showEpisodes)
                     if (_isLocked || _showLockIndicator)
                       Positioned(
                         top: 24,
@@ -361,7 +362,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           ),
                         ),
                       ),
-
+                  if (!_showEpisodes)
                     if (_controlsVisible && !_isLocked)
                       Positioned(
                         bottom: 20,
@@ -381,23 +382,22 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               setState(() => _showEpisodes = val),
                         ),
                       ),
-                  ],
-                ),
+                ],
               ),
             ),
+          ),
 
-            EpisodesHorizontalBar(
-              show: _showEpisodes,
-              title: 'E14 Finale',
-              episodesData: episodesData,
-              onClose: () => setState(() => _showEpisodes = false),
-              onEpisodeTap: (index) {
-                _playEpisode(index);
-                setState(() => _showEpisodes = false);
-              },
-            ),
-          ],
-        ),
+          EpisodesHorizontalBar(
+            show: _showEpisodes,
+            title: 'E14 Finale',
+            episodesData: episodesData,
+            onClose: () => setState(() => _showEpisodes = false),
+            onEpisodeTap: (index) {
+              _playEpisode(index);
+              setState(() => _showEpisodes = false);
+            },
+          ),
+        ],
       ),
     );
   }
