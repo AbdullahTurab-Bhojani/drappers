@@ -1,13 +1,13 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
+import '../../../shared/widgets/phonefield_code.dart';
 import '../../../shared/widgets/textfield_new.dart';
 import '../../user/domain/models/user_model.dart';
 import 'edit_profile_popup.dart';
@@ -22,9 +22,10 @@ class EditprofileScreen extends ConsumerStatefulWidget {
 class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _countryCodeController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
 
-  PhoneNumber? initialPhoneNumber;
   UserData? user;
 
   @override
@@ -39,13 +40,14 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
       _fullNameController.text = fetchedUser.fullName ?? '';
       _emailController.text = fetchedUser.email ?? '';
 
-      if (fetchedUser.phoneNumber != null) {
-        initialPhoneNumber = await PhoneNumber.getRegionInfoFromPhoneNumber(
-          fetchedUser.phoneNumber!,
-        );
-        _phoneController.text = initialPhoneNumber?.parseNumber() ?? '';
+      if (fetchedUser.phoneNumber != null &&
+          fetchedUser.phoneNumber!.contains(" ")) {
+        final parts = fetchedUser.phoneNumber!.split(" ");
+        _countryCodeController.text = parts[0];
+        _phoneNumberController.text = parts.sublist(1).join("");
       } else {
-        initialPhoneNumber = PhoneNumber(isoCode: 'US', dialCode: '+1');
+        _countryCodeController.text = "+92"; // default
+        _phoneNumberController.text = fetchedUser.phoneNumber ?? '';
       }
     }
     setState(() {});
@@ -55,7 +57,9 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
   void dispose() {
     _fullNameController.dispose();
     _emailController.dispose();
-    _phoneController.dispose();
+    _countryCodeController.dispose();
+    _phoneNumberController.dispose();
+    otpController.dispose();
     super.dispose();
   }
 
@@ -72,6 +76,7 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
           ),
           Column(
             children: [
+              // App Bar
               AppMainBar(
                 leading: GestureDetector(
                   behavior: HitTestBehavior.opaque,
@@ -88,6 +93,8 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                 elevation: 0,
               ),
               SizedBox(height: AppScaler.scaleHeight(context, 50)),
+
+              // Profile Image + Name
               Column(
                 children: [
                   Stack(
@@ -154,6 +161,8 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                   SizedBox(height: AppScaler.scaleHeight(context, 20)),
                 ],
               ),
+
+              // Form Fields
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -187,44 +196,22 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                           keyboardType: TextInputType.emailAddress,
                         ),
                         SizedBox(height: AppScaler.scaleHeight(context, 15)),
-                        if (initialPhoneNumber != null)
-                          InternationalPhoneNumberInput(
-                            textStyle: GoogleFonts.poppins(
-                              fontSize: AppScaler.scaleFont(context, 16),
-                              color: AppColors.white,
-                            ),
-                            onInputChanged: (PhoneNumber number) {
-                              _phoneController.text = number.phoneNumber ?? '';
-                            },
-                            onInputValidated: (bool isValid) {},
-                            selectorConfig: const SelectorConfig(
-                              selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                              showFlags: false,
-                            ),
-                            initialValue: initialPhoneNumber,
-                            textFieldController: _phoneController,
-                            inputDecoration: InputDecoration(
-                              hintStyle: GoogleFonts.poppins(
-                                fontSize: AppScaler.scaleFont(context, 16),
-                                color: AppColors.white,
-                              ),
-                              filled: true,
-                              fillColor: AppColors.tfield,
-                              labelText: 'Phone Number*',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              labelStyle: GoogleFonts.poppins(
-                                fontSize: AppScaler.scaleFont(context, 12),
-                                color: customColors.labelColor,
-                              ),
-                            ),
-                          ),
+
+                        // Phone Field (with country code)
+                        PhoneOtpField(
+                          countryCode: Country.parse("US"),
+                          phoneController: _phoneNumberController,
+                          otpController: otpController,
+                          fieldbg: AppColors.tfield,
+                          labelText: 'Phone Number*',
+                          onSendCode: () {},
+                        ),
 
                         SizedBox(height: AppScaler.scaleHeight(context, 20)),
+
                         AppButton(
                           onPressed: () {
+                            // Save logic here
                             Navigator.of(context).pop();
                           },
                           title: "Save Changes",

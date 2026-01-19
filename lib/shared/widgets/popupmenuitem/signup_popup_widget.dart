@@ -1,13 +1,13 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
+import '../../../features/authentication/data/dto/logout_dto/logout_dto.dart';
+import '../../../features/authentication/domain/repository/auth_repository.dart';
 import '../../../gen/assets.gen.dart';
-import 'provider/logout_provider.dart';
 
 class SignupPopupWidget extends ConsumerStatefulWidget {
   final bool showSaveIcon;
@@ -64,18 +64,31 @@ class _SignupPopupWidget extends ConsumerState<SignupPopupWidget> {
                 final router = GoRouter.of(context);
                 final messenger = ScaffoldMessenger.of(context);
                 if (mounted) Navigator.of(context).pop();
+                final localData = ref.read(localDataProvider);
+                final authApi = ref.read(authRepository);
+                final token = localData.refreshToken;
+                String message = "Logged out successfully";
 
                 try {
-                  final message = await ref.read(logoutProvider.future);
+                  if (token != null && token.isNotEmpty) {
+                    final response = await authApi.logout(
+                      LogoutDTO(refreshToken: token),
+                    );
+                    message = response.message;
+                  }
+
+                  await localData.clearAllData();
+
                   if (mounted) {
                     messenger.showSnackBar(SnackBar(content: Text(message)));
-
                     router.goNamed(AppRoutes.socialLoginScreen.name);
                   }
                 } catch (e) {
+                  await localData.clearAllData();
+
                   if (mounted) {
                     messenger.showSnackBar(
-                      SnackBar(content: Text('Logout failed: $e')),
+                      SnackBar(content: Text('Logged out locally')),
                     );
                     router.goNamed(AppRoutes.socialLoginScreen.name);
                   }
