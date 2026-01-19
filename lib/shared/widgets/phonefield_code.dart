@@ -12,6 +12,8 @@ class PhoneOtpField extends ConsumerStatefulWidget {
   final VoidCallback onSendCode;
   final Color fieldbg;
   final String labelText;
+  final String? Function(String?)? validator;
+  final Country? countryCode; // optional, will use runtime default
 
   const PhoneOtpField({
     super.key,
@@ -20,6 +22,8 @@ class PhoneOtpField extends ConsumerStatefulWidget {
     required this.onSendCode,
     required this.fieldbg,
     required this.labelText,
+    this.validator,
+    this.countryCode,
   });
 
   @override
@@ -27,7 +31,7 @@ class PhoneOtpField extends ConsumerStatefulWidget {
 }
 
 class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
-  Country selectedCountry = Country.parse("US");
+  late Country selectedCountry;
 
   bool showSendButton = false;
   bool showOtpField = false;
@@ -43,6 +47,9 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
   @override
   void initState() {
     super.initState();
+    // Runtime default country
+    selectedCountry = widget.countryCode ?? Country.parse("US");
+
     _otpControllers = List.generate(6, (_) => TextEditingController());
     _focusNodes = List.generate(6, (_) => FocusNode());
   }
@@ -60,21 +67,13 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
   @override
   void dispose() {
     _timer?.cancel();
-
-    for (final c in _otpControllers) {
-      c.dispose();
-    }
-
-    for (final f in _focusNodes) {
-      f.dispose();
-    }
-
+    for (final c in _otpControllers) c.dispose();
+    for (final f in _focusNodes) f.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Theme.of(context);
     return Column(
       children: [
         Container(
@@ -88,6 +87,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
             children: [
               TextFieldLabel(name: widget.labelText),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
@@ -129,9 +129,36 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                         isDense: true,
                         contentPadding: EdgeInsets.symmetric(vertical: 6),
                       ),
+                      validator:
+                          widget.validator ??
+                          (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return "Phone number required";
+                            }
+                            String digitsOnly = value.replaceAll(
+                              RegExp(r'[^0-9]'),
+                              '',
+                            );
+                            String fullNumber =
+                                '+${selectedCountry.phoneCode}$digitsOnly';
+                            String pattern = r'^\+[1-9]\d{9,14}$';
+                            if (!RegExp(pattern).hasMatch(fullNumber)) {
+                              return "Enter a valid phone number with country code";
+                            }
+                            return null;
+                          },
                       onChanged: (value) {
+                        String digitsOnly = value.replaceAll(
+                          RegExp(r'[^0-9]'),
+                          '',
+                        );
+                        String fullNumber =
+                            '+${selectedCountry.phoneCode}$digitsOnly';
+
                         setState(() {
-                          showSendButton = value.length == 10;
+                          showSendButton = RegExp(
+                            r'^\+[1-9]\d{9,14}$',
+                          ).hasMatch(fullNumber);
                         });
                       },
                     ),
@@ -141,9 +168,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
             ],
           ),
         ),
-
         const SizedBox(height: 16),
-
         if (showOtpField)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

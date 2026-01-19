@@ -133,11 +133,13 @@ class TokenRefreshManager {
   void _processQueuedRequests() {
     for (final request in _pendingRequests) {
       final newToken = request.getNewToken();
-      _retryRequest(request.dio, request.options, newToken).then((response) {
-        request.completer.complete(response);
-      }).catchError((error) {
-        request.completer.completeError(error);
-      });
+      _retryRequest(request.dio, request.options, newToken)
+          .then((response) {
+            request.completer.complete(response);
+          })
+          .catchError((error) {
+            request.completer.completeError(error);
+          });
     }
     _pendingRequests.clear();
   }
@@ -201,9 +203,9 @@ class AuthorizationInterceptorMarket extends Interceptor {
         err.type == DioExceptionType.unknown && err.error is SocketException) {
       $showMessage("No Internet Connection", isError: true);
     } else if (response?.statusCode == 401) {
-      final newToken = ref.read(localDataProvider).marketRefreshToken;
+      final newToken = ref.read(localDataProvider).refreshToken;
       if (newToken != null) {
-        ref.read(localDataProvider).setAccessTokenMarket(newToken);
+        ref.read(localDataProvider).setAccessToken(newToken);
       }
 
       handler.reject(err);
@@ -238,9 +240,9 @@ class AuthorizationInterceptorMarketNew extends Interceptor {
         err.type == DioExceptionType.unknown && err.error is SocketException) {
       $showMessage("No Internet Connection", isError: true);
     } else if (response?.statusCode == 401) {
-      final newToken = ref.read(localDataProvider).marketRefreshTokenNew;
+      final newToken = ref.read(localDataProvider).refreshToken;
       if (newToken != null) {
-        ref.read(localDataProvider).setAccessTokenMarket(newToken);
+        ref.read(localDataProvider).setAccessToken(newToken);
       }
 
       handler.reject(err);

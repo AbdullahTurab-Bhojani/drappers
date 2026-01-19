@@ -1,24 +1,46 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/cardwidget/card_widget.dart';
 import '../../../shared/widgets/popupmenuitem/signup_popup_widget.dart';
 import '../../../shared/widgets/tile_widget.dart';
+import '../../user/domain/models/user_model.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  bool canExit = false;
+  UserData? user;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUser();
+  }
+
+  Future<void> _loadUser() async {
+    user = await ref.read(localDataProvider).getUser();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    bool canExit = false;
+
     List images = [
       'https://source.boomplaymusic.com/buzzgroup2/M00/2E/F3/rBEe_GHV1vCACRvaAAJjfsEidFI769.png',
       'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
@@ -26,6 +48,7 @@ class ProfileScreen extends StatelessWidget {
       'https://i0.wp.com/maactioncinema.com/wp-content/uploads/2024/01/MV5BOGU2NDNmY2UtZTJmZS00M2U4LTkyMGQtNjc5MmNiZTQ4YjA0XkEyXkFqcGdeQXVyNTk1ODQ5NDg%40._V1_-scaled.jpg?ssl=1',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHIybZ6umH09-6J4suX89s4BGUn-CSb_4j3A&s',
     ];
+
     List menuList = [
       {
         'title': 'Saved Reel',
@@ -81,22 +104,15 @@ class ProfileScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         if (!canExit) {
-          canExit = true;
+          setState(() {
+            canExit = true;
+          });
           return false;
         }
-
         return true;
       },
-
       child: Container(
         padding: EdgeInsets.all(0),
-        decoration: BoxDecoration(
-          color: Colors.amber,
-          // image: DecorationImage(
-          //   image: AssetImage(Assets.images.screensbg.path),
-          //   fit: BoxFit.cover,
-          // ),
-        ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppMainBar(
@@ -109,7 +125,6 @@ class ProfileScreen extends StatelessWidget {
             actions: [
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
                 onTap: () {
                   context.pushNamed(AppRoutes.editprofile.name);
                 },
@@ -132,10 +147,8 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(
                       height: AppScaler.scaleHeight(context, 114.82),
                       width: AppScaler.scaleHeight(context, 114.82),
-
                       child: CircleAvatar(
                         radius: 60,
-                        // radius: isSelected ? 15 : 15,
                         backgroundColor: Colors.transparent,
                         backgroundImage: NetworkImage(
                           'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
@@ -145,7 +158,7 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(height: AppScaler.scaleHeight(context, 20)),
                     PoppinsText(
                       context,
-                      'Jerry Mackson',
+                      user != null ? user!.fullName! : "",
                       fontSize: PoppinsFontSizeVariant.size22,
                       fontWeight: PoppinsFontWeightVariant.medium,
                       color: customColors.textColor,
@@ -201,7 +214,6 @@ class ProfileScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   behavior: HitTestBehavior.opaque,
-
                                   onTap: () {
                                     context.pushNamed(
                                       AppRoutes.contentDetail.name,
@@ -267,7 +279,6 @@ class ProfileScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   behavior: HitTestBehavior.opaque,
-
                                   onTap: () {
                                     context.pushNamed(
                                       AppRoutes.contentDetail.name,
@@ -291,11 +302,9 @@ class ProfileScreen extends StatelessWidget {
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.all(0),
                             shrinkWrap: true,
-
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 behavior: HitTestBehavior.opaque,
-
                                 onTap: () {
                                   if (menuList[index]['title'] == 'Sign Out') {
                                     showDialog(
@@ -324,7 +333,6 @@ class ProfileScreen extends StatelessWidget {
                             },
                             itemCount: menuList.length,
                           ),
-
                           SizedBox(height: AppScaler.scaleHeight(context, 10)),
                         ],
                       ),

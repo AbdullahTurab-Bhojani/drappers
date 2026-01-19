@@ -1,22 +1,24 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import 'provider/logout_provider.dart';
 
-class SignupPopupWidget extends StatefulWidget {
+class SignupPopupWidget extends ConsumerStatefulWidget {
   final bool showSaveIcon;
 
   const SignupPopupWidget({super.key, this.showSaveIcon = true});
 
   @override
-  State<SignupPopupWidget> createState() => _SignupPopupWidget();
+  ConsumerState<SignupPopupWidget> createState() => _SignupPopupWidget();
 }
 
-class _SignupPopupWidget extends State<SignupPopupWidget> {
+class _SignupPopupWidget extends ConsumerState<SignupPopupWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -58,17 +60,31 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
             SizedBox(height: AppScaler.scaleHeight(context, 40)),
 
             AppButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Future.microtask(() {
-                  context.pushNamed(AppRoutes.socialLoginScreen.name);
-                });
+              onPressed: () async {
+                final router = GoRouter.of(context);
+                final messenger = ScaffoldMessenger.of(context);
+                if (mounted) Navigator.of(context).pop();
+
+                try {
+                  final message = await ref.read(logoutProvider.future);
+                  if (mounted) {
+                    messenger.showSnackBar(SnackBar(content: Text(message)));
+
+                    router.goNamed(AppRoutes.socialLoginScreen.name);
+                  }
+                } catch (e) {
+                  if (mounted) {
+                    messenger.showSnackBar(
+                      SnackBar(content: Text('Logout failed: $e')),
+                    );
+                    router.goNamed(AppRoutes.socialLoginScreen.name);
+                  }
+                }
               },
               title: "Sign Out",
             ),
 
             SizedBox(height: AppScaler.scaleHeight(context, 14)),
-
             AppButton(
               color: Colors.transparent,
               borderColor: customColors.greyColor,

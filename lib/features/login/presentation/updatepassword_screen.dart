@@ -4,7 +4,6 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/popupmenuitem/changepassword_popup_widget.dart';
 import '../../../shared/widgets/textfield_new.dart';
 
 class UpdatepasswordScreen extends StatefulWidget {
@@ -106,7 +105,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                   //     ),
                   //   );
                   // } else {
-                    context.pushNamed(AppRoutes.loginScreen.name);
+                  context.pushNamed(AppRoutes.loginScreen.name);
                   // }
                 },
                 title: "Continue",

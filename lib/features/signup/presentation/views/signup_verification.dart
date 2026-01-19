@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../core/theme/app_scalar.dart';
@@ -50,7 +51,12 @@ class _SignupVerificationState extends State<SignupVerification> {
                   decoration: TextDecoration.none,
                 ),
                 SizedBox(height: AppScaler.scaleHeight(context, 60)),
-                AppButton(onPressed: () {}, title: "Continue"),
+                AppButton(
+                  onPressed: () {
+                    context.pushReplacementNamed(AppRoutes.loginScreen.name);
+                  },
+                  title: "Continue",
+                ),
               ],
             ),
             SizedBox(),
