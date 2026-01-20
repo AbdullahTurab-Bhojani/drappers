@@ -168,7 +168,7 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
                           Map<String, dynamic>? appleData;
 
                           try {
-                            appleData = await appleAuthService.appleSignIn();
+                            appleData = await appleAuthService.appleLogin();
 
                             if (appleData == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
