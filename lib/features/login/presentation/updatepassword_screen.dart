@@ -105,7 +105,7 @@ class _UpdatepasswordScreenState extends State<UpdatepasswordScreen> {
                   //     ),
                   //   );
                   // } else {
-                    context.pushNamed(AppRoutes.loginScreen.name);
+                  context.pushNamed(AppRoutes.loginScreen.name);
                   // }
                 },
                 title: "Continue",

@@ -1,19 +1,41 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/likedcontent_header.dart';
 import '../../../shared/widgets/popupmenuitem/signup_popup_widget.dart';
 import '../../../shared/widgets/tile_widget.dart';
 import '../../../shared/widgets/watchhistory_header.dart';
+import '../../user/domain/models/user_model.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  bool canExit = false;
+  UserData? user;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUser();
+  }
+
+  Future<void> _loadUser() async {
+    user = await ref.read(localDataProvider).getUser();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,13 +97,13 @@ class ProfileScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         if (!canExit) {
-          canExit = true;
+          setState(() {
+            canExit = true;
+          });
           return false;
         }
-
         return true;
       },
-
       child: Container(
         padding: EdgeInsets.all(0),
         decoration: BoxDecoration(
@@ -102,7 +124,6 @@ class ProfileScreen extends StatelessWidget {
             actions: [
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
                 onTap: () {
                   context.pushNamed(AppRoutes.editprofile.name);
                 },
@@ -125,10 +146,8 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(
                       height: AppScaler.scaleHeight(context, 114.82),
                       width: AppScaler.scaleHeight(context, 114.82),
-
                       child: CircleAvatar(
                         radius: 60,
-                        // radius: isSelected ? 15 : 15,
                         backgroundColor: Colors.transparent,
                         backgroundImage: AssetImage(
                           Assets.images.editprofileimage.path,
@@ -138,7 +157,7 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(height: AppScaler.scaleHeight(context, 20)),
                     PoppinsText(
                       context,
-                      'Jerry Mackson',
+                      user != null ? user!.fullName! : "",
                       fontSize: PoppinsFontSizeVariant.size22,
                       fontWeight: PoppinsFontWeightVariant.medium,
                       color: customColors.textColor,
@@ -158,11 +177,9 @@ class ProfileScreen extends StatelessWidget {
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.all(0),
                             shrinkWrap: true,
-
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 behavior: HitTestBehavior.opaque,
-
                                 onTap: () {
                                   if (menuList[index]['title'] == 'Sign Out') {
                                     showDialog(
@@ -191,7 +208,6 @@ class ProfileScreen extends StatelessWidget {
                             },
                             itemCount: menuList.length,
                           ),
-
                           SizedBox(height: AppScaler.scaleHeight(context, 10)),
                         ],
                       ),

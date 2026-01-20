@@ -1,26 +1,24 @@
 // ignore_for_file: deprecated_member_use, sized_box_for_whitespace
 
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
 
-class SocialLoginScreen extends StatefulWidget {
+class SocialLoginScreen extends ConsumerStatefulWidget {
   const SocialLoginScreen({super.key});
 
   @override
-  State<SocialLoginScreen> createState() => _SocialLoginScreenState();
+  ConsumerState<SocialLoginScreen> createState() => _SocialLoginScreenState();
 }
 
-class _SocialLoginScreenState extends State<SocialLoginScreen> {
+class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
       onWillPop: () async {
         exit(0);
@@ -60,9 +58,7 @@ class _SocialLoginScreenState extends State<SocialLoginScreen> {
                 SizedBox(height: AppScaler.scaleHeight(context, 28)),
 
                 AppButton(
-                  onPressed: () {
-                    context.goNamed(AppRoutes.home.name);
-                  },
+                  onPressed: () {},
                   title: 'Login with Google',
                   color: AppColors.graylight,
                   prefixIcon: Image.asset(

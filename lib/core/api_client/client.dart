@@ -12,7 +12,6 @@ import '../local/domain/repositories/local_storage_repository.dart';
 part 'interceptors.dart';
 part 'pretty_logger.dart';
 
-/// A Dio Client Provider.
 final client = Provider.family<Dio, String>((ref, baseUrl) {
   const timeOut = Duration(seconds: 20);
   return Dio(
@@ -36,56 +35,6 @@ final client = Provider.family<Dio, String>((ref, baseUrl) {
         ),
     ])
     ..httpClientAdapter = CustomClientAdapter(ref);
-});
-
-final marketDataClient = Provider.family<Dio, String>((ref, baseUrl) {
-  const timeOut = Duration(seconds: 120000);
-  return Dio(
-      BaseOptions(
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        baseUrl: baseUrl,
-        connectTimeout: timeOut,
-        receiveTimeout: timeOut,
-      ),
-    )
-    ..interceptors.addAll([
-      AuthorizationInterceptor(ref),
-      if (kDebugMode)
-        PrettyDioLogger(
-          requestBody: kDebugMode,
-          requestHeader: kDebugMode,
-          responseBody: kDebugMode,
-        ),
-    ])
-    ..httpClientAdapter = MarketCustomClientAdapter(ref);
-});
-
-final marketDataClientNew = Provider.family<Dio, String>((ref, baseUrl) {
-  const timeOut = Duration(seconds: 120000);
-  return Dio(
-      BaseOptions(
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        baseUrl: baseUrl,
-        connectTimeout: timeOut,
-        receiveTimeout: timeOut,
-      ),
-    )
-    ..interceptors.addAll([
-      AuthorizationInterceptor(ref),
-      if (kDebugMode)
-        PrettyDioLogger(
-          requestBody: kDebugMode,
-          requestHeader: kDebugMode,
-          responseBody: kDebugMode,
-        ),
-    ])
-    ..httpClientAdapter = MarketCustomClientAdapterNew(ref);
 });
 
 final priceStreamClientNew = Provider.family<Dio, String>((ref, baseUrl) {
@@ -166,28 +115,6 @@ class CustomClientAdapter extends IOHttpClientAdapter {
   }
 }
 
-class MarketCustomClientAdapter extends IOHttpClientAdapter {
-  final Ref ref;
-  final bool isStripe;
-
-  MarketCustomClientAdapter(this.ref, {this.isStripe = false});
-
-  @override
-  Future<ResponseBody> fetch(
-    RequestOptions options,
-    Stream<Uint8List>? requestStream,
-    Future<void>? cancelFuture,
-  ) async {
-    final token = ref.read(localDataProvider).marketAccessToken;
-    if (token != null) {
-      options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-      debugPrint('CUSTOM CLIENT ACCESS TOKEN $token');
-    }
-
-    return super.fetch(options, requestStream, cancelFuture);
-  }
-}
-
 class PriceStreamCustomClientAdapter extends IOHttpClientAdapter {
   final Ref ref;
   final bool isStripe;
@@ -220,28 +147,6 @@ class PriceStreamCustomClientAdapter extends IOHttpClientAdapter {
         debugPrint('CUSTOM CLIENT ACCESS TOKEN $token');
       }
     }
-    return super.fetch(options, requestStream, cancelFuture);
-  }
-}
-
-class MarketCustomClientAdapterNew extends IOHttpClientAdapter {
-  final Ref ref;
-  final bool isStripe;
-
-  MarketCustomClientAdapterNew(this.ref, {this.isStripe = false});
-
-  @override
-  Future<ResponseBody> fetch(
-    RequestOptions options,
-    Stream<Uint8List>? requestStream,
-    Future<void>? cancelFuture,
-  ) async {
-    final token = ref.read(localDataProvider).marketAccessTokenNew;
-    if (token != null) {
-      options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-      debugPrint('CUSTOM CLIENT ACCESS TOKEN $token');
-    }
-
     return super.fetch(options, requestStream, cancelFuture);
   }
 }

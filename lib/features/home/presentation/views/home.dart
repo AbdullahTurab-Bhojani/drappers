@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../../core/extensions/theme_extension.dart';
+import '../../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
@@ -20,17 +22,18 @@ import '../../../../shared/widgets/homeheader_tab.dart';
 import '../../../../shared/widgets/podcast_header.dart';
 import '../../../../shared/widgets/reels_header.dart';
 import '../../../../shared/widgets/trendingshows_header.dart';
+import '../../../user/domain/models/user_model.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   bool get showSaveIcon => false;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   final bool _showControls = false;
   final posterPath = '/mnt/data/Live Tv.png';
   bool _wasPlayingBeforeNavigation = false;
@@ -38,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   BetterPlayerController? get controller => _betterPlayerController;
   File? videoFile;
   bool _controlsVisible = false;
-
+  UserData? user;
   bool showLoader = false;
   final String videoUrl = 'assets/images/livefullview.mp4';
 
@@ -46,6 +49,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _initializePlayer();
+    _loadUser();
+  }
+
+  Future<void> _loadUser() async {
+    user = await ref.read(localDataProvider).getUser();
+    setState(() {});
   }
 
   Future<File> assetToFile(String assetPath, {String? fileName}) async {
@@ -108,9 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     _betterPlayerController!.videoPlayerController!.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
+      if (mounted) {}
     });
 
     _hideControlsAfterDelay();
@@ -148,17 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_wasPlayingBeforeNavigation) {
       await _betterPlayerController!.pause();
     }
-
-    // Navigate to fullscreen screen if needed
-    // await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => newliveScreen(
-    //       videoController: _betterPlayerController!,
-    //       wasPlaying: _wasPlayingBeforeNavigation,
-    //     ),
-    //   ),
-    // );
 
     if (_wasPlayingBeforeNavigation && mounted) {
       await _betterPlayerController!.play();
@@ -249,7 +245,9 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppMainBar(
             width: AppScaler.scaleSize(context, 285),
-            leadingText: "Welcome Back John!",
+             leadingText: user != null
+                      ? "Welcome Back ${user!.fullName}!"
+                      : "Welcome Back Guest!",
             title: "",
             centerTitle: false,
             backgroundColor: Colors.transparent,

@@ -7,10 +7,23 @@ final routerConfigProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: kDebugMode,
     navigatorKey: navigatorKey,
-    initialLocation: AppRoutes.splashScreen.path,
+    initialLocation: AppRoutes.home.path,
     redirect: (context, state) {
+      bool isPublic = AppRoutes.isPublicRoute(state);
+      String accessToken = ref.read(localDataProvider).accessToken ?? "";
+      bool isLogin = accessToken.isNotEmpty;
+      bool guestAllowed = GuestHelper.isGuest;
+      debugPrint(
+        "🔁 Redirect : isLogin: $isLogin | isPublic: $isPublic | guestAllowed: $guestAllowed | path: ${state.fullPath}",
+      );
+      if (!isPublic) {
+        if (!isLogin && !guestAllowed) {
+          return AppRoutes.splashScreen.path;
+        }
+      }
       return null;
     },
+
     routes: [
       GoRoute(
         path: AppRoutes.splashScreen.path,
@@ -47,6 +60,7 @@ final routerConfigProvider = Provider((ref) {
         name: AppRoutes.verfiicationcodeScreen.name,
         builder: (context, state) => VerfiicationcodeScreen(),
       ),
+
       GoRoute(
         path: AppRoutes.updatepasswordScreen.path,
         name: AppRoutes.updatepasswordScreen.name,
@@ -111,6 +125,11 @@ final routerConfigProvider = Provider((ref) {
         path: AppRoutes.applyPitch.path,
         name: AppRoutes.applyPitch.name,
         builder: (context, state) => ApplyPitch(),
+      ),
+      GoRoute(
+        path: AppRoutes.signupVerification.path,
+        name: AppRoutes.signupVerification.name,
+        builder: (context, state) => SignupVerification(),
       ),
       GoRoute(
         path: AppRoutes.voteForStartupScreen.path,
