@@ -9,6 +9,7 @@ import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
 
+
 class SocialLoginScreen extends ConsumerStatefulWidget {
   const SocialLoginScreen({super.key});
 

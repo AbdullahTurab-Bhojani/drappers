@@ -31,6 +31,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     rememberMe = value ?? false;
   }
 
+  @override
+  void initState() {
+
+
+    super.initState();
+  }
+
   Future<void> onSubmit() async {
     if (!(_formKey.currentState?.validate() ?? false)) {
       Fluttertoast.showToast(
@@ -87,8 +94,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginState = ref.watch(loginProviderProvider);
-    final isLoading = loginState is Loading;
+    final state = ref.watch(loginProviderProvider);
+    final bool isLoading = state.isLoading;
 
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
@@ -278,7 +285,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       SizedBox(height: AppScaler.scaleSize(context, 15)),
                       AppPasswordField(
-                        keyboardType: TextInputType.numberWithOptions(),
+                        keyboardType: TextInputType.text,
                         controller: _passwordController,
                         labelText: "Password*",
                         hintText: "**********",
