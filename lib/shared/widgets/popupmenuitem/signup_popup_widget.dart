@@ -1,22 +1,24 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
+import '../../../features/authentication/data/dto/logout_dto/logout_dto.dart';
+import '../../../features/authentication/domain/repository/auth_repository.dart';
 import '../../../gen/assets.gen.dart';
 
-class SignupPopupWidget extends StatefulWidget {
+class SignupPopupWidget extends ConsumerStatefulWidget {
   final bool showSaveIcon;
 
   const SignupPopupWidget({super.key, this.showSaveIcon = true});
 
   @override
-  State<SignupPopupWidget> createState() => _SignupPopupWidget();
+  ConsumerState<SignupPopupWidget> createState() => _SignupPopupWidget();
 }
 
-class _SignupPopupWidget extends State<SignupPopupWidget> {
+class _SignupPopupWidget extends ConsumerState<SignupPopupWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -58,17 +60,44 @@ class _SignupPopupWidget extends State<SignupPopupWidget> {
             SizedBox(height: AppScaler.scaleHeight(context, 40)),
 
             AppButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Future.microtask(() {
-                  context.pushNamed(AppRoutes.socialLoginScreen.name);
-                });
+              onPressed: () async {
+                final router = GoRouter.of(context);
+                final messenger = ScaffoldMessenger.of(context);
+                if (mounted) Navigator.of(context).pop();
+                final localData = ref.read(localDataProvider);
+                final authApi = ref.read(authRepository);
+                final token = localData.refreshToken;
+                String message = "Logged out successfully";
+
+                try {
+                  if (token != null && token.isNotEmpty) {
+                    final response = await authApi.logout(
+                      LogoutDTO(refreshToken: token),
+                    );
+                    message = response.message;
+                  }
+
+                  await localData.clearAllData();
+
+                  if (mounted) {
+                    messenger.showSnackBar(SnackBar(content: Text(message)));
+                    router.goNamed(AppRoutes.socialLoginScreen.name);
+                  }
+                } catch (e) {
+                  await localData.clearAllData();
+
+                  if (mounted) {
+                    messenger.showSnackBar(
+                      SnackBar(content: Text('Logged out locally')),
+                    );
+                    router.goNamed(AppRoutes.socialLoginScreen.name);
+                  }
+                }
               },
               title: "Sign Out",
             ),
 
             SizedBox(height: AppScaler.scaleHeight(context, 14)),
-
             AppButton(
               color: Colors.transparent,
               borderColor: customColors.greyColor,

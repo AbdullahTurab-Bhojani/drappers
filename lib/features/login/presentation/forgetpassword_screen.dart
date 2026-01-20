@@ -1,21 +1,59 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../shared/widgets/textfield_new.dart';
+import '../providers/forget_provider.dart';
 
-class ForgetpasswordScreen extends StatefulWidget {
+class ForgetpasswordScreen extends ConsumerStatefulWidget {
   const ForgetpasswordScreen({super.key});
 
   @override
-  State<ForgetpasswordScreen> createState() => _ForgetpasswordScreenState();
+  ConsumerState<ForgetpasswordScreen> createState() =>
+      _ForgetpasswordScreenState();
 }
 
-class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
+class _ForgetpasswordScreenState extends ConsumerState<ForgetpasswordScreen> {
+  final _emailController = TextEditingController();
+  bool isLoading = false;
+
   bool isPhone = true;
+
+  void submitForgetPassword() async {
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
+    final email = _emailController.text.trim();
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final message = await ref.read(forgetPasswordProvider(email).future);
+
+      setState(() {
+        isLoading = false;
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
+      context.pushNamed(AppRoutes.loginScreen.name);
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
+    }
+  }
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +107,7 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
 
               PoppinsText(
                 context,
-                'Receive Code Via phone or email',
+                'Receive Code Via email',
                 fontSize: PoppinsFontSizeVariant.size16,
                 fontWeight: PoppinsFontWeightVariant.regular,
                 color: customColors.textColor,
@@ -77,39 +115,59 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
               SizedBox(height: AppScaler.scaleHeight(context, 24)),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 40,
-                child: Column(
-                  children: [
-                    RadioTileWidget(
-                      selected: isPhone,
-                      title: "Enter Your Email ",
-                      subtitle: "jo********@gmail.co|",
-                      onTap: () {
-                        setState(() {
-                          isPhone = true;
-                        });
-                      },
-                    ),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      NewTextField(
+                        fieldbg: AppColors.tfield,
+                        controller: _emailController,
+                        labelText: "Enter your Email Address or Phone*",
+                        hintText: "example@mailinator.com",
+                        filledColor: AppColors.tfield,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Email required";
+                          }
+                          if (!value.contains("@")) {
+                            return "Enter valid email";
+                          }
+                          return null;
+                        },
+                      ),
+                      // RadioTileWidget(
+                      //   selected: isPhone,
+                      //   title: "Enter Your Email ",
+                      //   subtitle: "jo********@gmail.co|",
+                      //   onTap: () {
+                      //     setState(() {
+                      //       isPhone = true;
+                      //     });
+                      //   },
+                      // ),
 
-                    RadioTileWidget(
-                      selected: !isPhone,
-                      title: "Enter Phone ",
-                      subtitle: "03xxxxxxx59",
-                      onTap: () {
-                        setState(() {
-                          isPhone = false;
-                        });
-                      },
-                    ),
-                    SizedBox(height: AppScaler.scaleHeight(context, 24)),
-                    AppButton(
-                      onPressed: () {
-                        context.pushNamed(
-                          AppRoutes.verfiicationcodeScreen.name,
-                        );
-                      },
-                      title: "Send Code",
-                    ),
-                  ],
+                      // RadioTileWidget(
+                      //   selected: !isPhone,
+                      //   title: "Enter Phone ",
+                      //   subtitle: "03xxxxxxx59",
+                      //   onTap: () {
+                      //     setState(() {
+                      //       isPhone = false;
+                      //     });
+                      //   },
+                      // ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 24)),
+                      AppButton(
+                        onPressed: () {
+                          if (!isLoading) {
+                            submitForgetPassword();
+                          }
+                        },
+                        title: isLoading ? 'Loading...' : 'Submit',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

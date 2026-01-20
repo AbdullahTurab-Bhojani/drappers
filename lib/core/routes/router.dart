@@ -7,10 +7,23 @@ final routerConfigProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: kDebugMode,
     navigatorKey: navigatorKey,
-    initialLocation: AppRoutes.splashScreen.path,
+    initialLocation: AppRoutes.home.path,
     redirect: (context, state) {
+      bool isPublic = AppRoutes.isPublicRoute(state);
+      String accessToken = ref.read(localDataProvider).accessToken ?? "";
+      bool isLogin = accessToken.isNotEmpty;
+      bool guestAllowed = GuestHelper.isGuest;
+      debugPrint(
+        "🔁 Redirect : isLogin: $isLogin | isPublic: $isPublic | guestAllowed: $guestAllowed | path: ${state.fullPath}",
+      );
+      if (!isPublic) {
+        if (!isLogin && !guestAllowed) {
+          return AppRoutes.splashScreen.path;
+        }
+      }
       return null;
     },
+
     routes: [
       GoRoute(
         path: AppRoutes.splashScreen.path,
@@ -241,7 +254,7 @@ final routerConfigProvider = Provider((ref) {
       GoRoute(
         path: AppRoutes.newliveScreen.path,
         name: AppRoutes.newliveScreen.name,
-        builder: (context, state) => newliveScreen(),
+        builder: (context, state) => Newlivescreen(),
       ),
       GoRoute(
         path: AppRoutes.livepitchesScreen.path,
@@ -251,7 +264,7 @@ final routerConfigProvider = Provider((ref) {
       GoRoute(
         path: AppRoutes.videoScreen.path,
         name: AppRoutes.videoScreen.name,
-        builder: (context, state) => CustomVideoPlayerScreen(),
+        builder: (context, state) => VideoPlayerScreen(),
       ),
       GoRoute(
         path: AppRoutes.searchView.path,

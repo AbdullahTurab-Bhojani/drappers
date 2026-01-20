@@ -6,7 +6,7 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/historyitemTile.dart';
+import '../../../shared/widgets/recentsearch_widget_header.dart';
 import '../../../shared/widgets/searchhistory.dart';
 
 class Searchview extends StatefulWidget {
@@ -16,26 +16,19 @@ class Searchview extends StatefulWidget {
   State<Searchview> createState() => SearchviewState();
 }
 
-class HistoryData {
-  final String title;
-  final String thumbnailPath;
-
-  HistoryData(this.title, this.thumbnailPath);
-}
-
-final List<HistoryData> dummyHistory = [
-  HistoryData(
-    'Semifinals 1 – Meet The Drapers Season...',
-    Assets.images.trendingimage1.path,
-  ),
-  HistoryData(
-    'Rio de Janeiro – Meet the Drapers Season...',
-    Assets.images.trendingimage2.path,
-  ),
-  HistoryData(
-    'Paris – Meet The Drapers Season 6 (2...',
-    Assets.images.trendingimage3.path,
-  ),
+final List<Map<String, String>> _sections = [
+  {
+    "title": 'Semifinals 1 – Meet The Drapers Season...',
+    "imagePath": Assets.images.trendingimage1.path,
+  },
+  {
+    "title": 'Rio de Janeiro – Meet the Drapers Season...',
+    "imagePath": Assets.images.trendingimage2.path,
+  },
+  {
+    "title": 'Paris – Meet The Drapers Season 6 (2...',
+    "imagePath": Assets.images.trendingimage3.path,
+  },
 ];
 
 class SearchviewState extends State<Searchview> {
@@ -63,168 +56,111 @@ class SearchviewState extends State<Searchview> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return Scaffold(
-      // resizeToAvoidBottomInset: true,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          automaticallyImplyLeading: false,
 
-        child: Column(
-          children: [
-            AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              scrolledUnderElevation: 0,
-              automaticallyImplyLeading: false,
-
-              title: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: AppScaler.scaleHeight(context, 40),
-                      decoration: BoxDecoration(
-                        color: AppColors.color202020.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(width: AppScaler.scaleSize(context, 15)),
-                          Image.asset(
-                            "assets/images/searchicon3x.png",
-                            width: AppScaler.scaleSize(context, 20),
-                            height: AppScaler.scaleHeight(context, 20),
-                          ),
-                          SizedBox(width: AppScaler.scaleSize(context, 10)),
-                          Expanded(
-                            child: TextField(
-                              focusNode: _focusNode,
-                              controller: searchCtrl,
-                              decoration: InputDecoration(
-                                hintText: "Search content",
-                                border: InputBorder.none,
-                                isDense: true,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                              cursorColor: Colors.blue,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+          title: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: AppScaler.scaleHeight(context, 40),
+                  decoration: BoxDecoration(
+                    color: AppColors.color202020.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-
-                  SizedBox(width: AppScaler.scaleSize(context, 12)),
-
-                  GestureDetector(
-                    onTap: () {
-                      context.pop();
-                    },
-                    child: PoppinsText(
-                      context,
-                      "Cancel",
-                      fontSize: PoppinsFontSizeVariant.size14,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                    ),
-                  ),
-                ],
-              ),
-
-              centerTitle: false,
-              titleSpacing: 16,
-            ),
-
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppScaler.scaleSize(context, 20),
-                    vertical: AppScaler.scaleHeight(context, 10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 185),
-                            child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              itemCount: dummyHistory.length,
-                              itemBuilder: (context, index) {
-                                final item = dummyHistory[index];
-                                return Searchhistory(
-                                  title: item.title,
-                                  thumbnailPath: item.thumbnailPath,
-                                  onTapRemove: () {},
-                                  onTapTile: () {},
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                      SizedBox(width: AppScaler.scaleSize(context, 15)),
+                      Image.asset(
+                        "assets/images/searchicon3x.png",
+                        width: AppScaler.scaleSize(context, 20),
+                        height: AppScaler.scaleHeight(context, 20),
                       ),
-
-                      // SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          PoppinsText(
-                            context,
-                            'Recent Searches ',
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
+                      SizedBox(width: AppScaler.scaleSize(context, 10)),
+                      Expanded(
+                        child: TextField(
+                          focusNode: _focusNode,
+                          controller: searchCtrl,
+                          decoration: InputDecoration(
+                            hintText: "Search content",
+                            border: InputBorder.none,
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
                           ),
-                          PoppinsText(
-                            context,
-                            'Clear All ',
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.textColor,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                      SizedBox(
-                        height: AppScaler.scaleHeight(context, 185),
-                        child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          itemCount: dummyHistory.length,
-                          itemBuilder: (context, index) {
-                            final item = dummyHistory[index];
-                            return HistoryItemTile(
-                              title: item.title,
-                              thumbnailPath: item.thumbnailPath,
-                              onTapRemove: () {},
-                              onTapTile: () {},
-                            );
-                          },
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          cursorColor: Colors.blue,
                         ),
                       ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                     ],
                   ),
                 ),
               ),
+
+              SizedBox(width: AppScaler.scaleSize(context, 12)),
+
+              GestureDetector(
+                onTap: () {
+                  context.pop();
+                },
+                child: PoppinsText(
+                  context,
+                  "Cancel",
+                  fontSize: PoppinsFontSizeVariant.size14,
+                  fontWeight: PoppinsFontWeightVariant.medium,
+                  color: customColors.textColor,
+                ),
+              ),
+            ],
+          ),
+
+          centerTitle: false,
+          titleSpacing: 16,
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppScaler.scaleSize(context, 20),
+              vertical: AppScaler.scaleHeight(context, 10),
             ),
-          ],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: AppScaler.scaleHeight(context, 185),
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    itemCount: _sections.length,
+                    itemBuilder: (context, index) {
+                      final item = _sections[index];
+                      return Searchhistory(
+                        title: item['title']!,
+                        thumbnailPath: item['imagePath']!,
+                        onTapRemove: () {},
+                        onTapTile: () {},
+                      );
+                    },
+                  ),
+                ),
+                RecentsearchWidgetHeader(),
+
+                SizedBox(height: AppScaler.scaleHeight(context, 30)),
+              ],
+            ),
+          ),
         ),
       ),
     );

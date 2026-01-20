@@ -665,6 +665,13 @@ class $AssetsImagesGen {
   AssetGenImage get phonecallicon =>
       const AssetGenImage('assets/images/phonecallicon.png');
 
+  /// File path: assets/images/picture.png
+  AssetGenImage get picture => const AssetGenImage('assets/images/picture.png');
+
+  /// File path: assets/images/pictureinpicture.png
+  AssetGenImage get pictureinpicture =>
+      const AssetGenImage('assets/images/pictureinpicture.png');
+
   /// File path: assets/images/play.png
   AssetGenImage get play => const AssetGenImage('assets/images/play.png');
 
@@ -1067,6 +1074,8 @@ class $AssetsImagesGen {
     onboarding3,
     onboardingBg,
     phonecallicon,
+    picture,
+    pictureinpicture,
     play,
     playbutton,
     playbutton123,

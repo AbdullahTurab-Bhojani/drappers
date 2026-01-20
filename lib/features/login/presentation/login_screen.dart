@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, dead_code
 
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -29,6 +29,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void onRememberMeChanged(bool? value) {
     rememberMe = value ?? false;
+  }
+
+  @override
+  void initState() {
+
+
+    super.initState();
   }
 
   Future<void> onSubmit() async {
@@ -79,7 +86,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final state = ref.watch(loginProviderProvider);
+    final bool isLoading = state.isLoading;
+
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
@@ -268,7 +285,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       SizedBox(height: AppScaler.scaleSize(context, 15)),
                       AppPasswordField(
-                        keyboardType: TextInputType.numberWithOptions(),
+                        keyboardType: TextInputType.text,
                         controller: _passwordController,
                         labelText: "Password*",
                         hintText: "**********",
@@ -364,10 +381,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                       AppButton(
                         onPressed: () {
-                          onSubmit();
+                          if (!isLoading) {
+                            onSubmit();
+                          }
                         },
-                        title: "Continue",
+                        title: isLoading ? "Loading..." : "Continue",
                       ),
+
                       SizedBox(height: AppScaler.scaleHeight(context, 40)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

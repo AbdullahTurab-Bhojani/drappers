@@ -11,3 +11,4 @@ analyzer:
     invalid_annotation_target: ignore
     camel_case_types: ignore
     unused_field: ignore ignore
+    prefer_final_fields: ignore

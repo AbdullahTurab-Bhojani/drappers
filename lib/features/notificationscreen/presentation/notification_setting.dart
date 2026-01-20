@@ -20,37 +20,33 @@ class _NotificationSettingState extends State<NotificationSetting> {
   @override
   Widget build(BuildContext context) {
     final customColors = Theme.of(context).extension<AppCustomColors>()!;
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-          ),
-        ),
-        child: Column(
-          children: [
-            AppMainBar(
-              leading: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: AppScaler.scaleSize(context, 10),
-                  ),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: AppScaler.scaleSize(context, 20),
-                    height: AppScaler.scaleHeight(context, 20),
-                  ),
-                ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(Assets.images.screensbg.path)),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => Navigator.of(context).pop(),
+            child: Padding(
+              padding: EdgeInsets.only(left: AppScaler.scaleSize(context, 20)),
+              child: Image.asset(
+                "assets/images/backicon.png",
+                width: AppScaler.scaleSize(context, 20),
+                height: AppScaler.scaleHeight(context, 20),
               ),
-              title: "Notifications Settings",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
             ),
+          ),
+          title: "Notifications Settings",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Column(
+          crossAxisAlignment: .start,
+          children: [
             SizedBox(height: AppScaler.scaleHeight(context, 30)),
             ToggleSettingTile(
               image: AssetImage(Assets.images.notificationsfillicon.path),
@@ -80,15 +76,12 @@ class _NotificationSettingState extends State<NotificationSetting> {
               padding: EdgeInsets.symmetric(
                 horizontal: AppScaler.scaleSize(context, 20),
               ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: PoppinsText(
-                  context,
-                  'Content Notifications',
-                  fontSize: PoppinsFontSizeVariant.size16,
-                  fontWeight: PoppinsFontWeightVariant.medium,
-                  color: customColors.textColor,
-                ),
+              child: PoppinsText(
+                context,
+                'Content Notifications',
+                fontSize: PoppinsFontSizeVariant.size16,
+                fontWeight: PoppinsFontWeightVariant.medium,
+                color: customColors.textColor,
               ),
             ),
             SizedBox(height: AppScaler.scaleHeight(context, 20)),
@@ -118,17 +111,14 @@ class _NotificationSettingState extends State<NotificationSetting> {
             SizedBox(height: AppScaler.scaleHeight(context, 26)),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: AppScaler.scaleSize(context, 26),
+                horizontal: AppScaler.scaleSize(context, 20),
               ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: PoppinsText(
-                  context,
-                  'Marketing',
-                  fontSize: PoppinsFontSizeVariant.size16,
-                  fontWeight: PoppinsFontWeightVariant.medium,
-                  color: customColors.textColor,
-                ),
+              child: PoppinsText(
+                context,
+                'Marketing',
+                fontSize: PoppinsFontSizeVariant.size16,
+                fontWeight: PoppinsFontWeightVariant.medium,
+                color: customColors.textColor,
               ),
             ),
             SizedBox(height: AppScaler.scaleHeight(context, 20)),
@@ -145,6 +135,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
             ),
           ],
         ),
+      
       ),
     );
   }

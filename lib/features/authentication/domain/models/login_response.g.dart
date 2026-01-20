@@ -9,7 +9,9 @@ part of 'login_response.dart';
 _LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     _LoginResponse(
       isSuccess: json['isSuccess'] as bool,
-      data: LoginData.fromJson(json['data'] as Map<String, dynamic>),
+      data: json['data'] == null
+          ? null
+          : LoginData.fromJson(json['data'] as Map<String, dynamic>),
       message: json['message'] as String,
     );
 
@@ -21,15 +23,15 @@ Map<String, dynamic> _$LoginResponseToJson(_LoginResponse instance) =>
     };
 
 _LoginData _$LoginDataFromJson(Map<String, dynamic> json) => _LoginData(
-  accessToken: json['access_token'] as String,
-  expiresIn: (json['expires_in'] as num).toInt(),
-  refreshExpiresIn: (json['refresh_expires_in'] as num).toInt(),
-  refreshToken: json['refresh_token'] as String,
-  tokenType: json['token_type'] as String,
-  idToken: json['id_token'] as String,
-  notBeforePolicy: (json['not-before-policy'] as num).toInt(),
-  sessionState: json['session_state'] as String,
-  scope: json['scope'] as String,
+  accessToken: json['access_token'] as String?,
+  expiresIn: (json['expires_in'] as num?)?.toInt(),
+  refreshExpiresIn: (json['refresh_expires_in'] as num?)?.toInt(),
+  refreshToken: json['refresh_token'] as String?,
+  tokenType: json['token_type'] as String?,
+  idToken: json['id_token'] as String?,
+  notBeforePolicy: (json['not-before-policy'] as num?)?.toInt(),
+  sessionState: json['session_state'] as String?,
+  scope: json['scope'] as String?,
 );
 
 Map<String, dynamic> _$LoginDataToJson(_LoginData instance) =>

@@ -19,7 +19,6 @@ class _EditProfilePopupState extends State<EditProfilePopup> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Container(
-      // height: 394, // Remove this line
       width: double.infinity,
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -28,11 +27,10 @@ class _EditProfilePopupState extends State<EditProfilePopup> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min, // ensures container wraps content
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween, // fix the dot error
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               PoppinsText(
                 context,

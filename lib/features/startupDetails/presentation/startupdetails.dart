@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unused_element
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +7,7 @@ import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../shared/widgets/guestloginwidget.dart';
+import '../../../shared/widgets/featured_episode_card.dart';
 
 class Startupdetails extends StatefulWidget {
   const Startupdetails({super.key});
@@ -91,74 +91,56 @@ class _StartupdetailsState extends State<Startupdetails> {
   double sliderValue = 40;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
-    double horizontalPadding = 16.0;
-    final List<String> tags = [
-      'Clean Tech',
-      'Energy Storage',
-      'Sustainability',
-    ];
-
-    final List<String> twotags = ['B2B', 'Hardware'];
-    final List<Map<String, String>> companyInfo = [
-      {'label': 'Founded', 'value': '2022'},
-      {'label': 'Team Size', 'value': '12 Employees'},
-      {'label': 'Funding Stage', 'value': 'Series A'},
-      {'label': 'Website', 'value': 'https://lost-lab.info'},
-    ];
-
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
-        child: Column(
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => Navigator.of(context).pop(),
+            child: Image.asset(
+              "assets/images/backicon.png",
+              width: AppScaler.scaleSize(context, 20),
+              height: AppScaler.scaleHeight(context, 20),
+            ),
+          ),
+          title: "Startup Details",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+
+              onTap: () {
+                context.pushNamed(AppRoutes.searchscreen.name);
+              },
+              child: Image.asset(
+                Assets.images.shareicon.path,
+                height: AppScaler.scaleHeight(context, 18),
+                width: AppScaler.scaleSize(context, 18),
+              ),
+            ),
+            SizedBox(width: AppScaler.scaleSize(context, 15)),
+          ],
+          // trailing: Padding(
+          //   padding:  EdgeInsets.only(right: 16.0),
+          //   // Using the share icon from the previous design suggestion
+          //   child: Icon(Icons.send, color: customColors.textColor, size: 24),
+          // ),
+        ),
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppMainBar(
-              leading: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => Navigator.of(context).pop(),
-                child: Image.asset(
-                  "assets/images/backicon.png",
-                  width: AppScaler.scaleSize(context, 20),
-                  height: AppScaler.scaleHeight(context, 20),
-                ),
-              ),
-              title: "Startup Details",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              actions: [
-                GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-
-                  onTap: () {
-                    context.pushNamed(AppRoutes.searchscreen.name);
-                  },
-                  child: Image.asset(
-                    Assets.images.shareicon.path,
-                    height: AppScaler.scaleHeight(context, 18),
-                    width: AppScaler.scaleSize(context, 18),
-                  ),
-                ),
-                SizedBox(width: AppScaler.scaleSize(context, 15)),
-              ],
-              // trailing: Padding(
-              //   padding:  EdgeInsets.only(right: 16.0),
-              //   // Using the share icon from the previous design suggestion
-              //   child: Icon(Icons.send, color: customColors.textColor, size: 24),
-              // ),
-            ),
             GestureDetector(
               onTap: () {
-                AppRoutes.videoScreen.name;
+                context.pushNamed(AppRoutes.videoScreen.name);
               },
               child: Container(
                 width: double.infinity,
@@ -206,476 +188,7 @@ class _StartupdetailsState extends State<Startupdetails> {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                // physics: BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: .start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: horizontalPadding,
-                        vertical: AppScaler.scaleHeight(context, 16),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          PoppinsText(
-                            context,
-                            'Echo Tech Solutions',
-                            fontSize: PoppinsFontSizeVariant.size22,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 2)),
-                          PoppinsText(
-                            context,
-                            'Sustainable energy Revolution',
-                            fontSize: PoppinsFontSizeVariant.size16,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.textColor,
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 16)),
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 35),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: tags.length,
-                              itemBuilder: (context, index) {
-                                return _TagChip(
-                                  label: tags[index],
-                                  customColors: customColors,
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 35),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: twotags.length,
-                              itemBuilder: (context, index) {
-                                return _TagChip(
-                                  label: twotags[index],
-                                  customColors: customColors,
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-                          AppButton(
-                            prefixIcon: Image(
-                              image: AssetImage(
-                                Assets.images.playstrokeicon.path,
-                              ),
-                              width: AppScaler.scaleSize(context, 20),
-                              height: AppScaler.scaleHeight(context, 20),
-                            ),
-                            onPressed: () {
-                              context.pushNamed(AppRoutes.videoScreen.name);
-                            },
-                            title: "Watch Episode",
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width:
-                                    (MediaQuery.of(context).size.width -
-                                        (2 * horizontalPadding) -
-                                        10) /
-                                    2,
-                                child: OutlinedButton.icon(
-                                  onPressed: () {
-                                    if (GuestHelper.isGuest) {
-                                      GuestHelper.checkGuest(context);
-                                      return;
-                                    }
-                                    setState(() {
-                                      isSaved = !isSaved;
-                                    });
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    side: BorderSide(
-                                      color: customColors.greyColor,
-                                      width: AppScaler.scaleSize(context, 2),
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    padding: EdgeInsets.symmetric(vertical: 12),
-                                    backgroundColor: Colors.transparent,
-                                  ),
-
-                                  icon: Icon(
-                                    isSaved
-                                        ? Icons.bookmark
-                                        : Icons.bookmark_border,
-                                    size: AppScaler.scaleFont(context, 24),
-                                    color: AppColors.wDark,
-                                  ),
-
-                                  label: PoppinsText(
-                                    context,
-                                    isSaved ? 'Saved' : 'Save',
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                    color: AppColors.wDark,
-                                  ),
-                                ),
-                              ),
-
-                              SizedBox(width: AppScaler.scaleSize(context, 10)),
-
-                              SizedBox(
-                                width:
-                                    (MediaQuery.of(context).size.width -
-                                        (2 * horizontalPadding) -
-                                        10) /
-                                    2,
-                                child: OutlinedButton.icon(
-                                  onPressed: () {
-                                    if (GuestHelper.isGuest) {
-                                      GuestHelper.checkGuest(context);
-                                      return;
-                                    }
-                                    setState(() {
-                                      isVoted = !isVoted;
-                                    });
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    side: BorderSide(
-                                      color: customColors.greyColor,
-                                      width: AppScaler.scaleSize(context, 2),
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    padding: EdgeInsets.symmetric(vertical: 12),
-                                    backgroundColor: Colors.transparent,
-                                  ),
-
-                                  icon: Icon(
-                                    isVoted
-                                        ? Icons.favorite
-                                        : Icons.favorite_border,
-                                    size: 24,
-                                    color: isVoted
-                                        ? Colors.red
-                                        : customColors.textColor,
-                                  ),
-
-                                  label: PoppinsText(
-                                    context,
-                                    isVoted ? 'Voted' : 'Vote',
-                                    fontSize: PoppinsFontSizeVariant.size16,
-                                    fontWeight: PoppinsFontWeightVariant.medium,
-                                    color: AppColors.wDark,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-                          Container(
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                color: customColors.greyColor.withOpacity(0.3),
-                                width: AppScaler.scaleSize(context, 1),
-                              ),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: AssetImage(
-                                    Assets.images.dummyprofile.path,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: AppScaler.scaleSize(context, 15),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      PoppinsText(
-                                        context,
-                                        'Jerry Mackson',
-                                        fontSize: PoppinsFontSizeVariant.size18,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.medium,
-                                        color: customColors.textColor,
-                                      ),
-                                      SizedBox(
-                                        height: AppScaler.scaleHeight(
-                                          context,
-                                          2,
-                                        ),
-                                      ),
-                                      PoppinsText(
-                                        context,
-                                        'Former Tesla Engineer 8+ Years experience in Battery Technology',
-                                        fontSize: PoppinsFontSizeVariant.size12,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.regular,
-                                        color: customColors.labelColor,
-                                        maxLines: 2,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 16)),
-                          PoppinsText(
-                            context,
-                            'Cast: Leonardo DiCaprio, Jonah Hill, Margot Robbie, Matthew... more',
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.labelColor,
-                          ),
-                          PoppinsText(
-                            context,
-                            'Director: Denis Villeneuve',
-                            fontSize: PoppinsFontSizeVariant.size12,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.labelColor,
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 25)),
-                          PoppinsText(
-                            context,
-                            'Company Information',
-                            fontSize: PoppinsFontSizeVariant.size20,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                          ...companyInfo.map(
-                            (info) => _CompanyInfoRow(
-                              label: info['label']!,
-                              value: info['value']!,
-                              customColors: customColors,
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 25)),
-                          PoppinsText(
-                            context,
-                            'About the Startup',
-                            fontSize: PoppinsFontSizeVariant.size20,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                          PoppinsText(
-                            context,
-                            'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-                            fontSize: PoppinsFontSizeVariant.size14,
-                            fontWeight: PoppinsFontWeightVariant.regular,
-                            color: customColors.labelColor,
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 25)),
-
-                          PoppinsText(
-                            context,
-                            'Featured Episode',
-                            fontSize: PoppinsFontSizeVariant.size20,
-                            fontWeight: PoppinsFontWeightVariant.medium,
-                            color: customColors.textColor,
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 15)),
-
-                          Padding(
-                            padding: EdgeInsets.only(
-                              bottom: AppScaler.scaleHeight(context, 10),
-                            ),
-                            child: GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: () {
-                                context.pushNamed(AppRoutes.contentDetail.name);
-                              },
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: AppScaler.scaleSize(context, 122),
-                                    height: AppScaler.scaleHeight(context, 200),
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          Assets.images.documentaries4.path,
-                                        ),
-                                        fit: BoxFit.cover,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: AppScaler.scaleSize(context, 12),
-                                  ),
-
-                                  // Content Column
-                                  Expanded(
-                                    child: SingleChildScrollView(
-                                      physics: BouncingScrollPhysics(),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          PoppinsText(
-                                            context,
-                                            "Finale – Meet The Drapers Season 07 (2025)",
-                                            fontSize:
-                                                PoppinsFontSizeVariant.size16,
-                                            fontWeight:
-                                                PoppinsFontWeightVariant.medium,
-                                            textOverflow: TextOverflow.ellipsis,
-                                            maxLines: 2,
-                                          ),
-                                          SizedBox(
-                                            height: AppScaler.scaleHeight(
-                                              context,
-                                              20,
-                                            ),
-                                          ),
-
-                                          PoppinsText(
-                                            context,
-                                            "Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode, spotlighting visionary startups from across the world. Judges Nikki Farb, TikTok executive Tim Natividad, and legendary investor Bill Draper evaluate groundbreaking innovations in connectivity, accessibility, and education. From CleverFi’s seamless WiFi to Zeality’s immersive AR/VR tech, WeWALK’s smart cane, and Taleemabad’s educational revolution, this episode is a thrilling showcase of entrepreneurial brilliance",
-                                            fontSize:
-                                                PoppinsFontSizeVariant.size14,
-                                            fontWeight: PoppinsFontWeightVariant
-                                                .regular,
-                                            color: Colors.grey,
-                                            maxLines: 2,
-                                            textOverflow: TextOverflow.ellipsis,
-                                          ),
-                                          SizedBox(
-                                            height: AppScaler.scaleHeight(
-                                              context,
-                                              20,
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: SliderTheme(
-                                                  data: SliderTheme.of(context)
-                                                      .copyWith(
-                                                        trackHeight: 3,
-                                                        thumbShape:
-                                                            RoundSliderThumbShape(
-                                                              enabledThumbRadius:
-                                                                  0,
-                                                            ),
-                                                        overlayShape:
-                                                            RoundSliderOverlayShape(
-                                                              overlayRadius: 0,
-                                                            ),
-                                                      ),
-                                                  child: Slider(
-                                                    activeColor: Color(
-                                                      0xFF0072FF,
-                                                    ),
-                                                    inactiveColor: Color(
-                                                      0xFF00002A,
-                                                    ),
-                                                    value: sliderValue,
-                                                    min: 0,
-                                                    max: 100,
-                                                    onChanged: (v) {
-                                                      setState(() {
-                                                        sliderValue = v;
-                                                      });
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: AppScaler.scaleSize(
-                                                  context,
-                                                  8,
-                                                ),
-                                              ),
-
-                                              PoppinsText(
-                                                context,
-                                                '-12:34',
-                                                fontSize: PoppinsFontSizeVariant
-                                                    .size10,
-                                                fontWeight:
-                                                    PoppinsFontWeightVariant
-                                                        .regular,
-                                                color: customColors.textColor,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: AppScaler.scaleHeight(
-                                              context,
-                                              20,
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: AppButton(
-                                                  onPressed: () {
-                                                    context.pushNamed(
-                                                      AppRoutes
-                                                          .videoScreen
-                                                          .name,
-                                                    );
-                                                  },
-                                                  title: 'Watch Episode',
-                                                  buttonSize: Size(
-                                                    double.infinity,
-                                                    AppScaler.scaleHeight(
-                                                      context,
-                                                      40,
-                                                    ),
-                                                  ),
-                                                  prefixIcon: Image.asset(
-                                                    Assets
-                                                        .images
-                                                        .playstrokeicon
-                                                        .path,
-                                                    width: AppScaler.scaleSize(
-                                                      context,
-                                                      14,
-                                                    ),
-                                                    height:
-                                                        AppScaler.scaleHeight(
-                                                          context,
-                                                          14,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: SingleChildScrollView(child: FeaturedEpisodeCard()),
             ),
           ],
         ),

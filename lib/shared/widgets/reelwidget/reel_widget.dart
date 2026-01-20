@@ -43,62 +43,57 @@ class _ReelWidgetState extends State<ReelWidget> {
     final cardHeight = AppScaler.scaleHeight(context, 350);
     final childAspectRatio = cardWidth / cardHeight;
 
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
-        child: Column(
-          children: [
-            AppMainBar(
-              leading: GestureDetector(
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              context.pop();
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: AppScaler.scaleSize(context, 10)),
+              child: Image.asset(
+                Assets.images.backicon.path,
+                width: AppScaler.scaleSize(context, 20),
+                height: AppScaler.scaleHeight(context, 20),
+              ),
+            ),
+          ),
+          title: "Reels",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: AppScaler.scaleSize(context, 16)),
+              child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  context.pop();
+                  if (GuestHelper.isGuest) {
+                    GuestHelper.checkGuest(context);
+                    return;
+                  }
+                  context.pushNamed(AppRoutes.searchscreen.name);
                 },
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: AppScaler.scaleSize(context, 10),
-                  ),
-                  child: Image.asset(
-                    Assets.images.backicon.path,
-                    width: AppScaler.scaleSize(context, 20),
-                    height: AppScaler.scaleHeight(context, 20),
-                  ),
+                child: Image.asset(
+                  Assets.images.searchstokeicon.path,
+                  width: AppScaler.scaleSize(context, 20),
+                  height: AppScaler.scaleHeight(context, 20),
                 ),
               ),
-              title: "Reels",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              actions: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    right: AppScaler.scaleSize(context, 16),
-                  ),
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () {
-                      if (GuestHelper.isGuest) {
-                        GuestHelper.checkGuest(context);
-                        return;
-                      }
-                      context.pushNamed(AppRoutes.searchscreen.name);
-                    },
-                    child: Image.asset(
-                      Assets.images.searchstokeicon.path,
-                      width: AppScaler.scaleSize(context, 20),
-                      height: AppScaler.scaleHeight(context, 20),
-                    ),
-                  ),
-                ),
-              ],
             ),
+          ],
+        ),
+        body: Column(
+          children: [
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(

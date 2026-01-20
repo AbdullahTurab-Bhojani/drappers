@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
@@ -26,53 +26,54 @@ class _ApplyPitchState extends State<ApplyPitch> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
-        child: Column(
-          children: [
-            AppMainBar(
-              leading: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-
-                onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => Navigator.of(context).pop(),
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: AppScaler.scaleHeight(context, 20),
               ),
-              title: "Apply to Pitch",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
+              child: Image.asset(
+                "assets/images/backicon.png",
+                width: AppScaler.scaleSize(context, 20),
+                height: AppScaler.scaleHeight(context, 20),
+              ),
             ),
-
+          ),
+          title: "Apply to Pitch",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Column(
+          children: [
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 20),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                       PoppinsText(
                         context,
                         "Submit Your Pitch",
                         fontSize: PoppinsFontSizeVariant.size16,
                         fontWeight: PoppinsFontWeightVariant.medium,
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(height: AppScaler.scaleHeight(context, 8)),
                       PoppinsText(
                         context,
                         "Apply to appeal on Meet the Drapers and pitch your startup to investors.",
@@ -80,55 +81,55 @@ class _ApplyPitchState extends State<ApplyPitch> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                         height: 1.7,
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
                       NewTextField(
                         fieldbg: AppColors.tfield,
                         controller: _fullNameController,
                         labelText: "Full Name*",
                         hintText: "johnmackson",
                         hintStyle: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppScaler.scaleFont(context, 16),
                           fontWeight: FontWeight.w500,
                           color: customColors.textColor,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
                       NewTextField(
                         fieldbg: AppColors.tfield,
                         controller: _startupController,
                         labelText: "Startup Name*",
-                        hintText: "Krypto",
+                        hintText: "Crypto",
                         hintStyle: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppScaler.scaleFont(context, 16),
                           fontWeight: FontWeight.w500,
                           color: customColors.textColor,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
                       NewTextField(
                         fieldbg: AppColors.tfield,
                         controller: _emailController,
                         labelText: "Email Address*",
                         hintText: "Enter your email",
                         hintStyle: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppScaler.scaleFont(context, 16),
                           fontWeight: FontWeight.w500,
                           color: customColors.textColor,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
                       NewTextField(
                         fieldbg: AppColors.tfield,
                         controller: _linkController,
                         labelText: "Shareable link for your pitch deck*",
                         hintText: "www.link.com",
                         hintStyle: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppScaler.scaleFont(context, 16),
                           fontWeight: FontWeight.w500,
                           color: customColors.textColor,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
                       PoppinsText(
                         context,
                         "Share a link to your pitch deck (Google Drive, DocSend, Dropbox, etc.)",
@@ -136,13 +137,13 @@ class _ApplyPitchState extends State<ApplyPitch> {
                         fontWeight: PoppinsFontWeightVariant.regular,
                         height: 1.7,
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
                       DropDownField(
                         controller: _locationController,
                         labelText: "Location*",
                         hintText: "Select your location",
                         hintStyle: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppScaler.scaleFont(context, 16),
                           fontWeight: FontWeight.w500,
                           color: customColors.textColor,
                         ),
@@ -154,14 +155,17 @@ class _ApplyPitchState extends State<ApplyPitch> {
                         // },
                         sufixIcon: Icon(
                           Icons.keyboard_arrow_down,
-                          color: Colors.white,
-                          size: 24,
+                          color: AppColors.white,
+                          size: AppScaler.scaleFont(context, 24),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
                       Container(
                         width: double.infinity,
-                        padding: EdgeInsets.all(12),
+                        padding: EdgeInsets.symmetric(
+                          vertical: AppScaler.scaleHeight(context, 12),
+                          horizontal: AppScaler.scaleSize(context, 12),
+                        ),
                         decoration: BoxDecoration(
                           color: customColors.dark,
                           borderRadius: BorderRadius.only(
@@ -175,10 +179,10 @@ class _ApplyPitchState extends State<ApplyPitch> {
                           children: [
                             Image.asset(
                               Assets.images.infoicon.path,
-                              width: 16,
-                              height: 16,
+                              width: AppScaler.scaleSize(context, 16),
+                              height: AppScaler.scaleHeight(context, 16),
                             ),
-                            SizedBox(width: 8),
+                            SizedBox(width: AppScaler.scaleSize(context, 8)),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,7 +194,9 @@ class _ApplyPitchState extends State<ApplyPitch> {
                                     fontWeight:
                                         PoppinsFontWeightVariant.semiBold,
                                   ),
-                                  SizedBox(height: 6),
+                                  SizedBox(
+                                    height: AppScaler.scaleHeight(context, 6),
+                                  ),
                                   PoppinsText(
                                     context,
                                     "Our team will review your application and pitchdeck. If selected, you’ll be contacted within 2-3 weeks to schedule your appearance on Meet the Drapers.",
@@ -205,10 +211,8 @@ class _ApplyPitchState extends State<ApplyPitch> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                       SizedBox(
-                        // height: 45,
-                        // width: 390,
                         child: AppButton(
                           onPressed: () {
                             context.goNamed(AppRoutes.home.name);
@@ -216,7 +220,7 @@ class _ApplyPitchState extends State<ApplyPitch> {
                           title: 'Submit',
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: AppScaler.scaleHeight(context, 30)),
                     ],
                   ),
                 ),

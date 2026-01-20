@@ -85,14 +85,14 @@ class TokenRefreshManager {
       } else {
         debugPrint('❌ Token refresh failed - callback returned false');
         // Clear user session on refresh failure
-        _clearSessionAndLogout(ref);
+        // _clearSessionAndLogout(ref);
         _failQueuedRequests(error);
         return null;
       }
     } catch (e, stackTrace) {
       debugPrint('❌ Token refresh exception: $e');
       debugPrint('Stack trace: $stackTrace');
-      _clearSessionAndLogout(ref);
+      // _clearSessionAndLogout(ref);
       _failQueuedRequests(error);
       return null;
     } finally {
@@ -151,15 +151,15 @@ class TokenRefreshManager {
     _pendingRequests.clear();
   }
 
-  void _clearSessionAndLogout(Ref ref) {
-    String password = ref.read(localDataProvider).getPassword1 ?? "";
-    String email = ref.read(localDataProvider).getEmail ?? "";
-    String rememberMe = ref.read(localDataProvider).getRemamberMe ?? "";
-    ref.read(localDataProvider).clearAllData();
-    ref.read(localDataProvider).setEmail(email);
-    ref.read(localDataProvider).setPassword(password);
-    ref.read(localDataProvider).setRememberMe(rememberMe);
-  }
+  // void _clearSessionAndLogout(Ref ref) {
+  //   String password = ref.read(localDataProvider).getPassword1 ?? "";
+  //   String email = ref.read(localDataProvider).getEmail ?? "";
+  //   String rememberMe = ref.read(localDataProvider).getRemamberMe ?? "";
+  //   ref.read(localDataProvider).clearAllData();
+  //   ref.read(localDataProvider).setEmail(email);
+  //   ref.read(localDataProvider).setPassword(password);
+  //   ref.read(localDataProvider).setRememberMe(rememberMe);
+  // }
 }
 
 class _QueuedRequest {
