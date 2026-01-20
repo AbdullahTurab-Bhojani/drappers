@@ -9,6 +9,7 @@ import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
 import '../../authentication/data/dto/social_dto/social_dto.dart';
+import '../providers/apple_auth_provider.dart';
 import '../providers/social_auth_provider.dart';
 
 class SocialLoginScreen extends ConsumerStatefulWidget {
@@ -20,6 +21,7 @@ class SocialLoginScreen extends ConsumerStatefulWidget {
 
 class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
   bool _isGoogleLoading = false;
+  bool _isAppleLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -154,17 +156,95 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
                       SizedBox(height: AppScaler.scaleHeight(context, 28)),
 
                       AppButton(
-                        onPressed: () {
-                          context.goNamed(AppRoutes.home.name);
+                        onPressed: () async {
+                          if (_isAppleLoading) return;
+
+                          setState(() => _isAppleLoading = true);
+
+                          final appleAuthService = ref.read(
+                            appleAuthServiceProvider,
+                          );
+
+                          Map<String, dynamic>? appleData;
+
+                          try {
+                            appleData = await appleAuthService.appleSignIn();
+
+                            if (appleData == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Apple Sign-In failed'),
+                                ),
+                              );
+                              setState(() => _isAppleLoading = false);
+                              return;
+                            }
+                          } catch (e, st) {
+                            debugPrint('Apple Sign-In error: $e\n$st');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Apple Sign-In encountered an error',
+                                ),
+                              ),
+                            );
+                            setState(() => _isAppleLoading = false);
+                            return;
+                          }
+
+                          final socialDto = SocialDTO(
+                            subjectToken: appleData['subject_token'] ?? '',
+                            subjectIssuer: appleData['subject_issuer'] ?? '',
+                            email: appleData['subject_email'] ?? '',
+                          );
+
+                          bool success = false;
+
+                          try {
+                            success = await appleAuthService.onAppleAuthApi(
+                              socialDto,
+                            );
+                          } catch (e, st) {
+                            debugPrint('Apple Backend Auth error: $e\n$st');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Apple login API error'),
+                              ),
+                            );
+                            setState(() => _isAppleLoading = false);
+                            return;
+                          }
+
+                          if (!context.mounted) return;
+
+                          setState(() => _isAppleLoading = false);
+
+                          if (success) {
+                            context.go('/home');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Apple login failed'),
+                              ),
+                            );
+                          }
                         },
 
-                        title: 'Login with Apple',
+                        title: _isAppleLoading ? '' : 'Login with Apple',
+
+                        prefixIcon: _isAppleLoading
+                            ? LoadingWidget(
+                                color: AppColors.buttoncolor.first,
+                                width: 22,
+                                height: 22,
+                              )
+                            : Image.asset(
+                                Assets.images.appleicon.path,
+                                width: AppScaler.scaleSize(context, 26),
+                                height: AppScaler.scaleHeight(context, 26),
+                              ),
+
                         color: AppColors.graylight,
-                        prefixIcon: Image.asset(
-                          Assets.images.appleicon.path,
-                          width: AppScaler.scaleSize(context, 26),
-                          height: AppScaler.scaleHeight(context, 26),
-                        ),
                         buttonGradient: [
                           AppColors.graylight,
                           AppColors.graylight,
