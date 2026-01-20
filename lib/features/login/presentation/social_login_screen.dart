@@ -148,23 +148,30 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
                   color: AppColors.graylight,
                   buttonGradient: [AppColors.graylight, AppColors.graylight],
                 ),
+                if (Platform.isIOS)
+                  Column(
+                    children: [
+                      SizedBox(height: AppScaler.scaleHeight(context, 28)),
 
-                SizedBox(height: AppScaler.scaleHeight(context, 28)),
+                      AppButton(
+                        onPressed: () {
+                          context.goNamed(AppRoutes.home.name);
+                        },
 
-                AppButton(
-                  onPressed: () {
-                    context.goNamed(AppRoutes.home.name);
-                  },
-
-                  title: 'Login with Apple',
-                  color: AppColors.graylight,
-                  prefixIcon: Image.asset(
-                    Assets.images.appleicon.path,
-                    width: AppScaler.scaleSize(context, 26),
-                    height: AppScaler.scaleHeight(context, 26),
+                        title: 'Login with Apple',
+                        color: AppColors.graylight,
+                        prefixIcon: Image.asset(
+                          Assets.images.appleicon.path,
+                          width: AppScaler.scaleSize(context, 26),
+                          height: AppScaler.scaleHeight(context, 26),
+                        ),
+                        buttonGradient: [
+                          AppColors.graylight,
+                          AppColors.graylight,
+                        ],
+                      ),
+                    ],
                   ),
-                  buttonGradient: [AppColors.graylight, AppColors.graylight],
-                ),
 
                 SizedBox(height: AppScaler.scaleHeight(context, 28)),
 
