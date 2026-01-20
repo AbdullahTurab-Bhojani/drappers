@@ -6,9 +6,8 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import '../../../shared/widgets/cardwidget/card_widget.dart';
+import '../../../shared/widgets/contentdetail_body.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
-import '../../../shared/widgets/reelcard/reelcard_widget.dart';
 
 class ContentDetail extends StatefulWidget {
   const ContentDetail({super.key});
@@ -65,6 +64,7 @@ class _ContentDetailState extends State<ContentDetail>
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
+<<<<<<< HEAD
     return Scaffold(
       body: Stack(
         children: [
@@ -306,65 +306,70 @@ class _ContentDetailState extends State<ContentDetail>
                     SizedBox(height: AppScaler.scaleHeight(context, 15)),
                   ],
                 ),
+=======
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(
+                top: AppScaler.scaleHeight(context, 54),
+                left: AppScaler.scaleSize(context, 12),
+                right: AppScaler.scaleSize(context, 12),
+>>>>>>> development
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppScaler.scaleSize(context, 12),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: .end,
                     children: [
-                      PoppinsText(
-                        context,
-                        '"The Wolf of Wall Street" is a captivating film about Jordan Belfort\'s rise and fall.',
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                        color: customColors.textColor,
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 5)),
-                      PoppinsText(
-                        context,
-                        'Cast: Leonardo DiCaprio, Jonah Hill, Margot Robbie, Matthew.... more Director: Denis Villeneuve',
-                        fontSize: PoppinsFontSizeVariant.size12,
-                        fontWeight: PoppinsFontWeightVariant.regular,
-                        color: customColors.greyColor,
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: AppScaler.scaleSize(context, 12),
+                      Container(
+                        height: AppScaler.scaleHeight(context, 258),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          image: DecorationImage(
+                            image: AssetImage(Assets.images.preview.path),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        child: Row(
+                        child: Stack(
                           children: [
-                            Column(
-                              children: [
-                                GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () {
-                                    if (GuestHelper.isGuest) {
-                                      GuestHelper.checkGuest(context);
-                                      return;
-                                    }
-                                    setState(() {
-                                      _isLiked = !_isLiked;
-                                    });
-                                  },
-                                  child: Image.asset(
-                                    _isLiked
-                                        ? Assets.images.like.path
-                                        : Assets.images.likeicon.path,
-                                    width: AppScaler.scaleSize(context, 18),
-                                    height: AppScaler.scaleHeight(context, 18),
-                                    color: _isLiked
-                                        ? customColors.buttonColors[0]
-                                        : null,
-                                  ),
+                            // Dark overlay + GestureDetector for tapping anywhere
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                context.pushNamed(AppRoutes.videoScreen.name);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
+                              ),
+                            ),
 
-                                SizedBox(
-                                  height: AppScaler.scaleHeight(context, 10),
+                            // Cross (close) button top-right
+                            Positioned(
+                              top: AppScaler.scaleHeight(context, 12),
+                              right: AppScaler.scaleSize(context, 19),
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () => Navigator.of(context).pop(),
+                                child: Image.asset(
+                                  Assets.images.crossnewicon.path,
+                                  width: AppScaler.scaleSize(context, 24),
+                                  height: AppScaler.scaleHeight(context, 24),
                                 ),
+<<<<<<< HEAD
                                 PoppinsText(
                                   context,
                                   'Like',
@@ -401,39 +406,38 @@ class _ContentDetailState extends State<ContentDetail>
                                     color: customColors.textColor,
                                   ),
                                 ],
+=======
+>>>>>>> development
                               ),
                             ),
-                            SizedBox(width: AppScaler.scaleSize(context, 30)),
-                            GestureDetector(
-                              onTap: () {
-                                if (GuestHelper.isGuest) {
-                                  GuestHelper.checkGuest(context);
-                                  return;
-                                }
-                                context.pushNamed(AppRoutes.reportContent.name);
-                              },
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    Assets.images.flagicon.path,
-                                    width: AppScaler.scaleSize(context, 18),
-                                    height: AppScaler.scaleHeight(context, 18),
-                                  ),
-                                  SizedBox(height: 10),
-                                  PoppinsText(
-                                    context,
-                                    'Report',
-                                    fontSize: PoppinsFontSizeVariant.size12,
-                                    fontWeight:
-                                        PoppinsFontWeightVariant.regular,
-                                    color: customColors.textColor,
-                                  ),
-                                ],
+
+                            Center(
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () {
+                                  if (GuestHelper.isGuest) {
+                                    GuestHelper.checkGuest(context);
+                                    return;
+                                  }
+                                  context.pushNamed(AppRoutes.videoScreen.name);
+                                },
+                                child: Image.asset(
+                                  Assets.images.playwithbgicon.path,
+                                  width: AppScaler.scaleSize(context, 60),
+                                  height: AppScaler.scaleHeight(context, 60),
+                                ),
                               ),
+                            ),
+
+                            Positioned(
+                              bottom: AppScaler.scaleHeight(context, 12),
+                              right: AppScaler.scaleSize(context, 19),
+                              child: Image.asset(Assets.images.muteicon.path),
                             ),
                           ],
                         ),
                       ),
+<<<<<<< HEAD
                       SizedBox(height: AppScaler.scaleHeight(context, 7)),
                       TabBar(
                         controller: _tabController,
@@ -642,27 +646,164 @@ class _ContentDetailState extends State<ContentDetail>
                       ),
 
                       SizedBox(height: AppScaler.scaleHeight(context, 14)),
+=======
+>>>>>>> development
                     ],
                   ),
-                ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                  PoppinsText(
+                    context,
+                    'Finale – Meet The Drapers Season 07 (2025)',
+                    fontSize: PoppinsFontSizeVariant.size22,
+                    fontWeight: PoppinsFontWeightVariant.medium,
+                    color: customColors.textColor,
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                  Row(
+                    children: [
+                      Text(
+                        '91% match',
+                        style: GoogleFonts.poppins(
+                          fontSize: AppScaler.scaleFont(context, 16),
+                          fontWeight: FontWeight.w400,
+                          color: customColors.greyColor,
+                        ),
+                      ),
+                      SizedBox(width: AppScaler.scaleSize(context, 8)),
+
+                      Text(
+                        '2017',
+                        style: GoogleFonts.poppins(
+                          fontSize: AppScaler.scaleFont(context, 16),
+                          fontWeight: FontWeight.w400,
+                          color: customColors.textColor,
+                        ),
+                      ),
+                      SizedBox(width: AppScaler.scaleSize(context, 8)),
+
+                      Container(
+                        width: AppScaler.scaleSize(context, 22),
+                        height: AppScaler.scaleHeight(context, 15),
+                        decoration: BoxDecoration(
+                          color: AppColors.shadegreycolor6B6B6B,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                        alignment: Alignment.center,
+                        child: PoppinsText(
+                          context,
+                          '16+',
+                          fontSize: PoppinsFontSizeVariant.size8,
+                          fontWeight: PoppinsFontWeightVariant.semiBold,
+                          color: customColors.textColor,
+                        ),
+                      ),
+                      SizedBox(width: AppScaler.scaleSize(context, 8)),
+
+                      Text(
+                        '2h 43m',
+                        style: GoogleFonts.poppins(
+                          fontSize: AppScaler.scaleFont(context, 16),
+                          fontWeight: FontWeight.w400,
+                          color: customColors.textColor,
+                        ),
+                      ),
+                      SizedBox(width: AppScaler.scaleSize(context, 8)),
+
+                      Container(
+                        width: AppScaler.scaleSize(context, 22),
+                        height: AppScaler.scaleHeight(context, 15),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppColors.shadegreycolor6B6B6B,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        alignment: Alignment.center,
+                        child: PoppinsText(
+                          context,
+                          'HQ',
+                          fontSize: PoppinsFontSizeVariant.size8,
+                          fontWeight: PoppinsFontWeightVariant.semiBold,
+                          color: customColors.textColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: AppScaler.scaleHeight(context, 45),
+                          child: AppButton(
+                            onPressed: () {
+                              context.pushNamed(AppRoutes.videoScreen.name);
+                            },
+                            title: 'Play',
+                            prefixIcon: Image.asset(
+                              Assets.images.playstrokeicon.path,
+                              width: AppScaler.scaleSize(context, 15),
+                              height: AppScaler.scaleHeight(context, 15),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: AppScaler.scaleSize(context, 10)),
+                      Expanded(
+                        child: SizedBox(
+                          height: AppScaler.scaleHeight(context, 45),
+                          child: AppButton(
+                            onPressed: () {
+                              if (GuestHelper.isGuest) {
+                                GuestHelper.checkGuest(context);
+                                return;
+                              }
+                              setState(() {
+                                isAdded = !isAdded;
+                              });
+                            },
+                            title: isAdded ? 'Added' : 'Add To Watch List',
+                            color: Colors.transparent,
+                            borderColor: customColors.greyColor,
+                            borderWidth: 1,
+                            border: true,
+                            prefixIcon: isAdded
+                                ? Icon(
+                                    Icons.check,
+                                    size: 17,
+                                    color: customColors.textColor,
+                                  )
+                                : Image.asset(
+                                    Assets.images.addicon.path,
+                                    width: AppScaler.scaleSize(context, 15),
+                                    height: AppScaler.scaleHeight(context, 15),
+                                  ),
+                            fontSize: PoppinsFontSizeVariant.size14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+            Expanded(
+              child: ContentDetailBody(
+                tabController: _tabController,
+                isAdded: isAdded,
+                onAddToWatchlist: (added) => setState(() => isAdded = added),
+                isLiked: _isLiked,
+                onLike: (liked) => setState(() => _isLiked = liked),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
-List trendingimages = [
-  Assets.images.trendingimage1.path,
-  Assets.images.trendingimage2.path,
-  Assets.images.trendingimage3.path,
-  Assets.images.trendingimage4.path,
-  Assets.images.trendingimage5.path,
-  Assets.images.trendingimage6.path,
-  Assets.images.trendingimage7.path,
-];
 
 class _VideoHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double minHeight;

@@ -1,13 +1,13 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../shared/widgets/guestloginwidget.dart';
+import '../../../shared/widgets/custom_video_card.dart';
+import '../../../shared/widgets/startup_card.dart';
 
 class VoteForStartupScreen extends StatefulWidget {
   const VoteForStartupScreen({super.key});
@@ -17,904 +17,147 @@ class VoteForStartupScreen extends StatefulWidget {
 }
 
 class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
-  bool isVoted = false;
+  final List<Map<String, dynamic>> startups = [
+    {
+      "title": "Echo Tech Solutions",
+      "subtitle": "Sustainable energy Revolution",
+      "description":
+          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
+      "episodeTitle": "Meet the Drapers S512",
+      "imagePath": Assets.images.studionew.path,
+      "initialCount": 6,
+    },
+    {
+      "title": "Future Innovations",
+      "subtitle": "AI-powered solutions",
+      "description":
+          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
+      "episodeTitle": "Meet the Drapers S513",
+      "imagePath": Assets.images.studionew.path,
+      "initialCount": 12,
+    },
+    {
+      "title": "Green Energy Co",
+      "subtitle": "Renewable energy solutions",
+      "description":
+          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
+      "episodeTitle": "Meet the Drapers S514",
+      "imagePath": Assets.images.studionew.path,
+      "initialCount": 20,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
-        child: Column(
-          children: [
-            AppMainBar(
-              leading: GestureDetector(
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Image.asset(
+              "assets/images/backicon.png",
+              width: AppScaler.scaleSize(context, 20),
+              height: AppScaler.scaleHeight(context, 20),
+            ),
+          ),
+          title: "Vote for Startup",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: AppScaler.scaleSize(context, 20)),
+              child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  Navigator.of(context).pop();
+                  context.pushNamed(AppRoutes.searchscreen.name);
                 },
                 child: Image.asset(
-                  "assets/images/backicon.png",
-                  width:  AppScaler.scaleSize(context, 20),
-                  height:  AppScaler.scaleHeight(context, 20),
-                ),
-              ),
-              title: "Vote for Startup",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              actions: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    right: AppScaler.scaleSize(context, 20),
-                  ),
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-
-                    onTap: () {
-                      context.pushNamed(AppRoutes.searchscreen.name);
-                    },
-                    child: Image.asset(
-                      Assets.images.searchstokeicon.path,
-                      width: 20,
-                      height: 20,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppScaler.scaleSize(context, 20),
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      Container(
-                        width: double.infinity,
-                        height: 85,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppScaler.scaleSize(context, 10),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    width: AppScaler.scaleSize(context, 84),
-                                    height: AppScaler.scaleHeight(context, 60),
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          Assets.images.trendingimage1.path,
-                                        ),
-                                        fit: BoxFit.fill,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: AppScaler.scaleSize(context, 75),
-                                    height: AppScaler.scaleHeight(context, 55),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.4),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                  Positioned.fill(
-                                    child: Center(
-                                      child: Image.asset(
-                                        Assets.images.play.path,
-                                        width: AppScaler.scaleSize(context, 22),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: AppScaler.scaleSize(context, 15)),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    PoppinsText(
-                                      context,
-                                      "Meet the Drapers Competition",
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.medium,
-                                      textOverflow: TextOverflow.ellipsis,
-                                    ),
-                                    // SizedBox(height: 6),
-                                    PoppinsText(
-                                      context,
-                                      "Vote for your favourites startup from \nseason 5, Episode 12.",
-                                      fontSize: PoppinsFontSizeVariant.size12,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
-
-                      Container(
-                        width: double.infinity,
-                        height: AppScaler.scaleHeight(context, 85),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.dGrey),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppScaler.scaleSize(context, 8),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    width: AppScaler.scaleSize(context, 84),
-                                    height: AppScaler.scaleHeight(context, 60),
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          Assets.images.trendingimage1.path,
-                                        ),
-                                        fit: BoxFit.fill,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: AppScaler.scaleSize(context, 75),
-                                    height: AppScaler.scaleHeight(context, 55),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.4),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                  Positioned.fill(
-                                    child: Center(
-                                      child: Image.asset(
-                                        Assets.images.play.path,
-                                        width: AppScaler.scaleSize(context, 22),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: AppScaler.scaleSize(context, 20)),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PoppinsText(
-                                      context,
-                                      "Voting Instructions",
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.medium,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(context, 6),
-                                    ),
-                                    PoppinsText(
-                                      context,
-                                      "Lorem ipsum dolor sit amet consectetur. Lorem at elit eu facilisis. Sed cursus volutpat.",
-                                      fontSize: PoppinsFontSizeVariant.size11,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: customColors.dark,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-
-                              onTap: () {
-                                context.pushNamed(
-                                  AppRoutes.startupdetails.name,
-                                );
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: AppScaler.scaleHeight(context, 215),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                  ),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      Assets.images.studionew.path,
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      bottom: AppScaler.scaleHeight(
-                                        context,
-                                        10,
-                                      ),
-                                      right: AppScaler.scaleSize(context, 10),
-                                      child: Image.asset(
-                                        Assets.images.muteicon.path,
-                                      ),
-                                    ),
-                                    // Center(
-                                    //   child: Image.asset(
-                                    //     Assets.images.playwithbgicon.path,
-                                    //   ),
-                                    // ),
-                                    // Positioned(
-                                    //   bottom: 10,
-                                    //   right: 10,
-                                    //   child: Image.asset(
-                                    //     Assets.images.muteicon.path,
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(15),
-                              child: Container(
-                                width: double.infinity,
-                                color: customColors.dark,
-                                child: Column(
-                                  crossAxisAlignment: .start,
-                                  children: [
-                                    PoppinsText(
-                                      context,
-                                      'Echo Tech Solutions',
-                                      fontSize: PoppinsFontSizeVariant.size22,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.medium,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(context, 2),
-                                    ),
-
-                                    PoppinsText(
-                                      context,
-                                      'Sustainable energy Revolution',
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.subtextColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        10,
-                                      ),
-                                    ),
-                                    PoppinsText(
-                                      context,
-                                      'simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.',
-                                      fontSize: PoppinsFontSizeVariant.size12,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.subtextColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        15,
-                                      ),
-                                    ),
-                                    PoppinsText(
-                                      context,
-                                      'Meet the Drapers S512',
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.textColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        20,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: AppButton(
-                                            prefixIcon: Image.asset(
-                                              Assets.images.playstrokeicon.path,
-                                              width: AppScaler.scaleSize(
-                                                context,
-                                                14,
-                                              ),
-                                              height: AppScaler.scaleHeight(
-                                                context,
-                                                14,
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              context.pushNamed(
-                                                AppRoutes.videoScreen.name,
-                                              );
-                                            },
-                                            title: 'Watch Episode',
-                                            buttonSize: Size(196, 52),
-                                            suffixIcon: SizedBox(),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: AppScaler.scaleSize(
-                                            context,
-                                            10,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 160,
-                                          height: 52,
-                                          child: OutlinedButton.icon(
-                                            onPressed: () {
-                                              if (GuestHelper.isGuest) {
-                                                GuestHelper.checkGuest(context);
-                                                return;
-                                              }
-                                              setState(() {
-                                                isVoted = !isVoted;
-                                              });
-                                            },
-                                            style: OutlinedButton.styleFrom(
-                                              side: BorderSide(
-                                                color: customColors.greyColor,
-                                                width: AppScaler.scaleSize(
-                                                  context,
-                                                  2,
-                                                ),
-                                              ),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                              ),
-                                              padding: EdgeInsets.symmetric(
-                                                vertical: AppScaler.scaleHeight(
-                                                  context,
-                                                  12,
-                                                ),
-                                              ),
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                            ),
-
-                                            icon: Icon(
-                                              isVoted
-                                                  ? Icons.favorite
-                                                  : Icons.favorite_border,
-                                              size: 24,
-                                              color: isVoted
-                                                  ? Colors.red
-                                                  : customColors.textColor,
-                                            ),
-
-                                            label: PoppinsText(
-                                              context,
-                                              isVoted ? 'Voted' : 'Vote',
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size16,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant
-                                                      .medium,
-                                              color: AppColors.wDark,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: customColors.dark,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-
-                              onTap: () {
-                                context.pushNamed(
-                                  AppRoutes.startupdetails.name,
-                                );
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: AppScaler.scaleHeight(context, 215),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                  ),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      Assets.images.studionew.path,
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      bottom: AppScaler.scaleHeight(
-                                        context,
-                                        10,
-                                      ),
-                                      right: AppScaler.scaleSize(context, 10),
-                                      child: Image.asset(
-                                        Assets.images.muteicon.path,
-                                      ),
-                                    ),
-                                    // Center(
-                                    //   child: Image.asset(
-                                    //     Assets.images.playwithbgicon.path,
-                                    //   ),
-                                    // ),
-                                    // Positioned(
-                                    //   bottom: 10,
-                                    //   right: 10,
-                                    //   child: Image.asset(
-                                    //     Assets.images.muteicon.path,
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(15),
-                              child: Container(
-                                width: double.infinity,
-                                color: customColors.dark,
-                                child: Column(
-                                  crossAxisAlignment: .start,
-                                  children: [
-                                    PoppinsText(
-                                      context,
-                                      'Echo Tech Solutions',
-                                      fontSize: PoppinsFontSizeVariant.size22,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.medium,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(context, 2),
-                                    ),
-
-                                    PoppinsText(
-                                      context,
-                                      'Sustainable energy Revolution',
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.subtextColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        10,
-                                      ),
-                                    ),
-                                    PoppinsText(
-                                      context,
-                                      'simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.',
-                                      fontSize: PoppinsFontSizeVariant.size12,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.subtextColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        15,
-                                      ),
-                                    ),
-                                    PoppinsText(
-                                      context,
-                                      'Meet the Drapers S512',
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.textColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        20,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: AppButton(
-                                            prefixIcon: Image.asset(
-                                              Assets.images.playstrokeicon.path,
-                                              width: AppScaler.scaleSize(
-                                                context,
-                                                14,
-                                              ),
-                                              height: AppScaler.scaleHeight(
-                                                context,
-                                                14,
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              context.pushNamed(
-                                                AppRoutes.videoScreen.name,
-                                              );
-                                            },
-                                            title: 'Watch Episode',
-                                            buttonSize: Size(196, 52),
-                                            suffixIcon: SizedBox(),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: AppScaler.scaleSize(
-                                            context,
-                                            10,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 160,
-                                          height: 52,
-                                          child: OutlinedButton.icon(
-                                            onPressed: () {
-                                              if (GuestHelper.isGuest) {
-                                                GuestHelper.checkGuest(context);
-                                                return;
-                                              }
-                                              setState(() {
-                                                isVoted = !isVoted;
-                                              });
-                                            },
-                                            style: OutlinedButton.styleFrom(
-                                              side: BorderSide(
-                                                color: customColors.greyColor,
-                                                width: AppScaler.scaleSize(
-                                                  context,
-                                                  2,
-                                                ),
-                                              ),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                              ),
-                                              padding: EdgeInsets.symmetric(
-                                                vertical: AppScaler.scaleHeight(
-                                                  context,
-                                                  12,
-                                                ),
-                                              ),
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                            ),
-
-                                            icon: Icon(
-                                              isVoted
-                                                  ? Icons.favorite
-                                                  : Icons.favorite_border,
-                                              size: 24,
-                                              color: isVoted
-                                                  ? Colors.red
-                                                  : customColors.textColor,
-                                            ),
-
-                                            label: PoppinsText(
-                                              context,
-                                              isVoted ? 'Voted' : 'Vote',
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size16,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant
-                                                      .medium,
-                                              color: AppColors.wDark,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: customColors.dark,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-
-                              onTap: () {
-                                context.pushNamed(
-                                  AppRoutes.startupdetails.name,
-                                );
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: AppScaler.scaleHeight(context, 215),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                  ),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      Assets.images.studionew.path,
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      bottom: AppScaler.scaleHeight(
-                                        context,
-                                        10,
-                                      ),
-                                      right: AppScaler.scaleSize(context, 10),
-                                      child: Image.asset(
-                                        Assets.images.muteicon.path,
-                                      ),
-                                    ),
-                                    // Center(
-                                    //   child: Image.asset(
-                                    //     Assets.images.playwithbgicon.path,
-                                    //   ),
-                                    // ),
-                                    // Positioned(
-                                    //   bottom: 10,
-                                    //   right: 10,
-                                    //   child: Image.asset(
-                                    //     Assets.images.muteicon.path,
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(15),
-                              child: Container(
-                                width: double.infinity,
-                                color: customColors.dark,
-                                child: Column(
-                                  crossAxisAlignment: .start,
-                                  children: [
-                                    PoppinsText(
-                                      context,
-                                      'Echo Tech Solutions',
-                                      fontSize: PoppinsFontSizeVariant.size22,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.medium,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(context, 2),
-                                    ),
-
-                                    PoppinsText(
-                                      context,
-                                      'Sustainable energy Revolution',
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.subtextColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        10,
-                                      ),
-                                    ),
-                                    PoppinsText(
-                                      context,
-                                      'simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.',
-                                      fontSize: PoppinsFontSizeVariant.size12,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.subtextColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        15,
-                                      ),
-                                    ),
-                                    PoppinsText(
-                                      context,
-                                      'Meet the Drapers S512',
-                                      fontSize: PoppinsFontSizeVariant.size16,
-                                      fontWeight:
-                                          PoppinsFontWeightVariant.regular,
-                                      color: customColors.textColor,
-                                    ),
-                                    SizedBox(
-                                      height: AppScaler.scaleHeight(
-                                        context,
-                                        20,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: AppButton(
-                                            prefixIcon: Image.asset(
-                                              Assets.images.playstrokeicon.path,
-                                              width: AppScaler.scaleSize(
-                                                context,
-                                                14,
-                                              ),
-                                              height: AppScaler.scaleHeight(
-                                                context,
-                                                14,
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              context.pushNamed(
-                                                AppRoutes.videoScreen.name,
-                                              );
-                                            },
-                                            title: 'Watch Episode',
-                                            buttonSize: Size(196, 52),
-                                            suffixIcon: SizedBox(),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: AppScaler.scaleSize(
-                                            context,
-                                            10,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 160,
-                                          height: 52,
-                                          child: OutlinedButton.icon(
-                                            onPressed: () {
-                                              if (GuestHelper.isGuest) {
-                                                GuestHelper.checkGuest(context);
-                                                return;
-                                              }
-                                              setState(() {
-                                                isVoted = !isVoted;
-                                              });
-                                            },
-                                            style: OutlinedButton.styleFrom(
-                                              side: BorderSide(
-                                                color: customColors.greyColor,
-                                                width: AppScaler.scaleSize(
-                                                  context,
-                                                  2,
-                                                ),
-                                              ),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                              ),
-                                              padding: EdgeInsets.symmetric(
-                                                vertical: AppScaler.scaleHeight(
-                                                  context,
-                                                  12,
-                                                ),
-                                              ),
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                            ),
-
-                                            icon: Icon(
-                                              isVoted
-                                                  ? Icons.favorite
-                                                  : Icons.favorite_border,
-                                              size: 24,
-                                              color: isVoted
-                                                  ? Colors.red
-                                                  : customColors.textColor,
-                                            ),
-
-                                            label: PoppinsText(
-                                              context,
-                                              isVoted ? 'Voted' : 'Vote',
-                                              fontSize:
-                                                  PoppinsFontSizeVariant.size16,
-                                              fontWeight:
-                                                  PoppinsFontWeightVariant
-                                                      .medium,
-                                              color: AppColors.wDark,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 24)),
-                    ],
-                  ),
+                  Assets.images.searchstokeicon.path,
+                  width: AppScaler.scaleSize(context, 20),
+                  height: AppScaler.scaleHeight(context, 20),
                 ),
               ),
             ),
           ],
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppScaler.scaleSize(context, 20),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: AppScaler.scaleHeight(context, 10)),
+
+                CustomVideoCard(
+                  fillGradient: LinearGradient(
+                    colors: [Color(0xFF1FCFFF), Color(0xFF0063FF)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  strokeColor: Colors.transparent,
+                  strokeWidth: 2,
+                  title: "Meet the Drapers Competition",
+                  subtitle:
+                      "Vote for your favourite startup from season 5, Episode 12.",
+                  thumbnailPath: Assets.images.trendingimage1.path,
+                  playIconPath: Assets.images.play.path,
+                  height: 85,
+                ),
+
+                SizedBox(height: AppScaler.scaleHeight(context, 16)),
+
+                CustomVideoCard(
+                  strokeColor: AppColors.dGrey,
+                  strokeWidth: 1,
+                  title: "Voting Instructions",
+                  subtitle:
+                      "Lorem ipsum dolor sit amet consectetur. Lorem at elit eu facilisis. Sed cursus volutpat.",
+                  thumbnailPath: Assets.images.trendingimage1.path,
+                  playIconPath: Assets.images.play.path,
+                  height: 85,
+                ),
+
+                SizedBox(height: AppScaler.scaleHeight(context, 16)),
+
+                ...startups.map((startup) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      bottom: AppScaler.scaleHeight(context, 16),
+                    ),
+                    child: StartupCard(
+                      imagePath: startup['imagePath'],
+                      title: startup['title'],
+                      subtitle: startup['subtitle'],
+                      description: startup['description'],
+                      episodeTitle: startup['episodeTitle'],
+                      initialCount: startup['initialCount'],
+                      onWatchPressed: () {
+                        context.pushNamed(AppRoutes.videoScreen.name);
+                      },
+                      onVotePressed: () {
+                        print('${startup['title']} vote pressed!');
+                      },
+                      onCardTap: () {
+                        context.pushNamed(AppRoutes.startupdetails.name);
+                      },
+                    ),
+                  );
+                }),
+              ],
+            ),
+          ),
         ),
       ),
     );

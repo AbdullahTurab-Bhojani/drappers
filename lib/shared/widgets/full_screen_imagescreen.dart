@@ -31,36 +31,36 @@ class _FullscreenImageScreenState extends State<FullscreenImageScreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.35),
-            blurRadius: 30,
-            spreadRadius: 4,
-            offset: Offset(0, 6),
+    return Center(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          image: DecorationImage(
+            image: AssetImage(widget.imagePath),
+            fit: BoxFit.cover,
           ),
-        ],
-      ),
-      child: ClipRRect(
-        // borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.35),
+              blurRadius: 30,
+              spreadRadius: 4,
+              offset: Offset(0, 6),
+            ),
+          ],
+        ),
         child: SizedBox(
           width: AppScaler.scaleSize(context, 400),
           height: AppScaler.scaleHeight(context, 450),
-          child: Stack(
-            children: [
-              Image.asset(
-                widget.imagePath,
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              Container(color: Colors.black.withOpacity(0.18)),
-              Positioned(
-                top: AppScaler.scaleHeight(context, 16),
-                left: AppScaler.scaleSize(context, 14),
-                right: AppScaler.scaleSize(context, 14),
-                child: Row(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppScaler.scaleSize(context, 8),
+              vertical: AppScaler.scaleHeight(context, 8),
+            ),
+            child: Column(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: .spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
@@ -75,13 +75,7 @@ class _FullscreenImageScreenState extends State<FullscreenImageScreen> {
                     PopupmenuWidget(showSaveIcon: false),
                   ],
                 ),
-              ),
-
-              Positioned(
-                bottom: AppScaler.scaleHeight(context, 10),
-                left: AppScaler.scaleSize(context, 12),
-                right: AppScaler.scaleSize(context, 12),
-                child: Row(
+                Row(
                   children: [
                     Expanded(
                       child: SizedBox(
@@ -141,8 +135,8 @@ class _FullscreenImageScreenState extends State<FullscreenImageScreen> {
                     ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

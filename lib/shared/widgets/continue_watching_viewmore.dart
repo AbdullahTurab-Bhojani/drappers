@@ -27,49 +27,39 @@ class ContinueWatchingViewmore extends StatefulWidget {
 }
 
 class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
-  final List<Map<String, dynamic>> _podcasts = [
+  final List<Map<String, String>> _podcasts = [
     {
-      'data': Podcast(
-        title: 'Finale – Meet The Drapers \nSeason 07 (2025)',
-        description:
-            'Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode,',
-        imagePath: Assets.images.podcastimage1.path,
-      ),
-      'slider': 60.0,
+      "title": 'Finale – Meet The Drapers Season 07 (2025)',
+      "description":
+          'Meet the Drapers returns to SHACK15 for an electrifying TikTok Global episode,',
+      "imagePath": Assets.images.podcastimage1.path,
+      "slider": "60.0",
     },
     {
-      'data': Podcast(
-        title: 'Episode 2 – Startup Stories',
-        description:
-            'Dive into inspiring stories of new entrepreneurs and their journey.',
-        imagePath: Assets.images.podcastimage2.path,
-      ),
-      'slider': 20.0,
+      "title": 'São Paulo – Meet The Drapers Season 6 (2023)',
+      "description":
+          'Dive into inspiring stories of new entrepreneurs and their journey.',
+      "imagePath": Assets.images.podcastimage2.path,
+      "slider": "40.0",
     },
     {
-      'data': Podcast(
-        title: 'Episode 3 – Tech Innovations',
-        description: 'Latest updates on tech, AI, and innovative startups.',
-        imagePath: Assets.images.podcastimage3.path,
-      ),
-      'slider': 40.0,
+      "title": 'Sri Sri University – Meet The Drapers Season 6 (2023)',
+      "description": 'Latest updates on tech, AI, and innovative startups.',
+      "imagePath": Assets.images.podcastimage3.path,
+      "slider": "40.0",
     },
     {
-      'data': Podcast(
-        title: 'Episode 2 – Startup Stories',
-        description:
-            'Dive into inspiring stories of new entrepreneurs and their journey.',
-        imagePath: Assets.images.podcastimage2.path,
-      ),
-      'slider': 20.0,
+      "title": 'Finale – Meet The Drapers Season 6 (2024)',
+      "description":
+          'Dive into inspiring stories of new entrepreneurs and their journey.',
+      "imagePath": Assets.images.podcastimage2.path,
+      "slider": "20.0",
     },
     {
-      'data': Podcast(
-        title: 'Episode 3 – Tech Innovations',
-        description: 'Latest updates on tech, AI, and innovative startups.',
-        imagePath: Assets.images.podcastimage3.path,
-      ),
-      'slider': 40.0,
+      "title": 'Semifinals 2 – Meet The Drapers Season 6 (2024)',
+      "description": 'Latest updates on tech, AI, and innovative startups.',
+      "imagePath": Assets.images.podcastimage3.path,
+      "slider": "40.0",
     },
   ];
 
@@ -77,39 +67,36 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
-        child: Column(
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => Navigator.of(context).pop(),
+            child: Padding(
+              padding: EdgeInsets.only(left: AppScaler.scaleSize(context, 20)),
+              child: Image.asset(
+                "assets/images/backicon.png",
+                width: AppScaler.scaleSize(context, 20),
+                height: AppScaler.scaleHeight(context, 20),
+              ),
+            ),
+          ),
+          title: "Continue Watching",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppMainBar(
-              leading: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: AppScaler.scaleSize(context, 20),
-                  ),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: AppScaler.scaleSize(context, 20),
-                    height: AppScaler.scaleHeight(context, 20),
-                  ),
-                ),
-              ),
-              title: "Continue Watching",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
             SizedBox(height: AppScaler.scaleHeight(context, 20)),
             Expanded(
               child: Padding(
@@ -120,8 +107,8 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                   padding: EdgeInsets.zero,
                   itemCount: _podcasts.length,
                   itemBuilder: (context, index) {
-                    final podcast = _podcasts[index]['data'] as Podcast;
-                    double sliderValue = _podcasts[index]['slider'];
+                    final podcast = _podcasts[index];
+                    double sliderValue = double.parse(podcast['slider']!);
 
                     return Padding(
                       padding: EdgeInsets.only(
@@ -135,8 +122,7 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                               width: AppScaler.scaleSize(context, 120),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(podcast.imagePath),
-                                  //  AssetImage(),
+                                  image: AssetImage(podcast['imagePath']!),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
@@ -149,18 +135,17 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                 children: [
                                   PoppinsText(
                                     context,
-                                    podcast.title,
+                                    podcast['title']!,
                                     fontSize: PoppinsFontSizeVariant.size16,
                                     fontWeight: PoppinsFontWeightVariant.medium,
                                     color: customColors.textColor,
-                                    textOverflow: TextOverflow.ellipsis,
                                   ),
                                   SizedBox(
                                     height: AppScaler.scaleHeight(context, 12),
                                   ),
                                   PoppinsText(
                                     context,
-                                    podcast.description,
+                                    podcast['description']!,
                                     fontSize: PoppinsFontSizeVariant.size14,
                                     fontWeight:
                                         PoppinsFontWeightVariant.regular,
@@ -171,7 +156,6 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                   SizedBox(
                                     height: AppScaler.scaleHeight(context, 12),
                                   ),
-                                  // SizedBox(height: 20),
                                   Row(
                                     children: [
                                       Expanded(
@@ -196,16 +180,16 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                             max: 100,
                                             onChanged: (v) {
                                               setState(() {
-                                                _podcasts[index]['slider'] = v;
+                                                _podcasts[index]['slider'] = v
+                                                    .toString();
                                               });
                                             },
                                           ),
                                         ),
                                       ),
                                       SizedBox(
-                                        height: AppScaler.scaleSize(context, 8),
+                                        width: AppScaler.scaleSize(context, 8),
                                       ),
-                                      // SizedBox(width: 8),
                                       PoppinsText(
                                         context,
                                         '-12:34',
@@ -219,7 +203,6 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                   SizedBox(
                                     height: AppScaler.scaleHeight(context, 16),
                                   ),
-                                  // SizedBox(height: 20),
                                   Row(
                                     children: [
                                       Expanded(
@@ -247,7 +230,6 @@ class _ContinueWatchingViewmoreState extends State<ContinueWatchingViewmore> {
                                       SizedBox(
                                         width: AppScaler.scaleSize(context, 20),
                                       ),
-                                      // SizedBox(width: 20),
                                       Image.asset(
                                         Assets.images.cancelicon.path,
                                         width: AppScaler.scaleSize(context, 24),

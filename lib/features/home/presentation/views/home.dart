@@ -13,15 +13,15 @@ import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
-import '../../../../shared/widgets/cardwidget/card_widget.dart';
-import '../../../../shared/widgets/documentries_card/documentries_card_widget.dart';
+import '../../../../shared/widgets/continuewatching_header.dart';
+import '../../../../shared/widgets/documentries_header.dart';
 import '../../../../shared/widgets/full_screen_imagescreen.dart';
 import '../../../../shared/widgets/guestloginwidget.dart';
 import '../../../../shared/widgets/home_banner.dart';
-import '../../../../shared/widgets/more_info_bottom_sheet.dart';
-import '../../../../shared/widgets/podcardswidget/podcards_widget.dart';
-import '../../../../shared/widgets/reelcard/reelcard_widget.dart';
-import '../../../../shared/widgets/watch_history.dart';
+import '../../../../shared/widgets/homeheader_tab.dart';
+import '../../../../shared/widgets/podcast_header.dart';
+import '../../../../shared/widgets/reels_header.dart';
+import '../../../../shared/widgets/trendingshows_header.dart';
 import '../../../user/domain/models/user_model.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -99,7 +99,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       handleLifecycle: true,
       subtitlesConfiguration: const BetterPlayerSubtitlesConfiguration(
         fontSize: 16,
-        fontColor: Colors.white,
+        fontColor: AppColors.white,
         outlineColor: Colors.black,
       ),
       controlsConfiguration: const BetterPlayerControlsConfiguration(
@@ -233,524 +233,163 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         }
         return true;
       },
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                Assets.images.screensbg.path,
-                fit: BoxFit.cover,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          image: DecorationImage(
+            image: AssetImage(Assets.images.screensbg.path),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppMainBar(
+            width: AppScaler.scaleSize(context, 285),
+            leadingText: user != null
+                ? (user!.firstName != null &&
+                          user!.firstName!.isNotEmpty &&
+                          user!.lastName != null &&
+                          user!.lastName!.isNotEmpty
+                      ? "Welcome Back ${user!.firstName!} ${user!.lastName!}!"
+                      : "Welcome Back ${user!.fullName}!")
+                : "Welcome Back Guest User!",
+            title: "",
+            centerTitle: false,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            actions: [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  if (GuestHelper.isGuest) {
+                    GuestHelper.checkGuest(context);
+                    return;
+                  }
+                  context.pushNamed('searchscreen');
+                },
+                child: Image.asset(
+                  Assets.images.searchstokeicon.path,
+                  width: AppScaler.scaleSize(context, 24),
+                  height: AppScaler.scaleHeight(context, 24),
+                  color: customColors.textColor,
+                ),
               ),
-            ),
-            Column(
-              children: [
-                AppMainBar(
-                  width: AppScaler.scaleSize(context, 285),
-                  leadingText: user != null
-                      ? (user!.firstName != null &&
-                                user!.firstName!.isNotEmpty &&
-                                user!.lastName != null &&
-                                user!.lastName!.isNotEmpty
-                            ? "Welcome Back ${user!.firstName!} ${user!.lastName!}!"
-                            : "Welcome Back ${user!.fullName ?? 'User'}!")
-                      : "Welcome Back Guest!",
-                  title: "",
-                  centerTitle: false,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  actions: [
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () {
-                        if (GuestHelper.isGuest) {
-                          GuestHelper.checkGuest(context);
-                          return;
-                        }
-                        context.pushNamed('searchscreen');
-                      },
-                      child: Image.asset(
-                        Assets.images.searchstokeicon.path,
-                        width: AppScaler.scaleSize(context, 24),
-                        height: AppScaler.scaleHeight(context, 24),
-                        color: customColors.textColor,
+              SizedBox(width: AppScaler.scaleSize(context, 16)),
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  if (_betterPlayerController != null &&
+                      _betterPlayerController!.isVideoInitialized() != null) {
+                    _betterPlayerController!.pause();
+                  }
+                  if (GuestHelper.isGuest) {
+                    GuestHelper.checkGuest(context);
+                    return;
+                  }
+                  context.pushNamed('notificationScreen');
+                },
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      Assets.images.notificationsiconnew.path,
+                      width: AppScaler.scaleSize(context, 24),
+                      height: AppScaler.scaleHeight(context, 24),
+                      color: customColors.textColor,
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 2,
+                      child: Container(
+                        width: AppScaler.scaleSize(context, 8),
+                        height: AppScaler.scaleHeight(context, 8),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
-                    SizedBox(width: AppScaler.scaleSize(context, 16)),
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () {
-                        if (_betterPlayerController != null &&
-                            _betterPlayerController!.isVideoInitialized() !=
-                                null) {
-                          _betterPlayerController!.pause();
-                        }
-                        if (GuestHelper.isGuest) {
-                          GuestHelper.checkGuest(context);
-                          return;
-                        }
-                        context.pushNamed('notificationScreen');
-                      },
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            Assets.images.notificationsiconnew.path,
-                            width: AppScaler.scaleSize(context, 24),
-                            height: AppScaler.scaleHeight(context, 24),
-                            color: customColors.textColor,
-                          ),
-                          Positioned(
-                            top: 0,
-                            right: 2,
-                            child: Container(
-                              width: AppScaler.scaleSize(context, 8),
-                              height: AppScaler.scaleHeight(context, 8),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 20),
                   ],
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppScaler.scaleSize(context, 20),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 45),
-                            child: ListView.separated(
-                              padding: EdgeInsets.zero,
-                              clipBehavior: Clip.none,
-                              scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: AppScaler.scaleSize(context, 10),
-                              ),
-                              shrinkWrap: true,
-                              itemCount: hometab.length,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () {
-                                    if (_betterPlayerController != null &&
-                                        _betterPlayerController!
-                                                .isVideoInitialized() !=
-                                            null) {
-                                      _betterPlayerController!.pause();
-                                    }
-                                    if (GuestHelper.isGuest) {
-                                      GuestHelper.checkGuest(context);
-                                      return;
-                                    }
-                                    context.pushNamed(
-                                      AppRoutes.livepitchesScreen.name,
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: AppScaler.scaleSize(
-                                        context,
-                                        16,
-                                      ),
-                                      vertical: AppScaler.scaleHeight(
-                                        context,
-                                        8,
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      border: Border.all(
-                                        color: AppColors.shadegreycolor6B6B6B,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: PoppinsText(
-                                        context,
-                                        hometab[index],
-                                        fontSize: PoppinsFontSizeVariant.size16,
-                                        fontWeight:
-                                            PoppinsFontWeightVariant.regular,
-                                        color: customColors.textColor,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-                          FullscreenImageScreen(
-                            imagePath: Assets.images.livetvnew.path,
-                            title: "We're Training Heroes of Future!",
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
+              ),
+              SizedBox(width: 20),
+            ],
+          ),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PoppinsText(
-                                context,
-                                'Trending Shows',
-                                fontSize: PoppinsFontSizeVariant.size16,
-                                fontWeight: PoppinsFontWeightVariant.medium,
-                                color: customColors.textColor,
-                              ),
-                              AppButton(
-                                buttonSize: Size(80, 25),
-                                color: Colors.transparent,
-                                borderColor: customColors.textColor.withOpacity(
-                                  0.5,
-                                ),
-                                borderWidth: 1,
-                                fontSize: PoppinsFontSizeVariant.size12,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                border: true,
-                                onPressed: () {
-                                  if (_betterPlayerController != null) {
-                                    _betterPlayerController!.pause();
-                                  }
-                                  context.pushNamed('trendingshow');
-                                },
-                                title: "View More",
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 180),
-                            child: ListView.separated(
-                              padding: EdgeInsets.zero,
-                              clipBehavior: Clip.none,
-                              scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: AppScaler.scaleSize(context, 15),
-                              ),
-                              itemCount: trendingimages.length,
-                              itemBuilder: (context, index) {
-                                return CardWidget(
-                                  assetImage: trendingimages[index],
-                                  showSaveIcon: false,
-                                  fromEpisode: false,
-                                  allowGuestNavigation: false,
-                                  index: index,
-                                  showMenuOnly: true,
-                                  showMoreInfo: index == 0,
-                                  onMoreInfoTap: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      useRootNavigator: true,
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.transparent,
-                                      builder: (context) =>
-                                          MoreInfoBottomSheet(),
-                                    );
-                                  },
-                                  showLiveTvBadge: true,
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PoppinsText(
-                                context,
-                                'Continue Watching',
-                                fontSize: PoppinsFontSizeVariant.size16,
-                                fontWeight: PoppinsFontWeightVariant.medium,
-                                color: customColors.textColor,
-                              ),
-                              AppButton(
-                                onPressed: () {
-                                  if (_betterPlayerController != null) {
-                                    _betterPlayerController!.pause();
-                                  }
-                                  if (GuestHelper.isGuest) {
-                                    GuestHelper.checkGuest(context);
-                                    return;
-                                  }
-                                  context.pushNamed('continueWatchingViewmore');
-                                },
-                                title: "View More",
-                                buttonSize: Size(80, 25),
-                                color: Colors.transparent,
-                                borderColor: customColors.textColor.withOpacity(
-                                  0.5,
-                                ),
-                                borderWidth: 1,
-                                fontSize: PoppinsFontSizeVariant.size12,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                border: true,
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 180),
-                            child: ListView.separated(
-                              padding: EdgeInsets.zero,
-                              clipBehavior: Clip.none,
-                              scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: AppScaler.scaleSize(context, 15),
-                              ),
-                              itemCount: trendingimages.length,
-                              itemBuilder: (context, index) {
-                                return WatchHistory(
-                                  assetImage: trendingimages[index],
-                                  showSaveIcon: false,
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PoppinsText(
-                                context,
-                                'Podcasts',
-                                fontSize: PoppinsFontSizeVariant.size16,
-                                fontWeight: PoppinsFontWeightVariant.medium,
-                                color: customColors.textColor,
-                              ),
-                              AppButton(
-                                buttonSize: Size(80, 25),
-                                color: Colors.transparent,
-                                borderColor: customColors.textColor.withOpacity(
-                                  0.5,
-                                ),
-                                borderWidth: 1,
-                                fontSize: PoppinsFontSizeVariant.size12,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                border: true,
-                                onPressed: () {
-                                  if (_betterPlayerController != null) {
-                                    _betterPlayerController!.pause();
-                                  }
-                                  context.pushNamed('podcasts');
-                                },
-
-                                title: "View More",
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 180),
-                            child: ListView.separated(
-                              padding: EdgeInsets.zero,
-                              clipBehavior: Clip.none,
-                              scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: AppScaler.scaleSize(context, 15),
-                              ),
-                              itemCount: podcardimages.length,
-                              itemBuilder: (context, index) {
-                                return PodcardsWidget(
-                                  assetImage: podcardimages[index],
-                                  title: '',
-                                  showSaveIcon: false,
-                                  fontSizeVariant:
-                                      PoppinsFontSizeVariant.size14,
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-                          HomeBanner(
-                            title: 'Ready to Pitch?',
-                            subtitle:
-                                'Submit your company details for\nmeet the Drapers',
-                            buttonText: 'Apply to Pitch',
-                            buttonColor: Colors.white,
-                            buttonBorderColor: Colors.transparent,
-                            backgroundImage: Assets.images.banner1.path,
-                            buttonBorderWidth: 0,
-                            buttonGradient: [],
-                            onTap: () {
-                              if (_betterPlayerController != null) {
-                                _betterPlayerController!.pause();
-                              }
-                              if (GuestHelper.isGuest) {
-                                GuestHelper.checkGuest(context);
-                                return;
-                              }
-                              context.pushNamed('applyPitch');
-                            },
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-                          HomeBanner(
-                            title: "Vote for Startups!",
-                            subtitle: "Cast your vote in the \ncompetition. ",
-                            buttonText: "Vote Now",
-                            buttonColor: Color(0xff582983),
-                            buttonBorderColor: Color(0xff9333E9),
-                            backgroundImage: Assets.images.banner2.path,
-                            buttonBorderWidth: 2,
-                            buttonGradient: [
-                              Color(0xff582983),
-                              Color(0xff582983),
-                            ],
-                            onTap: () {
-                              if (_betterPlayerController != null) {
-                                _betterPlayerController!.pause();
-                              }
-                              context.pushNamed('voteForStartupScreen');
-                            },
-                          ),
-
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PoppinsText(
-                                context,
-                                'Reels',
-                                fontSize: PoppinsFontSizeVariant.size16,
-                                fontWeight: PoppinsFontWeightVariant.medium,
-                                color: customColors.textColor,
-                              ),
-                              GestureDetector(
-                                behavior: HitTestBehavior.opaque,
-                                onTap: () {
-                                  if (_betterPlayerController != null) {
-                                    _betterPlayerController!.pause();
-                                  }
-                                  if (GuestHelper.isGuest) {
-                                    GuestHelper.checkGuest(context);
-                                    return;
-                                  }
-                                  context.pushNamed('reelWidget');
-                                },
-                                child: AppButton(
-                                  buttonSize: Size(80, 25),
-                                  color: Colors.transparent,
-                                  borderColor: customColors.textColor
-                                      .withOpacity(0.5),
-                                  borderWidth: 1,
-                                  fontSize: PoppinsFontSizeVariant.size12,
-                                  fontWeight: PoppinsFontWeightVariant.regular,
-                                  border: true,
-                                  onPressed: () {
-                                    if (_betterPlayerController != null) {
-                                      _betterPlayerController!.pause();
-                                    }
-                                    context.pushNamed('reelWidget');
-                                  },
-                                  title: "View More",
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 273),
-                            child: ListView.separated(
-                              padding: EdgeInsets.zero,
-                              clipBehavior: Clip.none,
-                              scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: AppScaler.scaleSize(context, 15),
-                              ),
-                              itemCount: reelimages.length,
-                              itemBuilder: (context, index) {
-                                return ReelcardWidget(
-                                  reelCardHeight: AppScaler.scaleHeight(
-                                    context,
-                                    273,
-                                  ),
-                                  reelCardWidth: AppScaler.scaleSize(
-                                    context,
-                                    149,
-                                  ),
-                                  fontSizeVariant:
-                                      PoppinsFontSizeVariant.size12,
-                                  assetImagePath: reelimages[index],
-                                  title: reelTitles[index],
-                                  showSaveIcon: false,
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 30)),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PoppinsText(
-                                context,
-                                'Documentaries',
-                                fontSize: PoppinsFontSizeVariant.size16,
-                                fontWeight: PoppinsFontWeightVariant.medium,
-                                color: customColors.textColor,
-                              ),
-                              AppButton(
-                                buttonSize: Size(80, 25),
-                                color: Colors.transparent,
-                                borderColor: customColors.textColor.withOpacity(
-                                  0.5,
-                                ),
-                                borderWidth: 1,
-                                fontSize: PoppinsFontSizeVariant.size12,
-                                fontWeight: PoppinsFontWeightVariant.regular,
-                                border: true,
-                                onPressed: () {
-                                  if (_betterPlayerController != null) {
-                                    _betterPlayerController!.pause();
-                                  }
-                                  context.pushNamed('documentries');
-                                },
-                                title: "View More",
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                          SizedBox(
-                            height: AppScaler.scaleHeight(context, 180),
-                            child: ListView.separated(
-                              padding: EdgeInsets.zero,
-                              clipBehavior: Clip.none,
-                              scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: AppScaler.scaleSize(context, 15),
-                              ),
-                              itemCount: documentriescard.length,
-                              itemBuilder: (context, index) {
-                                return DocumentriesCardWidget(
-                                  assetImage: documentriescard[index],
-                                  showSaveIcon: false,
-                                );
-                              },
-                            ),
-                          ),
-
-                          SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                        ],
-                      ),
-                    ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppScaler.scaleSize(context, 16),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HomeheaderTab(),
+                  SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                  FullscreenImageScreen(
+                    imagePath: Assets.images.livetvnew.path,
+                    title: "We're Training Heroes of Future!",
                   ),
-                ),
-              ],
+                  SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
+                  TrendingshowsHeader(
+                    showLiveTvBadge: true,
+                    showMoreInfo: true,
+                  ),
+
+                  SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                  ContinuewatchingHeader(),
+
+                  SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
+                  PodcastHeader(),
+                  SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                  HomeBanner(
+                    title: 'Ready to Pitch?',
+                    subtitle:
+                        'Submit your company details for\nmeet the Drapers',
+                    buttonText: 'Apply to Pitch',
+                    buttonColor: AppColors.white,
+                    buttonBorderColor: Colors.transparent,
+                    backgroundImage: Assets.images.banner1.path,
+                    buttonBorderWidth: 0,
+                    buttonGradient: [],
+                    onTap: () {
+                      if (_betterPlayerController != null) {
+                        _betterPlayerController!.pause();
+                      }
+                      if (GuestHelper.isGuest) {
+                        GuestHelper.checkGuest(context);
+                        return;
+                      }
+                      context.pushNamed('applyPitch');
+                    },
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                  HomeBanner(
+                    title: "Vote for Startups!",
+                    subtitle: "Cast your vote in the \ncompetition. ",
+                    buttonText: "Vote Now",
+                    buttonColor: Color(0xff582983),
+                    buttonBorderColor: Color(0xff9333E9),
+                    backgroundImage: Assets.images.banner2.path,
+                    buttonBorderWidth: 2,
+                    buttonGradient: [Color(0xff582983), Color(0xff582983)],
+                    onTap: () {
+                      if (_betterPlayerController != null) {
+                        _betterPlayerController!.pause();
+                      }
+                      context.pushNamed('voteForStartupScreen');
+                    },
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                  ReelsHeader(),
+                  SizedBox(height: AppScaler.scaleHeight(context, 30)),
+                  DocumentriesHeader(),
+                  SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );

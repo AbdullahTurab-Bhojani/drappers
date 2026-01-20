@@ -25,7 +25,6 @@ class EditprofileScreen extends ConsumerStatefulWidget {
 class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _countryCodeController = TextEditingController();
   final _phoneNumberController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
@@ -44,30 +43,24 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
 
   Future<void> _loadUser() async {
     final fetchedUser = await ref.read(localDataProvider).getUser();
-    if (fetchedUser != null) {
-      user = fetchedUser;
+    if (fetchedUser == null) return;
 
-      _fullNameController.text =
-          (fetchedUser.firstName?.isNotEmpty == true &&
-              fetchedUser.lastName?.isNotEmpty == true)
-          ? "${fetchedUser.firstName} ${fetchedUser.lastName}"
-          : fetchedUser.fullName ?? '';
+    user = fetchedUser;
 
-      _emailController.text = fetchedUser.email ?? '';
+    _fullNameController.text =
+        (fetchedUser.firstName?.isNotEmpty == true &&
+            fetchedUser.lastName?.isNotEmpty == true)
+        ? "${fetchedUser.firstName} ${fetchedUser.lastName}"
+        : fetchedUser.fullName ?? '';
 
-      _profileImageUrl = fetchedUser.profileUrl?.isNotEmpty == true
-          ? fetchedUser.profileUrl
-          : 'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg';
+    _emailController.text = fetchedUser.email ?? '';
 
-      if (fetchedUser.phoneNumber?.contains(" ") == true) {
-        final parts = fetchedUser.phoneNumber!.split(" ");
-        _countryCodeController.text = parts.first;
-        _phoneNumberController.text = parts.sublist(1).join();
-      } else {
-        _countryCodeController.text = "+92";
-        _phoneNumberController.text = fetchedUser.phoneNumber ?? '';
-      }
-    }
+    _profileImageUrl = fetchedUser.profileUrl?.isNotEmpty == true
+        ? fetchedUser.profileUrl
+        : 'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg';
+
+    _phoneNumberController.text = fetchedUser.phoneNumber ?? '';
+
     setState(() {});
   }
 
@@ -75,7 +68,6 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
   void dispose() {
     _fullNameController.dispose();
     _emailController.dispose();
-    _countryCodeController.dispose();
     _phoneNumberController.dispose();
     super.dispose();
   }
@@ -94,9 +86,7 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                 final XFile? file = await _picker.pickImage(
                   source: ImageSource.gallery,
                 );
-                if (file != null) {
-                  _uploadImage(File(file.path));
-                }
+                if (file != null) _uploadImage(File(file.path));
               },
             ),
             ListTile(
@@ -107,9 +97,7 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                 final XFile? file = await _picker.pickImage(
                   source: ImageSource.camera,
                 );
-                if (file != null) {
-                  _uploadImage(File(file.path));
-                }
+                if (file != null) _uploadImage(File(file.path));
               },
             ),
           ],
@@ -123,10 +111,9 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
       setState(() => _isUploadingImage = true);
 
       final userId = user?.id ?? "guest";
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child("profile_images")
-          .child("$userId-${DateTime.now().millisecondsSinceEpoch}.jpg");
+      final ref = FirebaseStorage.instance.ref(
+        "profile_images/$userId-${DateTime.now().millisecondsSinceEpoch}.jpg",
+      );
 
       final snapshot = await ref.putFile(file);
       final url = await snapshot.ref.getDownloadURL();
@@ -136,25 +123,23 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
         _profileImageUrl = url;
         _isUploadingImage = false;
       });
-    } catch (e) {
+    } catch (_) {
       setState(() => _isUploadingImage = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final customColors = Theme.of(context).extension<AppCustomColors>()!;
+    final colors = Theme.of(context).extension<AppCustomColors>()!;
     final updateState = ref.watch(updateUserProviderProvider);
 
     return Scaffold(
       body: Stack(
         children: [
-          /// BACKGROUND
           Positioned.fill(
             child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
           ),
 
-          /// MAIN UI
           Column(
             children: [
               AppMainBar(
@@ -171,28 +156,29 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                 elevation: 0,
               ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
+
               GestureDetector(
                 onTap: _pickImage,
                 child: Stack(
+                  alignment: Alignment.center,
                   clipBehavior: Clip.none,
                   children: [
                     CircleAvatar(
                       radius: 60,
                       backgroundImage: _profileImage != null
                           ? FileImage(_profileImage!)
-                          : NetworkImage(_profileImageUrl!) as ImageProvider,
+                          : NetworkImage(_profileImageUrl ?? '')
+                                as ImageProvider,
                       child: _isUploadingImage
                           ? const CircularProgressIndicator(color: Colors.white)
                           : null,
                     ),
                     Positioned(
-                      bottom: -15,
-                      right: 0,
-                      left: 0,
+                      bottom: -12,
                       child: CircleAvatar(
-                        radius: 15,
-                        backgroundColor: customColors.buttonColors.first,
+                        radius: 16,
+                        backgroundColor: colors.buttonColors.first,
                         child: Image.asset(
                           Assets.images.editprofilecameraicon.path,
                           width: 14,
@@ -205,6 +191,18 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
 
               const SizedBox(height: 20),
 
+              PoppinsText(
+                context,
+                _fullNameController.text.isNotEmpty
+                    ? _fullNameController.text
+                    : 'Guest User',
+                fontSize: PoppinsFontSizeVariant.size22,
+                fontWeight: PoppinsFontWeightVariant.medium,
+                color: colors.textColor,
+              ),
+
+              const SizedBox(height: 25),
+
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -213,29 +211,28 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                       NewTextField(
                         controller: _fullNameController,
                         labelText: "Full Name*",
+                        hintText: "Enter your full name",
                         fieldbg: AppColors.tfield,
-                        hintText: "Enter your Full Name",
                       ),
-
                       const SizedBox(height: 15),
                       NewTextField(
-                        hintText: "Enter your email",
+                        hintText: 'Enter your email',
                         controller: _emailController,
-                        labelText: "Email",
+                        labelText: "Email*",
                         readOnly: true,
                         fieldbg: AppColors.tfield,
                       ),
                       const SizedBox(height: 15),
                       NewTextField(
+                        hintText: 'Enter your phone number',
                         controller: _phoneNumberController,
-                        labelText: "Phone Number",
+                        labelText: "Phone Number*",
                         readOnly: true,
-                        hintText: "Enter your phone number",
-
                         fieldbg: AppColors.tfield,
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 30),
                       AppButton(
+                        title: "Save Changes",
                         onPressed: () async {
                           if (!updateState.isLoading) {
                             final name = _fullNameController.text.trim();
@@ -259,8 +256,8 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                             }
                           }
                         },
-                        title: "Save Changes",
                       ),
+                      const SizedBox(height: 40),
                     ],
                   ),
                 ),
@@ -270,12 +267,12 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
 
           if (updateState.isLoading)
             Container(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withOpacity(0.35),
               child: Center(
                 child: LoadingWidget(
                   width: 60,
                   height: 60,
-                  color: AppColors.buttoncolor[0],
+                  color: AppColors.buttoncolor.first,
                 ),
               ),
             ),

@@ -13,8 +13,8 @@ part of 'app_start.dart';
 const appStartupProvider = AppStartupProvider._();
 
 final class AppStartupProvider
-    extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
-    with $FutureModifier<void>, $FutureProvider<void> {
+    extends $FunctionalProvider<AsyncValue<double>, double, Stream<double>>
+    with $FutureModifier<double>, $StreamProvider<double> {
   const AppStartupProvider._()
     : super(
         from: null,
@@ -31,13 +31,13 @@ final class AppStartupProvider
 
   @$internal
   @override
-  $FutureProviderElement<void> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+  $StreamProviderElement<double> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
 
   @override
-  FutureOr<void> create(Ref ref) {
+  Stream<double> create(Ref ref) {
     return appStartup(ref);
   }
 }
 
-String _$appStartupHash() => r'f0022ab7ea2ca1298e82dcab70018694f647710f';
+String _$appStartupHash() => r'38df52ddc3d0ce350592f8f5503cb1410b7c0ef2';
