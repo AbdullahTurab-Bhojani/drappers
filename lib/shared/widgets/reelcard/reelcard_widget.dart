@@ -58,16 +58,13 @@ class _ReelcardWidgetState extends State<ReelcardWidget> {
                     colors: [
                       Colors.transparent,
                       Colors.transparent,
-                      Colors.black.withOpacity(
-                        0.9,
-                      ),
+                      Colors.black.withOpacity(0.9),
                     ],
                   ),
                 ),
               ),
             ),
 
-            // Content
             Padding(
               padding: widget.showSaveIcon
                   ? EdgeInsets.only(

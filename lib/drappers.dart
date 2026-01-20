@@ -111,6 +111,7 @@ import 'package:chewie/src/notifiers/index.dart';
 import 'shared/custom_app_start/providers/app_start.dart';
 import 'shared/video_player/providers/video_player_provider.dart';
 import 'shared/widgets/continue_watching_viewmore.dart';
+import 'shared/widgets/guestloginwidget.dart';
 import 'shared/widgets/podcast/podcast_widget.dart';
 import 'shared/widgets/reelwidget/reel_widget.dart';
 import 'shared/widgets/trendingshow/trendingshow_widget.dart';

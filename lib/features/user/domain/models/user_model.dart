@@ -6,9 +6,9 @@ part 'user_model.g.dart';
 @freezed
 abstract class UserModel with _$UserModel {
   const factory UserModel({
-    required bool isSuccess,
-    required UserData data,
-    required String message,
+    @Default(false) bool isSuccess,
+    UserData? data,
+    @Default('') String message,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
@@ -18,25 +18,25 @@ abstract class UserModel with _$UserModel {
 @freezed
 abstract class UserData with _$UserData {
   const factory UserData({
-    required int id,
-    required String createdOn,
-    required String modifiedOn,
-    required String createdBy,
-    required String modifiedBy,
-    required bool isDeleted,
+    @Default(0) int id,
+    String? createdOn,
+    String? modifiedOn,
+    String? createdBy,
+    String? modifiedBy,
+    @Default(false) bool isDeleted,
     String? ownerId,
     String? firstName,
     String? lastName,
-    required String fullName,
-    required String email,
-    required String phoneNumber,
+    String? fullName,
+    String? email,
+    String? phoneNumber,
     String? password,
-    required String keycloakUserId,
+    String? keycloakUserId,
     String? type,
-    required List<dynamic> addresses,
-    required List<dynamic> recentlySessions,
-    required List<dynamic> allSessions,
-    required int totalSessions,
+    @Default([]) List<dynamic> addresses,
+    @Default([]) List<dynamic> recentlySessions,
+    @Default([]) List<dynamic> allSessions,
+    @Default(0) int totalSessions,
   }) = _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) =>

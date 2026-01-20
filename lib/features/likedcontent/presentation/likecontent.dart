@@ -128,45 +128,45 @@ class _LikecontentState extends State<Likecontent>
 
     void onContinue(int index) {}
 
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
-        child: Column(
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+
+            onTap: () => Navigator.of(context).pop(),
+            child: Padding(
+              padding: EdgeInsets.only(left: AppScaler.scaleSize(context, 20)),
+              child: Image.asset(
+                "assets/images/backicon.png",
+                width: 20,
+                height: 20,
+              ),
+            ),
+          ),
+          title: "Liked Content",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          // actions: [
+          //   Image.asset(
+          //     Assets.images.searchicon.path,
+          //     color: customColors.textColor,
+          //   ),
+          //   SizedBox(width: 20),
+          // ],
+        ),
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppMainBar(
-              leading: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-
-                onTap: () => Navigator.of(context).pop(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 1),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
-              ),
-              title: "Liked Content",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              // actions: [
-              //   Image.asset(
-              //     Assets.images.searchicon.path,
-              //     color: customColors.textColor,
-              //   ),
-              //   SizedBox(width: 20),
-              // ],
-            ),
             SizedBox(height: 10),
             Padding(
               padding: EdgeInsets.only(left: 5, bottom: 20),

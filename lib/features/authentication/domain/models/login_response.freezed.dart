@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginResponse {
 
-@JsonKey(name: 'isSuccess') bool get isSuccess; LoginData get data; String get message;
+@JsonKey(name: 'isSuccess') bool get isSuccess; LoginData? get data; String get message;
 /// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $LoginResponseCopyWith<$Res>  {
   factory $LoginResponseCopyWith(LoginResponse value, $Res Function(LoginResponse) _then) = _$LoginResponseCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'isSuccess') bool isSuccess, LoginData data, String message
+@JsonKey(name: 'isSuccess') bool isSuccess, LoginData? data, String message
 });
 
 
-$LoginDataCopyWith<$Res> get data;
+$LoginDataCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -65,11 +65,11 @@ class _$LoginResponseCopyWithImpl<$Res>
 
 /// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isSuccess = null,Object? data = null,Object? message = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isSuccess = null,Object? data = freezed,Object? message = null,}) {
   return _then(_self.copyWith(
 isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
-as bool,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as LoginData,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as bool,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as LoginData?,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -77,9 +77,12 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$LoginDataCopyWith<$Res> get data {
-  
-  return $LoginDataCopyWith<$Res>(_self.data, (value) {
+$LoginDataCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
+
+  return $LoginDataCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }
@@ -164,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'isSuccess')  bool isSuccess,  LoginData data,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'isSuccess')  bool isSuccess,  LoginData? data,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginResponse() when $default != null:
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -185,7 +188,7 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'isSuccess')  bool isSuccess,  LoginData data,  String message)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'isSuccess')  bool isSuccess,  LoginData? data,  String message)  $default,) {final _that = this;
 switch (_that) {
 case _LoginResponse():
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -205,7 +208,7 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'isSuccess')  bool isSuccess,  LoginData data,  String message)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'isSuccess')  bool isSuccess,  LoginData? data,  String message)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginResponse() when $default != null:
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -220,11 +223,11 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 @JsonSerializable()
 
 class _LoginResponse implements LoginResponse {
-  const _LoginResponse({@JsonKey(name: 'isSuccess') required this.isSuccess, required this.data, required this.message});
+  const _LoginResponse({@JsonKey(name: 'isSuccess') required this.isSuccess, this.data, required this.message});
   factory _LoginResponse.fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);
 
 @override@JsonKey(name: 'isSuccess') final  bool isSuccess;
-@override final  LoginData data;
+@override final  LoginData? data;
 @override final  String message;
 
 /// Create a copy of LoginResponse
@@ -260,11 +263,11 @@ abstract mixin class _$LoginResponseCopyWith<$Res> implements $LoginResponseCopy
   factory _$LoginResponseCopyWith(_LoginResponse value, $Res Function(_LoginResponse) _then) = __$LoginResponseCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'isSuccess') bool isSuccess, LoginData data, String message
+@JsonKey(name: 'isSuccess') bool isSuccess, LoginData? data, String message
 });
 
 
-@override $LoginDataCopyWith<$Res> get data;
+@override $LoginDataCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -277,11 +280,11 @@ class __$LoginResponseCopyWithImpl<$Res>
 
 /// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isSuccess = null,Object? data = null,Object? message = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isSuccess = null,Object? data = freezed,Object? message = null,}) {
   return _then(_LoginResponse(
 isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
-as bool,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as LoginData,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as bool,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as LoginData?,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -290,9 +293,12 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$LoginDataCopyWith<$Res> get data {
-  
-  return $LoginDataCopyWith<$Res>(_self.data, (value) {
+$LoginDataCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
+
+  return $LoginDataCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }
@@ -302,7 +308,7 @@ $LoginDataCopyWith<$Res> get data {
 /// @nodoc
 mixin _$LoginData {
 
-@JsonKey(name: 'access_token') String get accessToken;@JsonKey(name: 'expires_in') int get expiresIn;@JsonKey(name: 'refresh_expires_in') int get refreshExpiresIn;@JsonKey(name: 'refresh_token') String get refreshToken;@JsonKey(name: 'token_type') String get tokenType;@JsonKey(name: 'id_token') String get idToken;@JsonKey(name: 'not-before-policy') int get notBeforePolicy;@JsonKey(name: 'session_state') String get sessionState; String get scope;
+@JsonKey(name: 'access_token') String? get accessToken;@JsonKey(name: 'expires_in') int? get expiresIn;@JsonKey(name: 'refresh_expires_in') int? get refreshExpiresIn;@JsonKey(name: 'refresh_token') String? get refreshToken;@JsonKey(name: 'token_type') String? get tokenType;@JsonKey(name: 'id_token') String? get idToken;@JsonKey(name: 'not-before-policy') int? get notBeforePolicy;@JsonKey(name: 'session_state') String? get sessionState; String? get scope;
 /// Create a copy of LoginData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -335,7 +341,7 @@ abstract mixin class $LoginDataCopyWith<$Res>  {
   factory $LoginDataCopyWith(LoginData value, $Res Function(LoginData) _then) = _$LoginDataCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'access_token') String accessToken,@JsonKey(name: 'expires_in') int expiresIn,@JsonKey(name: 'refresh_expires_in') int refreshExpiresIn,@JsonKey(name: 'refresh_token') String refreshToken,@JsonKey(name: 'token_type') String tokenType,@JsonKey(name: 'id_token') String idToken,@JsonKey(name: 'not-before-policy') int notBeforePolicy,@JsonKey(name: 'session_state') String sessionState, String scope
+@JsonKey(name: 'access_token') String? accessToken,@JsonKey(name: 'expires_in') int? expiresIn,@JsonKey(name: 'refresh_expires_in') int? refreshExpiresIn,@JsonKey(name: 'refresh_token') String? refreshToken,@JsonKey(name: 'token_type') String? tokenType,@JsonKey(name: 'id_token') String? idToken,@JsonKey(name: 'not-before-policy') int? notBeforePolicy,@JsonKey(name: 'session_state') String? sessionState, String? scope
 });
 
 
@@ -352,18 +358,18 @@ class _$LoginDataCopyWithImpl<$Res>
 
 /// Create a copy of LoginData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = null,Object? expiresIn = null,Object? refreshExpiresIn = null,Object? refreshToken = null,Object? tokenType = null,Object? idToken = null,Object? notBeforePolicy = null,Object? sessionState = null,Object? scope = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = freezed,Object? expiresIn = freezed,Object? refreshExpiresIn = freezed,Object? refreshToken = freezed,Object? tokenType = freezed,Object? idToken = freezed,Object? notBeforePolicy = freezed,Object? sessionState = freezed,Object? scope = freezed,}) {
   return _then(_self.copyWith(
-accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
-as String,expiresIn: null == expiresIn ? _self.expiresIn : expiresIn // ignore: cast_nullable_to_non_nullable
-as int,refreshExpiresIn: null == refreshExpiresIn ? _self.refreshExpiresIn : refreshExpiresIn // ignore: cast_nullable_to_non_nullable
-as int,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
-as String,idToken: null == idToken ? _self.idToken : idToken // ignore: cast_nullable_to_non_nullable
-as String,notBeforePolicy: null == notBeforePolicy ? _self.notBeforePolicy : notBeforePolicy // ignore: cast_nullable_to_non_nullable
-as int,sessionState: null == sessionState ? _self.sessionState : sessionState // ignore: cast_nullable_to_non_nullable
-as String,scope: null == scope ? _self.scope : scope // ignore: cast_nullable_to_non_nullable
-as String,
+accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
+as String?,expiresIn: freezed == expiresIn ? _self.expiresIn : expiresIn // ignore: cast_nullable_to_non_nullable
+as int?,refreshExpiresIn: freezed == refreshExpiresIn ? _self.refreshExpiresIn : refreshExpiresIn // ignore: cast_nullable_to_non_nullable
+as int?,refreshToken: freezed == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
+as String?,tokenType: freezed == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
+as String?,idToken: freezed == idToken ? _self.idToken : idToken // ignore: cast_nullable_to_non_nullable
+as String?,notBeforePolicy: freezed == notBeforePolicy ? _self.notBeforePolicy : notBeforePolicy // ignore: cast_nullable_to_non_nullable
+as int?,sessionState: freezed == sessionState ? _self.sessionState : sessionState // ignore: cast_nullable_to_non_nullable
+as String?,scope: freezed == scope ? _self.scope : scope // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -448,7 +454,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'access_token')  String accessToken, @JsonKey(name: 'expires_in')  int expiresIn, @JsonKey(name: 'refresh_expires_in')  int refreshExpiresIn, @JsonKey(name: 'refresh_token')  String refreshToken, @JsonKey(name: 'token_type')  String tokenType, @JsonKey(name: 'id_token')  String idToken, @JsonKey(name: 'not-before-policy')  int notBeforePolicy, @JsonKey(name: 'session_state')  String sessionState,  String scope)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'access_token')  String? accessToken, @JsonKey(name: 'expires_in')  int? expiresIn, @JsonKey(name: 'refresh_expires_in')  int? refreshExpiresIn, @JsonKey(name: 'refresh_token')  String? refreshToken, @JsonKey(name: 'token_type')  String? tokenType, @JsonKey(name: 'id_token')  String? idToken, @JsonKey(name: 'not-before-policy')  int? notBeforePolicy, @JsonKey(name: 'session_state')  String? sessionState,  String? scope)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginData() when $default != null:
 return $default(_that.accessToken,_that.expiresIn,_that.refreshExpiresIn,_that.refreshToken,_that.tokenType,_that.idToken,_that.notBeforePolicy,_that.sessionState,_that.scope);case _:
@@ -469,7 +475,7 @@ return $default(_that.accessToken,_that.expiresIn,_that.refreshExpiresIn,_that.r
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'access_token')  String accessToken, @JsonKey(name: 'expires_in')  int expiresIn, @JsonKey(name: 'refresh_expires_in')  int refreshExpiresIn, @JsonKey(name: 'refresh_token')  String refreshToken, @JsonKey(name: 'token_type')  String tokenType, @JsonKey(name: 'id_token')  String idToken, @JsonKey(name: 'not-before-policy')  int notBeforePolicy, @JsonKey(name: 'session_state')  String sessionState,  String scope)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'access_token')  String? accessToken, @JsonKey(name: 'expires_in')  int? expiresIn, @JsonKey(name: 'refresh_expires_in')  int? refreshExpiresIn, @JsonKey(name: 'refresh_token')  String? refreshToken, @JsonKey(name: 'token_type')  String? tokenType, @JsonKey(name: 'id_token')  String? idToken, @JsonKey(name: 'not-before-policy')  int? notBeforePolicy, @JsonKey(name: 'session_state')  String? sessionState,  String? scope)  $default,) {final _that = this;
 switch (_that) {
 case _LoginData():
 return $default(_that.accessToken,_that.expiresIn,_that.refreshExpiresIn,_that.refreshToken,_that.tokenType,_that.idToken,_that.notBeforePolicy,_that.sessionState,_that.scope);case _:
@@ -489,7 +495,7 @@ return $default(_that.accessToken,_that.expiresIn,_that.refreshExpiresIn,_that.r
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'access_token')  String accessToken, @JsonKey(name: 'expires_in')  int expiresIn, @JsonKey(name: 'refresh_expires_in')  int refreshExpiresIn, @JsonKey(name: 'refresh_token')  String refreshToken, @JsonKey(name: 'token_type')  String tokenType, @JsonKey(name: 'id_token')  String idToken, @JsonKey(name: 'not-before-policy')  int notBeforePolicy, @JsonKey(name: 'session_state')  String sessionState,  String scope)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'access_token')  String? accessToken, @JsonKey(name: 'expires_in')  int? expiresIn, @JsonKey(name: 'refresh_expires_in')  int? refreshExpiresIn, @JsonKey(name: 'refresh_token')  String? refreshToken, @JsonKey(name: 'token_type')  String? tokenType, @JsonKey(name: 'id_token')  String? idToken, @JsonKey(name: 'not-before-policy')  int? notBeforePolicy, @JsonKey(name: 'session_state')  String? sessionState,  String? scope)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginData() when $default != null:
 return $default(_that.accessToken,_that.expiresIn,_that.refreshExpiresIn,_that.refreshToken,_that.tokenType,_that.idToken,_that.notBeforePolicy,_that.sessionState,_that.scope);case _:
@@ -504,18 +510,18 @@ return $default(_that.accessToken,_that.expiresIn,_that.refreshExpiresIn,_that.r
 @JsonSerializable()
 
 class _LoginData implements LoginData {
-  const _LoginData({@JsonKey(name: 'access_token') required this.accessToken, @JsonKey(name: 'expires_in') required this.expiresIn, @JsonKey(name: 'refresh_expires_in') required this.refreshExpiresIn, @JsonKey(name: 'refresh_token') required this.refreshToken, @JsonKey(name: 'token_type') required this.tokenType, @JsonKey(name: 'id_token') required this.idToken, @JsonKey(name: 'not-before-policy') required this.notBeforePolicy, @JsonKey(name: 'session_state') required this.sessionState, required this.scope});
+  const _LoginData({@JsonKey(name: 'access_token') this.accessToken, @JsonKey(name: 'expires_in') this.expiresIn, @JsonKey(name: 'refresh_expires_in') this.refreshExpiresIn, @JsonKey(name: 'refresh_token') this.refreshToken, @JsonKey(name: 'token_type') this.tokenType, @JsonKey(name: 'id_token') this.idToken, @JsonKey(name: 'not-before-policy') this.notBeforePolicy, @JsonKey(name: 'session_state') this.sessionState, this.scope});
   factory _LoginData.fromJson(Map<String, dynamic> json) => _$LoginDataFromJson(json);
 
-@override@JsonKey(name: 'access_token') final  String accessToken;
-@override@JsonKey(name: 'expires_in') final  int expiresIn;
-@override@JsonKey(name: 'refresh_expires_in') final  int refreshExpiresIn;
-@override@JsonKey(name: 'refresh_token') final  String refreshToken;
-@override@JsonKey(name: 'token_type') final  String tokenType;
-@override@JsonKey(name: 'id_token') final  String idToken;
-@override@JsonKey(name: 'not-before-policy') final  int notBeforePolicy;
-@override@JsonKey(name: 'session_state') final  String sessionState;
-@override final  String scope;
+@override@JsonKey(name: 'access_token') final  String? accessToken;
+@override@JsonKey(name: 'expires_in') final  int? expiresIn;
+@override@JsonKey(name: 'refresh_expires_in') final  int? refreshExpiresIn;
+@override@JsonKey(name: 'refresh_token') final  String? refreshToken;
+@override@JsonKey(name: 'token_type') final  String? tokenType;
+@override@JsonKey(name: 'id_token') final  String? idToken;
+@override@JsonKey(name: 'not-before-policy') final  int? notBeforePolicy;
+@override@JsonKey(name: 'session_state') final  String? sessionState;
+@override final  String? scope;
 
 /// Create a copy of LoginData
 /// with the given fields replaced by the non-null parameter values.
@@ -550,7 +556,7 @@ abstract mixin class _$LoginDataCopyWith<$Res> implements $LoginDataCopyWith<$Re
   factory _$LoginDataCopyWith(_LoginData value, $Res Function(_LoginData) _then) = __$LoginDataCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'access_token') String accessToken,@JsonKey(name: 'expires_in') int expiresIn,@JsonKey(name: 'refresh_expires_in') int refreshExpiresIn,@JsonKey(name: 'refresh_token') String refreshToken,@JsonKey(name: 'token_type') String tokenType,@JsonKey(name: 'id_token') String idToken,@JsonKey(name: 'not-before-policy') int notBeforePolicy,@JsonKey(name: 'session_state') String sessionState, String scope
+@JsonKey(name: 'access_token') String? accessToken,@JsonKey(name: 'expires_in') int? expiresIn,@JsonKey(name: 'refresh_expires_in') int? refreshExpiresIn,@JsonKey(name: 'refresh_token') String? refreshToken,@JsonKey(name: 'token_type') String? tokenType,@JsonKey(name: 'id_token') String? idToken,@JsonKey(name: 'not-before-policy') int? notBeforePolicy,@JsonKey(name: 'session_state') String? sessionState, String? scope
 });
 
 
@@ -567,18 +573,18 @@ class __$LoginDataCopyWithImpl<$Res>
 
 /// Create a copy of LoginData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = null,Object? expiresIn = null,Object? refreshExpiresIn = null,Object? refreshToken = null,Object? tokenType = null,Object? idToken = null,Object? notBeforePolicy = null,Object? sessionState = null,Object? scope = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = freezed,Object? expiresIn = freezed,Object? refreshExpiresIn = freezed,Object? refreshToken = freezed,Object? tokenType = freezed,Object? idToken = freezed,Object? notBeforePolicy = freezed,Object? sessionState = freezed,Object? scope = freezed,}) {
   return _then(_LoginData(
-accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
-as String,expiresIn: null == expiresIn ? _self.expiresIn : expiresIn // ignore: cast_nullable_to_non_nullable
-as int,refreshExpiresIn: null == refreshExpiresIn ? _self.refreshExpiresIn : refreshExpiresIn // ignore: cast_nullable_to_non_nullable
-as int,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
-as String,idToken: null == idToken ? _self.idToken : idToken // ignore: cast_nullable_to_non_nullable
-as String,notBeforePolicy: null == notBeforePolicy ? _self.notBeforePolicy : notBeforePolicy // ignore: cast_nullable_to_non_nullable
-as int,sessionState: null == sessionState ? _self.sessionState : sessionState // ignore: cast_nullable_to_non_nullable
-as String,scope: null == scope ? _self.scope : scope // ignore: cast_nullable_to_non_nullable
-as String,
+accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
+as String?,expiresIn: freezed == expiresIn ? _self.expiresIn : expiresIn // ignore: cast_nullable_to_non_nullable
+as int?,refreshExpiresIn: freezed == refreshExpiresIn ? _self.refreshExpiresIn : refreshExpiresIn // ignore: cast_nullable_to_non_nullable
+as int?,refreshToken: freezed == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
+as String?,tokenType: freezed == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
+as String?,idToken: freezed == idToken ? _self.idToken : idToken // ignore: cast_nullable_to_non_nullable
+as String?,notBeforePolicy: freezed == notBeforePolicy ? _self.notBeforePolicy : notBeforePolicy // ignore: cast_nullable_to_non_nullable
+as int?,sessionState: freezed == sessionState ? _self.sessionState : sessionState // ignore: cast_nullable_to_non_nullable
+as String?,scope: freezed == scope ? _self.scope : scope // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

@@ -8,8 +8,7 @@ import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
-import '../../authentication/data/dto/social_dto/social_dto.dart';
-import '../providers/social_auth_provider.dart';
+
 
 class SocialLoginScreen extends ConsumerStatefulWidget {
   const SocialLoginScreen({super.key});
@@ -60,26 +59,7 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
                 SizedBox(height: AppScaler.scaleHeight(context, 28)),
 
                 AppButton(
-                  onPressed: () async {
-                    final authService = ref.read(socialAuthServiceProvider);
-                    final result = await authService.googleSignIn();
-
-                    if (result != null) {
-                      final socialDto = SocialDTO(
-                        subjectToken: result['subject_token'] ?? '',
-                        subjectIssuer: result['subject_issuer'] ?? 'google',
-                        email: result['subject_email'] ?? '',
-                      );
-                      final success = await authService.onSocialAuthApi(
-                        socialDto,
-                      );
-                      if (success && context.mounted) {
-                        context.goNamed(AppRoutes.home.name);
-                      }
-                    } else {
-                      debugPrint("Google Login Cancelled or Failed");
-                    }
-                  },
+                  onPressed: () {},
                   title: 'Login with Google',
                   color: AppColors.graylight,
                   prefixIcon: Image.asset(

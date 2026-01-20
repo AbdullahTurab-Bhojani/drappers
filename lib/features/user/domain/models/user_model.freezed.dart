@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
 
- bool get isSuccess; UserData get data; String get message;
+ bool get isSuccess; UserData? get data; String get message;
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $UserModelCopyWith<$Res>  {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) = _$UserModelCopyWithImpl;
 @useResult
 $Res call({
- bool isSuccess, UserData data, String message
+ bool isSuccess, UserData? data, String message
 });
 
 
-$UserDataCopyWith<$Res> get data;
+$UserDataCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -65,11 +65,11 @@ class _$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isSuccess = null,Object? data = null,Object? message = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isSuccess = null,Object? data = freezed,Object? message = null,}) {
   return _then(_self.copyWith(
 isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
-as bool,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as UserData,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as bool,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as UserData?,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -77,9 +77,12 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UserDataCopyWith<$Res> get data {
-  
-  return $UserDataCopyWith<$Res>(_self.data, (value) {
+$UserDataCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
+
+  return $UserDataCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }
@@ -164,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isSuccess,  UserData data,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isSuccess,  UserData? data,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -185,7 +188,7 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isSuccess,  UserData data,  String message)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isSuccess,  UserData? data,  String message)  $default,) {final _that = this;
 switch (_that) {
 case _UserModel():
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -205,7 +208,7 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isSuccess,  UserData data,  String message)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isSuccess,  UserData? data,  String message)?  $default,) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -220,12 +223,12 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 @JsonSerializable()
 
 class _UserModel implements UserModel {
-  const _UserModel({required this.isSuccess, required this.data, required this.message});
+  const _UserModel({this.isSuccess = false, this.data, this.message = ''});
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
-@override final  bool isSuccess;
-@override final  UserData data;
-@override final  String message;
+@override@JsonKey() final  bool isSuccess;
+@override final  UserData? data;
+@override@JsonKey() final  String message;
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
@@ -260,11 +263,11 @@ abstract mixin class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Re
   factory _$UserModelCopyWith(_UserModel value, $Res Function(_UserModel) _then) = __$UserModelCopyWithImpl;
 @override @useResult
 $Res call({
- bool isSuccess, UserData data, String message
+ bool isSuccess, UserData? data, String message
 });
 
 
-@override $UserDataCopyWith<$Res> get data;
+@override $UserDataCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -277,11 +280,11 @@ class __$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isSuccess = null,Object? data = null,Object? message = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isSuccess = null,Object? data = freezed,Object? message = null,}) {
   return _then(_UserModel(
 isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
-as bool,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as UserData,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as bool,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as UserData?,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -290,9 +293,12 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UserDataCopyWith<$Res> get data {
-  
-  return $UserDataCopyWith<$Res>(_self.data, (value) {
+$UserDataCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
+
+  return $UserDataCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }
@@ -302,7 +308,7 @@ $UserDataCopyWith<$Res> get data {
 /// @nodoc
 mixin _$UserData {
 
- int get id; String get createdOn; String get modifiedOn; String get createdBy; String get modifiedBy; bool get isDeleted; String? get ownerId; String? get firstName; String? get lastName; String get fullName; String get email; String get phoneNumber; String? get password; String get keycloakUserId; String? get type; List<dynamic> get addresses; List<dynamic> get recentlySessions; List<dynamic> get allSessions; int get totalSessions;
+ int get id; String? get createdOn; String? get modifiedOn; String? get createdBy; String? get modifiedBy; bool get isDeleted; String? get ownerId; String? get firstName; String? get lastName; String? get fullName; String? get email; String? get phoneNumber; String? get password; String? get keycloakUserId; String? get type; List<dynamic> get addresses; List<dynamic> get recentlySessions; List<dynamic> get allSessions; int get totalSessions;
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -335,7 +341,7 @@ abstract mixin class $UserDataCopyWith<$Res>  {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) _then) = _$UserDataCopyWithImpl;
 @useResult
 $Res call({
- int id, String createdOn, String modifiedOn, String createdBy, String modifiedBy, bool isDeleted, String? ownerId, String? firstName, String? lastName, String fullName, String email, String phoneNumber, String? password, String keycloakUserId, String? type, List<dynamic> addresses, List<dynamic> recentlySessions, List<dynamic> allSessions, int totalSessions
+ int id, String? createdOn, String? modifiedOn, String? createdBy, String? modifiedBy, bool isDeleted, String? ownerId, String? firstName, String? lastName, String? fullName, String? email, String? phoneNumber, String? password, String? keycloakUserId, String? type, List<dynamic> addresses, List<dynamic> recentlySessions, List<dynamic> allSessions, int totalSessions
 });
 
 
@@ -352,23 +358,23 @@ class _$UserDataCopyWithImpl<$Res>
 
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? createdOn = null,Object? modifiedOn = null,Object? createdBy = null,Object? modifiedBy = null,Object? isDeleted = null,Object? ownerId = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? fullName = null,Object? email = null,Object? phoneNumber = null,Object? password = freezed,Object? keycloakUserId = null,Object? type = freezed,Object? addresses = null,Object? recentlySessions = null,Object? allSessions = null,Object? totalSessions = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? createdOn = freezed,Object? modifiedOn = freezed,Object? createdBy = freezed,Object? modifiedBy = freezed,Object? isDeleted = null,Object? ownerId = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? fullName = freezed,Object? email = freezed,Object? phoneNumber = freezed,Object? password = freezed,Object? keycloakUserId = freezed,Object? type = freezed,Object? addresses = null,Object? recentlySessions = null,Object? allSessions = null,Object? totalSessions = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,createdOn: null == createdOn ? _self.createdOn : createdOn // ignore: cast_nullable_to_non_nullable
-as String,modifiedOn: null == modifiedOn ? _self.modifiedOn : modifiedOn // ignore: cast_nullable_to_non_nullable
-as String,createdBy: null == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
-as String,modifiedBy: null == modifiedBy ? _self.modifiedBy : modifiedBy // ignore: cast_nullable_to_non_nullable
-as String,isDeleted: null == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
+as int,createdOn: freezed == createdOn ? _self.createdOn : createdOn // ignore: cast_nullable_to_non_nullable
+as String?,modifiedOn: freezed == modifiedOn ? _self.modifiedOn : modifiedOn // ignore: cast_nullable_to_non_nullable
+as String?,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
+as String?,modifiedBy: freezed == modifiedBy ? _self.modifiedBy : modifiedBy // ignore: cast_nullable_to_non_nullable
+as String?,isDeleted: null == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
 as bool,ownerId: freezed == ownerId ? _self.ownerId : ownerId // ignore: cast_nullable_to_non_nullable
 as String?,firstName: freezed == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String?,lastName: freezed == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String?,fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
-as String,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String?,keycloakUserId: null == keycloakUserId ? _self.keycloakUserId : keycloakUserId // ignore: cast_nullable_to_non_nullable
-as String,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String?,fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,phoneNumber: freezed == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String?,keycloakUserId: freezed == keycloakUserId ? _self.keycloakUserId : keycloakUserId // ignore: cast_nullable_to_non_nullable
+as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String?,addresses: null == addresses ? _self.addresses : addresses // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,recentlySessions: null == recentlySessions ? _self.recentlySessions : recentlySessions // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,allSessions: null == allSessions ? _self.allSessions : allSessions // ignore: cast_nullable_to_non_nullable
@@ -458,7 +464,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String createdOn,  String modifiedOn,  String createdBy,  String modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String fullName,  String email,  String phoneNumber,  String? password,  String keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserData() when $default != null:
 return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions);case _:
@@ -479,7 +485,7 @@ return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String createdOn,  String modifiedOn,  String createdBy,  String modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String fullName,  String email,  String phoneNumber,  String? password,  String keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)  $default,) {final _that = this;
 switch (_that) {
 case _UserData():
 return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions);case _:
@@ -499,7 +505,7 @@ return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String createdOn,  String modifiedOn,  String createdBy,  String modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String fullName,  String email,  String phoneNumber,  String? password,  String keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)?  $default,) {final _that = this;
 switch (_that) {
 case _UserData() when $default != null:
 return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions);case _:
@@ -514,46 +520,46 @@ return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.
 @JsonSerializable()
 
 class _UserData implements UserData {
-  const _UserData({required this.id, required this.createdOn, required this.modifiedOn, required this.createdBy, required this.modifiedBy, required this.isDeleted, this.ownerId, this.firstName, this.lastName, required this.fullName, required this.email, required this.phoneNumber, this.password, required this.keycloakUserId, this.type, required final  List<dynamic> addresses, required final  List<dynamic> recentlySessions, required final  List<dynamic> allSessions, required this.totalSessions}): _addresses = addresses,_recentlySessions = recentlySessions,_allSessions = allSessions;
+  const _UserData({this.id = 0, this.createdOn, this.modifiedOn, this.createdBy, this.modifiedBy, this.isDeleted = false, this.ownerId, this.firstName, this.lastName, this.fullName, this.email, this.phoneNumber, this.password, this.keycloakUserId, this.type, final  List<dynamic> addresses = const [], final  List<dynamic> recentlySessions = const [], final  List<dynamic> allSessions = const [], this.totalSessions = 0}): _addresses = addresses,_recentlySessions = recentlySessions,_allSessions = allSessions;
   factory _UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
 
-@override final  int id;
-@override final  String createdOn;
-@override final  String modifiedOn;
-@override final  String createdBy;
-@override final  String modifiedBy;
-@override final  bool isDeleted;
+@override@JsonKey() final  int id;
+@override final  String? createdOn;
+@override final  String? modifiedOn;
+@override final  String? createdBy;
+@override final  String? modifiedBy;
+@override@JsonKey() final  bool isDeleted;
 @override final  String? ownerId;
 @override final  String? firstName;
 @override final  String? lastName;
-@override final  String fullName;
-@override final  String email;
-@override final  String phoneNumber;
+@override final  String? fullName;
+@override final  String? email;
+@override final  String? phoneNumber;
 @override final  String? password;
-@override final  String keycloakUserId;
+@override final  String? keycloakUserId;
 @override final  String? type;
  final  List<dynamic> _addresses;
-@override List<dynamic> get addresses {
+@override@JsonKey() List<dynamic> get addresses {
   if (_addresses is EqualUnmodifiableListView) return _addresses;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_addresses);
 }
 
  final  List<dynamic> _recentlySessions;
-@override List<dynamic> get recentlySessions {
+@override@JsonKey() List<dynamic> get recentlySessions {
   if (_recentlySessions is EqualUnmodifiableListView) return _recentlySessions;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_recentlySessions);
 }
 
  final  List<dynamic> _allSessions;
-@override List<dynamic> get allSessions {
+@override@JsonKey() List<dynamic> get allSessions {
   if (_allSessions is EqualUnmodifiableListView) return _allSessions;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_allSessions);
 }
 
-@override final  int totalSessions;
+@override@JsonKey() final  int totalSessions;
 
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
@@ -588,7 +594,7 @@ abstract mixin class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res>
   factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) _then) = __$UserDataCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String createdOn, String modifiedOn, String createdBy, String modifiedBy, bool isDeleted, String? ownerId, String? firstName, String? lastName, String fullName, String email, String phoneNumber, String? password, String keycloakUserId, String? type, List<dynamic> addresses, List<dynamic> recentlySessions, List<dynamic> allSessions, int totalSessions
+ int id, String? createdOn, String? modifiedOn, String? createdBy, String? modifiedBy, bool isDeleted, String? ownerId, String? firstName, String? lastName, String? fullName, String? email, String? phoneNumber, String? password, String? keycloakUserId, String? type, List<dynamic> addresses, List<dynamic> recentlySessions, List<dynamic> allSessions, int totalSessions
 });
 
 
@@ -605,23 +611,23 @@ class __$UserDataCopyWithImpl<$Res>
 
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? createdOn = null,Object? modifiedOn = null,Object? createdBy = null,Object? modifiedBy = null,Object? isDeleted = null,Object? ownerId = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? fullName = null,Object? email = null,Object? phoneNumber = null,Object? password = freezed,Object? keycloakUserId = null,Object? type = freezed,Object? addresses = null,Object? recentlySessions = null,Object? allSessions = null,Object? totalSessions = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? createdOn = freezed,Object? modifiedOn = freezed,Object? createdBy = freezed,Object? modifiedBy = freezed,Object? isDeleted = null,Object? ownerId = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? fullName = freezed,Object? email = freezed,Object? phoneNumber = freezed,Object? password = freezed,Object? keycloakUserId = freezed,Object? type = freezed,Object? addresses = null,Object? recentlySessions = null,Object? allSessions = null,Object? totalSessions = null,}) {
   return _then(_UserData(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,createdOn: null == createdOn ? _self.createdOn : createdOn // ignore: cast_nullable_to_non_nullable
-as String,modifiedOn: null == modifiedOn ? _self.modifiedOn : modifiedOn // ignore: cast_nullable_to_non_nullable
-as String,createdBy: null == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
-as String,modifiedBy: null == modifiedBy ? _self.modifiedBy : modifiedBy // ignore: cast_nullable_to_non_nullable
-as String,isDeleted: null == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
+as int,createdOn: freezed == createdOn ? _self.createdOn : createdOn // ignore: cast_nullable_to_non_nullable
+as String?,modifiedOn: freezed == modifiedOn ? _self.modifiedOn : modifiedOn // ignore: cast_nullable_to_non_nullable
+as String?,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
+as String?,modifiedBy: freezed == modifiedBy ? _self.modifiedBy : modifiedBy // ignore: cast_nullable_to_non_nullable
+as String?,isDeleted: null == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
 as bool,ownerId: freezed == ownerId ? _self.ownerId : ownerId // ignore: cast_nullable_to_non_nullable
 as String?,firstName: freezed == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String?,lastName: freezed == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String?,fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
-as String,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String?,keycloakUserId: null == keycloakUserId ? _self.keycloakUserId : keycloakUserId // ignore: cast_nullable_to_non_nullable
-as String,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String?,fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,phoneNumber: freezed == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String?,keycloakUserId: freezed == keycloakUserId ? _self.keycloakUserId : keycloakUserId // ignore: cast_nullable_to_non_nullable
+as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String?,addresses: null == addresses ? _self._addresses : addresses // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,recentlySessions: null == recentlySessions ? _self._recentlySessions : recentlySessions // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,allSessions: null == allSessions ? _self._allSessions : allSessions // ignore: cast_nullable_to_non_nullable

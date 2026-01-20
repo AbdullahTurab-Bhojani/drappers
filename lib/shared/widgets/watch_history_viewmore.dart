@@ -94,7 +94,8 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
     ];
     final Map<String, dynamic> podcastData = {
       'podcast': Podcast(
-        imagePath:  'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
+        imagePath:
+            'https://resizing.flixster.com/kmvpUXbW_IqKOXauZ76IceSquTA=/fit-in/180x240/v2/https://resizing.flixster.com/2bkyVmLlw_8s0SzA8C1gaYNdoZY=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzJlNTkwNTIxLTM0YmYtNDgzNi1hZGFlLThjODM2ZTA5OTEzMi5qcGc=',
         title: 'Podcast Title Placeholder',
         description: 'This is a description placeholder for the podcast item.',
       ),
@@ -105,46 +106,46 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
 
     void onContinue(int index) {}
 
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
         ),
-        child: Column(
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => Navigator.of(context).pop(),
+            child: Image.asset(
+              "assets/images/backicon.png",
+              width: AppScaler.scaleSize(context, 20),
+              height: AppScaler.scaleHeight(context, 20),
+            ),
+          ),
+          title: "Watch History",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          // actions: [
+          //   Image.asset(
+          //     Assets.images.searchicon.path,
+          //     color: customColors.textColor,
+          //   ),
+          //   SizedBox(width: 20),
+          // ],
+        ),
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppMainBar(
-              leading: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => Navigator.of(context).pop(),
-                child: Image.asset(
-                  "assets/images/backicon.png",
-                  width: AppScaler.scaleSize(context, 20),
-                  height: AppScaler.scaleHeight(context, 20),
-                ),
-              ),
-              title: "Watch History",
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              // actions: [
-              //   Image.asset(
-              //     Assets.images.searchicon.path,
-              //     color: customColors.textColor,
-              //   ),
-              //   SizedBox(width: 20),
-              // ],
-            ),
             SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
             Container(
               padding: EdgeInsets.symmetric(
-                horizontal: AppScaler.scaleSize(context, 10),
+                horizontal: AppScaler.scaleSize(context, 20),
               ),
               child: TabBar(
                 tabAlignment: TabAlignment.start,
@@ -231,9 +232,9 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(
-                          AppScaler.scaleSize(context, 15),
+                          AppScaler.scaleSize(context, 20),
                           AppScaler.scaleHeight(context, 15),
-                          AppScaler.scaleSize(context, 15),
+                          AppScaler.scaleSize(context, 20),
                           0,
                         ),
                         child: Row(
@@ -270,7 +271,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                         height: AppScaler.scaleHeight(context, 250),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: AppScaler.scaleSize(context, 15),
+                            horizontal: AppScaler.scaleSize(context, 20),
                           ),
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
@@ -300,7 +301,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                       SizedBox(height: AppScaler.scaleHeight(context, 30)),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: AppScaler.scaleSize(context, 15),
+                          horizontal: AppScaler.scaleSize(context, 20),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -337,7 +338,7 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
                         final item = entry.value;
                         return Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: AppScaler.scaleSize(context, 15),
+                            horizontal: AppScaler.scaleSize(context, 20),
                             vertical: AppScaler.scaleHeight(context, 8),
                           ),
                           child: VideosBoxWidget(

@@ -77,68 +77,65 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
-          ),
-
-          Column(
-            children: [
-              AppMainBar(
-                leadingText: "Edit Watchlist",
-                width: AppScaler.scaleSize(context, 200),
-                title: "",
-                centerTitle: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                actions: [
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => context.pop(),
-                    child: PoppinsText(
-                      context,
-                      "Cancel",
-                      fontSize: PoppinsFontSizeVariant.size14,
-                      fontWeight: PoppinsFontWeightVariant.medium,
-                      color: customColors.textColor,
-                    ),
-                  ),
-                  SizedBox(width: AppScaler.scaleSize(context, 20)),
-                ],
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leadingText: "Edit Watchlist",
+          width: AppScaler.scaleSize(context, 200),
+          title: "",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => context.pop(),
+              child: PoppinsText(
+                context,
+                "Cancel",
+                fontSize: PoppinsFontSizeVariant.size14,
+                fontWeight: PoppinsFontWeightVariant.medium,
+                color: customColors.textColor,
               ),
-
-              Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets.only(
-                    bottom: AppScaler.scaleHeight(context, 100),
-                  ),
-                  itemCount: watchlistItems.length,
-                  itemBuilder: (context, index) {
-                    final item = watchlistItems[index];
-
-                    return EditWatchlistItemTile(
-                      thumbnailPath: item.thumbnailPath,
-                      title: item.title,
-                      year: item.year,
-                      isChecked: item.isSelected,
-                      onToggle: (newValue) => _onItemToggle(index, newValue),
-                    );
-                  },
+            ),
+            SizedBox(width: AppScaler.scaleSize(context, 20)),
+          ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.only(
+                  bottom: AppScaler.scaleHeight(context, 20),
                 ),
-              ),
-            ],
-          ),
+                itemCount: watchlistItems.length,
+                itemBuilder: (context, index) {
+                  final item = watchlistItems[index];
 
-          if (selectedCount > 0)
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: AppScaler.scaleHeight(context, 20),
-              child: Padding(
+                  return EditWatchlistItemTile(
+                    thumbnailPath: item.thumbnailPath,
+                    title: item.title,
+                    year: item.year,
+                    isChecked: item.isSelected,
+                    onToggle: (newValue) => _onItemToggle(index, newValue),
+                  );
+                },
+              ),
+            ),
+
+            if (selectedCount > 0)
+              Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AppScaler.scaleSize(context, 20),
+                  vertical: AppScaler.scaleHeight(context, 20),
                 ),
                 child: AppButton(
                   buttonSize: Size(double.infinity, 40),
@@ -159,8 +156,8 @@ class _EditWatchlistScreenState extends State<EditWatchlistScreen> {
                   title: "Remove",
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
