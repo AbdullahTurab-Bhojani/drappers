@@ -1,3 +1,5 @@
+// ignore_for_file: unused_result
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../authentication/data/dto/user_update_dto/user_update.dart';

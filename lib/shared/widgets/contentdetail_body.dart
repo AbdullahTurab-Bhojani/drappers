@@ -4,7 +4,6 @@ import '../../core/extensions/theme_extension.dart';
 import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
-import 'cardwidget/card_widget.dart';
 import 'reelcard/reelcard_widget.dart';
 import 'trending_grid.dart';
 

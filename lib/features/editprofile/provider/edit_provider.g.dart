@@ -42,7 +42,7 @@ final class UpdateUserProviderProvider
 }
 
 String _$updateUserProviderHash() =>
-    r'42e1b6880734d9c0918377019d9bbba2283a77c5';
+    r'd46399f5fae9e623e3592cb71cef79e24ed7058e';
 
 abstract class _$UpdateUserProvider extends $Notifier<AppLoadingState> {
   AppLoadingState build();

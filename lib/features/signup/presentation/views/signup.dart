@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,6 +38,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     setState(() {
       rememberMe = value ?? false;
     });
+  }
+
+  bool _isStrongPassword(String value) {
+    final regex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$');
+    return regex.hasMatch(value);
   }
 
   Future<void> onSubmit() async {
@@ -241,10 +248,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                   hintText: "**********",
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
-                                      return "Password required";
+                                      return "New password required";
                                     }
-                                    if (value.trim().length < 6) {
-                                      return "Password must be at least 6 characters";
+                                    if (!_isStrongPassword(value)) {
+                                      return 'Password must be 8 chars with letter, number & symbol';
                                     }
                                     return null;
                                   },
@@ -272,6 +279,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                 ),
                                 AppButton(
                                   onPressed: () {
+                                    FocusScope.of(
+                                      context,
+                                    ).unfocus(); // Dismiss the keyboard
                                     if (!isLoading) {
                                       onSubmit();
                                     }

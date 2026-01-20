@@ -290,6 +290,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           SizedBox(height: AppScaler.scaleHeight(context, 40)),
                           AppButton(
                             onPressed: () {
+                              FocusScope.of(context).unfocus();
                               if (!isLoading) {
                                 onSubmit();
                               }

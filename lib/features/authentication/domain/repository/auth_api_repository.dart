@@ -9,10 +9,6 @@ import '../../data/dto/social_dto/social_dto.dart';
 import '../../data/dto/user_update_dto/user_update.dart';
 import '../models/login_response.dart';
 import '../models/base_response.dart';
-import '../../data/dto/login_dto/login_dto.dart';
-import '../../data/dto/sign_up_dto/sign_up.dart';
-import '../../data/dto/social_dto/social_dto.dart';
-import '../models/login_response.dart';
 import '../models/signup_response.dart';
 import '../models/user_response.dart';
 import 'auth_repository.dart';
@@ -37,6 +33,7 @@ class AuthApiRepository implements AuthRepository {
     return await AuthApi(client).socialLogin(socialDTO);
   }
 
+  @override
   Future<BaseResponse> logout(LogoutDTO logoutDto) async {
     return await AuthApi(client).logout(logoutDto);
   }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ResetPasswordDTO {
 
-@JsonKey(name: 'newPassword') String get newPassword;@JsonKey(name: 'temporary') bool get temporary;
+@JsonKey(name: 'newPassword') String get newPassword;
 /// Create a copy of ResetPasswordDTO
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ResetPasswordDTOCopyWith<ResetPasswordDTO> get copyWith => _$ResetPasswordDTOCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordDTO&&(identical(other.newPassword, newPassword) || other.newPassword == newPassword)&&(identical(other.temporary, temporary) || other.temporary == temporary));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordDTO&&(identical(other.newPassword, newPassword) || other.newPassword == newPassword));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,newPassword,temporary);
+int get hashCode => Object.hash(runtimeType,newPassword);
 
 @override
 String toString() {
-  return 'ResetPasswordDTO(newPassword: $newPassword, temporary: $temporary)';
+  return 'ResetPasswordDTO(newPassword: $newPassword)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ResetPasswordDTOCopyWith<$Res>  {
   factory $ResetPasswordDTOCopyWith(ResetPasswordDTO value, $Res Function(ResetPasswordDTO) _then) = _$ResetPasswordDTOCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'newPassword') String newPassword,@JsonKey(name: 'temporary') bool temporary
+@JsonKey(name: 'newPassword') String newPassword
 });
 
 
@@ -65,11 +65,10 @@ class _$ResetPasswordDTOCopyWithImpl<$Res>
 
 /// Create a copy of ResetPasswordDTO
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? newPassword = null,Object? temporary = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? newPassword = null,}) {
   return _then(_self.copyWith(
 newPassword: null == newPassword ? _self.newPassword : newPassword // ignore: cast_nullable_to_non_nullable
-as String,temporary: null == temporary ? _self.temporary : temporary // ignore: cast_nullable_to_non_nullable
-as bool,
+as String,
   ));
 }
 
@@ -154,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'newPassword')  String newPassword, @JsonKey(name: 'temporary')  bool temporary)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'newPassword')  String newPassword)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ResetPasswordDTO() when $default != null:
-return $default(_that.newPassword,_that.temporary);case _:
+return $default(_that.newPassword);case _:
   return orElse();
 
 }
@@ -175,10 +174,10 @@ return $default(_that.newPassword,_that.temporary);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'newPassword')  String newPassword, @JsonKey(name: 'temporary')  bool temporary)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'newPassword')  String newPassword)  $default,) {final _that = this;
 switch (_that) {
 case _ResetPasswordDTO():
-return $default(_that.newPassword,_that.temporary);case _:
+return $default(_that.newPassword);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +194,10 @@ return $default(_that.newPassword,_that.temporary);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'newPassword')  String newPassword, @JsonKey(name: 'temporary')  bool temporary)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'newPassword')  String newPassword)?  $default,) {final _that = this;
 switch (_that) {
 case _ResetPasswordDTO() when $default != null:
-return $default(_that.newPassword,_that.temporary);case _:
+return $default(_that.newPassword);case _:
   return null;
 
 }
@@ -210,11 +209,10 @@ return $default(_that.newPassword,_that.temporary);case _:
 @JsonSerializable()
 
 class _ResetPasswordDTO implements ResetPasswordDTO {
-  const _ResetPasswordDTO({@JsonKey(name: 'newPassword') required this.newPassword, @JsonKey(name: 'temporary') required this.temporary});
+  const _ResetPasswordDTO({@JsonKey(name: 'newPassword') required this.newPassword});
   factory _ResetPasswordDTO.fromJson(Map<String, dynamic> json) => _$ResetPasswordDTOFromJson(json);
 
 @override@JsonKey(name: 'newPassword') final  String newPassword;
-@override@JsonKey(name: 'temporary') final  bool temporary;
 
 /// Create a copy of ResetPasswordDTO
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +227,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetPasswordDTO&&(identical(other.newPassword, newPassword) || other.newPassword == newPassword)&&(identical(other.temporary, temporary) || other.temporary == temporary));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetPasswordDTO&&(identical(other.newPassword, newPassword) || other.newPassword == newPassword));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,newPassword,temporary);
+int get hashCode => Object.hash(runtimeType,newPassword);
 
 @override
 String toString() {
-  return 'ResetPasswordDTO(newPassword: $newPassword, temporary: $temporary)';
+  return 'ResetPasswordDTO(newPassword: $newPassword)';
 }
 
 
@@ -249,7 +247,7 @@ abstract mixin class _$ResetPasswordDTOCopyWith<$Res> implements $ResetPasswordD
   factory _$ResetPasswordDTOCopyWith(_ResetPasswordDTO value, $Res Function(_ResetPasswordDTO) _then) = __$ResetPasswordDTOCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'newPassword') String newPassword,@JsonKey(name: 'temporary') bool temporary
+@JsonKey(name: 'newPassword') String newPassword
 });
 
 
@@ -266,11 +264,10 @@ class __$ResetPasswordDTOCopyWithImpl<$Res>
 
 /// Create a copy of ResetPasswordDTO
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? newPassword = null,Object? temporary = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? newPassword = null,}) {
   return _then(_ResetPasswordDTO(
 newPassword: null == newPassword ? _self.newPassword : newPassword // ignore: cast_nullable_to_non_nullable
-as String,temporary: null == temporary ? _self.temporary : temporary // ignore: cast_nullable_to_non_nullable
-as bool,
+as String,
   ));
 }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, avoid_print, use_build_context_synchronously
+
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +49,7 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
 
     user = fetchedUser;
 
+    // Only set controller text for display; no updates yet
     _fullNameController.text =
         (fetchedUser.firstName?.isNotEmpty == true &&
             fetchedUser.lastName?.isNotEmpty == true)
@@ -54,12 +57,10 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
         : fetchedUser.fullName ?? '';
 
     _emailController.text = fetchedUser.email ?? '';
-
+    _phoneNumberController.text = fetchedUser.phoneNumber ?? '';
     _profileImageUrl = fetchedUser.profileUrl?.isNotEmpty == true
         ? fetchedUser.profileUrl
         : 'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg';
-
-    _phoneNumberController.text = fetchedUser.phoneNumber ?? '';
 
     setState(() {});
   }
@@ -111,20 +112,55 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
       setState(() => _isUploadingImage = true);
 
       final userId = user?.id ?? "guest";
+
       final ref = FirebaseStorage.instance.ref(
         "profile_images/$userId-${DateTime.now().millisecondsSinceEpoch}.jpg",
       );
-
       final snapshot = await ref.putFile(file);
       final url = await snapshot.ref.getDownloadURL();
 
       setState(() {
         _profileImage = file;
-        _profileImageUrl = url;
+        _profileImageUrl = url; // store uploaded image URL
         _isUploadingImage = false;
       });
-    } catch (_) {
+
+      print("Upload complete! URL: $url");
+    } catch (e) {
       setState(() => _isUploadingImage = false);
+      print("Upload failed: $e");
+    }
+  }
+
+  Future<void> _saveChanges() async {
+    final updateState = ref.read(updateUserProviderProvider);
+
+    if (updateState.isLoading) return;
+
+    final name = _fullNameController.text.trim();
+    if (name.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Full Name cannot be empty")),
+      );
+      return;
+    }
+
+    final parts = name.split(" ");
+
+    final dto = UpdateUserDTO(
+      firstName: parts.first,
+      lastName: parts.length > 1 ? parts.sublist(1).join(" ") : '',
+      profileUrl: _profileImageUrl!,
+    );
+
+    final res = await ref
+        .read(updateUserProviderProvider.notifier)
+        .onSubmit(dto: dto);
+
+    if (res != null && mounted) {
+      // update local storage only after successful backend update
+      await ref.read(localDataProvider).saveUser(res);
+      Navigator.pop(context, res);
     }
   }
 
@@ -139,7 +175,6 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
           Positioned.fill(
             child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
           ),
-
           Column(
             children: [
               AppMainBar(
@@ -155,9 +190,7 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
-
               const SizedBox(height: 30),
-
               GestureDetector(
                 onTap: _pickImage,
                 child: Stack(
@@ -188,21 +221,22 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                   ],
                 ),
               ),
-
               const SizedBox(height: 20),
-
               PoppinsText(
                 context,
-                _fullNameController.text.isNotEmpty
-                    ? _fullNameController.text
-                    : 'Guest User',
+                user != null
+                    ? (user!.firstName != null &&
+                              user!.firstName!.isNotEmpty &&
+                              user!.lastName != null &&
+                              user!.lastName!.isNotEmpty
+                          ? "${user!.firstName!} ${user!.lastName!}"
+                          : user!.fullName!)
+                    : "Guest User",
                 fontSize: PoppinsFontSizeVariant.size22,
                 fontWeight: PoppinsFontWeightVariant.medium,
                 color: colors.textColor,
               ),
-
               const SizedBox(height: 25),
-
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -231,30 +265,19 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                         fieldbg: AppColors.tfield,
                       ),
                       const SizedBox(height: 30),
+                      AppButton(title: "Save Changes", onPressed: _saveChanges),
+                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
                       AppButton(
-                        title: "Save Changes",
-                        onPressed: () async {
-                          if (!updateState.isLoading) {
-                            final name = _fullNameController.text.trim();
-                            if (name.isEmpty) return;
-
-                            final parts = name.split(" ");
-                            final dto = UpdateUserDTO(
-                              firstName: parts.first,
-                              lastName: parts.length > 1
-                                  ? parts.sublist(1).join(" ")
-                                  : '',
-                              profileUrl: _profileImageUrl!,
-                            );
-
-                            final res = await ref
-                                .read(updateUserProviderProvider.notifier)
-                                .onSubmit(dto: dto);
-
-                            if (res != null && mounted) {
-                              Navigator.pop(context, res);
-                            }
-                          }
+                        border: true,
+                        borderWidth: 2,
+                        borderColor: Colors.white,
+                        buttonGradient: [
+                          Colors.transparent,
+                          Colors.transparent,
+                        ],
+                        title: "Discard Changes",
+                        onPressed: () {
+                          Navigator.pop(context);
                         },
                       ),
                       const SizedBox(height: 40),
@@ -264,7 +287,6 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
               ),
             ],
           ),
-
           if (updateState.isLoading)
             Container(
               color: Colors.black.withOpacity(0.35),

@@ -8,7 +8,6 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../shared/widgets/watchlistitemtile.dart';
-import '../../../shared/widgets/editwatchlisttitle.dart';
 import '../../../shared/widgets/popupmenuitem/remove_popup.dart';
 
 class WatchlistData {
@@ -119,7 +118,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
             Expanded(
               child: ListView.separated(
                 itemCount: menuList.length,
-                separatorBuilder: (_, __) => SizedBox(height: 15),
+                separatorBuilder: (_, _) => SizedBox(height: 15),
                 itemBuilder: (context, index) {
                   final item = menuList[index];
 

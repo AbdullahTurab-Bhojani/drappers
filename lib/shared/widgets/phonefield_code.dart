@@ -59,8 +59,12 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
   @override
   void dispose() {
-    for (final c in _otpControllers) c.dispose();
-    for (final f in _focusNodes) f.dispose();
+    for (final c in _otpControllers) {
+      c.dispose();
+    }
+    for (final f in _focusNodes) {
+      f.dispose();
+    }
     super.dispose();
   }
 

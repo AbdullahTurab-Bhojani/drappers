@@ -23,9 +23,9 @@ class MyApp extends ConsumerWidget {
         builder: (_, child) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(
-              textScaleFactor: 1.0,
               viewInsets: MediaQuery.of(context).viewInsets,
               viewPadding: MediaQuery.of(context).viewPadding,
+              textScaler: TextScaler.linear(1.0),
               padding: MediaQuery.of(context).padding,
             ),
             child: child!,

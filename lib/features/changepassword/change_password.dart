@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -45,7 +47,6 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
     try {
       final dto = ResetPasswordDTO(
         newPassword: newPasswordController.text.trim(),
-        temporary: true,
       );
       print('Sending ResetPasswordDTO: ${dto.toJson()}');
 
@@ -152,6 +153,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                       SizedBox(height: AppScaler.scaleHeight(context, 24)),
                       AppButton(
                         onPressed: () {
+                          FocusScope.of(context).unfocus();
                           if (!isLoading) {
                             _onChangePassword();
                           }

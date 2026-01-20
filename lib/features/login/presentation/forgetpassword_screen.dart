@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -60,120 +60,111 @@ class _ForgetpasswordScreenState extends ConsumerState<ForgetpasswordScreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Assets.images.screensbg.path),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: AppScaler.scaleSize(context, 20),
-            right: AppScaler.scaleSize(context, 20),
-            top: AppScaler.scaleHeight(context, 118),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-
-                onTap: () {
-                  context.pop();
-                },
-                child: Image.asset(Assets.images.backicon.path),
+    return Stack(
+      children: [
+        Scaffold(
+          body: Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(Assets.images.screensbg.path),
+                fit: BoxFit.cover,
               ),
-              SizedBox(height: AppScaler.scaleHeight(context, 40)),
-              PoppinsText(
-                context,
-                "Forget Password?",
-                fontSize: PoppinsFontSizeVariant.size24,
-                fontWeight: PoppinsFontWeightVariant.semiBold,
-                color: customColors.textColor,
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: AppScaler.scaleSize(context, 20),
+                right: AppScaler.scaleSize(context, 20),
+                top: AppScaler.scaleHeight(context, 118),
               ),
-              SizedBox(height: AppScaler.scaleHeight(context, 4)),
-              PoppinsText(
-                context,
-                'Don’t worry, this happens.',
-                fontSize: PoppinsFontSizeVariant.size16,
-                fontWeight: PoppinsFontWeightVariant.regular,
-                color: customColors.textColor,
-              ),
-              SizedBox(height: AppScaler.scaleHeight(context, 36)),
-
-              PoppinsText(
-                context,
-                'Receive Code Via email',
-                fontSize: PoppinsFontSizeVariant.size16,
-                fontWeight: PoppinsFontWeightVariant.regular,
-                color: customColors.textColor,
-              ),
-              SizedBox(height: AppScaler.scaleHeight(context, 24)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 40,
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      NewTextField(
-                        fieldbg: AppColors.tfield,
-                        controller: _emailController,
-                        labelText: "Enter your Email Address or Phone*",
-                        hintText: "example@mailinator.com",
-                        filledColor: AppColors.tfield,
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return "Email required";
-                          }
-                          if (!value.contains("@")) {
-                            return "Enter valid email";
-                          }
-                          return null;
-                        },
-                      ),
-                      // RadioTileWidget(
-                      //   selected: isPhone,
-                      //   title: "Enter Your Email ",
-                      //   subtitle: "jo********@gmail.co|",
-                      //   onTap: () {
-                      //     setState(() {
-                      //       isPhone = true;
-                      //     });
-                      //   },
-                      // ),
-
-                      // RadioTileWidget(
-                      //   selected: !isPhone,
-                      //   title: "Enter Phone ",
-                      //   subtitle: "03xxxxxxx59",
-                      //   onTap: () {
-                      //     setState(() {
-                      //       isPhone = false;
-                      //     });
-                      //   },
-                      // ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 24)),
-                      AppButton(
-                        onPressed: () {
-                          if (!isLoading) {
-                            submitForgetPassword();
-                          }
-                        },
-                        title: isLoading ? 'Loading...' : 'Submit',
-                      ),
-                    ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      context.pop();
+                    },
+                    child: Image.asset(Assets.images.backicon.path),
                   ),
-                ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 40)),
+                  PoppinsText(
+                    context,
+                    "Forget Password?",
+                    fontSize: PoppinsFontSizeVariant.size24,
+                    fontWeight: PoppinsFontWeightVariant.semiBold,
+                    color: customColors.textColor,
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 4)),
+                  PoppinsText(
+                    context,
+                    'Don’t worry, this happens.',
+                    fontSize: PoppinsFontSizeVariant.size16,
+                    fontWeight: PoppinsFontWeightVariant.regular,
+                    color: customColors.textColor,
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 36)),
+                  PoppinsText(
+                    context,
+                    'Receive Code Via email',
+                    fontSize: PoppinsFontSizeVariant.size16,
+                    fontWeight: PoppinsFontWeightVariant.regular,
+                    color: customColors.textColor,
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 24)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 40,
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          NewTextField(
+                            fieldbg: AppColors.tfield,
+                            controller: _emailController,
+                            labelText: "Enter your Email Address or Phone*",
+                            hintText: "example@mailinator.com",
+                            filledColor: AppColors.tfield,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Email required";
+                              }
+                              if (!value.contains("@")) {
+                                return "Enter valid email";
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: AppScaler.scaleHeight(context, 24)),
+                          AppButton(
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+                              if (!isLoading) {
+                                submitForgetPassword();
+                              }
+                            },
+                            title: 'Submit',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
+
+        if (isLoading)
+          Container(
+            color: Colors.black.withOpacity(0.2),
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+          ),
+      ],
     );
   }
 }
