@@ -8,7 +8,8 @@ import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
-
+import '../../authentication/data/dto/social_dto/social_dto.dart';
+import '../providers/social_auth_provider.dart';
 
 class SocialLoginScreen extends ConsumerStatefulWidget {
   const SocialLoginScreen({super.key});
@@ -18,6 +19,8 @@ class SocialLoginScreen extends ConsumerStatefulWidget {
 }
 
 class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
+  bool _isGoogleLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -60,14 +63,89 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
                 SizedBox(height: AppScaler.scaleHeight(context, 28)),
 
                 AppButton(
-                  onPressed: () {},
-                  title: 'Login with Google',
+                  onPressed: () async {
+                    if (!_isGoogleLoading) {
+                      setState(() => _isGoogleLoading = true);
+
+                      final socialAuthService = ref.read(
+                        socialAuthServiceProvider,
+                      );
+
+                      Map<String, dynamic>? googleData;
+                      try {
+                        googleData = await socialAuthService.googleSignIn();
+                        if (googleData == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Google Sign-In failed'),
+                            ),
+                          );
+                          setState(() => _isGoogleLoading = false);
+                          return;
+                        }
+                      } catch (e, st) {
+                        debugPrint('Google Sign-In error: $e\n$st');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Google Sign-In encountered an error',
+                            ),
+                          ),
+                        );
+                        setState(() => _isGoogleLoading = false);
+                        return;
+                      }
+
+                      final socialDto = SocialDTO(
+                        subjectToken: googleData['subject_token'] ?? '',
+                        subjectIssuer: googleData['subject_issuer'] ?? '',
+                        email: googleData['subject_email'] ?? '',
+                      );
+
+                      bool success = false;
+                      try {
+                        success = await socialAuthService.onSocialAuthApi(
+                          socialDto,
+                        );
+                      } catch (e, st) {
+                        debugPrint('Backend Social Auth error: $e\n$st');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Social login API error'),
+                          ),
+                        );
+                        setState(() => _isGoogleLoading = false);
+                        return;
+                      }
+
+                      if (!context.mounted) return;
+
+                      setState(() => _isGoogleLoading = false);
+
+                      if (success) {
+                        context.go('/home');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Social login failed')),
+                        );
+                      }
+                    }
+                  },
+                  title: _isGoogleLoading ? '' : 'Login with Google',
+
+                  prefixIcon: _isGoogleLoading
+                      ? LoadingWidget(
+                          color: AppColors.buttoncolor.first,
+                          width: 22,
+                          height: 22,
+                        )
+                      : Image.asset(
+                          Assets.images.googleicon.path,
+                          width: AppScaler.scaleSize(context, 26),
+                          height: AppScaler.scaleHeight(context, 26),
+                        ),
+
                   color: AppColors.graylight,
-                  prefixIcon: Image.asset(
-                    Assets.images.googleicon.path,
-                    width: AppScaler.scaleSize(context, 26),
-                    height: AppScaler.scaleHeight(context, 26),
-                  ),
                   buttonGradient: [AppColors.graylight, AppColors.graylight],
                 ),
 
@@ -77,6 +155,7 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
                   onPressed: () {
                     context.goNamed(AppRoutes.home.name);
                   },
+
                   title: 'Login with Apple',
                   color: AppColors.graylight,
                   prefixIcon: Image.asset(

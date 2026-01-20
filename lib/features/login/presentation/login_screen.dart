@@ -126,29 +126,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               ),
               child: Column(
                 children: [
-                  // Logo and Header Section
+                  SizedBox(height: 20),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          context.pushNamed(AppRoutes.socialLoginScreen.name);
+                        },
+                        child: Image.asset(Assets.images.backicon.path),
+                      ),
+                    ],
+                  ),
                   Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          top: AppScaler.scaleHeight(context, 110),
+                          top: AppScaler.scaleHeight(context, 80),
                           left: AppScaler.scaleSize(context, 10),
                         ),
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: GestureDetector(
-                                behavior: HitTestBehavior.opaque,
-                                onTap: () {
-                                  context.pushNamed(
-                                    AppRoutes.socialLoginScreen.name,
-                                  );
-                                },
-                                child: Image.asset(Assets.images.backicon.path),
-                              ),
-                            ),
                             Image.asset(
                               Assets.images.logo2.path,
                               width: AppScaler.scaleSize(context, 180),
@@ -289,6 +288,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                           SizedBox(height: AppScaler.scaleHeight(context, 40)),
                           AppButton(
+                            isLoading: isLoading,
                             onPressed: () {
                               FocusScope.of(context).unfocus();
                               if (!isLoading) {

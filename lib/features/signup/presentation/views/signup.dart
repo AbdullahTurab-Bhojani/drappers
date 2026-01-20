@@ -278,10 +278,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                   height: AppScaler.scaleHeight(context, 40),
                                 ),
                                 AppButton(
+                                  isLoading: isLoading,
                                   onPressed: () {
-                                    FocusScope.of(
-                                      context,
-                                    ).unfocus(); // Dismiss the keyboard
+                                    FocusScope.of(context).unfocus();
                                     if (!isLoading) {
                                       onSubmit();
                                     }
@@ -302,17 +301,6 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               ),
             ),
           ),
-          if (isLoading)
-            Container(
-              color: Colors.black.withOpacity(0.3),
-              child: Center(
-                child: LoadingWidget(
-                  color: AppColors.buttoncolor.first,
-                  height: 60,
-                  width: 60,
-                ),
-              ),
-            ),
         ],
       ),
     );

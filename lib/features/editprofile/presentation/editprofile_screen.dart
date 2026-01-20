@@ -265,7 +265,11 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                         fieldbg: AppColors.tfield,
                       ),
                       const SizedBox(height: 30),
-                      AppButton(title: "Save Changes", onPressed: _saveChanges),
+                      AppButton(
+                        isLoading: updateState.isLoading,
+                        title: "Save Changes",
+                        onPressed: _saveChanges,
+                      ),
                       SizedBox(height: AppScaler.scaleHeight(context, 15)),
                       AppButton(
                         border: true,
@@ -287,17 +291,6 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
               ),
             ],
           ),
-          if (updateState.isLoading)
-            Container(
-              color: Colors.black.withOpacity(0.35),
-              child: Center(
-                child: LoadingWidget(
-                  width: 60,
-                  height: 60,
-                  color: AppColors.buttoncolor.first,
-                ),
-              ),
-            ),
         ],
       ),
     );

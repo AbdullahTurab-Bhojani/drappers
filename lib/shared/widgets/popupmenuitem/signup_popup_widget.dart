@@ -65,12 +65,13 @@ class _SignupPopupWidget extends ConsumerState<SignupPopupWidget> {
 
             SizedBox(height: AppScaler.scaleHeight(context, 30)),
             AppButton(
+              isLoading: state.isLoading,
               onPressed: () async {
                 if (!state.isLoading) {
                   await ref.read(logoutProviderProvider.notifier).logout();
                 }
               },
-              title: state.isLoading ? "Loading..." : "Continue",
+              title: "Continue",
             ),
 
             SizedBox(height: AppScaler.scaleHeight(context, 14)),
