@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -20,13 +18,10 @@ class ChangePassword extends ConsumerStatefulWidget {
 }
 
 class _ChangePasswordState extends ConsumerState<ChangePassword> {
-  bool isPhone = true;
-  bool isShow = false;
-
-  final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
@@ -50,25 +45,25 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
     try {
       final dto = ResetPasswordDTO(
         newPassword: newPasswordController.text.trim(),
-        temporary: false,
+        temporary: true,
       );
+      print('Sending ResetPasswordDTO: ${dto.toJson()}');
 
       final message = await ref.read(changePasswordProvider(dto).future);
 
       if (!mounted) return;
-
       setState(() => isLoading = false);
-
-      showDialog(
-        context: context,
-        builder: (_) => Dialog(
-          backgroundColor: Colors.transparent,
-          child: ChangepasswordPopupWidget(),
-        ),
-      );
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (_) => Dialog(
+            backgroundColor: Colors.transparent,
+            child: ChangepasswordPopupWidget(),
+          ),
+        );
+      });
     } catch (e) {
       setState(() => isLoading = false);
-
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(e.toString())));
@@ -102,10 +97,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
               children: [
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
-
-                  onTap: () {
-                    context.pop();
-                  },
+                  onTap: () => context.pop(),
                   child: Image.asset(Assets.images.backicon.path),
                 ),
                 SizedBox(height: AppScaler.scaleHeight(context, 40)),
@@ -117,92 +109,56 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                   color: customColors.textColor,
                 ),
                 SizedBox(height: AppScaler.scaleHeight(context, 24)),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 40,
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        AppPasswordField(
-                          keyboardType: TextInputType.numberWithOptions(),
-                          controller: oldPasswordController,
-                          labelText: "Old Password*",
-                          hintText: "**********",
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Old password required";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 15)),
-                        AppPasswordField(
-                          keyboardType: TextInputType.numberWithOptions(),
-                          controller: newPasswordController,
-                          labelText: "Create Password*",
-                          hintText: "**********",
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "New password required";
-                            }
-                            if (!_isStrongPassword(value)) {
-                              return 'Password must be 8 chars with letter, number & symbol';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 15)),
-                        AppPasswordField(
-                          keyboardType: TextInputType.numberWithOptions(),
-                          controller: confirmPasswordController,
-                          labelText: "Confirm Password*",
-                          hintText: "**********",
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Confirm password required";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                        PoppinsText(
-                          context,
-                          "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
-                          fontSize: PoppinsFontSizeVariant.size11,
-                          fontWeight: PoppinsFontWeightVariant.regular,
-                          color: customColors.greyColor,
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 24)),
-                        AppButton(
-                          onPressed: () {
-                            if (!isLoading) {
-                              _onChangePassword();
-                            }
-                          },
-                          title: isLoading
-                              ? 'Please wait...'
-                              : 'Change Password',
-                        ),
-                        // SizedBox(height: AppScaler.scaleHeight(context, 45)),
-
-                        // GestureDetector(
-                        //   behavior: HitTestBehavior.opaque,
-                        //   onTap: () {
-                        //     context.pushNamed(
-                        //       AppRoutes.forgetpasswordScreen.name,
-                        //     );
-                        //   },
-                        //   child: PoppinsText(
-                        //     context,
-                        //     'Forgot Password?',
-                        //     decoration: TextDecoration.underline,
-                        //     fontSize: PoppinsFontSizeVariant.size14,
-                        //     fontWeight: PoppinsFontWeightVariant.medium,
-                        //     color: AppColors.white,
-                        //   ),
-                        // ),
-                      ],
-                    ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      AppPasswordField(
+                        keyboardType: TextInputType.text,
+                        controller: newPasswordController,
+                        labelText: "New Password*",
+                        hintText: "**********",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "New password required";
+                          }
+                          if (!_isStrongPassword(value)) {
+                            return 'Password must be 8 chars with letter, number & symbol';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                      AppPasswordField(
+                        keyboardType: TextInputType.text,
+                        controller: confirmPasswordController,
+                        labelText: "Confirm Password*",
+                        hintText: "**********",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Confirm password required";
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                      PoppinsText(
+                        context,
+                        "Make sure your password has at least 8 characters, including a letter, a number, and a symbol!",
+                        fontSize: PoppinsFontSizeVariant.size11,
+                        fontWeight: PoppinsFontWeightVariant.regular,
+                        color: customColors.greyColor,
+                      ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 24)),
+                      AppButton(
+                        onPressed: () {
+                          if (!isLoading) {
+                            _onChangePassword();
+                          }
+                        },
+                        title: isLoading ? 'Please wait...' : 'Change Password',
+                      ),
+                    ],
                   ),
                 ),
               ],

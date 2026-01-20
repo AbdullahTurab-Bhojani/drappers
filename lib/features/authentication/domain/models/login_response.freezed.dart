@@ -15,8 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginResponse {
 
-@JsonKey(name: 'isSuccess') bool get isSuccess; LoginData? get data;// ✅ nullable (important)
- String get message;
+@JsonKey(name: 'isSuccess') bool get isSuccess; LoginData? get data; String get message;
 /// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -229,7 +228,6 @@ class _LoginResponse implements LoginResponse {
 
 @override@JsonKey(name: 'isSuccess') final  bool isSuccess;
 @override final  LoginData? data;
-// ✅ nullable (important)
 @override final  String message;
 
 /// Create a copy of LoginResponse

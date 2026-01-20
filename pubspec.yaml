@@ -55,6 +55,7 @@ dependencies:
   retrofit: ^4.9.2
   retrofit_generator: ^10.2.1
   intl_phone_number_input: ^0.7.5
+  firebase_storage: ^13.0.6
 
 
 

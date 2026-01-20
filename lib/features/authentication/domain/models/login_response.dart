@@ -7,7 +7,7 @@ part 'login_response.g.dart';
 abstract class LoginResponse with _$LoginResponse {
   const factory LoginResponse({
     @JsonKey(name: 'isSuccess') required bool isSuccess,
-    LoginData? data, // ✅ nullable (important)
+    LoginData? data,
     required String message,
   }) = _LoginResponse;
 

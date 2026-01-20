@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use, unused_element, prefer_final_fields, unused_local_variable
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -64,7 +62,6 @@ class _ContentDetailState extends State<ContentDetail>
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
@@ -250,18 +247,12 @@ class _ContentDetailState extends State<ContentDetail>
                     ),
                     SizedBox(height: AppScaler.scaleHeight(context, 10)),
                     Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
                           child: SizedBox(
-                            // width: 188,
                             height: AppScaler.scaleHeight(context, 45),
                             child: AppButton(
                               onPressed: () {
-                                // if (GuestHelper.isGuest) {
-                                //   GuestHelper.checkGuest(context);
-                                //   return;
-                                // }
                                 context.pushNamed(AppRoutes.videoScreen.name);
                               },
                               title: 'Play',
@@ -276,7 +267,6 @@ class _ContentDetailState extends State<ContentDetail>
                         SizedBox(width: AppScaler.scaleSize(context, 10)),
                         Expanded(
                           child: SizedBox(
-                            // width: 188,
                             height: AppScaler.scaleHeight(context, 45),
                             child: AppButton(
                               onPressed: () {
@@ -391,7 +381,6 @@ class _ContentDetailState extends State<ContentDetail>
                                   GuestHelper.checkGuest(context);
                                   return;
                                 }
-                                // context.pushNamed(AppRoutes.reportContent.name);
                               },
                               child: Column(
                                 children: [
@@ -505,10 +494,11 @@ class _ContentDetailState extends State<ContentDetail>
                                             child: DropdownButtonHideUnderline(
                                               child: DropdownButton<String>(
                                                 itemHeight: 50,
-                                                menuMaxHeight: 150,padding: EdgeInsets.all(0),
+                                                menuMaxHeight: 150,
+                                                padding: EdgeInsets.all(0),
 
-                                                // menuWidth: 150,
-                                                value: selectedSeason,isDense: false,
+                                                value: selectedSeason,
+                                                isDense: false,
 
                                                 icon: Icon(
                                                   Icons.keyboard_arrow_down,
@@ -591,13 +581,6 @@ class _ContentDetailState extends State<ContentDetail>
                                                 200,
                                           ),
                                       itemBuilder: (context, index) {
-                                        double cardWidth =
-                                            (MediaQuery.of(context).size.width /
-                                                3) -
-                                            10;
-                                        double cardHeight =
-                                            cardWidth * 200 / 150;
-
                                         return CardWidget(
                                           assetImage: trendingimages[index],
                                           showSaveIcon: false,

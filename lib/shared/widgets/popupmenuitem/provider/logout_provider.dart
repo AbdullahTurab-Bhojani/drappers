@@ -14,20 +14,20 @@ class LogoutProvider extends _$LogoutProvider {
 
   Future<void> logout() async {
     if (state.isLoading) return;
+
     state = const AppLoadingState.loading();
+    final pref = ref.read(localDataProvider);
+    final authRepo = ref.read(authRepository);
+
     try {
-      final pref = ref.read(localDataProvider);
-      final authRepo = ref.read(authRepository);
       final refreshToken = pref.refreshToken;
       if (refreshToken != null && refreshToken.isNotEmpty) {
         await authRepo.logout(LogoutDTO(refreshToken: refreshToken));
       }
-      await pref.setLogout();
 
+      await pref.setLogout();
       state = const AppLoadingState.success(null);
     } catch (e) {
-      final pref = ref.read(localDataProvider);
-      await pref.setLogout();
       state = AppLoadingState.error(
         e.toString().replaceFirst('Exception: ', ''),
       );

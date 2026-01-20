@@ -1,16 +1,19 @@
-import 'package:country_picker/country_picker.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
-import '../../../shared/widgets/phonefield_code.dart';
 import '../../../shared/widgets/textfield_new.dart';
+import '../../authentication/data/dto/user_update_dto/user_update.dart';
 import '../../user/domain/models/user_model.dart';
-import 'edit_profile_popup.dart';
+import '../provider/edit_provider.dart';
 
 class EditprofileScreen extends ConsumerStatefulWidget {
   const EditprofileScreen({super.key});
@@ -20,13 +23,18 @@ class EditprofileScreen extends ConsumerStatefulWidget {
 }
 
 class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
-  final TextEditingController _fullNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _countryCodeController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController otpController = TextEditingController();
+  final _fullNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _countryCodeController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
+  final ImagePicker _picker = ImagePicker();
+
+  File? _profileImage;
+  String? _profileImageUrl;
   UserData? user;
+
+  bool _isUploadingImage = false;
 
   @override
   void initState() {
@@ -37,16 +45,26 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
   Future<void> _loadUser() async {
     final fetchedUser = await ref.read(localDataProvider).getUser();
     if (fetchedUser != null) {
-      _fullNameController.text = fetchedUser.fullName ?? '';
+      user = fetchedUser;
+
+      _fullNameController.text =
+          (fetchedUser.firstName?.isNotEmpty == true &&
+              fetchedUser.lastName?.isNotEmpty == true)
+          ? "${fetchedUser.firstName} ${fetchedUser.lastName}"
+          : fetchedUser.fullName ?? '';
+
       _emailController.text = fetchedUser.email ?? '';
 
-      if (fetchedUser.phoneNumber != null &&
-          fetchedUser.phoneNumber!.contains(" ")) {
+      _profileImageUrl = fetchedUser.profileUrl?.isNotEmpty == true
+          ? fetchedUser.profileUrl
+          : 'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg';
+
+      if (fetchedUser.phoneNumber?.contains(" ") == true) {
         final parts = fetchedUser.phoneNumber!.split(" ");
-        _countryCodeController.text = parts[0];
-        _phoneNumberController.text = parts.sublist(1).join("");
+        _countryCodeController.text = parts.first;
+        _phoneNumberController.text = parts.sublist(1).join();
       } else {
-        _countryCodeController.text = "+92"; // default
+        _countryCodeController.text = "+92";
         _phoneNumberController.text = fetchedUser.phoneNumber ?? '';
       }
     }
@@ -59,181 +77,208 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
     _emailController.dispose();
     _countryCodeController.dispose();
     _phoneNumberController.dispose();
-    otpController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickImage() async {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text("Gallery"),
+              onTap: () async {
+                Navigator.pop(context);
+                final XFile? file = await _picker.pickImage(
+                  source: ImageSource.gallery,
+                );
+                if (file != null) {
+                  _uploadImage(File(file.path));
+                }
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text("Camera"),
+              onTap: () async {
+                Navigator.pop(context);
+                final XFile? file = await _picker.pickImage(
+                  source: ImageSource.camera,
+                );
+                if (file != null) {
+                  _uploadImage(File(file.path));
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _uploadImage(File file) async {
+    try {
+      setState(() => _isUploadingImage = true);
+
+      final userId = user?.id ?? "guest";
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child("profile_images")
+          .child("$userId-${DateTime.now().millisecondsSinceEpoch}.jpg");
+
+      final snapshot = await ref.putFile(file);
+      final url = await snapshot.ref.getDownloadURL();
+
+      setState(() {
+        _profileImage = file;
+        _profileImageUrl = url;
+        _isUploadingImage = false;
+      });
+    } catch (e) {
+      setState(() => _isUploadingImage = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final customColors = theme.extension<AppCustomColors>()!;
+    final customColors = Theme.of(context).extension<AppCustomColors>()!;
+    final updateState = ref.watch(updateUserProviderProvider);
 
     return Scaffold(
       body: Stack(
         children: [
+          /// BACKGROUND
           Positioned.fill(
             child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
           ),
+
+          /// MAIN UI
           Column(
             children: [
-              // App Bar
               AppMainBar(
                 leading: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () => Navigator.pop(context),
                   child: Image.asset(
                     "assets/images/backicon.png",
-                    width: AppScaler.scaleSize(context, 20),
-                    height: AppScaler.scaleHeight(context, 20),
+                    width: 20,
+                    height: 20,
                   ),
                 ),
                 title: "Edit Profile",
-                centerTitle: false,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
-              SizedBox(height: AppScaler.scaleHeight(context, 50)),
 
-              // Profile Image + Name
-              Column(
-                children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (context) => Center(
-                              child: Dialog(
-                                backgroundColor: Colors.transparent,
-                                insetPadding: EdgeInsets.symmetric(
-                                  horizontal: AppScaler.scaleSize(context, 20),
-                                ),
-                                child: EditProfilePopup(),
-                              ),
-                            ),
-                          );
-                        },
-                        child: SizedBox(
-                          height: AppScaler.scaleHeight(context, 114.82),
-                          width: AppScaler.scaleSize(context, 114.82),
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundColor: Colors.transparent,
-                            backgroundImage: NetworkImage(
-                              'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                            ),
-                          ),
+              const SizedBox(height: 40),
+              GestureDetector(
+                onTap: _pickImage,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: _profileImage != null
+                          ? FileImage(_profileImage!)
+                          : NetworkImage(_profileImageUrl!) as ImageProvider,
+                      child: _isUploadingImage
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : null,
+                    ),
+                    Positioned(
+                      bottom: -15,
+                      right: 0,
+                      left: 0,
+                      child: CircleAvatar(
+                        radius: 15,
+                        backgroundColor: customColors.buttonColors.first,
+                        child: Image.asset(
+                          Assets.images.editprofilecameraicon.path,
+                          width: 14,
                         ),
                       ),
-                      Positioned(
-                        bottom: AppScaler.scaleSize(context, -10),
-                        right: AppScaler.scaleSize(context, 46),
-                        child: Container(
-                          width: AppScaler.scaleSize(context, 24),
-                          height: AppScaler.scaleHeight(context, 24),
-                          padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: customColors.buttonColors.first,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              Assets.images.editprofilecameraicon.path,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                  PoppinsText(
-                    context,
-                    _fullNameController.text.isNotEmpty
-                        ? _fullNameController.text
-                        : 'Guest User',
-                    fontSize: PoppinsFontSizeVariant.size22,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: customColors.textColor,
-                  ),
-                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                ],
+                    ),
+                  ],
+                ),
               ),
 
-              // Form Fields
+              const SizedBox(height: 20),
+
               Expanded(
                 child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppScaler.scaleSize(context, 20),
-                    ),
-                    child: Column(
-                      children: [
-                        NewTextField(
-                          fieldbg: AppColors.tfield,
-                          controller: _fullNameController,
-                          labelText: "Full Name*",
-                          hintText: "Enter your full name",
-                          hintStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          filledColor: customColors.textColor,
-                        ),
-                        SizedBox(height: 15),
-                        NewTextField(
-                          fieldbg: AppColors.tfield,
-                          controller: _emailController,
-                          labelText: "Email Address*",
-                          hintText: "Enter your email",
-                          hintStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          filledColor: AppColors.tfield,
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: [
+                      NewTextField(
+                        controller: _fullNameController,
+                        labelText: "Full Name*",
+                        fieldbg: AppColors.tfield,
+                        hintText: "Enter your Full Name",
+                      ),
 
-                        // Phone Field (with country code)
-                        PhoneOtpField(
-                          countryCode: Country.parse("US"),
-                          phoneController: _phoneNumberController,
-                          otpController: otpController,
-                          fieldbg: AppColors.tfield,
-                          labelText: 'Phone Number*',
-                          onSendCode: () {},
-                        ),
+                      const SizedBox(height: 15),
+                      NewTextField(
+                        hintText: "Enter your email",
+                        controller: _emailController,
+                        labelText: "Email",
+                        readOnly: true,
+                        fieldbg: AppColors.tfield,
+                      ),
+                      const SizedBox(height: 15),
+                      NewTextField(
+                        controller: _phoneNumberController,
+                        labelText: "Phone Number",
+                        readOnly: true,
+                        hintText: "Enter your phone number",
 
-                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                        fieldbg: AppColors.tfield,
+                      ),
+                      const SizedBox(height: 25),
+                      AppButton(
+                        onPressed: () async {
+                          if (!updateState.isLoading) {
+                            final name = _fullNameController.text.trim();
+                            if (name.isEmpty) return;
 
-                        AppButton(
-                          onPressed: () {
-                            // Save logic here
-                            Navigator.of(context).pop();
-                          },
-                          title: "Save Changes",
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 12)),
-                        AppButton(
-                          color: Colors.transparent,
-                          borderColor: customColors.textColor,
-                          borderWidth: 1,
-                          border: true,
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          title: "Discard Changes",
-                        ),
-                      ],
-                    ),
+                            final parts = name.split(" ");
+                            final dto = UpdateUserDTO(
+                              firstName: parts.first,
+                              lastName: parts.length > 1
+                                  ? parts.sublist(1).join(" ")
+                                  : '',
+                              profileUrl: _profileImageUrl!,
+                            );
+
+                            final res = await ref
+                                .read(updateUserProviderProvider.notifier)
+                                .onSubmit(dto: dto);
+
+                            if (res != null && mounted) {
+                              Navigator.pop(context, res);
+                            }
+                          }
+                        },
+                        title: "Save Changes",
+                      ),
+                    ],
                   ),
                 ),
               ),
             ],
           ),
+
+          if (updateState.isLoading)
+            Container(
+              color: Colors.black.withOpacity(0.3),
+              child: Center(
+                child: LoadingWidget(
+                  width: 60,
+                  height: 60,
+                  color: AppColors.buttoncolor[0],
+                ),
+              ),
+            ),
         ],
       ),
     );

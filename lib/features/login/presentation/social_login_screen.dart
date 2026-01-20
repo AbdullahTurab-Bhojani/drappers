@@ -29,6 +29,7 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
           height: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
+              fit: BoxFit.cover,
               image: AssetImage(Assets.images.screensbg.path),
             ),
           ),

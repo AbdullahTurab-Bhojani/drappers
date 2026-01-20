@@ -22,9 +22,9 @@ class _SignupPopupWidget extends ConsumerState<SignupPopupWidget> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    /// 🔥 LISTENER (navigation + snackbar)
     ref.listen<AppLoadingState>(logoutProviderProvider, (previous, next) {
       if (next.isSuccess) {
+        // Only navigate on success
         context.goNamed(AppRoutes.socialLoginScreen.name);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Logged out successfully')),
@@ -32,10 +32,9 @@ class _SignupPopupWidget extends ConsumerState<SignupPopupWidget> {
       }
 
       if (next.isError) {
-        context.goNamed(AppRoutes.socialLoginScreen.name);
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(next.message ?? 'Logged out')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.message ?? 'Logout failed')),
+        );
       }
     });
 

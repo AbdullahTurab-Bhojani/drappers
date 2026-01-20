@@ -125,8 +125,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             actions: [
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  context.pushNamed(AppRoutes.editprofile.name);
+                onTap: () async {
+                  var res = await context.pushNamed(AppRoutes.editprofile.name);
+                  if (res != null && res is UserData) {
+                    setState(() {
+                      user = res;
+                    });
+                  }
                 },
                 child: PoppinsText(
                   context,
@@ -144,21 +149,41 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 SizedBox(height: AppScaler.scaleHeight(context, 40)),
                 Column(
                   children: [
-                    SizedBox(
-                      height: AppScaler.scaleHeight(context, 114.82),
-                      width: AppScaler.scaleHeight(context, 114.82),
-                      child: CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(
-                          'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                        ),
-                      ),
-                    ),
+                    user != null &&
+                            user!.profileUrl != null &&
+                            user!.profileUrl!.isNotEmpty
+                        ? SizedBox(
+                            height: AppScaler.scaleHeight(context, 114.82),
+                            width: AppScaler.scaleHeight(context, 114.82),
+                            child: CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.transparent,
+                              backgroundImage: NetworkImage(user!.profileUrl!),
+                            ),
+                          )
+                        : SizedBox(
+                            height: AppScaler.scaleHeight(context, 114.82),
+                            width: AppScaler.scaleHeight(context, 114.82),
+                            child: CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.transparent,
+                              backgroundImage: NetworkImage(
+                                "https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg",
+                              ),
+                            ),
+                          ),
+
                     SizedBox(height: AppScaler.scaleHeight(context, 20)),
                     PoppinsText(
                       context,
-                      user != null ? user!.fullName! : "",
+                      user != null
+                          ? (user!.firstName != null &&
+                                    user!.firstName!.isNotEmpty &&
+                                    user!.lastName != null &&
+                                    user!.lastName!.isNotEmpty
+                                ? "${user!.firstName!} ${user!.lastName!}"
+                                : user!.fullName!)
+                          : "Guest User",
                       fontSize: PoppinsFontSizeVariant.size22,
                       fontWeight: PoppinsFontWeightVariant.medium,
                       color: customColors.textColor,

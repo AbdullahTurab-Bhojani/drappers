@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'logout_provider.dart';
+part of 'edit_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,28 +9,28 @@ part of 'logout_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(LogoutProvider)
-const logoutProviderProvider = LogoutProviderProvider._();
+@ProviderFor(UpdateUserProvider)
+const updateUserProviderProvider = UpdateUserProviderProvider._();
 
-final class LogoutProviderProvider
-    extends $NotifierProvider<LogoutProvider, AppLoadingState> {
-  const LogoutProviderProvider._()
+final class UpdateUserProviderProvider
+    extends $NotifierProvider<UpdateUserProvider, AppLoadingState> {
+  const UpdateUserProviderProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'logoutProviderProvider',
+        name: r'updateUserProviderProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$logoutProviderHash();
+  String debugGetCreateSourceHash() => _$updateUserProviderHash();
 
   @$internal
   @override
-  LogoutProvider create() => LogoutProvider();
+  UpdateUserProvider create() => UpdateUserProvider();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(AppLoadingState value) {
@@ -41,9 +41,10 @@ final class LogoutProviderProvider
   }
 }
 
-String _$logoutProviderHash() => r'598f9e6069507e1ee42a9603e5eee04ec0e18c6f';
+String _$updateUserProviderHash() =>
+    r'42e1b6880734d9c0918377019d9bbba2283a77c5';
 
-abstract class _$LogoutProvider extends $Notifier<AppLoadingState> {
+abstract class _$UpdateUserProvider extends $Notifier<AppLoadingState> {
   AppLoadingState build();
   @$mustCallSuper
   @override

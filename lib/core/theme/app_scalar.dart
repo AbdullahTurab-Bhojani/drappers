@@ -9,7 +9,6 @@ class AppScaler {
   static bool _isLandscape(BuildContext context) =>
       MediaQuery.of(context).orientation == Orientation.landscape;
 
-  /// 🔹 Width based (padding, radius, icons, card width)
   static double scaleSize(BuildContext context, double size) {
     final screen = _screen(context);
 
@@ -20,7 +19,6 @@ class AppScaler {
     return size * (width / baseWidth);
   }
 
-  /// 🔹 Height based (containers height, vertical gaps)
   static double scaleHeight(BuildContext context, double size) {
     final screen = _screen(context);
 

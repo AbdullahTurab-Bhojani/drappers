@@ -308,7 +308,7 @@ $UserDataCopyWith<$Res>? get data {
 /// @nodoc
 mixin _$UserData {
 
- int get id; String? get createdOn; String? get modifiedOn; String? get createdBy; String? get modifiedBy; bool get isDeleted; String? get ownerId; String? get firstName; String? get lastName; String? get fullName; String? get email; String? get phoneNumber; String? get password; String? get keycloakUserId; String? get type; List<dynamic> get addresses; List<dynamic> get recentlySessions; List<dynamic> get allSessions; int get totalSessions;
+ int get id; String? get createdOn; String? get modifiedOn; String? get createdBy; String? get modifiedBy; bool get isDeleted; String? get ownerId; String? get firstName; String? get lastName; String? get fullName; String? get email; String? get phoneNumber; String? get password; String? get keycloakUserId; String? get type; List<dynamic> get addresses; List<dynamic> get recentlySessions; List<dynamic> get allSessions; int get totalSessions; String? get profileUrl;
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -321,16 +321,16 @@ $UserDataCopyWith<UserData> get copyWith => _$UserDataCopyWithImpl<UserData>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserData&&(identical(other.id, id) || other.id == id)&&(identical(other.createdOn, createdOn) || other.createdOn == createdOn)&&(identical(other.modifiedOn, modifiedOn) || other.modifiedOn == modifiedOn)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.modifiedBy, modifiedBy) || other.modifiedBy == modifiedBy)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.password, password) || other.password == password)&&(identical(other.keycloakUserId, keycloakUserId) || other.keycloakUserId == keycloakUserId)&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&const DeepCollectionEquality().equals(other.recentlySessions, recentlySessions)&&const DeepCollectionEquality().equals(other.allSessions, allSessions)&&(identical(other.totalSessions, totalSessions) || other.totalSessions == totalSessions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserData&&(identical(other.id, id) || other.id == id)&&(identical(other.createdOn, createdOn) || other.createdOn == createdOn)&&(identical(other.modifiedOn, modifiedOn) || other.modifiedOn == modifiedOn)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.modifiedBy, modifiedBy) || other.modifiedBy == modifiedBy)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.password, password) || other.password == password)&&(identical(other.keycloakUserId, keycloakUserId) || other.keycloakUserId == keycloakUserId)&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&const DeepCollectionEquality().equals(other.recentlySessions, recentlySessions)&&const DeepCollectionEquality().equals(other.allSessions, allSessions)&&(identical(other.totalSessions, totalSessions) || other.totalSessions == totalSessions)&&(identical(other.profileUrl, profileUrl) || other.profileUrl == profileUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,createdOn,modifiedOn,createdBy,modifiedBy,isDeleted,ownerId,firstName,lastName,fullName,email,phoneNumber,password,keycloakUserId,type,const DeepCollectionEquality().hash(addresses),const DeepCollectionEquality().hash(recentlySessions),const DeepCollectionEquality().hash(allSessions),totalSessions]);
+int get hashCode => Object.hashAll([runtimeType,id,createdOn,modifiedOn,createdBy,modifiedBy,isDeleted,ownerId,firstName,lastName,fullName,email,phoneNumber,password,keycloakUserId,type,const DeepCollectionEquality().hash(addresses),const DeepCollectionEquality().hash(recentlySessions),const DeepCollectionEquality().hash(allSessions),totalSessions,profileUrl]);
 
 @override
 String toString() {
-  return 'UserData(id: $id, createdOn: $createdOn, modifiedOn: $modifiedOn, createdBy: $createdBy, modifiedBy: $modifiedBy, isDeleted: $isDeleted, ownerId: $ownerId, firstName: $firstName, lastName: $lastName, fullName: $fullName, email: $email, phoneNumber: $phoneNumber, password: $password, keycloakUserId: $keycloakUserId, type: $type, addresses: $addresses, recentlySessions: $recentlySessions, allSessions: $allSessions, totalSessions: $totalSessions)';
+  return 'UserData(id: $id, createdOn: $createdOn, modifiedOn: $modifiedOn, createdBy: $createdBy, modifiedBy: $modifiedBy, isDeleted: $isDeleted, ownerId: $ownerId, firstName: $firstName, lastName: $lastName, fullName: $fullName, email: $email, phoneNumber: $phoneNumber, password: $password, keycloakUserId: $keycloakUserId, type: $type, addresses: $addresses, recentlySessions: $recentlySessions, allSessions: $allSessions, totalSessions: $totalSessions, profileUrl: $profileUrl)';
 }
 
 
@@ -341,7 +341,7 @@ abstract mixin class $UserDataCopyWith<$Res>  {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) _then) = _$UserDataCopyWithImpl;
 @useResult
 $Res call({
- int id, String? createdOn, String? modifiedOn, String? createdBy, String? modifiedBy, bool isDeleted, String? ownerId, String? firstName, String? lastName, String? fullName, String? email, String? phoneNumber, String? password, String? keycloakUserId, String? type, List<dynamic> addresses, List<dynamic> recentlySessions, List<dynamic> allSessions, int totalSessions
+ int id, String? createdOn, String? modifiedOn, String? createdBy, String? modifiedBy, bool isDeleted, String? ownerId, String? firstName, String? lastName, String? fullName, String? email, String? phoneNumber, String? password, String? keycloakUserId, String? type, List<dynamic> addresses, List<dynamic> recentlySessions, List<dynamic> allSessions, int totalSessions, String? profileUrl
 });
 
 
@@ -358,7 +358,7 @@ class _$UserDataCopyWithImpl<$Res>
 
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? createdOn = freezed,Object? modifiedOn = freezed,Object? createdBy = freezed,Object? modifiedBy = freezed,Object? isDeleted = null,Object? ownerId = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? fullName = freezed,Object? email = freezed,Object? phoneNumber = freezed,Object? password = freezed,Object? keycloakUserId = freezed,Object? type = freezed,Object? addresses = null,Object? recentlySessions = null,Object? allSessions = null,Object? totalSessions = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? createdOn = freezed,Object? modifiedOn = freezed,Object? createdBy = freezed,Object? modifiedBy = freezed,Object? isDeleted = null,Object? ownerId = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? fullName = freezed,Object? email = freezed,Object? phoneNumber = freezed,Object? password = freezed,Object? keycloakUserId = freezed,Object? type = freezed,Object? addresses = null,Object? recentlySessions = null,Object? allSessions = null,Object? totalSessions = null,Object? profileUrl = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,createdOn: freezed == createdOn ? _self.createdOn : createdOn // ignore: cast_nullable_to_non_nullable
@@ -379,7 +379,8 @@ as String?,addresses: null == addresses ? _self.addresses : addresses // ignore:
 as List<dynamic>,recentlySessions: null == recentlySessions ? _self.recentlySessions : recentlySessions // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,allSessions: null == allSessions ? _self.allSessions : allSessions // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,totalSessions: null == totalSessions ? _self.totalSessions : totalSessions // ignore: cast_nullable_to_non_nullable
-as int,
+as int,profileUrl: freezed == profileUrl ? _self.profileUrl : profileUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -464,10 +465,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions,  String? profileUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserData() when $default != null:
-return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions);case _:
+return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions,_that.profileUrl);case _:
   return orElse();
 
 }
@@ -485,10 +486,10 @@ return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions,  String? profileUrl)  $default,) {final _that = this;
 switch (_that) {
 case _UserData():
-return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions);case _:
+return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions,_that.profileUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -505,10 +506,10 @@ return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String? createdOn,  String? modifiedOn,  String? createdBy,  String? modifiedBy,  bool isDeleted,  String? ownerId,  String? firstName,  String? lastName,  String? fullName,  String? email,  String? phoneNumber,  String? password,  String? keycloakUserId,  String? type,  List<dynamic> addresses,  List<dynamic> recentlySessions,  List<dynamic> allSessions,  int totalSessions,  String? profileUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _UserData() when $default != null:
-return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions);case _:
+return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.modifiedBy,_that.isDeleted,_that.ownerId,_that.firstName,_that.lastName,_that.fullName,_that.email,_that.phoneNumber,_that.password,_that.keycloakUserId,_that.type,_that.addresses,_that.recentlySessions,_that.allSessions,_that.totalSessions,_that.profileUrl);case _:
   return null;
 
 }
@@ -520,7 +521,7 @@ return $default(_that.id,_that.createdOn,_that.modifiedOn,_that.createdBy,_that.
 @JsonSerializable()
 
 class _UserData implements UserData {
-  const _UserData({this.id = 0, this.createdOn, this.modifiedOn, this.createdBy, this.modifiedBy, this.isDeleted = false, this.ownerId, this.firstName, this.lastName, this.fullName, this.email, this.phoneNumber, this.password, this.keycloakUserId, this.type, final  List<dynamic> addresses = const [], final  List<dynamic> recentlySessions = const [], final  List<dynamic> allSessions = const [], this.totalSessions = 0}): _addresses = addresses,_recentlySessions = recentlySessions,_allSessions = allSessions;
+  const _UserData({this.id = 0, this.createdOn, this.modifiedOn, this.createdBy, this.modifiedBy, this.isDeleted = false, this.ownerId, this.firstName, this.lastName, this.fullName, this.email, this.phoneNumber, this.password, this.keycloakUserId, this.type, final  List<dynamic> addresses = const [], final  List<dynamic> recentlySessions = const [], final  List<dynamic> allSessions = const [], this.totalSessions = 0, this.profileUrl}): _addresses = addresses,_recentlySessions = recentlySessions,_allSessions = allSessions;
   factory _UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
 
 @override@JsonKey() final  int id;
@@ -560,6 +561,7 @@ class _UserData implements UserData {
 }
 
 @override@JsonKey() final  int totalSessions;
+@override final  String? profileUrl;
 
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
@@ -574,16 +576,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserData&&(identical(other.id, id) || other.id == id)&&(identical(other.createdOn, createdOn) || other.createdOn == createdOn)&&(identical(other.modifiedOn, modifiedOn) || other.modifiedOn == modifiedOn)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.modifiedBy, modifiedBy) || other.modifiedBy == modifiedBy)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.password, password) || other.password == password)&&(identical(other.keycloakUserId, keycloakUserId) || other.keycloakUserId == keycloakUserId)&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&const DeepCollectionEquality().equals(other._recentlySessions, _recentlySessions)&&const DeepCollectionEquality().equals(other._allSessions, _allSessions)&&(identical(other.totalSessions, totalSessions) || other.totalSessions == totalSessions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserData&&(identical(other.id, id) || other.id == id)&&(identical(other.createdOn, createdOn) || other.createdOn == createdOn)&&(identical(other.modifiedOn, modifiedOn) || other.modifiedOn == modifiedOn)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.modifiedBy, modifiedBy) || other.modifiedBy == modifiedBy)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.password, password) || other.password == password)&&(identical(other.keycloakUserId, keycloakUserId) || other.keycloakUserId == keycloakUserId)&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&const DeepCollectionEquality().equals(other._recentlySessions, _recentlySessions)&&const DeepCollectionEquality().equals(other._allSessions, _allSessions)&&(identical(other.totalSessions, totalSessions) || other.totalSessions == totalSessions)&&(identical(other.profileUrl, profileUrl) || other.profileUrl == profileUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,createdOn,modifiedOn,createdBy,modifiedBy,isDeleted,ownerId,firstName,lastName,fullName,email,phoneNumber,password,keycloakUserId,type,const DeepCollectionEquality().hash(_addresses),const DeepCollectionEquality().hash(_recentlySessions),const DeepCollectionEquality().hash(_allSessions),totalSessions]);
+int get hashCode => Object.hashAll([runtimeType,id,createdOn,modifiedOn,createdBy,modifiedBy,isDeleted,ownerId,firstName,lastName,fullName,email,phoneNumber,password,keycloakUserId,type,const DeepCollectionEquality().hash(_addresses),const DeepCollectionEquality().hash(_recentlySessions),const DeepCollectionEquality().hash(_allSessions),totalSessions,profileUrl]);
 
 @override
 String toString() {
-  return 'UserData(id: $id, createdOn: $createdOn, modifiedOn: $modifiedOn, createdBy: $createdBy, modifiedBy: $modifiedBy, isDeleted: $isDeleted, ownerId: $ownerId, firstName: $firstName, lastName: $lastName, fullName: $fullName, email: $email, phoneNumber: $phoneNumber, password: $password, keycloakUserId: $keycloakUserId, type: $type, addresses: $addresses, recentlySessions: $recentlySessions, allSessions: $allSessions, totalSessions: $totalSessions)';
+  return 'UserData(id: $id, createdOn: $createdOn, modifiedOn: $modifiedOn, createdBy: $createdBy, modifiedBy: $modifiedBy, isDeleted: $isDeleted, ownerId: $ownerId, firstName: $firstName, lastName: $lastName, fullName: $fullName, email: $email, phoneNumber: $phoneNumber, password: $password, keycloakUserId: $keycloakUserId, type: $type, addresses: $addresses, recentlySessions: $recentlySessions, allSessions: $allSessions, totalSessions: $totalSessions, profileUrl: $profileUrl)';
 }
 
 
@@ -594,7 +596,7 @@ abstract mixin class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res>
   factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) _then) = __$UserDataCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String? createdOn, String? modifiedOn, String? createdBy, String? modifiedBy, bool isDeleted, String? ownerId, String? firstName, String? lastName, String? fullName, String? email, String? phoneNumber, String? password, String? keycloakUserId, String? type, List<dynamic> addresses, List<dynamic> recentlySessions, List<dynamic> allSessions, int totalSessions
+ int id, String? createdOn, String? modifiedOn, String? createdBy, String? modifiedBy, bool isDeleted, String? ownerId, String? firstName, String? lastName, String? fullName, String? email, String? phoneNumber, String? password, String? keycloakUserId, String? type, List<dynamic> addresses, List<dynamic> recentlySessions, List<dynamic> allSessions, int totalSessions, String? profileUrl
 });
 
 
@@ -611,7 +613,7 @@ class __$UserDataCopyWithImpl<$Res>
 
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? createdOn = freezed,Object? modifiedOn = freezed,Object? createdBy = freezed,Object? modifiedBy = freezed,Object? isDeleted = null,Object? ownerId = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? fullName = freezed,Object? email = freezed,Object? phoneNumber = freezed,Object? password = freezed,Object? keycloakUserId = freezed,Object? type = freezed,Object? addresses = null,Object? recentlySessions = null,Object? allSessions = null,Object? totalSessions = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? createdOn = freezed,Object? modifiedOn = freezed,Object? createdBy = freezed,Object? modifiedBy = freezed,Object? isDeleted = null,Object? ownerId = freezed,Object? firstName = freezed,Object? lastName = freezed,Object? fullName = freezed,Object? email = freezed,Object? phoneNumber = freezed,Object? password = freezed,Object? keycloakUserId = freezed,Object? type = freezed,Object? addresses = null,Object? recentlySessions = null,Object? allSessions = null,Object? totalSessions = null,Object? profileUrl = freezed,}) {
   return _then(_UserData(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,createdOn: freezed == createdOn ? _self.createdOn : createdOn // ignore: cast_nullable_to_non_nullable
@@ -632,7 +634,8 @@ as String?,addresses: null == addresses ? _self._addresses : addresses // ignore
 as List<dynamic>,recentlySessions: null == recentlySessions ? _self._recentlySessions : recentlySessions // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,allSessions: null == allSessions ? _self._allSessions : allSessions // ignore: cast_nullable_to_non_nullable
 as List<dynamic>,totalSessions: null == totalSessions ? _self.totalSessions : totalSessions // ignore: cast_nullable_to_non_nullable
-as int,
+as int,profileUrl: freezed == profileUrl ? _self.profileUrl : profileUrl // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

@@ -247,7 +247,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 AppMainBar(
                   width: AppScaler.scaleSize(context, 285),
                   leadingText: user != null
-                      ? "Welcome Back ${user!.fullName}!"
+                      ? (user!.firstName != null &&
+                                user!.firstName!.isNotEmpty &&
+                                user!.lastName != null &&
+                                user!.lastName!.isNotEmpty
+                            ? "Welcome Back ${user!.firstName!} ${user!.lastName!}!"
+                            : "Welcome Back ${user!.fullName ?? 'User'}!")
                       : "Welcome Back Guest!",
                   title: "",
                   centerTitle: false,

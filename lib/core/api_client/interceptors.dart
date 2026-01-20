@@ -203,7 +203,7 @@ class AuthorizationInterceptorMarket extends Interceptor {
         err.type == DioExceptionType.unknown && err.error is SocketException) {
       $showMessage("No Internet Connection", isError: true);
     } else if (response?.statusCode == 401) {
-      final newToken = ref.read(localDataProvider).refreshToken;
+      final newToken = ref.read(localDataProvider).accessToken;
       if (newToken != null) {
         ref.read(localDataProvider).setAccessToken(newToken);
       }
@@ -240,7 +240,7 @@ class AuthorizationInterceptorMarketNew extends Interceptor {
         err.type == DioExceptionType.unknown && err.error is SocketException) {
       $showMessage("No Internet Connection", isError: true);
     } else if (response?.statusCode == 401) {
-      final newToken = ref.read(localDataProvider).refreshToken;
+      final newToken = ref.read(localDataProvider).accessToken;
       if (newToken != null) {
         ref.read(localDataProvider).setAccessToken(newToken);
       }

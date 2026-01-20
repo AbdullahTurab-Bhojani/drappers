@@ -26,8 +26,6 @@ class SharedPreferencesService implements SharedPrefService {
   static const _deviceIdKey = 'device_id';
   static const _fcmTokenKey = 'fcm_token';
 
-  // ================= AUTH =================
-
   @override
   String? get accessToken => sharedPreferences.getString(_tokenKey);
 
@@ -69,8 +67,6 @@ class SharedPreferencesService implements SharedPrefService {
     return true;
   }
 
-  // ================= USER =================
-
   @override
   Future<void> saveUser(UserData user) async {
     await sharedPreferences.setString(_userKey, jsonEncode(user.toJson()));
@@ -99,8 +95,6 @@ class SharedPreferencesService implements SharedPrefService {
   @override
   String? get getUserName => sharedPreferences.getString(_userNameKey);
 
-  // ================= FIRST TIME =================
-
   @override
   bool getIsFirstTime() => sharedPreferences.getBool(_isFirstTimeKey) ?? true;
 
@@ -109,14 +103,10 @@ class SharedPreferencesService implements SharedPrefService {
     await sharedPreferences.setBool(_isFirstTimeKey, value);
   }
 
-  // ================= CLEAR =================
-
   @override
   Future<bool> clearAllData() async {
     return sharedPreferences.clear();
   }
-
-  // ================= EXTRA =================
 
   @override
   String? get getdeviceId => sharedPreferences.getString(_deviceIdKey);

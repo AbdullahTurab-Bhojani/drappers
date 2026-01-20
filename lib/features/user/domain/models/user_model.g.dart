@@ -41,6 +41,7 @@ _UserData _$UserDataFromJson(Map<String, dynamic> json) => _UserData(
   recentlySessions: json['recentlySessions'] as List<dynamic>? ?? const [],
   allSessions: json['allSessions'] as List<dynamic>? ?? const [],
   totalSessions: (json['totalSessions'] as num?)?.toInt() ?? 0,
+  profileUrl: json['profileUrl'] as String?,
 );
 
 Map<String, dynamic> _$UserDataToJson(_UserData instance) => <String, dynamic>{
@@ -63,4 +64,5 @@ Map<String, dynamic> _$UserDataToJson(_UserData instance) => <String, dynamic>{
   'recentlySessions': instance.recentlySessions,
   'allSessions': instance.allSessions,
   'totalSessions': instance.totalSessions,
+  'profileUrl': instance.profileUrl,
 };

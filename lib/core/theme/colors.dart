@@ -5,13 +5,10 @@ part of '../../drappers.dart';
 @immutable
 abstract final class AppColors {
   static const List<Color> buttongradientcolor = [
-    // Color(0xFF00C6FF),
-    // Color(0xFF0072FF),
     Color(0xFF4DA0FF),
     Color(0xFF0066FF),
   ];
 
-  // Default Theme //
   static const dDarkest = Color(0xFF0C0A14);
   static const dDark = Color(0xFF0E0C19);
   static const dRegular = Color(0xFF00002A);
@@ -42,14 +39,12 @@ abstract final class AppColors {
   static const submitticket0E0E0E = Color(0xff0E0E0E);
   static const submitfield181818 = Color(0xff181818);
 
-
   static const white0xffbdbdbe = Color(0xffbdbdbe);
   static const containergrey = Color(0xff323232);
   static const popselectcolor19193F = Color(0xff19193F);
   static const sliderbar4C4C4C = Color(0xff4C4C4C);
   static const helpsupport = Color(0xff242424);
 
-  // Dark Theme //
   static const bDarkest = Color(0xFF000000);
   static const bDark = Color(0xFF0D0D0D);
   static const bRegular = Color(0xFF100F10);
@@ -57,10 +52,9 @@ abstract final class AppColors {
   static const bLightest = Color(0xFF1C191C);
   static const bTextColor = Color(0xFFFFFFFF);
   static const bGrey = Color(0xFF6E7480);
-  static const bSubTextColor = Color(0xFF777573); // optional
-  static const bLabel = Color(0xFF736D9D); // optional
+  static const bSubTextColor = Color(0xFF777573);
+  static const bLabel = Color(0xFF736D9D);
 
-  // Light Theme //
   static const wDarkest = Color(0xFFEBE7F1);
   static const wDark = Color(0xFFF6F2FB);
   static const wRegular = Color(0xFFFCFAFF);
@@ -68,8 +62,8 @@ abstract final class AppColors {
   static const wLightest = Color(0xFFF0F0F5);
   static const wTextColor = Color(0xFF1D2733);
   static const wGrey = Color(0xFF919498);
-  static const wSubTextColor = Color(0xFF736D9D); // optional
-  static const wLabel = Color(0xFF919498); // same as grey
+  static const wSubTextColor = Color(0xFF736D9D);
+  static const wLabel = Color(0xFF919498);
 
   static const List<Color> buttoncolor = [Color(0xFF1FCFFF), Color(0xFF0063FF)];
 

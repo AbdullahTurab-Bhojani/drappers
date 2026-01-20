@@ -78,13 +78,6 @@ class _BottomNavigationBarShellState
     });
   }
 
-  // old void _onTap(BuildContext context, int index) {
-  //   selectedIndex = index;
-  //   setState(() {});
-  //   final path = _navItems[index]['path'];
-  //   if (path.isNotEmpty) context.goNamed(path);
-  // }
-
   void _onTap(BuildContext context, int index) {
     if (GuestHelper.isGuest) {
       GuestHelper.checkGuest(context);

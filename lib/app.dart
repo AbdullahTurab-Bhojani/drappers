@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 part of 'drappers.dart';
 
 class MyApp extends ConsumerWidget {
@@ -29,13 +27,9 @@ class MyApp extends ConsumerWidget {
               viewInsets: MediaQuery.of(context).viewInsets,
               viewPadding: MediaQuery.of(context).viewPadding,
               padding: MediaQuery.of(context).padding,
-              // textScaler: 1.0,
             ),
             child: child!,
           );
-          //  AppStartupWidget(
-          //   onLoaded: (_) =>
-          // );
         },
       ),
     );
