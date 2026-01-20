@@ -1,10 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../../features/user/domain/models/user_model.dart';
 import '../../providers/shared_pref.dart';
 import 'shared_preference_repository.dart';
-
-/// ================= INTERFACE =================
 
 abstract interface class SharedPrefService {
   Future<bool> setLogout();
@@ -17,44 +14,31 @@ abstract interface class SharedPrefService {
   Future<bool> setRefreshToken(String token);
   String? get refreshToken;
 
-  Future<bool> setRememberMe(String rememberMe);
-  String? get getRemamberMe;
-
-  Future<bool> setEmail(String email);
-  String? get getEmail;
-
-  Future<bool> setPassword(String password);
-  String? get getPassword1;
-
-  Future<void> setIsFirstTime(bool value);
-  bool getIsFirstTime();
-
   Future<bool> clearAllData();
 
-  Future<void> saveUserName(String userName);
-  String? get getUserName;
+  Future<void> saveUser(UserData user);
+  Future<UserData?> getUser();
 
   Future<void> saveUserId(String userId);
   String get getUserId;
 
-  Future<void> removeUserId(String userId);
+  Future<void> saveUserName(String userName);
+  String? get getUserName;
 
-  /// ✅ Device
+  bool getIsFirstTime();
+  Future<void> setIsFirstTime(bool value);
+
   String? get getdeviceId;
   Future<void> saveDeviceId(String deviceId);
 
-  /// ✅ FCM
   String? get getfcmToken;
   Future<void> saveFcmToken(String fcmToken);
-
-  /// ✅ User
-  Future<void> saveUser(UserData user);
-  Future<UserData?> getUser();
 
   Future<void> saveLatitude(double value);
   Future<void> saveLongitude(double value);
   double? getLatitude();
   double? getLongitude();
+
   Future<void> saveTheme(String themeName);
   String getTheme();
 }

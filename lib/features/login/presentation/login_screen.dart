@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -29,6 +30,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void onRememberMeChanged(bool? value) {
     rememberMe = value ?? false;
+  }
+
+  @override
+  void initState() {
+    final pref = ref.read(localDataProvider);
+    print(pref.accessToken);
+
+    super.initState();
   }
 
   Future<void> onSubmit() async {
@@ -87,8 +96,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginState = ref.watch(loginProviderProvider);
-    final isLoading = loginState is Loading;
+    final state = ref.watch(loginProviderProvider);
+    final bool isLoading = state.isLoading;
 
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
@@ -278,7 +287,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       SizedBox(height: AppScaler.scaleSize(context, 15)),
                       AppPasswordField(
-                        keyboardType: TextInputType.numberWithOptions(),
+                        keyboardType: TextInputType.text,
                         controller: _passwordController,
                         labelText: "Password*",
                         hintText: "**********",

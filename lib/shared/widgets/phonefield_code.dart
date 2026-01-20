@@ -13,7 +13,7 @@ class PhoneOtpField extends ConsumerStatefulWidget {
   final Color fieldbg;
   final String labelText;
   final String? Function(String?)? validator;
-  final Country? countryCode; // optional, will use runtime default
+  final Country? countryCode;
 
   const PhoneOtpField({
     super.key,
