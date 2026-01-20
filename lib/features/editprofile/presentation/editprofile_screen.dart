@@ -68,69 +68,68 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(Assets.images.screensbg.path, fit: BoxFit.cover),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.screensbg.path),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppMainBar(
+          leading: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => Navigator.of(context).pop(),
+            child: Image.asset(
+              "assets/images/backicon.png",
+              width: AppScaler.scaleSize(context, 20),
+              height: AppScaler.scaleHeight(context, 20),
+            ),
           ),
-          Column(
-            children: [
-              // App Bar
-              AppMainBar(
-                leading: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => Navigator.of(context).pop(),
-                  child: Image.asset(
-                    "assets/images/backicon.png",
-                    width: AppScaler.scaleSize(context, 20),
-                    height: AppScaler.scaleHeight(context, 20),
-                  ),
-                ),
-                title: "Edit Profile",
-                centerTitle: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-              ),
-              SizedBox(height: AppScaler.scaleHeight(context, 50)),
+          title: "Edit Profile",
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Column(
+          children: [
+            SizedBox(height: AppScaler.scaleHeight(context, 50)),
 
-              // Profile Image + Name
-              Column(
-                children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (context) => Center(
-                              child: Dialog(
-                                backgroundColor: Colors.transparent,
-                                insetPadding: EdgeInsets.symmetric(
-                                  horizontal: AppScaler.scaleSize(context, 20),
-                                ),
-                                child: EditProfilePopup(),
-                              ),
-                            ),
-                          );
-                        },
-                        child: SizedBox(
-                          height: AppScaler.scaleHeight(context, 114.82),
-                          width: AppScaler.scaleSize(context, 114.82),
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundColor: Colors.transparent,
-                            backgroundImage: NetworkImage(
-                              'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
-                            ),
-                          ),
-                        ),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (context) => Center(
+                    child: Dialog(
+                      backgroundColor: Colors.transparent,
+                      insetPadding: EdgeInsets.symmetric(
+                        horizontal: AppScaler.scaleSize(context, 20),
                       ),
-                      Positioned(
-                        bottom: AppScaler.scaleSize(context, -10),
-                        right: AppScaler.scaleSize(context, 46),
+                      child: EditProfilePopup(),
+                    ),
+                  ),
+                );
+              },
+              child: Column(
+                children: [
+                  Container(
+                    height: AppScaler.scaleHeight(context, 114.82),
+                    width: AppScaler.scaleSize(context, 114.82),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Transform.translate(
+                        offset: Offset(0, 12),
                         child: Container(
                           width: AppScaler.scaleSize(context, 24),
                           height: AppScaler.scaleHeight(context, 24),
@@ -139,102 +138,97 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                             color: customColors.buttonColors.first,
                             shape: BoxShape.circle,
                           ),
-                          child: Center(
-                            child: Image.asset(
-                              Assets.images.editprofilecameraicon.path,
-                            ),
+                          child: Image.asset(
+                            Assets.images.editprofilecameraicon.path,
                           ),
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                  PoppinsText(
-                    context,
-                    _fullNameController.text.isNotEmpty
-                        ? _fullNameController.text
-                        : 'Guest User',
-                    fontSize: PoppinsFontSizeVariant.size22,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: customColors.textColor,
-                  ),
-                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
                 ],
               ),
+            ),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
+            PoppinsText(
+              context,
+              _fullNameController.text.isNotEmpty
+                  ? _fullNameController.text
+                  : 'Guest User',
+              fontSize: PoppinsFontSizeVariant.size22,
+              fontWeight: PoppinsFontWeightVariant.medium,
+              color: customColors.textColor,
+            ),
+            SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
-              // Form Fields
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppScaler.scaleSize(context, 20),
-                    ),
-                    child: Column(
-                      children: [
-                        NewTextField(
-                          fieldbg: AppColors.tfield,
-                          controller: _fullNameController,
-                          labelText: "Full Name*",
-                          hintText: "Enter your full name",
-                          hintStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          filledColor: customColors.textColor,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppScaler.scaleSize(context, 20),
+                  ),
+                  child: Column(
+                    children: [
+                      NewTextField(
+                        fieldbg: AppColors.tfield,
+                        controller: _fullNameController,
+                        labelText: "Full Name*",
+                        hintText: "Enter your full name",
+                        hintStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
-                        SizedBox(height: 15),
-                        NewTextField(
-                          fieldbg: AppColors.tfield,
-                          controller: _emailController,
-                          labelText: "Email Address*",
-                          hintText: "Enter your email",
-                          hintStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          filledColor: AppColors.tfield,
-                          keyboardType: TextInputType.emailAddress,
+                        filledColor: customColors.textColor,
+                      ),
+                      SizedBox(height: 15),
+                      NewTextField(
+                        fieldbg: AppColors.tfield,
+                        controller: _emailController,
+                        labelText: "Email Address*",
+                        hintText: "Enter your email",
+                        hintStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                        filledColor: AppColors.tfield,
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
 
-                        // Phone Field (with country code)
-                        PhoneOtpField(
-                          countryCode: Country.parse("US"),
-                          phoneController: _phoneNumberController,
-                          otpController: otpController,
-                          fieldbg: AppColors.tfield,
-                          labelText: 'Phone Number*',
-                          onSendCode: () {},
-                        ),
+                      PhoneOtpField(
+                        countryCode: Country.parse("US"),
+                        phoneController: _phoneNumberController,
+                        otpController: otpController,
+                        fieldbg: AppColors.tfield,
+                        labelText: 'Phone Number*',
+                        onSendCode: () {},
+                      ),
 
-                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
-                        AppButton(
-                          onPressed: () {
-                            // Save logic here
-                            Navigator.of(context).pop();
-                          },
-                          title: "Save Changes",
-                        ),
-                        SizedBox(height: AppScaler.scaleHeight(context, 12)),
-                        AppButton(
-                          color: Colors.transparent,
-                          borderColor: customColors.textColor,
-                          borderWidth: 1,
-                          border: true,
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          title: "Discard Changes",
-                        ),
-                      ],
-                    ),
+                      AppButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        title: "Save Changes",
+                      ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 12)),
+                      AppButton(
+                        color: Colors.transparent,
+                        borderColor: customColors.textColor,
+                        borderWidth: 1,
+                        border: true,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        title: "Discard Changes",
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
