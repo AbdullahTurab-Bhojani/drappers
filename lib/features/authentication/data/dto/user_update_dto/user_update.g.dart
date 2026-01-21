@@ -11,6 +11,7 @@ _UpdateUserDTO _$UpdateUserDTOFromJson(Map<String, dynamic> json) =>
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       profileUrl: json['profileUrl'] as String,
+      phoneNumber: json['phoneNumber'] as String,
     );
 
 Map<String, dynamic> _$UpdateUserDTOToJson(_UpdateUserDTO instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$UpdateUserDTOToJson(_UpdateUserDTO instance) =>
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'profileUrl': instance.profileUrl,
+      'phoneNumber': instance.phoneNumber,
     };

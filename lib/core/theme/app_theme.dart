@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -5,6 +7,7 @@ import '../../drappers.dart';
 import '../extensions/theme_extension.dart';
 import '../local/domain/repositories/local_storage_repository.dart';
 import '../local/providers/shared_pref.dart';
+
 part 'app_theme.freezed.dart';
 part 'app_theme.g.dart';
 
@@ -69,6 +72,11 @@ class AppThemes {
           containergrey: AppColors.containergrey,
         ),
       ],
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.buttoncolor.first,
+        selectionColor: AppColors.buttoncolor.first,
+        selectionHandleColor: AppColors.buttoncolor.first,
+      ),
     ),
 
     AppThemeType.light: ThemeData(
@@ -103,6 +111,11 @@ class AppThemes {
           containergrey: AppColors.containergrey,
         ),
       ],
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.buttoncolor.first,
+        selectionColor: AppColors.buttoncolor.first,
+        selectionHandleColor: AppColors.buttoncolor.first,
+      ),
     ),
 
     AppThemeType.dark: ThemeData(
@@ -137,6 +150,11 @@ class AppThemes {
           containergrey: AppColors.containergrey,
         ),
       ],
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.buttoncolor.first,
+        selectionColor: AppColors.buttoncolor.first,
+        selectionHandleColor: AppColors.buttoncolor.first,
+      ),
     ),
   };
 }

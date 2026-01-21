@@ -162,7 +162,7 @@ class _UnifiedVideoPlayerScreenState extends State<UnifiedVideoPlayerScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: _isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? Center(child: LoadingWidget())
             : GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {

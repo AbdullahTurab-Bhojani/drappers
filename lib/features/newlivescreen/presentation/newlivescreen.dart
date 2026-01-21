@@ -125,7 +125,7 @@ class _NewlivescreenState extends State<Newlivescreen> {
                 if (_controlsVisible) _hideControlsAfterDelay();
               },
               child: showLoader
-                  ? Center(child: CircularProgressIndicator())
+                  ? Center(child: LoadingWidget())
                   : BetterPlayer(controller: _betterPlayerController),
             ),
           ),
@@ -218,7 +218,6 @@ class _NewlivescreenState extends State<Newlivescreen> {
                 ),
 
                 // SizedBox(height: 10),
-
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(

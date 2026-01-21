@@ -75,45 +75,37 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                       }
                     },
                     countryListTheme: CountryListThemeData(
-                      flagSize: 20, // hide flags
-
+                      flagSize: 20,
                       backgroundColor: AppColors.bDark,
-
                       textStyle: GoogleFonts.poppins(
                         fontSize: 16,
-
+                        color: AppColors.white,
+                      ),
+                      searchTextStyle: GoogleFonts.poppins(
+                        fontSize: 16,
                         color: AppColors.white,
                       ),
 
-                      searchTextStyle: GoogleFonts.poppins(
-                        fontSize: 16,
-
-                        color: AppColors.bSubTextColor,
-                      ),
-
                       bottomSheetHeight: 600,
-
                       inputDecoration: InputDecoration(
+                        focusColor: AppColors.buttoncolor.first,
+                        hoverColor: AppColors.buttoncolor.first,
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: AppColors.bSubTextColor,
                           ),
                         ),
-
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: AppColors.bSubTextColor,
                           ),
                         ),
-
                         hintText: 'Search by country name',
-
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: AppColors.bSubTextColor,
                           ),
                         ),
-
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: AppColors.bSubTextColor,

@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, sized_box_for_whitespace
+// ignore_for_file: deprecated_member_use, sized_box_for_whitespace, use_build_context_synchronously
 
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -128,7 +128,12 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
                         context.go('/home');
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Social login failed')),
+                          SnackBar(
+                            content: PoppinsText(
+                              context,
+                              'Social login failed',
+                            ),
+                          ),
                         );
                       }
                     }

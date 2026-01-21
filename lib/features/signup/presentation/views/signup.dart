@@ -174,7 +174,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: AppScaler.scaleSize(context, 15),
+                          horizontal: AppScaler.scaleSize(context, 0),
                         ),
                         child: Form(
                           key: _formKey,
@@ -275,6 +275,158 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                   },
                                 ),
                                 SizedBox(
+                                  height: AppScaler.scaleHeight(context, 20),
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: AppScaler.scaleHeight(
+                                        context,
+                                        14,
+                                      ),
+                                      width: AppScaler.scaleSize(context, 14),
+                                      child: GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: () =>
+                                            onRememberMeChanged(!rememberMe),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              4,
+                                            ),
+                                            border: rememberMe
+                                                ? null
+                                                : Border.all(
+                                                    color: AppColors.white,
+                                                  ),
+                                          ),
+                                          child: rememberMe
+                                              ? Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          4,
+                                                        ),
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Color(0xFF1FCFFF),
+                                                        Color(0xFF0063FF),
+                                                      ],
+                                                      begin: Alignment.topLeft,
+                                                      end:
+                                                          Alignment.bottomRight,
+                                                    ),
+                                                  ),
+                                                  child: Icon(
+                                                    Icons.check,
+                                                    size: AppScaler.scaleSize(
+                                                      context,
+                                                      12,
+                                                    ),
+                                                    color: AppColors.white,
+                                                  ),
+                                                )
+                                              : null,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: AppScaler.scaleSize(context, 5),
+                                    ),
+                                    Expanded(
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            WidgetSpan(
+                                              child: PoppinsText(
+                                                context,
+                                                "I agree to the ",
+                                                fontSize: PoppinsFontSizeVariant
+                                                    .size12,
+                                                color: customColors.textColor,
+                                                fontWeight:
+                                                    PoppinsFontWeightVariant
+                                                        .regular,
+                                              ),
+                                            ),
+                                            WidgetSpan(
+                                              child: ShaderMask(
+                                                shaderCallback: (bounds) =>
+                                                    LinearGradient(
+                                                      colors: customColors
+                                                          .buttonColors,
+                                                    ).createShader(
+                                                      Rect.fromLTWH(
+                                                        0,
+                                                        0,
+                                                        bounds.width,
+                                                        bounds.height,
+                                                      ),
+                                                    ),
+                                                child: PoppinsText(
+                                                  context,
+                                                  "Terms & Conditions",
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size12,
+                                                  color: AppColors.white,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .regular,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                              ),
+                                            ),
+                                            WidgetSpan(
+                                              child: PoppinsText(
+                                                context,
+                                                " and ",
+                                                fontSize: PoppinsFontSizeVariant
+                                                    .size12,
+                                                color: customColors.textColor,
+                                                fontWeight:
+                                                    PoppinsFontWeightVariant
+                                                        .regular,
+                                              ),
+                                            ),
+                                            WidgetSpan(
+                                              child: ShaderMask(
+                                                shaderCallback: (bounds) =>
+                                                    LinearGradient(
+                                                      colors: customColors
+                                                          .buttonColors,
+                                                    ).createShader(
+                                                      Rect.fromLTWH(
+                                                        0,
+                                                        0,
+                                                        bounds.width,
+                                                        bounds.height,
+                                                      ),
+                                                    ),
+                                                child: PoppinsText(
+                                                  context,
+                                                  "Privacy Policy.",
+                                                  fontSize:
+                                                      PoppinsFontSizeVariant
+                                                          .size12,
+                                                  color: AppColors.white,
+                                                  fontWeight:
+                                                      PoppinsFontWeightVariant
+                                                          .regular,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
                                   height: AppScaler.scaleHeight(context, 40),
                                 ),
                                 AppButton(
@@ -286,6 +438,58 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                     }
                                   },
                                   title: "Create Account",
+                                ),
+                                SizedBox(
+                                  height: AppScaler.scaleHeight(context, 40),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    PoppinsText(
+                                      context,
+                                      "Already have an account?",
+                                      fontSize: PoppinsFontSizeVariant.size14,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.medium,
+                                      color: customColors.textColor,
+                                    ),
+                                    SizedBox(
+                                      width: AppScaler.scaleSize(context, 10),
+                                    ),
+                                    ShaderMask(
+                                      shaderCallback: (bounds) =>
+                                          LinearGradient(
+                                            colors: [
+                                              Color(0xFF1FCFFF),
+                                              Color(0xFF0063FF),
+                                            ],
+                                          ).createShader(
+                                            Rect.fromLTWH(
+                                              0,
+                                              0,
+                                              bounds.width,
+                                              bounds.height,
+                                            ),
+                                          ),
+                                      child: GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: () {
+                                          context.pushNamed(
+                                            AppRoutes.loginScreen.name,
+                                          );
+                                        },
+                                        child: PoppinsText(
+                                          context,
+                                          "Sign in",
+                                          fontSize:
+                                              PoppinsFontSizeVariant.size14,
+                                          fontWeight:
+                                              PoppinsFontWeightVariant.medium,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: AppScaler.scaleHeight(context, 50),

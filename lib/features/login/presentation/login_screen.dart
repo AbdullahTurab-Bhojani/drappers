@@ -127,16 +127,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               child: Column(
                 children: [
                   SizedBox(height: 20),
-                  Row(
-                    children: [
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {
-                          context.pushNamed(AppRoutes.socialLoginScreen.name);
-                        },
-                        child: Image.asset(Assets.images.backicon.path),
-                      ),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.only(left: 15),
+
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            context.pushNamed(AppRoutes.socialLoginScreen.name);
+                          },
+                          child: Image.asset(Assets.images.backicon.path),
+                        ),
+                      ],
+                    ),
                   ),
                   Column(
                     children: [

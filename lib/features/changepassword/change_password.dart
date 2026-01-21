@@ -21,6 +21,8 @@ class ChangePassword extends ConsumerStatefulWidget {
 
 class _ChangePasswordState extends ConsumerState<ChangePassword> {
   final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController oldPasswordController = TextEditingController();
+
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
@@ -36,9 +38,9 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
     if (!_formKey.currentState!.validate()) return;
 
     if (newPasswordController.text != confirmPasswordController.text) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Passwords do not match')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: PoppinsText(context, 'Passwords do not match')),
+      );
       return;
     }
 
@@ -116,6 +118,20 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                     children: [
                       AppPasswordField(
                         keyboardType: TextInputType.text,
+                        controller: oldPasswordController,
+                        labelText: "Old Password*",
+                        hintText: "**********",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Old password required";
+                          }
+
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                      AppPasswordField(
+                        keyboardType: TextInputType.text,
                         controller: newPasswordController,
                         labelText: "New Password*",
                         hintText: "**********",
@@ -123,10 +139,14 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                           if (value == null || value.trim().isEmpty) {
                             return "New password required";
                           }
+
+                          if (value == oldPasswordController.text.trim()) {
+                            return "New password cannot be same as old password";
+                          }
+
                           if (!_isStrongPassword(value)) {
                             return 'Password must be 8 chars with letter, number & symbol';
                           }
-                          return null;
                         },
                       ),
                       SizedBox(height: AppScaler.scaleHeight(context, 15)),
@@ -139,6 +159,11 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                           if (value == null || value.trim().isEmpty) {
                             return "Confirm password required";
                           }
+
+                          if (value != newPasswordController.text.trim()) {
+                            return "Passwords do not match";
+                          }
+
                           return null;
                         },
                       ),

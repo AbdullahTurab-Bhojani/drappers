@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UpdateUserDTO {
 
- String get firstName; String get lastName; String get profileUrl;
+ String get firstName; String get lastName; String get profileUrl; String get phoneNumber;
 /// Create a copy of UpdateUserDTO
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UpdateUserDTOCopyWith<UpdateUserDTO> get copyWith => _$UpdateUserDTOCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateUserDTO&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.profileUrl, profileUrl) || other.profileUrl == profileUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateUserDTO&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.profileUrl, profileUrl) || other.profileUrl == profileUrl)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,firstName,lastName,profileUrl);
+int get hashCode => Object.hash(runtimeType,firstName,lastName,profileUrl,phoneNumber);
 
 @override
 String toString() {
-  return 'UpdateUserDTO(firstName: $firstName, lastName: $lastName, profileUrl: $profileUrl)';
+  return 'UpdateUserDTO(firstName: $firstName, lastName: $lastName, profileUrl: $profileUrl, phoneNumber: $phoneNumber)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UpdateUserDTOCopyWith<$Res>  {
   factory $UpdateUserDTOCopyWith(UpdateUserDTO value, $Res Function(UpdateUserDTO) _then) = _$UpdateUserDTOCopyWithImpl;
 @useResult
 $Res call({
- String firstName, String lastName, String profileUrl
+ String firstName, String lastName, String profileUrl, String phoneNumber
 });
 
 
@@ -65,11 +65,12 @@ class _$UpdateUserDTOCopyWithImpl<$Res>
 
 /// Create a copy of UpdateUserDTO
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? firstName = null,Object? lastName = null,Object? profileUrl = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? firstName = null,Object? lastName = null,Object? profileUrl = null,Object? phoneNumber = null,}) {
   return _then(_self.copyWith(
 firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,profileUrl: null == profileUrl ? _self.profileUrl : profileUrl // ignore: cast_nullable_to_non_nullable
+as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String firstName,  String lastName,  String profileUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String firstName,  String lastName,  String profileUrl,  String phoneNumber)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UpdateUserDTO() when $default != null:
-return $default(_that.firstName,_that.lastName,_that.profileUrl);case _:
+return $default(_that.firstName,_that.lastName,_that.profileUrl,_that.phoneNumber);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.firstName,_that.lastName,_that.profileUrl);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String firstName,  String lastName,  String profileUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String firstName,  String lastName,  String profileUrl,  String phoneNumber)  $default,) {final _that = this;
 switch (_that) {
 case _UpdateUserDTO():
-return $default(_that.firstName,_that.lastName,_that.profileUrl);case _:
+return $default(_that.firstName,_that.lastName,_that.profileUrl,_that.phoneNumber);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +197,10 @@ return $default(_that.firstName,_that.lastName,_that.profileUrl);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String firstName,  String lastName,  String profileUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String firstName,  String lastName,  String profileUrl,  String phoneNumber)?  $default,) {final _that = this;
 switch (_that) {
 case _UpdateUserDTO() when $default != null:
-return $default(_that.firstName,_that.lastName,_that.profileUrl);case _:
+return $default(_that.firstName,_that.lastName,_that.profileUrl,_that.phoneNumber);case _:
   return null;
 
 }
@@ -211,12 +212,13 @@ return $default(_that.firstName,_that.lastName,_that.profileUrl);case _:
 @JsonSerializable()
 
 class _UpdateUserDTO implements UpdateUserDTO {
-  const _UpdateUserDTO({required this.firstName, required this.lastName, required this.profileUrl});
+  const _UpdateUserDTO({required this.firstName, required this.lastName, required this.profileUrl, required this.phoneNumber});
   factory _UpdateUserDTO.fromJson(Map<String, dynamic> json) => _$UpdateUserDTOFromJson(json);
 
 @override final  String firstName;
 @override final  String lastName;
 @override final  String profileUrl;
+@override final  String phoneNumber;
 
 /// Create a copy of UpdateUserDTO
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateUserDTO&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.profileUrl, profileUrl) || other.profileUrl == profileUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateUserDTO&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.profileUrl, profileUrl) || other.profileUrl == profileUrl)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,firstName,lastName,profileUrl);
+int get hashCode => Object.hash(runtimeType,firstName,lastName,profileUrl,phoneNumber);
 
 @override
 String toString() {
-  return 'UpdateUserDTO(firstName: $firstName, lastName: $lastName, profileUrl: $profileUrl)';
+  return 'UpdateUserDTO(firstName: $firstName, lastName: $lastName, profileUrl: $profileUrl, phoneNumber: $phoneNumber)';
 }
 
 
@@ -251,7 +253,7 @@ abstract mixin class _$UpdateUserDTOCopyWith<$Res> implements $UpdateUserDTOCopy
   factory _$UpdateUserDTOCopyWith(_UpdateUserDTO value, $Res Function(_UpdateUserDTO) _then) = __$UpdateUserDTOCopyWithImpl;
 @override @useResult
 $Res call({
- String firstName, String lastName, String profileUrl
+ String firstName, String lastName, String profileUrl, String phoneNumber
 });
 
 
@@ -268,11 +270,12 @@ class __$UpdateUserDTOCopyWithImpl<$Res>
 
 /// Create a copy of UpdateUserDTO
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? firstName = null,Object? lastName = null,Object? profileUrl = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? firstName = null,Object? lastName = null,Object? profileUrl = null,Object? phoneNumber = null,}) {
   return _then(_UpdateUserDTO(
 firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,profileUrl: null == profileUrl ? _self.profileUrl : profileUrl // ignore: cast_nullable_to_non_nullable
+as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

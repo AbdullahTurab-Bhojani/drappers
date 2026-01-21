@@ -9,6 +9,7 @@ abstract class UpdateUserDTO with _$UpdateUserDTO {
     required String firstName,
     required String lastName,
     required String profileUrl,
+    required String phoneNumber,
   }) = _UpdateUserDTO;
 
   factory UpdateUserDTO.fromJson(Map<String, dynamic> json) =>

@@ -150,17 +150,17 @@ class _BottomNavigationBarShellState
                                   user!.profileUrl != null &&
                                   user!.profileUrl != ''
                             ? CircleAvatar(
-                                radius: 12,
+                                radius: 11,
                                 backgroundColor: Colors.transparent,
                                 backgroundImage: NetworkImage(
                                   user!.profileUrl!,
                                 ),
                               )
                             : CircleAvatar(
-                                radius: 9,
+                                radius: 11,
                                 backgroundColor: Colors.transparent,
-                                backgroundImage: AssetImage(
-                                  Assets.images.editprofileimage.path,
+                                backgroundImage: NetworkImage(
+                                  'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg',
                                 ),
                               )
                       else

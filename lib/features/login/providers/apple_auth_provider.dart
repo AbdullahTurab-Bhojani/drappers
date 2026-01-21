@@ -1,17 +1,15 @@
+// ignore_for_file: unused_element
+
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:crypto/crypto.dart';
-
 import '../../authentication/data/dto/social_dto/social_dto.dart';
 import '../../authentication/domain/repository/auth_repository.dart';
 import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../user/domain/models/user_model.dart';
-import 'dart:convert';
-import 'dart:math';
 
 final appleAuthServiceProvider = Provider<AppleAuthService>((ref) {
   return AppleAuthService(ref);
@@ -20,8 +18,6 @@ final appleAuthServiceProvider = Provider<AppleAuthService>((ref) {
 class AppleAuthService {
   final Ref ref;
   AppleAuthService(this.ref);
-
-  // ---------------- NONCE HELPERS ----------------
 
   String _generateNonce([int length = 32]) {
     const charset =
