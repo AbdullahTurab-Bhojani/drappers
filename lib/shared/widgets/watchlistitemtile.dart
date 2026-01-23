@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../drappers.dart';
 import '../../../../core/extensions/theme_extension.dart';
@@ -83,7 +84,7 @@ class WatchlistItemTile extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.0),
               image: DecorationImage(
-                image: AssetImage(thumbnailPath),
+                image: CachedNetworkImageProvider(thumbnailPath),
                 fit: BoxFit.cover,
               ),
             ),

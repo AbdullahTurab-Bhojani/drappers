@@ -24,13 +24,13 @@ class TrendingshowsHeader extends StatefulWidget {
 }
 
 List trendingimages = [
-  Assets.images.trendingimage1.path,
-  Assets.images.trendingimage2.path,
-  Assets.images.trendingimage3.path,
-  Assets.images.trendingimage4.path,
-  Assets.images.trendingimage5.path,
-  Assets.images.trendingimage6.path,
-  Assets.images.trendingimage7.path,
+  'https://media.licdn.com/dms/image/v2/D5622AQEyov8yWSObtQ/feedshare-shrink_800/B56ZZbWaY0GUAg-/0/1745289326559?e=2147483647&v=beta&t=aVV9PZkR61m9nD1gjSmofrkmGY3YO3rftG8mZaF6ofU',
+  'https://media.licdn.com/dms/image/v2/D5622AQEyov8yWSObtQ/feedshare-shrink_800/B56ZZbWaY0GUAg-/0/1745289326559?e=2147483647&v=beta&t=aVV9PZkR61m9nD1gjSmofrkmGY3YO3rftG8mZaF6ofU',
+  'https://media.licdn.com/dms/image/v2/D5622AQEyov8yWSObtQ/feedshare-shrink_800/B56ZZbWaY0GUAg-/0/1745289326559?e=2147483647&v=beta&t=aVV9PZkR61m9nD1gjSmofrkmGY3YO3rftG8mZaF6ofU',
+  'https://media.licdn.com/dms/image/v2/D5622AQEyov8yWSObtQ/feedshare-shrink_800/B56ZZbWaY0GUAg-/0/1745289326559?e=2147483647&v=beta&t=aVV9PZkR61m9nD1gjSmofrkmGY3YO3rftG8mZaF6ofU',
+  'https://media.licdn.com/dms/image/v2/D5622AQEyov8yWSObtQ/feedshare-shrink_800/B56ZZbWaY0GUAg-/0/1745289326559?e=2147483647&v=beta&t=aVV9PZkR61m9nD1gjSmofrkmGY3YO3rftG8mZaF6ofU',
+  'https://media.licdn.com/dms/image/v2/D5622AQEyov8yWSObtQ/feedshare-shrink_800/B56ZZbWaY0GUAg-/0/1745289326559?e=2147483647&v=beta&t=aVV9PZkR61m9nD1gjSmofrkmGY3YO3rftG8mZaF6ofU',
+  'https://media.licdn.com/dms/image/v2/D5622AQEyov8yWSObtQ/feedshare-shrink_800/B56ZZbWaY0GUAg-/0/1745289326559?e=2147483647&v=beta&t=aVV9PZkR61m9nD1gjSmofrkmGY3YO3rftG8mZaF6ofU',
 ];
 
 class _TrendingshowsHeaderState extends State<TrendingshowsHeader> {

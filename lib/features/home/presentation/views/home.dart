@@ -205,15 +205,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       'The Frontier - Meet The Drappers',
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
-    List trendingimages = [
-      Assets.images.trendingimage1.path,
-      Assets.images.trendingimage2.path,
-      Assets.images.trendingimage3.path,
-      Assets.images.trendingimage4.path,
-      Assets.images.trendingimage5.path,
-      Assets.images.trendingimage6.path,
-      Assets.images.trendingimage7.path,
-    ];
+
     List<String> hometab = [
       'Live Pitches',
       'Success Stories',
