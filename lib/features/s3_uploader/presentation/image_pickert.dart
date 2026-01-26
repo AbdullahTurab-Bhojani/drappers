@@ -33,11 +33,10 @@ class UploadImageScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(s3UploadRepositoryProvider);
+    ref.watch(s3UploadRepositoryProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // 📂 Gallery Button
         GestureDetector(
           onTap: () async {
             bool result = await requestStoragePermission(isCamera: false);
@@ -55,11 +54,7 @@ class UploadImageScreen extends ConsumerWidget {
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             decoration: BoxDecoration(
               color: AppColors.buttoncolor.first,
-              // gradient: const LinearGradient(
-              //   colors: [Color(0xFF6D5DF6), Color(0xFF53E88B)],
-              //   begin: Alignment.topLeft,
-              //   end: Alignment.bottomRight,
-              // ),
+
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -85,8 +80,6 @@ class UploadImageScreen extends ConsumerWidget {
             ),
           ),
         ),
-
-        // 📷 Camera Button
         GestureDetector(
           onTap: () async {
             bool result = await requestStoragePermission(isCamera: true);

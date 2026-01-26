@@ -147,6 +147,7 @@ class _ChangePasswordState extends ConsumerState<ChangePassword> {
                           if (!_isStrongPassword(value)) {
                             return 'Password must be 8 chars with letter, number & symbol';
                           }
+                          return null;
                         },
                       ),
                       SizedBox(height: AppScaler.scaleHeight(context, 15)),

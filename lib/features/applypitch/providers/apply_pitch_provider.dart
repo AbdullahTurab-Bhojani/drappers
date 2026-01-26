@@ -7,6 +7,7 @@ part 'apply_pitch_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class PitchProvider extends _$PitchProvider {
+  @override
   AppLoadingState build() {
     return const AppLoadingState.initial();
   }
