@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, unused_element, prefer_final_fields, unused_local_variable
+// ignore_for_file: unused_element, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,7 +63,6 @@ class _ContentDetailState extends State<ContentDetail>
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
 

@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
@@ -50,7 +51,7 @@ class _CardWidgetState extends State<CardWidget> {
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
             image: isNetworkImage
-                ? NetworkImage(widget.assetImage)
+                ? CachedNetworkImageProvider(widget.assetImage)
                 : AssetImage(widget.assetImage) as ImageProvider,
             fit: BoxFit.cover,
           ),

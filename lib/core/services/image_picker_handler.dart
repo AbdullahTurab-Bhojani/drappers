@@ -297,8 +297,9 @@ class ImagePickerHandler {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Permission required'),
-        content: Text(
+        title: PoppinsText(context, 'Permission required'),
+        content: PoppinsText(
+          context,
           'Please enable ${isCamera ? 'camera' : 'photo'} access in the app settings to use this feature.',
         ),
         actions: [
@@ -306,14 +307,14 @@ class ImagePickerHandler {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Cancel'),
+            child: PoppinsText(context, 'Cancel'),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               openAppSettings();
             },
-            child: Text('Open Settings'),
+            child: PoppinsText(context, 'Open Settings'),
           ),
         ],
       ),

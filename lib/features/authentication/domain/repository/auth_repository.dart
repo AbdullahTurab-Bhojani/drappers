@@ -7,13 +7,11 @@ import '../../data/dto/logout_dto/logout_dto.dart';
 import '../../data/dto/reset_dto/reset_password_dto.dart';
 import '../../data/dto/sign_up_dto/sign_up.dart';
 import '../../data/dto/social_dto/social_dto.dart';
+import '../../data/dto/user_update_dto/user_update.dart';
 import '../models/login_response.dart';
 import '../models/base_response.dart';
-import '../../data/dto/login_dto/login_dto.dart';
-import '../../data/dto/sign_up_dto/sign_up.dart';
-import '../../data/dto/social_dto/social_dto.dart';
-import '../models/login_response.dart';
 import '../models/signup_response.dart';
+import '../models/user_response.dart';
 import 'auth_api_repository.dart';
 
 abstract interface class AuthRepository {
@@ -30,21 +28,7 @@ abstract interface class AuthRepository {
 
   Future<BaseResponse> resetPassword(ResetPasswordDTO resetPasswordDto);
 
-  //   Future<VerificationResponseModel> verifyotp(Map<String, dynamic> body);
-
-  //   Future<ForgotPasswordResponse> forgotPassword(Map<String, dynamic> body);
-
-  //   Future<ForgotPasswordResponse> resetPassword(Map<String, dynamic> body);
-
-  //   Future<LogoutResponseModel> logout(LogoutDto dto);
-
-  //   Future<LogoutResponseModel> addDevice(LogoutDto dto);
-
-  //   Future<OtpResponseModel> sendotp(Map<String, dynamic> body);
-
-  // Future<ChangePasswordResponseModel> changePassword(ChangePasswordRequestDto body);
-
-  // Future<DeleteAccountResponse> deleteAccount();
+  Future<UpdateUserResponse> updateProfile(UpdateUserDTO updateUserDto);
 }
 
 final authRepository = Provider<AuthRepository>(

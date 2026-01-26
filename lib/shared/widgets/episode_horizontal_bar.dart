@@ -60,7 +60,7 @@ class EpisodesHorizontalBar extends StatelessWidget {
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       padding: EdgeInsets.only(left: 20),
-                      separatorBuilder: (_, __) => const SizedBox(width: 20),
+                      separatorBuilder: (_, _) => const SizedBox(width: 20),
                       itemCount: episodesData.length,
                       itemBuilder: (_, index) => HorizontalEpisodeItem(
                         episode: episodesData[index],

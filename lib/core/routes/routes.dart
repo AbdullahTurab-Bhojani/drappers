@@ -1,7 +1,7 @@
 part of '../../drappers.dart';
 
 enum AppRoutes {
-  splashScreen('splash', '/'),
+  splashScreen('splash', '/splash'),
   onboardingScreen('onboarding', '/onboarding'),
   loginScreen('login', '/login'),
   forgetpasswordScreen('forgetpassword', '/forgetpassword'),
@@ -78,6 +78,12 @@ enum AppRoutes {
   static List<AppRoutes> get publicRoutes => [
     AppRoutes.splashScreen,
     AppRoutes.signupScreen,
+    AppRoutes.loginScreen,
+    AppRoutes.socialLoginScreen,
+    AppRoutes.forgetpasswordScreen,
+    AppRoutes.verfiicationcodeScreen,
+    AppRoutes.createAccountCodeScreen,
+    AppRoutes.onboardingScreen,
   ];
   static List<AppRoutes> bottomNavPages = [
     AppRoutes.home,

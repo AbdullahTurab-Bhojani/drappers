@@ -88,7 +88,7 @@ class _ReelActionBarState extends State<ReelActionBar> {
                     ),
                   )
                 : Center(
-                    child: CircularProgressIndicator(color: AppColors.white),
+                    child: LoadingWidget(color: AppColors.buttoncolor.first),
                   ),
           ),
 

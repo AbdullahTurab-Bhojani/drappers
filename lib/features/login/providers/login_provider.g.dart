@@ -41,7 +41,7 @@ final class LoginProviderProvider
   }
 }
 
-String _$loginProviderHash() => r'ed14aa7cb89ff629936246b5da3e857f62577fe2';
+String _$loginProviderHash() => r'c03033b3a0fac7e8d2acff11f594c2df93e4e898';
 
 abstract class _$LoginProvider extends $Notifier<AppLoadingState> {
   AppLoadingState build();

@@ -377,41 +377,32 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
   }
 }
 
-class DropDownField extends StatefulWidget {
+class DropDownField extends StatelessWidget {
   const DropDownField({
     super.key,
-    required this.controller,
+    required this.items,
+    required this.onChanged,
+    this.value,
     required this.hintText,
-    this.validator,
-    this.textInputAction,
-    this.keyboardType,
-    this.sufixIcon,
-    this.prefixIcon,
-    this.hintStyle,
     this.labelText,
+    this.validator,
+    this.prefixIcon,
+    this.sufixIcon,
   });
 
-  final TextEditingController controller;
+  final List<String> items;
+  final String? value;
   final String hintText;
+  final String? labelText;
   final String? Function(String?)? validator;
-  final TextInputAction? textInputAction;
-  final TextInputType? keyboardType;
   final Widget? prefixIcon;
   final Widget? sufixIcon;
-  final TextStyle? hintStyle;
-  final String? labelText;
-
-  @override
-  State createState() => _DropDownFieldFieldState();
-}
-
-class _DropDownFieldFieldState extends State<DropDownField> {
-  bool isShow = true;
+  final void Function(String?) onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 14, right: 14, top: 12, bottom: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         color: AppColors.tfield,
         borderRadius: BorderRadius.circular(5),
@@ -419,63 +410,31 @@ class _DropDownFieldFieldState extends State<DropDownField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.labelText != null) TextFieldLabel(name: widget.labelText!),
+          if (labelText != null) TextFieldLabel(name: labelText!),
 
-          SizedBox(
-            // height: 38,
-            child: TextFormField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              cursorColor: AppColors.white,
-              validator: widget.validator,
-              obscureText: isShow,
-              controller: widget.controller,
-              inputFormatters: [NoOnlyWhitespaceFormatter()],
-              keyboardType: widget.keyboardType,
-              textInputAction: widget.textInputAction,
-
-              style: GoogleFonts.poppins(
+          DropdownButtonFormField<String>(
+            initialValue: value,
+            validator: validator,
+            dropdownColor: AppColors.tfield,
+            icon: sufixIcon ?? const Icon(Icons.keyboard_arrow_down),
+            style: GoogleFonts.poppins(
+              color: AppColors.white,
+              fontSize: AppScaler.scaleFont(context, 16),
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              isDense: true,
+              prefixIcon: prefixIcon,
+              hintText: hintText,
+              hintStyle: GoogleFonts.poppins(
                 color: AppColors.white,
                 fontSize: AppScaler.scaleFont(context, 16),
-                fontWeight: FontWeight.w400,
-                // height: 1.1,
-              ),
-
-              decoration: InputDecoration(
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
-
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-
-                hintText: widget.hintText,
-                hintStyle:
-                    widget.hintStyle ??
-                    GoogleFonts.poppins(
-                      color: AppColors.white,
-                      fontSize: AppScaler.scaleFont(context, 16),
-                      fontWeight: FontWeight.w400,
-                    ),
-
-                prefixIcon: widget.prefixIcon != null
-                    ? Center(child: widget.prefixIcon!)
-                    : null,
-                prefixIconConstraints: const BoxConstraints(
-                  minWidth: 32,
-                  minHeight: 32,
-                ),
-
-                suffixIcon: Padding(
-                  padding: EdgeInsetsGeometry.only(bottom: 10),
-                  child: widget.sufixIcon,
-                ),
-
-                suffixIconConstraints: BoxConstraints(
-                  minWidth: 32,
-                  minHeight: 32,
-                ),
               ),
             ),
+            items: items
+                .map((e) => DropdownMenuItem<String>(value: e, child: Text(e)))
+                .toList(),
+            onChanged: onChanged,
           ),
         ],
       ),

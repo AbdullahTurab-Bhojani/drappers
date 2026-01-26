@@ -11,7 +11,6 @@ class AppLoadingState with _$AppLoadingState {
   const factory AppLoadingState.error([String? message]) = _ErrorState;
 }
 
-/// Extension to add convenient state-check getters
 extension AppLoadingStateX on AppLoadingState {
   bool get isLoading => maybeWhen(loading: () => true, orElse: () => false);
 

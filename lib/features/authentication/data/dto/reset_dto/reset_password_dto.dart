@@ -6,7 +6,6 @@ part 'reset_password_dto.g.dart';
 abstract class ResetPasswordDTO with _$ResetPasswordDTO {
   const factory ResetPasswordDTO({
     @JsonKey(name: 'newPassword') required String newPassword,
-    @JsonKey(name: 'temporary') required bool temporary,
   }) = _ResetPasswordDTO;
 
   factory ResetPasswordDTO.fromJson(Map<String, dynamic> json) =>

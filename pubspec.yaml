@@ -55,7 +55,10 @@ dependencies:
   retrofit: ^4.9.2
   retrofit_generator: ^10.2.1
   intl_phone_number_input: ^0.7.5
-  # google_sign_in: ^6.3.0
+  firebase_storage: ^13.0.6
+  firebase_core: ^4.4.0
+  google_sign_in: ^6.3.0
+  sign_in_with_apple: ^7.0.1
 
 
 

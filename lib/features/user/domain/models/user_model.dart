@@ -37,6 +37,7 @@ abstract class UserData with _$UserData {
     @Default([]) List<dynamic> recentlySessions,
     @Default([]) List<dynamic> allSessions,
     @Default(0) int totalSessions,
+    String? profileUrl,
   }) = _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) =>

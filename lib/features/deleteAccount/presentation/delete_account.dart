@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, unused_local_variable
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -24,8 +24,6 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
-
-    const double horizontalPadding = 20;
 
     return Scaffold(
       body: Container(
@@ -59,7 +57,6 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(
-                  // horizontal: horizontalPadding,
                   vertical: AppScaler.scaleHeight(context, 10),
                 ),
                 child: Padding(
@@ -98,7 +95,6 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                            // horizontal: 8,
                             vertical: AppScaler.scaleHeight(context, 8),
                           ),
                           decoration: BoxDecoration(

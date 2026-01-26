@@ -8,7 +8,6 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../shared/widgets/watchlistitemtile.dart';
-import '../../../shared/widgets/editwatchlisttitle.dart';
 import '../../../shared/widgets/popupmenuitem/remove_popup.dart';
 
 class WatchlistData {
@@ -37,22 +36,22 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
 
   List<WatchlistData> menuList = [
     WatchlistData(
-      Assets.images.watchlistcard1.path,
+      'https://assets.myco.io/public/20250418/myplay-Thumbnail-Abu-Dhabi-2-1744984205453.jpg',
       'Finale – Meet The Drapers Season 07',
       '2025',
     ),
     WatchlistData(
-      Assets.images.watchlistcard2.path,
+      'https://assets.myco.io/public/compressed/thumbnails/20250221/myplay-Thumbnail-Abu-Dhabi-Ep7-1740138441423.webp',
       'Semifinals 2 – Meet The Drapers Season 6',
       '2024',
     ),
     WatchlistData(
-      Assets.images.watchlistcard3.path,
+      'https://assets.myco.io/public/compressed/thumbnails/20250307/myplay-Thumbnail-Abu-Dhabi-1741342634493.webp',
       'Semifinals 1 – Meet The Drapers Season 6',
       '2023',
     ),
     WatchlistData(
-      Assets.images.watchlistcard4.path,
+      'https://i.ytimg.com/vi/XXbrwwT0xwI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDBUef9cu2Ng3NcDJNxMKvs82z16w',
       'Sri Sri University – Meet The Drapers Season 6',
       '2023',
     ),
@@ -119,7 +118,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
             Expanded(
               child: ListView.separated(
                 itemCount: menuList.length,
-                separatorBuilder: (_, __) => SizedBox(height: 15),
+                separatorBuilder: (_, _) => SizedBox(height: 15),
                 itemBuilder: (context, index) {
                   final item = menuList[index];
 

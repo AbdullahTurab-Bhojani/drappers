@@ -9,19 +9,18 @@ final routerConfigProvider = Provider((ref) {
     navigatorKey: navigatorKey,
     initialLocation: AppRoutes.home.path,
     redirect: (context, state) {
+      final localData = ref.read(localDataProvider);
+      String? accessToken = localData.accessToken;
+      bool isLogin = accessToken?.isNotEmpty ?? false;
       bool isPublic = AppRoutes.isPublicRoute(state);
-      String accessToken = ref.read(localDataProvider).accessToken ?? "";
-      bool isLogin = accessToken.isNotEmpty;
-      bool guestAllowed = GuestHelper.isGuest;
       debugPrint(
-        "🔁 Redirect : isLogin: $isLogin | isPublic: $isPublic | guestAllowed: $guestAllowed | path: ${state.fullPath}",
+        "🔁 Redirect : isLogin: $isLogin | isPublic: $isPublic | path: ${state.fullPath}",
       );
-      if (!isPublic) {
-        if (!isLogin && !guestAllowed) {
-          return AppRoutes.splashScreen.path;
-        }
+      if (!isPublic && !isLogin) {
+        return AppRoutes.socialLoginScreen.path;
+      } else {
+        return null;
       }
-      return null;
     },
 
     routes: [

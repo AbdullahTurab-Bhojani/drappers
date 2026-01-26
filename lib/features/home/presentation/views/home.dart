@@ -205,15 +205,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       'The Frontier - Meet The Drappers',
       'Season 6, Saudi Arabia - Meet The Drappers',
     ];
-    List trendingimages = [
-      Assets.images.trendingimage1.path,
-      Assets.images.trendingimage2.path,
-      Assets.images.trendingimage3.path,
-      Assets.images.trendingimage4.path,
-      Assets.images.trendingimage5.path,
-      Assets.images.trendingimage6.path,
-      Assets.images.trendingimage7.path,
-    ];
+
     List<String> hometab = [
       'Live Pitches',
       'Success Stories',
@@ -245,9 +237,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppMainBar(
             width: AppScaler.scaleSize(context, 285),
-             leadingText: user != null
-                      ? "Welcome Back ${user!.fullName}!"
-                      : "Welcome Back Guest!",
+            leadingText: user != null
+                ? (user!.firstName != null &&
+                          user!.firstName!.isNotEmpty &&
+                          user!.lastName != null &&
+                          user!.lastName!.isNotEmpty
+                      ? "Welcome Back ${user!.firstName!} ${user!.lastName!}!"
+                      : "Welcome Back ${user!.fullName}!")
+                : "Welcome Back Guest User!",
             title: "",
             centerTitle: false,
             backgroundColor: Colors.transparent,

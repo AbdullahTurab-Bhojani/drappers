@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -5,6 +7,7 @@ import '../../drappers.dart';
 import '../extensions/theme_extension.dart';
 import '../local/domain/repositories/local_storage_repository.dart';
 import '../local/providers/shared_pref.dart';
+
 part 'app_theme.freezed.dart';
 part 'app_theme.g.dart';
 
@@ -35,10 +38,8 @@ extension AppThemeTypeExtension on AppThemeType {
   }
 }
 
-/// 🔹 Theme Definitions
 class AppThemes {
   static final Map<AppThemeType, ThemeData> themes = {
-    /// 🟣 Default Theme
     AppThemeType.defaultTheme: ThemeData(
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.dDark,
@@ -71,6 +72,11 @@ class AppThemes {
           containergrey: AppColors.containergrey,
         ),
       ],
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.buttoncolor.first,
+        selectionColor: AppColors.buttoncolor.first,
+        selectionHandleColor: AppColors.buttoncolor.first,
+      ),
     ),
 
     AppThemeType.light: ThemeData(
@@ -105,9 +111,13 @@ class AppThemes {
           containergrey: AppColors.containergrey,
         ),
       ],
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.buttoncolor.first,
+        selectionColor: AppColors.buttoncolor.first,
+        selectionHandleColor: AppColors.buttoncolor.first,
+      ),
     ),
 
-    /// 🌑 Dark Theme
     AppThemeType.dark: ThemeData(
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.bDark,
@@ -140,11 +150,15 @@ class AppThemes {
           containergrey: AppColors.containergrey,
         ),
       ],
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.buttoncolor.first,
+        selectionColor: AppColors.buttoncolor.first,
+        selectionHandleColor: AppColors.buttoncolor.first,
+      ),
     ),
   };
 }
 
-/// 🔹 Immutable State for Custom Theme
 @freezed
 abstract class CustomThemeState with _$CustomThemeState {
   const factory CustomThemeState({
@@ -167,7 +181,6 @@ class CustomTheme extends _$CustomTheme {
     );
   }
 
-  /// Load saved theme from local storage
   Future<void> _loadTheme() async {
     try {
       await ref.watch(sharedPreferencesProvider.future);
@@ -191,7 +204,6 @@ class CustomTheme extends _$CustomTheme {
     }
   }
 
-  /// Save theme locally
   Future<void> _saveTheme(AppThemeType theme) async {
     try {
       final localData = ref.read(localDataProvider);
@@ -201,7 +213,6 @@ class CustomTheme extends _$CustomTheme {
     }
   }
 
-  /// Convert AppThemeType → ThemeMode
   ThemeMode _getThemeMode(AppThemeType theme) {
     switch (theme) {
       case AppThemeType.light:
@@ -213,7 +224,6 @@ class CustomTheme extends _$CustomTheme {
     }
   }
 
-  /// Apply selected theme
   Future<void> setTheme(AppThemeType theme) async {
     await _saveTheme(theme);
     state = CustomThemeState(
@@ -223,7 +233,6 @@ class CustomTheme extends _$CustomTheme {
     );
   }
 
-  /// Toggle between Default → Dark → Light → Default
   Future<void> toggleTheme() async {
     final newTheme = switch (state.theme) {
       AppThemeType.defaultTheme => AppThemeType.dark,

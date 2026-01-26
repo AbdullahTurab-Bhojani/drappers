@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +12,7 @@ class PhoneOtpField extends ConsumerStatefulWidget {
   final Color fieldbg;
   final String labelText;
   final String? Function(String?)? validator;
-  final Country? countryCode; // optional, will use runtime default
+  final Country? countryCode;
 
   const PhoneOtpField({
     super.key,
@@ -35,11 +34,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
   bool showSendButton = false;
   bool showOtpField = false;
-  bool isTimerRunning = false;
-  bool showResendButton = false;
-
-  int seconds = 30;
-  Timer? _timer;
 
   late final List<TextEditingController> _otpControllers;
   late final List<FocusNode> _focusNodes;
@@ -47,7 +41,6 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
   @override
   void initState() {
     super.initState();
-    // Runtime default country
     selectedCountry = widget.countryCode ?? Country.parse("US");
 
     _otpControllers = List.generate(6, (_) => TextEditingController());
@@ -66,10 +59,19 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
 
   @override
   void dispose() {
-    _timer?.cancel();
-    for (final c in _otpControllers) c.dispose();
-    for (final f in _focusNodes) f.dispose();
+    for (final c in _otpControllers) {
+      c.dispose();
+    }
+    for (final f in _focusNodes) {
+      f.dispose();
+    }
     super.dispose();
+  }
+
+  bool _isPhoneValid(String value) {
+    String digitsOnly = value.replaceAll(RegExp(r'[^0-9]'), '');
+    String fullNumber = '+${selectedCountry.phoneCode}$digitsOnly';
+    return RegExp(r'^\+[1-9]\d{9,14}$').hasMatch(fullNumber);
   }
 
   @override
@@ -100,6 +102,15 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                             setState(() => selectedCountry = country);
                           }
                         },
+                        countryListTheme: CountryListThemeData(
+                          flagSize: 20, // hide flags
+                          backgroundColor: Colors.white,
+                          textStyle: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: AppColors.bSubTextColor,
+                          ),
+                          bottomSheetHeight: 500,
+                        ),
                       );
                     },
                     child: Padding(
@@ -117,7 +128,7 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                     child: TextFormField(
                       controller: widget.phoneController,
                       keyboardType: TextInputType.phone,
-                      maxLength: 10,
+                      maxLength: 15,
                       style: GoogleFonts.poppins(
                         fontSize: AppScaler.scaleFont(context, 16),
                         color: AppColors.white,
@@ -135,34 +146,26 @@ class _PhoneOtpFieldState extends ConsumerState<PhoneOtpField> {
                             if (value == null || value.trim().isEmpty) {
                               return "Phone number required";
                             }
-                            String digitsOnly = value.replaceAll(
-                              RegExp(r'[^0-9]'),
-                              '',
-                            );
-                            String fullNumber =
-                                '+${selectedCountry.phoneCode}$digitsOnly';
-                            String pattern = r'^\+[1-9]\d{9,14}$';
-                            if (!RegExp(pattern).hasMatch(fullNumber)) {
+                            if (!_isPhoneValid(value)) {
                               return "Enter a valid phone number with country code";
                             }
                             return null;
                           },
                       onChanged: (value) {
-                        String digitsOnly = value.replaceAll(
-                          RegExp(r'[^0-9]'),
-                          '',
-                        );
-                        String fullNumber =
-                            '+${selectedCountry.phoneCode}$digitsOnly';
-
                         setState(() {
-                          showSendButton = RegExp(
-                            r'^\+[1-9]\d{9,14}$',
-                          ).hasMatch(fullNumber);
+                          showSendButton = _isPhoneValid(value);
                         });
                       },
                     ),
                   ),
+                  if (showSendButton)
+                    TextButton(
+                      onPressed: widget.onSendCode,
+                      child: Text(
+                        "Send OTP",
+                        style: GoogleFonts.poppins(color: Colors.blue),
+                      ),
+                    ),
                 ],
               ),
             ],

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
+import '../../user/domain/models/user_model.dart';
 
 class BottomNavigationBarShell extends ConsumerStatefulWidget {
   final Widget child;
@@ -23,6 +25,7 @@ class _BottomNavigationBarShellState
   int selectedIndex = 0;
   bool isOpen = false;
   bool isEditing = false;
+  UserData? user;
 
   final List<Map<String, dynamic>> _navItems = [
     {
@@ -57,6 +60,12 @@ class _BottomNavigationBarShellState
     WidgetsBinding.instance.addPostFrameCallback((_) {
       syncIndex();
     });
+    _loadUser();
+  }
+
+  Future<void> _loadUser() async {
+    user = await ref.read(localDataProvider).getUser();
+    setState(() {});
   }
 
   @override
@@ -77,13 +86,6 @@ class _BottomNavigationBarShellState
       selectedIndex = index >= 0 ? index : 0;
     });
   }
-
-  // old void _onTap(BuildContext context, int index) {
-  //   selectedIndex = index;
-  //   setState(() {});
-  //   final path = _navItems[index]['path'];
-  //   if (path.isNotEmpty) context.goNamed(path);
-  // }
 
   void _onTap(BuildContext context, int index) {
     if (GuestHelper.isGuest) {
@@ -144,11 +146,21 @@ class _BottomNavigationBarShellState
                                     ? customColors.textColor
                                     : customColors.greyColor,
                               )
-                            : CircleAvatar(
-                                radius: 9,
+                            : user != null &&
+                                  user!.profileUrl != null &&
+                                  user!.profileUrl != ''
+                            ? CircleAvatar(
+                                radius: 11,
                                 backgroundColor: Colors.transparent,
-                                backgroundImage: AssetImage(
-                                  Assets.images.editprofileimage.path,
+                                backgroundImage: NetworkImage(
+                                  user!.profileUrl!,
+                                ),
+                              )
+                            : CircleAvatar(
+                                radius: 11,
+                                backgroundColor: Colors.transparent,
+                                backgroundImage: NetworkImage(
+                                  'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg',
                                 ),
                               )
                       else
@@ -161,8 +173,9 @@ class _BottomNavigationBarShellState
                                 image: AssetImage(_navItems[index]['icon2']),
                                 height: AppScaler.scaleHeight(context, 20),
                               ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 4)),
+                      isProfileTab
+                          ? SizedBox(height: AppScaler.scaleHeight(context, 2))
+                          : SizedBox(height: AppScaler.scaleHeight(context, 4)),
 
                       PoppinsText(
                         context,

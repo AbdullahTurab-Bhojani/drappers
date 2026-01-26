@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../core/extensions/theme_extension.dart';
 import '../../core/theme/app_scalar.dart';

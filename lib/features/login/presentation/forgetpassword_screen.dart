@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -81,7 +81,6 @@ class _ForgetpasswordScreenState extends ConsumerState<ForgetpasswordScreen> {
             children: [
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-
                 onTap: () {
                   context.pop();
                 },
@@ -104,7 +103,6 @@ class _ForgetpasswordScreenState extends ConsumerState<ForgetpasswordScreen> {
                 color: customColors.textColor,
               ),
               SizedBox(height: AppScaler.scaleHeight(context, 36)),
-
               PoppinsText(
                 context,
                 'Receive Code Via email',
@@ -136,35 +134,16 @@ class _ForgetpasswordScreenState extends ConsumerState<ForgetpasswordScreen> {
                           return null;
                         },
                       ),
-                      // RadioTileWidget(
-                      //   selected: isPhone,
-                      //   title: "Enter Your Email ",
-                      //   subtitle: "jo********@gmail.co|",
-                      //   onTap: () {
-                      //     setState(() {
-                      //       isPhone = true;
-                      //     });
-                      //   },
-                      // ),
-
-                      // RadioTileWidget(
-                      //   selected: !isPhone,
-                      //   title: "Enter Phone ",
-                      //   subtitle: "03xxxxxxx59",
-                      //   onTap: () {
-                      //     setState(() {
-                      //       isPhone = false;
-                      //     });
-                      //   },
-                      // ),
                       SizedBox(height: AppScaler.scaleHeight(context, 24)),
                       AppButton(
+                        isLoading: isLoading,
                         onPressed: () {
+                          FocusScope.of(context).unfocus();
                           if (!isLoading) {
                             submitForgetPassword();
                           }
                         },
-                        title: isLoading ? 'Loading...' : 'Submit',
+                        title: 'Submit',
                       ),
                     ],
                   ),

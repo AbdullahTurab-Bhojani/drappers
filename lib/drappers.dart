@@ -1,7 +1,4 @@
-// Main library file for Everbloom app
-// All imports are consolidated here, and all other files use `part of` pattern
-
-// ignore_for_file: unnecessary_import, implementation_imports
+// ignore_for_file: implementation_imports, unnecessary_import
 
 import 'dart:async';
 import 'dart:io';
@@ -13,23 +10,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-
-// Third-party packages
-// import 'package:connectivity_plus/connectivity_plus.dart';
-// import 'package:firebase_auth/firebase_auth.dart'
-//     show
-//         AppleAuthProvider,
-//         AuthCredential,
-//         FirebaseAuth,
-//         User,
-//         FirebaseAuthException,
-//         GoogleAuthProvider,
-//         OAuthProvider,
-//         UserInfo;
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
-// import 'package:flutter_timezone/flutter_timezone.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image/image.dart' as img;
 import 'package:chewie/chewie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,7 +22,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:share_plus/share_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -53,7 +32,8 @@ import 'core/extensions/theme_extension.dart';
 import 'core/local/domain/repositories/local_storage_repository.dart';
 import 'core/theme/app_scalar.dart';
 import 'core/theme/app_theme.dart';
-import 'features/Setting&preferences/presentation/setting_preferences.dart';
+import 'features/faqs/presentation/views/faqs.dart';
+import 'features/setting&preferences/presentation/setting_preferences.dart';
 import 'features/applypitch/presentation/apply_pitch_screen.dart';
 import 'features/changepassword/change_password.dart';
 import 'features/contentdetail/presentation/content_detail.dart';
@@ -66,7 +46,6 @@ import 'features/documentriescard/presentation/documentriescard.dart';
 import 'features/editprofile/presentation/edit_profile_popup.dart';
 import 'features/editprofile/presentation/editprofile_screen.dart';
 import 'features/editwatchlist/presentation/editwatchlist_screen.dart';
-import 'features/faqs/privacypolicy/presentation/views/faqs.dart';
 import 'features/help&support/presentation/helpsupport.dart';
 import 'features/home/presentation/views/home.dart';
 import 'features/likedcontent/presentation/likecontent.dart';
@@ -111,7 +90,6 @@ import 'package:chewie/src/notifiers/index.dart';
 import 'shared/custom_app_start/providers/app_start.dart';
 import 'shared/video_player/providers/video_player_provider.dart';
 import 'shared/widgets/continue_watching_viewmore.dart';
-import 'shared/widgets/guestloginwidget.dart';
 import 'shared/widgets/podcast/podcast_widget.dart';
 import 'shared/widgets/reelwidget/reel_widget.dart';
 import 'shared/widgets/trendingshow/trendingshow_widget.dart';
@@ -131,7 +109,6 @@ part 'core/services/fixed_grid_heigh_delegates.dart';
 part 'core/services/files_picker_service.dart';
 part 'core/services/check_internet.dart';
 part 'shared/custom_app_start/presentation/my_app_start.dart';
-part 'shared/disposable_providers/disposable_providers.dart';
 part 'shared/modals/confirmation_modal.dart';
 part 'shared/utils/custom_date_picker.dart';
 part 'shared/utils/custom_scroll_behaviour.dart';
@@ -159,6 +136,3 @@ part 'shared/widgets/error_widget.dart';
 part 'shared/widgets/loading_widget.dart';
 part 'shared/widgets/searchable_custom_dropdown.dart';
 part 'shared/widgets/text_field_label.dart';
-
-// part 'core/local/domain/repositories/shared_preference_repository.dart';
-// part 'core/local/domain/repositories/local_storage_repository.dart';

@@ -22,15 +22,39 @@ class LoginProvider extends _$LoginProvider {
       final authRepo = ref.read(authRepository);
       final pref = ref.read(localDataProvider);
       final userRepo = ref.read(userRepository);
+
       final response = await authRepo.login(loginDto);
+
+      final apiMessage = response.message;
+
+      if (!response.isSuccess || response.data == null) {
+        state = AppLoadingState.error(apiMessage);
+        return response;
+      }
+
+      final accessToken = response.data!.accessToken;
+      final refreshToken = response.data!.refreshToken;
+
+      if (accessToken == null || refreshToken == null) {
+        state = AppLoadingState.error(apiMessage);
+        return response;
+      }
+
       await pref.setLogout();
-      await pref.setAccessToken(response.data!.accessToken!);
-      await pref.setRefreshToken(response.data!.refreshToken!);
+      await pref.setAccessToken(accessToken);
+      await pref.setRefreshToken(refreshToken);
 
       final userResponse = await userRepo.getUser();
-      await pref.saveUser(userResponse.data!);
-      await pref.saveUserId(userResponse.data!.id.toString());
-      await pref.saveUserName(userResponse.data!.fullName ?? '');
+
+      if (userResponse.data == null) {
+        state = AppLoadingState.error(apiMessage);
+        return response;
+      }
+
+      final user = userResponse.data!;
+      await pref.saveUser(user);
+      await pref.saveUserId(user.id.toString());
+      await pref.saveUserName(user.fullName ?? '');
       await pref.setIsLogin();
 
       state = AppLoadingState.success(response);

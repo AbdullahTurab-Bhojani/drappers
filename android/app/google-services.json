@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "573316572965",
+    "project_id": "drapertv-279b1",
+    "storage_bucket": "drapertv-279b1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573316572965:android:be83fff64e5fc823e61ccc",
+        "android_client_info": {
+          "package_name": "com.retrocube.drappers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMRHSzFRaOmgJVBbalYGLiBPplxjsJYyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

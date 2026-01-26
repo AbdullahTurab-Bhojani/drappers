@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -124,8 +125,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             actions: [
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  context.pushNamed(AppRoutes.editprofile.name);
+                onTap: () async {
+                  var res = await context.pushNamed(AppRoutes.editprofile.name);
+                  if (res != null && res is UserData) {
+                    setState(() {
+                      user = res;
+                    });
+                  }
                 },
                 child: PoppinsText(
                   context,
@@ -146,18 +152,35 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     SizedBox(
                       height: AppScaler.scaleHeight(context, 114.82),
                       width: AppScaler.scaleHeight(context, 114.82),
-                      child: CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: AssetImage(
-                          Assets.images.editprofileimage.path,
+                      child: ClipOval(
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              user != null &&
+                                  user!.profileUrl != null &&
+                                  user!.profileUrl!.isNotEmpty
+                              ? user!.profileUrl!
+                              : "https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg",
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.person, size: 50),
                         ),
                       ),
                     ),
+
                     SizedBox(height: AppScaler.scaleHeight(context, 20)),
                     PoppinsText(
                       context,
-                      user != null ? user!.fullName! : "",
+                      user != null
+                          ? (user!.firstName != null &&
+                                    user!.firstName!.isNotEmpty &&
+                                    user!.lastName != null &&
+                                    user!.lastName!.isNotEmpty
+                                ? "${user!.firstName!} ${user!.lastName!}"
+                                : user!.fullName!)
+                          : "Guest User",
                       fontSize: PoppinsFontSizeVariant.size22,
                       fontWeight: PoppinsFontWeightVariant.medium,
                       color: customColors.textColor,

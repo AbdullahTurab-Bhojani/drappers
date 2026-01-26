@@ -75,140 +75,128 @@ class _SettingpreferencesScreenState extends State<SettingpreferencesScreen> {
             ),
           ),
         ),
-        body: Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                SettingSectionHeader(
-                  title: "Playback Settings",
-                  color: customColors.textColor,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: AppScaler.scaleHeight(context, 10)),
+              SettingSectionHeader(
+                title: "Playback Settings",
+                color: customColors.textColor,
+              ),
+
+              ToggleSettingTile(
+                image: AssetImage(Assets.images.playbutton123.path),
+                titleText: "Autoplay Next Episode",
+                subtitleText: "Automatically play the next episode",
+                initialValue: _autoplayNextEpisode,
+                onChanged: (value) {
+                  setState(() {
+                    _autoplayNextEpisode = value;
+                  });
+                },
+              ),
+              SizedBox(height: AppScaler.scaleHeight(context, 15)),
+              ToggleSettingTile(
+                image: AssetImage(Assets.images.playicon1234.path),
+                titleText: "Autoplay Next Preview",
+                subtitleText: "Play previews when browsing",
+                initialValue: _autoplayNextPreview,
+                onChanged: (value) {
+                  setState(() {
+                    _autoplayNextPreview = value;
+                  });
+                },
+              ),
+              SizedBox(height: AppScaler.scaleHeight(context, 20)),
+              Divider(color: customColors.labelColor.withOpacity(0.2)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SettingSectionHeader(
+                    title: "Video Quality",
+                    color: customColors.textColor,
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 15)),
+                  DropdownSettingTile(
+                    image: AssetImage(Assets.images.hd123.path),
+                    titleText: "Streaming Quality",
+                    subtitleText: "Choose video quality for streaming",
+                    options: _qualityOptions,
+                    initialValue: _streamingQuality,
+                    onChanged: (value) {
+                      setState(() {
+                        _streamingQuality = value;
+                      });
+                    },
+                    isMenuOpen: false,
+                  ),
+                ],
+              ),
+              SizedBox(height: AppScaler.scaleHeight(context, 40)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppScaler.scaleSize(context, 20),
                 ),
-        
-                ToggleSettingTile(
-                  image: AssetImage(Assets.images.playbutton123.path),
-                  titleText: "Autoplay Next Episode",
-                  subtitleText: "Automatically play the next episode",
-                  initialValue: _autoplayNextEpisode,
-                  onChanged: (value) {
-                    setState(() {
-                      _autoplayNextEpisode = value;
-                    });
-                  },
+                child: Divider(color: customColors.labelColor.withOpacity(0.2)),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SettingSectionHeader(
+                    title: "Accessibility",
+                    color: customColors.textColor,
+                  ),
+                  SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                  DropdownSettingTile(
+                    isMenuOpen: false,
+                    image: AssetImage(Assets.images.cc123.path),
+                    titleText: "Subtitles & Captions",
+                    subtitleText: "Default subtitle language",
+                    options: _subtitleOptions,
+                    initialValue: _subtitlesLanguage,
+                    onChanged: (value) {
+                      setState(() {
+                        _subtitlesLanguage = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalPadding * 2,
                 ),
-                SizedBox(height: AppScaler.scaleHeight(context, 15)),
-                ToggleSettingTile(
-                  image: AssetImage(Assets.images.playicon1234.path),
-                  titleText: "Autoplay Next Preview",
-                  subtitleText: "Play previews when browsing",
-                  initialValue: _autoplayNextPreview,
-                  onChanged: (value) {
-                    setState(() {
-                      _autoplayNextPreview = value;
-                    });
-                  },
-                ),
-                SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                Divider(
-                  color: customColors.labelColor.withOpacity(0.2),
-                ),
-                Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SettingSectionHeader(
-                      title: "Video Quality",
-                      color: customColors.textColor,
-                    ),
-                    SizedBox(height: AppScaler.scaleHeight(context, 15)),
-                    DropdownSettingTile(
-                      image: AssetImage(Assets.images.hd123.path),
-                      titleText: "Streaming Quality",
-                      subtitleText: "Choose video quality for streaming",
-                      options: _qualityOptions,
-                      initialValue: _streamingQuality,
-                      onChanged: (value) {
-                        setState(() {
-                          _streamingQuality = value;
-                        });
+                    SizedBox(height: AppScaler.scaleHeight(context, 40)),
+                    Divider(color: customColors.labelColor.withOpacity(0.2)),
+                    SizedBox(height: horizontalPadding),
+
+                    SettingsRowItem(
+                      text: "Change Password",
+                      iconPath: Assets.images.lock786.path,
+                      onTap: () {
+                        context.pushNamed(AppRoutes.changePassword.name);
                       },
-                      isMenuOpen: false,
+                    ),
+                    SizedBox(height: horizontalPadding),
+                    Divider(color: customColors.labelColor.withOpacity(0.2)),
+                    SizedBox(height: horizontalPadding),
+
+                    SettingsRowItem(
+                      text: "Delete or Deactivate Account",
+                      iconPath: Assets.images.delete123.path,
+                      iconColor: customColors.rednormal,
+                      onTap: () {
+                        context.pushNamed(AppRoutes.deleteAccountScreen.name);
+                      },
                     ),
                   ],
                 ),
-                SizedBox(height: AppScaler.scaleHeight(context, 40)),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppScaler.scaleSize(context, 20),
-                  ),
-                  child: Divider(
-                    color: customColors.labelColor.withOpacity(0.2),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SettingSectionHeader(
-                      title: "Accessibility",
-                      color: customColors.textColor,
-                    ),
-                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
-                    DropdownSettingTile(
-                      isMenuOpen: false,
-                      image: AssetImage(Assets.images.cc123.path),
-                      titleText: "Subtitles & Captions",
-                      subtitleText: "Default subtitle language",
-                      options: _subtitleOptions,
-                      initialValue: _subtitlesLanguage,
-                      onChanged: (value) {
-                        setState(() {
-                          _subtitlesLanguage = value;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: horizontalPadding * 2,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: AppScaler.scaleHeight(context, 40)),
-                      Divider(
-                        color: customColors.labelColor.withOpacity(0.2),
-                      ),
-                      SizedBox(height: horizontalPadding),
-        
-                      SettingsRowItem(
-                        text: "Change Password",
-                        iconPath: Assets.images.lock786.path,
-                        onTap: () {
-                          context.pushNamed(AppRoutes.changePassword.name);
-                        },
-                      ),
-                      SizedBox(height: horizontalPadding),
-                      Divider(
-                        color: customColors.labelColor.withOpacity(0.2),
-                      ),
-                      SizedBox(height: horizontalPadding),
-        
-                      SettingsRowItem(
-                        text: "Delete or Deactivate Account",
-                        iconPath: Assets.images.delete123.path,
-                        iconColor: customColors.rednormal,
-                        onTap: () {
-                          context.pushNamed(
-                            AppRoutes.deleteAccountScreen.name,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
