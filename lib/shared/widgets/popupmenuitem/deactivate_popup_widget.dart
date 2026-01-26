@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../drappers.dart';
 import '../../../features/deactivateAccount/provider/deactivate_provider.dart';
 import '../../../gen/assets.gen.dart';
@@ -58,6 +59,7 @@ class DeactivatePopupWidget extends ConsumerWidget {
 
                 if (response.isSuccess) {
                   if (context.mounted) {
+                    await ref.read(localDataProvider).setLogout();
                     context.pushReplacement(AppRoutes.socialLoginScreen.path);
                   }
                 } else {

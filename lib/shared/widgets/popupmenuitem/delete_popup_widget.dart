@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
+import '../../../core/local/domain/repositories/local_storage_repository.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../features/delete_detail/provider/delete_provider.dart';
@@ -73,6 +74,7 @@ class _DeletePopupWidget extends ConsumerState<DeletePopupWidget> {
 
                 if (response.isSuccess) {
                   if (context.mounted) {
+                    await ref.read(localDataProvider).setLogout();
                     context.pushReplacement(AppRoutes.socialLoginScreen.path);
                   }
                 } else {
