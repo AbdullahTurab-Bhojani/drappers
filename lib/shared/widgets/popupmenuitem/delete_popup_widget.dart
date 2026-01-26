@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
+import '../../../features/delete_detail/provider/delete_provider.dart';
 import '../../../gen/assets.gen.dart';
 
-class DeletePopupWidget extends StatefulWidget {
+class DeletePopupWidget extends ConsumerStatefulWidget {
   final bool showSaveIcon;
 
   const DeletePopupWidget({super.key, this.showSaveIcon = true});
 
   @override
-  State<DeletePopupWidget> createState() => _DeletePopupWidget();
+  ConsumerState<DeletePopupWidget> createState() => _DeletePopupWidget();
 }
 
-class _DeletePopupWidget extends State<DeletePopupWidget> {
+class _DeletePopupWidget extends ConsumerState<DeletePopupWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -53,10 +55,41 @@ class _DeletePopupWidget extends State<DeletePopupWidget> {
 
           SizedBox(height: AppScaler.scaleHeight(context, 24)),
           AppButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
+            onPressed: () async {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (_) => Center(
+                  child: LoadingWidget(color: AppColors.buttoncolor.first),
+                ),
+              );
 
-              context.pushNamed(AppRoutes.loginScreen.name);
+              try {
+                final response = await ref.read(deleteUserProvider.future);
+
+                if (context.mounted) {
+                  Navigator.pop(context);
+                }
+
+                if (response.isSuccess) {
+                  if (context.mounted) {
+                    context.pushReplacement(AppRoutes.socialLoginScreen.path);
+                  }
+                } else {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(response.message)));
+                  }
+                }
+              } catch (e) {
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text("Error: $e")));
+                }
+              }
             },
             title: "Yes, delete",
           ),

@@ -1,62 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../core/theme/app_scalar.dart';
 import '../../../../drappers.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../../shared/widgets/title_subtitle_widget.dart';
+import '../../../setting&preferences/providers/static_content_provider.dart';
 
-class PrivacypolicyScreen extends StatefulWidget {
+class PrivacypolicyScreen extends ConsumerStatefulWidget {
   const PrivacypolicyScreen({super.key});
 
   @override
-  State<PrivacypolicyScreen> createState() => _PrivacypolicyScreenState();
+  ConsumerState<PrivacypolicyScreen> createState() =>
+      _PrivacypolicyScreenState();
 }
 
-class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
-  final List<Map<String, String>> sections = [
-    {
-      "title": "1. Information We Collect",
-      "subtitle":
-          "We collect email addresses and names from contact forms and newsletter sign-ups.",
-    },
-    {
-      "title": "2. Purpose of Collection",
-      "subtitle":
-          "We collect this information for the purpose of sending newsletters to our subscribers.",
-    },
-    {
-      "title": "3. Cookies and Tracking Technologies",
-      "subtitle":
-          "We use Google Analytics to track website traffic and gather information about how visitors use our site. This information is used for internal purposes only and helps us improve our website.",
-    },
-    {
-      "title": "4. Sharing of Personal Information",
-      "subtitle":
-          "We do not share the personal information we collect with any third parties.",
-    },
-    {
-      "title": "5. Data Security",
-      "subtitle":
-          "We take appropriate measures to protect the personal information we collect. This includes using secure servers and encryption methods.",
-    },
-    {
-      "title": "6. Data Retention",
-      "subtitle":
-          "We retain the personal information you provide for an indefinite period, unless you request its deletion.",
-    },
-    {
-      "title": "7. Opt-Out Option",
-      "subtitle":
-          "If you no longer wish to receive our newsletters, you can opt-out by following the unsubscribe instructions provided in the email or by contacting us directly.",
-    },
-  ];
-
+class _PrivacypolicyScreenState extends ConsumerState<PrivacypolicyScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     final double paddingValue = 20.0;
+
+    final privacyAsync = ref.watch(staticContentProvider('privacyPolicy'));
 
     return Container(
       decoration: BoxDecoration(
@@ -72,7 +39,7 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
             behavior: HitTestBehavior.opaque,
             onTap: () => Navigator.of(context).pop(),
             child: Padding(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: Image.asset(
                 "assets/images/backicon.png",
                 width: 20,
@@ -95,31 +62,47 @@ class _PrivacypolicyScreenState extends State<PrivacypolicyScreen> {
               color: AppColors.submitticket0E0E0E,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(paddingValue, 20, paddingValue, 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  PoppinsText(
-                    context,
-                    "Last updated: 10/30/2023",
-                    color: customColors.textColor,
-                    fontSize: PoppinsFontSizeVariant.size16,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                  ),
-                  SizedBox(height: AppScaler.scaleHeight(context, 16)),
-
-                  ...sections.map(
-                    (section) => TitleSubtitleWidget(
-                      title: section["title"]!,
-                      subtitle: section["subtitle"]!,
-                      colors: customColors,
-                    ),
-                  ),
-
-                  SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                ],
+            child: privacyAsync.when(
+              loading: () => Center(
+                child: LoadingWidget(color: AppColors.buttoncolor.first),
               ),
+              error: (e, _) => Center(
+                child: Text(
+                  e.toString(),
+                  style: TextStyle(color: customColors.textColor),
+                ),
+              ),
+              data: (content) {
+                return SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(
+                    paddingValue,
+                    20,
+                    paddingValue,
+                    20,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      PoppinsText(
+                        context,
+                        "Last updated: ${content.data.modifiedOn.toLocal().toString().split(' ').first}",
+                        color: customColors.textColor,
+                        fontSize: PoppinsFontSizeVariant.size16,
+                        fontWeight: PoppinsFontWeightVariant.medium,
+                      ),
+                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
+
+                      TitleSubtitleWidget(
+                        title: "Privacy Policy",
+                        subtitle: content.data.value,
+                        colors: customColors,
+                      ),
+
+                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
         ),
