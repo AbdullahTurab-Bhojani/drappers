@@ -9,6 +9,7 @@ import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/custom_video_card.dart';
 import '../../../shared/widgets/startup_card.dart';
+import '../../startupDetails/provider/startup_detail_provider.dart';
 import '../domain/models/startup_model.dart';
 import '../provider/startup_provider.dart';
 import '../provider/startup_vote_provider.dart';
@@ -160,7 +161,6 @@ class _VoteForStartupScreenState extends ConsumerState<VoteForStartupScreen> {
                                 await ref.read(
                                   startupVoteProvider(startup.id).future,
                                 );
-                                ref.invalidate(startupListProvider(''));
                               } catch (e) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

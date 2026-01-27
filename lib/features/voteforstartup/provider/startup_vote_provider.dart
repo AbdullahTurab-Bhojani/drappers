@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../startupDetails/provider/startup_detail_provider.dart';
 import 'startup_provider.dart';
 
 final startupVoteProvider = FutureProvider.family<void, int>((
@@ -10,4 +11,5 @@ final startupVoteProvider = FutureProvider.family<void, int>((
   await repo.voteStartup(startupId);
 
   ref.invalidate(startupListProvider(''));
+  ref.invalidate(startupDetailProvider(startupId));
 });

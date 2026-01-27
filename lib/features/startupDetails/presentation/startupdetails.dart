@@ -10,6 +10,7 @@ import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/featured_episode_card.dart';
+import '../../voteforstartup/provider/startup_vote_provider.dart';
 import '../provider/startup_detail_provider.dart';
 
 class Startupdetails extends ConsumerStatefulWidget {
@@ -210,8 +211,22 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // SizedBox(height: AppScaler.scaleHeight(context, 16)),
-                        FeaturedEpisodeCard(startupModel: startup),
+                        FeaturedEpisodeCard(
+                          startupModel: startup,
+                          onVotePressed: () async {
+                            try {
+                              await ref.read(
+                                startupVoteProvider(startup.id).future,
+                              );
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Vote failed: ${e.toString()}'),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                         SizedBox(height: AppScaler.scaleHeight(context, 20)),
                       ],
                     ),

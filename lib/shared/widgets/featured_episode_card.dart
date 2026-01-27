@@ -13,7 +13,13 @@ import 'guestloginwidget.dart';
 
 class FeaturedEpisodeCard extends StatefulWidget {
   final StartupModel? startupModel;
-  const FeaturedEpisodeCard({required this.startupModel, super.key});
+  final VoidCallback? onVotePressed;
+
+  const FeaturedEpisodeCard({
+    required this.startupModel,
+    super.key,
+    required this.onVotePressed,
+  });
 
   @override
   State<FeaturedEpisodeCard> createState() => _FeaturedEpisodeCardState();
@@ -26,6 +32,12 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
 
   final List<String> tags = ['Clean Tech', 'Energy Storage', 'Sustainability'];
   final List<String> twotags = ['B2B', 'Hardware'];
+
+  @override
+  void initState() {
+    super.initState();
+    isVoted = widget.startupModel?.isLikedByUser ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,20 +167,27 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
                       GuestHelper.checkGuest(context);
                       return;
                     }
+
+                    // Optimistic toggle
                     setState(() {
                       isVoted = !isVoted;
                     });
+
+                    // Call the vote API if provided
+                    if (widget.onVotePressed != null) widget.onVotePressed!();
                   },
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(
-                      color: customColors.greyColor,
+                      color: isVoted ? Colors.red : customColors.greyColor,
                       width: AppScaler.scaleSize(context, 2),
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 12),
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: isVoted
+                        ? Colors.red.withOpacity(0.1)
+                        : Colors.transparent,
                   ),
                   icon: Icon(
                     isVoted ? Icons.favorite : Icons.favorite_border,
@@ -180,7 +199,7 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
                     isVoted ? 'Voted' : 'Vote',
                     fontSize: PoppinsFontSizeVariant.size16,
                     fontWeight: PoppinsFontWeightVariant.medium,
-                    color: AppColors.wDark,
+                    color: isVoted ? Colors.red : AppColors.wDark,
                   ),
                 ),
               ),
