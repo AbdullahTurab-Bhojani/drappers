@@ -11,7 +11,6 @@ part of 'pitch_response.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$PitchResponseModel {
 
@@ -22,8 +21,6 @@ mixin _$PitchResponseModel {
 @pragma('vm:prefer-inline')
 $PitchResponseModelCopyWith<PitchResponseModel> get copyWith => _$PitchResponseModelCopyWithImpl<PitchResponseModel>(this as PitchResponseModel, _$identity);
 
-  /// Serializes this PitchResponseModel to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -31,7 +28,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is PitchResponseModel&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess)&&(identical(other.data, data) || other.data == data)&&(identical(other.message, message) || other.message == message));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,isSuccess,data,message);
 
@@ -220,11 +217,11 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _PitchResponseModel implements PitchResponseModel {
   const _PitchResponseModel({required this.isSuccess, this.data, required this.message});
-  factory _PitchResponseModel.fromJson(Map<String, dynamic> json) => _$PitchResponseModelFromJson(json);
+  
 
 @override final  bool isSuccess;
 @override final  PitchData? data;
@@ -236,17 +233,14 @@ class _PitchResponseModel implements PitchResponseModel {
 @pragma('vm:prefer-inline')
 _$PitchResponseModelCopyWith<_PitchResponseModel> get copyWith => __$PitchResponseModelCopyWithImpl<_PitchResponseModel>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$PitchResponseModelToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _PitchResponseModel&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess)&&(identical(other.data, data) || other.data == data)&&(identical(other.message, message) || other.message == message));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,isSuccess,data,message);
 

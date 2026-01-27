@@ -6,22 +6,6 @@ part of 'pitch_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_PitchResponseModel _$PitchResponseModelFromJson(Map<String, dynamic> json) =>
-    _PitchResponseModel(
-      isSuccess: json['isSuccess'] as bool,
-      data: json['data'] == null
-          ? null
-          : PitchData.fromJson(json['data'] as Map<String, dynamic>),
-      message: json['message'] as String,
-    );
-
-Map<String, dynamic> _$PitchResponseModelToJson(_PitchResponseModel instance) =>
-    <String, dynamic>{
-      'isSuccess': instance.isSuccess,
-      'data': instance.data,
-      'message': instance.message,
-    };
-
 _PitchData _$PitchDataFromJson(Map<String, dynamic> json) => _PitchData(
   id: (json['id'] as num).toInt(),
   createdOn: DateTime.parse(json['createdOn'] as String),

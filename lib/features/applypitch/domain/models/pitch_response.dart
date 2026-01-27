@@ -11,8 +11,17 @@ abstract class PitchResponseModel with _$PitchResponseModel {
     required String message,
   }) = _PitchResponseModel;
 
-  factory PitchResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$PitchResponseModelFromJson(json);
+  factory PitchResponseModel.fromJson(Map<String, dynamic> json) {
+    final rawData = json['data'];
+
+    return PitchResponseModel(
+      isSuccess: json['isSuccess'] as bool,
+      message: json['message'] as String,
+      data: rawData is Map<String, dynamic>
+          ? PitchData.fromJson(rawData)
+          : null,
+    );
+  }
 }
 
 @freezed
