@@ -15,7 +15,6 @@ import '../models/user_response.dart';
 import 'auth_api_repository.dart';
 
 abstract interface class AuthRepository {
-  // Future<BaseModel<User>> login(SignIn signIn);
   Future<SignUpResponseDto> signUp(SignUpDto signup);
 
   Future<LoginResponse> login(LoginDto loginDto);

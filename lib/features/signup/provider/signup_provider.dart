@@ -6,7 +6,7 @@ import '../../authentication/domain/models/signup_response.dart';
 import '../../authentication/domain/repository/auth_repository.dart';
 part 'signup_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class SignUpProvider extends _$SignUpProvider {
   @override
   AppLoadingState build() {

@@ -1,14 +1,19 @@
 // featured_episode_card.dart
+// ignore_for_file: deprecated_member_use
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
+import '../../features/voteforstartup/domain/models/startup_model.dart';
 import 'guestloginwidget.dart';
 
 class FeaturedEpisodeCard extends StatefulWidget {
-  const FeaturedEpisodeCard({super.key});
+  final StartupModel? startupModel;
+  const FeaturedEpisodeCard({required this.startupModel, super.key});
 
   @override
   State<FeaturedEpisodeCard> createState() => _FeaturedEpisodeCardState();
@@ -21,13 +26,6 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
 
   final List<String> tags = ['Clean Tech', 'Energy Storage', 'Sustainability'];
   final List<String> twotags = ['B2B', 'Hardware'];
-
-  final List<Map<String, String>> companyInfo = [
-    {'label': 'Founded', 'value': '2022'},
-    {'label': 'Team Size', 'value': '12 Employees'},
-    {'label': 'Funding Stage', 'value': 'Series A'},
-    {'label': 'Website', 'value': 'https://lost-lab.info'},
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,7 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
         children: [
           PoppinsText(
             context,
-            'Echo Tech Solutions',
+            widget.startupModel!.startupTitle,
             fontSize: PoppinsFontSizeVariant.size22,
             fontWeight: PoppinsFontWeightVariant.medium,
             color: customColors.textColor,
@@ -53,7 +51,7 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
           SizedBox(height: AppScaler.scaleHeight(context, 2)),
           PoppinsText(
             context,
-            'Sustainable energy Revolution',
+            widget.startupModel!.startupSubTitle,
             fontSize: PoppinsFontSizeVariant.size16,
             fontWeight: PoppinsFontWeightVariant.regular,
             color: customColors.textColor,
@@ -144,8 +142,7 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
                 ),
               ),
 
-              SizedBox(width: AppScaler.scaleSize(context, 10)),
-
+              // SizedBox(width: AppScaler.scaleSize(context, 10)),
               SizedBox(
                 width:
                     (MediaQuery.of(context).size.width -
@@ -190,31 +187,117 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
             ],
           ),
 
-          SizedBox(height: AppScaler.scaleHeight(context, 30)),
+          SizedBox(height: AppScaler.scaleHeight(context, 35)),
 
-          ...companyInfo.map(
-            (info) => _CompanyInfoRow(
-              label: info['label']!,
-              value: info['value']!,
-              customColors: customColors,
+          Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: customColors.textColor.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey.shade200,
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  child: CachedNetworkImage(
+                    imageUrl: widget.startupModel!.founderPictureUrl.isNotEmpty
+                        ? widget.startupModel!.founderPictureUrl
+                        : 'https://mis.ihc.gov.pk/img/no-video.jpg',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) =>
+                        LoadingWidget(color: AppColors.buttoncolor.first),
+                    errorWidget: (context, url, error) => const Center(
+                      child: Icon(Icons.person, size: 35, color: Colors.grey),
+                    ),
+                  ),
+                ),
+                SizedBox(width: AppScaler.scaleSize(context, 20)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PoppinsText(
+                      context,
+                      widget.startupModel!.founderName,
+                      fontSize: PoppinsFontSizeVariant.size16,
+                      fontWeight: PoppinsFontWeightVariant.regular,
+                      color: customColors.textColor,
+                    ),
+                    SizedBox(height: AppScaler.scaleHeight(context, 5)),
+                    SizedBox(
+                      width: AppScaler.scaleSize(context, 280),
+                      child: PoppinsText(
+                        context,
+                        widget.startupModel!.founderTitle,
+                        fontSize: PoppinsFontSizeVariant.size12,
+                        fontWeight: PoppinsFontWeightVariant.regular,
+                        color: customColors.textColor.withOpacity(0.5),
+                        maxLines: 2,
+                        textOverflow: TextOverflow.clip,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           SizedBox(height: AppScaler.scaleHeight(context, 25)),
 
           PoppinsText(
             context,
+            'Company Information',
+            fontSize: PoppinsFontSizeVariant.size16,
+            fontWeight: PoppinsFontWeightVariant.regular,
+            color: customColors.textColor,
+          ),
+          SizedBox(height: AppScaler.scaleHeight(context, 10)),
+
+          _CompanyInfoRow(
+            label: "Founder",
+            value: widget.startupModel!.founderName,
+            customColors: customColors,
+          ),
+          _CompanyInfoRow(
+            label: "Founded",
+            value: widget.startupModel!.founded,
+            customColors: customColors,
+          ),
+          _CompanyInfoRow(
+            label: "Team Size",
+            value: widget.startupModel!.teamSize,
+            customColors: customColors,
+          ),
+          _CompanyInfoRow(
+            label: "Funding Stage",
+            value: widget.startupModel!.fundingStage,
+            customColors: customColors,
+          ),
+          SizedBox(height: AppScaler.scaleHeight(context, 25)),
+
+          PoppinsText(
+            context,
             'About the Startup',
-            fontSize: PoppinsFontSizeVariant.size20,
-            fontWeight: PoppinsFontWeightVariant.medium,
+            fontSize: PoppinsFontSizeVariant.size16,
+            fontWeight: PoppinsFontWeightVariant.regular,
             color: customColors.textColor,
           ),
           SizedBox(height: AppScaler.scaleHeight(context, 10)),
           PoppinsText(
             context,
-            'Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s...',
-            fontSize: PoppinsFontSizeVariant.size14,
+            widget.startupModel!.aboutStartup,
+            fontSize: PoppinsFontSizeVariant.size12,
             fontWeight: PoppinsFontWeightVariant.regular,
-            color: customColors.labelColor,
+            height: 1.8,
+            color: customColors.textColor.withOpacity(0.6),
           ),
 
           SizedBox(height: AppScaler.scaleHeight(context, 25)),
@@ -222,8 +305,8 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
           PoppinsText(
             context,
             'Featured Episode',
-            fontSize: PoppinsFontSizeVariant.size20,
-            fontWeight: PoppinsFontWeightVariant.medium,
+            fontSize: PoppinsFontSizeVariant.size16,
+            fontWeight: PoppinsFontWeightVariant.regular,
             color: customColors.textColor,
           ),
           SizedBox(height: AppScaler.scaleHeight(context, 15)),
@@ -348,19 +431,21 @@ class _TagChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
       margin: EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: customColors.greyColor, width: 1),
       ),
-      child: PoppinsText(
-        context,
-        label,
-        fontSize: PoppinsFontSizeVariant.size12,
-        fontWeight: PoppinsFontWeightVariant.regular,
-        color: customColors.textColor,
+      child: Center(
+        child: PoppinsText(
+          context,
+          label,
+          fontSize: PoppinsFontSizeVariant.size12,
+          fontWeight: PoppinsFontWeightVariant.regular,
+          color: customColors.textColor,
+        ),
       ),
     );
   }
@@ -389,15 +474,15 @@ class _CompanyInfoRow extends StatelessWidget {
           PoppinsText(
             context,
             '$label:',
-            fontSize: PoppinsFontSizeVariant.size14,
+            fontSize: PoppinsFontSizeVariant.size12,
             fontWeight: PoppinsFontWeightVariant.regular,
             color: customColors.labelColor,
           ),
           PoppinsText(
             context,
             value,
-            fontSize: PoppinsFontSizeVariant.size14,
-            fontWeight: PoppinsFontWeightVariant.medium,
+            fontSize: PoppinsFontSizeVariant.size12,
+            fontWeight: PoppinsFontWeightVariant.semiBold,
             color: customColors.textColor,
           ),
         ],

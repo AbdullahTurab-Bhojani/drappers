@@ -20,7 +20,7 @@ final class SignUpProviderProvider
         argument: null,
         retry: null,
         name: r'signUpProviderProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class SignUpProviderProvider
   }
 }
 
-String _$signUpProviderHash() => r'bd06dd56f56e865dd8b9acac89e7fcf6d0da2a11';
+String _$signUpProviderHash() => r'edeb428076844ef27de1867826d74a015c097d54';
 
 abstract class _$SignUpProvider extends $Notifier<AppLoadingState> {
   AppLoadingState build();

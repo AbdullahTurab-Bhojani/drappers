@@ -130,13 +130,6 @@ class _WatchHistoryViewmoreState extends State<WatchHistoryViewmore>
           centerTitle: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          // actions: [
-          //   Image.asset(
-          //     Assets.images.searchicon.path,
-          //     color: customColors.textColor,
-          //   ),
-          //   SizedBox(width: 20),
-          // ],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

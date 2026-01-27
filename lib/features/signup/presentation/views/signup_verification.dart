@@ -34,11 +34,7 @@ class _SignupVerificationState extends State<SignupVerification> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              Assets.images.logo2.path,
-              // width: AppScaler.scaleSize(context, 180),
-              // height: AppScaler.scaleHeight(context, 110),
-            ),
+            Image.asset(Assets.images.logo2.path),
             Column(
               children: [
                 PoppinsText(

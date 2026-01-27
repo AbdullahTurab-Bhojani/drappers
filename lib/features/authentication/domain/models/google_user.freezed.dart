@@ -15,8 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GoogleSocialModel {
 
- bool get isSuccess; String get message;// Tokens
-@JsonKey(name: 'data') GoogleSocialData? get data;
+ bool get isSuccess; String get message;@JsonKey(name: 'data') GoogleSocialData? get data;
 /// Create a copy of GoogleSocialModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -229,7 +228,6 @@ class _GoogleSocialModel implements GoogleSocialModel {
 
 @override@JsonKey() final  bool isSuccess;
 @override@JsonKey() final  String message;
-// Tokens
 @override@JsonKey(name: 'data') final  GoogleSocialData? data;
 
 /// Create a copy of GoogleSocialModel
@@ -310,8 +308,7 @@ $GoogleSocialDataCopyWith<$Res>? get data {
 /// @nodoc
 mixin _$GoogleSocialData {
 
-@JsonKey(name: 'access_token') String get accessToken;@JsonKey(name: 'refresh_token') String get refreshToken;@JsonKey(name: 'expires_in') int get expiresIn;@JsonKey(name: 'refresh_expires_in') int get refreshExpiresIn;@JsonKey(name: 'token_type') String get tokenType;// User object
- GoogleUser? get user;
+@JsonKey(name: 'access_token') String get accessToken;@JsonKey(name: 'refresh_token') String get refreshToken;@JsonKey(name: 'expires_in') int get expiresIn;@JsonKey(name: 'refresh_expires_in') int get refreshExpiresIn;@JsonKey(name: 'token_type') String get tokenType; GoogleUser? get user;
 /// Create a copy of GoogleSocialData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -530,7 +527,6 @@ class _GoogleSocialData implements GoogleSocialData {
 @override@JsonKey(name: 'expires_in') final  int expiresIn;
 @override@JsonKey(name: 'refresh_expires_in') final  int refreshExpiresIn;
 @override@JsonKey(name: 'token_type') final  String tokenType;
-// User object
 @override final  GoogleUser? user;
 
 /// Create a copy of GoogleSocialData

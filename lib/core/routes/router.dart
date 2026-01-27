@@ -246,10 +246,14 @@ final routerConfigProvider = Provider((ref) {
         builder: (context, state) => ReportContentSomehingElse(),
       ),
       GoRoute(
-        path: AppRoutes.startupdetails.path,
         name: AppRoutes.startupdetails.name,
-        builder: (context, state) => Startupdetails(),
+        path: '/startup-details',
+        builder: (context, state) {
+          final id = state.extra as int;
+          return Startupdetails(startupId: id);
+        },
       ),
+
       GoRoute(
         path: AppRoutes.newliveScreen.path,
         name: AppRoutes.newliveScreen.name,

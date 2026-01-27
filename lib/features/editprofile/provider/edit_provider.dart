@@ -9,7 +9,7 @@ import '../../user/domain/repository/user_repository.dart';
 import '../../../drappers.dart';
 part 'edit_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class UpdateUserProvider extends _$UpdateUserProvider {
   @override
   AppLoadingState build() {

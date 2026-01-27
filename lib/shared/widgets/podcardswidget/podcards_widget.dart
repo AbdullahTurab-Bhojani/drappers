@@ -30,10 +30,6 @@ class _PodcardsWidgetState extends State<PodcardsWidget> {
       behavior: HitTestBehavior.opaque,
 
       onTap: () {
-        // if (GuestHelper.isGuest) {
-        //   GuestHelper.checkGuest(context);
-        //   return;
-        // }
         context.pushNamed(AppRoutes.contentDetail.name);
       },
       child: Container(

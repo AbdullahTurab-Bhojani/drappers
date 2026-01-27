@@ -20,7 +20,7 @@ final class PitchProviderProvider
         argument: null,
         retry: null,
         name: r'pitchProviderProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class PitchProviderProvider
   }
 }
 
-String _$pitchProviderHash() => r'4d221f28a3e5a9342edfcbb9e32571b27cfbc263';
+String _$pitchProviderHash() => r'e56206871caca92eaaeba38db1eb7000828ca4cd';
 
 abstract class _$PitchProvider extends $Notifier<AppLoadingState> {
   AppLoadingState build();

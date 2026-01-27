@@ -37,11 +37,7 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
   final ImagePicker _picker = ImagePicker();
   Country selectedCountry = Country.parse('US');
 
-  File? _profileImage;
-  String? _profileImageUrl;
   UserData? user;
-
-  bool _isUploadingImage = false;
 
   @override
   void initState() {
@@ -209,6 +205,9 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
     );
   }
 
+  bool _isUploadingImage = false;
+  File? _profileImage;
+  String? _profileImageUrl;
   Future<void> _saveChanges() async {
     final updateState = ref.read(updateUserProviderProvider);
 
@@ -286,13 +285,7 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                     Container(
                       width: 120,
                       height: 120,
-                      decoration: BoxDecoration(
-                        // shape: BoxShape.circle,
-                        // border: Border.all(
-                        //   color: colors.buttonColors.first,
-                        //   width: 3,
-                        // ),
-                      ),
+                      decoration: BoxDecoration(),
                       child: ClipOval(
                         child: _isUploadingImage
                             ? Center(

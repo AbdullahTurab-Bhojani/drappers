@@ -20,7 +20,7 @@ final class LogoutProviderProvider
         argument: null,
         retry: null,
         name: r'logoutProviderProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class LogoutProviderProvider
   }
 }
 
-String _$logoutProviderHash() => r'598f9e6069507e1ee42a9603e5eee04ec0e18c6f';
+String _$logoutProviderHash() => r'29a3b38bb0baa36b3f7bf100837df91d3a253a8e';
 
 abstract class _$LogoutProvider extends $Notifier<AppLoadingState> {
   AppLoadingState build();

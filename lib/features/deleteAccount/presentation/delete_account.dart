@@ -163,7 +163,6 @@ class _DeleteAccountScreenState extends State<DeleteAccount> {
                           });
                         },
                         child: Container(
-                          // padding: const EdgeInsets.all(10.0),
                           padding: EdgeInsets.only(
                             right: AppScaler.scaleSize(context, 8),
                             top: AppScaler.scaleHeight(context, 8),

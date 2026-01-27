@@ -8,8 +8,6 @@ abstract class GoogleSocialModel with _$GoogleSocialModel {
   const factory GoogleSocialModel({
     @Default(false) bool isSuccess,
     @Default('') String message,
-
-    // Tokens
     @JsonKey(name: 'data') GoogleSocialData? data,
   }) = _GoogleSocialModel;
 
@@ -25,8 +23,6 @@ abstract class GoogleSocialData with _$GoogleSocialData {
     @JsonKey(name: 'expires_in') @Default(0) int expiresIn,
     @JsonKey(name: 'refresh_expires_in') @Default(0) int refreshExpiresIn,
     @JsonKey(name: 'token_type') @Default('Bearer') String tokenType,
-
-    // User object
     GoogleUser? user,
   }) = _GoogleSocialData;
 

@@ -20,7 +20,7 @@ final class UpdateUserProviderProvider
         argument: null,
         retry: null,
         name: r'updateUserProviderProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -42,7 +42,7 @@ final class UpdateUserProviderProvider
 }
 
 String _$updateUserProviderHash() =>
-    r'd46399f5fae9e623e3592cb71cef79e24ed7058e';
+    r'00dd95955c082ca4cab7b26dc9d2df94c8cf56f4';
 
 abstract class _$UpdateUserProvider extends $Notifier<AppLoadingState> {
   AppLoadingState build();

@@ -168,9 +168,6 @@ class _CreateAccountCodeScreenState extends State<CreateAccountCodeScreen> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                // borderSide: BorderSide(
-                                //   color: Colors.blueAccent,
-                                // ),
                               ),
                             ),
                             onChanged: (val) => _onOtpChanged(index, val),

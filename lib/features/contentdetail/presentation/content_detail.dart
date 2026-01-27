@@ -101,7 +101,6 @@ class _ContentDetailState extends State<ContentDetail>
                         ),
                         child: Stack(
                           children: [
-                            // Dark overlay + GestureDetector for tapping anywhere
                             GestureDetector(
                               behavior: HitTestBehavior.opaque,
                               onTap: () {
@@ -115,7 +114,6 @@ class _ContentDetailState extends State<ContentDetail>
                               ),
                             ),
 
-                            // Cross (close) button top-right
                             Positioned(
                               top: AppScaler.scaleHeight(context, 12),
                               right: AppScaler.scaleSize(context, 19),

@@ -20,7 +20,6 @@ class _RemovePopupState extends State<RemovePopup> {
     final customColors = theme.extension<AppCustomColors>()!;
 
     return Container(
-      // height: AppScaler.scaleHeight(context, 310),
       width: double.infinity,
       padding: EdgeInsets.only(
         top: AppScaler.scaleHeight(context, 24),
@@ -75,27 +74,8 @@ class _RemovePopupState extends State<RemovePopup> {
             },
             title: "Cancel",
           ),
-
-          // Container(
-          //   width: double.infinity,
-          //   height: 45,
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(30),
-          //     border: Border.all(color: Colors.white.withOpacity(0.3)),
-          //   ),
-          //   child: Center(
-          //     child: PoppinsText(
-          //       "Cancel",
-          //       fontSize: PoppinsFontSizeVariant.size16,
-          //             fontWeight: PoppinsFontWeightVariant.medium,
-          //             color: customColors.textColor,
-
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
   }
-
 }

@@ -26,10 +26,6 @@ class _DocumentriesCardWidgetState extends State<DocumentriesCardWidget> {
       behavior: HitTestBehavior.opaque,
 
       onTap: () {
-        // if (GuestHelper.isGuest) {
-        //   GuestHelper.checkGuest(context);
-        //   return;
-        // }
         context.pushNamed(AppRoutes.contentDetail.name);
       },
       child: Container(
@@ -55,15 +51,7 @@ class _DocumentriesCardWidgetState extends State<DocumentriesCardWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              PopupmenuWidget(showSaveIcon: widget.showSaveIcon),
-
-              // PoppinsText(
-              //   widget.title,
-              //   fontSize: PoppinsFontSizeVariant.size14,
-              //   fontWeight: PoppinsFontWeightVariant.medium,
-              // ),
-            ],
+            children: [PopupmenuWidget(showSaveIcon: widget.showSaveIcon)],
           ),
         ),
       ),

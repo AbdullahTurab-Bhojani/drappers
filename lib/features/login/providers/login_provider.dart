@@ -8,7 +8,7 @@ import '../../../drappers.dart';
 
 part 'login_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class LoginProvider extends _$LoginProvider {
   @override
   AppLoadingState build() {

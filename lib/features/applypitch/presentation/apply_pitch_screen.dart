@@ -61,7 +61,7 @@ class _ApplyPitchState extends ConsumerState<ApplyPitch> {
   final List<String> locationList = [
     "SWSX Austin",
     "Salt lake city",
-    "waikiki",
+    "Waikiki",
     "Palm beach",
     "Las Vegas",
     "Silicon Valley",

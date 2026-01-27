@@ -5,7 +5,7 @@ import '../../../../features/authentication/data/dto/logout_dto/logout_dto.dart'
 import '../../../../features/authentication/domain/repository/auth_repository.dart';
 part 'logout_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class LogoutProvider extends _$LogoutProvider {
   @override
   AppLoadingState build() {

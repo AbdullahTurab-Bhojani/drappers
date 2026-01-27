@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
@@ -8,47 +9,23 @@ import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/custom_video_card.dart';
 import '../../../shared/widgets/startup_card.dart';
+import '../domain/models/startup_model.dart';
+import '../provider/startup_provider.dart';
+import '../provider/startup_vote_provider.dart';
 
-class VoteForStartupScreen extends StatefulWidget {
+class VoteForStartupScreen extends ConsumerStatefulWidget {
   const VoteForStartupScreen({super.key});
 
   @override
-  State<VoteForStartupScreen> createState() => _VoteForStartupScreenState();
+  ConsumerState<VoteForStartupScreen> createState() =>
+      _VoteForStartupScreenState();
 }
 
-class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
-  final List<Map<String, dynamic>> startups = [
-    {
-      "title": "Echo Tech Solutions",
-      "subtitle": "Sustainable energy Revolution",
-      "description":
-          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      "episodeTitle": "Meet the Drapers S512",
-      "imagePath": Assets.images.studionew.path,
-      "initialCount": 6,
-    },
-    {
-      "title": "Future Innovations",
-      "subtitle": "AI-powered solutions",
-      "description":
-          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      "episodeTitle": "Meet the Drapers S513",
-      "imagePath": Assets.images.studionew.path,
-      "initialCount": 12,
-    },
-    {
-      "title": "Green Energy Co",
-      "subtitle": "Renewable energy solutions",
-      "description":
-          "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      "episodeTitle": "Meet the Drapers S514",
-      "imagePath": Assets.images.studionew.path,
-      "initialCount": 20,
-    },
-  ];
-
+class _VoteForStartupScreenState extends ConsumerState<VoteForStartupScreen> {
   @override
   Widget build(BuildContext context) {
+    final startupsAsync = ref.watch(startupListProvider(''));
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -130,31 +107,82 @@ class _VoteForStartupScreenState extends State<VoteForStartupScreen> {
                 ),
 
                 SizedBox(height: AppScaler.scaleHeight(context, 16)),
-
-                ...startups.map((startup) {
-                  return Padding(
+                startupsAsync.when(
+                  loading: () => Padding(
                     padding: EdgeInsets.only(
-                      bottom: AppScaler.scaleHeight(context, 16),
+                      top: AppScaler.scaleHeight(context, 40),
                     ),
-                    child: StartupCard(
-                      imagePath: startup['imagePath'],
-                      title: startup['title'],
-                      subtitle: startup['subtitle'],
-                      description: startup['description'],
-                      episodeTitle: startup['episodeTitle'],
-                      initialCount: startup['initialCount'],
-                      onWatchPressed: () {
-                        context.pushNamed(AppRoutes.videoScreen.name);
-                      },
-                      onVotePressed: () {
-                        print('${startup['title']} vote pressed!');
-                      },
-                      onCardTap: () {
-                        context.pushNamed(AppRoutes.startupdetails.name);
-                      },
+                    child: LoadingWidget(color: AppColors.buttoncolor.first),
+                  ),
+
+                  error: (e, _) => Padding(
+                    padding: EdgeInsets.only(
+                      top: AppScaler.scaleHeight(context, 40),
                     ),
-                  );
-                }),
+                    child: Text(
+                      e.toString(),
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+
+                  data: (List<StartupModel> startups) {
+                    if (startups.isEmpty) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          top: AppScaler.scaleHeight(context, 40),
+                        ),
+                        child: Text("No startups found"),
+                      );
+                    }
+
+                    return Column(
+                      children: startups.map((startup) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            bottom: AppScaler.scaleHeight(context, 16),
+                          ),
+                          child: StartupCard(
+                            isVotedByUser: startup.isLikedByUser ?? false,
+                            imagePath: startup.thumbnailUrl ?? '',
+                            title: startup.startupTitle,
+                            subtitle: startup.startupSubTitle,
+                            description: startup.aboutStartup,
+                            episodeTitle: startup.startupExpertise,
+                            initialCount: 0,
+                            onWatchPressed: () {
+                              context.pushNamed(
+                                AppRoutes.videoScreen.name,
+                                extra: startup.videoLink,
+                              );
+                            },
+                            onVotePressed: () async {
+                              try {
+                                await ref.read(
+                                  startupVoteProvider(startup.id).future,
+                                );
+                                ref.invalidate(startupListProvider(''));
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Vote failed: ${e.toString()}',
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                            onCardTap: () {
+                              context.pushNamed(
+                                AppRoutes.startupdetails.name,
+                                extra: startup.id,
+                              );
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  },
+                ),
               ],
             ),
           ),

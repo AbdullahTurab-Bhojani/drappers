@@ -35,8 +35,6 @@ class AppleAuthService {
     return digest.toString();
   }
 
-  // ---------------- APPLE SIGN IN ----------------
-
   Future<Map<String, dynamic>?> appleLogin() async {
     try {
       final credential = await SignInWithApple.getAppleIDCredential(
@@ -47,8 +45,8 @@ class AppleAuthService {
       );
 
       return {
-        "id_token": credential.identityToken, // 🔥 MAIN TOKEN
-        "email": credential.email, // ⚠️ first login only
+        "id_token": credential.identityToken,
+        "email": credential.email,
         "apple_user_id": credential.userIdentifier,
         "auth_code": credential.authorizationCode,
       };

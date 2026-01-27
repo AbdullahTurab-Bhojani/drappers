@@ -5,7 +5,7 @@ import '../domain/models/pitch_response.dart';
 import '../domain/repository/pitch_apply_repository.dart';
 part 'apply_pitch_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@Riverpod()
 class PitchProvider extends _$PitchProvider {
   @override
   AppLoadingState build() {

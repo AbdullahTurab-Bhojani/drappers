@@ -6,7 +6,7 @@ import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/title_subtitle_widget.dart';
-import '../../setting&preferences/providers/static_content_provider.dart'; // 👈 provider import
+import '../../setting&preferences/providers/static_content_provider.dart';
 
 class Termscondition extends ConsumerStatefulWidget {
   const Termscondition({super.key});

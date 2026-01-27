@@ -1,6 +1,7 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
@@ -18,6 +19,7 @@ class StartupCard extends StatefulWidget {
   final VoidCallback onWatchPressed;
   final VoidCallback? onVotePressed;
   final VoidCallback? onCardTap;
+  final bool isVotedByUser;
 
   const StartupCard({
     super.key,
@@ -30,6 +32,7 @@ class StartupCard extends StatefulWidget {
     required this.onWatchPressed,
     this.onVotePressed,
     this.onCardTap,
+    this.isVotedByUser = false,
   });
 
   @override
@@ -45,6 +48,7 @@ class _StartupCardState extends State<StartupCard> {
   void initState() {
     super.initState();
     count = widget.initialCount;
+    isVoted = widget.isVotedByUser;
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
@@ -57,6 +61,16 @@ class _StartupCardState extends State<StartupCard> {
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  ImageProvider getImageProvider(String? url) {
+    if (url == null || url.isEmpty) {
+      return const CachedNetworkImageProvider(
+        'https://mis.ihc.gov.pk/img/no-video.jpg',
+      );
+    }
+
+    return CachedNetworkImageProvider(url);
   }
 
   @override
@@ -83,13 +97,23 @@ class _StartupCardState extends State<StartupCard> {
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
-                image: DecorationImage(
-                  image: AssetImage(widget.imagePath),
-                  fit: BoxFit.cover,
-                ),
+                color: Colors.grey.shade200, // fallback color
               ),
+              clipBehavior: Clip.hardEdge,
               child: Stack(
                 children: [
+                  CachedNetworkImage(
+                    imageUrl: widget.imagePath,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                    placeholder: (context, url) => Center(
+                      child: LoadingWidget(color: AppColors.buttoncolor.first),
+                    ),
+                    errorWidget: (context, url, error) => Image.network(
+                      'https://mis.ihc.gov.pk/img/no-video.jpg',
+                    ),
+                  ),
                   Positioned(
                     bottom: AppScaler.scaleHeight(context, 10),
                     right: AppScaler.scaleSize(context, 10),
@@ -164,15 +188,20 @@ class _StartupCardState extends State<StartupCard> {
                             GuestHelper.checkGuest(context);
                             return;
                           }
+
+                          // Optimistic UI toggle
                           setState(() {
                             isVoted = !isVoted;
                           });
+
                           if (widget.onVotePressed != null)
                             widget.onVotePressed!();
                         },
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(
-                            color: customColors.greyColor,
+                            color: isVoted
+                                ? Colors.red
+                                : customColors.greyColor,
                             width: AppScaler.scaleSize(context, 2),
                           ),
                           shape: RoundedRectangleBorder(
@@ -181,7 +210,9 @@ class _StartupCardState extends State<StartupCard> {
                           padding: EdgeInsets.symmetric(
                             vertical: AppScaler.scaleHeight(context, 12),
                           ),
-                          backgroundColor: Colors.transparent,
+                          backgroundColor: isVoted
+                              ? Colors.red.withOpacity(0.1)
+                              : Colors.transparent,
                         ),
                         icon: Icon(
                           isVoted ? Icons.favorite : Icons.favorite_border,
@@ -193,7 +224,7 @@ class _StartupCardState extends State<StartupCard> {
                           isVoted ? 'Voted' : 'Vote',
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
-                          color: AppColors.wDark,
+                          color: isVoted ? Colors.red : AppColors.wDark,
                         ),
                       ),
                     ),
