@@ -7,7 +7,7 @@ part 'pitch_response.g.dart';
 abstract class PitchResponseModel with _$PitchResponseModel {
   const factory PitchResponseModel({
     required bool isSuccess,
-    required PitchData data,
+    PitchData? data,
     required String message,
   }) = _PitchResponseModel;
 

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PitchResponseModel {
 
- bool get isSuccess; PitchData get data; String get message;
+ bool get isSuccess; PitchData? get data; String get message;
 /// Create a copy of PitchResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $PitchResponseModelCopyWith<$Res>  {
   factory $PitchResponseModelCopyWith(PitchResponseModel value, $Res Function(PitchResponseModel) _then) = _$PitchResponseModelCopyWithImpl;
 @useResult
 $Res call({
- bool isSuccess, PitchData data, String message
+ bool isSuccess, PitchData? data, String message
 });
 
 
-$PitchDataCopyWith<$Res> get data;
+$PitchDataCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -65,11 +65,11 @@ class _$PitchResponseModelCopyWithImpl<$Res>
 
 /// Create a copy of PitchResponseModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isSuccess = null,Object? data = null,Object? message = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isSuccess = null,Object? data = freezed,Object? message = null,}) {
   return _then(_self.copyWith(
 isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
-as bool,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as PitchData,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as bool,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as PitchData?,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -77,9 +77,12 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PitchDataCopyWith<$Res> get data {
-  
-  return $PitchDataCopyWith<$Res>(_self.data, (value) {
+$PitchDataCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
+
+  return $PitchDataCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }
@@ -164,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isSuccess,  PitchData data,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isSuccess,  PitchData? data,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PitchResponseModel() when $default != null:
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -185,7 +188,7 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isSuccess,  PitchData data,  String message)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isSuccess,  PitchData? data,  String message)  $default,) {final _that = this;
 switch (_that) {
 case _PitchResponseModel():
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -205,7 +208,7 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isSuccess,  PitchData data,  String message)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isSuccess,  PitchData? data,  String message)?  $default,) {final _that = this;
 switch (_that) {
 case _PitchResponseModel() when $default != null:
 return $default(_that.isSuccess,_that.data,_that.message);case _:
@@ -220,11 +223,11 @@ return $default(_that.isSuccess,_that.data,_that.message);case _:
 @JsonSerializable()
 
 class _PitchResponseModel implements PitchResponseModel {
-  const _PitchResponseModel({required this.isSuccess, required this.data, required this.message});
+  const _PitchResponseModel({required this.isSuccess, this.data, required this.message});
   factory _PitchResponseModel.fromJson(Map<String, dynamic> json) => _$PitchResponseModelFromJson(json);
 
 @override final  bool isSuccess;
-@override final  PitchData data;
+@override final  PitchData? data;
 @override final  String message;
 
 /// Create a copy of PitchResponseModel
@@ -260,11 +263,11 @@ abstract mixin class _$PitchResponseModelCopyWith<$Res> implements $PitchRespons
   factory _$PitchResponseModelCopyWith(_PitchResponseModel value, $Res Function(_PitchResponseModel) _then) = __$PitchResponseModelCopyWithImpl;
 @override @useResult
 $Res call({
- bool isSuccess, PitchData data, String message
+ bool isSuccess, PitchData? data, String message
 });
 
 
-@override $PitchDataCopyWith<$Res> get data;
+@override $PitchDataCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -277,11 +280,11 @@ class __$PitchResponseModelCopyWithImpl<$Res>
 
 /// Create a copy of PitchResponseModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isSuccess = null,Object? data = null,Object? message = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isSuccess = null,Object? data = freezed,Object? message = null,}) {
   return _then(_PitchResponseModel(
 isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
-as bool,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as PitchData,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as bool,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as PitchData?,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -290,9 +293,12 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PitchDataCopyWith<$Res> get data {
-  
-  return $PitchDataCopyWith<$Res>(_self.data, (value) {
+$PitchDataCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
+
+  return $PitchDataCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }

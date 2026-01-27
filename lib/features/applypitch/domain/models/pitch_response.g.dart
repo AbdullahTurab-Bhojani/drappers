@@ -9,7 +9,9 @@ part of 'pitch_response.dart';
 _PitchResponseModel _$PitchResponseModelFromJson(Map<String, dynamic> json) =>
     _PitchResponseModel(
       isSuccess: json['isSuccess'] as bool,
-      data: PitchData.fromJson(json['data'] as Map<String, dynamic>),
+      data: json['data'] == null
+          ? null
+          : PitchData.fromJson(json['data'] as Map<String, dynamic>),
       message: json['message'] as String,
     );
 

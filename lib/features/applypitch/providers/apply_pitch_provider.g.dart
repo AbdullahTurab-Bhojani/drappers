@@ -41,7 +41,7 @@ final class PitchProviderProvider
   }
 }
 
-String _$pitchProviderHash() => r'1d7d4c0620e2bc6d19ba91101bd7449243b87866';
+String _$pitchProviderHash() => r'4d221f28a3e5a9342edfcbb9e32571b27cfbc263';
 
 abstract class _$PitchProvider extends $Notifier<AppLoadingState> {
   AppLoadingState build();
