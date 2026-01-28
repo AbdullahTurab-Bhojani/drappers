@@ -39,8 +39,6 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     double horizontalPadding = 16.0;
-    final isLiked =
-        _optimisticLiked ?? widget.startupModel!.isLikedByUser ?? false;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
@@ -149,8 +147,6 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
                   ),
                 ),
               ),
-
-              // SizedBox(width: AppScaler.scaleSize(context, 10)),
               SizedBox(
                 width:
                     (MediaQuery.of(context).size.width -
@@ -172,16 +168,14 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
                                 widget.startupModel!.isLikedByUser ??
                                 false;
 
-                            // Toggle immediately (optimistic)
                             setState(() {
                               _isVoting = true;
-                              _optimisticLiked = !current; // 🔄 toggle
+                              _optimisticLiked = !current;
                             });
 
                             try {
-                              await widget.onVotePressed!(); // API call
+                              await widget.onVotePressed!();
                             } catch (e) {
-                              // rollback on error
                               setState(() => _optimisticLiked = current);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
