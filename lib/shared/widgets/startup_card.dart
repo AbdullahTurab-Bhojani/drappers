@@ -3,13 +3,14 @@
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
 import 'guestloginwidget.dart';
 
-class StartupCard extends StatefulWidget {
+class StartupCard extends ConsumerStatefulWidget {
   final String imagePath;
   final String title;
   final String subtitle;
@@ -36,11 +37,11 @@ class StartupCard extends StatefulWidget {
   });
 
   @override
-  State<StartupCard> createState() => _StartupCardState();
+  ConsumerState<StartupCard> createState() => _StartupCardState();
 }
 
-class _StartupCardState extends State<StartupCard> {
-  bool isVoted = false;
+class _StartupCardState extends ConsumerState<StartupCard> {
+  // bool isVoted = false;
   late int count;
   Timer? _timer;
 
@@ -48,7 +49,7 @@ class _StartupCardState extends State<StartupCard> {
   void initState() {
     super.initState();
     count = widget.initialCount;
-    isVoted = widget.isVotedByUser;
+    // isVoted = widget.isVotedByUser;
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
@@ -190,16 +191,16 @@ class _StartupCardState extends State<StartupCard> {
                           }
 
                           // Optimistic UI toggle
-                          setState(() {
-                            isVoted = !isVoted;
-                          });
+                          // setState(() {
+                          //   isVoted = !isVoted;
+                          // });
 
                           if (widget.onVotePressed != null)
                             widget.onVotePressed!();
                         },
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(
-                            color: isVoted
+                            color: widget.isVotedByUser
                                 ? Colors.red
                                 : customColors.greyColor,
                             width: AppScaler.scaleSize(context, 2),
@@ -210,21 +211,27 @@ class _StartupCardState extends State<StartupCard> {
                           padding: EdgeInsets.symmetric(
                             vertical: AppScaler.scaleHeight(context, 12),
                           ),
-                          backgroundColor: isVoted
+                          backgroundColor: widget.isVotedByUser
                               ? Colors.red.withOpacity(0.1)
                               : Colors.transparent,
                         ),
                         icon: Icon(
-                          isVoted ? Icons.favorite : Icons.favorite_border,
+                          widget.isVotedByUser
+                              ? Icons.favorite
+                              : Icons.favorite_border,
                           size: 24,
-                          color: isVoted ? Colors.red : customColors.textColor,
+                          color: widget.isVotedByUser
+                              ? Colors.red
+                              : customColors.textColor,
                         ),
                         label: PoppinsText(
                           context,
-                          isVoted ? 'Voted' : 'Vote',
+                          widget.isVotedByUser ? 'Voted' : 'Vote',
                           fontSize: PoppinsFontSizeVariant.size16,
                           fontWeight: PoppinsFontWeightVariant.medium,
-                          color: isVoted ? Colors.red : AppColors.wDark,
+                          color: widget.isVotedByUser
+                              ? Colors.red
+                              : AppColors.wDark,
                         ),
                       ),
                     ),

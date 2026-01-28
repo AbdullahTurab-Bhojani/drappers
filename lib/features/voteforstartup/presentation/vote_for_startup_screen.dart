@@ -22,6 +22,21 @@ class VoteForStartupScreen extends ConsumerStatefulWidget {
 }
 
 class _VoteForStartupScreenState extends ConsumerState<VoteForStartupScreen> {
+  Future<void> votedByUser(int id) async {
+    try {
+      // final repo = ref.read(startupRepositoryProvider);
+      // await repo.voteStartup(id);
+
+      // ref.refresh(startupListProvider(''));
+      // ref.refresh(startupDetailProvider(id));
+      await ref.read(startupVoteProvider(id))();
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Vote failed: ${e.toString()}')));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final startupsAsync = ref.watch(startupListProvider(''));
@@ -156,19 +171,7 @@ class _VoteForStartupScreenState extends ConsumerState<VoteForStartupScreen> {
                               );
                             },
                             onVotePressed: () async {
-                              try {
-                                await ref.read(
-                                  startupVoteProvider(startup.id).future,
-                                );
-                              } catch (e) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Vote failed: ${e.toString()}',
-                                    ),
-                                  ),
-                                );
-                              }
+                              await votedByUser(startup.id);
                             },
                             onCardTap: () {
                               context.pushNamed(

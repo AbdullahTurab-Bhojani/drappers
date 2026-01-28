@@ -218,9 +218,7 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
                           startupModel: startup,
                           onVotePressed: () async {
                             try {
-                              await ref.read(
-                                startupVoteProvider(startup.id).future,
-                              );
+                              await ref.read(startupVoteProvider(startup.id))();
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
