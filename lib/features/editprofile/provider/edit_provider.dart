@@ -2,6 +2,7 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/local/domain/repositories/local_storage_repository.dart';
+import '../../../core/provider/user_provider.dart';
 import '../../authentication/data/dto/user_update_dto/user_update.dart';
 import '../../authentication/domain/repository/auth_repository.dart';
 import '../../user/domain/models/user_model.dart';
@@ -32,7 +33,7 @@ class UpdateUserProvider extends _$UpdateUserProvider {
         await pref.saveUser(userResponse.data!);
         await pref.saveUserId(userResponse.data!.id.toString());
         await pref.saveUserName(userResponse.data!.fullName ?? '');
-
+        ref.invalidate(userDataProvider);
         ref.refresh(localDataProvider);
 
         state = AppLoadingState.success(userResponse);

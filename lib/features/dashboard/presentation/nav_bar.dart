@@ -1,10 +1,12 @@
 // ignore_for_file: unused_import
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/extensions/theme_extension.dart';
 import '../../../core/local/domain/repositories/local_storage_repository.dart';
+import '../../../core/provider/user_provider.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -60,12 +62,6 @@ class _BottomNavigationBarShellState
     WidgetsBinding.instance.addPostFrameCallback((_) {
       syncIndex();
     });
-    _loadUser();
-  }
-
-  Future<void> _loadUser() async {
-    user = await ref.read(localDataProvider).getUser();
-    setState(() {});
   }
 
   @override
@@ -103,6 +99,7 @@ class _BottomNavigationBarShellState
 
   @override
   Widget build(BuildContext context) {
+    final userAsync = ref.watch(userDataProvider);
     final customColors = Theme.of(context).extension<AppCustomColors>()!;
     return PopScope(
       canPop: false,
@@ -137,32 +134,54 @@ class _BottomNavigationBarShellState
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (isProfileTab)
-                        GuestHelper.isGuest
-                            ? Image.asset(
-                                Assets.images.user.path,
-                                width: 20,
-                                height: 20,
-                                color: isSelected
-                                    ? customColors.textColor
-                                    : customColors.greyColor,
-                              )
-                            : user != null &&
-                                  user!.profileUrl != null &&
-                                  user!.profileUrl != ''
-                            ? CircleAvatar(
-                                radius: 11,
-                                backgroundColor: Colors.transparent,
-                                backgroundImage: NetworkImage(
-                                  user!.profileUrl!,
-                                ),
-                              )
-                            : CircleAvatar(
-                                radius: 11,
-                                backgroundColor: Colors.transparent,
-                                backgroundImage: NetworkImage(
-                                  'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg',
-                                ),
-                              )
+                        ProfileAvatar(isSelected: isSelected)
+                      // if (isProfileTab)
+                      //   GuestHelper.isGuest
+                      //       ? Image.asset(
+                      //           Assets.images.user.path,
+                      //           width: 20,
+                      //           height: 20,
+                      //           color: isSelected
+                      //               ? customColors.textColor
+                      //               : customColors.greyColor,
+                      //         )
+                      //       : userAsync.when(
+                      //           data: (user) {
+                      //             if (user != null &&
+                      //                 user.profileUrl != null &&
+                      //                 user.profileUrl != '') {
+                      //               return CircleAvatar(
+                      //                 radius: 11,
+                      //                 backgroundColor: Colors.transparent,
+                      //                 backgroundImage: NetworkImage(
+                      //                   "${user.profileUrl}?v=${DateTime.now().millisecondsSinceEpoch}", // force refresh
+                      //                 ),
+                      //               );
+                      //             } else {
+                      //               return CircleAvatar(
+                      //                 radius: 11,
+                      //                 backgroundColor: Colors.transparent,
+                      //                 backgroundImage: NetworkImage(
+                      //                   'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg',
+                      //                 ),
+                      //               );
+                      //             }
+                      //           },
+                      //           loading: () => CircleAvatar(
+                      //             radius: 11,
+                      //             backgroundColor: Colors.transparent,
+                      //             child: CircularProgressIndicator(
+                      //               strokeWidth: 2,
+                      //             ),
+                      //           ),
+                      //           error: (_, _) => CircleAvatar(
+                      //             radius: 11,
+                      //             backgroundColor: Colors.transparent,
+                      //             backgroundImage: NetworkImage(
+                      //               'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg',
+                      //             ),
+                      //           ),
+                      //         )
                       else
                         isSelected
                             ? Image(
@@ -193,6 +212,41 @@ class _BottomNavigationBarShellState
           ),
         ),
       ),
+    );
+  }
+}
+
+class ProfileAvatar extends ConsumerWidget {
+  final bool isSelected;
+
+  const ProfileAvatar({super.key, required this.isSelected});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profileUrl = ref.watch(
+      userDataProvider.select((v) => v.value?.profileUrl),
+    );
+
+    final customColors = Theme.of(context).extension<AppCustomColors>()!;
+
+    if (GuestHelper.isGuest) {
+      return Image.asset(
+        Assets.images.user.path,
+        width: 20,
+        height: 20,
+        color: isSelected ? customColors.textColor : customColors.greyColor,
+      );
+    }
+
+    return CircleAvatar(
+      radius: 11,
+      backgroundColor: Colors.transparent,
+      backgroundImage: profileUrl != null && profileUrl.isNotEmpty
+          ? CachedNetworkImageProvider(profileUrl)
+          : const NetworkImage(
+                  'https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg',
+                )
+                as ImageProvider,
     );
   }
 }
