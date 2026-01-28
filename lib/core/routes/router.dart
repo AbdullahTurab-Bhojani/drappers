@@ -13,14 +13,23 @@ final routerConfigProvider = Provider((ref) {
       String? accessToken = localData.accessToken;
       bool isLogin = accessToken?.isNotEmpty ?? false;
       bool isPublic = AppRoutes.isPublicRoute(state);
+      bool isGuest = GuestHelper.isGuest;
+
       debugPrint(
-        "🔁 Redirect : isLogin: $isLogin | isPublic: $isPublic | path: ${state.fullPath}",
+        "🔁 Redirect : isLogin: $isLogin | isPublic: $isPublic | isGuest: $isGuest | path: ${state.fullPath}",
       );
-      if (!isPublic && !isLogin) {
-        return AppRoutes.socialLoginScreen.path;
-      } else {
-        return null;
+
+      if (!isPublic && !isLogin && !isGuest) {
+        return AppRoutes.splashScreen.path;
       }
+
+      // Guest can access home only
+      if (isGuest && state.path != AppRoutes.home.path) {
+        return AppRoutes.home.path;
+      }
+
+      // Otherwise, allow navigation
+      return null;
     },
 
     routes: [

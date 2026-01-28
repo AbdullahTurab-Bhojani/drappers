@@ -173,7 +173,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     if (showLoader) {
-      return Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Scaffold(
+        body: Center(child: LoadingWidget(color: AppColors.buttoncolor.first)),
+      );
     }
 
     List<String> documentriescard = [

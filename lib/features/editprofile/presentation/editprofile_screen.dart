@@ -311,6 +311,7 @@ class _EditprofileScreenState extends ConsumerState<EditprofileScreen> {
                                       if (loadingProgress == null) return child;
                                       return Center(
                                         child: CircularProgressIndicator(
+                                          color: AppColors.buttoncolor.first,
                                           value:
                                               loadingProgress
                                                       .expectedTotalBytes !=

@@ -161,8 +161,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               ? user!.profileUrl!
                               : "https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg",
                           fit: BoxFit.cover,
-                          placeholder: (context, url) => const Center(
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                          placeholder: (context, url) => Center(
+                            child: LoadingWidget(
+                              color: AppColors.buttoncolor.first,
+                            ),
                           ),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.person, size: 50),
