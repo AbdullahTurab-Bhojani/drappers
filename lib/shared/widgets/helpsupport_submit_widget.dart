@@ -47,7 +47,7 @@ class _HelpsupportSubmitWidgetState
         maxWidth: 800,
         maxHeight: 800,
       );
-      if (picked != null) files = picked;
+      files = picked;
     } else {
       final XFile? file = await _picker.pickImage(
         source: source,

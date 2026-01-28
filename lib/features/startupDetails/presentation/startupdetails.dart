@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, unused_element
+// ignore_for_file: deprecated_member_use, unused_element, use_build_context_synchronously
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +12,7 @@ import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/featured_episode_card.dart';
 import '../../voteforstartup/provider/startup_vote_provider.dart';
 import '../provider/startup_detail_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Startupdetails extends ConsumerStatefulWidget {
   const Startupdetails({super.key, required this.startupId});
@@ -125,7 +126,9 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
             GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                context.pushNamed(AppRoutes.searchscreen.name);
+                SharePlus.instance.share(
+                  ShareParams(text: 'check out my website https://example.com'),
+                );
               },
               child: Image.asset(
                 Assets.images.shareicon.path,

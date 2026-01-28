@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, avoid_print
+// ignore_for_file: deprecated_member_use, avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +9,6 @@ import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../shared/widgets/custom_video_card.dart';
 import '../../../shared/widgets/startup_card.dart';
-import '../../startupDetails/provider/startup_detail_provider.dart';
 import '../domain/models/startup_model.dart';
 import '../provider/startup_provider.dart';
 import '../provider/startup_vote_provider.dart';
