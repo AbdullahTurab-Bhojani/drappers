@@ -11,7 +11,7 @@ final startupVoteProvider = Provider.family<Future<void> Function(), int>((
     final repo = ref.read(startupRepositoryProvider);
     await repo.voteStartup(startupId);
 
-    ref.invalidate(startupListProvider(''));
-    ref.invalidate(startupDetailProvider(startupId));
+    ref.refresh(startupListProvider(''));
+    ref.refresh(getStartupDetailProvider(startupId));
   };
 });

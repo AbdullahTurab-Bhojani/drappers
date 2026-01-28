@@ -98,7 +98,7 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
 
   @override
   Widget build(BuildContext context) {
-    final asyncStartup = ref.watch(startupDetailProvider(widget.startupId));
+    final asyncStartup = ref.watch(getStartupDetailProvider(widget.startupId));
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(

@@ -13,7 +13,7 @@ import 'guestloginwidget.dart';
 
 class FeaturedEpisodeCard extends StatefulWidget {
   final StartupModel? startupModel;
-  final VoidCallback? onVotePressed;
+  final Future<void> Function()? onVotePressed;
 
   const FeaturedEpisodeCard({
     required this.startupModel,
@@ -27,24 +27,20 @@ class FeaturedEpisodeCard extends StatefulWidget {
 
 class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
   bool isSaved = false;
-  bool isVoted = false;
   double sliderValue = 40;
+  bool _isVoting = false;
+  bool? _optimisticLiked;
 
   final List<String> tags = ['Clean Tech', 'Energy Storage', 'Sustainability'];
   final List<String> twotags = ['B2B', 'Hardware'];
-
-  @override
-  void initState() {
-    super.initState();
-    isVoted = widget.startupModel?.isLikedByUser ?? false;
-  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
     double horizontalPadding = 16.0;
-
+    final isLiked =
+        _optimisticLiked ?? widget.startupModel!.isLikedByUser ?? false;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
@@ -162,45 +158,111 @@ class _FeaturedEpisodeCardState extends State<FeaturedEpisodeCard> {
                         10) /
                     2,
                 child: OutlinedButton.icon(
-                  onPressed: () {
-                    if (GuestHelper.isGuest) {
-                      GuestHelper.checkGuest(context);
-                      return;
-                    }
+                  onPressed: _isVoting
+                      ? null
+                      : () async {
+                          if (GuestHelper.isGuest) {
+                            GuestHelper.checkGuest(context);
+                            return;
+                          }
 
-                    // Optimistic toggle
-                    setState(() {
-                      isVoted = !isVoted;
-                    });
+                          if (widget.onVotePressed != null) {
+                            final current =
+                                _optimisticLiked ??
+                                widget.startupModel!.isLikedByUser ??
+                                false;
 
-                    // Call the vote API if provided
-                    if (widget.onVotePressed != null) widget.onVotePressed!();
-                  },
+                            // Toggle immediately (optimistic)
+                            setState(() {
+                              _isVoting = true;
+                              _optimisticLiked = !current; // 🔄 toggle
+                            });
+
+                            try {
+                              await widget.onVotePressed!(); // API call
+                            } catch (e) {
+                              // rollback on error
+                              setState(() => _optimisticLiked = current);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Vote failed: ${e.toString()}'),
+                                ),
+                              );
+                            } finally {
+                              setState(() => _isVoting = false);
+                            }
+                          }
+                        },
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(
-                      color: isVoted ? Colors.red : customColors.greyColor,
+                      color:
+                          (_optimisticLiked ??
+                              widget.startupModel!.isLikedByUser ??
+                              false)
+                          ? Colors.red
+                          : customColors.greyColor,
                       width: AppScaler.scaleSize(context, 2),
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 12),
-                    backgroundColor: isVoted
+                    backgroundColor:
+                        (_optimisticLiked ??
+                            widget.startupModel!.isLikedByUser ??
+                            false)
                         ? Colors.red.withOpacity(0.1)
                         : Colors.transparent,
                   ),
-                  icon: Icon(
-                    isVoted ? Icons.favorite : Icons.favorite_border,
-                    size: 24,
-                    color: isVoted ? Colors.red : customColors.textColor,
-                  ),
-                  label: PoppinsText(
-                    context,
-                    isVoted ? 'Voted' : 'Vote',
-                    fontSize: PoppinsFontSizeVariant.size16,
-                    fontWeight: PoppinsFontWeightVariant.medium,
-                    color: isVoted ? Colors.red : AppColors.wDark,
-                  ),
+                  icon: _isVoting
+                      ? SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.red,
+                            ),
+                          ),
+                        )
+                      : Icon(
+                          (_optimisticLiked ??
+                                  widget.startupModel!.isLikedByUser ??
+                                  false)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          size: 24,
+                          color:
+                              (_optimisticLiked ??
+                                  widget.startupModel!.isLikedByUser ??
+                                  false)
+                              ? Colors.red
+                              : customColors.textColor,
+                        ),
+                  label: _isVoting
+                      ? PoppinsText(
+                          context,
+                          'Voting...',
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color: Colors.red,
+                        )
+                      : PoppinsText(
+                          context,
+                          (_optimisticLiked ??
+                                  widget.startupModel!.isLikedByUser ??
+                                  false)
+                              ? 'Voted'
+                              : 'Vote',
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                          color:
+                              (_optimisticLiked ??
+                                  widget.startupModel!.isLikedByUser ??
+                                  false)
+                              ? Colors.red
+                              : AppColors.wDark,
+                        ),
                 ),
               ),
             ],
