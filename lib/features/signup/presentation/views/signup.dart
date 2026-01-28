@@ -46,17 +46,20 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   }
 
   Future<void> onSubmit() async {
+    if (!rememberMe) {
+      if (!mounted) return;
+      Fluttertoast.showToast(
+        msg: "Please accept terms & conditions to sign up.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+      return;
+    }
+
     if (!(_formKey.currentState?.validate() ?? false)) {
-      if (!rememberMe && mounted) {
-        Fluttertoast.showToast(
-          msg: "Please accept terms & conditions to sign up.",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.white,
-          textColor: Colors.black,
-          fontSize: 16.0,
-        );
-      }
       return;
     }
 
@@ -96,9 +99,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         textColor: Colors.black,
         fontSize: 16.0,
       );
-
       if (result.isSuccess) {
-        context.pushNamed(AppRoutes.signupVerification.name);
+        context.pushReplacement(AppRoutes.signupVerification.name);
       }
     } catch (e) {
       if (!mounted) return;
