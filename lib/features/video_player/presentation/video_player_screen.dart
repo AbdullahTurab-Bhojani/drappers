@@ -23,7 +23,7 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late BetterPlayerController _betterPlayerController;
+  BetterPlayerController? _betterPlayerController;
 
   String? _selectedSubtitle;
   String _selectedQuality = "720p";
@@ -59,7 +59,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void dispose() {
     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-    _betterPlayerController.dispose();
+    _betterPlayerController!.dispose();
     super.dispose();
   }
 
@@ -127,7 +127,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       betterPlayerDataSource: source,
     );
 
-    _betterPlayerController.videoPlayerController!.addListener(() {
+    _betterPlayerController!.videoPlayerController!.addListener(() {
       if (mounted) setState(() {});
     });
 
@@ -139,7 +139,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     Future.delayed(Duration(seconds: 4), () {
       if (mounted &&
           !_isLocked &&
-          _betterPlayerController.isPlaying() == true) {
+          _betterPlayerController!.isPlaying() == true) {
         setState(() => _controlsVisible = false);
       }
     });
@@ -177,7 +177,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         onSelected: (value) {
           setState(() {
             _selectedSpeed = value;
-            _betterPlayerController.setSpeed(
+            _betterPlayerController!.setSpeed(
               double.parse(value.replaceAll('x', '')),
             );
           });
@@ -213,192 +213,203 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       BetterPlayerDataSourceType.network,
       episodesData[index]['url']!,
     );
-    _betterPlayerController.setupDataSource(source);
+    _betterPlayerController!.setupDataSource(source);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () {
-                if (_showEpisodes) {
-                  setState(() => _showEpisodes = false);
-                  return;
-                }
+      body: _betterPlayerController == null
+          ? Center(child: LoadingWidget(color: AppColors.buttoncolor.first))
+          : Column(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      if (_showEpisodes) {
+                        setState(() => _showEpisodes = false);
+                        return;
+                      }
 
-                if (!_isLocked) {
-                  setState(() => _controlsVisible = !_controlsVisible);
-                  if (_controlsVisible) _hideControlsAfterDelay();
-                } else {
-                  _showLockIndicatorWithTimer();
-                }
-              },
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: BetterPlayer(controller: _betterPlayerController),
-                  ),
-                  if (!_showEpisodes)
-                    if (_controlsVisible && !_isLocked)
-                      Positioned(
-                        top: 40,
-                        left: 10,
-                        right: 10,
-                        child: TopBarWidget(
-                          title: "Finale – Meet The Drapers Season",
-                          onBack: () => Navigator.pop(context),
-                          onClose: () => Navigator.pop(context),
-                        ),
-                      ),
-                  if (!_showEpisodes)
-                    if (_controlsVisible && !_isLocked)
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              icon: Image.asset(
-                                Assets.images.back10seconds.path,
-                                width: 50,
-                                height: 50,
-                              ),
-                              onPressed: () {
-                                final controller = _betterPlayerController
-                                    .videoPlayerController!;
-                                final pos = controller.value.position;
-                                controller.seekTo(
-                                  pos - Duration(seconds: 10) >= Duration.zero
-                                      ? pos - Duration(seconds: 10)
-                                      : Duration.zero,
-                                );
-                              },
-                            ),
-                            SizedBox(width: 32),
-                            IconButton(
-                              icon: Icon(
-                                _betterPlayerController
-                                        .videoPlayerController!
-                                        .value
-                                        .isPlaying
-                                    ? Icons.pause_circle
-                                    : Icons.play_circle,
-                                size: 70,
-                                color: AppColors.white,
-                              ),
-                              onPressed: () {
-                                final controller = _betterPlayerController
-                                    .videoPlayerController!;
-                                final pos = controller.value.position;
-                                final dur =
-                                    controller.value.duration ?? Duration.zero;
-
-                                if (controller.value.isPlaying) {
-                                  controller.pause();
-                                } else {
-                                  if (pos >= dur)
-                                    controller.seekTo(Duration.zero);
-                                  controller.play();
-                                }
-                              },
-                            ),
-                            SizedBox(width: 32),
-                            IconButton(
-                              icon: Image.asset(
-                                Assets.images.forward10seconds.path,
-                                width: 50,
-                                height: 50,
-                              ),
-                              onPressed: () {
-                                final controller = _betterPlayerController
-                                    .videoPlayerController!;
-                                final pos = controller.value.position;
-                                final dur =
-                                    controller.value.duration ?? Duration.zero;
-
-                                controller.seekTo(
-                                  pos + Duration(seconds: 10) <= dur
-                                      ? pos + Duration(seconds: 10)
-                                      : dur,
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                  if (!_showEpisodes)
-                    if (_isLocked || _showLockIndicator)
-                      Positioned(
-                        top: 24,
-                        right: 24,
-                        child: GestureDetector(
-                          onTap: () {
-                            _toggleLock();
-                            setState(() => _controlsVisible = true);
-                            _hideControlsAfterDelay();
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                Assets.images.videolock.path,
-                                color: AppColors.white,
-                                width: 20,
-                                height: 20,
-                              ),
-                              SizedBox(width: 8),
-                              PoppinsText(
-                                context,
-                                "Locked",
-                                fontSize: PoppinsFontSizeVariant.size28,
-                                fontWeight: PoppinsFontWeightVariant.semiBold,
-                                color: Colors.white,
-                              ),
-                            ],
+                      if (!_isLocked) {
+                        setState(() => _controlsVisible = !_controlsVisible);
+                        if (_controlsVisible) _hideControlsAfterDelay();
+                      } else {
+                        _showLockIndicatorWithTimer();
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: BetterPlayer(
+                            controller: _betterPlayerController!,
                           ),
                         ),
-                      ),
-                  if (!_showEpisodes)
-                    if (_controlsVisible && !_isLocked)
-                      Positioned(
-                        bottom: 20,
-                        left: 0,
-                        right: 0,
-                        child: BottomControlsWidget(
-                          betterController: _betterPlayerController,
-                          isLocked: _isLocked,
-                          showEpisodes: _showEpisodes,
-                          selectedSpeed: _selectedSpeed,
-                          selectedQuality: _selectedQuality,
-                          changeSpeed: _changeSpeed,
-                          toggleLock: _toggleLock,
-                          openAudioSubtitlePopup: _openAudioSubtitlePopup,
-                          openVideoQualityPopup: _openVideoQualityPopup,
-                          onEpisodesToggle: (val) =>
-                              setState(() => _showEpisodes = val),
-                        ),
-                      ),
-                ],
-              ),
-            ),
-          ),
+                        if (!_showEpisodes)
+                          if (_controlsVisible && !_isLocked)
+                            Positioned(
+                              top: 40,
+                              left: 10,
+                              right: 10,
+                              child: TopBarWidget(
+                                title: "Finale – Meet The Drapers Season",
+                                onBack: () => Navigator.pop(context),
+                                onClose: () => Navigator.pop(context),
+                              ),
+                            ),
+                        if (!_showEpisodes)
+                          if (_controlsVisible && !_isLocked)
+                            Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    icon: Image.asset(
+                                      Assets.images.back10seconds.path,
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    onPressed: () {
+                                      final controller =
+                                          _betterPlayerController!
+                                              .videoPlayerController!;
+                                      final pos = controller.value.position;
+                                      controller.seekTo(
+                                        pos - Duration(seconds: 10) >=
+                                                Duration.zero
+                                            ? pos - Duration(seconds: 10)
+                                            : Duration.zero,
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(width: 32),
+                                  IconButton(
+                                    icon: Icon(
+                                      _betterPlayerController!
+                                              .videoPlayerController!
+                                              .value
+                                              .isPlaying
+                                          ? Icons.pause_circle
+                                          : Icons.play_circle,
+                                      size: 70,
+                                      color: AppColors.white,
+                                    ),
+                                    onPressed: () {
+                                      final controller =
+                                          _betterPlayerController!
+                                              .videoPlayerController!;
+                                      final pos = controller.value.position;
+                                      final dur =
+                                          controller.value.duration ??
+                                          Duration.zero;
 
-          EpisodesHorizontalBar(
-            show: _showEpisodes,
-            title: 'E14 Finale',
-            episodesData: episodesData,
-            onClose: () => setState(() => _showEpisodes = false),
-            onEpisodeTap: (index) {
-              _playEpisode(index);
-              setState(() => _showEpisodes = false);
-            },
-          ),
-        ],
-      ),
+                                      if (controller.value.isPlaying) {
+                                        controller.pause();
+                                      } else {
+                                        if (pos >= dur)
+                                          controller.seekTo(Duration.zero);
+                                        controller.play();
+                                      }
+                                    },
+                                  ),
+                                  SizedBox(width: 32),
+                                  IconButton(
+                                    icon: Image.asset(
+                                      Assets.images.forward10seconds.path,
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    onPressed: () {
+                                      final controller =
+                                          _betterPlayerController!
+                                              .videoPlayerController!;
+                                      final pos = controller.value.position;
+                                      final dur =
+                                          controller.value.duration ??
+                                          Duration.zero;
+
+                                      controller.seekTo(
+                                        pos + Duration(seconds: 10) <= dur
+                                            ? pos + Duration(seconds: 10)
+                                            : dur,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                        if (!_showEpisodes)
+                          if (_isLocked || _showLockIndicator)
+                            Positioned(
+                              top: 24,
+                              right: 24,
+                              child: GestureDetector(
+                                onTap: () {
+                                  _toggleLock();
+                                  setState(() => _controlsVisible = true);
+                                  _hideControlsAfterDelay();
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      Assets.images.videolock.path,
+                                      color: AppColors.white,
+                                      width: 20,
+                                      height: 20,
+                                    ),
+                                    SizedBox(width: 8),
+                                    PoppinsText(
+                                      context,
+                                      "Locked",
+                                      fontSize: PoppinsFontSizeVariant.size28,
+                                      fontWeight:
+                                          PoppinsFontWeightVariant.semiBold,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        if (!_showEpisodes)
+                          if (_controlsVisible && !_isLocked)
+                            Positioned(
+                              bottom: 20,
+                              left: 0,
+                              right: 0,
+                              child: BottomControlsWidget(
+                                betterController: _betterPlayerController!,
+                                isLocked: _isLocked,
+                                showEpisodes: _showEpisodes,
+                                selectedSpeed: _selectedSpeed,
+                                selectedQuality: _selectedQuality,
+                                changeSpeed: _changeSpeed,
+                                toggleLock: _toggleLock,
+                                openAudioSubtitlePopup: _openAudioSubtitlePopup,
+                                openVideoQualityPopup: _openVideoQualityPopup,
+                                onEpisodesToggle: (val) =>
+                                    setState(() => _showEpisodes = val),
+                              ),
+                            ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                EpisodesHorizontalBar(
+                  show: _showEpisodes,
+                  title: 'E14 Finale',
+                  episodesData: episodesData,
+                  onClose: () => setState(() => _showEpisodes = false),
+                  onEpisodeTap: (index) {
+                    _playEpisode(index);
+                    setState(() => _showEpisodes = false);
+                  },
+                ),
+              ],
+            ),
     );
   }
 }

@@ -12,7 +12,6 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../shared/widgets/app_bar/main_app_bar.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../shared/widgets/documentries_header.dart';
-import '../../../shared/widgets/full_screen_imagescreen.dart';
 import '../../../shared/widgets/genreboxwidget.dart';
 import '../../../shared/widgets/podcast_header.dart';
 import '../../../shared/widgets/trendingshows_header.dart';
@@ -129,7 +128,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppMainBar(
-          width: AppScaler.scaleSize(context, 133),
+          width: AppScaler.scaleSize(context, 120),
           leadingText: "Discover",
           title: "",
           backgroundColor: Colors.transparent,
@@ -157,13 +156,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FullscreenImageScreen(
-                  imagePath: Assets.images.livetvnew.path,
-                  title: "We're Training Heroes of Future!",
-                ),
-          
-                SizedBox(height: AppScaler.scaleHeight(context, 30)),
-          
+                // FullscreenImageScreen(
+                //   imagePath: Assets.images.livetvnew.path,
+                //   title: "We're Training Heroes of Future!",
+                // ),
+                // SizedBox(height: AppScaler.scaleHeight(context, 30)),
                 PoppinsText(
                   context,
                   'Genre',
@@ -171,9 +168,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   fontWeight: PoppinsFontWeightVariant.medium,
                   color: customColors.textColor,
                 ),
-          
+
                 SizedBox(height: AppScaler.scaleHeight(context, 20)),
-          
+
                 SizedBox(
                   height: AppScaler.scaleHeight(context, 56),
                   child: ListView.separated(
@@ -187,23 +184,21 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         showBorder: index == 0,
                         onTap: () {
                           if (index == 1) {
-                            context.pushNamed(
-                              AppRoutes.livepitchesScreen.name,
-                            );
+                            context.pushNamed(AppRoutes.livepitchesScreen.name);
                           }
                         },
                       );
                     },
                   ),
                 ),
-          
+
                 SizedBox(height: AppScaler.scaleHeight(context, 30)),
-          
+
                 TrendingshowsHeader(
                   showLiveTvBadge: false,
                   showMoreInfo: false,
                 ),
-          
+
                 SizedBox(height: AppScaler.scaleHeight(context, 30)),
                 PodcastHeader(),
                 SizedBox(height: AppScaler.scaleHeight(context, 30)),

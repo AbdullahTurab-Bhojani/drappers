@@ -45,7 +45,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     bool canExit = false;
     List menuList = [
       {
-        'title': 'Saved Reel',
+        'title': 'Saved Reels',
         'image': Assets.images.savereelnewicon.path,
         'route': AppRoutes.savedreel.name,
         'color': customColors.textColor,

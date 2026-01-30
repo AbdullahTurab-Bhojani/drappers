@@ -10,18 +10,33 @@ class AuthorizationInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
+    final response = err.response;
+
     if (err.type == DioExceptionType.connectionError ||
         err.type == DioExceptionType.unknown && err.error is SocketException) {
       $showMessage("No Internet Connection", isError: true);
+    } else if (response?.statusCode == 401) {
+      try {
+        final response = await TokenRefreshManager.marketData.handleRefresh(
+          dio: dio,
+          error: err,
+          ref: ref,
+          refreshTokenCallback: () => _refreshMarketToken(ref),
+          getNewToken: () => ref.read(localDataProvider).accessToken ?? '',
+        );
+        if (response != null) {
+          handler.resolve(response);
+          return;
+        }
+      } catch (e) {
+        debugPrint('Token refresh failed: $e');
+      }
     }
     handler.reject(err);
   }
 }
 
-/// Token refresh manager to handle 401 errors and prevent multiple refresh calls
-/// Uses separate instances for different API endpoints
 class TokenRefreshManager {
-  // Separate managers for different market endpoints
   static final TokenRefreshManager marketData = TokenRefreshManager._internal();
   static final TokenRefreshManager marketDataNew =
       TokenRefreshManager._internal();
@@ -44,7 +59,6 @@ class TokenRefreshManager {
 
     if (_isRefreshing) {
       debugPrint('⏳ Token refresh already in progress, queuing request...');
-      // Queue this request and wait for refresh to complete
       final completer = Completer<Response<dynamic>?>();
       _pendingRequests.add(
         _QueuedRequest(
@@ -63,36 +77,30 @@ class TokenRefreshManager {
       final success = await refreshTokenCallback();
 
       if (success) {
-        // Small delay to ensure SharedPreferences has propagated
         await Future.delayed(const Duration(milliseconds: 100));
 
         final newToken = getNewToken();
         debugPrint(
           '✅ Token refresh successful, new token: ${newToken.substring(0, math.min(20, newToken.length))}...',
         );
-
-        // Retry the original request with new token
         final response = await _retryRequest(
           dio,
           error.requestOptions,
           newToken,
         );
-
-        // Process all queued requests
         _processQueuedRequests();
 
         return response;
       } else {
         debugPrint('❌ Token refresh failed - callback returned false');
-        // Clear user session on refresh failure
-        // _clearSessionAndLogout(ref);
+        _clearSessionAndLogout(ref);
         _failQueuedRequests(error);
         return null;
       }
     } catch (e, stackTrace) {
       debugPrint('❌ Token refresh exception: $e');
       debugPrint('Stack trace: $stackTrace');
-      // _clearSessionAndLogout(ref);
+      _clearSessionAndLogout(ref);
       _failQueuedRequests(error);
       return null;
     } finally {
@@ -108,8 +116,6 @@ class TokenRefreshManager {
     debugPrint(
       '🔁 Retrying request: ${requestOptions.method} ${requestOptions.path}',
     );
-
-    // Update the authorization header with new token
     final headers = Map<String, dynamic>.from(requestOptions.headers);
     headers[HttpHeaders.authorizationHeader] = 'Bearer $newToken';
 
@@ -151,15 +157,10 @@ class TokenRefreshManager {
     _pendingRequests.clear();
   }
 
-  // void _clearSessionAndLogout(Ref ref) {
-  //   String password = ref.read(localDataProvider).getPassword1 ?? "";
-  //   String email = ref.read(localDataProvider).getEmail ?? "";
-  //   String rememberMe = ref.read(localDataProvider).getRemamberMe ?? "";
-  //   ref.read(localDataProvider).clearAllData();
-  //   ref.read(localDataProvider).setEmail(email);
-  //   ref.read(localDataProvider).setPassword(password);
-  //   ref.read(localDataProvider).setRememberMe(rememberMe);
-  // }
+  void _clearSessionAndLogout(Ref ref) {
+    ref.read(localDataProvider).clearAllData();
+    ref.read(localDataProvider).setLogout();
+  }
 }
 
 class _QueuedRequest {
@@ -182,18 +183,6 @@ class AuthorizationInterceptorMarket extends Interceptor {
   final Ref ref;
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // final token = ref.read(accessTokenProvider);
-
-    // if (token != null) {
-
-    //   options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-    // }
-
-    super.onRequest(options, handler);
-  }
-
-  @override
   Future<void> onError(
     DioException err,
     ErrorInterceptorHandler handler,
@@ -203,13 +192,48 @@ class AuthorizationInterceptorMarket extends Interceptor {
         err.type == DioExceptionType.unknown && err.error is SocketException) {
       $showMessage("No Internet Connection", isError: true);
     } else if (response?.statusCode == 401) {
-      final newToken = ref.read(localDataProvider).accessToken;
-      if (newToken != null) {
-        ref.read(localDataProvider).setAccessToken(newToken);
+      try {
+        final response = await TokenRefreshManager.marketData.handleRefresh(
+          dio: dio,
+          error: err,
+          ref: ref,
+          refreshTokenCallback: () => _refreshMarketToken(ref),
+          getNewToken: () => ref.read(localDataProvider).accessToken ?? '',
+        );
+        if (response != null) {
+          handler.resolve(response);
+          return;
+        }
+      } catch (e) {
+        debugPrint('Token refresh failed: $e');
       }
-
-      handler.reject(err);
     }
+    handler.reject(err);
+  }
+}
+
+Future<bool> _refreshMarketToken(Ref ref) async {
+  try {
+    final authRepo = ref.read(authRepository1);
+    final localData = ref.read(localDataProvider);
+
+    final refreshToken = localData.refreshToken;
+    if (refreshToken == null) {
+      $showMessage("Session expired. Please login again.", isError: true);
+      return false;
+    }
+
+    final refreshResponse = await authRepo.refreshToken(
+      RefreshTokenModel(refreshToken: refreshToken),
+    );
+
+    localData.setAccessToken(refreshResponse.data.accessToken);
+    localData.setRefreshToken(refreshResponse.data.refreshToken);
+
+    return true;
+  } catch (e) {
+    $showMessage("Session expired. Please login again.", isError: true);
+    return false;
   }
 }
 
@@ -219,18 +243,6 @@ class AuthorizationInterceptorMarketNew extends Interceptor {
   final Ref ref;
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // final token = ref.read(accessTokenProvider);
-
-    // if (token != null) {
-
-    //   options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-    // }
-
-    super.onRequest(options, handler);
-  }
-
-  @override
   Future<void> onError(
     DioException err,
     ErrorInterceptorHandler handler,
@@ -240,12 +252,22 @@ class AuthorizationInterceptorMarketNew extends Interceptor {
         err.type == DioExceptionType.unknown && err.error is SocketException) {
       $showMessage("No Internet Connection", isError: true);
     } else if (response?.statusCode == 401) {
-      final newToken = ref.read(localDataProvider).accessToken;
-      if (newToken != null) {
-        ref.read(localDataProvider).setAccessToken(newToken);
+      try {
+        final response = await TokenRefreshManager.marketData.handleRefresh(
+          dio: dio,
+          error: err,
+          ref: ref,
+          refreshTokenCallback: () => _refreshMarketToken(ref),
+          getNewToken: () => ref.read(localDataProvider).accessToken ?? '',
+        );
+        if (response != null) {
+          handler.resolve(response);
+          return;
+        }
+      } catch (e) {
+        debugPrint('Token refresh failed: $e');
       }
-
-      handler.reject(err);
     }
+    handler.reject(err);
   }
 }

@@ -238,15 +238,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppMainBar(
-            width: AppScaler.scaleSize(context, 285),
+            width: AppScaler.scaleSize(context, 220),
             leadingText: user != null
                 ? (user!.firstName != null &&
                           user!.firstName!.isNotEmpty &&
                           user!.lastName != null &&
                           user!.lastName!.isNotEmpty
-                      ? "Welcome Back ${user!.firstName!} ${user!.lastName!}!"
-                      : "Welcome Back ${user!.fullName}!")
-                : "Welcome Back Guest User!",
+                      ? "Welcome ${user!.firstName!} ${user!.lastName!}!"
+                      : "Welcome ${user!.fullName}!")
+                : "Welcome Guest User!",
             title: "",
             centerTitle: false,
             backgroundColor: Colors.transparent,

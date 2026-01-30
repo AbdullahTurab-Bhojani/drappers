@@ -99,7 +99,7 @@ class _BottomNavigationBarShellState
 
   @override
   Widget build(BuildContext context) {
-    final userAsync = ref.watch(userDataProvider);
+    ref.watch(userDataProvider);
     final customColors = Theme.of(context).extension<AppCustomColors>()!;
     return PopScope(
       canPop: false,

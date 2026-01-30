@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/theme_extension.dart';
 import '../../../../drappers.dart';
@@ -56,6 +57,15 @@ class _ReportContentState extends State<ReportContent> {
     ReportItem(title: "", isValue: false, subtitle: "Something Else"),
   ];
   bool isSelected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +186,7 @@ class _ReportContentState extends State<ReportContent> {
                         },
                         title: "Submit",
                       ),
-                    SizedBox(height: AppScaler.scaleHeight(context, 10)),
+                    SizedBox(height: AppScaler.scaleHeight(context, 40)),
                   ],
                 ),
               ),
