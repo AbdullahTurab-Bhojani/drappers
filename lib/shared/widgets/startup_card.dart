@@ -8,7 +8,7 @@ import '../../../core/extensions/theme_extension.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
-import 'guestloginwidget.dart';
+import '../../../shared/widgets/guestloginwidget.dart';
 
 class StartupCard extends ConsumerStatefulWidget {
   final String imagePath;
@@ -18,7 +18,10 @@ class StartupCard extends ConsumerStatefulWidget {
   final String episodeTitle;
   final int initialCount;
   final VoidCallback onWatchPressed;
-  final VoidCallback? onVotePressed;
+
+  /// ⚠ CHANGE: ye ab Future hona chahiye
+  final Future<void> Function()? onVotePressed;
+
   final VoidCallback? onCardTap;
   final bool isVotedByUser;
 
@@ -41,15 +44,16 @@ class StartupCard extends ConsumerStatefulWidget {
 }
 
 class _StartupCardState extends ConsumerState<StartupCard> {
-  // bool isVoted = false;
   late int count;
   Timer? _timer;
+
+  /// 🔥 LOADER STATE
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
     count = widget.initialCount;
-    // isVoted = widget.isVotedByUser;
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
@@ -74,10 +78,36 @@ class _StartupCardState extends ConsumerState<StartupCard> {
     return CachedNetworkImageProvider(url);
   }
 
+  Future<void> _handleVote() async {
+    if (GuestHelper.isGuest) {
+      GuestHelper.checkGuest(context);
+      return;
+    }
+
+    if (widget.onVotePressed == null) return;
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      await widget.onVotePressed!();
+    } catch (e) {
+      debugPrint("Vote error: $e");
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -94,11 +124,11 @@ class _StartupCardState extends ConsumerState<StartupCard> {
               width: double.infinity,
               height: AppScaler.scaleHeight(context, 215),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
-                color: Colors.grey.shade200, // fallback color
+                color: Colors.grey.shade200,
               ),
               clipBehavior: Clip.hardEdge,
               child: Stack(
@@ -126,7 +156,7 @@ class _StartupCardState extends ConsumerState<StartupCard> {
           ),
 
           Padding(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -136,7 +166,9 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                   fontSize: PoppinsFontSizeVariant.size22,
                   fontWeight: PoppinsFontWeightVariant.medium,
                 ),
+
                 SizedBox(height: AppScaler.scaleHeight(context, 2)),
+
                 PoppinsText(
                   context,
                   widget.subtitle,
@@ -144,7 +176,9 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                   fontWeight: PoppinsFontWeightVariant.regular,
                   color: customColors.subtextColor,
                 ),
+
                 SizedBox(height: AppScaler.scaleHeight(context, 10)),
+
                 PoppinsText(
                   context,
                   widget.description,
@@ -152,7 +186,9 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                   fontWeight: PoppinsFontWeightVariant.regular,
                   color: customColors.subtextColor,
                 ),
+
                 SizedBox(height: AppScaler.scaleHeight(context, 15)),
+
                 PoppinsText(
                   context,
                   widget.episodeTitle,
@@ -160,6 +196,7 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                   fontWeight: PoppinsFontWeightVariant.regular,
                   color: customColors.textColor,
                 ),
+
                 SizedBox(height: AppScaler.scaleHeight(context, 20)),
 
                 Row(
@@ -174,30 +211,23 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                         ),
                         onPressed: widget.onWatchPressed,
                         title: 'Watch Episode',
-                        buttonSize: Size(196, 52),
-                        suffixIcon: SizedBox(),
+                        buttonSize: Size(
+                          AppScaler.scaleSize(context, 196),
+                          AppScaler.scaleHeight(context, 52),
+                        ),
+                        suffixIcon: const SizedBox(),
                       ),
                     ),
+
                     SizedBox(width: AppScaler.scaleSize(context, 10)),
 
+                    /// 🔥 VOTE BUTTON WITH LOADER
                     SizedBox(
-                      width: 160,
-                      height: 52,
+                      width: AppScaler.scaleSize(context, 150),
+                      height: AppScaler.scaleHeight(context, 52),
                       child: OutlinedButton.icon(
-                        onPressed: () {
-                          if (GuestHelper.isGuest) {
-                            GuestHelper.checkGuest(context);
-                            return;
-                          }
+                        onPressed: isLoading ? null : _handleVote,
 
-                          // Optimistic UI toggle
-                          // setState(() {
-                          //   isVoted = !isVoted;
-                          // });
-
-                          if (widget.onVotePressed != null)
-                            widget.onVotePressed!();
-                        },
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(
                             color: widget.isVotedByUser
@@ -208,31 +238,37 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: AppScaler.scaleHeight(context, 12),
-                          ),
                           backgroundColor: widget.isVotedByUser
                               ? Colors.red.withOpacity(0.1)
                               : Colors.transparent,
                         ),
-                        icon: Icon(
-                          widget.isVotedByUser
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          size: 24,
-                          color: widget.isVotedByUser
-                              ? Colors.red
-                              : customColors.textColor,
-                        ),
-                        label: PoppinsText(
-                          context,
-                          widget.isVotedByUser ? 'Voted' : 'Vote',
-                          fontSize: PoppinsFontSizeVariant.size16,
-                          fontWeight: PoppinsFontWeightVariant.medium,
-                          color: widget.isVotedByUser
-                              ? Colors.red
-                              : AppColors.wDark,
-                        ),
+
+                        icon: isLoading
+                            ? SizedBox()
+                            : Icon(
+                                widget.isVotedByUser
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: widget.isVotedByUser
+                                    ? Colors.red
+                                    : customColors.textColor,
+                              ),
+
+                        label: isLoading
+                            ? SizedBox(
+                                width: AppScaler.scaleSize(context, 20),
+                                height: AppScaler.scaleHeight(context, 20),
+                                child: const LoadingWidget(color: Colors.red),
+                              )
+                            : PoppinsText(
+                                context,
+                                widget.isVotedByUser ? 'Voted' : 'Vote',
+                                fontSize: PoppinsFontSizeVariant.size16,
+                                fontWeight: PoppinsFontWeightVariant.medium,
+                                color: widget.isVotedByUser
+                                    ? Colors.red
+                                    : AppColors.wDark,
+                              ),
                       ),
                     ),
                   ],

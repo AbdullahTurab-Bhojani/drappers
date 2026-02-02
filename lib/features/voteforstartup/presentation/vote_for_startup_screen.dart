@@ -24,11 +24,6 @@ class VoteForStartupScreen extends ConsumerStatefulWidget {
 class _VoteForStartupScreenState extends ConsumerState<VoteForStartupScreen> {
   Future<void> votedByUser(int id) async {
     try {
-      // final repo = ref.read(startupRepositoryProvider);
-      // await repo.voteStartup(id);
-
-      // ref.refresh(startupListProvider(''));
-      // ref.refresh(startupDetailProvider(id));
       await ref.read(startupVoteProvider(id))();
     } catch (e) {
       ScaffoldMessenger.of(
