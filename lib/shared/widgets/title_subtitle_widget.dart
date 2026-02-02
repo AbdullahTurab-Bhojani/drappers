@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/extensions/theme_extension.dart';
 import '../../drappers.dart';
 import '../../core/theme/app_scalar.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class TitleSubtitleWidget extends StatelessWidget {
   final String title;
@@ -33,12 +35,31 @@ class TitleSubtitleWidget extends StatelessWidget {
             fontWeight: PoppinsFontWeightVariant.medium,
           ),
         ),
-        PoppinsText(
-          context,
-          subtitle,
-          color: colors.textColor,
-          fontSize: PoppinsFontSizeVariant.size12,
-          fontWeight: PoppinsFontWeightVariant.regular,
+        Html(
+          data: subtitle,
+          onLinkTap: (url, attributes, element) async {
+            if (url == null) return;
+
+            final uri = Uri.parse(url);
+
+            if (uri.scheme == 'mailto') {
+              await launchUrl(uri);
+            } else if (uri.scheme == 'tel') {
+              await launchUrl(uri);
+            } else {
+              await launchUrl(uri, mode: LaunchMode.externalApplication);
+            }
+          },
+          style: {
+            "p": Style(
+              fontFamily: 'Poppins',
+              fontSize: FontSize(13),
+              fontWeight: FontWeight.w400,
+              color: colors.textColor,
+              margin: Margins.zero,
+            ),
+            "body": Style(margin: Margins.zero),
+          },
         ),
       ],
     );

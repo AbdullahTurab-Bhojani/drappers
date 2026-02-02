@@ -40,6 +40,11 @@
 	<string>This app needs camera access to take photos.</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+  	<string>https</string>
+  	<string>http</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
