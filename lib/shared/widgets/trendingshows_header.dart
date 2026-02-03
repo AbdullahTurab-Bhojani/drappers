@@ -7,6 +7,7 @@ import '../../core/extensions/theme_extension.dart';
 import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import 'cardwidget/card_widget.dart';
+import 'guestloginwidget.dart';
 import 'more_info_bottom_sheet.dart';
 
 class TrendingshowsHeader extends StatefulWidget {
@@ -63,7 +64,7 @@ class _TrendingshowsHeaderState extends State<TrendingshowsHeader> {
                 if (_betterPlayerController != null) {
                   _betterPlayerController!.pause();
                 }
-                context.pushNamed('trendingshow');
+                context.pushNamed(AppRoutes.trendingshow.name);
               },
               title: "View More",
             ),
@@ -98,8 +99,16 @@ class _TrendingshowsHeaderState extends State<TrendingshowsHeader> {
                   }
 
                   if (index == 0) {
+                    if (GuestHelper.isGuest) {
+                      GuestHelper.checkGuest(context);
+                      return;
+                    }
                     context.pushNamed(AppRoutes.newliveScreen.name);
                   } else {
+                    if (GuestHelper.isGuest) {
+                      GuestHelper.checkGuest(context);
+                      return;
+                    }
                     context.pushNamed(AppRoutes.contentDetail.name);
                   }
                 },

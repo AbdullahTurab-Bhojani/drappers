@@ -82,6 +82,10 @@ class _FullscreenImageScreenState extends State<FullscreenImageScreen> {
                         height: AppScaler.scaleHeight(context, 45),
                         child: AppButton(
                           onPressed: () {
+                            if (GuestHelper.isGuest) {
+                              GuestHelper.checkGuest(context);
+                              return;
+                            }
                             context.pushNamed(AppRoutes.contentDetail.name);
                           },
                           title: 'Play',

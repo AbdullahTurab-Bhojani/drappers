@@ -259,7 +259,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     GuestHelper.checkGuest(context);
                     return;
                   }
-                  context.pushNamed('searchscreen');
+                  context.pushNamed(AppRoutes.searchscreen.name);
                 },
                 child: Image.asset(
                   Assets.images.searchstokeicon.path,
@@ -280,7 +280,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     GuestHelper.checkGuest(context);
                     return;
                   }
-                  context.pushNamed('notificationScreen');
+                  context.pushNamed(AppRoutes.notificationScreen.name);
                 },
                 child: Stack(
                   children: [
@@ -355,7 +355,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         GuestHelper.checkGuest(context);
                         return;
                       }
-                      context.pushNamed('applyPitch');
+                      context.pushNamed(AppRoutes.applyPitch.name);
                     },
                   ),
                   SizedBox(height: AppScaler.scaleHeight(context, 30)),
@@ -369,10 +369,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     buttonBorderWidth: 2,
                     buttonGradient: [Color(0xff582983), Color(0xff582983)],
                     onTap: () {
+                      if (GuestHelper.isGuest) {
+                        GuestHelper.checkGuest(context);
+                        return;
+                      }
                       if (_betterPlayerController != null) {
                         _betterPlayerController!.pause();
                       }
-                      context.pushNamed('voteForStartupScreen');
+                      context.pushNamed(AppRoutes.voteForStartupScreen.name);
                     },
                   ),
                   SizedBox(height: AppScaler.scaleHeight(context, 30)),

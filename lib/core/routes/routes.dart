@@ -92,6 +92,16 @@ enum AppRoutes {
     AppRoutes.profile,
   ];
 
+  static List<AppRoutes> guestAllowedRoutes = [
+    AppRoutes.home,
+    AppRoutes.reelWidget,
+    AppRoutes.documentries,
+    AppRoutes.trendingshow,
+    AppRoutes.continueWatchingViewmore,
+    AppRoutes.podcasts,
+    AppRoutes.contentDetail,
+  ];
+
   static bool isPublicRoute(GoRouterState state) {
     final fullPath = state.fullPath;
 

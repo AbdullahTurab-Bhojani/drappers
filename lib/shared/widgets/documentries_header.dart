@@ -57,7 +57,7 @@ class _DocumentriesHeaderState extends State<DocumentriesHeader> {
                 if (_betterPlayerController != null) {
                   _betterPlayerController!.pause();
                 }
-                context.pushNamed('documentries');
+                context.pushNamed(AppRoutes.documentries.name);
               },
               title: "View More",
             ),

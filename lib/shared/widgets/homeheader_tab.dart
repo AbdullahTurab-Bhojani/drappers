@@ -42,16 +42,16 @@ class _HomeheaderTabState extends State<HomeheaderTab> {
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
+              if (GuestHelper.isGuest) {
+                GuestHelper.checkGuest(context);
+                return;
+              }
               if (index == 0) {
                 context.pushNamed(AppRoutes.livepitchesScreen.name);
               }
               if (_betterPlayerController != null &&
                   _betterPlayerController!.isVideoInitialized() != null) {
                 _betterPlayerController!.pause();
-              }
-              if (GuestHelper.isGuest) {
-                GuestHelper.checkGuest(context);
-                return;
               }
             },
             child: Container(

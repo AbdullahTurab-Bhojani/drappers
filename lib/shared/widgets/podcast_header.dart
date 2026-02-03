@@ -32,7 +32,7 @@ class _PodcastHeaderState extends State<PodcastHeader> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
- 
+
     return Column(
       children: [
         Row(
@@ -57,7 +57,7 @@ class _PodcastHeaderState extends State<PodcastHeader> {
                 if (_betterPlayerController != null) {
                   _betterPlayerController!.pause();
                 }
-                context.pushNamed('podcasts');
+                context.pushNamed(AppRoutes.podcasts.name);
               },
 
               title: "View More",
@@ -87,6 +87,5 @@ class _PodcastHeaderState extends State<PodcastHeader> {
         ),
       ],
     );
- 
   }
 }

@@ -14,6 +14,7 @@ final routerConfigProvider = Provider((ref) {
       bool isLogin = accessToken?.isNotEmpty ?? false;
       bool isPublic = AppRoutes.isPublicRoute(state);
       bool isGuest = GuestHelper.isGuest;
+      final String? fullPath = state.fullPath;
 
       debugPrint(
         "🔁 Redirect : isLogin: $isLogin | isPublic: $isPublic | isGuest: $isGuest | path: ${state.fullPath}",
@@ -22,13 +23,15 @@ final routerConfigProvider = Provider((ref) {
       if (!isPublic && !isLogin && !isGuest) {
         return AppRoutes.splashScreen.path;
       }
-
-      // Guest can access home only
-      if (isGuest && state.path != AppRoutes.home.path) {
-        return AppRoutes.home.path;
+      if (isGuest && fullPath != null) {
+        final bool isGuestAllowed = AppRoutes.guestAllowedRoutes.any(
+          (route) => fullPath.startsWith(route.path),
+        );
+        if (!isGuestAllowed) {
+          return AppRoutes.home.path;
+        }
       }
 
-      // Otherwise, allow navigation
       return null;
     },
 

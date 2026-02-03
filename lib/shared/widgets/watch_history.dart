@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
+import 'guestloginwidget.dart';
 import 'popupmenuitem/popupmenu_widget.dart';
 
 class WatchHistory extends StatefulWidget {
@@ -32,10 +33,10 @@ class _WatchHistoryState extends State<WatchHistory> {
       behavior: HitTestBehavior.opaque,
 
       onTap: () {
-        // if (GuestHelper.isGuest) {
-        //   GuestHelper.checkGuest(context);
-        //   return;
-        // }
+        if (GuestHelper.isGuest) {
+          GuestHelper.checkGuest(context);
+          return;
+        }
         context.pushNamed(AppRoutes.videoScreen.name);
       },
       child: Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/extensions/theme_extension.dart';
 import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
@@ -54,6 +55,9 @@ class TrendingGrid extends StatelessWidget {
                   index: index,
                   showMenuOnly: true,
                   showLiveTvBadge: false,
+                  onTap: () {
+                    context.pushNamed(AppRoutes.contentDetail.name);
+                  },
                 );
               },
             );

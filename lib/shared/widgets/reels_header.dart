@@ -52,34 +52,21 @@ class _ReelsHeaderState extends State<ReelsHeader> {
               fontWeight: PoppinsFontWeightVariant.medium,
               color: customColors.textColor,
             ),
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () {
+            AppButton(
+              buttonSize: Size(80, 25),
+              color: Colors.transparent,
+              borderColor: customColors.textColor.withOpacity(0.5),
+              borderWidth: 1,
+              fontSize: PoppinsFontSizeVariant.size12,
+              fontWeight: PoppinsFontWeightVariant.regular,
+              border: true,
+              onPressed: () {
                 if (_betterPlayerController != null) {
                   _betterPlayerController!.pause();
                 }
-                if (GuestHelper.isGuest) {
-                  GuestHelper.checkGuest(context);
-                  return;
-                }
-                context.pushNamed('reelWidget');
+                context.pushNamed(AppRoutes.reelWidget.name);
               },
-              child: AppButton(
-                buttonSize: Size(80, 25),
-                color: Colors.transparent,
-                borderColor: customColors.textColor.withOpacity(0.5),
-                borderWidth: 1,
-                fontSize: PoppinsFontSizeVariant.size12,
-                fontWeight: PoppinsFontWeightVariant.regular,
-                border: true,
-                onPressed: () {
-                  if (_betterPlayerController != null) {
-                    _betterPlayerController!.pause();
-                  }
-                  context.pushNamed('reelWidget');
-                },
-                title: "View More",
-              ),
+              title: "View More",
             ),
           ],
         ),

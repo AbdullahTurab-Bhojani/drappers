@@ -7,7 +7,6 @@ import '../../core/extensions/theme_extension.dart';
 import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
-import 'guestloginwidget.dart';
 import 'watch_history.dart';
 
 class ContinuewatchingHeader extends StatefulWidget {
@@ -51,11 +50,7 @@ class _ContinuewatchingHeaderState extends State<ContinuewatchingHeader> {
                 if (_betterPlayerController != null) {
                   _betterPlayerController!.pause();
                 }
-                if (GuestHelper.isGuest) {
-                  GuestHelper.checkGuest(context);
-                  return;
-                }
-                context.pushNamed('continueWatchingViewmore');
+                context.pushNamed(AppRoutes.continueWatchingViewmore.name);
               },
               title: "View More",
               buttonSize: Size(80, 25),

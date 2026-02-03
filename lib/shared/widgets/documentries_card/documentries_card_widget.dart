@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
+import '../guestloginwidget.dart';
 import '../popupmenuitem/popupmenu_widget.dart';
 
 class DocumentriesCardWidget extends StatefulWidget {
@@ -24,7 +25,6 @@ class _DocumentriesCardWidgetState extends State<DocumentriesCardWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-
       onTap: () {
         context.pushNamed(AppRoutes.contentDetail.name);
       },

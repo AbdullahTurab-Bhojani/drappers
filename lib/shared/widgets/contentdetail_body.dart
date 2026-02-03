@@ -4,6 +4,7 @@ import '../../core/extensions/theme_extension.dart';
 import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
+import 'guestloginwidget.dart';
 import 'reelcard/reelcard_widget.dart';
 import 'trending_grid.dart';
 
@@ -92,7 +93,13 @@ class _ContentDetailBodyState extends State<ContentDetailBody> {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () => widget.onLike(!widget.isLiked),
+                      onTap: () {
+                        if (GuestHelper.isGuest) {
+                          GuestHelper.checkGuest(context);
+                          return;
+                        }
+                        widget.onLike(!widget.isLiked);
+                      },
                       child: Image.asset(
                         widget.isLiked
                             ? Assets.images.like.path

@@ -104,6 +104,10 @@ class _ContentDetailState extends State<ContentDetail>
                             GestureDetector(
                               behavior: HitTestBehavior.opaque,
                               onTap: () {
+                                if (GuestHelper.isGuest) {
+                                  GuestHelper.checkGuest(context);
+                                  return;
+                                }
                                 context.pushNamed(AppRoutes.videoScreen.name);
                               },
                               child: Container(
@@ -244,6 +248,10 @@ class _ContentDetailState extends State<ContentDetail>
                           height: AppScaler.scaleHeight(context, 45),
                           child: AppButton(
                             onPressed: () {
+                              if (GuestHelper.isGuest) {
+                                GuestHelper.checkGuest(context);
+                                return;
+                              }
                               context.pushNamed(AppRoutes.videoScreen.name);
                             },
                             title: 'Play',
