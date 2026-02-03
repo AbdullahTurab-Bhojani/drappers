@@ -53,7 +53,7 @@ class SocialAuthService {
     }
   }
 
-  Future<bool> onSocialAuthApi(SocialDTO socialDto) async {
+  Future<Map<String, dynamic>> onSocialAuthApi(SocialDTO socialDto) async {
     try {
       final repo = ref.read(authRepository);
 
@@ -63,8 +63,9 @@ class SocialAuthService {
         final googleUserModel = GoogleSocialModel.fromJson(response);
         final storage = ref.read(localDataProvider);
         final data = googleUserModel.data;
-        final accessToken = data!.accessToken;
-        final refreshToken = data.refreshToken;
+
+        final accessToken = data?.accessToken ?? '';
+        final refreshToken = data?.refreshToken ?? '';
 
         if (accessToken.isNotEmpty) {
           await storage.setAccessToken(accessToken);
@@ -74,7 +75,7 @@ class SocialAuthService {
           await storage.setRefreshToken(refreshToken);
         }
 
-        final user = data.user;
+        final user = data?.user;
         if (user != null) {
           final userData = UserData(
             keycloakUserId: user.sub,
@@ -89,12 +90,15 @@ class SocialAuthService {
           await storage.saveUser(userData);
           debugPrint('User saved: ${user.toJson()}');
         }
-
-        return googleUserModel.isSuccess;
+        return {
+          "success": googleUserModel.isSuccess,
+          "message": googleUserModel.message,
+        };
       }
     } catch (e, st) {
       debugPrint("Social Auth API Error: $e\n$st");
+      return {"success": false, "message": e.toString()};
     }
-    return false;
+    return {"success": false, "message": "Unknown error occurred"};
   }
 }

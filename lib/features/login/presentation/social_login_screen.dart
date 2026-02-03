@@ -66,80 +66,79 @@ class _SocialLoginScreenState extends ConsumerState<SocialLoginScreen> {
 
                 AppButton(
                   onPressed: () async {
-                    if (!_isGoogleLoading) {
-                      setState(() => _isGoogleLoading = true);
+                    if (_isGoogleLoading) return;
 
-                      final socialAuthService = ref.read(
-                        socialAuthServiceProvider,
-                      );
+                    setState(() => _isGoogleLoading = true);
 
-                      Map<String, dynamic>? googleData;
-                      try {
-                        googleData = await socialAuthService.googleSignIn();
-                        if (googleData == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Google Sign-In failed'),
-                            ),
-                          );
-                          setState(() => _isGoogleLoading = false);
-                          return;
-                        }
-                      } catch (e, st) {
-                        debugPrint('Google Sign-In error: $e\n$st');
+                    final socialAuthService = ref.read(
+                      socialAuthServiceProvider,
+                    );
+
+                    Map<String, dynamic>? googleData;
+                    try {
+                      googleData = await socialAuthService.googleSignIn();
+                      if (googleData == null) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text(
-                              'Google Sign-In encountered an error',
-                            ),
+                            content: Text('Google Sign-In failed'),
                           ),
                         );
                         setState(() => _isGoogleLoading = false);
                         return;
                       }
-
-                      final socialDto = SocialDTO(
-                        subjectToken: googleData['subject_token'] ?? '',
-                        subjectIssuer: googleData['subject_issuer'] ?? '',
-                        email: googleData['subject_email'] ?? '',
+                    } catch (e, st) {
+                      debugPrint('Google Sign-In error: $e\n$st');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Google Sign-In encountered an error'),
+                        ),
                       );
-
-                      bool success = false;
-                      try {
-                        success = await socialAuthService.onSocialAuthApi(
-                          socialDto,
-                        );
-                      } catch (e, st) {
-                        debugPrint('Backend Social Auth error: $e\n$st');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Social login API error'),
-                          ),
-                        );
-                        setState(() => _isGoogleLoading = false);
-                        return;
-                      }
-
-                      if (!context.mounted) return;
 
                       setState(() => _isGoogleLoading = false);
+                      return;
+                    }
 
-                      if (success) {
-                        context.go('/home');
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: PoppinsText(
-                              context,
-                              'Social login failed',
-                            ),
+                    final socialDto = SocialDTO(
+                      subjectToken: googleData['subject_token'] ?? '',
+                      subjectIssuer: googleData['subject_issuer'] ?? '',
+                      email: googleData['subject_email'] ?? '',
+                    );
+
+                    Map<String, dynamic> result;
+
+                    try {
+                      result = await socialAuthService.onSocialAuthApi(
+                        socialDto,
+                      );
+                    } catch (e, st) {
+                      debugPrint('Backend Social Auth error: $e\n$st');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Social login API error')),
+                      );
+
+                      setState(() => _isGoogleLoading = false);
+                      return;
+                    }
+
+                    if (!context.mounted) return;
+
+                    setState(() => _isGoogleLoading = false);
+
+                    if (result["success"] == true) {
+                      context.go('/home');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: PoppinsText(
+                            context,
+                            result["message"] ?? "Social login failed",
                           ),
-                        );
-                      }
+                        ),
+                      );
                     }
                   },
-                  title: _isGoogleLoading ? '' : 'Login with Google',
 
+                  title: _isGoogleLoading ? '' : 'Login with Google',
                   prefixIcon: _isGoogleLoading
                       ? LoadingWidget(
                           color: AppColors.buttoncolor.first,
