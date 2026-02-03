@@ -26,10 +26,34 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
   bool _isPlayerInitialized = false;
   bool _isMuted = true;
   bool _showPlayIcon = true;
+  String?
+  _initializedUrl; // ✅ track karne ke liye kaunsa URL already initialized hai
+
+  @override
+  void initState() {
+    super.initState();
+
+    // ✅ Provider listener: data aate hi player init karenge sirf ek dafa
+    ref.listenManual(getStartupDetailProvider(widget.startupId), (
+      previous,
+      next,
+    ) {
+      next.whenData((startup) {
+        if (startup != null &&
+            startup.videoLink.isNotEmpty &&
+            _initializedUrl != startup.videoLink) {
+          _initializedUrl = startup.videoLink;
+          _initPlayer(startup.videoLink);
+        }
+      });
+    });
+  }
 
   void _initPlayer(String url) {
     _playerController = BetterPlayerController(
       BetterPlayerConfiguration(
+        allowedScreenSleep: false,
+        handleLifecycle: true,
         autoPlay: true,
         looping: true,
         fit: BoxFit.cover,
@@ -47,9 +71,21 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
     _isPlayerInitialized = true;
 
     Future.delayed(const Duration(seconds: 20), () {
-      if (mounted) {
-        _playerController.pause();
-        setState(() => _showPlayIcon = true);
+      if (!mounted || !_isPlayerInitialized) return;
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _isPlayerInitialized) {
+          _playerController.pause();
+          setState(() => _showPlayIcon = true);
+        }
+      });
+    });
+    _playerController.addEventsListener((event) {
+      if (event.betterPlayerEventType == BetterPlayerEventType.exception) {
+        if (!mounted || !_isPlayerInitialized) return;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) setState(() => _isPlayerInitialized = false);
+        });
       }
     });
   }
@@ -114,10 +150,6 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
               return const Center(child: Text("Startup not found"));
             }
 
-            if (!_isPlayerInitialized) {
-              _initPlayer(startup.videoLink);
-            }
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -137,7 +169,9 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
                         SizedBox(
                           width: double.infinity,
                           height: AppScaler.scaleHeight(context, 215),
-                          child: startup.videoLink.isNotEmpty
+                          child:
+                              startup.videoLink.isNotEmpty &&
+                                  _isPlayerInitialized
                               ? BetterPlayer(controller: _playerController)
                               : Image.network(
                                   startup.thumbnailUrl ?? '',
@@ -156,23 +190,6 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
                             height: AppScaler.scaleHeight(context, 215),
                             color: Colors.black.withOpacity(0.35),
                           ),
-                        if (startup.videoLink.isNotEmpty)
-                          Positioned(
-                            bottom: AppScaler.scaleHeight(context, 10),
-                            right: AppScaler.scaleSize(context, 10),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _isMuted = !_isMuted;
-                                  _playerController.setVolume(_isMuted ? 0 : 1);
-                                });
-                              },
-                              child: Image.asset(
-                                Assets.images.muteicon.path,
-                                width: 22,
-                              ),
-                            ),
-                          ),
                         if (_showPlayIcon && startup.videoLink.isNotEmpty)
                           Positioned(
                             top: 0,
@@ -188,6 +205,24 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
                                 Icons.play_circle_fill,
                                 size: 60,
                                 color: Colors.white.withOpacity(0.85),
+                              ),
+                            ),
+                          ),
+                        if (startup.videoLink.isNotEmpty)
+                          Positioned(
+                            bottom: AppScaler.scaleHeight(context, 10),
+                            right: AppScaler.scaleSize(context, 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _isMuted = !_isMuted;
+                                  _playerController.setVolume(_isMuted ? 0 : 1);
+                                });
+                              },
+                              child: Icon(
+                                _isMuted ? Icons.volume_off : Icons.volume_up,
+                                color: Colors.white,
+                                size: 22,
                               ),
                             ),
                           ),

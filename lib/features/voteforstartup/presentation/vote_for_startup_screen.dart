@@ -152,8 +152,9 @@ class _VoteForStartupScreenState extends ConsumerState<VoteForStartupScreen> {
                             bottom: AppScaler.scaleHeight(context, 16),
                           ),
                           child: StartupCard(
+                            videoPath: startup.videoLink,
                             isVotedByUser: startup.isLikedByUser ?? false,
-                            imagePath: startup.thumbnailUrl ?? '',
+                            thumbnail: startup.thumbnailUrl ?? '',
                             title: startup.startupTitle,
                             subtitle: startup.startupSubTitle,
                             description: startup.aboutStartup,

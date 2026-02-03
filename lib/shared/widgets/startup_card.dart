@@ -1,6 +1,7 @@
 // ignore_for_file: curly_braces_in_flow_control_structures, deprecated_member_use
 
 import 'dart:async';
+import 'package:better_player_plus/better_player_plus.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,23 +12,22 @@ import '../../../gen/assets.gen.dart';
 import '../../../shared/widgets/guestloginwidget.dart';
 
 class StartupCard extends ConsumerStatefulWidget {
-  final String imagePath;
+  final String videoPath;
+  final String? thumbnail;
   final String title;
   final String subtitle;
   final String description;
   final String episodeTitle;
   final int initialCount;
   final VoidCallback onWatchPressed;
-
-  /// ⚠ CHANGE: ye ab Future hona chahiye
   final Future<void> Function()? onVotePressed;
-
   final VoidCallback? onCardTap;
   final bool isVotedByUser;
 
   const StartupCard({
     super.key,
-    required this.imagePath,
+    required this.videoPath,
+    required this.thumbnail,
     required this.title,
     required this.subtitle,
     required this.description,
@@ -47,7 +47,10 @@ class _StartupCardState extends ConsumerState<StartupCard> {
   late int count;
   Timer? _timer;
 
-  /// 🔥 LOADER STATE
+  late BetterPlayerController _playerController;
+  bool _isMuted = true;
+  bool _isInitialized = false;
+  bool _showPlayIcon = true;
   bool isLoading = false;
 
   @override
@@ -56,25 +59,60 @@ class _StartupCardState extends ConsumerState<StartupCard> {
     count = widget.initialCount;
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        count += 1;
-      });
+      if (!mounted) return;
+      setState(() => count += 1);
+    });
+
+    // Setup BetterPlayer
+    BetterPlayerDataSource dataSource = BetterPlayerDataSource(
+      BetterPlayerDataSourceType.network,
+      widget.videoPath,
+    );
+
+    _playerController = BetterPlayerController(
+      BetterPlayerConfiguration(
+        autoPlay: true,
+        looping: false,
+        controlsConfiguration: const BetterPlayerControlsConfiguration(
+          showControls: false,
+        ),
+        fit: BoxFit.cover,
+      ),
+      betterPlayerDataSource: dataSource,
+    );
+
+    _playerController.setVolume(0);
+
+    _playerController.addEventsListener((event) {
+      if (event.betterPlayerEventType == BetterPlayerEventType.initialized) {
+        if (!mounted) return;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+          setState(() => _isInitialized = true);
+        });
+      }
+      if (event.betterPlayerEventType == BetterPlayerEventType.exception) {
+        if (!mounted) return;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+          setState(() => _isInitialized = false);
+        });
+      }
     });
   }
 
   @override
   void dispose() {
     _timer?.cancel();
+    _playerController.dispose();
     super.dispose();
   }
 
   ImageProvider getImageProvider(String? url) {
-    if (url == null || url.isEmpty) {
+    if (url == null || url.isEmpty)
       return const CachedNetworkImageProvider(
         'https://mis.ihc.gov.pk/img/no-video.jpg',
       );
-    }
-
     return CachedNetworkImageProvider(url);
   }
 
@@ -86,20 +124,16 @@ class _StartupCardState extends ConsumerState<StartupCard> {
 
     if (widget.onVotePressed == null) return;
 
-    setState(() {
-      isLoading = true;
-    });
+    if (!mounted) return;
+    setState(() => isLoading = true);
 
     try {
       await widget.onVotePressed!();
     } catch (e) {
       debugPrint("Vote error: $e");
     } finally {
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
-      }
+      if (!mounted) return;
+      setState(() => isLoading = false);
     }
   }
 
@@ -123,6 +157,7 @@ class _StartupCardState extends ConsumerState<StartupCard> {
             child: Container(
               width: double.infinity,
               height: AppScaler.scaleHeight(context, 215),
+              clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -130,31 +165,80 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                 ),
                 color: Colors.grey.shade200,
               ),
-              clipBehavior: Clip.hardEdge,
               child: Stack(
                 children: [
-                  CachedNetworkImage(
-                    imageUrl: widget.imagePath,
-                    fit: BoxFit.cover,
+                  _isInitialized
+                      ? SizedBox(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: BetterPlayer(controller: _playerController),
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: widget.thumbnail ?? '',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          placeholder: (_, __) => Center(
+                            child: LoadingWidget(
+                              color: AppColors.buttoncolor.first,
+                            ),
+                          ),
+                          errorWidget: (_, __, ___) => Image.network(
+                            'https://mis.ihc.gov.pk/img/no-video.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+
+                  // Dark overlay
+                  Container(
                     width: double.infinity,
                     height: double.infinity,
-                    placeholder: (context, url) => Center(
-                      child: LoadingWidget(color: AppColors.buttoncolor.first),
-                    ),
-                    errorWidget: (context, url, error) => Image.network(
-                      'https://mis.ihc.gov.pk/img/no-video.jpg',
-                    ),
+                    color: Colors.black.withOpacity(0.25),
                   ),
-                  Positioned(
-                    bottom: AppScaler.scaleHeight(context, 10),
-                    right: AppScaler.scaleSize(context, 10),
-                    child: Image.asset(Assets.images.muteicon.path),
-                  ),
+
+                  // Play icon overlay
+                  if (_showPlayIcon)
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          if (widget.onCardTap != null) widget.onCardTap!();
+
+                          if (!mounted) return;
+                          setState(() => _showPlayIcon = false);
+                        },
+                        child: Icon(
+                          Icons.play_circle_fill,
+                          color: Colors.white.withOpacity(0.85),
+                          size: 60,
+                        ),
+                      ),
+                    ),
+                  _isInitialized
+                      ? Positioned(
+                          bottom: AppScaler.scaleHeight(context, 10),
+                          right: AppScaler.scaleSize(context, 10),
+                          child: GestureDetector(
+                            onTap: () {
+                              if (!mounted) return;
+                              setState(() {
+                                _isMuted = !_isMuted;
+                                _playerController.setVolume(_isMuted ? 0 : 1);
+                              });
+                            },
+                            child: Icon(
+                              _isMuted ? Icons.volume_off : Icons.volume_up,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                          ),
+                        )
+                      : SizedBox(),
                 ],
               ),
             ),
           ),
 
+          // Info Section
           Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
@@ -166,9 +250,7 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                   fontSize: PoppinsFontSizeVariant.size22,
                   fontWeight: PoppinsFontWeightVariant.medium,
                 ),
-
                 SizedBox(height: AppScaler.scaleHeight(context, 2)),
-
                 PoppinsText(
                   context,
                   widget.subtitle,
@@ -176,9 +258,7 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                   fontWeight: PoppinsFontWeightVariant.regular,
                   color: customColors.subtextColor,
                 ),
-
                 SizedBox(height: AppScaler.scaleHeight(context, 10)),
-
                 PoppinsText(
                   context,
                   widget.description,
@@ -186,9 +266,7 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                   fontWeight: PoppinsFontWeightVariant.regular,
                   color: customColors.subtextColor,
                 ),
-
                 SizedBox(height: AppScaler.scaleHeight(context, 15)),
-
                 PoppinsText(
                   context,
                   widget.episodeTitle,
@@ -196,9 +274,7 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                   fontWeight: PoppinsFontWeightVariant.regular,
                   color: customColors.textColor,
                 ),
-
                 SizedBox(height: AppScaler.scaleHeight(context, 20)),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -218,16 +294,12 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                         suffixIcon: const SizedBox(),
                       ),
                     ),
-
                     SizedBox(width: AppScaler.scaleSize(context, 10)),
-
-                    /// 🔥 VOTE BUTTON WITH LOADER
                     SizedBox(
                       width: AppScaler.scaleSize(context, 150),
                       height: AppScaler.scaleHeight(context, 52),
                       child: OutlinedButton.icon(
                         onPressed: isLoading ? null : _handleVote,
-
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(
                             color: widget.isVotedByUser
@@ -242,7 +314,6 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                               ? Colors.red.withOpacity(0.1)
                               : Colors.transparent,
                         ),
-
                         icon: isLoading
                             ? SizedBox()
                             : Icon(
@@ -253,7 +324,6 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                                     ? Colors.red
                                     : customColors.textColor,
                               ),
-
                         label: isLoading
                             ? SizedBox(
                                 width: AppScaler.scaleSize(context, 20),
