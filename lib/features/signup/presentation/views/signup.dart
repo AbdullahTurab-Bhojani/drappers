@@ -47,7 +47,6 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   Future<void> onSubmit() async {
     if (!rememberMe) {
-      if (!mounted) return;
       Fluttertoast.showToast(
         msg: "Please accept terms & conditions to sign up.",
         toastLength: Toast.LENGTH_SHORT,
@@ -59,24 +58,19 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       return;
     }
 
-    if (!(_formKey.currentState?.validate() ?? false)) {
-      return;
-    }
+    if (!(_formKey.currentState?.validate() ?? false)) return;
 
     if (_passwordController.text != _confirmPasswordController.text) {
       Fluttertoast.showToast(
         msg: "Password and Confirm Password do not match",
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.white,
-        textColor: Colors.black,
-        fontSize: 16.0,
       );
       return;
     }
 
     final phoneNumber =
         '+${selectedCountry.phoneCode}${_phoneController.text.trim()}';
+
     final notifier = ref.read(signUpProviderProvider.notifier);
 
     try {
@@ -91,28 +85,19 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
       if (!mounted) return;
 
-      Fluttertoast.showToast(
-        msg: result.message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.white,
-        textColor: Colors.black,
-        fontSize: 16.0,
-      );
+      Fluttertoast.showToast(msg: result.message);
+
       if (result.isSuccess) {
-        context.pushReplacement(AppRoutes.signupVerification.name);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+
+          context.pushReplacementNamed(AppRoutes.signupVerification.name);
+        });
       }
     } catch (e) {
       if (!mounted) return;
 
-      Fluttertoast.showToast(
-        msg: e.toString().replaceFirst('Exception: ', ''),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.white,
-        textColor: Colors.black,
-        fontSize: 16.0,
-      );
+      Fluttertoast.showToast(msg: e.toString().replaceFirst('Exception: ', ''));
     }
   }
 
