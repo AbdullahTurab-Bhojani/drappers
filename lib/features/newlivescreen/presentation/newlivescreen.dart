@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
+
 import '../../../core/theme/app_scalar.dart';
 import '../../../drappers.dart';
 import '../../../gen/assets.gen.dart';
@@ -38,6 +39,8 @@ class _NewlivescreenState extends State<Newlivescreen> {
     (index) => 'assets/images/livefullview.mp4',
   );
 
+  // ------------------------------------------------------
+
   @override
   void initState() {
     super.initState();
@@ -45,16 +48,19 @@ class _NewlivescreenState extends State<Newlivescreen> {
     _initializePlayer();
   }
 
+  // ✅ FIXED
   void _setLandscapeAndFullscreen() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
+
+  // ------------------------------------------------------
 
   Future<File> assetToFile(String assetPath) async {
     setState(() => showLoader = true);
+
     final tempDir = await getTemporaryDirectory();
     final file = File('${tempDir.path}/${assetPath.split('/').last}');
 
@@ -71,11 +77,14 @@ class _NewlivescreenState extends State<Newlivescreen> {
     return file;
   }
 
+  // ------------------------------------------------------
+
   void _initializePlayer() async {
     final config = BetterPlayerConfiguration(
       autoPlay: true,
       fit: BoxFit.cover,
-      controlsConfiguration: BetterPlayerControlsConfiguration(
+      useRootNavigator: true, // ✅ iOS stability
+      controlsConfiguration: const BetterPlayerControlsConfiguration(
         showControls: false,
       ),
     );
@@ -97,8 +106,10 @@ class _NewlivescreenState extends State<Newlivescreen> {
     });
   }
 
+  // ------------------------------------------------------
+
   void _hideControlsAfterDelay() {
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 4), () {
       if (mounted && _betterPlayerController.isPlaying() == true) {
         setState(() => _controlsVisible = false);
       }
@@ -111,22 +122,29 @@ class _NewlivescreenState extends State<Newlivescreen> {
     return "$m:$s";
   }
 
+  // ------------------------------------------------------
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.black,
       body: Stack(
         children: [
+          // ---------------- VIDEO ----------------
+          Positioned.fill(
+            child: showLoader
+                ? const Center(child: LoadingWidget())
+                : BetterPlayer(controller: _betterPlayerController),
+          ),
+
+          // ---------------- TAP LAYER (NEW) ----------------
           Positioned.fill(
             child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
+              behavior: HitTestBehavior.translucent,
               onTap: () {
                 setState(() => _controlsVisible = !_controlsVisible);
                 if (_controlsVisible) _hideControlsAfterDelay();
               },
-              child: showLoader
-                  ? Center(child: LoadingWidget())
-                  : BetterPlayer(controller: _betterPlayerController),
             ),
           ),
 
@@ -153,6 +171,8 @@ class _NewlivescreenState extends State<Newlivescreen> {
     );
   }
 
+  // ------------------------------------------------------
+
   Widget _buildControls() {
     final controller = _betterPlayerController.videoPlayerController!;
     final pos = controller.value.position;
@@ -161,9 +181,10 @@ class _NewlivescreenState extends State<Newlivescreen> {
     return Container(
       color: Colors.black.withOpacity(0.35),
       child: Column(
-        mainAxisAlignment: .spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(height: AppScaler.scaleHeight(context, 56)),
+
           if (!_isLocked)
             IconButton(
               iconSize: 90,
@@ -177,7 +198,8 @@ class _NewlivescreenState extends State<Newlivescreen> {
                 if (controller.value.isPlaying) {
                   controller.pause();
                 } else {
-                  if (controller.value.position >= controller.value.duration!) {
+                  if (controller.value.position >=
+                      controller.value.duration!) {
                     controller.seekTo(Duration.zero);
                   }
                   controller.play();
@@ -186,7 +208,7 @@ class _NewlivescreenState extends State<Newlivescreen> {
             ),
 
           Padding(
-            padding: EdgeInsets.only(bottom: 20, left: 16, right: 16),
+            padding: const EdgeInsets.only(bottom: 20, left: 16, right: 16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -200,13 +222,13 @@ class _NewlivescreenState extends State<Newlivescreen> {
                             .clamp(0, dur.inMilliseconds)
                             .toDouble(),
                         onChanged: (v) {
-                          controller.seekTo(Duration(milliseconds: v.round()));
+                          controller.seekTo(
+                              Duration(milliseconds: v.round()));
                         },
                         activeColor: AppColors.white,
                         inactiveColor: AppColors.sliderbar4C4C4C,
                       ),
                     ),
-                    // SizedBox(width: 8),
                     PoppinsText(
                       context,
                       _format(pos),
@@ -217,13 +239,12 @@ class _NewlivescreenState extends State<Newlivescreen> {
                   ],
                 ),
 
-                // SizedBox(height: 10),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(width: 24),
+                      const SizedBox(width: 24),
                       Row(
                         children: [
                           PlayerActionButton(
@@ -231,13 +252,14 @@ class _NewlivescreenState extends State<Newlivescreen> {
                             label: "Speed ($_selectedSpeed)",
                             onTap: _changeSpeed,
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           PlayerActionButton(
-                            imagePath: Assets.images.audioSubtitles.path,
+                            imagePath:
+                                Assets.images.audioSubtitles.path,
                             label: "Audio & Subtitles",
                             onTap: _openAudioSubtitlePopup,
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           PlayerActionButton(
                             imagePath: Assets.images.picture.path,
                             label: "Picture in Picture",
@@ -263,6 +285,8 @@ class _NewlivescreenState extends State<Newlivescreen> {
       ),
     );
   }
+
+  // ------------------------------------------------------
 
   void _changeSpeed() {
     showDialog(
@@ -292,6 +316,8 @@ class _NewlivescreenState extends State<Newlivescreen> {
       ),
     );
   }
+
+  // ------------------------------------------------------
 
   @override
   void dispose() {
