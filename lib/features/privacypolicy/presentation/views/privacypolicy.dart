@@ -18,6 +18,20 @@ class PrivacypolicyScreen extends ConsumerStatefulWidget {
 
 class _PrivacypolicyScreenState extends ConsumerState<PrivacypolicyScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    // ✅ Force refresh when screen opens
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.refresh(staticContentProvider('privacyPolicy'));
+    });
+  }
+
+  Future<void> _onRefresh() async {
+    ref.refresh(staticContentProvider('privacyPolicy'));
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
@@ -62,47 +76,51 @@ class _PrivacypolicyScreenState extends ConsumerState<PrivacypolicyScreen> {
               color: AppColors.submitticket0E0E0E,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: privacyAsync.when(
-              loading: () => Center(
-                child: LoadingWidget(color: AppColors.buttoncolor.first),
-              ),
-              error: (e, _) => Center(
-                child: Text(
-                  e.toString(),
-                  style: TextStyle(color: customColors.textColor),
+            child: RefreshIndicator(
+              color: AppColors.buttoncolor.first,
+              onRefresh: _onRefresh,
+              child: privacyAsync.when(
+                loading: () => Center(child: LoadingLottieWidget()),
+                error: (e, _) => Center(
+                  child: Text(
+                    e.toString(),
+                    style: TextStyle(color: customColors.textColor),
+                  ),
                 ),
+                data: (content) {
+                  return SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: EdgeInsets.fromLTRB(
+                      paddingValue,
+                      20,
+                      paddingValue,
+                      20,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PoppinsText(
+                          context,
+                          "Last updated: ${content.data.modifiedOn.toLocal().toString().split(' ').first}",
+                          color: customColors.textColor,
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                        ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 16)),
+
+                        TitleSubtitleWidget(
+                          title: "Privacy Policy",
+                          subtitle: content.data.value,
+                          colors: customColors,
+                        ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                      ],
+                    ),
+                  );
+                },
               ),
-              data: (content) {
-                return SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(
-                    paddingValue,
-                    20,
-                    paddingValue,
-                    20,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PoppinsText(
-                        context,
-                        "Last updated: ${content.data.modifiedOn.toLocal().toString().split(' ').first}",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
-
-                      TitleSubtitleWidget(
-                        title: "Privacy Policy",
-                        subtitle: content.data.value,
-                        colors: customColors,
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                    ],
-                  ),
-                );
-              },
             ),
           ),
         ),

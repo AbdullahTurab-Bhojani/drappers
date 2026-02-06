@@ -17,6 +17,18 @@ class Termscondition extends ConsumerStatefulWidget {
 
 class _TermsconditionState extends ConsumerState<Termscondition> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.refresh(staticContentProvider('termsAndConditions'));
+    });
+  }
+
+  Future<void> _onRefresh() async {
+    ref.refresh(staticContentProvider('termsAndConditions'));
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final customColors = theme.extension<AppCustomColors>()!;
@@ -61,47 +73,51 @@ class _TermsconditionState extends ConsumerState<Termscondition> {
               color: AppColors.submitticket0E0E0E,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: termsAsync.when(
-              loading: () => Center(
-                child: LoadingWidget(color: AppColors.buttoncolor.first),
-              ),
-              error: (e, _) => Center(
-                child: Text(
-                  e.toString(),
-                  style: TextStyle(color: customColors.textColor),
+            child: RefreshIndicator(
+              color: AppColors.buttoncolor.first,
+              onRefresh: _onRefresh,
+              child: termsAsync.when(
+                loading: () => Center(child: LoadingLottieWidget()),
+                error: (e, _) => Center(
+                  child: Text(
+                    e.toString(),
+                    style: TextStyle(color: customColors.textColor),
+                  ),
                 ),
+                data: (content) {
+                  return SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: EdgeInsets.fromLTRB(
+                      paddingValue,
+                      20,
+                      paddingValue,
+                      20,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PoppinsText(
+                          context,
+                          "Last updated: ${content.data.modifiedOn.toLocal().toString().split(' ').first}",
+                          color: customColors.textColor,
+                          fontSize: PoppinsFontSizeVariant.size16,
+                          fontWeight: PoppinsFontWeightVariant.medium,
+                        ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 16)),
+
+                        TitleSubtitleWidget(
+                          title: "Terms & Conditions",
+                          subtitle: content.data.value,
+                          colors: customColors,
+                        ),
+
+                        SizedBox(height: AppScaler.scaleHeight(context, 20)),
+                      ],
+                    ),
+                  );
+                },
               ),
-              data: (content) {
-                return SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(
-                    paddingValue,
-                    20,
-                    paddingValue,
-                    20,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PoppinsText(
-                        context,
-                        "Last updated: ${content.data.modifiedOn.toLocal().toString().split(' ').first}",
-                        color: customColors.textColor,
-                        fontSize: PoppinsFontSizeVariant.size16,
-                        fontWeight: PoppinsFontWeightVariant.medium,
-                      ),
-                      SizedBox(height: AppScaler.scaleHeight(context, 16)),
-
-                      TitleSubtitleWidget(
-                        title: "Terms & Conditions",
-                        subtitle: content.data.value,
-                        colors: customColors,
-                      ),
-
-                      SizedBox(height: AppScaler.scaleHeight(context, 20)),
-                    ],
-                  ),
-                );
-              },
             ),
           ),
         ),

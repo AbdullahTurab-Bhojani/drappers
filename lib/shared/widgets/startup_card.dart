@@ -132,8 +132,7 @@ class _StartupCardState extends ConsumerState<StartupCard> {
     } catch (e) {
       debugPrint("Vote error: $e");
     } finally {
-      if (!mounted) return;
-      setState(() => isLoading = false);
+      if (!mounted) setState(() => isLoading = false);
     }
   }
 
@@ -178,12 +177,12 @@ class _StartupCardState extends ConsumerState<StartupCard> {
                           fit: BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
-                          placeholder: (_, __) => Center(
+                          placeholder: (_, _) => Center(
                             child: LoadingWidget(
                               color: AppColors.buttoncolor.first,
                             ),
                           ),
-                          errorWidget: (_, __, ___) => Image.network(
+                          errorWidget: (_, _, _) => Image.network(
                             'https://mis.ihc.gov.pk/img/no-video.jpg',
                             fit: BoxFit.cover,
                           ),

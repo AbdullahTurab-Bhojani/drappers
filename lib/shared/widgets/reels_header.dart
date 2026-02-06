@@ -3,12 +3,10 @@
 import 'package:better_player_plus/better_player_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../core/extensions/theme_extension.dart';
 import '../../core/theme/app_scalar.dart';
 import '../../drappers.dart';
 import '../../gen/assets.gen.dart';
-import 'guestloginwidget.dart';
 import 'reelcard/reelcard_widget.dart';
 
 class ReelsHeader extends StatefulWidget {
