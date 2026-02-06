@@ -137,8 +137,7 @@ class _StartupdetailsState extends ConsumerState<Startupdetails> {
           ],
         ),
         body: asyncStartup.when(
-          loading: () =>
-              Center(child: LoadingWidget(color: AppColors.buttoncolor.first)),
+          loading: () => Center(child: LoadingLottieWidget()),
           error: (e, _) => Center(
             child: Text(
               e.toString(),

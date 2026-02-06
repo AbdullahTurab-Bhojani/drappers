@@ -124,7 +124,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             elevation: 0,
             actions: [
               GestureDetector(
-                behavior: HitTestBehavior.opaque,
                 onTap: () async {
                   var res = await context.pushNamed(AppRoutes.editprofile.name);
                   if (res != null && res is UserData) {
@@ -197,14 +196,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           LikedcontentHeader(),
                           SizedBox(height: AppScaler.scaleHeight(context, 30)),
                           WatchhistoryHeader(),
+
                           SizedBox(height: AppScaler.scaleHeight(context, 30)),
+
                           ListView.separated(
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.all(0),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              return GestureDetector(
-                                behavior: HitTestBehavior.opaque,
+                              return TileWidget(
+                                iconImage: menuList[index]['image'],
+                                title: menuList[index]['title'],
+                                textColor: menuList[index]['color'],
                                 onTap: () {
                                   if (menuList[index]['title'] == 'Sign Out') {
                                     showDialog(
@@ -218,12 +221,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                     context.pushNamed(menuList[index]['route']);
                                   }
                                 },
-                                child: TileWidget(
-                                  iconImage: menuList[index]['image'],
-                                  title: menuList[index]['title'],
-                                  textColor: menuList[index]['color'],
-                                  ontaped: menuList[index]['isTap'],
-                                ),
                               );
                             },
                             separatorBuilder: (context, index) {
@@ -233,6 +230,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             },
                             itemCount: menuList.length,
                           ),
+
                           SizedBox(height: AppScaler.scaleHeight(context, 10)),
                         ],
                       ),

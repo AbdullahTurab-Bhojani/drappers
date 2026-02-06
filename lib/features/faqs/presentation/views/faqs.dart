@@ -58,9 +58,7 @@ class _FaqsScreenState extends ConsumerState<FaqsScreen> {
             ),
             Expanded(
               child: faqAsync.when(
-                loading: () => Center(
-                  child: LoadingWidget(color: AppColors.buttoncolor.first),
-                ),
+                loading: () => Center(child: LoadingLottieWidget()),
                 error: (e, _) => Center(child: Text(e.toString())),
                 data: (faqModel) {
                   final faqs = faqModel.data;

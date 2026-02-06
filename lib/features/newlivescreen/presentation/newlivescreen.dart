@@ -133,7 +133,7 @@ class _NewlivescreenState extends State<Newlivescreen> {
           // ---------------- VIDEO ----------------
           Positioned.fill(
             child: showLoader
-                ? const Center(child: LoadingWidget())
+                ? const Center(child: LoadingLottieWidget())
                 : BetterPlayer(controller: _betterPlayerController),
           ),
 
@@ -198,8 +198,7 @@ class _NewlivescreenState extends State<Newlivescreen> {
                 if (controller.value.isPlaying) {
                   controller.pause();
                 } else {
-                  if (controller.value.position >=
-                      controller.value.duration!) {
+                  if (controller.value.position >= controller.value.duration!) {
                     controller.seekTo(Duration.zero);
                   }
                   controller.play();
@@ -222,8 +221,7 @@ class _NewlivescreenState extends State<Newlivescreen> {
                             .clamp(0, dur.inMilliseconds)
                             .toDouble(),
                         onChanged: (v) {
-                          controller.seekTo(
-                              Duration(milliseconds: v.round()));
+                          controller.seekTo(Duration(milliseconds: v.round()));
                         },
                         activeColor: AppColors.white,
                         inactiveColor: AppColors.sliderbar4C4C4C,
@@ -254,8 +252,7 @@ class _NewlivescreenState extends State<Newlivescreen> {
                           ),
                           const SizedBox(width: 16),
                           PlayerActionButton(
-                            imagePath:
-                                Assets.images.audioSubtitles.path,
+                            imagePath: Assets.images.audioSubtitles.path,
                             label: "Audio & Subtitles",
                             onTap: _openAudioSubtitlePopup,
                           ),

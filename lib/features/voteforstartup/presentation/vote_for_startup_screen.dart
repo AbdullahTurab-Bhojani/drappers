@@ -122,7 +122,7 @@ class _VoteForStartupScreenState extends ConsumerState<VoteForStartupScreen> {
                     padding: EdgeInsets.only(
                       top: AppScaler.scaleHeight(context, 40),
                     ),
-                    child: LoadingWidget(color: AppColors.buttoncolor.first),
+                    child: LoadingLottieWidget(),
                   ),
 
                   error: (e, _) => Padding(
